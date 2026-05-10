@@ -1,0 +1,99 @@
+geffen_in,151,119,4	script	Great Wizard#en_coat	64,{
+	mes "[BLIZZARDRISS]";
+	mes "Hey ! My friend !";
+	mes "I see that you are a mage.";
+	mes "Look into yourself to discover";
+	mes "your hidden abilities !";
+	next;
+	switch (select("About mage's hidden ability :About skill ^0000FF' Energy Coat '^000000 :End conversation")) {
+	case 1:
+		mes "[BLIZZARDRISS]";
+		mes "For many years I have studied the ancient magic of Geffen.";
+		mes "Recently, I discovered a very good forgotten skill! ! !";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "The skill uses your mental energy to block attacks against you.";
+		mes "It is like a magical shield. Only the most special of persons can use this amazing skill.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "If you wish to learn this skill, you must present me with a ^3355FFTraining Recommendation 1^000000 first.";
+		mes "Then, you will also need to gather:";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Thirty ^3355FFShells^000000";
+		mes "Five ^3355FFIron Ores^000000";
+		mes "Bring me these items.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Also, one more thing...";
+		mes "You must be sufficiently experienced in the magical arts.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "This means you must either be a Wizard/Sage, or a Mage with a ^FF0000Job Level of 15 or higher^000000.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Are you interested?";
+		close;
+
+	case 2:
+		// Verificación de si ya tiene la skill
+		if (getskilllv("MG_ENERGYCOAT") == 1) {
+			mes "[BLIZZARDRISS]";
+			mes "It seems that you have already mastered this skill.";
+			mes "I have nothing more to teach you...";
+			close;
+		}
+
+		// Verificación de Clase Base (Mage)
+		if (BaseClass != Job_Mage) {
+			mes "[BLIZZARDRISS]";
+			mes "I only teach this to those who walk the path of Magic. You belong to a different guild.";
+			close;
+		}
+
+		if (countitem(50002) < 1) {
+			mes "[BLIZZARDRISS]";
+			mes "I cannot teach you this skill without a proper ^3355FFTraining Recommendation 1^000000. Please obtain one first.";
+			close;
+		}
+
+		// Verificación de Requisitos (Shell x30, Iron Ore x5 + Job Level 15)
+		if (countitem(935) >= 30 && countitem(1002) >= 5 && (JobLevel >= 15 || BaseJob == Job_Wizard || BaseJob == Job_Sage)) {
+			mes "[BLIZZARDRISS]";
+			mes "Okay, I have received your request and the materials.";
+			mes "I will now awaken your hidden energies...";
+			mes ". . . . . .";
+			next;
+			mes "[BLIZZARDRISS]";
+			mes "Ancient powers of Geffen! Release your spirit!";
+			mes "Mana Shield! Metal Armor!";
+			mes ". . . . . . . . . . . .";
+			mes "ENERGY COAT! ! !";
+			next;
+			
+			// Consumo de items
+			delitem 935,30; // Shell
+			delitem 1002, 5; // Iron Ore
+			delitem 50002, 1; // Training Recommendation 1
+			
+			// Entrega de skill
+			skill "MG_ENERGYCOAT",1,SKILL_PERM;
+			
+			mes "[BLIZZARDRISS]";
+			mes "It is done. You now have the elite skill ^3355FF'Energy Coat'^000000.";
+			mes "Use it well.";
+			close;
+		}
+
+		// Si no cumple los requisitos
+		mes "[BLIZZARDRISS]";
+		mes "Look!! You have not prepared fully.";
+		mes "Check that you have ^3355FF30 Shells^000000, the ^3355FF5 Iron Ores^000000, and that your Job Level is ^FF000015^000000.";
+		close;
+
+	case 3:
+		mes "[BLIZZARDRISS]";
+		mes "Prepare yourself, and return when you are ready.";
+		close;
+	}
+}

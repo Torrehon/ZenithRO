@@ -1,0 +1,285 @@
+// =====================================================
+// Custom Hunting System - Prontera
+// Description: Hunting Board & Veteran Hunter Shop
+// =====================================================
+
+// -----------------------------------------------------
+// 1. Hunting Board - Prontera (Sprite 857)
+// -----------------------------------------------------
+prontera,143,172,4	script	Hunting Board#prt	857,{
+	mes "[^0055FFHunting Board - Prontera^000000]";
+	mes "Welcome, hunter. Here is the status of today's contracts.";
+	mes "You can take on multiple contracts at once.";
+	next;
+
+	.@today = gettime(DT_YYYYMMDD);
+
+	// Menú dinámico: Cambia el texto según el estado de cada misión
+	.@m1$ = (Hunt_Prt_CD_1 == .@today) ? "^777777[Done] Garden Pest^000000" : (Hunt_Prt_M1_Active ? "^0055FF[Report] Garden Pest^000000" : "[Accept] Garden Pest");
+	.@m2$ = (Hunt_Prt_CD_2 == .@today) ? "^777777[Done] The Grasshopper^000000" : (Hunt_Prt_M2_Active ? "^0055FF[Report] The Grasshopper^000000" : "[Accept] The Grasshopper");
+	.@m3$ = (Hunt_Prt_CD_3 == .@today) ? "^777777[Done] The Sewers^000000" : (Hunt_Prt_M3_Active ? "^0055FF[Report] The Sewers^000000" : "[Accept] The Sewers");
+
+	.@opt = select(.@m1$, .@m2$, .@m3$, "Close");
+
+	if (.@opt == 4) close;
+
+	mes "[^0055FFHunting Board - Prontera^000000]";
+
+	// ==========================================
+	// Misión 1: Garden Pest
+	// ==========================================
+	if (.@opt == 1) {
+		if (Hunt_Prt_CD_1 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Prt_M1_Active) {
+			if (Hunt_Prt_M1_K1 >= 10 && Hunt_Prt_M1_K2 >= 10) {
+				// Cálculo de EXP al 75%
+				.@base = ((getmonsterinfo(1002, MOB_BASEEXP) * 10) + (getmonsterinfo(1063, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1002, MOB_JOBEXP) * 10) + (getmonsterinfo(1063, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50003, 5; // Entrega el item físico
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Prontera Coin and extra Experience.^000000";
+				Hunt_Prt_CD_1 = .@today; // Inicia el Cooldown de la misión 1
+				Hunt_Prt_M1_Active = 0;
+			} else {
+				mes "Progress: Poring ("+Hunt_Prt_M1_K1+"/10) | Lunatic ("+Hunt_Prt_M1_K2+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Prt_M1_Active = 0;
+					mes "Contract abandoned. You can accept it again anytime.";
+				}
+			}
+		} else {
+			// Ventana de confirmación de misión
+			mes "Contract: ^0055FFGarden Pest^000000";
+			mes "Objective: Hunt down ^FF000010 Porings^000000 and ^FF000010 Lunatics^000000.";
+			mes "Reward: ^00AA005x Prontera Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) {
+				mes "Maybe next time. The board is always here.";
+				close;
+			}
+			mes "Contract signed! You are now hunting Porings and Lunatics.";
+			Hunt_Prt_M1_Active = 1;
+			Hunt_Prt_M1_K1 = 0; Hunt_Prt_M1_K2 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 2: The Grasshopper
+	// ==========================================
+	if (.@opt == 2) {
+		if (Hunt_Prt_CD_2 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Prt_M2_Active) {
+			if (Hunt_Prt_M2_K1 >= 10) {
+				// Cálculo de EXP al 75%
+				.@base = ((getmonsterinfo(1052, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1052, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50003, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Prontera Coin and extra Experience.^000000";
+				Hunt_Prt_CD_2 = .@today; // Inicia el Cooldown de la misión 2
+				Hunt_Prt_M2_Active = 0;
+			} else {
+				mes "Progress: Rocker ("+Hunt_Prt_M2_K1+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Prt_M2_Active = 0;
+					mes "Contract abandoned. You can accept it again anytime.";
+				}
+			}
+		} else {
+			// Ventana de confirmación de misión
+			mes "Contract: ^0055FFThe Grasshopper^000000";
+			mes "Objective: Hunt down ^FF000010 Rockers^000000.";
+			mes "Reward: ^00AA005x Prontera Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) {
+				mes "Maybe next time. The board is always here.";
+				close;
+			}
+			mes "Contract signed! You are now hunting Rockers.";
+			Hunt_Prt_M2_Active = 1;
+			Hunt_Prt_M2_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 3: The Sewers
+	// ==========================================
+	if (.@opt == 3) {
+		if (Hunt_Prt_CD_3 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Prt_M3_Active) {
+			if (Hunt_Prt_M3_K1 >= 30 && Hunt_Prt_M3_K2 >= 20 && Hunt_Prt_M3_K3 >= 10) {
+				// Cálculo de EXP al 75%
+				.@base = ((getmonsterinfo(1051, MOB_BASEEXP) * 30) + (getmonsterinfo(1175, MOB_BASEEXP) * 20) + (getmonsterinfo(1005, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1051, MOB_JOBEXP) * 30) + (getmonsterinfo(1175, MOB_JOBEXP) * 20) + (getmonsterinfo(1005, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50003, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Prontera Coin and extra Experience.^000000";
+				Hunt_Prt_CD_3 = .@today; // Inicia el Cooldown de la misión 3
+				Hunt_Prt_M3_Active = 0;
+			} else {
+				mes "Progress: Thief Bug ("+Hunt_Prt_M3_K1+"/30) | Tarou ("+Hunt_Prt_M3_K2+"/20) | Familiar ("+Hunt_Prt_M3_K3+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Prt_M3_Active = 0;
+					mes "Contract abandoned. You can accept it again anytime.";
+				}
+			}
+		} else {
+			// Ventana de confirmación de misión
+			mes "Contract: ^0055FFThe Sewers^000000";
+			mes "Objective: Hunt down ^FF000030 Thief Bugs^000000, ^FF000020 Tarous^000000, and ^FF000010 Familiars^000000.";
+			mes "Reward: ^00AA005x Prontera Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) {
+				mes "Maybe next time. The board is always here.";
+				close;
+			}
+			mes "Contract signed! You are now hunting the sewer pests.";
+			Hunt_Prt_M3_Active = 1;
+			Hunt_Prt_M3_K1 = 0; Hunt_Prt_M3_K2 = 0; Hunt_Prt_M3_K3 = 0;
+		}
+		close;
+	}
+}
+
+// -----------------------------------------------------
+// 2. Hidden Kill Event Logic
+// -----------------------------------------------------
+-	script	Hunt_Kill_Events	-1,{
+OnNPCKillEvent:
+	.@mob_id = killedrid;
+
+	if (Hunt_Prt_M1_Active == 1) {
+		if (.@mob_id == 1002 && Hunt_Prt_M1_K1 < 10) {
+			Hunt_Prt_M1_K1++;
+			dispbottom "Prontera Hunt: Poring ["+Hunt_Prt_M1_K1+"/10]";
+		}
+		else if (.@mob_id == 1063 && Hunt_Prt_M1_K2 < 10) {
+			Hunt_Prt_M1_K2++;
+			dispbottom "Prontera Hunt: Lunatic ["+Hunt_Prt_M1_K2+"/10]";
+		}
+	}
+	if (Hunt_Prt_M2_Active == 1) {
+		if (.@mob_id == 1052 && Hunt_Prt_M2_K1 < 10) {
+			Hunt_Prt_M2_K1++;
+			dispbottom "Prontera Hunt: Rocker ["+Hunt_Prt_M2_K1+"/10]";
+		}
+	}
+	if (Hunt_Prt_M3_Active == 1) {
+		if (.@mob_id == 1051 && Hunt_Prt_M3_K1 < 30) {
+			Hunt_Prt_M3_K1++;
+			dispbottom "Prontera Hunt: Thief Bug ["+Hunt_Prt_M3_K1+"/30]";
+		}
+		else if (.@mob_id == 1175 && Hunt_Prt_M3_K2 < 20) {
+			Hunt_Prt_M3_K2++;
+			dispbottom "Prontera Hunt: Tarou ["+Hunt_Prt_M3_K2+"/20]";
+		}
+		else if (.@mob_id == 1005 && Hunt_Prt_M3_K3 < 10) {
+			Hunt_Prt_M3_K3++;
+			dispbottom "Prontera Hunt: Familiar ["+Hunt_Prt_M3_K3+"/10]";
+		}
+	}
+	end;
+}
+
+// -----------------------------------------------------
+// 3. Veteran Hunter Shop (Crusader Flavor)
+// -----------------------------------------------------
+prontera,141,172,4	script	Veteran Hunter	404,{
+	mes "[^0055FFVeteran Hunter^000000]";
+	mes "Greetings, citizen. May the Light protect you on your travels.";
+	mes "I am tasked with rewarding those who take up arms to defend our lands from the encroaching beasts.";
+	mes "Do you wish to exchange your hard-earned Prontera Coins for provisions?";
+	mes " ";
+	mes "You currently hold: ^00AA00" + countitem(50003) + " Prontera Coins^000000.";
+	next;
+
+	if (select("Show me your wares:I must return to my duties") == 2) {
+		mes "[^0055FFVeteran Hunter^000000]";
+		mes "Stand firm, and may your shield never falter.";
+		close;
+	}
+
+	callshop "hunter_shop",1;
+	npcshopattach "hunter_shop";
+	end;
+
+OnBuyItem:
+	.@size = getarraysize(@bought_nameid);
+	for (.@i = 0; .@i < .@size; .@i++) {
+		.@item_idx = inarray(.Shop_Data, @bought_nameid[.@i]);
+		if (.@item_idx == -1) {
+			dispbottom "System Error: Item not found in the Crusader's supply line.";
+			end;
+		}
+		.@total_cost += (.Shop_Data[.@item_idx + 1] * @bought_quantity[.@i]);
+	}
+
+	if (.@total_cost > countitem(50003)) {
+		mes "[^0055FFVeteran Hunter^000000]";
+		mes "I am afraid you lack the necessary Prontera Coins for these supplies, my friend.";
+		mes "Total cost: " + .@total_cost + " Coins.";
+		close;
+	}
+	
+	delitem 50003, .@total_cost;
+	
+	for (.@i = 0; .@i < .@size; .@i++) {
+		getitem @bought_nameid[.@i], @bought_quantity[.@i];
+	}
+	
+	mes "[^0055FFVeteran Hunter^000000]";
+	mes "A wise choice. May these provisions serve you well on the battlefield.";
+	mes "Stay vigilant!";
+	specialeffect2 EF_MONEY;
+	close;
+
+OnInit:
+	setarray .Shop_Data[0], 
+		13531, 3,    // Light Red Potion Box
+		13532, 5,    // Light Orange Potion Box
+		13533, 7,    // Light Yellow Potion Box
+		13534, 10,   // Light White Potion Box
+		19526, 50,   // Costume Helm
+		19630, 50,   // Costume Crown
+		19832, 50,   // Costume Poring Hat
+		19972, 200,  // Costume Crown of Guardian
+		19673, 200,  // Costume Love Guard
+		19669, 200,  // Costume Reginleif Hairband
+		19568, 500,  // Costume Ancient Horns
+		19678, 500,  // Costume Bell Ribbon
+		19750, 500;  // Costume Saint Frill Ribbon
+
+	npcshopdelitem "hunter_shop", 502; 
+	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {
+		npcshopadditem "hunter_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
+	}
+	end;
+}
+
+// -----------------------------------------------------
+// 4. Shop Definition (Hidden)
+// -----------------------------------------------------
+-	shop	hunter_shop	-1,502:-1

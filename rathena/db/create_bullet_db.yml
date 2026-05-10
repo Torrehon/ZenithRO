@@ -1,0 +1,581 @@
+Header:
+  Type: CREATE_BULLET_DB
+  Version: 1
+
+Body:
+  - Source: Empty_Bottle
+    Make:
+      - Item: Bullet
+        Amount: 2
+  - Source: Emperium
+    Make:
+      - Item: Bullet
+        Amount: 600
+  - Source: Red_Gemstone
+    Make:
+      - Item: Poison_Sphere
+        Amount: 1
+  - Source: Blue_Gemstone
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 1
+      - Item: Freezing_Bullet
+        Amount: 5
+  - Source: Oridecon_Stone
+    Make:
+      - Item: Bullet
+        Amount: 150
+      - Item: Magical_Stone_Bullet
+        Amount: 100
+  - Source: Elunium_Stone
+    Make:
+      - Item: Bullet
+        Amount: 150
+      - Item: Magical_Stone_Bullet
+        Amount: 100
+  - Source: Tree_Root
+    Make:
+      - Item: Bullet
+        Amount: 7
+      - Item: Magical_Stone_Bullet
+        Amount: 15
+  - Source: Jellopy
+    Make:
+      - Item: Bullet
+        Amount: 4
+  - Source: Garlet
+    Make:
+      - Item: Bullet
+        Amount: 12
+  - Source: Scell
+    Make:
+      - Item: Bullet
+        Amount: 8
+  - Source: Zargon
+    Make:
+      - Item: Silver_Bullet
+        Amount: 50
+  - Source: Tooth_Of_Bat
+    Make:
+      - Item: Blind_Sphere
+        Amount: 1
+  - Source: Claw_Of_Wolves
+    Make:
+      - Item: Bullet
+        Amount: 15
+  - Source: Orcish_Cuspid
+    Make:
+      - Item: Bullet
+        Amount: 35
+  - Source: Evil_Horn
+    Make:
+      - Item: Blind_Sphere
+        Amount: 30
+  - Source: Posionous_Canine
+    Make:
+      - Item: Poison_Sphere
+        Amount: 1
+  - Source: Horn
+    Make:
+      - Item: Bullet
+        Amount: 35
+  - Source: Cactus_Needle
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Gill
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 10
+      - Item: Freezing_Bullet
+        Amount: 100
+  - Source: Decayed_Nail
+    Make:
+      - Item: Blind_Sphere
+        Amount: 1
+  - Source: Horrendous_Mouth
+    Make:
+      - Item: Blind_Sphere
+        Amount: 5
+  - Source: Rotten_Scale
+    Make:
+      - Item: Poison_Sphere
+        Amount: 1
+  - Source: Voucher_Of_Orcish_Hero
+    Make:
+      - Item: Bullet
+        Amount: 1
+  - Source: Gold
+    Make:
+      - Item: Blind_Sphere
+        Amount: 50
+      - Item: Bullet
+        Amount: 50
+  - Source: Oridecon
+    Make:
+      - Item: Bullet
+        Amount: 250
+      - Item: Magical_Stone_Bullet
+        Amount: 500
+  - Source: Elunium
+    Make:
+      - Item: Bullet
+        Amount: 250
+      - Item: Magical_Stone_Bullet
+        Amount: 500
+  - Source: Boody_Red
+    Make:
+      - Item: Flare_Sphere
+        Amount: 50
+      - Item: Blaze_Bullet
+        Amount: 500
+  - Source: Crystal_Blue
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 50
+      - Item: Freezing_Bullet
+        Amount: 500
+  - Source: Wind_Of_Verdure
+    Make:
+      - Item: Lighting_Sphere
+        Amount: 50
+      - Item: Electric_Shock_Bullet
+        Amount: 500
+  - Source: Yellow_Live
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 500
+  - Source: Flame_Heart
+    Make:
+      - Item: Flare_Sphere
+        Amount: 120
+      - Item: Blaze_Bullet
+        Amount: 1500
+  - Source: Mistic_Frozen
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 120
+      - Item: Freezing_Bullet
+        Amount: 1500
+  - Source: Rough_Wind
+    Make:
+      - Item: Lighting_Sphere
+        Amount: 120
+      - Item: Electric_Shock_Bullet
+        Amount: 1500
+  - Source: Great_Nature
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 1500
+  - Source: Iron
+    Make:
+      - Item: Bullet
+        Amount: 100
+  - Source: Steel
+    Make:
+      - Item: Bullet
+        Amount: 100
+  - Source: Star_Crumb
+    Make:
+      - Item: Blind_Sphere
+        Amount: 30
+  - Source: Sparkling_Dust
+    Make:
+      - Item: Blind_Sphere
+        Amount: 10
+  - Source: Iron_Ore
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Coal
+    Make:
+      - Item: Blind_Sphere
+        Amount: 8
+  - Source: Phracon
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 20
+  - Source: Emveretarcon
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 50
+      - Item: Silver_Bullet
+        Amount: 40
+  - Source: Nail_Of_Mole
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Wooden_Block
+    Make:
+      - Item: Bullet
+        Amount: 40
+  - Source: Dokkaebi_Horn
+    Make:
+      - Item: Blind_Sphere
+        Amount: 2
+      - Item: Bullet
+        Amount: 40
+  - Source: Porcupine_Spike
+    Make:
+      - Item: Bullet
+        Amount: 70
+  - Source: Limb_Of_Mantis
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 20
+  - Source: Dragon_Canine
+    Make:
+      - Item: Bullet
+        Amount: 51
+  - Source: Petite_DiablOfs_Horn
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Lantern
+    Make:
+      - Item: Bullet
+        Amount: 80
+  - Source: Nail_Of_Orc
+    Make:
+      - Item: Bullet
+        Amount: 10
+  - Source: Tooth_Of_Ancient_Fish
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 10
+      - Item: Freezing_Bullet
+        Amount: 120
+  - Source: Sharpened_Cuspid
+    Make:
+      - Item: Shell_Of_Blood
+        Amount: 2
+      - Item: Silver_Bullet
+        Amount: 40
+  - Source: Reins
+    Make:
+      - Item: Bullet
+        Amount: 150
+  - Source: Tree_Of_Archer_1
+    Make:
+      - Item: Bullet
+        Amount: 20
+  - Source: Tree_Of_Archer_2
+    Make:
+      - Item: Bullet
+        Amount: 20
+  - Source: Tree_Of_Archer_3
+    Make:
+      - Item: Bullet
+        Amount: 20
+  - Source: Needle_Of_Alarm
+    Make:
+      - Item: Bullet
+        Amount: 100
+  - Source: Manacles
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Snowy_Horn
+    Make:
+      - Item: Silver_Bullet
+        Amount: 1000
+  - Source: Phantom_Of_Opera
+    Make:
+      - Item: Bullet
+        Amount: 200
+  - Source: Mr_Scream
+    Make:
+      - Item: Shell_Of_Blood
+        Amount: 200
+      - Item: Bullet
+        Amount: 300
+  - Source: Welding_Mask
+    Make:
+      - Item: Bullet
+        Amount: 200
+  - Source: Glittering_Clothes
+    Make:
+      - Item: Blind_Sphere
+        Amount: 1000
+  - Source: Wooden_Mail
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 800
+  - Source: Wooden_Mail_
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 800
+  - Source: Silver_Robe
+    Make:
+      - Item: Silver_Bullet
+        Amount: 700
+  - Source: Silver_Robe_
+    Make:
+      - Item: Silver_Bullet
+        Amount: 1000
+  - Source: Cuffs
+    Make:
+      - Item: Bullet
+        Amount: 750
+  - Source: Matyr's_Flea_Guard
+    Make:
+      - Item: Lighting_Sphere
+        Amount: 5
+      - Item: Electric_Shock_Bullet
+        Amount: 150
+      - Item: Shell_Of_Blood
+        Amount: 10
+      - Item: Bullet
+        Amount: 100
+  - Source: Fin_Helm
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 500
+      - Item: Freezing_Bullet
+        Amount: 5000
+  - Source: Ogre_Tooth
+    Make:
+      - Item: Bullet
+        Amount: 30
+  - Source: Tail_Of_Steel_Scorpion
+    Make:
+      - Item: Poison_Sphere
+        Amount: 1
+      - Item: Bullet
+        Amount: 250
+  - Source: Loki's_Whispers
+    Make:
+      - Item: Blind_Sphere
+        Amount: 1000
+  - Source: Foolishness_Of_Blind
+    Make:
+      - Item: Blind_Sphere
+        Amount: 200
+      - Item: Magical_Stone_Bullet
+        Amount: 600
+  - Source: Old_Hilt
+    Make:
+      - Item: Bullet
+        Amount: 1000
+  - Source: Blade_Lost_In_Darkness
+    Make:
+      - Item: Blind_Sphere
+        Amount: 200
+      - Item: Shell_Of_Blood
+        Amount: 600
+  - Source: Bloody_Edge
+    Make:
+      - Item: Shell_Of_Blood
+        Amount: 600
+  - Source: Key_Of_Clock_Tower
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Underground_Key
+    Make:
+      - Item: Blind_Sphere
+        Amount: 100
+  - Source: Matchstick
+    Make:
+      - Item: Flare_Sphere
+        Amount: 50
+      - Item: Blaze_Bullet
+        Amount: 500
+  - Source: Fang_Of_Garm
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 300
+      - Item: Freezing_Bullet
+        Amount: 3000
+  - Source: Ice_Piece
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 100
+      - Item: Freezing_Bullet
+        Amount: 1000
+  - Source: Burn_Tree
+    Make:
+      - Item: Flare_Sphere
+        Amount: 25
+      - Item: Blaze_Bullet
+        Amount: 300
+  - Source: Broken_Armor_Piece
+    Make:
+      - Item: Bullet
+        Amount: 150
+  - Source: Burning_Heart
+    Make:
+      - Item: Flare_Sphere
+        Amount: 60
+      - Item: Blaze_Bullet
+        Amount: 250
+  - Source: Live_Coal
+    Make:
+      - Item: Flare_Sphere
+        Amount: 40
+      - Item: Blaze_Bullet
+        Amount: 400
+  - Source: Sharp_Leaf
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 30
+  - Source: Boroken_Shiled_Piece
+    Make:
+      - Item: Bullet
+        Amount: 200
+  - Source: Shine_Spear_Blade
+    Make:
+      - Item: Bullet
+        Amount: 100
+  - Source: Burning_Horse_Shoe
+    Make:
+      - Item: Bullet
+        Amount: 100
+  - Source: Dragon's_Skin
+    Make:
+      - Item: Bullet
+        Amount: 10
+  - Source: Bamboo_Cut
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 40
+  - Source: Poison_Toad's_Skin
+    Make:
+      - Item: Poison_Sphere
+        Amount: 20
+  - Source: Sharp_Feeler
+    Make:
+      - Item: Shell_Of_Blood
+        Amount: 20
+  - Source: Leopard_Talon
+    Make:
+      - Item: Shell_Of_Blood
+        Amount: 10
+  - Source: Dullahan_Armor
+    Make:
+      - Item: Blind_Sphere
+        Amount: 150
+  - Source: Tangled_Chain
+    Make:
+      - Item: Blind_Sphere
+        Amount: 50
+      - Item: Bullet
+        Amount: 50
+  - Source: Cat_Eyed_Stone
+    Make:
+      - Item: Lighting_Sphere
+        Amount: 70
+      - Item: Electric_Shock_Bullet
+        Amount: 750
+  - Source: Dark_Crystal_Fragment
+    Make:
+      - Item: Blind_Sphere
+        Amount: 50
+  - Source: Long_Limb
+    Make:
+      - Item: Shell_Of_Blood
+        Amount: 10
+      - Item: Poison_Sphere
+        Amount: 50
+  - Source: Old_Pick
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Old_Steel_Plate
+    Make:
+      - Item: Bullet
+        Amount: 100
+  - Source: Fragment_Of_Crystal
+    Make:
+      - Item: Blind_Sphere
+        Amount: 10
+  - Source: Battered_Kettle
+    Make:
+      - Item: Bullet
+        Amount: 50
+  - Source: Will_Of_Darkness
+    Make:
+      - Item: Blind_Sphere
+        Amount: 50
+      - Item: Poison_Sphere
+        Amount: 30
+  - Source: Golden_Bracelet
+    Make:
+      - Item: Silver_Bullet
+        Amount: 500
+  - Source: Dragonball_Green
+    Make:
+      - Item: Magical_Stone_Bullet
+        Amount: 800
+  - Source: Dragonball_Blue
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 80
+      - Item: Freezing_Bullet
+        Amount: 800
+  - Source: Dragonball_Red
+    Make:
+      - Item: Flare_Sphere
+        Amount: 80
+      - Item: Blaze_Bullet
+        Amount: 800
+      - Item: Blind_Sphere
+        Amount: 80
+  - Source: Dragonball_Yellow
+    Make:
+      - Item: Lighting_Sphere
+        Amount: 80
+      - Item: Electric_Shock_Bullet
+        Amount: 800
+  - Source: Piece_Of_Bone_Armor
+    Make:
+      - Item: Blind_Sphere
+        Amount: 200
+      - Item: Bullet
+        Amount: 100
+  - Source: Scale_Of_Red_Dragon
+    Make:
+      - Item: Flare_Sphere
+        Amount: 200
+      - Item: Blaze_Bullet
+        Amount: 2000
+  - Source: Valhalla_Flower
+    Make:
+      - Item: Silver_Bullet
+        Amount: 600
+      - Item: Shell_Of_Blood
+        Amount: 600
+  - Source: Rune_Of_Darkness
+    Make:
+      - Item: Blind_Sphere
+        Amount: 450
+  - Source: Ice_Heart
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 40
+      - Item: Freezing_Bullet
+        Amount: 600
+  - Source: Ice_Scale
+    Make:
+      - Item: Freezing_Sphere
+        Amount: 400
+      - Item: Freezing_Bullet
+        Amount: 4000
+  - Source: Will_Of_Darkness_
+    Make:
+      - Item: Blind_Sphere
+        Amount: 100
+      - Item: Poison_Sphere
+        Amount: 200
+  - Source: Clattering_Skull
+    Make:
+      - Item: Blind_Sphere
+        Amount: 50
+  - Source: Broken_Farming_Utensil
+    Make:
+      - Item: Bullet
+        Amount: 10
+        
+Footer:
+  Imports:
+  - Path: db/import/create_bullet_db.yml

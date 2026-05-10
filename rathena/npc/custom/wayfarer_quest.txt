@@ -1,0 +1,61 @@
+
+izlude,130,70,4	script	Wayfarer Lloyd	832,{
+
+    if (countitem(50000) > 0) { // Check for Wayfarer's Map ID
+        mes "[Wayfarer Lloyd]";
+        mes "Ah, I see you're already using the map!";
+        mes "Keep it handy. Midgard is a vast place, and even the best scouts can lose their way.";
+        close;
+    }
+
+    mes "[Wayfarer Lloyd]";
+    mes "Greetings, traveler!";
+    mes "Are you heading to the mainland? It's easy to get turned around once you leave the harbor.";
+    mes "You wouldn't want to end up in a Baphomet's den by mistake, right?";
+    next;
+
+    if (select("Who are you?:I could use a map:No thanks") == 3) {
+        mes "[Wayfarer Lloyd]";
+        mes "Suit yourself! Sometimes the best way to learn the land is by getting lost. Safe travels!";
+        close;
+    }
+
+    mes "[Wayfarer Lloyd]";
+    mes "I'm Lloyd, the logistics coordinator for new explorers.";
+    mes "I'm currently drafting specialized maps for newcomers, but I've run out of materials to finish this batch.";
+    next;
+    
+    mes "[Wayfarer Lloyd]";
+    mes "If you bring me these supplies, I'll finish a ^0000FFWayfarer's Map^000000 for you right now:";
+    mes "- ^FF00005 Feather^000000";
+    mes "- ^FF00005 Sticky Mucus^000000";
+    mes "- ^FF00001 Empty Bottle^000000";
+    mes "- 1,000 Zeny for the premium ink.";
+    next;
+
+    if (select("I have the materials:I'll come back later") == 2) close;
+
+    if (countitem(949) < 5 || countitem(938) < 5 || countitem(713) < 1 || Zeny < 1000) {
+        mes "[Wayfarer Lloyd]";
+        mes "It seems you're missing a few things.";
+        mes "I need all the materials to get the ink and the parchment ready!";
+        close;
+    }
+
+    delitem 949, 5; 
+    delitem 938, 5;
+    delitem 713, 1;
+    set Zeny, Zeny - 1000;
+
+    getitem 50000, 1; // ID of your Wayfarer's Map
+	getitem 50001, 10;
+
+    mes "[Wayfarer Lloyd]";
+    mes "Perfect! Just a few quick strokes... and there we go.";
+    specialeffect2 EF_PHARMACY_OK;
+    next;
+    mes "[Wayfarer Lloyd]";
+    mes "This should serve you well. Use it wisely!";
+    mes "If you ever feel lost, just remember that the horizon is your best guide. Good luck out there!";
+    close;
+}

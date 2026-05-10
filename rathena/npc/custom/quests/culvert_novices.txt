@@ -1,0 +1,303 @@
+//============================================================
+// NPCs INSIDE THE INSTANCE (Main Quest Only)
+//============================================================
+
+1@sewb2,20,13,0	script	culvert_exit#c	45,2,2,{
+OnTouch_:
+	warp "prt_fild05",273,212;
+	end;
+}
+
+1@sewb2,16,26,4	script	Adventurer Alard#c	1,{
+	if (getcharid(1) > 0) .party_id = getcharid(1);
+
+	if (culvert_quest == 2) {
+		if (mobcount(instance_mapname("1@sewb2"), instance_npcname("Adventurer Alard#c")+"::OnBossKilled") == 0) {
+			set culvert_quest, 3;
+		}
+	}
+
+	if (culvert_quest == 4) {
+		mes "[Adventurer Alard]";
+		mes "The sewers feel a bit lighter today. Thank you for your bravery, adventurer.";
+		close;
+	}
+
+	if (culvert_quest == 3) {
+		mes "[Adventurer Alard]";
+		mes "That was incredible! I've never seen a mutant that size fall so fast. Please, report back to the ^0000FFGuard at the surface^000000 immediately.";
+		if (checkquest(80002, HAVEQUEST) != -1) changequest 80002, 80003;
+		close;
+	}
+
+	if (culvert_quest == 2) {
+		mes "[Adventurer Alard]";
+		mes "Eyes on the prize! Keep fighting until that thing stops moving!";
+		close;
+	}
+
+	if (culvert_quest == 1) {
+		mes "[Adventurer Alard]";
+		mes "Help! We are trapped... the walls... they are moving!";
+		next;
+		if (countitem(501) >= 20) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Hold on! I have the supplies. Get behind me!";
+			next;
+			delitem 501,20;
+			specialeffect2 563;
+			soundeffect "earth_quake.wav",0;
+			mes "* RUMBLE *";
+			next;
+			mes "[Adventurer Alard]";
+			mes "IT'S COMING THROUGH THE WALLS!";
+			
+			.@origin_aid = getcharid(3);
+			.@my_party = getcharid(1);
+			set culvert_quest, 2;
+			if (checkquest(80001) != -1) changequest 80001, 80002;
+
+			if (.@my_party > 0) {
+				getpartymember .@my_party, 2;
+				for (.@i = 0; .@i < $@partymembercount; .@i++) {
+					if ($@partymemberaid[.@i] == .@origin_aid) continue;
+					if (attachrid($@partymemberaid[.@i])) {
+						set culvert_quest, 2;
+						if (checkquest(80001) != -1) changequest 80001, 80002;
+						detachrid;
+					}
+				}
+			}
+			attachrid(.@origin_aid);
+			close2; 
+			monster instance_mapname("1@sewb2"), 20, 50, "Mutant Male Bug", 3501, 1, instance_npcname("Adventurer Alard#c")+"::OnBossKilled";
+			end;
+		}
+		mes "[Adventurer Alard]";
+		mes "We need ^FF000020 Red Potions^000000! We can't hold them off much longer!";
+		close;
+	}
+	mes "[Adventurer Alard]";
+	mes "Stay safe. These tunnels have ears.";
+	close;
+
+OnBossKilled:
+	.@inst_map$ = instance_mapname("1@sewb2");
+	.@my_party = (playerattached()) ? getcharid(1) : .party_id;
+	if (.@my_party > 0) {
+		getpartymember .@my_party, 0;
+		for (.@i = 0; .@i < $@partymembercount; .@i++) {
+			if (attachrid($@partymemberaid[.@i])) {
+				if (strcharinfo(3) == .@inst_map$ && culvert_quest == 2) {
+					set culvert_quest, 3;
+					if (checkquest(80002, HAVEQUEST) != -1) changequest 80002, 80003;
+				}
+				detachrid; 
+			}
+		}
+	}
+	end;
+
+OnInstanceInit:
+	setmapflag instance_mapname("1@sewb2"), mf_noteleport;
+	setmapflag instance_mapname("1@sewb2"), mf_nomemo;
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 1;
+	setunitdata .GID, UNPC_HAIRSTYLE, 2;
+	setunitdata .GID, UNPC_HAIRCOLOR, 1;
+	end;
+}
+
+// Berin & Linnea
+1@sewb2,23,25,2	script	Injured Berin#c	6,{
+	mes "[Injured Berin]";
+	mes "My head... everything is spinning...";
+	close;
+OnInstanceInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 5;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 2;
+	end;
+}
+
+1@sewb2,24,27,3	script	Scared Linnea#c	3,{
+	mes "[Scared Linnea]";
+	mes "Is it gone? Tell me it's gone...";
+	close;
+OnInstanceInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 7;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 6;
+	end;
+}
+
+//============================================================
+// WORLD NPCs (Repeatable & Entrances)
+//============================================================
+
+// The Crack - Repeatable Boss (FFA)
+prt_sewb2,24,68,0	script	Crack in the Wall	550,{
+	mes "^888888*You notice a foul stench emanating from the deep crack...*^000000";
+	mes "^888888*A rhythmic and ravenous scratching can be heard from the other side...*^000000";
+	next;
+	
+	if (culvert_quest < 4) {
+		mes "^888888*The presence inside seems to ignore you... Perhaps you haven't proven your worth in these sewers yet?*^000000";
+		close;
+	}
+
+	if (BaseLevel < 15 || BaseLevel > 35) {
+		mes "^888888*The presence remains indifferent. You are either too weak or too seasoned for its hunger...*^000000";
+		close;
+	}
+
+	if (#culvert_cooldown > gettimetick(2)) {
+		.@rest = #culvert_cooldown - gettimetick(2);
+		mes "^888888*The crack is silent. The creature seems satisfied for now...*^000000";
+		mes "It will hunt again in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^000000.";
+		close;
+	}
+
+	mes "The hunger behind the wall is overwhelming. Do you wish to lure it out?";
+	next;
+	if (select("Offer 50 Jellopies and 50 Worm Peelings.:Leave it alone.") == 1) {
+		if (countitem(909) >= 50 && countitem(955) >= 50) {
+			delitem 909, 50;
+			delitem 955, 50;
+			
+			set #culvert_cooldown, gettimetick(2) + 10800; // 3 Hours Cooldown
+			
+			mes "^888888*You toss the bait into the abyss...*^000000";
+			mes "^888888*A terrifying silence follows...*^000000";
+			next;
+			mes "^888888*Suddenly, the walls begin to tremble!*^000000";
+			
+			// Reproducimos los efectos AQUÍ, mientras sigues conectado al texto
+			specialeffect2 563;
+			soundeffect "earth_quake.wav",0;
+			
+			// Iniciamos el temporizador interno para el spawn y cerramos
+			initnpctimer;
+			close;
+		} else {
+			mes "You lack the necessary offerings to entice the beast.";
+			close;
+		}
+	}
+	close;
+
+// Eventos del Temporizador Independiente
+OnTimer1000:
+	// 1 segundo después de cerrar la ventana, el boss sale
+	monster "prt_sewb2", 24, 65, "Mutant Male Bug", 3501, 1, "Crack in the Wall::OnDummyKill";
+	
+	.@mob_gid = $@mobid[0];
+	if (.@mob_gid > 0) {
+		setunitdata .@mob_gid, UMOB_SIZE, 8;
+	}
+	
+	mapannounce "prt_sewb2", "A massive mutant presence has emerged from the crack!", bc_map, "0xFFFF00";
+	
+	stopnpctimer;
+	end;
+
+OnDummyKill:
+	end;
+}
+
+// Surface Guard
+prt_fild05,270,212,5	script	Culvert Guardian	105,{
+	if (culvert_quest == 3) {
+		mes "[Culvert Guardian]";
+		mes "You returned! The novices told me of your heroism against that massive mutation.";
+		next;
+		mes "[Culvert Guardian]";
+		mes "Prontera owes you a great debt. Take this reward, and use this ^0000FFTraining Recommendation^000000 at your local Guild to further your studies.";
+		getitem 50002, 1;
+		getitem 5559, 1;
+		getexp 3000, 3000;
+		set Zeny, Zeny + 2000;
+		if (checkquest(80003, HAVEQUEST) != -1) completequest 80003;
+		set culvert_quest, 4;
+		close;
+	}
+
+	if (culvert_quest >= 4) {
+		mes "[Culvert Guardian]";
+		mes "Welcome back, hero. How can I assist you today?";
+		next;
+		switch(select("Enter the culverts.:Check hunting cooldown.:Cancel.")) {
+			case 1:
+				warp "prt_sewb1",131,247;
+				end;
+			case 2:
+				if (#culvert_cooldown > gettimetick(2)) {
+					.@rest = #culvert_cooldown - gettimetick(2);
+					mes "[Culvert Guardian]";
+					mes "The trackers report that the nest is currently quiet.";
+					mes "Check back in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^000000.";
+				} else {
+					mes "[Culvert Guardian]";
+					mes "The Crack in the lower levels is active. Be on your guard.";
+				}
+				close;
+			case 3:
+				close;
+		}
+	}
+
+	mes "[Culvert Guardian]";
+	mes "Halt! Entry is restricted due to the mutant infestation.";
+	
+	if (BaseLevel < 15 || BaseLevel > 35) { 
+		next;
+		mes "[Culvert Guardian]";
+		mes "I cannot let you pass. This sector is designated for adventurers between ^0000FFLevel 15 and 35^000000.";
+		close; 
+	}
+	
+	if (culvert_quest == 0) {
+		mes "Wait... you look like you can handle yourself. We have a rescue emergency.";
+		next;
+		mes "[Culvert Guardian]";
+		mes "Will you deliver ^FF000020 Red Potions^000000 to the novices trapped on the 2nd floor?";
+		if (select("I'll save them!.:Not interested.") == 1) {
+			if (checkquest(80001) == -1) setquest 80001;
+			set culvert_quest, 1;
+			warp "prt_sewb1",131,247;
+		}
+	} else {
+		warp "prt_sewb1",131,247;
+	}
+	close;
+}
+
+// Inner Captain
+prt_sewb1,195,244,5	script	Guard Captain	105,{
+	if (culvert_quest < 4) {
+		if (getcharid(1) == 0) { mes "[Guard Captain]"; mes "This is a team effort. Form a party first!"; close; }
+		if (!is_party_leader()) {
+			mes "[Guard Captain]";
+			mes "Your party leader must authorize the breach.";
+			next;
+			if (select("Enter Instance.:Stay.") == 1) instance_enter("Culvert");
+			close;
+		}
+		mes "[Guard Captain]";
+		mes "Are you ready to breach the gate and save those kids?";
+		if (select("Open Gate.:Wait.") == 1) {
+			if (instance_create("Culvert") < 0) { mes "Mechanism failure! (Instance error)."; close; }
+			instance_enter("Culvert");
+		}
+		close;
+	}
+
+	mes "[Guard Captain]";
+	mes "The tunnels are safer thanks to you, but stay sharp.";
+	next;
+	mes "[Guard Captain]";
+	mes "I've heard disturbing reports about a crack in the southern walls. Keep your eyes open for anything... unusual.";
+	close;
+}

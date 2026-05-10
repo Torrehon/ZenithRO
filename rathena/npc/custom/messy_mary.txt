@@ -1,0 +1,78 @@
+new_1-3,85,33,3	script	Messy Mary	729,{
+    mes "^FF0000[Messy Mary]^000000";
+    
+    if (Has_Pickup_Skill == 1) {
+        if (getskilllv(1013) == 0) { 
+            skill 1013,1,0;
+        }
+        mes "Hey there, partner!";
+        mes "My inventory is still a bit of a mess, but at least now we know how to clear the floor in a blink!";
+        mes "Have you been using our 'secret technique' out there?";
+        mes "Good luck with your training! See you in the main world!";
+        close;
+    }
+
+    mes "Oh! Hello! Watch your step, please!";
+    mes "Sorry about the mess... I'm a Novice just like you, but I think I'm failing 'Inventory Management 101'.";
+    next;
+    
+    mes "^FF0000[Messy Mary]^000000";
+    mes "My name's Mary. Every time I hunt something, I end up dropping half of my loot because I'm so disorganized!";
+    mes "But hey, I found this old, dusty book in the Academy library that mentions a special technique.";
+    next;
+    mes "^FF0000[Messy Mary]^000000";
+    mes "It's called ^0000FF'Pickup'^000000. It's supposed to help you grab everything around you at once!";
+    mes "I've been trying to figure it out, but I need some materials to practice the hand movements.";
+    next;
+
+    mes "^FF0000[Messy Mary]^000000";
+    mes "Do you want to try and learn it with me? We can practice together!";
+    mes "I just need some 'training supplies' to get the movement right:";
+    mes " "; 
+    mes "^0000FF- 10x Fluff (ID 914)          ^000000";
+    mes "^0000FF- 10x Jellopy (ID 909)        ^000000";
+    mes "^0000FF- 10x Feather (ID 949)        ^000000";
+    mes " "; 
+    mes "If we gather these, I'm sure we can master the skill together!";
+    next;
+
+    if (select("Let's practice together!:I'm busy right now.") == 2) {
+        mes "^FF0000[Messy Mary]^000000";
+        mes "Oh, okay! I'll keep trying to figure it out on my own... although I might get buried under this junk first!";
+        close;
+    }
+
+    if (countitem(914) < 10 || countitem(909) < 10 || countitem(949) < 10) {
+        mes "^FF0000[Messy Mary]^000000";
+        mes "Wait, I don't think we have enough for a proper practice session.";
+        mes "We need ^FF000010 of each^000000 to really get the hang of it. I'll be here waiting!";
+        close;
+    }
+
+    mes "^FF0000[Messy Mary]^000000";
+    mes "Awesome! You got them! Okay, let's see... the book says we have to focus and then... SWIPE!";
+    mes "Let's try to organize this pile while we practice!";
+    next;
+    
+    specialeffect2 EF_FLIP_COIN; 
+    sleep2 500;
+    specialeffect2 EF_HIT2;
+    
+    mes "^FF0000[Messy Mary]^000000";
+    mes "Whoa! Did you see that? My hands just... moved on their own! It worked!";
+    mes "I think we finally understood how it's done!";
+    next;
+
+    delitem 914, 10;
+    delitem 909, 10;
+    delitem 949, 10;
+    
+    set Has_Pickup_Skill, 1;
+    skill 1013,1,0; 
+
+    mes "^FF0000[Messy Mary]^000000";
+    mes "We did it! We mastered the ^0000FFPickup^000000 skill together!";
+    specialeffect2 EF_LEVELUP;
+    mes "Now we can both pick up loot much faster. No more messy floors for us!";
+    close;
+}

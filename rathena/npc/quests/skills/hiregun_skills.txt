@@ -1,0 +1,79 @@
+hire_in,176,78,4	script	Quartermaster Vargas	900,{ // QUEST DE SKILL PLATINUM: AMMO CRAFTING
+
+	if (Class != 4502) {
+		mes "[Quartermaster Vargas]";
+		mes "I only talk business with real Hireguns. Scram.";
+		close;
+	}
+
+	mes "[Quartermaster Vargas]";
+	mes "Bullets don't grow on trees, rookie. If you run out of ammo in the field, you're dead meat.";
+	mes "I can teach you the Republic's secret to ^0000FFAmmo Crafting^000000.";
+	next;
+
+	if (getskilllv("GS_AMMOCRAFT") > 0) {
+		mes "[Quartermaster Vargas]";
+		mes "You already know how to pack your own brass. Stop bothering me and go shoot something.";
+		close;
+	}
+
+	if (JobLevel < 15) {
+		mes "[Quartermaster Vargas]";
+		mes "However, you must be at least ^FF0000Job Level 15^000000 to handle explosive powder safely.";
+		close;
+	}
+
+	if (plat_ammocraft_active == 0) {
+		if (countitem(50002) < 1) {
+			mes "[Quartermaster Vargas]";
+			mes "To begin your training, you must present a ^3355FFTraining Recommendation 1^000000.";
+			close;
+		}
+		mes "[Quartermaster Vargas]";
+		mes "Before I trust you with gunpowder, you need to prove you understand the materials.";
+		mes "Bring me ^3355FF10 Iron^000000, ^3355FF5 Coal^000000, and ^3355FF10 Shells^000000 so we can practice making casings and powder.";
+		next;
+		if (select("I'll get them.:Maybe later.") == 1) {
+			set plat_ammocraft_active, 1;
+			mes "[Quartermaster Vargas]";
+			mes "Good. Don't come back empty-handed.";
+		}
+		close;
+	}
+
+	if (plat_ammocraft_active == 1) {
+		mes "[Quartermaster Vargas]";
+		mes "Did you bring the materials I asked for?";
+		mes "I need ^3355FF5 Iron^000000, ^3355FF1 Coal^000000, and ^3355FF10 Shells^000000.";
+		next;
+		
+		if (countitem(50002) < 1) {
+			mes "[Quartermaster Vargas]";
+			mes "You lost your ^3355FFTraining Recommendation 1^000000? I need that for the paperwork. Come back when you have it.";
+			close;
+		}
+
+		if (countitem(998) >= 5 && countitem(1003) >= 1 && countitem(935) >= 10) {
+			delitem 998, 5;  // Iron
+			delitem 1003, 1;  // Coal
+			delitem 935, 10;  // Shell
+			delitem 50002, 1; // Training Recommendation 1
+			
+			mes "[Quartermaster Vargas]";
+			mes "Good. Now pay attention. The secret is in the powder mixture and pressing the casing just right...";
+			next;
+			
+			skill "GS_AMMOCRAFT", 1, SKILL_PERM;
+			set plat_ammocraft_active, 0; // Reseteamos la variable, la skill ya está aprendida.
+			
+			mes "[Quartermaster Vargas]";
+			mes "There you go. You are now authorized to use ^3355FFAmmo Crafting^000000.";
+			mes "Don't blow your own hands off.";
+			close;
+		} else {
+			mes "[Quartermaster Vargas]";
+			mes "You are missing some materials. Don't waste my time, go get them.";
+			close;
+		}
+	}
+}

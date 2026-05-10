@@ -1,0 +1,160 @@
+//===== rAthena Script ======================================= 
+//= Thief Skills Quests (Fixed & Linear Version)
+//============================================================ 
+
+moc_prydb1,154,128,4	script	Alcouskou	118,{
+	if (BaseClass != Job_Thief) {
+		mes "[Alcouskou]";
+		mes "These secrets are only for those who walk the path of the shadows.";
+		close;
+	}
+
+	mes "[Alcouskou]";
+	mes "As you live life as a Thief, you will realize that raw power isn't everything.";
+	mes "Survival often depends on dirty tricks, agility, and using your environment.";
+	next;
+
+	// --- MAPEO DINÁMICO SEGURO ---
+	// Esto evita que los 'case' se mezclen cuando una opción desaparece.
+	.@menu$ = "";
+	.@i = 1;
+
+	if (getskilllv("TF_SPRINKLESAND") == 0) {
+		.@menu$ += "^0000FFLearn Sprinkle Sand^000000:";
+		.@map[.@i] = 1; // ID Interno para Sand
+		.@i++;
+	}
+	if (getskilllv("TF_BACKSLIDING") == 0) {
+		.@menu$ += "Back Slide:";
+		.@map[.@i] = 2; // ID Interno para BackSlide
+		.@i++;
+	}
+	if (getskilllv("TF_PICKSTONE") == 0 || getskilllv("TF_THROWSTONE") == 0) {
+		.@menu$ += "Find Stone & Stone Fling:";
+		.@map[.@i] = 3; // ID Interno para Stones
+		.@i++;
+	}
+	
+	.@menu$ += "I will be back later.";
+	.@map[.@i] = 4;
+
+	// Ahora el switch no lee la posición del menú, sino el valor guardado en el mapa
+	switch(.@map[select(.@menu$)]) {
+		
+		case 1: // Sprinkle Sand
+			mes "[Alcouskou]";
+			if (JobLevel < 15) {
+				mes "Your hands are not yet steady enough. Return when you are ^FF0000Job Level 15^000000.";
+				close;
+			}
+			if (countitem(50002) < 1) {
+				mes "I cannot teach you this dark trick unless you show me a proper ^3355FFTraining Recommendation 1^000000.";
+				close;
+			}
+			if (countitem(7041) < 5) {
+				mes "Blinding your enemy can save your life.";
+				mes "I can teach you how to throw sand effectively, but I need you to bring me ^0000FF5 Fine Grit^000000 to demonstrate.";
+				close;
+			}
+			mes "Ah, you brought the items requested. Watch closely...";
+			next;
+			mes "^5533FF- *throwing sand* -^000000";
+			next;
+			mes "[Alcouskou]";
+			mes "See? It's all in the wrist. You are a natural!";
+			delitem 7041, 5;
+			delitem 50002, 1;
+			skill "TF_SPRINKLESAND", 1, SKILL_PERM;
+			next;
+			mes "[Alcouskou]";
+			mes "By the way, there is a merchant named ^0000FFRuRumuni in Payon^000000. He can help you with elemental bags.";
+			close;
+
+		case 2: // Back Slide
+			mes "[Alcouskou]";
+			if (JobLevel < 15) {
+				mes "You need more leg strength. Return when you are ^FF0000Job Level 15^000000.";
+				close;
+			}
+			if (thief_backslide_q == 0) {
+				mes "Fleeing is just as important as attacking.";
+				mes "Go and hunt ^FF000010 Rockers^000000. Come back to me when you're done.";
+				set thief_backslide_q, 1;
+				set thief_rocker_kills, 0;
+				close;
+			}
+			if (thief_backslide_q == 1) {
+				mes "You haven't hunted ^FF000010 Rockers^000000 yet. Progress: ^FF0000" + thief_rocker_kills + "/10^000000.";
+				close;
+			}
+			if (thief_backslide_q == 2) {
+				mes "Great! Your legs look much stronger now. Let's practice.";
+				next;
+				mes "[Alcouskou]";
+				mes "Suuuuk - -";
+				next;
+				mes "[Alcouskou]";
+				mes "Perfect! Now you can slip out of danger in a blink of an eye.";
+				skill "TF_BACKSLIDING", 1, SKILL_PERM;
+				set thief_backslide_q, 0; 
+				set thief_rocker_kills, 0;
+				close;
+			}
+			break;
+
+		case 3: // Find Stone & Stone Fling
+			mes "[Alcouskou]";
+			if (JobLevel < 15) {
+				mes "Even picking up rocks requires a bit of experience. Come back at ^FF0000Job Level 15^000000.";
+				close;
+			}
+			mes "Are you serious? You're a Thief! Just bend over, grab a rock and chuck it!";
+			next;
+			mes "[Alcouskou]";
+			mes "Here, just take the skills and don't tell anyone we had this conversation.";
+			skill "TF_PICKSTONE", 1, SKILL_PERM;
+			skill "TF_THROWSTONE", 1, SKILL_PERM;
+			close;
+
+		case 4: // Salir
+			mes "[Alcouskou]";
+			mes "Keep to the shadows.";
+			close;
+	}
+
+// --- Evento de Caza Integrado ---
+OnNPCKillEvent:
+	if (killedrid == 1052 && thief_backslide_q == 1) {
+		set thief_rocker_kills, thief_rocker_kills + 1;
+		if (thief_rocker_kills >= 10) {
+			dispbottom "You have hunted 10 Rockers. Return to Alcouskou.";
+			set thief_backslide_q, 2;
+		} else {
+			dispbottom "Rockers hunted: " + thief_rocker_kills + " / 10";
+		}
+	}
+	end;
+}
+
+// NPC RuRumuni se mantiene igual (mismas coordenadas)
+payon,91,77,3	script	RuRumuni	99,{
+    // ... (Tu código de RuRumuni es correcto, no necesita cambios de lógica) ...
+	mes "[RuRumuni]";
+	mes "Welcome to my humble shop. I specialize in leatherworking.";
+    // ... el resto del script de RuRumuni ...
+    next;
+    switch(select("Red Sand Bag (Fire):Blue Sand Bag (Water):Yellow Sand Bag (Wind):Green Sand Bag (Earth):Nevermind")) {
+        case 1: set .@elem_item, 990; set .@bag_id, 60990; set .@bag_name$, "Red Sand Bag"; break;
+        case 2: set .@elem_item, 991; set .@bag_id, 60991; set .@bag_name$, "Blue Sand Bag"; break;
+        case 3: set .@elem_item, 992; set .@bag_id, 60992; set .@bag_name$, "Yellow Sand Bag"; break;
+        case 4: set .@elem_item, 993; set .@bag_id, 60993; set .@bag_name$, "Green Sand Bag"; break;
+        case 5: close;
+    }
+    if (countitem(952) >= 5 && countitem(919) >= 5 && countitem(914) >= 10 && countitem(.@elem_item) >= 1) {
+        delitem 952, 5; delitem 919, 5; delitem 914, 10; delitem .@elem_item, 1;
+        getitem .@bag_id, 1;
+        mes "[RuRumuni]"; mes "All done! Use it well."; close;
+    } else {
+        mes "[RuRumuni]"; mes "You are missing materials."; close;
+    }
+}

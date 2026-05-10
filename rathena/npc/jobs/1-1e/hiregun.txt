@@ -1,0 +1,168 @@
+hire_in,165,96,6	script	Hiregun Master#hg_1	633,{ // QUEST DE HIREGUN (CUSTOM ID 4502)
+	
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (Class == 4502) { // Verificación directa del ID Custom
+			mes "[Hiregun Master]";
+			mes "Looking for a job change? Hah! You're already carrying iron, partner. Keep your aim steady!";
+			close;
+		}
+		mes "[Hiregun Master]";
+		mes "I only deal with green Novices looking for real firepower. You've already made your choice. Beat it!";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		mes "[Hiregun Master]";
+		mes "I smell gunpowder...";
+		mes "And a soul that has seen countless battles. You've been reborn, haven't you?";
+		next;
+		mes "[Hiregun Master]";
+		mes "I see you're ready to wield a gun once more! Once you feel the kick of the recoil, you can never go back!!";
+		next;
+		if (!callfunc("F_CanChangeJob")) {
+			mes "[Hiregun Master]";
+			mes "Hold your horses. You need to master your Basic Skills before you can handle a firearm.";
+			next;
+			mes "[Hiregun Master]";
+			mes "Come back when you've finished learning the Basic Novice Skills.";
+			close;
+		}
+		mes "[Hiregun Master]";
+		mes "Excellent! Let me officially reinstate you as a Hiregun right away!";
+		next;
+		skill "NV_TRICKDEAD",0,SKILL_PERM;
+		jobchange 4502; // Cambio al Job Custom ID 4502
+		mes "[Hiregun Master]";
+		mes "Hmm... You look like you know your way around a barrel. Still, keep your skills sharp and your powder dry!";
+		close;
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Hiregun Master]";
+	mes "Welcome to the real world, kid. I've traveled all the way from ^0000FFEinbroch^000000, the city of steel in the ^0000FFRepublic of Schwartzvald^000000.";
+	next;
+	mes "[Hiregun Master]";
+	mes "We are constantly looking to recruit capable mercenaries. People who appreciate the smell of gunpowder and the kick of a fine weapon.";
+	mes "The folks at the Novice Grounds say you've got a sharp eye and a steady hand.";
+	next;
+
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Hiregun Master]";
+		mes "But you're still lacking the basics. A good shot needs a solid stance. Master your Basic Skills first!";
+		close;
+	}
+
+	mes "[Hiregun Master]";
+	mes "Are you ready to cast aside your old life, embrace the steel of Schwartzvald, and become a Hiregun?";
+	next;
+
+	if (select("Yes, I am ready.:I need more time.") == 2) {
+		mes "[Hiregun Master]";
+		mes "Come back when your resolve is as cold as steel.";
+		close;
+	}
+
+	mes "[Hiregun Master]";
+	mes "Lock and load! Your new life starts today!";
+	next;
+	
+	callfunc "Job_Change", 4502; // Cambio al Job Custom ID 4502
+	
+	mes "[Hiregun Master]";
+	mes "Congratulations! You are now an official Hiregun. Take these bullets to try your new weapon.";
+	next;
+	getitem 13200, 1000;
+	mes "[Hiregun Master]";
+	mes "Before you hit the road, go talk to ^0000FFVeteran Flint^000000 over there. He brought some special hardware from the Republic.";
+	close;
+}
+
+
+hire_in,182,96,4	script	Veteran Flint	632,{ // DAWN HIREGUN QUEST
+
+	// Verificamos si el jugador es de la clase Custom 4502
+	if (Class != 4502) {
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Veteran Flint]";
+			mes "Speak to the Master if you want to learn how to shoot. I only deal with professionals.";
+			close;
+		}
+		mes "[Veteran Flint]";
+		mes "You don't carry the mark of a Hiregun. Walk away.";
+		close;
+	}
+
+	if (dawn_hg_q == 2) {
+		mes "[Veteran Flint]";
+		mes "There's our rising star! Keep that Dawn weapon clean and it will never jam on you.";
+		close;
+	}
+
+	if (dawn_hg_q == 1) {
+		mes "[Veteran Flint]";
+		if (JobLevel >= 10) {
+			mes "Well look at you! You've hit Job Level 10. You've got the scars to prove you're not just talk.";
+			next;
+			mes "[Veteran Flint]";
+			mes "As promised, I'm handing over the Dawn hardware. I've got two beauties right here, forged in the furnaces of Einbroch.";
+			mes "One favors quick draw, the other precision from afar. Which one fits your style?";
+			next;
+			
+			// --- Selección de Arma ---
+			switch(select("- Dawn Revolver:- Dawn Rifle")) {
+				case 1:
+					set .@weapon_id, 40008;
+					set .@weapon_name$, "Dawn Revolver";
+					break;
+				case 2:
+					set .@weapon_id, 40009;
+					set .@weapon_name$, "Dawn Rifle";
+					break;
+			}
+			
+			mes "[Veteran Flint]";
+			mes "Excellent choice. The " + .@weapon_name$ + " is yours.";
+			next;
+			mes "[Veteran Flint]";
+			mes "I'm also throwing in this jewelry box. Take the gemstone inside to a ^0000FFJewel Enchanter^000000 in ^0000FFProntera^000000 to unlock your weapon's true potential.";
+			next;
+			
+			getitem .@weapon_id, 1; // Entrega el arma seleccionada
+			getitem 12106, 1; // Jewelry Box
+			getexp 1000, 1000;
+			set dawn_hg_q, 2;
+			
+			mes "[Veteran Flint]";
+			mes "Make every shot count. See you around, partner!";
+			close;
+		} else {
+			mes "[Veteran Flint]";
+			mes "You need to hit ^FF0000Job Level 10^000000 before you can handle the Dawn firepower.";
+			mes "Get out there, take some bounties, and come back when you're tougher.";
+			close;
+		}
+	}
+
+	if (dawn_hg_q == 0) {
+		mes "[Veteran Flint]";
+		mes "Fresh meat, huh? The Master and I brought some experimental hardware straight from ^0000FFEinbroch^000000: the ^0000FFDawn Revolver^000000 and the ^0000FFDawn Rifle^000000.";
+		next;
+		mes "[Veteran Flint]";
+		mes "Rookies usually complain about their heavy trigger pulls, but a real Hiregun knows that weight means stopping power.";
+		next;
+		mes "[Veteran Flint]";
+		mes "Prove you're not going to shoot your own foot off. Hit ^FF0000Job Level 10^000000 in real combat, and you can pick one.";
+		next;
+		if (select("I accept the challenge.:I'll pass for now.") == 2) {
+			mes "[Veteran Flint]";
+			mes "Your loss. Come back if you grow a spine.";
+			close;
+		}
+		mes "[Veteran Flint]";
+		mes "That's what I like to hear! Don't get yourself killed before you come back to claim it.";
+		set dawn_hg_q, 1;
+		close;
+	}
+}

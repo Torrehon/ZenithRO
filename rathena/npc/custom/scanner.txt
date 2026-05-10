@@ -1,0 +1,13 @@
+-	script	MobScanner	-1,{
+
+OnNPCKillEvent:
+	.@id = killedrid;
+	dispbottom "--- ESCANEANDO MONSTRUO: " + getmonsterinfo(.@id, 1) + " (ID: " + .@id + ") ---";
+
+	// Vamos a probar los índices del 15 al 25 que es donde suele estar la Clase y la Exp
+	for (.@i = 15; .@i <= 25; .@i++) {
+		dispbottom "Índice [" + .@i + "]: " + getmonsterinfo(.@id, .@i);
+	}
+	dispbottom "---------------------------------------";
+	end;
+}

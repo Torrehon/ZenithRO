@@ -1,0 +1,167 @@
+// --- Prontera Sanctuary: Acolyte Guild ---
+
+prt_church,184,41,4	script	Acolyte Master#aco_1	60,{
+
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (BaseClass == Job_Acolyte) {
+			mes "[Acolyte Master]";
+			mes "Welcome back, child of light. May your faith be the shield that protects the weak.";
+			close;
+		}
+		mes "[Acolyte Master]";
+		mes "I sense a different calling in your soul. The path of the Acolyte is only for those who seek to serve through mercy and light.";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		if (ADVJOB == Job_High_Priest || ADVJOB == Job_Champion) {
+			mes "[Acolyte Master]";
+			mes "Ah, I sense a familiar resonance. You have endured much in your past life and returned from Valhalla.";
+			next;
+			mes "[Acolyte Master]";
+			mes "The grace of the gods has brought you back to us. Are you ready to take up the holy mantle once more?";
+			next;
+			
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Acolyte Master]";
+				mes "Your spirit is willing, but your basic training is not yet complete. Master your Basic Skills first.";
+				close;
+			}
+			
+			// Cambio de Job Lineal (Se mantiene nivel 80+)
+			skill "NV_TRICKDEAD",0,SKILL_PERM;
+			jobchange Job_Acolyte_High;
+			
+			mes "[Acolyte Master]";
+			mes "Welcome back to the light. Go now, and use your gifts to guide those in darkness.";
+			close;
+		}
+		else {
+			mes "[Acolyte Master]";
+			mes "I see a reborn soul, but your destiny is not written in the holy scriptures of this temple.";
+			close;
+		}
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Acolyte Master]";
+	mes "Welcome to the Prontera Sanctuary. Do you wish to dedicate your life to the service of others as an Acolyte?";
+	next;
+
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Acolyte Master]";
+		mes "To serve as an Acolyte, one must have a solid foundation.";
+		mes "Please ensure you have reached Job Level 10 and mastered all your Basic Skills before applying.";
+		close;
+	}
+
+	mes "[Acolyte Master]";
+	mes "In the past, I would have sent you on a long pilgrimage to visit our ascetics across the continent...";
+	next;
+	mes "[Acolyte Master]";
+	mes "...but I can see the devotion in your eyes. Your training at the Novice Academy has prepared you well.";
+	mes "Do you accept the vows and the path of the light?";
+	next;
+
+	if (select("I do, Father.:I am not ready.") == 2) {
+		mes "[Acolyte Master]";
+		mes "Faith cannot be forced. Return when you are certain of your path.";
+		close;
+	}
+
+	mes "[Acolyte Master]";
+	mes "Then, by the power vested in me, I welcome you to our order!";
+	next;
+	
+	callfunc "Job_Change", Job_Acolyte;
+	
+	mes "[Acolyte Master]";
+	mes "Congratulations! You are now an Acolyte.";
+	next;
+	mes "[Acolyte Master]";
+	mes "Before you begin your ministry, speak with ^0000FFSister Lyra^000000. She has a blessed gift for a dedicated servant like you.";
+	close;
+}
+
+prt_church,180,41,4	script	Sister Lyra	696,{ // DAWN MACE QUEST
+
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (BaseClass != Job_Acolyte) {
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Sister Lyra]";
+			mes "Peace be with you. If you seek to serve, please speak with the Master first.";
+			close;
+		}
+		mes "[Sister Lyra]";
+		mes "I'm sorry, but this blessed mace is only for those who walk the path of the Acolyte.";
+		close;
+	}
+
+	// === A PARTIR DE AQUÍ, ES 100% RAMA ACOLYTE ===
+
+	if (dawn_mace_q == 2) {
+		mes "[Sister Lyra]";
+		mes "The Dawn Mace looks radiant in your hands. May it be a beacon of hope for your allies and a hammer of justice against the dark.";
+		close;
+	}
+
+	if (dawn_mace_q == 1) {
+		mes "[Sister Lyra]";
+		if (JobLevel >= 10) {
+			mes "Your aura has grown much brighter. You have reached Job Level 10.";
+			mes "I can see that your devotion is bearing fruit.";
+			next;
+			mes "[Sister Lyra]";
+			mes "As promised, here is the ^0000FFDawn Mace^000000. It is a sturdy weapon, blessed to help you protect those in need.";
+			next;
+			mes "[Sister Lyra]";
+			mes "Take this jewelry box as well. It contains a sacred stone of energy.";
+			next;
+			mes "[Sister Lyra]";
+			mes "If you take it to the ^0000FFJewel Enchanter^000000 in the refiner's building here in ^0000FFProntera^000000, he can infuse its essence into the mace.";
+			mes "An awakened weapon is a great aid in your holy mission.";
+			next;
+			
+			getitem 40005, 1; 
+			getitem 12106, 1;
+			getexp 1000, 1000;
+			set dawn_mace_q, 2;
+			
+			mes "[Sister Lyra]";
+			mes "Go in peace, and may the light guide every step you take.";
+			close;
+		} else {
+			mes "[Sister Lyra]";
+			mes "The weight of a holy weapon is as much spiritual as it is physical.";
+			mes "Continue your service and return when you reach ^FF0000Job Level 10^000000. I will be waiting for you.";
+			close;
+		}
+	}
+
+	if (dawn_mace_q == 0) {
+		mes "[Sister Lyra]";
+		mes "Welcome, newly ordained servant. The path you've chosen is not easy, but it is noble.";
+		next;
+		mes "[Sister Lyra]";
+		mes "I have something to help you on your journey: the ^0000FFDawn Mace^000000.";
+		next;
+		mes "[Sister Lyra]";
+		mes "Many think our path is only about prayer, but we must also be the iron that stands against evil.";
+		next;
+		mes "[Sister Lyra]";
+		mes "This mace will grow alongside your faith. Prove your dedication by reaching ^FF0000Job Level 10^000000, and I shall grant it to you.";
+		mes "Will you continue your training?";
+		next;
+		if (select("I will serve with all my heart.:I need more time.") == 2) {
+			mes "[Sister Lyra]";
+			mes "Reflection is also a form of prayer. Return when your heart is ready.";
+			close;
+		}
+		mes "[Sister Lyra]";
+		mes "Splendid. Go forth and help those who suffer. I shall keep you in my prayers.";
+		set dawn_mace_q, 1;
+		close;
+	}
+}

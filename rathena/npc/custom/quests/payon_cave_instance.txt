@@ -1,0 +1,288 @@
+// =============================================
+// Payon Instance Quest & FFA Boss: Tormented Weaver
+// =============================================
+
+// --- 1. GRANDMOTHER KYUNG (pay_arche) ---
+pay_arche,48,137,4	script	Grandmother Kyung	78,{
+	mes "[Grandmother Kyung]";
+	
+	// Estado 4: Quest Completada (Informa del Cooldown del MVP FFA)
+	if (payon_quest >= 4) {
+		if (#payon_cooldown > gettimetick(2)) {
+			.@rest = #payon_cooldown - gettimetick(2);
+			mes "The caves are quiet right now, traveler.";
+			mes "The dark spirits will need ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^000000 to gather their strength again.";
+		} else {
+			mes "I can feel a chill coming from the caves...";
+			mes "The Weaver's shadow has returned to the ancient gravestone. If you are brave, you can face it again.";
+		}
+		close;
+	}
+
+	// Estado 3: Entregar Quest y Recompensa
+	if (payon_quest == 3) {
+		mes "Min-ji is finally free! I saw her in my dreams, smiling without that terrible ribbon...";
+		next;
+		mes "She left this for you. She said it was her only true 'perfect' work.";
+		next;
+		getitem 5801, 1; // Reward: Red Tailed Ribbon
+		getexp 12000, 10000;
+		set Zeny, Zeny + 5000;
+		set payon_quest, 4;
+		if (checkquest(80020, HAVEQUEST) != -1) { completequest 80020; }
+		mes "You've brought peace to our family. No more shadows... no more silk.";
+		close;
+	}
+
+	// Estado 1 y 2: Quest en progreso
+	if (payon_quest == 1 || payon_quest == 2) {
+		mes "Please hurry! The silk... it is tightening! Find the ancient gravestone!";
+		close;
+	}
+
+	// Estado 0: Inicio de Quest (Con restricción de Nivel)
+	if (payon_quest == 0) {
+		if (BaseLevel < 25 || BaseLevel > 40) {
+			mes "Child, the caves are no place for someone like you yet.";
+			mes "The darkness down there drinks the light of those who are not prepared.";
+			next;
+			mes "Come back when you are between ^FF0000Level 25 and 40^000000.";
+			close;
+		}
+
+		mes "My granddaughter Min-ji... She was the greatest weaver in the village.";
+		next;
+		mes "But she became obsessed with a 'Perfect Ribbon' that could transcend death itself.";
+		next;
+		mes "She went into the caves searching for the legendary silk... and never returned.";
+		next;
+		mes "I can still hear her crying near the ancient gravestone. Please... free her soul from this nightmare.";
+		next;
+		if (select("I will find her.:I am sorry.") == 2) close;
+		
+		set payon_quest, 1;
+		if (checkquest(80020) == -1) { setquest 80020; }
+		mes "The gravestone is located on the first level of the caves. Beware of the threads.";
+		close;
+	}
+	close;
+}
+
+// --- 2. OUTSIDE ALTAR (pay_dun00) ---
+pay_dun00,163,142,5	script	Pulsing Gravestone	10443,{
+	
+	// Restricción Global de Nivel
+	if (BaseLevel < 25 || BaseLevel > 40) {
+		mes "^888888*The gravestone rejects your presence. It requires souls between Level 25 and 40.*^000000";
+		close;
+	}
+
+	// === MODO FFA BOSS (Quest completada) ===
+	if (payon_quest >= 4) {
+		if (#payon_cooldown > gettimetick(2)) {
+			.@rest = #payon_cooldown - gettimetick(2);
+			mes "^888888*The gravestone is cold and silent. The corruption is dormant.*^000000";
+			mes "^888888*It will accept offerings again in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^888888.*^000000";
+			close;
+		}
+
+		mes "^888888*A dark presence lingers in the air... It hungers for death and decay.*^000000";
+		next;
+		mes "Do you wish to offer tribute to summon the Tormented Weaver?";
+		mes "Requirements: ^FF000050 Skel-Bones^000000, ^FF000050 Decayed Nails^000000, and ^FF00001 Horrendous Mouth^000000.";
+		next;
+		if (select("Make offering.:Cancel.") == 1) {
+			if (countitem(932) >= 50 && countitem(957) >= 50 && countitem(958) >= 1) {
+				delitem 932, 50;
+				delitem 957, 50;
+				delitem 958, 1;
+				
+				set #payon_cooldown, gettimetick(2) + 10800; // 3 Hours Cooldown
+				
+				mes "^888888*You place the grotesque offerings on the gravestone...*^000000";
+				mes "^888888*A terrifying silence follows...*^000000";
+				next;
+				mes "^888888*Suddenly, the ground begins to tremble!*^000000";
+				
+				specialeffect2 563;
+				soundeffect "earth_quake.wav", 0;
+				
+				setnpctimer 0;
+				initnpctimer;
+				close;
+			} else {
+				mes "You lack the necessary offerings to entice the spirit.";
+				close;
+			}
+		}
+		close;
+	}
+
+	// === MODO INSTANCIA (Quest NO completada) ===
+	if (payon_quest == 0) {
+		mes "^888888*The ancient gravestone is cold and silent.*^000000";
+		close;
+	}
+	
+	if (countitem(523) < 1) {
+		mes "You need a bottle of ^FF0000Holy Water^000000 to interact with this gravestone.";
+		close;
+	}
+
+	if (getcharid(1) == 0) { 
+		mes "You must be in a party to cleanse this corrupted gravestone."; 
+		close; 
+	}
+
+	if (!is_party_leader()) { 
+		mes "Only your party leader can initiate the cleansing ritual."; 
+		next;
+		if (select("Enter Instance.:Stay.") == 1) {
+			instance_enter("Payon Dungeon");
+		}
+		close;
+	}
+
+	mes "Are you ready to enter the darkness and cleanse the gravestone?";
+	if (select("Open Gateway.:Wait.") == 1) {
+		if (instance_id(1) <= 0) {
+			if (instance_create("Payon Dungeon") < 0) { 
+				mes "The gateway is currently barred. (Instance error)."; 
+				close; 
+			}
+		}
+		instance_enter("Payon Dungeon");
+	}
+	close;
+
+// Timer para el Boss FFA (Fuera de la instancia)
+OnTimer1000:
+	monster "pay_dun00", 141, 136, "Tormented Weaver", 3502, 1, "Gravestone::OnDummyKill";
+	.@mob_gid = $@mobid[0];
+	if (.@mob_gid > 0) { setunitdata .@mob_gid, UMOB_SIZE, 8; }
+	mapannounce "pay_dun00", "A furious spirit has been summoned at the ancient gravestone!", bc_map, "0xFFFF00";
+	stopnpctimer;
+	end;
+
+OnDummyKill:
+	end;
+}
+
+// --- 3. INSIDE ALTAR (1@pay00) ---
+1@pay00,163,142,5	script	Tainted Gravestone	10443,{
+	
+	if (getcharid(1) > 0) .party_id = getcharid(1);
+
+	if (payon_quest == 3) {
+		mes "The dark energy has fully dissipated. The gravestone is purified.";
+		next;
+		if (select("Leave Instance.:Stay here.") == 1) {
+			warp "pay_arche", 39, 131;
+		}
+		close;
+	}
+
+	if (.ritual_active) {
+		mes "The ritual is currently in progress! Defeat the intruders!";
+		close;
+	}
+
+	mes "The gravestone pulses with a very violent purple light...";
+	next;
+	if (countitem(523) < 1) {
+		mes "Where is the ^FF0000Holy Water^000000? You cannot proceed without it now.";
+		close;
+	}
+
+	mes "Pour the Holy Water on the Tainted Gravestone?";
+	next;
+	if (select("Pour it.:Wait a moment.") == 2) close;
+
+	delitem 523, 1;
+	.ritual_active = 1;
+	.MyMobs = 11; // 1 Skeleton + 10 Zombies
+	
+	.@origin_aid = getcharid(3);
+	getpartymember .party_id, 2;
+	for (.@i = 0; .@i < $@partymembercount; .@i++) {
+		if (attachrid($@partymemberaid[.@i])) {
+			if (payon_quest == 1) { set payon_quest, 2; }
+			detachrid;
+		}
+	}
+	attachrid(.@origin_aid);
+
+	mes "As the holy water touches the stone, the air grows freezing cold...";
+	close2;
+	
+	setnpctimer 0;
+	initnpctimer;
+	end;
+
+OnInstanceInit:
+	setmapflag instance_mapname("1@pay00"), mf_noteleport;
+	setmapflag instance_mapname("1@pay00"), mf_nomemo;
+	.ritual_active = 0;
+	.MyMobs = 0;
+	end;
+
+OnTimer1000:
+	mapannounce instance_mapname("1@pay00"), "The undead feel attracted to the dark energies!", bc_map, "0x8A2BE2";
+	// OLEADA 1: Solo 1 Soldier Skeleton (ID 1028)
+	monster instance_mapname("1@pay00"), 152, 145, "Corrupted Guardian", 1028, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	end;
+
+OnTimer10000: 
+	// OLEADA 2: 10 Zombies (ID 1015)
+	monster instance_mapname("1@pay00"), 152, 145, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 151, 141, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 153, 139, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 150, 143, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 152, 145, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 153, 142, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 151, 143, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 152, 145, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 149, 144, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	monster instance_mapname("1@pay00"), 149, 137, "Restless Corpse", 1015, 1, instance_npcname("Tainted Gravestone")+"::OnWaveKill";
+	stopnpctimer;
+	end;
+
+OnWaveKill:
+	.MyMobs--;
+	if (.MyMobs <= 0) {
+		donpcevent instance_npcname("Tainted Gravestone")+"::OnBossPhase";
+	}
+	end;
+
+OnBossPhase:
+	mapannounce instance_mapname("1@pay00"), "A powerful dark entity is rapidly approaching!", bc_map, "0xFF0000";
+	
+	sleep 2000; 
+	soundeffectall "earth_quake.wav", 0, instance_mapname("1@pay00");
+	
+	getpartymember .party_id, 2;
+	for (.@i = 0; .@i < $@partymembercount; .@i++) {
+		if (attachrid($@partymemberaid[.@i])) {
+			specialeffect2 563;
+			break; 
+		}
+	}
+	
+	monster instance_mapname("1@pay00"), 141, 136, "Tormented Weaver", 3502, 1, instance_npcname("Tainted Gravestone")+"::OnBossDead";
+	.@mob_gid = $@mobid[0];
+	if (.@mob_gid > 0) { setunitdata .@mob_gid, UMOB_SIZE, 8; }
+	end;
+
+OnBossDead:
+	.ritual_active = 0;
+	mapannounce instance_mapname("1@pay00"), "The corruption has been purged! Speak to the Gravestone to leave.", bc_map, "0x00FF00";
+	
+	getpartymember .party_id, 2;
+	for (.@i = 0; .@i < $@partymembercount; .@i++) {
+		if (attachrid($@partymemberaid[.@i])) {
+			if (payon_quest == 2) { set payon_quest, 3; }
+			detachrid;
+		}
+	}
+	end;
+}

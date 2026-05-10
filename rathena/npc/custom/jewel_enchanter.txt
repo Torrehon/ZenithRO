@@ -1,0 +1,245 @@
+// ======================================================
+// NPC: Jewel Enchanter (Random Options Upgrade)
+// Location: Prontera (160, 190)
+// ======================================================
+prt_in,89,72,4	script	Jewel Enchanter	542,{
+
+    mes "[Jewel Enchanter]";
+    mes "I can extract the maximum potential of your equipment by embedding precious jewels into it.";
+    mes "Each infused jewel will increase an attribute's power.";
+    next;
+
+    // 1. SELECCIÓN DE ITEM EN EL INVENTARIO
+    set .@menu_count, 0;
+    set .@menu$, "";
+    getinventorylist;
+
+    for (set .@i, 0; .@i < @inventorylist_count; set .@i, .@i + 1) {
+        if (getd("@inventorylist_option_id1["+.@i+"]") > 0) {
+            set .@menu$, .@menu$ + getitemname(@inventorylist_id[.@i]) + " (+" + @inventorylist_refine[.@i] + "):";
+            set .@indices[.@menu_count], .@i;
+            set .@menu_count, .@menu_count + 1;
+        }
+    }
+
+    if (.@menu$ == "") {
+        mes "You don't have any equipment with random options in your inventory.";
+        close;
+    }
+
+    set .@selection, select(.@menu$) - 1;
+    set .@idx, .@indices[.@selection]; 
+    set .@real_inv_idx, @inventorylist_idx[.@idx]; 
+    
+    // --- SEGURO DE DESEQUIPAR ---
+    if (@inventorylist_equip[.@idx] > 0) {
+        mes "[Jewel Enchanter]";
+        mes "I see you have that item equipped.";
+        mes "For the safety of your attributes, you must ^FF0000unequip^000000 it and leave it in your inventory before I can work on it.";
+        close;
+    }
+    
+    // Datos del Item seleccionado
+    set .@it_id, @inventorylist_id[.@idx];
+    set .@it_type, getiteminfo(.@it_id, 2); // 4 = IT_WEAPON, 5 = IT_ARMOR
+    set .@wlv, getiteminfo(.@it_id, 13);    // Weapon Level real
+    if (.@wlv <= 0) set .@wlv, 1; 
+
+    next;
+    mes "[Jewel Enchanter]";
+    mes "Which option of your " + getitemname(.@it_id) + " would you like to enhance?";
+    
+    // 2. LISTAR OPCIONES DEL ITEM (Menú Limpio)
+    set .@opt_menu$, "";
+    set .@slot_count, 0; 
+    
+    for (set .@i, 1; .@i <= 5; set .@i, .@i + 1) {
+        set .@o_id, getd("@inventorylist_option_id"+.@i+"["+.@idx+"]");
+        set .@o_val, getd("@inventorylist_option_value"+.@i+"["+.@idx+"]");
+        
+        if (.@o_id > 0) {
+            set .@opt_menu$, .@opt_menu$ + "Slot " + .@i + ":";
+            set .@active_slots[.@slot_count], .@i;
+            set .@slot_count, .@slot_count + 1;
+        }
+    }
+
+    if (.@opt_menu$ == "") {
+        mes "There was an error reading the options for this item.";
+        close;
+    }
+
+    set .@sel_opt, select(.@opt_menu$) - 1;
+    set .@real_slot, .@active_slots[.@sel_opt]; 
+    
+    set .@target_opt_id, getd("@inventorylist_option_id"+.@real_slot+"["+.@idx+"]");
+    set .@current_val, getd("@inventorylist_option_value"+.@real_slot+"["+.@idx+"]");
+
+    // 3. DETERMINAR JOYA Y COSTE (Mapeo Oficial)
+    if (.@target_opt_id >= 3 && .@target_opt_id <= 8) { 
+        set .@joya_req, .Diamond; set .@zeny_req, 1000000; set .@joya_qty, 1; 
+    } 
+    else if (.@target_opt_id == 1 || .@target_opt_id == 11 || .@target_opt_id == 9) {
+        set .@joya_req, .Emerald;
+    }
+    else if (.@target_opt_id == 2 || .@target_opt_id == 12 || .@target_opt_id == 10 || .@target_opt_id == 172) {
+        set .@joya_req, .Aquamarine;
+    }
+    else if (.@target_opt_id == 168 || .@target_opt_id == 169) {
+        set .@joya_req, .Pearl;
+    }
+    else if (.@target_opt_id == 18 || .@target_opt_id == 24 || .@target_opt_id == 22 || .@target_opt_id == 23) {
+        set .@joya_req, .Opal;
+    }
+    else if (.@target_opt_id == 16 || .@target_opt_id == 170 || .@target_opt_id == 171) {
+        set .@joya_req, .Amethyst;
+    }
+    else if (.@target_opt_id == 25 || (.@target_opt_id >= 26 && .@target_opt_id <= 34) || .@target_opt_id == 20 || .@target_opt_id == 21 || (.@target_opt_id >= 160 && .@target_opt_id <= 162) || .@target_opt_id == 220 || .@target_opt_id == 167 || (.@target_opt_id >= 87 && .@target_opt_id <= 96)) {
+        set .@joya_req, .Topaz;
+    }
+    else if (.@target_opt_id >= 232 && .@target_opt_id <= 242) {
+        set .@joya_req, .Zircon;
+    }
+    else if (.@target_opt_id == 19 || (.@target_opt_id >= 57 && .@target_opt_id <= 75) || .@target_opt_id == 151 || .@target_opt_id == 152 || .@target_opt_id == 155 || .@target_opt_id == 156 || (.@target_opt_id >= 187 && .@target_opt_id <= 189) || .@target_opt_id == 14) {
+        set .@joya_req, .Sapphire;
+    }
+    else if (.@target_opt_id == 17 || (.@target_opt_id >= 37 && .@target_opt_id <= 55) || (.@target_opt_id >= 97 && .@target_opt_id <= 106) || .@target_opt_id == 147 || .@target_opt_id == 148 || .@target_opt_id == 153 || .@target_opt_id == 154 || (.@target_opt_id >= 157 && .@target_opt_id <= 159) || .@target_opt_id == 164 || .@target_opt_id == 13) {
+        set .@joya_req, .Ruby;
+    }
+    else {
+        set .@joya_req, .Ruby; // Fallback para físicas
+    }
+
+    // --- SEPARACIÓN DE EQUIPO Y ARMAS ---
+    if (.@joya_req != .Diamond) {
+        if (.@it_type == 5) {
+            // ARMADURAS Y EQUIPO (Fijo)
+            set .@joya_qty, 1; 
+            set .@zeny_req, 20000;
+        } else {
+            // ARMAS (Escala por Weapon Level)
+            if (.@wlv <= 1)      { set .@joya_qty, 1; set .@zeny_req, 20000; }
+            else if (.@wlv == 2) { set .@joya_qty, 2; set .@zeny_req, 40000; }
+            else if (.@wlv == 3) { set .@joya_qty, 3; set .@zeny_req, 60000; }
+            else                 { set .@joya_qty, 4; set .@zeny_req, 80000; }
+        }
+    }
+    
+    // Obtenemos el CAP desde la subrutina
+    set .@max_val, callsub(S_GetCap, .@target_opt_id, .@wlv);
+
+    if (.@current_val >= .@max_val) {
+        next;
+        mes "[Jewel Enchanter]";
+        mes "Current Value: ^0000FF" + .@current_val + "^000000";
+        mes "Maximum Limit: ^00AA00" + .@max_val + "^000000";
+        mes " ";
+        mes "^FF0000This option has already reached its maximum potential.^000000";
+        close;
+    }
+
+    // --- CÁLCULO DINÁMICO DEL INCREMENTO ---
+    set .@increment, 1; 
+    if (.@target_opt_id == 1) set .@increment, 25; // Max HP
+    else if (.@target_opt_id == 2) set .@increment, 5; // Max SP
+
+    if (.@current_val + .@increment > .@max_val) {
+        set .@increment, .@max_val - .@current_val;
+    }
+
+    next;
+    mes "[Jewel Enchanter]";
+    mes "To upgrade this option, you will need:";
+    mes " > ^FF0000" + .@joya_qty + "x " + getitemname(.@joya_req) + "^000000";
+    mes " > ^FF0000" + .@zeny_req + " Zeny^000000";
+    mes " ";
+    mes "Current Value: ^0000FF" + .@current_val + "^000000";
+    mes "Upgrade amount: ^FF8800+" + .@increment + "^000000";
+    mes "Maximum Limit: ^00AA00" + .@max_val + "^000000";
+    
+    if (select("Proceed with upgrade:Cancel") == 2) close;
+
+    // 4. VERIFICACIÓN Y COBRO
+    if (countitem(.@joya_req) < .@joya_qty || Zeny < .@zeny_req) {
+        mes "You do not have enough materials or Zeny.";
+        close;
+    }
+
+    delitem .@joya_req, .@joya_qty;
+    set Zeny, Zeny - .@zeny_req;
+
+    // 5. ANIMACIÓN Y APLICACIÓN DE CAMBIOS
+    close2; // Cierra la ventana del NPC pero sigue ejecutando el script
+    
+    soundeffect "blacksmith.wav", 0; // Efecto de sonido de forja
+    progressbar "0x00FF00", 2;       // Barra de casteo verde de 2 segundos
+
+    set .@new_val, .@current_val + .@increment;
+    if (.@new_val > .@max_val) set .@new_val, .@max_val;
+
+    setitemoption .@real_inv_idx, (.@real_slot - 1), .@target_opt_id, .@new_val;
+    specialeffect 154; // Brillo de éxito
+    dispbottom "The jewel has been successfully embedded! New value: +" + .@new_val;
+    end;
+
+// SUB-RUTINA PARA CALCULAR EL CAP (1:1 con Documentación Oficial)
+S_GetCap:
+    set .@id, getarg(0);
+    set .@w, getarg(1); // Nivel de Arma (1 a 4)
+
+    // ==========================================
+    // ARMAS (Grupos 8, 9 y 10 - Escalan con WLV)
+    // ==========================================
+    if (.@id == 17) return (.@w == 4) ? 25 : (.@w * 6);
+    if (.@id == 19) return (.@w == 4) ? 35 : (.@w * 8);
+    
+    if (.@id == 153 || .@id == 154 || .@id == 168) return (.@w * 5);
+
+    if (.@id == 18 || .@id == 155 || .@id == 156) { 
+        set .@c, .@w * 4; 
+        return (.@c > 15) ? 15 : .@c; 
+    }
+    if ((.@id >= 37 && .@id <= 75) || (.@id >= 97 && .@id <= 106) || (.@id >= 157 && .@id <= 159) || .@id == 164 || .@id == 172) {
+        return (.@w == 4) ? 15 : (.@w * 4); 
+    }
+
+    if (.@id == 16 || .@id == 24 || .@id == 170 || .@id == 171 || (.@id >= 187 && .@id <= 189)) {
+        if (.@w == 1) return 3;
+        if (.@w == 2) return 5;
+        if (.@w == 3) return 8;
+        return 10;
+    }
+
+    if (.@id == 147 || .@id == 148 || .@id == 151 || .@id == 152) return 5;
+
+    // ==========================================
+    // ARMADURAS Y EQUIPO (Topes Fijos)
+    // ==========================================
+    if (.@id >= 3 && .@id <= 8) return 3; // Gorros
+    if (.@id == 1) return 400; // HP plana
+    if (.@id == 2) return 75;  // SP plana
+    if (.@id == 11 || .@id == 12) return 25; // HP/SP Recovery
+    if (.@id >= 26 && .@id <= 34) return 10; // Resistencias elementales
+    if (.@id == 25) return 5; // Resistencia neutral
+    if (.@id == 169) return 15; // Heal Recibido
+    if (.@id >= 232 && .@id <= 242) return 15; // Raza EXP
+    if (.@id == 9 || .@id == 10 || .@id == 20 || .@id == 220 || (.@id >= 160 && .@id <= 162)) return 5; // HP/SP%, Def, Res Melee, Res Tamaños
+    if (.@id == 21) return 10; // Mdef
+    if (.@id == 13 || .@id == 14 || .@id == 23 || .@id == 167 || (.@id >= 87 && .@id <= 96)) return 5; // Atk/Matk%, PD, Ranged Res, Race Res
+    if (.@id == 22) return 15; // Flee
+
+    return 50; // Fallback de seguridad
+
+OnInit:
+    set .Ruby, 723;       
+    set .Sapphire, 726;   
+    set .Emerald, 721;    
+    set .Aquamarine, 720; 
+    set .Opal, 727;       
+    set .Topaz, 728;      
+    set .Amethyst, 719;   
+    set .Diamond, 6024;   
+    set .Pearl, 722;      
+    set .Zircon, 729;     
+    end;
+}

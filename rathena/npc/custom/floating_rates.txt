@@ -1,0 +1,101 @@
+//--------------------------------------------------------------
+// MANA ENGINE - Floating Rates (5x - 8x)
+//--------------------------------------------------------------
+-	script	MANA_ENGINE	-1,{
+
+// Ciclo cada 3 horas
+OnHour00:OnHour03:OnHour06:OnHour09:OnHour12:OnHour15:OnHour18:OnHour21:
+OnManualTrigger:
+	// 1. Calculo Aleatorio 5x - 8x
+	set .@new_rate, rand(500, 800);
+	set .@int, .@new_rate / 100;
+	set .@dec, .@new_rate % 100;
+
+	setbattleflag "base_exp_rate", .@new_rate;
+	setbattleflag "job_exp_rate", .@new_rate;
+
+	// Variables de control
+	set $ManaEvent_Active, 1;
+	set $ManaEvent_Reloaded, 0;
+
+	debugmes "[MANA ENGINE] New rate set: " + .@int + "." + .@dec + "x";
+
+	// 2. Ejecucion del Reload (Necesita un RID)
+	if (getusers(1) > 0) {
+		if (query_sql("SELECT char_id FROM `char` WHERE online=1 LIMIT 1", .@target_ids)) {
+			attachrid(.@target_ids[0]);
+			atcommand "@reloadmobdb";
+			set $ManaEvent_Reloaded, 1;
+			debugmes "[MANA ENGINE] Reloaded via RID " + .@target_ids[0];
+		}
+	}
+
+	announce "The mana flow is flooding the fields! Experience rates are now: " + .@int + "." + .@dec + "x", bc_all;
+
+	sleep 3600000; // 1 hora de evento
+
+	// Finalizacion automatica
+	if ($ManaEvent_Active == 0) end; // Si ya se detuvo manualmente, no hacer nada
+	
+	set $ManaEvent_Active, 0;
+	set $ManaEvent_Reloaded, 0;
+	setbattleflag "base_exp_rate", 500;
+	setbattleflag "job_exp_rate", 500;
+	
+	if (getusers(1) > 0) {
+		atcommand "@reloadmobdb";
+	}
+	announce "The mana flow has stabilized. Experience rates return to 5.00x", bc_all;
+	end;
+
+OnPCLoginEvent:
+	if ($ManaEvent_Active == 1 && $ManaEvent_Reloaded == 0) {
+		atcommand "@reloadmobdb";
+		set $ManaEvent_Reloaded, 1;
+		debugmes "[MANA ENGINE] Login trigger: @reloadmobdb executed.";
+	}
+	end;
+
+OnInit:
+	set $ManaEvent_Active, 0;
+	set $ManaEvent_Reloaded, 0;
+	setbattleflag "base_exp_rate", 500;
+	setbattleflag "job_exp_rate", 500;
+	debugmes "[MANA ENGINE] Initialized at 5x.";
+	end;
+}
+
+//--------------------------------------------------------------
+// NPC CONTROL (PRONTERA 155, 180)
+//--------------------------------------------------------------
+prontera,155,180,5	script	"Mana Control"	122,{
+	mes "[Mana Control]";
+	mes "Hello. (Testing Mode Active)";
+	mes "Current Status: " + (($ManaEvent_Active) ? "^00FF00Active^000000" : "^FF0000Inactive^000000");
+	next;
+	
+	switch(select("Force Event (5x-8x):Stop Event:Cancel")) {
+		case 1:
+			mes "[Mana Control]";
+			mes "Triggering global event and reloading database...";
+			close2;
+			donpcevent "MANA_ENGINE::OnManualTrigger";
+			break;
+		
+		case 2:
+			mes "[Mana Control]";
+			mes "Restoring rates to 5.00x and reloading database...";
+			set $ManaEvent_Active, 0;
+			set $ManaEvent_Reloaded, 0;
+			setbattleflag "base_exp_rate", 500;
+			setbattleflag "job_exp_rate", 500;
+			atcommand "@reloadmobdb";
+			announce "The mana event has been manually terminated. Rates are now 5.00x.", bc_all;
+			close;
+			break;
+
+		case 3:
+			close;
+			break;
+	}
+}

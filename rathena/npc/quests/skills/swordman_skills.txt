@@ -1,0 +1,141 @@
+izlude,47,131,4	script	Veteran Brand	85,{
+	
+	mes "[Veteran Brand]";
+	mes "A true Swordman does not only survive; he dominates the battlefield through constant training.";
+	next;
+
+	// --- FILTER: Only Swordman Class ---
+	if (BaseClass != Job_Swordman) {
+		mes "[Veteran Brand]";
+		mes "My teachings are reserved for those who walk the path of the blade. Begone.";
+		close;
+	}
+
+	mes "[Veteran Brand]";
+	mes "Which technique are you looking to perfect today?";
+	next;
+
+	// --- SECURE DYNAMIC MENU ---
+	.@menu$ = "";
+	.@i = 1;
+
+	if (getskilllv("SM_MOVINGRECOVERY") == 0) {
+		.@menu$ += "Moving Recovery:";
+		.@map[.@i] = 1;
+		.@i++;
+	}
+	if (getskilllv("SM_FATALBLOW") == 0) {
+		.@menu$ += "^0000FFLearn Fatal Blow^000000:";
+		.@map[.@i] = 2;
+		.@i++;
+	}
+	if (getskilllv("SM_AUTOBERSERK") == 0) {
+		.@menu$ += "Auto Berserk:";
+		.@map[.@i] = 3;
+		.@i++;
+	}
+	
+	.@menu$ += "I will be back later.";
+	.@map[.@i] = 4;
+
+	switch(.@map[select(.@menu$)]) {
+		
+		case 1: // MOVING RECOVERY
+			mes "[Veteran Brand]";
+			mes "To learn ^3355FFMoving Recovery^000000, I must ensure you have enough supplies to sustain your body.";
+			mes "Bring me: 10 Red Potions, 5 Orange Potions, and 3 Yellow Potions.";
+			mes "You must also be at least ^FF0000Job Level 15^000000.";
+			next;
+
+			if (select("I have the items.:I'll come back later.") == 2) close;
+
+			if (countitem(501) >= 10 && countitem(502) >= 5 && countitem(503) >= 3 && JobLevel >= 15) {
+				delitem 501, 10;
+				delitem 502, 5;
+				delitem 503, 3;
+				skill "SM_MOVINGRECOVERY", 1, SKILL_PERM;
+				mes "[Veteran Brand]";
+				mes "Excellent! Your body is now prepared to mend itself even while you travel.";
+				close;
+			}
+			mes "[Veteran Brand]";
+			mes "You lack the necessary supplies or experience. Don't waste my time.";
+			close;
+
+		case 2: // FATAL BLOW
+			mes "[Veteran Brand]";
+			if (JobLevel < 15) {
+				mes "Your technique is still too sloppy. Return to me when you reach ^FF0000Job Level 15^000000.";
+				close;
+			}
+			
+			if (countitem(50002) < 1) {
+				mes "To learn ^3355FFFatal Blow^000000, you must first obtain a ^3355FFTraining Recommendation 1^000000. I cannot train you otherwise.";
+				close;
+			}
+
+			mes "I see you carry a ^3355FFTraining Recommendation 1^000000. Excellent.";
+			mes "To learn ^3355FFFatal Blow^000000, I need you to demonstrate your raw potential and gather some materials.";
+			mes "Bring me: 1 ^3355FFHorrendous Mouth^000000, 10 ^3355FFDecayed Nails^000000, and 10 ^3355FFSkel-Bones^000000.";
+			next;
+			
+			if (select("I have them right here.:I need more time.") == 2) close;
+			
+			if (countitem(958) >= 1 && countitem(957) >= 10 && countitem(932) >= 10) {
+				delitem 50002, 1;
+				delitem 958, 1;
+				delitem 957, 10;
+				delitem 932, 10;
+				mes "[Veteran Brand]";
+				mes "That efficiency is the foundation of ^3355FFFatal Blow^000000. Your ^990000Bash^000000 strikes will now be stronger!";
+				skill "SM_FATALBLOW", 1, SKILL_PERM;
+				mes "Congratulations! Use this power wisely.";
+				close;
+			}
+			
+			mes "[Veteran Brand]";
+			mes "You lack the items I requested. Come back when you are prepared.";
+			close;
+
+		case 3: // AUTO BERSERK
+			mes "[Veteran Brand]";
+			mes "To learn ^3355FFAuto Berserk^000000, you must understand the true aggressiveness of a Swordman.";
+			mes "When you are pushed to the brink of death, you must not falter. You must embrace the fury!";
+			next;
+			mes "[Veteran Brand]";
+			mes "To prove you can look death in the eye without fear, face the wild beasts and bring me their trophies:";
+			mes "5 ^3355FFRed Blood^000000";
+			mes "10 ^3355FFWolf Claws^000000";
+			next;
+			mes "[Veteran Brand]";
+			mes "And remember, you must be at least ^FF0000Job Level 15^000000 to handle this training.";
+			next;
+			
+			if (select("I have returned from the hunt.:I am on my way.") == 2) close;
+
+			if (countitem(990) >= 5 && countitem(939) >= 10 && JobLevel >= 15) {
+				delitem 990, 5;
+				delitem 939, 10;
+				skill "SM_AUTOBERSERK", 1, SKILL_PERM;
+				
+				mes "[Veteran Brand]";
+				mes "You have returned with the fire of battle in your eyes!";
+				mes "You can now use Auto Berserk.";
+				next;
+				mes "[Veteran Brand]";
+				mes "A word of caution: once you regain your health, the fury will subside.";
+				mes "Use this power only when your life hangs by a thread. Now go, and let your enemies fear your wrath!";
+				close;
+			}
+			mes "[Veteran Brand]";
+			mes "You either lack the proof of your battles, or your experience is lacking. Return when you meet the requirements.";
+			close;
+
+		case 4: // EXIT
+			mes "[Veteran Brand]";
+			mes "Strength through discipline. Farewell.";
+			close;
+	}
+
+// --- Monster Kill Event (Porings ID 1002) - Removed for Fatal Blow ---
+}

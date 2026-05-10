@@ -1,0 +1,192 @@
+payon_in02,60,74,4	script	Fletcher Roberto	88,{
+	mes "[Fletcher Roberto]";
+	mes "A true Archer knows that the forest provides, but we must never waste its gifts.";
+	next;
+
+	// --- FILTER: Only Archer Class ---
+	if (BaseClass != Job_Archer) {
+		mes "[Fletcher Roberto]";
+		mes "You hold no respect for the bow or the woods. I only share my techniques with true Archers.";
+		close;
+	}
+
+	mes "[Fletcher Roberto]";
+	mes "What survival technique do you wish to learn today?";
+	next;
+
+	// --- SECURE DYNAMIC MENU ---
+	.@menu$ = "";
+	.@i = 1;
+
+	if (getskilllv("AC_MAKINGARROW") == 0) {
+		.@menu$ += "Making Arrow:";
+		.@map[.@i] = 1;
+		.@i++;
+	}
+	if (getskilllv("AC_CHARGEARROW") == 0) {
+		.@menu$ += "Charge Arrow:";
+		.@map[.@i] = 2;
+		.@i++;
+	}
+	if (getskilllv("AC_MOMENTUM") == 0) { // Nueva Skill Custom
+		.@menu$ += "^0000FFLearn Momentum^000000:";
+		.@map[.@i] = 3;
+		.@i++;
+	}
+
+	.@menu$ += "I will be back later.";
+	.@map[.@i] = 4;
+
+	switch(.@map[select(.@menu$)]) {
+		
+		case 1: // MAKING ARROW
+			mes "[Fletcher Roberto]";
+			if (JobLevel < 15) {
+				mes "Your hands are not yet steady enough for delicate carving. Return to me when you reach ^FF0000Job Level 15^000000.";
+				close;
+			}
+			mes "The art of ^3355FFMaking Arrow^000000 is about resourcefulness. We reshape dead and discarded wood into deadly projectiles.";
+			next;
+			mes "[Fletcher Roberto]";
+			mes "Bring me these specific discarded woods:";
+			mes "3 ^3355FFFine Grained Trunks^000000";
+			mes "5 ^3355FFSolid Trunks^000000";
+			mes "5 ^3355FFBarren Trunks^000000";
+			mes "1 ^3355FFTrunk^000000";
+			next;
+
+			if (select("I have the materials.:I'll gather them.") == 2) {
+				mes "[Fletcher Roberto]";
+				mes "A good hunter is always prepared. Go gather them.";
+				close;
+			}
+
+			if (countitem(1068) >= 3 && countitem(1066) >= 5 && countitem(1067) >= 5 && countitem(1019) >= 1) {
+				delitem 1068, 3; delitem 1066, 5; delitem 1067, 5; delitem 1019, 1;
+				skill "AC_MAKINGARROW", 1, SKILL_PERM;
+				mes "[Fletcher Roberto]";
+				mes "Excellent. Watch carefully how I carve the shaft...";
+				close;
+			}
+			mes "[Fletcher Roberto]";
+			mes "You don't have all the materials.";
+			close;
+
+		case 2: // CHARGE ARROW
+			mes "[Fletcher Roberto]";
+			if (JobLevel < 15) {
+				mes "Your arms cannot handle the tension of a full draw yet. Return to me when you reach ^FF0000Job Level 15^000000.";
+				close;
+			}
+
+			if (plat_familiar_active == 0) {
+				mes "To master ^3355FFCharge Arrow^000000, you must learn the art of absolute precision.";
+				next;
+				mes "[Fletcher Roberto]";
+				mes "Go into the depths of the ^0000FFPayon Cave^000000 and shoot down ^FF000010 Familiars^000000.";
+				next;
+				if (select("I accept the hunt.:Maybe later.") == 1) {
+					set plat_familiar_active, 1;
+					set plat_familiar_count, 0;
+					mes "[Fletcher Roberto]";
+					mes "Keep your breathing steady. Good luck.";
+				}
+				close;
+			}
+			
+			if (plat_familiar_active == 1) {
+				mes "The hunt requires patience. You have grounded ^FF0000" + plat_familiar_count + " out of 10^000000 Familiars.";
+				close;
+			}
+			
+			if (plat_familiar_active == 2) {
+				mes "I heard the echoes of your bowstring. Flawless precision.";
+				next;
+				skill "AC_CHARGEARROW", 1, SKILL_PERM;
+				set plat_familiar_count, 0; set plat_familiar_active, 0;
+				mes "[Fletcher Roberto]";
+				mes "Your ^3355FFCharge Arrow^000000 will now knock your enemies back!";
+				close;
+			}
+			break;
+
+		case 3: // MOMENTUM (NUEVA QUEST)
+			mes "[Fletcher Roberto]";
+			if (JobLevel < 15) {
+				mes "You lack the stamina to maintain a constant firing rhythm. Return to me when you reach ^FF0000Job Level 15^000000.";
+				close;
+			}
+
+			if (plat_general_active == 0) {
+				if (countitem(50002) < 1) {
+					mes "Before I can train you in ^3355FFMomentum^000000, you must bring me a ^3355FFTraining Recommendation 1^000000.";
+					close;
+				}
+				mes "There is a state of mind called ^3355FFMomentum^000000. It is the ability to use the recoil of one shot to power the next, creating a deadly rhythm.";
+				next;
+				mes "[Fletcher Roberto]";
+				mes "To learn this, you must face a foe that does not flinch. A foe that forces you to stand your ground and keep firing without pause.";
+				next;
+				mes "[Fletcher Roberto]";
+				mes "Seek out a ^FF0000Greatest General^000000. Break its spirit with your rhythmic fire.";
+				next;
+				if (select("I will find it.:I'm not ready.") == 1) {
+					set plat_general_active, 1;
+					mes "[Fletcher Roberto]";
+					mes "Do not let the rhythm break. If you stop, you lose everything.";
+				}
+				close;
+			}
+
+			if (plat_general_active == 1) {
+				mes "[Fletcher Roberto]";
+				mes "The ^FF0000Greatest General^000000 still stands. You have not yet mastered the flow of battle.";
+				close;
+			}
+
+			if (plat_general_active == 2) {
+				mes "[Fletcher Roberto]";
+				if (countitem(50002) < 1) {
+					mes "You have defeated the General, but you lack the ^3355FFTraining Recommendation 1^000000. Come back when you obtain it.";
+					close;
+				}
+				mes "I can see it in your eyes... you've felt the vibration of the bowstring becoming a single, continuous note.";
+				next;
+				mes "[Fletcher Roberto]";
+				mes "That is ^3355FFMomentum^000000. The faster you strike, the more powerful you become, but the harder it is to stay in control.";
+				
+				delitem 50002, 1;
+				skill "AC_MOMENTUM", 1, SKILL_PERM;
+				set plat_general_active, 0;
+				next;
+				mes "[Fletcher Roberto]";
+				mes "Use this technique when you need to bring down the giants of the forest. Go now.";
+				close;
+			}
+			break;
+
+		case 4: // EXIT
+			mes "[Fletcher Roberto]";
+			mes "May the forest provide for you. Farewell.";
+			close;
+	}
+
+// --- Monster Kill Events ---
+OnNPCKillEvent:
+	// Evento para Familiars (Charge Arrow)
+	if (killedrid == 1005 && plat_familiar_active == 1) {
+		set plat_familiar_count, plat_familiar_count + 1;
+		if (plat_familiar_count >= 10) {
+			dispbottom "You have hunted 10 Familiars. Return to Fletcher Roberto.";
+			set plat_familiar_active, 2;
+		} else {
+			dispbottom "Familiars hunted: " + plat_familiar_count + " / 10";
+		}
+	}
+	// Evento para Greatest General (Momentum)
+	if (killedrid == 1277 && plat_general_active == 1) {
+		dispbottom "The Greatest General has fallen. Return to Fletcher Roberto.";
+		set plat_general_active, 2;
+	}
+	end;
+}

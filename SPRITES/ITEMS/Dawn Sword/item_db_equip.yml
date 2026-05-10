@@ -1,0 +1,46 @@
+- Id: 40001
+    AegisName: Dawn_Sword
+    Name: Dawn Sword
+    Type: Weapon
+    SubType: 1hSword
+    Buy: 5000
+    Weight: 800
+    Attack: 45
+    Range: 1
+    Slots: 0
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 2
+    EquipLevelMin: 10
+    Refineable: true
+    Jobs:
+      Alchemist: true
+      Assassin: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Novice: true
+      Rogue: true
+      SuperNovice: true
+      Swordman: true
+      Thief: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      // Bonus base para todos los trabajos
+      bonus bAtk, min(JobLevel, 30);
+
+      // El toque especial: Solo se activa si la clase base es Swordman
+      if (BaseClass == Job_Swordman) {
+          // getskilllv lee el nivel de la pasiva "Increase HP Recovery" (SM_RECOVERY)
+          bonus bDef2, getskilllv("SM_RECOVERY") * 3;
+          bonus2 bSkillAtk, "SM_BASH", 25;
+      }

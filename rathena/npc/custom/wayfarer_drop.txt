@@ -1,0 +1,12 @@
+-	script	WayfarerDropSystem	-1,{
+
+OnNPCKillEvent:
+	// Filter: Exit if the monster is a Boss (bit 0x04)
+	if (getmonsterinfo(killedrid, MOB_MODE) & 4) end;
+
+	// Rate: 1% (100 out of 10000)
+	if (rand(10000) < 200) {
+		getitem 50001, 1;
+	}
+	end;
+}

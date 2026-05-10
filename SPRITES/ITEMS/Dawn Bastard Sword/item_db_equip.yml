@@ -1,0 +1,39 @@
+- Id: 40006
+    AegisName: Dawn_Bastard_Sword
+    Name: Dawn Bastard Sword
+    Type: Weapon
+    SubType: 2hSword
+    Buy: 5000
+    Weight: 1500
+    Attack: 75
+    Range: 1
+    Slots: 0
+    Locations:
+      Right_Hand: true
+      Left_Hand: true
+    WeaponLevel: 2
+    EquipLevelMin: 10
+    Refineable: true
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      // Bonus base para todos los trabajos
+      bonus bAtk, min(JobLevel, 30);
+
+      if (BaseClass == Job_Swordman) {
+          // -2% SP Consumption per level of Two-Handed Sword Mastery
+          if (getskilllv("SM_TWOHAND") > 0) {
+              bonus bUseSPrate, -(getskilllv("SM_TWOHAND") * 2);
+          }
+      }

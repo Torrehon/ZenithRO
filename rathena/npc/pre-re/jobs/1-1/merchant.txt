@@ -1,0 +1,188 @@
+alberta_in,53,43,6	script	Merchant Master#mer	86,{
+
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (BaseClass == Job_Merchant) {
+			mes "[Merchant Master]";
+			mes "Hello there! How do you like being a Merchant?";
+			mes "Having a way with money certainly has its perks, does it not?";
+			close;
+		}
+		mes "[Merchant Master]";
+		mes "We Merchants hate people who are two faced. It's bad for business.";
+		next;
+		mes "[Merchant Master]";
+		mes "We only accept Novices for job changes here. I appreciate your interest, but you already have a career.";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		if (ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator) {
+			mes "[Merchant Master]";
+			mes "Long time no see!";
+			mes "Hey, you didn't quit your business, did you?";
+			next;
+			mes "[Merchant Master]";
+			mes "Wait... you've actually been to Valhalla?! Wow, you've come a long way...";
+			next;
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Merchant Master]";
+				mes "Hmmm... It seems that you're not ready to become a Merchant again.";
+				mes "Go finish learning the Basic Novice Skills first.";
+				close;
+			}
+			mes "[Merchant Master]";
+			mes "I guess it's destiny that we meet like this once more. Alright. Once again, let me change you into a Merchant!";
+			next;
+			
+			// Cambio de Job (Sin skills automáticas por petición)
+			skill "NV_TRICKDEAD",0,SKILL_PERM;
+			jobchange Job_Merchant_High;
+			
+			mes "[Merchant Master]";
+			mes "Ah~ How nostalgic. Just like old times! Alright, do your best!";
+			close;
+		}
+		else {
+			mes "[Merchant Master]";
+			mes "You've been reborn, but your heart doesn't beat for the sound of Zeny.";
+			mes "I'm afraid there is nothing I can do for you.";
+			close;
+		}
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Merchant Master]";
+	mes "Welcome to the Merchant Association!";
+	mes "I've seen many rookies, but you... you have that sparkle in your eye. The sparkle of someone who knows the value of a single Zeny.";
+	next;
+
+	// Validamos que tenga Job Nivel 10 y Basic Skills
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Merchant Master]";
+		mes "First, you have to be a Novice with Job Level 10. Once you do that, make sure you learn all of the Basic Skills.";
+		next;
+		mes "[Merchant Master]";
+		mes "We're not just simple money makers! We pride ourselves on having standards.";
+		close;
+	}
+
+	mes "[Merchant Master]";
+	mes "I've heard great things about your performance at the Novice Grounds. Usually, I'd make you deliver packages all over the world to prove your worth...";
+	next;
+	mes "[Merchant Master]";
+	mes "...but time is money, and I can tell you're ready for the big leagues.";
+	mes "Are you ready to join the Merchant Guild and start your path to fortune?";
+	next;
+
+	if (select("Yes, I'm ready.:Maybe later.") == 2) {
+		mes "[Merchant Master]";
+		mes "Time is money, kid! Don't waste mine. Come back when you're ready to work!";
+		close;
+	}
+
+	mes "[Merchant Master]";
+	mes "Excellent decision! Our goal is to control 20% of the world's income, and we need people like you.";
+	next;
+	
+	// Función estándar que hace el cambio de clase y da el equipamiento base
+	callfunc "Job_Change", Job_Merchant; 
+	
+	mes "[Merchant Master]";
+	mes "Congratulations! You are now a Merchant. Go forth, fill your cart, and remember: everything has a price!";
+	next;
+	mes "[Merchant Master]";
+	mes "Oh, before you go! Talk to ^0000FFGarrick^000000 just outside. He's a veteran who has been looking for a rookie to handle a very special weapon.";
+	close;
+}
+
+alberta_in,56,39,6	script	Garrick	731,{ //DAWN AXE QUEST
+
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (BaseClass != Job_Merchant) {
+		// Si es Novice, lo manda al Master
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Garrick]";
+			mes "If you're looking for a Merchant license, you're talking to the wrong person. The Master is right there.";
+			close;
+		}
+		// Si es otra clase
+		mes "[Garrick]";
+		mes "You don't have the hands of a trader. You wouldn't know what to do with a real axe anyway. Move along.";
+		close;
+	}
+
+	// === A PARTIR DE AQUÍ, ES 100% RAMA MERCHANT ===
+
+	// Si la quest ya está completada
+	if (dawn_axe_q == 2) {
+		mes "[Garrick]";
+		mes "How is the Dawn Axe? I told you it was more than just a piece of metal.";
+		mes "May it help you clear the path to your first million Zeny!";
+		close;
+	}
+
+	// Si la quest está en curso
+	if (dawn_axe_q == 1) {
+		mes "[Garrick]";
+		// Verificamos si ya alcanzó el Job Level 10
+		if (JobLevel >= 10) {
+			mes "Well, well! Look at you. Job Level 10 already.";
+			mes "You've shown that you can handle the weight of a Merchant's responsibility.";
+			next;
+			mes "[Garrick]";
+			mes "As promised, here is the ^0000FFDawn Axe^000000. It's a bit stiff and the balance is unusual, but for someone with your drive, it will be the perfect investment.";
+			next;
+			mes "[Garrick]";
+			mes "I'm also giving you this jewelry box. Consider it a bonus for your professionalism.";
+			next;
+			mes "[Garrick]";
+			mes "If you ever visit ^0000FFProntera^000000, look for the ^0000FFJewel Enchanter^000000 in the refiner's building.";
+			mes "He can use the stones inside that box to unlock the weapon's true value. A smart Merchant never leaves profit on the table!";
+			next;
+			
+			// Entregamos el Hacha Custom (ID 40002), la Caja de Joyas, la EXP y actualizamos la quest
+			getitem 40002, 1; 
+			getitem 12106, 1;
+			getexp 1000, 1000;
+			set dawn_axe_q, 2;
+			
+			mes "[Garrick]";
+			mes "Use it well. Remember: a sharp axe and a sharp mind are a Merchant's best friends!";
+			close;
+		} else {
+			mes "You're still a bit green, aren't you? You need more experience in the field.";
+			mes "Come back when you reach ^FF0000Job Level 10^000000. Then I'll know you're serious about this business.";
+			close;
+		}
+	}
+
+	// Si la quest aún no ha sido iniciada
+	if (dawn_axe_q == 0) {
+		mes "[Garrick]";
+		mes "So, you're the one the Master mentioned? You don't look like much, but I've learned never to judge a book by its cover... or a Merchant by his rags.";
+		next;
+		mes "[Garrick]";
+		mes "I have something special: the ^0000FFDawn Axe^000000.";
+		next;
+		mes "[Garrick]";
+		mes "Most rookies take one look at it and say it's too clunky for combat and too heavy for travel. They'd rather have a shiny rapier.";
+		next;
+		mes "[Garrick]";
+		mes "But I see potential in it... and in you. I think you're the type who can turn this 'clunky' tool into a masterpiece of destruction.";
+		next;
+		mes "[Garrick]";
+		mes "Here's the deal: prove your worth by reaching ^FF0000Job Level 10^000000 as a Merchant. Do that, and the axe is yours. What do you say?";
+		next;
+		if (select("I'll take that deal.:I'm not interested.") == 2) {
+			mes "[Garrick]";
+			mes "Hah! Your loss. Come back if you ever decide to get serious about your career.";
+			close;
+		}
+		mes "[Garrick]";
+		mes "That's the spirit! Go on then, time is money. I'll be right here waiting.";
+		set dawn_axe_q, 1;
+		close;
+	}
+}

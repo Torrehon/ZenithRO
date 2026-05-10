@@ -1,0 +1,164 @@
+izlude_in,175,130,3	script	Genin Master#gn_1	637,{ // QUEST DE GENIN (CUSTOM ID 4501)
+	
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (Class == 4501) { // Verificación directa del ID Custom
+			mes "[Genin Master]";
+			mes "A job change? You are already walking the path of shadows. Keep your presence concealed and your blade sharp.";
+			close;
+		}
+		mes "[Genin Master]";
+		mes "I only reveal myself to Novices seeking the hidden arts. You already chose your destiny. Forget you saw me.";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		mes "[Genin Master]";
+		mes "Your footsteps make no sound...";
+		mes "And your aura carries the weight of a past life. You have returned from the cycle of rebirth, haven't you?";
+		next;
+		mes "[Genin Master]";
+		mes "I see you wish to embrace the shadows once more! Once a Shinobi, the darkness never truly leaves you!!";
+		next;
+		if (!callfunc("F_CanChangeJob")) {
+			mes "[Genin Master]";
+			mes "Patience. You must relearn the Basic Skills before you can wield our secret techniques again.";
+			next;
+			mes "[Genin Master]";
+			mes "Return to me when your Novice training is complete.";
+			close;
+		}
+		mes "[Genin Master]";
+		mes "Excellent! Let me awaken your dormant skills and reinstate you as a Genin!";
+		next;
+		skill "NV_TRICKDEAD",0,SKILL_PERM;
+		jobchange 4501; // Cambio al Job Custom ID 4501
+		mes "[Genin Master]";
+		mes "Hmm... Your movements are as flawless as ever. Still, a true ninja never stops training. Become one with the night!";
+		close;
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Genin Master]";
+	mes "Greetings. I am an emissary from Amatsu, the city of shadows.";
+	mes "I have traveled across the sea to the Rune-Midgarts Kingdom to recruit those with the potential to learn our hidden arts.";
+	next;
+
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Genin Master]";
+		mes "However, you have not yet mastered your Basic Skills. A Genin must have total control over their foundation.";
+		close;
+	}
+
+	mes "[Genin Master]";
+	mes "Are you ready to cast aside the light, embrace the darkness, and walk the silent path of the Genin?";
+	next;
+
+	if (select("Yes, I am ready.:I need more time.") == 2) {
+		mes "[Genin Master]";
+		mes "A wise choice to hesitate if your resolve is weak. Return when you fear nothing.";
+		close;
+	}
+
+	mes "[Genin Master]";
+	mes "Excellent! Your journey into the shadows begins now.";
+	next;
+	
+	callfunc "Job_Change", 4501; // Cambio al Job Custom ID 4501
+	
+	mes "[Genin Master]";
+	mes "Congratulations. You are now a Genin.";
+	next;
+	mes "[Genin Master]";
+	mes "Before you vanish, speak with ^0000FFEnvoy Hanzo^000000 over there. He has the tools you will need for your missions.";
+	close;
+}
+
+
+izlude_in,175,124,3	script	Envoy Hanzo	636,{ // DAWN GENIN QUEST
+
+	// Verificamos si el jugador es de la clase Custom 4501
+	if (Class != 4501) {
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Envoy Hanzo]";
+			mes "Speak to the Master if you seek the way of the Shinobi. I only deal with initiated Genin.";
+			close;
+		}
+		mes "[Envoy Hanzo]";
+		mes "You are too loud. Walk away before I make you disappear.";
+		close;
+	}
+
+	if (dawn_gn_q == 2) {
+		mes "[Envoy Hanzo]";
+		mes "Ah, there you are. Strike swiftly from the shadows, and leave no trace.";
+		close;
+	}
+
+	if (dawn_gn_q == 1) {
+		mes "[Envoy Hanzo]";
+		if (JobLevel >= 10) {
+			mes "Impressive. You have reached Job Level 10 without getting yourself killed.";
+			next;
+			mes "[Envoy Hanzo]";
+			mes "As the Master promised, I have brought weapons of the Dawn from Amatsu. One is meant for rapid, close-to-mid range strikes, the other for devastating wide arcs.";
+			mes "Which one suits your technique?";
+			next;
+			
+			// --- Selección de Arma ---
+			switch(select("- Dawn Kunai:- Dawn Huuma Shuriken")) {
+				case 1:
+					set .@weapon_id, 40010;
+					set .@weapon_name$, "Dawn Kunai";
+					break;
+				case 2:
+					set .@weapon_id, 40011;
+					set .@weapon_name$, "Dawn Huuma Shuriken";
+					break;
+			}
+			
+			mes "[Envoy Hanzo]";
+			mes "A deadly choice. The " + .@weapon_name$ + " is yours.";
+			next;
+			mes "[Envoy Hanzo]";
+			mes "Take this jewelry box as well. A ^0000FFJewel Enchanter^000000 in ^0000FFProntera^000000 can extract the gemstone inside to awaken the hidden power of your weapon.";
+			next;
+			
+			getitem .@weapon_id, 1; // Entrega el arma seleccionada
+			getitem 12106, 1; // Jewelry Box
+			getexp 1000, 1000;
+			set dawn_gn_q, 2;
+			
+			mes "[Envoy Hanzo]";
+			mes "Serve Amatsu well. May the shadows conceal you.";
+			close;
+		} else {
+			mes "[Envoy Hanzo]";
+			mes "You are still too weak. Reach ^FF0000Job Level 10^000000 before you try to wield a Dawn weapon.";
+			mes "Return to the shadows and train.";
+			close;
+		}
+	}
+
+	if (dawn_gn_q == 0) {
+		mes "[Envoy Hanzo]";
+		mes "A new recruit. The Master sent you? Good. I hold two weapons forged in the twilight: the ^0000FFDawn Kunai^000000 and the ^0000FFDawn Huuma Shuriken^000000.";
+		next;
+		mes "[Envoy Hanzo]";
+		mes "They require immense chakra and precision to wield properly. A careless Genin will only harm themselves.";
+		next;
+		mes "[Envoy Hanzo]";
+		mes "Prove your worth. Survive, train, and reach ^FF0000Job Level 10^000000. Once you do, I will grant you one of them.";
+		next;
+		if (select("I accept the challenge.:I'm not ready.") == 2) {
+			mes "[Envoy Hanzo]";
+			mes "Fear is a weakness. Overcome it, then return.";
+			close;
+		}
+		mes "[Envoy Hanzo]";
+		mes "Do not disappoint us. I will be waiting.";
+		set dawn_gn_q, 1;
+		close;
+	}
+}

@@ -1,0 +1,176 @@
+izlude_in,74,172,4	script	Swordman Master#swd_1	119,{ // SWORDMAN QUEST
+	
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (BaseClass == Job_Swordman) {
+			mes "[Swordman Master]";
+			mes "Job change? Muhahaha! But you're already walking the path of the Sword! Be proud and be strong!";
+			close;
+		}
+		mes "[Swordman Master]";
+		mes "I only have business with Novices. You already chose your path in life. Be gone!";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		if (ADVJOB == Job_Lord_Knight || ADVJOB == Job_Paladin) {
+			mes "[Swordman Master]";
+			mes "It...";
+			mes "Can't be...";
+			mes "You've been reborn, haven't you?";
+			next;
+			mes "[Swordman Master]";
+			mes "I see you're retreading the path of the Swordman! Once you've gotten used to brandishing a sword, you can never go back!!";
+			next;
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Swordman Master]";
+				mes "Hmm? Ah, you must first master the Basic Skills before you are ready to become a Swordman.";
+				next;
+				mes "[Swordman Master]";
+				mes "Come back to me when you have finished learning the Basic Novice Skills.";
+				close;
+			}
+			mes "[Swordman Master]";
+			mes "Excellent! Let me promote you to a Swordman right away!";
+			next;
+			skill "NV_TRICKDEAD",0,SKILL_PERM;
+			jobchange Job_Swordman_High;
+			skill "SM_MOVINGRECOVERY",1,SKILL_PERM;
+			skill "SM_FATALBLOW",1,SKILL_PERM;
+			skill "SM_AUTOBERSERK",1,SKILL_PERM;
+			mes "[Swordman Master]";
+			mes "Hmm... You look like a well-experienced Swordman. Still, I'm sure that you must train to improve your skills and gain strength!";
+			close;
+		}
+		else {
+			mes "[Swordman Master]";
+			mes "Hm...? You're a reborn warrior, aren't you?";
+			next;
+			mes "[Swordman Master]";
+			mes "Hmmm... It seems that being a Swordman is not part of your destiny. I'm sorry.";
+			close;
+		}
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Swordman Master]";
+	mes "Welcome to the Swordman Association!";
+	mes "I have received word of your arrival. The instructors at the Novice Grounds speak highly of your strength!";
+	next;
+
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Swordman Master]";
+		mes "However, I see you still haven't fully mastered your Basic Skills. A true warrior must have a solid foundation!";
+		close;
+	}
+
+	mes "[Swordman Master]";
+	mes "Are you ready to cast aside your past and walk the proud path of the Swordman?";
+	next;
+
+	if (select("Yes, I am ready.:I need more time.") == 2) {
+		mes "[Swordman Master]";
+		mes "Return when your heart is resolute!";
+		close;
+	}
+
+	mes "[Swordman Master]";
+	mes "Excellent! Your journey begins right now!";
+	next;
+	
+	callfunc "Job_Change", Job_Swordman;
+	
+	mes "[Swordman Master]";
+	mes "Congratulations! You are now a proud Swordman.";
+	next;
+	mes "[Swordman Master]";
+	mes "Before you depart, speak with ^0000FFVeteran Leon^000000 over there. He has a challenge for you.";
+	close;
+}
+
+
+izlude_in,79,173,4	script	Veteran Leon	734,{ //DAWN SWORD QUEST
+
+	if (BaseClass != Job_Swordman) {
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Veteran Leon]";
+			mes "Speak to the Master behind me to join our ranks.";
+			close;
+		}
+		mes "[Veteran Leon]";
+		mes "You do not walk the path of the Sword. Begone.";
+		close;
+	}
+
+	if (dawn_sword_q == 2) {
+		mes "[Veteran Leon]";
+		mes "Ah, there you are! May your Dawn weapon never lose its edge.";
+		close;
+	}
+
+	if (dawn_sword_q == 1) {
+		mes "[Veteran Leon]";
+		if (JobLevel >= 10) {
+			mes "Excellent! You have reached Job Level 10. Your arms have grown strong.";
+			next;
+			mes "[Veteran Leon]";
+			mes "As promised, you have earned a weapon of the Dawn. I have two available; both are stubborn blades, but powerful in the right hands.";
+			mes "Which one fits your fighting style?";
+			next;
+			
+			switch(select("- Dawn Sword (1-Handed):- Dawn Bastard Sword (2-Handed)")) {
+				case 1:
+					set .@weapon_id, 40001;
+					set .@weapon_name$, "Dawn Sword";
+					break;
+				case 2:
+					set .@weapon_id, 40006;
+					set .@weapon_name$, "Dawn Bastard Sword";
+					break;
+			}
+			
+			mes "[Veteran Leon]";
+			mes "A fine choice. The " + .@weapon_name$ + " is yours.";
+			next;
+			mes "[Veteran Leon]";
+			mes "Take this jewelry box as well. It holds a gemstone that a ^0000FFJewel Enchanter^000000 in ^0000FFProntera^000000 can use to awaken the true edge of your new weapon.";
+			next;
+			
+			getitem .@weapon_id, 1;
+			getitem 12106, 1; // Jewelry Box
+			getexp 1000, 1000;
+			set dawn_sword_q, 2;
+			
+			mes "[Veteran Leon]";
+			mes "Wield it with honor. May your blade never dull!";
+			close;
+		} else {
+			mes "[Veteran Leon]";
+			mes "You must reach ^FF0000Job Level 10^000000 before you can handle the Dawn weapons.";
+			mes "Return to your training. Let the sweat of your brow temper your spirit.";
+			close;
+		}
+	}
+
+	if (dawn_sword_q == 0) {
+		mes "[Veteran Leon]";
+		mes "A new recruit! I possess two unique weapons: the ^0000FFDawn Sword^000000 and the ^0000FFDawn Bastard Sword^000000.";
+		next;
+		mes "[Veteran Leon]";
+		mes "Many novices complain they are poorly balanced, but a true Swordman knows power comes from the one who swings the steel.";
+		next;
+		mes "[Veteran Leon]";
+		mes "Prove your worth: harden your body in battle and reach ^FF0000Job Level 10^000000. Once you do, you may choose one as your own.";
+		next;
+		if (select("I accept the challenge.:I'm not ready.") == 2) {
+			mes "[Veteran Leon]";
+			mes "Return when your spirit is resolute.";
+			close;
+		}
+		mes "[Veteran Leon]";
+		mes "Spoken like a warrior! I'll be waiting for your return.";
+		set dawn_sword_q, 1;
+		close;
+	}
+}

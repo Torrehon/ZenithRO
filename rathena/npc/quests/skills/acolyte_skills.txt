@@ -1,0 +1,111 @@
+//===== rAthena Script =======================================
+//= Acolyte Skill Quest
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.8
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Quest for skills: Holy Light
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
+//= 1.7 Updated to latest available official file. [Masao]
+//= 1.8 Fixed JobLevel requirements. [Euphy]
+//============================================================
+
+prt_church,173,23,4	script	Cleric	79,{
+	if (BaseClass != Job_Acolyte) {
+		mes "[Acolyte Klift]";
+		mes "May the Lord bless your path, child.";
+		close;
+	}
+
+	mes "[Acolyte Klift]";
+	mes "Ahh... Brother! Does the task of fighting against the undead tire you?";
+	mes "I can teach you an ancient technique known as ^0000FFZealot^000000.";
+	next;
+
+	if (getskilllv("AL_ZEALOT") > 0) {
+		mes "[Acolyte Klift]";
+		mes "You already carry the fire of a Zealot. Use it to purge the darkness.";
+		close;
+	}
+
+	if (JobLevel < 15) {
+		mes "[Acolyte Klift]";
+		mes "However, you must be at least ^FF0000Job Level 15^000000 to comprehend this power.";
+		close;
+	}
+
+	if (plat_zealot_active == 0) {
+		if (countitem(50002) < 1) {
+			mes "[Acolyte Klift]";
+			mes "To begin training in the art of the Zealot, you must present a ^3355FFTraining Recommendation 1^000000.";
+			close;
+		}
+		mes "[Acolyte Klift]";
+		mes "To prove your resolve, you must journey to the Payon Cave or any infested domain.";
+		mes "Purge the undead! Slay ^FF000010 Zombies^000000 and ^FF000015 Skeletons^000000.";
+		next;
+		if (select("I shall purge them.:I am not ready.") == 1) {
+			set plat_zealot_active, 1;
+			set plat_zombie_count, 0;
+			set plat_skeleton_count, 0;
+			mes "[Acolyte Klift]";
+			mes "May the Light guide your strikes.";
+		}
+		close;
+	}
+
+	if (plat_zealot_active == 1) {
+		mes "[Acolyte Klift]";
+		mes "The undead still roam. You have slain:";
+		mes "^FF0000" + plat_zombie_count + " / 10 Zombies^000000.";
+		mes "^FF0000" + plat_skeleton_count + " / 15 Skeletons^000000.";
+		close;
+	}
+
+	if (plat_zealot_active == 2) {
+		mes "[Acolyte Klift]";
+		if (countitem(50002) < 1) {
+			mes "Your crusade was successful, but you must present a ^3355FFTraining Recommendation 1^000000 to finalize your initiation.";
+			close;
+		}
+		mes "You have cleansed the impurity... you have proven your zeal.";
+		next;
+		delitem 50002, 1;
+		skill "AL_ZEALOT", 1, SKILL_PERM;
+		set plat_zealot_active, 0;
+		set plat_zombie_count, 0;
+		set plat_skeleton_count, 0;
+		mes "[Acolyte Klift]";
+		mes "You are now a true ^3355FFZealot^000000. Strike down the evil with divine wrath!";
+		close;
+	}
+
+OnNPCKillEvent:
+	if (plat_zealot_active == 1) {
+		if (killedrid == 1015) { // Zombie
+			set plat_zombie_count, plat_zombie_count + 1;
+			if (plat_zombie_count >= 10 && plat_skeleton_count >= 15) {
+				dispbottom "You have completed the purge. Return to Acolyte Klift.";
+				set plat_zealot_active, 2;
+			} else {
+				dispbottom "Zombies slain: " + plat_zombie_count + " / 10";
+			}
+		}
+		else if (killedrid == 1076) { // Skeleton
+			set plat_skeleton_count, plat_skeleton_count + 1;
+			if (plat_zombie_count >= 10 && plat_skeleton_count >= 15) {
+				dispbottom "You have completed the purge. Return to Acolyte Klift.";
+				set plat_zealot_active, 2;
+			} else {
+				dispbottom "Skeletons slain: " + plat_skeleton_count + " / 15";
+			}
+		}
+	}
+	end;
+}
+

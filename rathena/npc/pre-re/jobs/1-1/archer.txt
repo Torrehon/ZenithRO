@@ -1,0 +1,180 @@
+payon_in02,64,71,4	script	Archer Master#arc_1	59,{
+
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (BaseClass == Job_Archer) {
+			mes "[Archer Master]";
+			mes "Welcome back! Your eyes are as sharp as ever.";
+			mes "May your arrows always fly true!";
+			close;
+		}
+		mes "[Archer Master]";
+		mes "Your stance is too heavy and your steps make too much noise. The path of the Archer is not for you.";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		if (ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy) {
+			mes "[Archer Master]";
+			mes "Hey, I know you. I remember that steady breathing.";
+			mes "You took this test before, didn't you?";
+			next;
+			mes "[Archer Master]";
+			mes "Ah, you must have been to Valhalla and been reborn. Wow, that's so impressive!";
+			next;
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Archer Master]";
+				mes "Err... You'd better learn all the Basic Skills first before you can string a bow again.";
+				mes "Alright, see you later.";
+				close;
+			}
+			mes "[Archer Master]";
+			mes "Well then. I don't need to say anything else. I know you'll make a great Archer... again!";
+			next;
+			
+			// Cambio de Job (Sin skills automáticas por petición)
+			skill "NV_TRICKDEAD",0,SKILL_PERM;
+			jobchange Job_Archer_High;
+			
+			mes "[Archer Master]";
+			mes "Welcome back to the Guild. Now, go show the world why our arrows never miss!";
+			close;
+		}
+		else {
+			mes "[Archer Master]";
+			mes "I see a reborn soul, but the wind does not guide your hands. Your destiny lies elsewhere.";
+			close;
+		}
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Archer Master]";
+	mes "Good day. Do you wish to join the ranks of the Archers?";
+	next;
+
+	// Validamos que tenga Job Nivel 10 y Basic Skills
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Archer Master]";
+		mes "An Archer needs extremely high concentration and reflexes.";
+		next;
+		mes "[Archer Master]";
+		mes "Your job level must be at least 10, and you must master all of your Basic Skills. Return when you have trained your patience.";
+		close;
+	}
+
+	mes "[Archer Master]";
+	mes "Usually, I would send you out to gather different types of Trunks to prove your patience and eye for quality materials...";
+	next;
+	mes "[Archer Master]";
+	mes "...but the instructors from the Novice Grounds have already sent me a flawless report about your marksmanship.";
+	mes "Are you ready to officially join the Archer Guild?";
+	next;
+
+	if (select("Yes, I am ready.:Not yet.") == 2) {
+		mes "[Archer Master]";
+		mes "Hesitation can cost you your life on the battlefield. Come back when your mind is clear.";
+		close;
+	}
+
+	mes "[Archer Master]";
+	mes "Excellent! Let me promote you right away!";
+	next;
+	
+	// Función estándar que hace el cambio de clase y da el equipamiento base
+	callfunc "Job_Change", Job_Archer; 
+	
+	mes "[Archer Master]";
+	mes "Congratulations! You are now an Archer!";
+	next;
+	mes "[Archer Master]";
+	mes "Oh, wait a moment! Before you leave for your first hunt, speak to ^0000FFKael^000000 over there.";
+	mes "He has been holding onto a very special bow, waiting for a recruit with your exact potential.";
+	close;
+}
+
+
+payon_in02,69,72,4	script	Kael	732,{ //DAWN BOW QUEST
+
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (BaseClass != Job_Archer) {
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Kael]";
+			mes "You have the eyes of a hunter, but you haven't earned your title yet. Speak with the Master first.";
+			close;
+		}
+		mes "[Kael]";
+		mes "You couldn't pull this string even if your life depended on it. Move along.";
+		close;
+	}
+
+	// === A PARTIR DE AQUÍ, ES 100% RAMA ARCHER ===
+
+	if (dawn_bow_q == 2) {
+		mes "[Kael]";
+		mes "Ah, the string of the Dawn Bow hums beautifully in your hands. I knew I wasn't wrong about you.";
+		mes "May the wind always be at your back!";
+		close;
+	}
+
+	if (dawn_bow_q == 1) {
+		mes "[Kael]";
+		if (JobLevel >= 10) {
+			mes "Your posture is much firmer now. You've reached Job Level 10.";
+			mes "I can see you've learned how to truly focus your mind and steady your breathing.";
+			next;
+			mes "[Kael]";
+			mes "As promised, the ^0000FFDawn Bow^000000 is yours. Most recruits find its draw weight impossible to handle, but you have the strength and the technique for it.";
+			next;
+			mes "[Kael]";
+			mes "I also want you to have this jewelry box. It contains a rare gemstone.";
+			next;
+			mes "[Kael]";
+			mes "When you visit ^0000FFProntera^000000, seek out the ^0000FFJewel Enchanter^000000 inside the refiner's building.";
+			mes "He knows how to fuse the essence of this stone with your bow, unleashing its true power. A good hunter never ignores an advantage.";
+			next;
+			
+			// Entregamos el Arco Custom (ID 40004), la Caja de Joyas, la EXP y actualizamos la quest
+			getitem 40004, 1; 
+			getitem 12106, 1;
+			getexp 1000, 1000;
+			set dawn_bow_q, 2;
+			
+			mes "[Kael]";
+			mes "Take it. Let the forest hear the song of your arrows!";
+			close;
+		} else {
+			mes "Your stance is still too loose. Your arms will shake if you try to draw this bow now.";
+			mes "Return to me when you reach ^FF0000Job Level 10^000000. Then we will see if you are truly ready.";
+			close;
+		}
+	}
+
+	if (dawn_bow_q == 0) {
+		mes "[Kael]";
+		mes "A new face in the guild. The Master seems to think highly of you, but out in the wild, words mean nothing.";
+		next;
+		mes "[Kael]";
+		mes "I've been holding onto a very particular weapon: the ^0000FFDawn Bow^000000.";
+		next;
+		mes "[Kael]";
+		mes "Many rookies have tried to claim it, but they complain that it is too stiff, too heavy, and impossible to aim quickly.";
+		next;
+		mes "[Kael]";
+		mes "They rely on lightweight bows because they lack true technique. But I think you are different. I think you can tame this beast.";
+		next;
+		mes "[Kael]";
+		mes "Prove it to me. Train your body, reach ^FF0000Job Level 10^000000 as an Archer, and this bow will be yours.";
+		mes "Do you accept the challenge?";
+		next;
+		if (select("I will tame the bow.:I am not ready.") == 2) {
+			mes "[Kael]";
+			mes "Knowing your limits is a good survival trait. Come back when you are prepared to push past them.";
+			close;
+		}
+		mes "[Kael]";
+		mes "That's what I like to hear. Go, the forest awaits you. I'll be right here when you return.";
+		set dawn_bow_q, 1;
+		close;
+	}
+}

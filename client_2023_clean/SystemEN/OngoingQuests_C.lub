@@ -1,0 +1,87 @@
+-- Original translation works of zackdreaver: https://github.com/zackdreaver/ROenglishRE
+-- Continuated by llchrisll at https://github.com/llchrisll/ROenglishRE
+-- This file can be distributed, used and modified freely
+-- This file shouldn't be claimed as part of your project, unless you fork it from https://github.com/llchrisll/ROenglishRE
+-- This file only works if used in combination with the edited `questinfo_f.lub`
+
+QuestInfoList_C = {
+	--[[ Quest Info Format:
+	[<ID>] = {
+		Title = "",
+		Description = {
+			""
+		},
+		Summary = "", -- If you don't need any arguments below, remove the , in this line
+		-- Optional values:
+		CoolTimeQuest = 1, -- Shows the Quest in a separate tab (if supported by the client)
+		NpcSpr = "<NPC_Sprite>",
+		NpcNavi = "<MapName>",
+		RewardEXP = "0",
+		RewardJEXP = "0",
+		NpcPosX = 0,
+		NpcPosY = 0,
+		RewardItemList = {
+			{ ItemID = 0, ItemNum = 1 },
+			{ ItemID = 0, ItemNum = 1 },
+			{ ItemID = 0, ItemNum = 1 }
+		}
+	},
+	]]
+	-------- Start of custom entries: -----------
+	[80001] = {
+		Title = "Sewage Novice Rescue",
+		Description = {
+			"I have promised to help the novices",
+			"lost in the Prontera Culverts.",
+			"I must find them all to earn a reward."
+		},
+		Summary = "Bring 20 Red Potions to the novices.",
+		NpcName = "Culvert Guardian",
+	},
+	[80002] = {
+		Title = "Mutant Bug Extermination",
+		Description = {
+			"The boss of the culvert bugs,",
+			"a powerful Mutant Thief Bug, is hiding",
+			"in the deepest corner.",
+			"I must exterminate it to save the city."
+		},
+		Summary = "Defeat the Mutant Thief Bug.",
+		Hunt1 = "Mutant Male Bug",
+		NpcName = "Prontera Knight",
+	},
+	[80003] = {
+		Title = "Culvert Bounty Claim",
+		Description = {
+			"The mutant has been slain!",
+			"I must report back to the Guard",
+			"at the entrance of the Culvert",
+			"to claim my reward."
+		},
+		Summary = "Return to the Culvert Guardian.",
+		NpcName = "Culvert Guardian",
+	},
+	[80020] = {
+		Title = "Minji Sacrifice",
+		Description = {
+			"The grandmother Kyung at Payon Archer",
+			"Village is mourning her granddaughter.",
+			"I must find the ancient altar in the",
+			"Payon Caves and purify the darkness."
+		},
+		Summary = "Purify the Tormented Weaver.",
+		Hunt1 = "Tormented Weaver",
+		NpcName = "Grandmother Kyung",
+	},
+	[80021] = {
+		Title = "Payon Purification",
+		Description = {
+			"The shadows in Payon Dungeon never",
+			"truly sleep. I must return to the altar",
+			"to keep Minji spirit at peace."
+		},
+		Summary = "Defeat the Tormented Weaver.",
+		Hunt1 = "Tormented Weaver",
+		NpcName = "Grandmother Kyung",
+	}
+}

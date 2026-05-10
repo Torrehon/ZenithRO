@@ -1,0 +1,29 @@
+-	script	MiniBossJewelryDrop	-1,{
+
+OnNPCKillEvent:
+	.@mobID = killedrid;
+	.@jewelID = 0;
+
+	// Filtramos por ID de monstruo
+	switch(.@mobID) {
+		case 1093: .@jewelID = 727; break; // Eclipse -> Opal
+		case 1091: .@jewelID = 719; break; // Dragon Fly -> Amethyst
+		case 1090: .@jewelID = 722; break; // Mastering -> Pearl
+		case 1088: .@jewelID = 721; break; // Vocal -> Emerald
+		case 1089: .@jewelID = 729; break; // Toad -> Zircon
+		case 1092: .@jewelID = 728; break; // Vagabond Wolf -> Topaz
+		case 1096: .@jewelID = 726; break; // Angeling -> Sapphire
+		case 1582: .@jewelID = 723; break; // Deviling -> Ruby
+		case 1894: .@jewelID = 720; break; // Pouring -> Aquamarine
+		default: end; // Si no es uno de estos, ignorar
+	}
+
+	// Entrega de premios
+	getitem 12106, 1;   // La caja
+	getitem .@jewelID, 1; // La joya específica
+
+	// Efecto y mensaje
+	specialeffect 154, AREA, playerattached();
+	dispbottom "¡Has obtenido un botín raro de " + getmonsterinfo(.@mobID, 0) + "!";
+	end;
+}

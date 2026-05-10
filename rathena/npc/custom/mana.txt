@@ -1,0 +1,51 @@
+-	script	MANA_ENGINE	-1,{
+
+OnHour00:OnHour03:OnHour06:OnHour09:OnHour12:OnHour15:OnHour18:OnHour21:
+OnManualTrigger:
+    // Seteamos el multiplicador: 600 = 6x, 800 = 8x.
+    // Como tu base es 500 (5x), calculamos cuanto extra dar.
+	set $ManaEventRate, rand(600, 800); 
+	set .@int, $ManaEventRate / 100;
+	set .@dec, $ManaEventRate % 100;
+
+	announce "¡El flujo de mana ha estallado! Bonus manual de EXP de " + .@int + "." + .@dec + "x activo por 1 hora.", bc_all;
+
+	sleep 3600000; // 1 hora de evento
+
+	set $ManaEventRate, 0; // Apagamos el evento
+	announce "El flujo de mana se ha estabilizado. Los rates vuelven a 5.00x", bc_all;
+	end;
+
+// ESTA ES LA CLAVE: Se ejecuta CADA VEZ que alguien mata un mob
+OnNPCKillEvent:
+    if ($ManaEventRate <= 500) end; // Si el evento está apagado o es menor al base, no hace nada.
+
+    // Calculamos la diferencia. Si el evento es 8x (800) y el base es 5x (500), 
+    // el extra es un 60% más (300 de 500).
+    // Usamos 'killedrid' para saber qué bicho murió.
+    set .@base_exp, strmobinfo(2, killedrid);
+    set .@job_exp, strmobinfo(3, killedrid);
+
+    // Calculamos el bonus: (EXP_BASE * (Rate_Evento - Rate_Servidor)) / 100
+    // Ejemplo: (1000 exp * (800 - 500)) / 100 = 3000 de EXP extra.
+    set .@extra_base, (.@base_exp * ($ManaEventRate - 500)) / 100;
+    set .@extra_job, (.@job_exp * ($ManaEventRate - 500)) / 100;
+
+    // Entregamos la experiencia extra directamente al jugador
+    if (.@extra_base > 0) getexp .@extra_base, .@extra_job;
+    end;
+}
+
+// NPC INTERRUPTOR
+prontera,155,180,5	script	Mana_Control	122,{
+	mes "[Mana Control]";
+	mes "Este método inyecta EXP directamente al matar.";
+	next;
+	if (select("Activar Evento:Desactivar Evento") == 1) {
+		donpcevent "MANA_ENGINE::OnManualTrigger";
+	} else {
+		set $ManaEventRate, 0;
+		announce "Evento de Mana cancelado manualmente.", bc_all;
+	}
+	close;
+}

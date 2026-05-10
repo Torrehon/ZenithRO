@@ -1,0 +1,113 @@
+//===== rAthena Script =======================================
+//= Merchant Skills Quests
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.8
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Quests for skills: Crazy Uproar, Change Cart, Cart Revolution
+//===== Additional Comments: =================================
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Updated to latest available official file. [Masao]
+//= 1.7 Fixed JobLevel requirements. [Euphy]
+//= 1.8 Moved Alberta NPC to pre-re/re paths. [Euphy]
+//============================================================
+
+alberta_in,56,48,4	script	Senior Merchant Kass	86,{
+	if (BaseClass != Job_Merchant) {
+		mes "[Senior Merchant Kass]";
+		mes "I only deal with true Merchants. Shoo, go away.";
+		close;
+	}
+
+	mes "[Senior Merchant Kass]";
+	mes "Welcome to the Merchant Guild. A good merchant knows how to survive and how to carry their weight.";
+	
+	if (countitem(50002) >= 1) {
+		mes "I see you carry the ^3355FFTraining Recommendation^000000. Very well, we can begin your advanced training.";
+	} else {
+		mes "If you are looking for advanced techniques, you will need a ^3355FFTraining Recommendation^000000.";
+	}
+	next;
+
+	.@menu$ = "";
+	.@i = 1;
+
+	if (getskilllv("MC_LOUD") == 0) {
+		.@menu$ += "^0000FFLearn Crazy Uproar^000000:";
+		.@map[.@i] = 1;
+		.@i++;
+	}
+	if (getskilllv("MC_CHANGECART") == 0) {
+		.@menu$ += "Learn Change Cart:";
+		.@map[.@i] = 2;
+		.@i++;
+	}
+
+	.@menu$ += "I will be back later.";
+	.@map[.@i] = 3;
+
+	switch(.@map[select(.@menu$)]) {
+		case 1: // Crazy Uproar
+			mes "[Senior Merchant Kass]";
+			if (JobLevel < 15) {
+				mes "You lack the confidence required. Come back when you reach ^FF0000Job Level 15^000000.";
+				close;
+			}
+			if (countitem(50002) < 1) {
+				mes "You lack a ^3355FFTraining Recommendation 1^000000. I cannot teach you this without that official seal.";
+				close;
+			}
+			mes "Surviving in the wild is all about fighting fear with a loud voice!";
+			mes "If you want to learn ^3355FFCrazy Uproar^000000, bring me ^0000FF20 Pointed Scales^000000 to prove you've faced the beasts.";
+			next;
+			if (select("I have them.:I'll get them.") == 2) close;
+
+			if (countitem(906) >= 20 && countitem(50002) >= 1) {
+				delitem 50002, 1;
+				delitem 906, 20;
+				mes "[Senior Merchant Kass]";
+				mes "Good! Now, take a deep breath... AND SHOUT!";
+				next;
+				mes "PUKAKAKAKAKAKAKAKAKAKA!!!";
+				skill "MC_LOUD", 1, SKILL_PERM;
+				mes "Yes! That's it! You have learned ^FF0000Crazy Uproar^000000!";
+				close;
+			}
+			mes "[Senior Merchant Kass]";
+			mes "You don't have what I asked for. Come back when you do.";
+			close;
+
+		case 2: // Change Cart
+			mes "[Senior Merchant Kass]";
+			if (JobLevel < 15) {
+				mes "You are not ready to customize your livelihood. Come back when you reach ^FF0000Job Level 15^000000.";
+				close;
+			}
+			mes "A merchant's cart shows their status and style.";
+			mes "If you want to learn ^3355FFChange Cart^000000, you need to bring the raw materials: ^0000FF20 Solid Trunks^000000.";
+			next;
+			if (select("I have the wood.:I need to chop some.") == 2) close;
+
+			if (countitem(1067) >= 20) {
+				delitem 1067, 20;
+				mes "[Senior Merchant Kass]";
+				mes "Excellent quality wood. Let me show you how to fashion different styles.";
+				next;
+				skill "MC_CHANGECART", 1, SKILL_PERM;
+				mes "[Senior Merchant Kass]";
+				mes "Congratulations. You can now choose a cart according to your taste.";
+				close;
+			}
+			mes "[Senior Merchant Kass]";
+			mes "That's not 20 Solid Trunks. Don't try to shortchange me!";
+			close;
+
+		case 3:
+			mes "[Senior Merchant Kass]";
+			mes "Time is money. Goodbye.";
+			close;
+	}
+}

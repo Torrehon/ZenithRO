@@ -1,0 +1,563 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Git::Git::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Git__Git-Debug-6b0c38037e9583f1b73a.json",
+					"name" : "Git::Git",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Threads::Threads::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Threads__Threads-Debug-746eeb0f33b24b6c77c2.json",
+					"name" : "Threads::Threads",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "tools::@312d1879a87bc0da48b6",
+					"jsonFile" : "target-tools-Debug-2802183cb5ff45fea7e0.json",
+					"name" : "tools",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1
+					],
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						11
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-7151a824ba8821b822e5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "3rdparty",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						9,
+						10
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-3rdparty-Debug-b4e658359d5c16e511d3.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "3rdparty"
+				},
+				{
+					"build" : "3rdparty/httplib",
+					"jsonFile" : "directory-3rdparty.httplib-Debug-7968b6eb32816a8bb122.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "3rdparty/httplib",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "3rdparty/json",
+					"jsonFile" : "directory-3rdparty.json-Debug-9fabe2e44e3cc21e8b36.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "3rdparty/json"
+				},
+				{
+					"build" : "3rdparty/libconfig",
+					"jsonFile" : "directory-3rdparty.libconfig-Debug-492ff2c7dc6872738e1c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "3rdparty/libconfig"
+				},
+				{
+					"build" : "3rdparty/mysql",
+					"jsonFile" : "directory-3rdparty.mysql-Debug-c31cfdd0b55699b721ed.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "3rdparty/mysql"
+				},
+				{
+					"build" : "3rdparty/pcre",
+					"jsonFile" : "directory-3rdparty.pcre-Debug-02bbf08fe5e46a5a140e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "3rdparty/pcre"
+				},
+				{
+					"build" : "3rdparty/rapidyaml",
+					"childIndexes" : 
+					[
+						8
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-3rdparty.rapidyaml-Debug-acc36101e607ce8a53e0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "3rdparty/rapidyaml",
+					"targetIndexes" : 
+					[
+						11,
+						12
+					]
+				},
+				{
+					"build" : "3rdparty/rapidyaml/subprojects/c4core/build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-3rdparty.rapidyaml.subprojects.c4core.build-Debug-c51af3b27b18a84fac78.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 7,
+					"projectIndex" : 3,
+					"source" : "3rdparty/rapidyaml/ext/c4core",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"build" : "3rdparty/yaml-cpp",
+					"jsonFile" : "directory-3rdparty.yaml-cpp-Debug-2b58b4d075c53f75ad17.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 4,
+					"source" : "3rdparty/yaml-cpp",
+					"targetIndexes" : 
+					[
+						14
+					]
+				},
+				{
+					"build" : "3rdparty/zlib",
+					"jsonFile" : "directory-3rdparty.zlib-Debug-58f9b74f91cd02967007.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "3rdparty/zlib"
+				},
+				{
+					"build" : "src",
+					"childIndexes" : 
+					[
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src-Debug-1722085f943e0250936a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src"
+				},
+				{
+					"build" : "src/common",
+					"jsonFile" : "directory-src.common-Debug-31b099629783a692f917.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "src/common",
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						10
+					]
+				},
+				{
+					"build" : "src/login",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src.login-Debug-7eeb66027546c41c54e7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "src/login",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "src/char",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src.char-Debug-5399eddf7fcf3f76bfb4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "src/char",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "src/map",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src.map-Debug-a72bfd53380f0859b573.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "src/map",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "src/web",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src.web-Debug-3afca259f319b9be5f29.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "src/web",
+					"targetIndexes" : 
+					[
+						13
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						2
+					],
+					"build" : "src/tool",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src.tool-Debug-cc9306d86373c8632d57.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "src/tool",
+					"targetIndexes" : 
+					[
+						5,
+						9,
+						15,
+						16
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"childIndexes" : 
+					[
+						1,
+						2,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						3,
+						4,
+						5,
+						6,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					],
+					"name" : "rAthena",
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						7,
+						8,
+						9,
+						10,
+						13,
+						15,
+						16
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "httplib",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						3
+					],
+					"directoryIndexes" : 
+					[
+						7
+					],
+					"name" : "ryml",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						11,
+						12
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						8
+					],
+					"name" : "c4core",
+					"parentIndex" : 2,
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						9
+					],
+					"name" : "yaml-cpp",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						14
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 8,
+					"id" : "c4core::@e712fc12641d6434aa68",
+					"jsonFile" : "target-c4core-Debug-c95e852a12e3bfe2a193.json",
+					"name" : "c4core",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "c4core-amalgamate::@e712fc12641d6434aa68",
+					"jsonFile" : "target-c4core-amalgamate-Debug-408d20ba9dbc79895750.json",
+					"name" : "c4core-amalgamate",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 14,
+					"id" : "char-server::@d03abcc085423b291df8",
+					"jsonFile" : "target-char-server-Debug-72add510f780eaae0252.json",
+					"name" : "char-server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "common::@af79f3804eddddbfa7f1",
+					"jsonFile" : "target-common-Debug-9df32804435786a60b6c.json",
+					"name" : "common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "common_base::@af79f3804eddddbfa7f1",
+					"jsonFile" : "target-common_base-Debug-f59ac8f54fb90984f263.json",
+					"name" : "common_base",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "csv2yaml::@312d1879a87bc0da48b6",
+					"jsonFile" : "target-csv2yaml-Debug-5e3ebdd8c8c483e893f1.json",
+					"name" : "csv2yaml",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "httplib::@56dc7c034d08ebb68a4b",
+					"jsonFile" : "target-httplib-Debug-811987c2f6fe4fb9ce1b.json",
+					"name" : "httplib",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 13,
+					"id" : "login-server::@b49ffc661df6bab7e8e2",
+					"jsonFile" : "target-login-server-Debug-a690f2f0adedf3913ed4.json",
+					"name" : "login-server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 15,
+					"id" : "map-server::@49e5eb6817f363ea937d",
+					"jsonFile" : "target-map-server-Debug-486bad342baabb75f2f5.json",
+					"name" : "map-server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "mapcache::@312d1879a87bc0da48b6",
+					"jsonFile" : "target-mapcache-Debug-0f13c8ddf93633bf5d78.json",
+					"name" : "mapcache",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "minicore::@af79f3804eddddbfa7f1",
+					"jsonFile" : "target-minicore-Debug-e9c7fabe7e508cd20298.json",
+					"name" : "minicore",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "ryml::@53f7b59fdef72150fd83",
+					"jsonFile" : "target-ryml-Debug-25f52d0141606706767b.json",
+					"name" : "ryml",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "ryml-uninstall::@53f7b59fdef72150fd83",
+					"jsonFile" : "target-ryml-uninstall-Debug-76d7160215d18e4060db.json",
+					"name" : "ryml-uninstall",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 16,
+					"id" : "web-server::@30cab77be7adbc5a5c26",
+					"jsonFile" : "target-web-server-Debug-56a9cee896fd0efc7c05.json",
+					"name" : "web-server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "yaml-cpp::@addeabc058b455b1cfd8",
+					"jsonFile" : "target-yaml-cpp-Debug-3ea84ed29291d25a6998.json",
+					"name" : "yaml-cpp",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "yaml2sql::@312d1879a87bc0da48b6",
+					"jsonFile" : "target-yaml2sql-Debug-f5bdb4617da9659c0567.json",
+					"name" : "yaml2sql",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "yamlupgrade::@312d1879a87bc0da48b6",
+					"jsonFile" : "target-yamlupgrade-Debug-dfa13552cea7a2a69b15.json",
+					"name" : "yamlupgrade",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/SERVER_RO/LevitationRO/rathena/out/build/x64-Debug",
+		"source" : "D:/SERVER_RO/LevitationRO/rathena"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	}
+}

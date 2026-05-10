@@ -1,0 +1,364 @@
+// Class Representatives for Novice Grounds
+// Extracted and adapted from Renewal Novice Academy
+// Location: new_1-3 (Training Grounds)
+
+-	script	NvSwordman	-1,{
+	mes "[Swordman Guildsman]";
+	mes "Can I help you?";
+	next;
+	switch(select("About Swordman Class.:Job change to Swordman.:Got any quests?:Cancel.")) {
+	case 1:
+		mes "[Swordman Guildsman]";
+		mes "Literally, Swordman means one, who is specialized in wielding swords.";
+		mes "But they can also choose to use spears if they so choose.";
+		next;
+		mes "[Swordman Guildsman]";
+		mes "We possesses strong physical strength. So naturally we can equip heavy armors and weapons.";
+		next;
+		if (isequipped(2819) || countitem(2819)) {
+			mes "[Swordman Guildsman]";
+			mes "Try the Swordman skills listed in the manual.";
+			mes "Open your skill menu by pressing Alt + S";
+			close;
+		}
+		mes "[Swordman Guildsman]";
+		mes "If you're interested in being a Swordman, I'll offer you this manual.";
+		mes "Do you want to try the skills of a Swordman?";
+		next;
+		if (select("I'll try the Swordman skills.:No thanks.") == 1) {
+			mes "[Swordman Guildsman]";
+			mes "Here is the Swordman manual.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2819,1; //Swordman_Manual
+			close;
+		}
+		close;
+	case 2:
+		mes "[Swordman Guildsman]";
+		mes "Do you really want to change your job to Swordman?";
+		next;
+		if (select("I'll consider it again.:I'll go to the Swordman Association.") == 2) {
+			mes "[Swordman Guildsman]";
+			mes "Then I'll end your training process and send you to the Swordman Guild.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "izlude",128,98,1,1;
+			warp "izlude_in",74,167;
+			end;
+		}
+		close;
+	case 3:
+		set .@quest, checkquest(7123);
+		if (.@quest == -1) {
+			mes "[Swordman Guildsman]";
+			mes "Hunt a couple of Picky monsters around here?";
+			setquest 7123;
+			close;
+		} else if (checkquest(7123,HUNTING) == 2) {
+			mes "[Swordman Guildsman]";
+			mes "Great. I'll give you some potions as a reward.";
+			completequest 7123;
+			getitem 569,200; //Novice_Potion
+			getexp 100,100;
+			close;
+		} else {
+			mes "[Swordman Guildsman]";
+			mes "Hunt two Picky monsters.";
+			close;
+		}
+	case 4:
+		close;
+	}
+}
+
+-	script	NvAcolyte	-1,{
+	mes "[Prontera Acolyte]";
+	mes "What can I do for you?";
+	next;
+	switch(select("What is an Acolyte?:Job change to Acolyte.:Cancel")) {
+	case 1:
+		mes "[Prontera Acolyte]";
+		mes "An Acolyte is someone who worships the goddess Freya sacrificing themselves to help others.";
+		next;
+		if (isequipped(2821) || countitem(2821)) {
+			mes "[Prontera Acolyte]";
+			mes "Try the Acolyte Skills with the manual you have.";
+			close;
+		}
+		mes "[Prontera Acolyte]";
+		mes "Would you like to experience the skills of an Acolyte?";
+		next;
+		if (select("Yes, please.:No, I'm not interested.") == 1) {
+			callfunc "F_NvErase";
+			getitem 2821,1; //Acolyte_Manual
+			close;
+		}
+		close;
+	case 2:
+		if (select("Let me reconsider.:I will go to the Sanctuary.") == 2) {
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "prontera",117,72,1,1;
+			warp "prt_church",172,19;
+			end;
+		}
+		close;
+	case 3:
+		close;
+	}
+}
+
+-	script	NvThief	-1,{
+	mes "[Thief Guild Member]";
+	mes "How can I help you?";
+	next;
+	switch(select("About the Thief Class.:I want to be a Thief.:Got any Quests?:Cancel.")) {
+	case 1:
+		mes "[Thief Guild Member]";
+		mes "Thieves are experts at using Dagger class weapons.";
+		next;
+		if (isequipped(2820) || countitem(2820)) {
+			mes "[Thief Guild Member]";
+			mes "The class manual can help you understand what it is to be a Thief.";
+			close;
+		}
+		mes "[Thief Guild Member]";
+		mes "Would you like to experience the skills of a Thief?";
+		next;
+		if (select("Yes, I would.:No, I don't.") == 1) {
+			callfunc "F_NvErase";
+			getitem 2820,1; //Thief_Manual
+			close;
+		}
+		close;
+	case 2:
+		if (select("Let me consider it again.:Yes, I do.") == 2) {
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "morocc",150,99,1,1;
+			warp "moc_prydb1",99,185;
+			end;
+		}
+		close;
+	case 3:
+		set .@quest, checkquest(7127);
+		if (.@quest == -1) {
+			mes "[Thief Guild Member]";
+			mes "How about hunting some Willows?";
+			setquest 7127;
+			close;
+		} else if (checkquest(7127,HUNTING) == 2) {
+			mes "[Thief Guild Member]";
+			mes "You are very strong.";
+			completequest 7127;
+			getitem 12323,50; //N_Fly_Wing
+			getexp 100,100;
+			close;
+		} else {
+			mes "[Thief Guild Member]";
+			mes "Hunt 5 Willows.";
+			close;
+		}
+	case 4:
+		close;
+	}
+}
+
+-	script	NvMerchant	-1,{
+	mes "[Merchant Guildsman]";
+	mes "What can I help you with?";
+	next;
+	switch(select("Tell me about Merchants:I want to be a Merchant.:Give me a Quest.:Cancel")) {
+	case 1:
+		mes "[Merchant Guildsman]";
+		mes "Merchant? Simply put, he sells goods and makes money.";
+		next;
+		if (isequipped(2823) || countitem(2823)) {
+			mes "[Merchant Guildsman]";
+			mes "I think you should test Merchant skills.";
+			close;
+		}
+		mes "[Merchant Guildsman]";
+		mes "Do you want to see what it's like to be a Merchant?";
+		next;
+		if (select("I want to test Merchant skills.:I don't want to test it.") == 1) {
+			callfunc "F_NvErase";
+			getitem 2823,1; //Merchant_Manual
+			close;
+		}
+		close;
+	case 2:
+		if (select("I will think about it again.:Yes, I want to go to the Merchant Guild's union") == 2) {
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "alberta",30,232,1,1;
+			warp "alberta_in",62,44;
+			end;
+		}
+		close;
+	case 3:
+		set .@quest, checkquest(7126);
+		if (.@quest == -1) {
+			mes "[Merchant Guildsman]";
+			mes "Bring me ^5d5dff300 zeny^000000.";
+			setquest 7126;
+			close;
+		} else if (Zeny >= 300) {
+			mes "[Merchant Guildsman]";
+			mes "Excellent!";
+			completequest 7126;
+			getitem 1010,7; //Phracon
+			getexp 100,100;
+			close;
+		} else {
+			mes "[Merchant Guildsman]";
+			mes "Bring me 300 zeny.";
+			close;
+		}
+	case 4:
+		close;
+	}
+}
+
+-	script	NvArcher	-1,{
+	mes "[Archer Guildsman]";
+	mes "What can I do for you?";
+	next;
+	switch(select("What is an Archer?:I want to be an Archer.:Cancel")) {
+	case 1:
+		mes "[Archer Guildsman]";
+		mes "Archers use bows and arrows to attack from a distance.";
+		next;
+		if (isequipped(2822) || countitem(2822)) {
+			mes "[Archer Guildsman]";
+			mes "Try the Archer skills.";
+			close;
+		}
+		mes "[Archer Guildsman]";
+		mes "Would you like to experience the skills of an Archer?";
+		next;
+		if (select("Yes, please.:No, I'm not interested.") == 1) {
+			callfunc "F_NvErase";
+			getitem 2822,1; //Archer_Manual
+			close;
+		}
+		close;
+	case 2:
+		if (select("I will think about it again.:Yes, I want to go to the Archer Guilds union") == 2) {
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "payon",256,242,1,1;
+			warp "payon_in02",64,65;
+			end;
+		}
+		close;
+	case 3:
+		close;
+	}
+}
+
+-	script	NvMage	-1,{
+	mes "[Mage Guild Member]";
+	mes "How can I help you?";
+	next;
+	switch(select("What is a Mage?:I want to be a Mage.:Got any Quests?:Reset Quest.:Cancel.")) {
+	case 1:
+		mes "[Mage Guild Member]";
+		mes "Mages use powerful elemental spells to destroy their enemies.";
+		next;
+		if (isequipped(2824) || countitem(2824)) {
+			mes "[Mage Guild Member]";
+			mes "Try the Mage skills.";
+			close;
+		}
+		mes "[Mage Guild Member]";
+		mes "Would you like to experience the skills of a Mage?";
+		next;
+		if (select("Yes, I would.:No, I don't.") == 1) {
+			callfunc "F_NvErase";
+			getitem 2824,1; //Mage_Manual
+			close;
+		}
+		close;
+	case 2:
+		if (select("Let me consider it again.:Yes, I do.") == 2) {
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "geffen",119,37,1,1;
+			warp "geffen_in",165,168;
+			end;
+		}
+		close;
+	case 3:
+		set .@quest, checkquest(7124);
+		if (.@quest == -1) {
+			mes "[Mage Guild Member]";
+			mes "I have a challenge for you!";
+			mes "Hunt ^FF00005 Lunatics^000000 and bring me ^0000FF5 Clovers^000000.";
+			next;
+			setquest 7124;
+			mes "[Mage Guild Member]";
+			mes "I've added the quest to your travel log. Go to the training field and find them!";
+			close;
+		}
+		
+		set .@hunt, checkquest(7124,HUNTING);
+		set .@items, countitem(705);
+		
+		if (.@hunt == 2 && .@items >= 5) {
+			mes "[Mage Guild Member]";
+			mes "Excellent job! You've proven your worth both in combat and in gathering reagents.";
+			next;
+			delitem 705,5; // Clover
+			completequest 7124;
+			getexp 100,100;
+			getitem 12324,30; // N_Butterfly_Wing
+			mes "[Mage Guild Member]";
+			mes "Here is your reward. Good luck with your magical studies!";
+			close;
+		}
+		
+		mes "[Mage Guild Member]";
+		mes "You haven't finished yet!";
+		if (.@hunt != 2) mes "- You still need to hunt all ^FF00005 Lunatics^000000 (State: "+.@hunt+").";
+		if (.@items < 5) mes "- You still need to bring ^0000FF"+(5-.@items)+" more Clovers^000000.";
+		close;
+	case 4:
+		mes "[Mage Guild Member]";
+		mes "Resetting your progress for the Mage trial...";
+		erasequest 7124;
+		mes "Done. You can take the quest again now.";
+		close;
+	case 5:
+		close;
+	}
+}
+
+// Support Function
+function	script	F_NvErase	{
+	if (getarg(0,0)) {
+		if (checkquest(7122) > -1) erasequest 7122;
+		if (checkquest(7123) > -1) erasequest 7123;
+		if (checkquest(7124) > -1) erasequest 7124;
+		if (checkquest(7126) > -1) erasequest 7126;
+		if (checkquest(7127) > -1) erasequest 7127;
+	}
+	nude;
+	setarray .@manuals[0],countitem(2819),countitem(2820),countitem(2821),countitem(2822),countitem(2823),countitem(2824);
+	if (.@manuals[0]) delitem 2819,.@manuals[0];
+	if (.@manuals[1]) delitem 2820,.@manuals[1];
+	if (.@manuals[2]) delitem 2821,.@manuals[2];
+	if (.@manuals[3]) delitem 2822,.@manuals[3];
+	if (.@manuals[4]) delitem 2823,.@manuals[4];
+	if (.@manuals[5]) delitem 2824,.@manuals[5];
+	return;
+}
+
+// Map Duplicates for new_1-3
+new_1-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv1	728
+new_1-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv1	95
+new_1-3,105,41,3	duplicate(NvThief)	Thief Guide#nv1	118
+new_1-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv1	97
+new_1-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv1	727
+new_1-3,117,41,3	duplicate(NvMage)	Mage Guide#nv1	123

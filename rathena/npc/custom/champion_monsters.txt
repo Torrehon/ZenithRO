@@ -1,0 +1,389 @@
+-	script	CHAMPION_SYSTEM	-1,{
+
+OnInit:
+	// --- MAPEO DE CHAMPIONS (IDs Nativas de rAthena) ---
+	setd ".ch_1864_1", 2603; // ZOMBIE_SLAUGHTER
+	setd ".ch_1197_2", 2604; // ZOMBIE_PRISONER
+	setd ".ch_1015_4", 2606; // ZOMBIE
+	setd ".ch_1979_5", 2607; // ZAKUDAM
+	setd ".ch_1057_1", 2608; // YOYO
+	setd ".ch_1057_2", 2609; // YOYO
+	setd ".ch_1024_3", 2610; // WORM_TAIL
+	setd ".ch_1499_4", 2611; // WOOTAN_FIGHTER
+	setd ".ch_1880_5", 2612; // WOOD_GOBLIN
+	setd ".ch_1013_1", 2613; // WOLF
+	setd ".ch_1263_2", 2614; // WIND_GHOST
+	setd ".ch_1010_3", 2615; // WILOW
+	setd ".ch_1261_4", 2616; // WILD_ROSE
+	setd ".ch_1416_5", 2617; // WICKED_NYMPH
+	setd ".ch_1179_2", 2618; // WHISPER
+	setd ".ch_1208_4", 2620; // WANDER_MAN
+	setd ".ch_1390_5", 2621; // VIOLY
+	setd ".ch_1390_1", 2622; // VIOLY
+	setd ".ch_1390_2", 2623; // VIOLY
+	setd ".ch_1621_3", 2624; // VENOMOUS
+	setd ".ch_1676_4", 2625; // VENATU_1
+	setd ".ch_1882_5", 2626; // VAVAYAGA
+	setd ".ch_1771_1", 2627; // VANBERK
+	setd ".ch_1066_2", 2628; // VADON // SEGUIR POR AQUI
+	setd ".ch_1618_3", 2629; // UNGOLIANT
+	setd ".ch_2063_4", 2630; // TOUCAN
+//	setd ".ch_1864_5", 2631; // TIYANAK
+	setd ".ch_1051_2", 2632; // THIEF_BUG
+	setd ".ch_1051_3", 2633; // THIEF_BUG
+	setd ".ch_1051_4", 2634; // THIEF_BUG
+	setd ".ch_1034_5", 2635; // THARA_FROG
+	setd ".ch_1622_1", 2636; // TEDDY_BEAR
+	setd ".ch_1997_2", 2637; // TATACHO
+	setd ".ch_1175_3", 2638; // TAROU
+	setd ".ch_1596_4", 2639; // TAMRUAN
+	setd ".ch_1207_5", 2640; // STING
+	setd ".ch_1215_1", 2641; // STEM_WORM
+	setd ".ch_1042_2", 2642; // STEEL_CHONCHON
+	setd ".ch_1784_3", 2643; // STAPO
+	setd ".ch_1278_4", 2644; // STALACTIC_GOLEM
+	setd ".ch_1174_5", 2645; // STAINER
+	setd ".ch_1014_1", 2646; // SPORE
+	setd ".ch_1316_2", 2647; // SOLIDER
+	setd ".ch_1028_3", 2648; // SOLDIER_SKELETON
+	setd ".ch_1028_4", 2649; // SOLDIER_SKELETON
+	setd ".ch_1703_5", 2650; // SOLACE
+	setd ".ch_1170_1", 2651; // SOHEE
+	setd ".ch_1775_2", 2652; // SNOWIER
+	setd ".ch_1025_3", 2653; // SNAKE
+	setd ".ch_1056_4", 2654; // SMOKIE
+	setd ".ch_1386_5", 2655; // SLEEPER
+	setd ".ch_1386_1", 2656; // SLEEPER
+	setd ".ch_1752_2", 2657; // SKOGUL
+	setd ".ch_1290_3", 2658; // SKELETON_GENERAL
+	setd ".ch_1290_4", 2659; // SKELETON_GENERAL
+	setd ".ch_1469_5", 2660; // SKEL_WORKER
+	setd ".ch_1776_1", 2661; // SIROMA
+	setd ".ch_1037_2", 2662; // SIDE_WINDER
+	setd ".ch_1037_3", 2663; // SIDE_WINDER
+	setd ".ch_1560_4", 2664; // SHINOBI
+	setd ".ch_1701_5", 2665; // SHELTER
+	setd ".ch_1074_1", 2666; // SHELLFISH
+	setd ".ch_1631_2", 2667; // SHECIL
+	setd ".ch_1323_3", 2668; // SEE_OTTER
+//	setd ".ch_2013_4", 2669; // SEDORA
+	setd ".ch_1559_5", 2670; // SCORPION
+	setd ".ch_1167_1", 2671; // SAVAGE_BABE
+	setd ".ch_1166_2", 2672; // SAVAGE
+	setd ".ch_1166_3", 2673; // SAVAGE
+	setd ".ch_1165_4", 2674; // SAND_MAN
+	setd ".ch_1831_5", 2675; // SALAMANDER
+//	setd ".ch_"+getmonsterinfo("SAILOR_SKELETON",1)+"_1", 2676; 
+	setd ".ch_1782_2", 2677; // ROWEEN
+	setd ".ch_1012_3", 2678; // RODA_FROG
+	setd ".ch_1012_4", 2679; // RODA_FROG
+	setd ".ch_1052_5", 2680; // ROCKER
+	setd ".ch_1195_1", 2681; // RIDEWORD
+	setd ".ch_1195_2", 2682; // RIDEWORD
+	setd ".ch_1409_3", 2683; // RICE CAKE BOY
+	setd ".ch_1702_4", 2684; // RETRIBUTION
+	setd ".ch_1702_5", 2685; // RETRIBUTION
+	setd ".ch_1702_1", 2686; // RETRIBUTION
+	setd ".ch_1164_2", 2687; // REQUIEM
+	setd ".ch_1682_3", 2688; // REMOVAL
+//	setd ".ch_1395_5", 2689; // RED_ERUMA
+	setd ".ch_1163_1", 2690; // RAYDRIC
+	setd ".ch_1163_2", 2691; // RAYDRIC
+	setd ".ch_1657_3", 2692; // RAWREL
+//	setd ".ch_2083_4", 2693; // RAKE_SCARABA
+	setd ".ch_1254_5", 2694; // RAGGLER
+	setd ".ch_1162_1", 2695; // RAFFLESIA
+	setd ".ch_1002_3", 2696; // PORING
+	setd ".ch_1002_4", 2697; // PORING
+	setd ".ch_1002_5", 2698; // PORING
+	setd ".ch_1002_1", 2699; // PORING
+	setd ".ch_1619_2", 2700; // PORCELLIO
+	setd ".ch_1031_3", 2701; // POPORING
+	setd ".ch_1031_4", 2702; // POPORING
+	setd ".ch_1031_5", 2703; // POPORING
+	setd ".ch_1402_1", 2704; // POISON_TOAD
+	setd ".ch_1077_2", 2705; // POISON_SPORE
+	setd ".ch_1693_3", 2706; // PLASMA_Y
+	setd ".ch_1161_4", 2707; // PLANKTON
+	setd ".ch_1616_5", 2708; // PITMAN
+//	setd ".ch_1968_1", 2709; // PIRANHA
+	setd ".ch_2015_2", 2710; // PINGUICULA_D
+	setd ".ch_1995_3", 2711; // PINGUICULA
+	setd ".ch_1050_4", 2712; // PICKY_
+	setd ".ch_1158_5", 2713; // PHEN
+	setd ".ch_1155_1", 2714; // PETIT
+	setd ".ch_1155_2", 2715; // PETIT
+	setd ".ch_1216_3", 2716; // PENOMENA
+	setd ".ch_1216_4", 2717; // PENOMENA
+	setd ".ch_1019_5", 2718; // PECOPECO
+	setd ".ch_1154_1", 2719; // PASANA
+	setd ".ch_1500_2", 2720; // PARASITE
+	setd ".ch_1320_3", 2721; // OWL_DUKE
+	setd ".ch_1023_4", 2722; // ORK_WARRIOR
+	setd ".ch_1153_5", 2723; // ORC_ZOMBIE
+	setd ".ch_1152_1", 2724; // ORC_SKELETON
+	setd ".ch_1273_2", 2725; // ORC_LADY
+	setd ".ch_1700_3", 2726; // OBSERVATION
+	setd ".ch_1620_4", 2727; // NOXIOUS
+	setd ".ch_1715_5", 2728; // NOVUS
+	setd ".ch_1715_1", 2729; // NOVUS
+	setd ".ch_1715_2", 2730; // NOVUS
+	setd ".ch_1715_3", 2731; // NOVUS
+	setd ".ch_1379_4", 2732; // NIGHTMARE_TERROR
+	setd ".ch_1291_5", 2733; // WRAITH DEAD
+	setd ".ch_1208_1", 2734; // WANDERER
+	setd ".ch_1988_2", 2735; // NEPENTHES
+	setd ".ch_1870_3", 2736; // NECROMANCER
+	setd ".ch_1249_4", 2737; // MYSTCASE
+	setd ".ch_1780_5", 2738; // MUSCIPULAR
+	setd ".ch_1041_1", 2739; // MUMMY
+	setd ".ch_1041_2", 2740; // MUMMY
+	setd ".ch_1055_3", 2741; // MUKA
+	setd ".ch_1918_4", 2742; // MOROCC_1
+	setd ".ch_1918_5", 2743; // MOROCC_1
+	setd ".ch_1918_1", 2744; // MOROCC_1
+	setd ".ch_1628_2", 2745; // HOLDEN
+	setd ".ch_1404_3", 2746; // MIYABI_NINGYO
+	setd ".ch_1149_4", 2747; // MINOROUS
+	setd ".ch_1149_5", 2748; // MINOROUS
+	setd ".ch_1149_1", 2749; // MINOROUS
+	setd ".ch_1614_2", 2750; // MINERAL
+//	setd ".ch_"+getmonsterinfo("MIMING",1)+"_3", 2751; 
+	setd ".ch_1191_4", 2752; // MIMIC
+	setd ".ch_1191_5", 2753; // MIMIC
+	setd ".ch_1058_1", 2754; // METALLER
+	setd ".ch_1613_2", 2755; // METALING
+	setd ".ch_1613_3", 2756; // METALING
+	setd ".ch_1451_4", 2757; // MERMAN
+//	setd ".ch_1992_5", 2758; // MENBLATT
+	setd ".ch_1148_1", 2759; // MEDUSA
+	setd ".ch_1145_2", 2760; // MARTIN
+	setd ".ch_1143_3", 2761; // MARIONETTE
+	setd ".ch_1242_4", 2762; // MARIN
+	setd ".ch_1140_5", 2763; // MARDUK
+	setd ".ch_1139_1", 2764; // MANTIS
+	setd ".ch_1020_2", 2765; // MANDRAGORA
+	setd ".ch_1867_3", 2766; // MANANANGGAL
+	setd ".ch_1310_4", 2767; // MAJORUROS
+	setd ".ch_1138_5", 2768; // MAGNOLIA
+	setd ".ch_1836_1", 2769; // MAGMARING
+	setd ".ch_1063_2", 2770; // LUNATIC
+	setd ".ch_1063_3", 2771; // LUNATIC
+	setd ".ch_1509_4", 2772; // LUDE
+	setd ".ch_1994_5", 2773; // LUCIOLA_VESPA
+	setd ".ch_1505_1", 2774; // LOLI_RURI
+	setd ".ch_1410_2", 2775; // LIVE_PEACH_TREE
+//	setd ".ch_"+getmonsterinfo("LITTLE_PORING",1)+"_3", 2776; 
+//	setd ".ch_1989_4", 2777; // LITTLE_FATUM
+	setd ".ch_1517_5", 2778; // LI_ME_MANG_RYANG
+	setd ".ch_1881_1", 2779; // LES
+	setd ".ch_1306_2", 2780; // LEIB_OLMAI
+	setd ".ch_1586_3", 2781; // LEAF_CAT
+	setd ".ch_1653_4", 2782; // WICKEBINE_TRES
+	setd ".ch_1635_5", 2783; // EREMES_GUILE //SEGUIR AQUI 3
+	setd ".ch_1282_1", 2784; // KOBOLD_ARCHER
+	setd ".ch_1133_2", 2785; // KOBOLD_1
+	setd ".ch_1838_3", 2786; // KNOCKER
+	setd ".ch_1494_4", 2787; // KIND_OF_BEETLE
+	setd ".ch_1833_5", 2788; // KASA
+	setd ".ch_1400_1", 2789; // KARAKASA
+	setd ".ch_1029_2", 2790; // ISIS
+	setd ".ch_1772_3", 2791; // ISILLA
+	setd ".ch_1257_4", 2792; // INJUSTICE
+	setd ".ch_1516_5", 2793; // INCREASE_SOIL
+	setd ".ch_1777_1", 2794; // ICE_TITAN
+//	setd ".ch_2014_2", 2795; // IARA
+	setd ".ch_1512_3", 2796; // HYEGUN
+	setd ".ch_1035_4", 2797; // HUNTER_FLY
+	setd ".ch_1004_5", 2798; // HORNET
+//	setd ".ch_2081_1", 2799; // HORN_SCARABA
+	setd ".ch_1128_2", 2800; // HORN
+	setd ".ch_1773_3", 2801; // HODREMLIN
+	setd ".ch_1127_4", 2802; // HODE
+	setd ".ch_1680_5", 2803; // HILL_WIND_1
+	setd ".ch_1680_1", 2804; // HILL_WIND_1
+	setd ".ch_1213_2", 2805; // HIGH_ORC
+	setd ".ch_1376_3", 2806; // HARPY
+	setd ".ch_1376_4", 2807; // HARPY
+	setd ".ch_1687_5", 2808; // GREEN_IGUANA
+	setd ".ch_1277_1", 2809; // GREATEST_GENERAL
+	setd ".ch_1369_2", 2810; // GRAND_PECO
+	setd ".ch_1369_3", 2811; // GRAND_PECO
+	setd ".ch_1040_4", 2812; // GOLEM
+	setd ".ch_1122_5", 2813; // GOBLIN_1
+	setd ".ch_1122_1", 2814; // GOBLIN_1
+	setd ".ch_1372_2", 2815; // GOAT
+	setd ".ch_1372_3", 2816; // GOAT
+//	setd ".ch_"+getmonsterinfo("GLD_KOBOLD_2",1)+"_4", 2817; 
+//	setd ".ch_"+getmonsterinfo("GLD_DARK_SHADOW",1)+"_5", 2818; 
+//	setd ".ch_"+getmonsterinfo("GLD_DARK_SHADOW",1)+"_1", 2819; 
+//	setd ".ch_"+getmonsterinfo("GLD_DARK_SHADOW",1)+"_2", 2820; 
+	setd ".ch_1303_3", 2821; // GIANT_HONET
+	setd ".ch_1036_4", 2822; // GHOUL
+	setd ".ch_1036_5", 2823; // GHOUL
+	setd ".ch_1368_1", 2824; // GEOGRAPHER
+	setd ".ch_1368_2", 2825; // GEOGRAPHER
+	setd ".ch_1253_3", 2826; // GARGOYLE
+	setd ".ch_1253_4", 2827; // GARGOYLE
+	setd ".ch_1783_5", 2828; // GALION
+	setd ".ch_1317_1", 2829; // FUR_SEAL
+	setd ".ch_1319_2", 2830; // FREEZER
+	setd ".ch_1319_3", 2831; // FREEZER
+	setd ".ch_1717_4", 2832; // FERUS_
+	setd ".ch_1005_5", 2833; // FARMILIAR
+	setd ".ch_1371_1", 2834; // FAKE_ANGEL
+	setd ".ch_1007_2", 2835; // FABRE
+	setd ".ch_1007_3", 2836; // FABRE
+	setd ".ch_1383_4", 2837; // EXPLOSION
+	setd ".ch_1117_5", 2838; // EVIL_DRUID
+	setd ".ch_1033_1", 2839; // ELDER_WILOW
+	setd ".ch_1033_2", 2840; // ELDER_WILOW
+	setd ".ch_1770_3", 2841; // ECHIO
+	setd ".ch_1114_4", 2842; // DUSTINESS
+	setd ".ch_1493_1", 2843; // DRYAD
+	setd ".ch_1781_2", 2844; // DROSERA
+	setd ".ch_1113_3", 2845; // DROPS
+	setd ".ch_1380_4", 2846; // DRILLER
+	setd ".ch_1111_5", 2847; // DRAINLIAR
+	setd ".ch_1321_1", 2848; // DRAGON_TAIL
+	setd ".ch_2013_2", 2849; // DRACO
+//	setd ".ch_2092_3", 2850; // DOLOMEDES
+	setd ".ch_1110_4", 2851; // DOKEBI
+	setd ".ch_1506_5", 2852; // DISGUISE
+	setd ".ch_1670_1", 2853; // DIMIK_1
+	setd ".ch_1109_2", 2854; // DEVIRUCHI
+	setd ".ch_1107_3", 2855; // DESERT_WOLF_B
+	setd ".ch_1107_4", 2856; // DESERT_WOLF_B
+	setd ".ch_1105_5", 2857; // DENIRO
+	setd ".ch_1698_1", 2858; // DEATHWORD
+	setd ".ch_1698_2", 2859; // DEATHWORD
+	setd ".ch_1698_3", 2860; // DEATHWORD
+//	setd ".ch_1254_4", 2861; // DARK_PRIEST
+	setd ".ch_1514_5", 2862; // DANCING_DRAGON
+	setd ".ch_1018_1", 2863; // CREAMY
+	setd ".ch_1067_2", 2864; // CORNUTUS
+	setd ".ch_1265_3", 2865; // COOKIE
+	setd ".ch_1738_4", 2866; // CONSTANT
+//	setd ".ch_1987_5", 2867; // COMODO
+	setd ".ch_1104_1", 2868; // COCO
+	setd ".ch_1104_2", 2869; // COCO
+	setd ".ch_1269_3", 2870; // CLOCK
+	setd ".ch_1269_4", 2871; // CLOCK
+	setd ".ch_1011_5", 2872; // CHONCHON
+//	setd ".ch_1996_1", 2873; // CENTIPEDE
+//	setd ".ch_2015_2", 2874; // CENERE
+//	setd ".ch_"+getmonsterinfo("CELIA",1)+"_3", 2875; 
+	setd ".ch_1300_4", 2876; // CATERPILLAR
+	setd ".ch_1267_5", 2877; // CARAT
+	setd ".ch_1103_1", 2878; // CARAMEL
+//	setd ".ch_1866_2", 2879; // BUNGISNGIS
+	setd ".ch_1692_3", 2880; // BREEZE
+	setd ".ch_1692_4", 2881; // BREEZE
+//	setd ".ch_1986_5", 2882; // BRADIUM_GOLEM
+	setd ".ch_1408_1", 2883; // BLOOD_BUTTERFLY
+	setd ".ch_1060_3", 2884; // BIGFOOT
+	setd ".ch_1102_4", 2885; // BATHORY
+	setd ".ch_1974_5", 2886; // BANSHEE_MASTER
+	setd ".ch_1867_1", 2887; // BANSHEE
+//	setd ".ch_1882_2", 2888; // BANASPATY
+	setd ".ch_1315_3", 2889; // ASSULTER
+	setd ".ch_1100_4", 2890; // ARGOS
+	setd ".ch_1099_5", 2891; // ARGIOPE
+	setd ".ch_1099_1", 2892; // ARGIOPE
+	setd ".ch_1194_2", 2893; // ARCLOUSE
+	setd ".ch_1194_3", 2894; // ARCLOUSE
+	setd ".ch_1365_4", 2895; // APOCALIPS
+//	setd ".ch_2082_5", 2896; // ANTLER_SCARABA
+//	setd ".ch_1504_1", 2897; // ANTIQUE_BOOK
+//	setd ".ch_1504_2", 2898; // ANTIQUE_BOOK
+	setd ".ch_1206_4", 2899; // ANOLIAN
+//	setd ".ch_2085_5", 2900; // ANGRA_MANTIS
+//	setd ".ch_2085_1", 2901; // ANGRA_MANTIS
+	setd ".ch_1095_2", 2902; // ANDRE
+	setd ".ch_1699_3", 2903; // ANCIENT_MIMIC
+	setd ".ch_1030_4", 2904; // ANACONDAQ
+	setd ".ch_1094_5", 2905; // AMBERNITE
+//	setd ".ch_1885_1", 2906; // ALNOLDI
+	setd ".ch_1271_2", 2907; // ALLIGATOR
+	setd ".ch_1737_3", 2908; // ALIZA
+	setd ".ch_1735_4", 2909; // ALICEL
+	setd ".ch_1193_5", 2910; // ALARM
+	setd ".ch_1769_1", 2911; // AGAV
+	setd ".ch_1716_2", 2912; // ACIDUS_
+	setd ".ch_1716_3", 2913; // ACIDUS_
+	end;
+	
+OnNPCKillEvent:
+	// 1. ATTACH PLAYER
+	attachrid(killerrid);
+
+	set .@id, killedrid;
+	set .@map$, strcharinfo(3);
+
+	// Filter: Only mobs with champions
+	if (getd(".ch_" + .@id + "_1") == 0) end;
+
+	// 2. DYNAMIC REQUIREMENTS BY LEVEL
+	// We use MOB_LV constant for better compatibility
+	set .@lvl, getmonsterinfo(.@id, MOB_LV);
+	
+	// If it still returns 0, we try to get it via ID directly
+	if (.@lvl <= 0) set .@lvl, getmonsterinfo(killedrid, MOB_LV);
+
+	// --- DEBUG LINE (Uncomment if you want to see the detected level in chat) ---
+	// dispbottom "DEBUG: Mob Level detected: " + .@lvl;
+	// ----------------------------------------------------------------------------
+
+	// LEVEL LOGIC
+	if (.@lvl <= 25) { set .@req, 300; }
+	else if (.@lvl <= 50) { set .@req, 200; }
+	else if (.@lvl <= 75) { set .@req, 150; }
+	else { set .@req, 75; }
+
+	// 3. COUNTER LOGIC
+	set .@var$, "$CK_" + .@map$ + "_" + .@id;
+	setd .@var$, getd(.@var$) + 1;
+	set .@curr, getd(.@var$);
+	
+	// 4. PROGRESS DISPLAY (145/150 Format)
+	set .@rem, .@req - .@curr;
+	if (.@rem >= 0 && .@rem <= 25) {
+		dispbottom "Champion Progress [ID: " + .@id + "]: " + .@curr + "/" + .@req;
+	}
+
+	// 5. SPAWN LOGIC
+	if (.@curr >= .@req) {
+		setd .@var$, 0; 
+
+		set .@v, 0;
+		for (set .@i, 1; .@i <= 5; set .@i, .@i + 1) {
+			if (getd(".ch_" + .@id + "_" + .@i) > 0) set .@v, .@v + 1;
+		}
+		set .@champ, getd(".ch_" + .@id + "_" + (rand(.@v) + 1));
+
+		getmapxy(.@map$, .@px, .@py);
+		if (.@px <= 0) { set .@px, 150; set .@py, 150; }
+
+		set .@x1, .@px - 10; set .@y1, .@py - 10;
+		set .@x2, .@px + 10; set .@y2, .@py + 10;
+
+		areamonster .@map$, .@x1, .@y1, .@x2, .@y2, "--en--", .@champ, 1, "CHAMPION_SYSTEM::OnDeath";
+		
+		mapannounce .@map$, "A Champion has appeared near " + strcharinfo(0) + "!", bc_map, 0xFFFF00;
+	}
+	end;
+
+OnDeath:
+	// Dynamic Drop (20-50%)
+	set .@lvl, getmonsterinfo(killedrid, MOB_LV);
+	set .@drop, 20 + (.@lvl * 30 / 100);
+	if (.@drop > 50) set .@drop, 50;
+
+	if (rand(100) < .@drop) {
+		getitem 12106, 1;
+		dispbottom "Rare item obtained! (" + .@drop + "% chance).";
+	}
+	
+	announce "The Champion was defeated by " + strcharinfo(0) + "!", bc_map, 0x00FF00;
+	end;
+}	

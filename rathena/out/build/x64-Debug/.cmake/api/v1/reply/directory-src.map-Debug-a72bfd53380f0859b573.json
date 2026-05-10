@@ -1,0 +1,61 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"src/map/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 41,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Runtime_mapserver",
+			"destination" : ".",
+			"paths" : 
+			[
+				"D:/SERVER_RO/LevitationRO/rathena/map-server.exe"
+			],
+			"targetId" : "map-server::@49e5eb6817f363ea937d",
+			"targetIndex" : 8,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Runtime_mapserver",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "map-server::@49e5eb6817f363ea937d",
+				"index" : 8
+			},
+			"destination" : ".",
+			"type" : "cxxModuleBmi"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "src/map",
+		"source" : "src/map"
+	}
+}

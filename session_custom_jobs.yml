@@ -1,0 +1,172 @@
+from: "D:/SERVER_RO/LevitationRO/client_2023_clean/2021-11-03_Ragexe_1635926200.exe"
+to: "D:/SERVER_RO/LevitationRO/client_2023_clean/2021-11-03_Ragexe_1635926200_patched_custom_jobs_OK3.exe"
+inputs:
+    $newPrivAirplane:
+        data: '53797374656d454e5c50726976617465416972706c616e652e6c756200'
+        display: "SystemEN\\PrivateAirplane.lub"
+        type: 10
+    
+    $newAchieveList:
+        data: '53797374656d454e5c616368696576656d656e74732e6c756200'
+        display: "SystemEN\\achievements.lub"
+        type: 10
+    
+    $bossBarSize:
+        data: ''
+        display: 
+            - type: 2
+              value: 80
+            - type: 2
+              value: 10
+    
+    $newTownInfo:
+        data: '53797374656d454e2f546f776e696e666f2e6c756200'
+        display: "SystemEN/Towninfo.lub"
+        type: 10
+    
+    $newPetEvoCln:
+        data: '53797374656d454e5c50657445766f6c7574696f6e2e6c756200'
+        display: "SystemEN\\PetEvolution.lub"
+        type: 10
+    
+    $newTipBox:
+        data: '53797374656d454e2f746970626f782e6c756200'
+        display: "SystemEN/tipbox.lub"
+        type: 10
+    
+    $newMapInfo:
+        data: '53797374656d454e5c6d6170496e666f5f747275655f454e2e6c756200'
+        display: "SystemEN\\mapInfo_true_EN.lub"
+        type: 10
+    
+    .choice:
+        data: ''
+        display: ""
+        type: 10
+    
+    $newCheckAtt:
+        data: '53797374656d454e2f436865636b417474656e64616e63652e6c756200'
+        display: "SystemEN/CheckAttendance.lub"
+        type: 10
+    
+    $inpIconFile:
+        data: ''
+        display: "D:\\SERVER_RO\\LevitationRO\\Cliente\\Icon\\LRO_ok.ico"
+        type: 10
+    
+    $newItemInfo:
+        data: '53797374656d454e2f6974656d496e666f2e6c756100'
+        display: "SystemEN/itemInfo.lua"
+        type: 10
+    
+    $customWindowTitle:
+        data: '4c657669746174696f6e524f00'
+        display: "LevitationRO"
+        type: 10
+    
+    $maxParty:
+        data: '06'
+        display: 6
+        type: 2
+    
+    $copyCJLub:
+        data: ''
+        display: "false"
+        type: 10
+    
+    $dataINI:
+        data: '444154412e494e4900'
+        display: "DATA.INI"
+        type: 10
+    
+    $RodexTax:
+        data: '64000000'
+        display: 100
+        type: 2
+    
+    $newRcmdQInfoList:
+        data: '53797374656d454e5c5265636f6d6d656e6465645175657374732e6c756200'
+        display: "SystemEN\\RecommendedQuests.lub"
+        type: 10
+    
+    $showFailures:
+        data: ''
+        display: "true"
+        type: 10
+    
+    $chatFloodLimit:
+        data: '06'
+        display: 6
+        type: 2
+    
+    $newOngQInfoList:
+        data: '53797374656d454e5c4f6e676f696e6751756573747300'
+        display: "SystemEN\\OngoingQuests"
+        type: 10
+    
+    $translationFile:
+        data: ''
+        display: "Inputs/Translations_EN.yml"
+        type: 10
+    
+    $maxJob:
+        data: '8813'
+        display: 5000
+        type: 2
+    
+    $newMonSizeEffect:
+        data: '53797374656d454e2f6d6f6e737465725f73697a655f6566666563742e6c756200'
+        display: "SystemEN/monster_size_effect.lub"
+        type: 10
+    
+patches:
+    - ResizeBossBar
+    - NoBlindness
+    - EnableWho
+    - EnableShowName
+    - MediumCamAngle
+    - UseOldLogin
+    - LimitedChatRepeat
+    - CustomRodexTax
+    - AlwaysAscii
+    - CallKoreaClientInfo
+    - PlainTextDesc
+    - HideBuildInfo
+    - TranslateClient
+    - MsgStrings
+    - CustomItemInfoLub
+    - CustomAchieveLub
+    - CustomMonSizeEffLub
+    - CustomTownInfoLub
+    - CustomPetEvoClnLub
+    - CustomTipboxLub
+    - CustomCheckAttLub
+    - CustomPrivAirplaneLub
+    - CustomMapInfoLub
+    - CustomOngQuestInfoLub
+    - CustomRcmdQuestInfoLub
+    - GRFsFromIni
+    - NoFilenameCheck
+    - EnableSysMenu
+    - CustomWinTitle
+    - No1and1Arg
+    - RestoreIcon
+    - EnableDnsSupport
+    - NoNagle
+    - NoHardCodedAddr
+    - SendClientFlags
+    - CustomJobs
+    - NoSwearFilter
+    - OpenToServiceSelect
+    - GuildBrackets
+    - FixChatAt
+    - NoHourly
+    - NoSerialDisplay
+    - NoHelpMsg
+    - InsensitiveStorageSearch
+    - NoGravityAds
+    - NoGravityLogo
+    - IgnoreLuaErr
+    - FixLatestNCWin
+    - CustomPartyLimit
+    - DisConnToLogin

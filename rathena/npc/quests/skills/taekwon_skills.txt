@@ -1,0 +1,92 @@
+payon,156,136,6	script	Instructor Chul	841,{ // QUEST DE SKILL PLATINUM: SHATTERING KICKS
+
+	// Filtro: Solo para la clase Taekwon
+	if (Class != Job_Taekwon) {
+		mes "[Instructor Chul]";
+		mes "My breaking techniques are strictly for practitioners of Taekwon Do. Keep walking.";
+		close;
+	}
+
+	mes "[Instructor Chul]";
+	mes "Greetings. I teach the advanced art of breaking. But out there in the world, our enemies are not made of wooden boards.";
+	mes "I can teach you the destructive technique known as ^0000FFShattering Kicks^000000.";
+	next;
+
+	// Comprobamos si el jugador ya tiene la skill (ID 1029)
+	if (getskilllv("TK_SHATTER") > 0) {
+		mes "[Instructor Chul]";
+		mes "Your legs are already weapons of mass destruction. There is nothing more I can teach you about breaking.";
+		close;
+	}
+
+	// Requisito de nivel de Job
+	if (JobLevel < 15) {
+		mes "[Instructor Chul]";
+		mes "However, your legs are not conditioned enough yet. You must reach ^FF0000Job Level 15^000000 before attempting this.";
+		close;
+	}
+
+	// Inicio de la quest
+	if (plat_tkshatter_active == 0) {
+		if (countitem(50002) < 1) {
+			mes "[Instructor Chul]";
+			mes "If you wish to learn, you must present a ^3355FFTraining Recommendation 1^000000 as proof of your dedication.";
+			close;
+		}
+		mes "[Instructor Chul]";
+		mes "To master this art, you must prove that your kicks can shatter the strongest defenses in nature.";
+		mes "I want you to travel to the Sograt Desert and defeat a ^FF0000Golem^000000. Yes, a living creature made of solid rock.";
+		next;
+		mes "[Instructor Chul]";
+		mes "Their skin is incredibly hard to pierce, so this will be a true test of your endurance and willpower.";
+		if (select("I will shatter it.:I am not ready.") == 1) {
+			set plat_tkshatter_active, 1;
+			set plat_golem_count, 0;
+			mes "[Instructor Chul]";
+			mes "Show that pile of rocks the true power of Taekwon Do. I await your return.";
+		}
+		close;
+	}
+
+	// Quest en progreso
+	if (plat_tkshatter_active == 1) {
+		mes "[Instructor Chul]";
+		mes "Has the stone broken your spirit? Your record says:";
+		mes "^FF0000" + plat_golem_count + " / 1 Golem^000000.";
+		close;
+	}
+
+	// Quest completada (ha matado al Golem)
+	if (plat_tkshatter_active == 2) {
+		mes "[Instructor Chul]";
+		if (countitem(50002) < 1) {
+			mes "You shattered the beast, but I still need your ^3355FFTraining Recommendation 1^000000 to officially register your training.";
+			close;
+		}
+		mes "I felt the tremors from here! You actually shattered that stone monstrosity!";
+		next;
+		
+		delitem 50002, 1; // Se elimina el ticket
+		skill "TK_SHATTER", 1, SKILL_PERM; // Otorga la skill
+		set plat_tkshatter_active, 0; // Reseteamos variables
+		set plat_golem_count, 0;
+		
+		mes "[Instructor Chul]";
+		mes "You have proven your strength. I hereby pass onto you the knowledge of ^3355FFShattering Kicks^000000.";
+		mes "May your kicks shatter the defenses of any foe that stands in your way.";
+		close;
+	}
+
+// Etiqueta global para detectar cuando el jugador mata un monstruo
+OnNPCKillEvent:
+	if (plat_tkshatter_active == 1) {
+		if (killedrid == 1040) { // ID del Golem
+			set plat_golem_count, plat_golem_count + 1;
+			if (plat_golem_count >= 1) {
+				dispbottom "You have shattered the Golem! Return to Instructor Chul.";
+				set plat_tkshatter_active, 2;
+			}
+		}
+	}
+	end;
+}

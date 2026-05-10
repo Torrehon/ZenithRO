@@ -1,0 +1,158 @@
+payon,157,141,6	script	Taekwon Master#tk_1	644,{ // QUEST DE TAEKWON
+	
+	// --- EL PORTERO: Filtro anti-intrusos ---
+	if (Class != Job_Novice && Class != Job_Novice_High) {
+		if (BaseClass == Job_Taekwon) {
+			mes "[Taekwon Master]";
+			mes "Job change? Haha! But you already practice the art of Taekwon Do. Train hard!";
+			close;
+		}
+		mes "[Taekwon Master]";
+		mes "I only have business with Novices. You already chose your path in life. Be gone!";
+		close;
+	}
+
+	// --- Bloque de Rebirth / Transcendent (High Novice) ---
+	if (Class == Job_Novice_High) {
+		if (ADVJOB == Job_Star_Gladiator || ADVJOB == Job_Soul_Linker) {
+			mes "[Taekwon Master]";
+			mes "I sense...";
+			mes "A powerful aura...";
+			mes "You've been reborn, haven't you?";
+			next;
+			mes "[Taekwon Master]";
+			mes "I see you're retreading the path of Taekwon Do! Once you've awakened your inner energy, you can never go back!!";
+			next;
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Taekwon Master]";
+				mes "Hmm? Ah, you must first master the Basic Skills before you are ready to become a Taekwon.";
+				next;
+				mes "[Taekwon Master]";
+				mes "Come back to me when you have finished learning the Basic Novice Skills.";
+				close;
+			}
+			mes "[Taekwon Master]";
+			mes "Excellent! Let me promote you to a Taekwon right away!";
+			next;
+			skill "NV_TRICKDEAD",0,SKILL_PERM;
+			jobchange Job_Taekwon; // Nota: RO tradicional no tiene Job_Taekwon_High, se usa el estándar
+			skill "TK_RUN",1,SKILL_PERM; 
+			mes "[Taekwon Master]";
+			mes "Hmm... You look like a well-experienced martial artist. Still, I'm sure that you must train to improve your skills and gain strength!";
+			close;
+		}
+		else {
+			mes "[Taekwon Master]";
+			mes "Hm...? You're a reborn warrior, aren't you?";
+			next;
+			mes "[Taekwon Master]";
+			mes "Hmmm... It seems that being a Taekwon is not part of your destiny. I'm sorry.";
+			close;
+		}
+	}
+
+	// --- Nueva Quest Instantánea para Novices ---
+	mes "[Taekwon Master]";
+	mes "Welcome to our Dojang!";
+	mes "I have received word of your arrival. The instructors at the Novice Grounds speak highly of your inner strength!";
+	next;
+
+	if (!callfunc("F_CanChangeJob")) {
+		mes "[Taekwon Master]";
+		mes "However, I see you still haven't fully mastered your Basic Skills. A strong mind requires a prepared body!";
+		close;
+	}
+
+	mes "[Taekwon Master]";
+	mes "Are you ready to cast aside your past and dedicate yourself to the art of Taekwon Do?";
+	next;
+
+	if (select("Yes, I am ready.:I need more time.") == 2) {
+		mes "[Taekwon Master]";
+		mes "Return when your mind is calm and resolute!";
+		close;
+	}
+
+	mes "[Taekwon Master]";
+	mes "Excellent! Your journey to true strength begins now!";
+	next;
+	
+	callfunc "Job_Change", Job_Taekwon;
+	
+	mes "[Taekwon Master]";
+	mes "Congratulations! You are now a practitioner of Taekwon Do.";
+	next;
+	mes "[Taekwon Master]";
+	mes "Before you depart, speak with ^0000FFInstructor Kenji^000000 over there. He has a challenge for you.";
+	close;
+}
+
+
+payon,155,139,6	script	Instructor Kenji	843,{ // DAWN TAEKWON QUEST
+
+	if (BaseClass != Job_Taekwon) {
+		if (Class == Job_Novice || Class == Job_Novice_High) {
+			mes "[Instructor Kenji]";
+			mes "Speak to the Master to begin your martial arts training.";
+			close;
+		}
+		mes "[Instructor Kenji]";
+		mes "You do not practice our arts. Begone.";
+		close;
+	}
+
+	if (dawn_tk_q == 2) {
+		mes "[Instructor Kenji]";
+		mes "Ah, there you are! Keep your mind focused and your fists ready.";
+		close;
+	}
+
+	if (dawn_tk_q == 1) {
+		mes "[Instructor Kenji]";
+		if (JobLevel >= 10) {
+			mes "Excellent! You have reached Job Level 10. Your kicks have grown powerful.";
+			next;
+			mes "[Instructor Kenji]";
+			mes "As promised, you have earned a weapon of the Dawn. This battle bandage will channel your inner energy perfectly.";
+			next;
+			mes "[Instructor Kenji]";
+			mes "Take this jewelry box as well. It holds a gemstone that a ^0000FFJewel Enchanter^000000 in ^0000FFProntera^000000 can use to awaken the true power of your new gear.";
+			next;
+			
+			getitem 40007, 1; // Dawn Battle Bandage
+			getitem 12106, 1; // Jewelry Box
+			getexp 1000, 1000;
+			set dawn_tk_q, 2;
+			
+			mes "[Instructor Kenji]";
+			mes "Wield it with honor. May your spirit never falter!";
+			close;
+		} else {
+			mes "[Instructor Kenji]";
+			mes "You must reach ^FF0000Job Level 10^000000 before you can handle the Dawn Battle Bandage.";
+			mes "Return to your training. Discipline is the key to true strength.";
+			close;
+		}
+	}
+
+	if (dawn_tk_q == 0) {
+		mes "[Instructor Kenji]";
+		mes "A new student! I possess a unique weapon: the ^0000FFDawn Battle Bandage^000000.";
+		next;
+		mes "[Instructor Kenji]";
+		mes "Many novices complain it restricts their movements, but a true Taekwon knows power comes from discipline and technique.";
+		next;
+		mes "[Instructor Kenji]";
+		mes "Prove your worth: harden your body in battle and reach ^FF0000Job Level 10^000000. Once you do, I will grant it to you.";
+		next;
+		if (select("I accept the challenge.:I'm not ready.") == 2) {
+			mes "[Instructor Kenji]";
+			mes "Return when your spirit is resolute.";
+			close;
+		}
+		mes "[Instructor Kenji]";
+		mes "Spoken like a true martial artist! I'll be waiting for your return.";
+		set dawn_tk_q, 1;
+		close;
+	}
+}

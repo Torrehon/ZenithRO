@@ -1,0 +1,48 @@
+- Id: 40005
+    AegisName: Dawn_Mace
+    Name: Dawn Mace
+    Type: Weapon
+    SubType: Mace
+    Buy: 5000
+    Weight: 600
+    Attack: 45
+    Range: 1
+    Slots: 0
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 2
+    EquipLevelMin: 10
+    Refineable: true
+    Jobs:
+      Acolyte: true
+      Priest: true
+      Monk: true
+      Novice: true
+      SuperNovice: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      // Bonus base escalable
+      bonus bAtk, min(JobLevel, 30);
+      bonus bMatk, min(JobLevel, 30);
+      // +10% de daño con elemento Holy
+      bonus2 bElementAtkRate, Ele_Holy, 10;
+
+      if (BaseClass == Job_Acolyte) {
+          // Bonus por Blessing
+          if (getskilllv("AL_BLESSING") > 0) {
+              bonus bAtk, getskilllv("AL_BLESSING");
+              bonus bHit, getskilllv("AL_BLESSING");
+          }
+          // Bonus por Increase Agility
+          if (getskilllv("AL_INCAGI") > 0) {
+              bonus bFlee, getskilllv("AL_INCAGI");
+          }
+      }

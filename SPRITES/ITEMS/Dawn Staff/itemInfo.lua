@@ -1,0 +1,30 @@
+[40003] = {
+		unidentifiedDisplayName = "Dawn Staff",
+		unidentifiedResourceName = "Dawn_Staff",
+		unidentifiedDescriptionName = { "Unknown Item, can be identified by using a ^6666CCMagnifier^000000." },
+		identifiedDisplayName = "Dawn Staff",
+		identifiedResourceName = "Dawn_Staff",
+		identifiedDescriptionName = {
+			"An old but resonant staff crafted in the early light of dawn. Its wood might seem unresponsive to most, but it hums with potential in the right hands.",
+			"It is said to be the first step in a long journey of awakening.",
+			"-------------------------",
+			"^777777Account Bound.^000000",
+			"MATK + 15%",
+			"MATK + 1 per Job Level (Max 30).",
+			"-------------------------",
+			"^0000CC[Mage Class]^000000",
+			"Increases magic damage to ^009900Earth^000000 property targets by 1% per level of ^990000Fire Bolt^000000 learned.",
+			"Increases magic damage to ^0000CCWater^000000 property targets by 1% per level of ^990000Lightning Bolt^000000 learned.",
+			"Increases magic damage to ^CC0000Fire^000000 property targets by 1% per level of ^990000Cold Bolt^000000 learned.",
+			"-------------------------",
+			"Class:^6666CC 1-Handed Staff^000000",
+			"Attack:^CC0000 20^000000",
+			"Weight:^009900 60^000000",
+			"Weapon Level:^009900 2^000000",
+			"Level Requirement:^009900 10^000000",
+			"Jobs:^6666CC Mage Classes, Acolyte Classes and Soul Linker^000000"
+		},
+		slotCount = 0,
+		ClassNum = 10, -- View ID para Staff de 1 mano
+		costume = false
+	},

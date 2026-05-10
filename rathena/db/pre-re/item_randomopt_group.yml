@@ -1,0 +1,38 @@
+Header:
+  Type: RANDOM_OPTION_GROUP
+  Version: 1
+
+Body:
+  # ==========================================
+  # GORROS (ID 1) - Solo 1 Stat
+  # ==========================================
+  - Group: 1
+    Id: 1
+    Options:
+      - Option: 3      # ID 3 = VAR_STRAMOUNT
+        Chance: 10000
+        Min: 5
+        Max: 5
+      - Option: 6      # ID 6 = VAR_INTAMOUNT
+        Chance: 10000
+        Min: 5
+        Max: 5
+
+  # ==========================================
+  # ARMAS (ID 8) - Hasta 3 Stats
+  # ==========================================
+  - Group: 8
+    Id: 8
+    Options:
+      - Option: 17     # ID 17 = VAR_ATTPOWER (ATK)
+        Chance: 10000
+        Min: 50
+        Max: 50
+      - Option: 3      # ID 3 = VAR_STRAMOUNT (STR)
+        Chance: 10000
+        Min: 10
+        Max: 10
+      - Option: 16     # ID 16 = VAR_PLUSASPDPERCENT (ASPD %)
+        Chance: 10000
+        Min: 10
+        Max: 10

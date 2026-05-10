@@ -1,0 +1,47 @@
+- Id: 40002
+    AegisName: Dawn_Axe
+    Name: Dawn Axe
+    Type: Weapon
+    SubType: 1hAxe
+    Buy: 5000
+    Weight: 1000
+    Attack: 45
+    Range: 1
+    Slots: 0
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 2
+    EquipLevelMin: 10
+    Refineable: true
+    Jobs:
+      Alchemist: true
+      Assassin: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Novice: true
+      Rogue: true
+      SuperNovice: true
+      Swordman: true
+      Thief: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      // Bonus base para todos los trabajos
+      bonus bAtk, min(JobLevel, 30);
+
+      if (BaseClass == Job_Merchant) {
+          bonus2 bSkillAtk, "MC_CARTREVOLUTION", 25;
+          // Comprueba si el jugador tiene aprendida Crazy Uproar (MC_LOUD)
+          if (getskilllv("MC_LOUD") > 0) {
+              bonus bAspdRate, 5;
+          }
+      }

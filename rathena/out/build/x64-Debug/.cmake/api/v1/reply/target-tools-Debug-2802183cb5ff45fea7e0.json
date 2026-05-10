@@ -1,0 +1,90 @@
+{
+	"abstract" : true,
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"src/tool/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 4,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	},
+	"id" : "tools::@312d1879a87bc0da48b6",
+	"interfaceCompileDependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "yaml-cpp::@addeabc058b455b1cfd8"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "ryml::@53f7b59fdef72150fd83"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "minicore::@af79f3804eddddbfa7f1"
+		}
+	],
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 2,
+			"fragment" : "oldnames.lib"
+		},
+		{
+			"backtrace" : 2,
+			"fragment" : "ws2_32.lib"
+		},
+		{
+			"backtrace" : 2,
+			"fragment" : "D:/SERVER_RO/LevitationRO/rathena/3rdparty/zlib/lib/x64/zlib.lib"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "yaml-cpp::@addeabc058b455b1cfd8"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "ryml::@53f7b59fdef72150fd83"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "minicore::@af79f3804eddddbfa7f1"
+		}
+	],
+	"name" : "tools",
+	"paths" : 
+	{
+		"build" : "src/tool",
+		"source" : "src/tool"
+	},
+	"sources" : [],
+	"type" : "INTERFACE_LIBRARY"
+}

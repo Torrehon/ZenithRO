@@ -1,0 +1,52 @@
+// party members for flavor at Novice Grounds
+// Alard, Berin and Linnea before their adventure in Prontera Culvert
+// ONLY FOR new_1-2
+
+new_1-2,26,173,5	script	Novice Alard	0,{
+	mes "[Novice Alard]";
+	mes "Hey! Are you also starting your journey?";
+	mes "I've heard there are some giant bugs in the sewers of Prontera. I can't wait to get out of here and test my blade!";
+	next;
+	mes "[Novice Alard]";
+	mes "My friends are a bit nervous, but I'll protect them. We're going to be legendary adventurers, just watch us!";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 2;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 1;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+new_1-2,29,183,9	script	Novice Berin	0,{
+	mes "[Novice Berin]";
+	mes "Ugh... do you think we'll need a lot of Red Potions for our first mission?";
+	mes "Alard says he will protect us, but I have a bad feeling about this...";
+	next;
+	mes "[Novice Berin]";
+	mes "I just hope I don't get injured on my very first day out of the Academy.";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 5;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 2;
+	end;
+}
+
+new_1-2,36,180,7	script	Novice Linnea	0,{
+	mes "[Novice Linnea]";
+	mes "Wow! Look at all these people! Everyone looks so strong!";
+	mes "I want to see a real monster, Alard says there is a monster that glows... is that possible?";
+	next;
+	mes "[Novice Linnea]";
+	mes "I'm a bit scared, but as long as we stay together, nothing bad will happen, right?";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 7;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 6;
+	end;
+}

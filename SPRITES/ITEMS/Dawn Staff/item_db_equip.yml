@@ -1,0 +1,47 @@
+- Id: 40003
+    AegisName: Dawn_Staff
+    Name: Dawn Staff
+    Type: Weapon
+    SubType: 1hStaff
+    Buy: 5000
+    Weight: 600
+    Attack: 20
+    Range: 1
+    Slots: 0
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 2
+    EquipLevelMin: 10
+    Refineable: true
+    Jobs:
+      Mage: true
+      Acolyte: true
+      SoulLinker: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      // Efecto base del arma
+      bonus bMatkRate, 15;
+      bonus bMatk, min(JobLevel, 30);
+
+      if (BaseClass == Job_Mage) {
+          // +1% de daño mágico a Tierra por nivel de Fire Bolt
+          if (getskilllv("MG_FIREBOLT") > 0) {
+              bonus2 bMagicAtkEle, Ele_Earth, getskilllv("MG_FIREBOLT");
+          }
+          // +1% de daño mágico a Agua por nivel de Lightning Bolt
+          if (getskilllv("MG_LIGHTNINGBOLT") > 0) {
+              bonus2 bMagicAtkEle, Ele_Water, getskilllv("MG_LIGHTNINGBOLT");
+          }
+          // +1% de daño mágico a Fuego por nivel de Cold Bolt
+          if (getskilllv("MG_COLDBOLT") > 0) {
+              bonus2 bMagicAtkEle, Ele_Fire, getskilllv("MG_COLDBOLT");
+          }
+      }

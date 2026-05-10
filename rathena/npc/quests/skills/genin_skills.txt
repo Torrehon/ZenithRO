@@ -1,0 +1,97 @@
+izlude_in,177,120,4	script	Voice in the Dark#gn_plat	844,{ // QUEST DE SKILL PLATINUM: SHADOW HIDING
+
+	// Efecto visual y sonoro de Hiding sobre el NPC al hacerle clic
+	specialeffect 487;
+
+	// Filtro: Solo para la clase Genin (Custom ID 4501)
+	if (BaseJob == Job_4501) {
+		mes "[Voice in the Dark]";
+		mes "Your footsteps are too heavy. You do not belong in the shadows. Begone.";
+		close;
+	}
+
+	mes "[Voice in the Dark]";
+	mes "I can see you, but you cannot see me. Such is the absolute advantage of the unseen.";
+	mes "Do you wish to learn the ancient art of ^0000FFShadow Hiding^000000?";
+	next;
+
+	// Comprobamos si el jugador ya tiene la skill (ID 3001)
+	if (getskilllv("KO_YAMIKUMO") > 0) {
+		mes "[Voice in the Dark]";
+		mes "Your presence is already one with the shadows. I have nothing left to teach you.";
+		close;
+	}
+
+	// Requisito de nivel de Job
+	if (JobLevel < 15) {
+		mes "[Voice in the Dark]";
+		mes "Your presence is still too loud. Reach ^FF0000Job Level 15^000000 before attempting to conceal yourself completely.";
+		close;
+	}
+
+	// Inicio de la quest
+	if (plat_gnhiding_active == 0) {
+		if (countitem(50002) < 1) {
+			mes "[Voice in the Dark]";
+			mes "If you seek this knowledge, you must present a ^3355FFTraining Recommendation 1^000000. It proves you have permission to learn our secrets.";
+			close;
+		}
+		mes "[Voice in the Dark]";
+		mes "To hide from your enemies, you must first learn from those who do it naturally in the wild.";
+		mes "Travel to the forests and hunt down ^FF000015 Smokies^000000. Observe how they blend with the leaves and vanish from sight.";
+		next;
+		if (select("I shall become the shadow.:I am not ready.") == 1) {
+			set plat_gnhiding_active, 1;
+			set plat_smokie_count, 0;
+			mes "[Voice in the Dark]";
+			mes "Fade into the background. Let them not see the blade that ends them.";
+		}
+		close;
+	}
+
+	// Quest en progreso
+	if (plat_gnhiding_active == 1) {
+		mes "[Voice in the Dark]";
+		mes "You are still visible. What is your progress?";
+		mes "^FF0000" + plat_smokie_count + " / 15 Smokies^000000.";
+		close;
+	}
+
+	// Quest completada (ha matado a los Smokies)
+	if (plat_gnhiding_active == 2) {
+		mes "[Voice in the Dark]";
+		if (countitem(50002) < 1) {
+			mes "You have learned the lesson, but you lost your ^3355FFTraining Recommendation 1^000000. Return when you have the paperwork.";
+			close;
+		}
+		mes "Your breathing is calmer. Your steps make no sound. You have understood the essence of concealment.";
+		next;
+		
+		delitem 50002, 1; // Se elimina el ticket
+		skill "KO_YAMIKUMO", 1, SKILL_PERM; // Otorga la skill
+		set plat_gnhiding_active, 0; // Reseteamos variables
+		set plat_smokie_count, 0;
+		
+		// Otro efecto de humo para celebrar que la aprendió
+		specialeffect 487;
+		
+		mes "[Voice in the Dark]";
+		mes "The darkness welcomes you, Genin. Use ^3355FFShadow Hiding^000000 to vanish from the sight of your enemies and strike when they least expect it.";
+		close;
+	}
+
+// Etiqueta global para detectar cuando el jugador mata un monstruo
+OnNPCKillEvent:
+	if (plat_gnhiding_active == 1) {
+		if (killedrid == 1056) { // ID del Smokie
+			set plat_smokie_count, plat_smokie_count + 1;
+			if (plat_smokie_count >= 15) {
+				dispbottom "You have mastered the Smokie's stealth. Return to the Voice in the Dark.";
+				set plat_gnhiding_active, 2;
+			} else {
+				dispbottom "Smokies hunted: " + plat_smokie_count + " / 15";
+			}
+		}
+	}
+	end;
+}

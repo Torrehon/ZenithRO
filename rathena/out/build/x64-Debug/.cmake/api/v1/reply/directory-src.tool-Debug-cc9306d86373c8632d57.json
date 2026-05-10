@@ -1,0 +1,148 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"src/tool/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 60,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 70,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 75,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Runtime_mapcache",
+			"destination" : ".",
+			"paths" : 
+			[
+				"D:/SERVER_RO/LevitationRO/rathena/mapcache.exe"
+			],
+			"targetId" : "mapcache::@312d1879a87bc0da48b6",
+			"targetIndex" : 9,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Runtime_mapcache",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "mapcache::@312d1879a87bc0da48b6",
+				"index" : 9
+			},
+			"destination" : ".",
+			"type" : "cxxModuleBmi"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Runtime_csv2yaml",
+			"destination" : ".",
+			"paths" : 
+			[
+				"D:/SERVER_RO/LevitationRO/rathena/csv2yaml.exe"
+			],
+			"targetId" : "csv2yaml::@312d1879a87bc0da48b6",
+			"targetIndex" : 5,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Runtime_csv2yaml",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "csv2yaml::@312d1879a87bc0da48b6",
+				"index" : 5
+			},
+			"destination" : ".",
+			"type" : "cxxModuleBmi"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Runtime_yaml2sql",
+			"destination" : ".",
+			"paths" : 
+			[
+				"D:/SERVER_RO/LevitationRO/rathena/yaml2sql.exe"
+			],
+			"targetId" : "yaml2sql::@312d1879a87bc0da48b6",
+			"targetIndex" : 15,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Runtime_yaml2sql",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "yaml2sql::@312d1879a87bc0da48b6",
+				"index" : 15
+			},
+			"destination" : ".",
+			"type" : "cxxModuleBmi"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Runtime_yamlupgrade",
+			"destination" : ".",
+			"paths" : 
+			[
+				"D:/SERVER_RO/LevitationRO/rathena/yamlupgrade.exe"
+			],
+			"targetId" : "yamlupgrade::@312d1879a87bc0da48b6",
+			"targetIndex" : 16,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Runtime_yamlupgrade",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "yamlupgrade::@312d1879a87bc0da48b6",
+				"index" : 16
+			},
+			"destination" : ".",
+			"type" : "cxxModuleBmi"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "src/tool",
+		"source" : "src/tool"
+	}
+}
