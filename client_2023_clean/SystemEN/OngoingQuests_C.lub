@@ -98,10 +98,32 @@ QuestInfoList_C = {
 	[80031] = {
 		Title = "Orichalcum Extraction",
 		Description = {
+			"The Orichalcum vein must be somewhere",
+			"at the northwestern part of the 3rd floor",
 			"Grab an Old Pick from a Skeleton",
-			"Worker, and start mining! "
+			"Worker and start mining!"
 		},
 		Summary = "Mine for Orichalcum.",
 		NpcName = "Orichalcum Vein",
+	},
+	[80032] = {
+		Title = "Mine Spirit's Vengeance",
+		Description = {
+			"Stop the Mine Spirit before it",
+			"makes the mines collapse!"
+		},
+		Summary = "Defeat the Mine Spirit",
+		Hunt1 = "Mine Spirit",
+		NpcName = "Orichalcum Vein",
+	},
+	[80033] = {
+		Title = "Orichalcum Delivery",
+		Description = {
+			"You conquered the mines.",
+			"Go back to Garrick and",
+			"give him the Orichalcum."
+		},
+		Summary = "Talk to Garrick",
+		NpcName = "Garrick the Surveyor",
 	},
 }

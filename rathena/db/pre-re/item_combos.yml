@@ -36,6 +36,297 @@ Header:
 Body:
   - Combos:
       - Combo:
+          - Leather_Jacket
+          - Shoes
+      - Combo:
+          - Leather_Jacket_
+          - Shoes_
+      - Combo:
+          - Leather_Jacket
+          - Shoes_
+      - Combo:
+          - Leather_Jacket_
+          - Shoes
+    Script: |
+      bonus bAgi,1;
+      bonus bAspdRate,1;
+  - Combos:
+      - Combo:
+          - Adventure_Suit
+          - Hood
+          - Sandals
+      - Combo:
+          - Adventurere's_Suit_
+          - Hood_
+          - Sandals_
+      - Combo:
+          - Adventurere's_Suit_
+          - Hood
+          - Sandals
+      - Combo:
+          - Adventurere's_Suit_
+          - Hood_
+          - Sandals
+      - Combo:
+          - Adventure_Suit
+          - Hood_
+          - Sandals
+      - Combo:
+          - Adventure_Suit
+          - Hood_
+          - Sandals_
+      - Combo:
+          - Adventure_Suit
+          - Hood
+          - Sandals_
+      - Combo:
+          - Adventurere's_Suit_
+          - Hood
+          - Sandals_
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,25;
+  - Combos:
+      - Combo:
+          - Mink_Coat
+          - Muffler
+      - Combo:
+          - Mink_Coat
+          - Muffler_
+    Script: |
+      bonus bInt,1;
+      bonus bMatk,15;
+  - Combos:
+      - Combo:
+          - Chain_Mail
+          - Manteau
+          - Boots
+      - Combo:
+          - Chain_Mail_
+          - Manteau_
+          - Boots_
+      - Combo:
+          - Chain_Mail_
+          - Manteau
+          - Boots
+      - Combo:
+          - Chain_Mail_
+          - Manteau_
+          - Boots
+      - Combo:
+          - Chain_Mail
+          - Manteau_
+          - Boots
+      - Combo:
+          - Chain_Mail
+          - Manteau_
+          - Boots_
+      - Combo:
+          - Chain_Mail
+          - Manteau
+          - Boots_
+      - Combo:
+          - Chain_Mail_
+          - Manteau
+          - Boots_
+    Script: |
+      bonus bAtk,10;
+      bonus bMaxHP,500;
+  - Combos:
+      - Combo:
+          - Plate_Armor #Full Plate
+          - Pauldron
+          - Grave #Greaves
+      - Combo:
+          - Plate_Armor_
+          - Pauldron
+          - Grave_
+      - Combo:
+          - Plate_Armor_
+          - Pauldron
+          - Grave
+      - Combo:
+          - Plate_Armor
+          - Pauldron
+          - Grave_
+    Script: |
+      bonus bDef,3;
+      bonus bMaxHPrate,3;
+  - Combos:
+      - Combo:
+          - Scapulare
+          - Rosary
+      - Combo:
+          - Scapulare_
+          - Rosary_
+      - Combo:
+          - Scapulare_
+          - Rosary
+      - Combo:
+          - Scapulare
+          - Rosary_
+    Script: |
+      bonus bHealPower,5;
+  - Combos:
+      - Combo:
+          - Holy_Robe
+          - Bible
+      - Combo:
+          - Holy_Robe_
+          - Bible
+    Script: |
+      bonus2 bSkillAtk,PR_MAGNUS,20;
+      bonus2 bCastrate,PR_MAGNUS,20;
+  - Combos:
+      - Combo:
+          - Tights
+          - Apple_Of_Archer
+      - Combo:
+          - Tights_
+          - Apple_Of_Archer
+    Script: |
+      bonus bDex,1;
+      bonus bLongAtkRate,3;
+  - Combos:
+      - Combo:
+          - Full_Plate_Armor #Legion Plate Armor
+          - Pauldron
+          - Grave #Greaves
+      - Combo:
+          - Full_Plate_Armor_
+          - Pauldron
+          - Grave_
+      - Combo:
+          - Full_Plate_Armor_
+          - Pauldron
+          - Grave
+      - Combo:
+          - Full_Plate_Armor
+          - Pauldron
+          - Grave_
+    Script: |
+      bonus bNoKnockback;
+      bonus bMaxHPrate,5;
+  - Combos:
+      - Combo:
+          - Helm
+          - Iron_Cane
+      - Combo:
+          - Helm_
+          - Iron_Cane
+    Script: |
+      bonus bMaxHP,2;
+  - Combos:
+      - Combo:
+          - Mage_Coat
+          - Cape_Of_Ancient_Lord
+      - Combo:
+          - Mage_Coat_
+          - Cape_Of_Ancient_Lord
+    Script: |
+      if (getskilllv("SA_ADVANCEDBOOK") == 10) {
+         bonus bAspdRate,5;
+         bonus bMatkRate,5;
+      }
+  - Combos:
+      - Combo:
+          - Skul_Ring
+          - Skeleton's_Cape
+      - Combo:
+          - Skul_Ring_
+          - Skeleton's_Cape
+    Script: |
+      bonus2 bMagicAddRace,RC_Undead,10;
+      bonus2 bAddRace,RC_Undead,10; 
+  - Combos:
+      - Combo:
+          - Arm_Guard_
+          - Excalibur
+      - Combo:
+          - Herald_Of_GOD_
+          - Excalibur
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Holy,15;
+  - Combos:
+      - Combo:
+          - Arm_Guard
+          - Asura
+      - Combo:
+          - Arm_Guard_
+          - Asura_
+      - Combo:
+          - Arm_Guard_
+          - Asura
+      - Combo:
+          - Arm_Guard
+          - Asura_
+    Script: |
+      bonus bMatkRate,5;
+  - Combos:
+      - Combo:
+          - Improved_Arm_Guard
+          - Asura
+      - Combo:
+          - Improved_Arm_Guard_
+          - Asura_
+      - Combo:
+          - Improved_Arm_Guard_
+          - Asura
+      - Combo:
+          - Improved_Arm_Guard
+          - Asura_
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Fire,25;
+  - Combos:
+      - Combo:
+          - Improved_Arm_Guard
+          - Kamaitachi
+      - Combo:
+          - Improved_Arm_Guard_
+          - Kamaitachi
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Wind,25;
+  - Combos:
+      - Combo:
+          - Improved_Arm_Guard
+          - Murasame
+      - Combo:
+          - Improved_Arm_Guard_
+          - Murasame_
+      - Combo:
+          - Improved_Arm_Guard_
+          - Murasame
+      - Combo:
+          - Improved_Arm_Guard
+          - Murasame_
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Water,25;
+  - Combos:
+      - Combo:
+          - Nurse_Cap
+          - Healing_Staff
+    Script:
+      bonus bMatk,30;
+  - Combos:
+      - Combo:
+          - Sahkkat
+          - Ninja_Suit
+      - Combo:
+          - Sahkkat
+          - Ninja_Suit_
+    Script: |
+      bonus bAtk,10;
+  - Combos:
+      - Combo:
+          - Sahkkat
+          - Thief_Clothes
+      - Combo:
+          - Sahkkat
+          - Thief_Clothes_
+    Script: |
+      bonus bFlee,10;
+  - Combos:
+      - Combo:
           - Dragon_Slayer
           - Dragon_Breath
       - Combo:
@@ -350,6 +641,7 @@ Body:
     Script: |
       bonus bDef,5;
       bonus bMaxHP,150;
+      bonus bDef2,20;
   - Combos:
       - Combo:
           - Ninja_Suit
@@ -360,6 +652,10 @@ Body:
     Script: |
       bonus bUseSPrate,-20;
       bonus bMaxHP,300;
+      if (Class == Job_Genin) {
+         bonus bLongAtkRate,5;
+         bonus bMatkRate,5;
+        }
   - Combos:
       - Combo:
           - G_Strings
@@ -621,6 +917,10 @@ Body:
           - Rider_Insignia_M
     Script: |
       bonus bFlee,10;
+        if (getskilllv("KN_CAVALIERMASTERY") || getskilllv("RK_DRAGONTRAINING")== 5) {
+       bonus bAtk,20;
+       bonus bAspdRate,3;
+      }
   - Combos:
       - Combo:
           - Diabolus_Boots
@@ -770,97 +1070,22 @@ Body:
       bonus2 bSubRace,RC_Angel,10;
   - Combos:
       - Combo:
+          - Poring_Card
+          - Mastering_Card
+      - Combo:
           - Chonchon_Card
           - Dragon_Fly_Card
-    Script: |
-      bonus bFlee,4;
-      bonus bAspdRate,2;
-  - Combos:
+      - Combo:
+          - Roda_Frog_Card
+          - Toad_Card
+      - Combo:
+          - Rocker_Card
+          - Vocal_Card
       - Combo:
           - Wolf_Card
           - Vagabond_Wolf_Card
     Script: |
-      bonus bAtk,10;
-      bonus bAtkRate,2;
-  - Combos:
-      - Combo:
-          - Poring_Card
-          - Mastering_Card
-    Script: |
-      bonus bCritical,4;
-      bonus bCritAtkRate,10;
-  - Combos:
-      - Combo:
-          - Rocker_Card
-          - Vocal_Card
-    Script: |
-      bonus bLongAtkRate,2;
-      bonus bHit,5;
-  - Combos:
-      - Combo:
-          - Rocker_Card
-          - Rocker_Card
-          - Vocal_Card
-    Script: |
-      bonus bLongAtkRate,4;
-      bonus bHit,10;
-  - Combos:
-      - Combo:
-          - Rocker_Card
-          - Rocker_Card
-          - Rocker_Card
-          - Vocal_Card
-    Script: |
-      bonus bLongAtkRate,6;
-      bonus bHit,15;
-  - Combos:
-      - Combo:
-          - Rocker_Card
-          - Rocker_Card
-          - Rocker_Card
-          - Rocker_Card
-          - Vocal_Card
-    Script: |
-      bonus bLongAtkRate,8;
-      bonus bHit,20;
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,3;
-      bonus bCastrate,-5;
-
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,6;
-      bonus bCastrate,-5;
-
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Lunatic_Card
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,9;
-      bonus bCastrate,-5;
-
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Lunatic_Card
-          - Lunatic_Card
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatk,12;
-      bonus bCastrate,-15;
-
+      bonus bFlee,18;
   - Combos:
       - Combo:
           - Skeleton_Card
@@ -902,7 +1127,7 @@ Body:
       - Combo:
           - Stainer_Card
           - Wander_Man_Card
-          - Thief_Bug_Male_Card
+          - Shinobi_Card
           - Wild_Rose_Card
           - Whikebain_Card
     Script: |
@@ -953,7 +1178,7 @@ Body:
       - Combo:
           - The_Paper_Card
           - Wander_Man_Card
-          - Thief_Bug_Male_Card
+          - Shinobi_Card
           - Wild_Rose_Card
           - Dancing_Dragon_Card
     Script: |
@@ -1240,8 +1465,69 @@ Body:
       bonus2 bSkillAtk,"AL_CRUCIS",25;
   - Combos:
       - Combo:
+          - Chonchon_Card
+          - Dragon_Fly_Card
+    Script: |
+      bonus bFlee,4;
+      bonus bAspdRate,2;
+  - Combos:
+      - Combo:
+          - Wolf_Card
+          - Vagabond_Wolf_Card
+    Script: |
+      bonus bAtk,10;
+      bonus bAtkRate,2;
+  - Combos:
+      - Combo:
+          - Poring_Card
+          - Mastering_Card
+    Script: |
+      bonus bCritical,4;
+      bonus bCritAtkRate,10;
+  - Combos:
+      - Combo:
+          - Rocker_Card
+          - Vocal_Card
+    Script: |
+      bonus bLongAtkRate,2;
+      bonus bHit,5;
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,5;
+      bonus bCastrate,-4;
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,10;
+      bonus bCastrate,-8;
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Lunatic_Card
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,15;
+      bonus bCastrate,-12;
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Lunatic_Card
+          - Lunatic_Card
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,20;
+      bonus bCastrate,-16;
+  - Combos:
+      - Combo:
           - Golem_Card
           - Lava_Golem_Card
     Script: |
       bonus bLongAtkRate,5;
-      
