@@ -2019,7 +2019,10 @@
 	export_constant(SC_PSLOW);
 	export_constant(SC_STAGGER);
 	export_constant(SC_DUELIST);
-
+	export_constant(SC_DROWN);
+    export_constant(SC_ELECTROCUTE);
+	export_constant(SC_BURIED);
+	export_constant(SC_ARCINSIGHT);
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
 	export_constant(EFST_BLANK);
@@ -3501,6 +3504,10 @@
 	export_constant(EFST_PSLOW);
 	export_constant(EFST_STAGGER);
 	export_constant(EFST_DUELIST);
+	export_constant(EFST_DROWN);
+	export_constant(EFST_ELECTROCUTE);
+	export_constant(EFST_BURIED);
+	export_constant(EFST_ARCINSIGHT);
 	export_constant(EFST_MAX);
 
 	/* elements */

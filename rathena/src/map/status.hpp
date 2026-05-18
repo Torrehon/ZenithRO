@@ -1453,6 +1453,10 @@ enum sc_type : int16 {
 	SC_PSLOW,
 	SC_STAGGER,
 	SC_DUELIST,
+	SC_DROWN,
+	SC_ELECTROCUTE,
+	SC_BURIED,
+	SC_ARCINSIGHT,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -2962,6 +2966,10 @@ enum efst_type : int16{
 	EFST_PSLOW = 1704,
 	EFST_STAGGER = 1705,
 	EFST_DUELIST = 1706,
+	EFST_DROWN = 1707,
+	EFST_ELECTROCUTE = 1708,
+	EFST_BURIED = 1709,
+	EFST_ARCINSIGHT = 1710,
 	EFST_MAX,
 };
 
@@ -2995,6 +3003,9 @@ enum e_sc_opt1 : uint16 {
 	OPT1_STONEWAIT = 6, //Petrifying
 	OPT1_BURNING,
 	OPT1_IMPRISON,
+	OPT1_DROWN,
+	OPT1_BURIED,
+	OPT1_ELECTROCUTE,
 	OPT1_MAX
 };
 

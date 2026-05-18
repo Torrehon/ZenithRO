@@ -109,7 +109,10 @@ Body:
       Dancer: true
       Crusader2: true
       Supernovice: true
+      Hiregun: true
       Gunslinger: true
+      Genin: true
+      Ninja: true
       Baby: true
       Baby_Swordman: true
       Baby_Mage: true
@@ -137,8 +140,48 @@ Body:
       Star_Gladiator: true
       Star_Gladiator2: true
       Soul_Linker: true
-      Genin: true
-      Hiregun: true
+      Lord_Knight: true
+      High_Priest: true
+      High_Wizard: true
+      Whitesmith: true
+      Sniper: true
+      Assassin_Cross: true
+      Lord_Knight2: true
+      Paladin: true
+      Champion: true
+      Professor: true
+      Stalker: true
+      Creator: true
+      Clown: true
+      Gypsy: true
+      Paladin2: true
+      Rune_Knight_T: true
+      Warlock_T: true
+      Ranger_T: true
+      Arch_Bishop_T: true
+      Mechanic_T: true
+      Guillotine_Cross_T: true
+      Royal_Guard_T: true
+      Sorcerer_T: true
+      Minstrel_T: true
+      Wanderer_T: true
+      Sura_T: true
+      Genetic_T: true
+      Shadow_Chaser_T: true
+      Rune_Knight2: true
+      Rune_Knight_T2: true
+      Royal_Guard2: true
+      Royal_Guard_T2: true
+      Ranger2: true
+      Ranger_T2: true
+      Mechanic2: true
+      Mechanic_T2: true
+      Kagerou: true
+      Oboro: true
+      Rebellion: true
+      Star_Emperor: true
+      Soul_Reaper: true
+      Star_Emperor2: true
     MaxBaseLevel: 99
     BaseExp:
       - Level: 1
@@ -300,266 +343,43 @@ Body:
       - Level: 79
         Exp: 3206160
       - Level: 80
-        Exp: 3681024
-      - Level: 81
-        Exp: 4022472
-      - Level: 82
-        Exp: 4377024
-      - Level: 83
-        Exp: 4744680
-      - Level: 84
-        Exp: 5125440
-      - Level: 85
-        Exp: 5767272
-      - Level: 86
-        Exp: 6204000
-      - Level: 87
-        Exp: 6655464
-      - Level: 88
-        Exp: 7121664
-      - Level: 89
-        Exp: 7602600
-      - Level: 90
-        Exp: 9738720
-      - Level: 91
-        Exp: 11649960
-      - Level: 92
-        Exp: 13643520
-      - Level: 93
-        Exp: 18339300
-      - Level: 94
-        Exp: 23836800
-      - Level: 95
-        Exp: 35658000
-      - Level: 96
-        Exp: 48687000
-      - Level: 97
-        Exp: 58135000
-      - Level: 98
-        Exp: 99999998
-      - Level: 99
-        Exp: 99999999
-  - Jobs:
-      Novice_High: true
-      Swordman_High: true
-      Mage_High: true
-      Archer_High: true
-      Acolyte_High: true
-      Merchant_High: true
-      Thief_High: true
-      Lord_Knight: true
-      High_Priest: true
-      High_Wizard: true
-      Whitesmith: true
-      Sniper: true
-      Assassin_Cross: true
-      Lord_Knight2: true
-      Paladin: true
-      Champion: true
-      Professor: true
-      Stalker: true
-      Creator: true
-      Clown: true
-      Gypsy: true
-      Paladin2: true
-    MaxBaseLevel: 99
-    BaseExp:
-      - Level: 1
-        Exp: 10
-      - Level: 2
-        Exp: 18
-      - Level: 3
-        Exp: 28
-      - Level: 4
-        Exp: 40
-      - Level: 5
-        Exp: 85
-      - Level: 6
-        Exp: 123
-      - Level: 7
-        Exp: 168
-      - Level: 8
-        Exp: 220
-      - Level: 9
-        Exp: 278
-      - Level: 10
-        Exp: 400
-      - Level: 11
-        Exp: 481
-      - Level: 12
-        Exp: 613
-      - Level: 13
-        Exp: 731
-      - Level: 14
-        Exp: 875
-      - Level: 15
-        Exp: 1038
-      - Level: 16
-        Exp: 1213
-      - Level: 17
-        Exp: 1400
-      - Level: 18
-        Exp: 1575
-      - Level: 19
-        Exp: 1775
-      - Level: 20
-        Exp: 2268
-      - Level: 21
-        Exp: 2604
-      - Level: 22
-        Exp: 2786
-      - Level: 23
-        Exp: 3136
-      - Level: 24
-        Exp: 3506
-      - Level: 25
-        Exp: 4130
-      - Level: 26
-        Exp: 4796
-      - Level: 27
-        Exp: 5508
-      - Level: 28
-        Exp: 6264
-      - Level: 29
-        Exp: 9645
-      - Level: 30
-        Exp: 12392
-      - Level: 31
-        Exp: 14220
-      - Level: 32
-        Exp: 16159
-      - Level: 33
-        Exp: 18209
-      - Level: 34
-        Exp: 21649
-      - Level: 35
-        Exp: 24451
-      - Level: 36
-        Exp: 27401
-      - Level: 37
-        Exp: 30499
-      - Level: 38
-        Exp: 33748
-      - Level: 39
-        Exp: 47342
-      - Level: 40
-        Exp: 58160
-      - Level: 41
-        Exp: 64711
-      - Level: 42
-        Exp: 71573
-      - Level: 43
-        Exp: 78749
-      - Level: 44
-        Exp: 90144
-      - Level: 45
-        Exp: 99312
-      - Level: 46
-        Exp: 108870
-      - Level: 47
-        Exp: 118816
-      - Level: 48
-        Exp: 129154
-      - Level: 49
-        Exp: 174196
-      - Level: 50
-        Exp: 213220
-      - Level: 51
-        Exp: 238080
-      - Level: 52
-        Exp: 264150
-      - Level: 53
-        Exp: 291427
-      - Level: 54
-        Exp: 329640
-      - Level: 55
-        Exp: 363155
-      - Level: 56
-        Exp: 398116
-      - Level: 57
-        Exp: 434526
-      - Level: 58
-        Exp: 472381
-      - Level: 59
-        Exp: 610848
-      - Level: 60
-        Exp: 731828
-      - Level: 61
-        Exp: 806448
-      - Level: 62
-        Exp: 884232
-      - Level: 63
-        Exp: 965180
-      - Level: 64
-        Exp: 1073896
-      - Level: 65
-        Exp: 1170382
-      - Level: 66
-        Exp: 1270556
-      - Level: 67
-        Exp: 1374422
-      - Level: 68
-        Exp: 1481976
-      - Level: 69
-        Exp: 1850800
-      - Level: 70
-        Exp: 3389616
-      - Level: 71
-        Exp: 3666333
-      - Level: 72
-        Exp: 3953534
-      - Level: 73
-        Exp: 4251217
-      - Level: 74
-        Exp: 4559382
-      - Level: 75
-        Exp: 5129260
-      - Level: 76
-        Exp: 5488173
-      - Level: 77
-        Exp: 5859059
-      - Level: 78
-        Exp: 6241919
-      - Level: 79
-        Exp: 7374168
-      - Level: 80
         Exp: 9570662
       - Level: 81
-        Exp: 10458427
+        Exp: 10723869
       - Level: 82
-        Exp: 11380262
+        Exp: 11957905
       - Level: 83
-        Exp: 12336168
+        Exp: 13275330
       - Level: 84
-        Exp: 13326144
+        Exp: 14678950
       - Level: 85
-        Exp: 14994907
+        Exp: 16897734
       - Level: 86
-        Exp: 16130400
+        Exp: 18586685
       - Level: 87
-        Exp: 17304206
+        Exp: 20378411
       - Level: 88
-        Exp: 18516326
+        Exp: 22275825
       - Level: 89
-        Exp: 19766760
+        Exp: 24281813
       - Level: 90
-        Exp: 29216160
+        Exp: 36631109
       - Level: 91
-        Exp: 34949880
+        Exp: 44706852
       - Level: 92
-        Exp: 40930560
+        Exp: 53396200
       - Level: 93
-        Exp: 55017900
+        Exp: 73170295
       - Level: 94
-        Exp: 71510400
+        Exp: 96919133
       - Level: 95
-        Exp: 106974000
+        Exp: 147698505
       - Level: 96
-        Exp: 146061000
+        Exp: 205372861
       - Level: 97
-        Exp: 174405000
+        Exp: 249652750
       - Level: 98
-        Exp: 343210000
+        Exp: 500000000
       - Level: 99
         Exp: 99999999
   - Jobs:
@@ -601,8 +421,8 @@ Body:
       Baby_Merchant: true
       Baby_Thief: true
       Taekwon: true
-      Genin: true
       Hiregun: true
+      Genin: true
     MaxJobLevel: 50
     JobExp:
       - Level: 1
@@ -666,45 +486,45 @@ Body:
       - Level: 30
         Exp: 28359
       - Level: 31
-        Exp: 36478
+        Exp: 30769
       - Level: 32
-        Exp: 39716
+        Exp: 33384
       - Level: 33
-        Exp: 43088
+        Exp: 36222
       - Level: 34
-        Exp: 52417
+        Exp: 39301
       - Level: 35
-        Exp: 62495
+        Exp: 42642
       - Level: 36
-        Exp: 78160
+        Exp: 46266
       - Level: 37
-        Exp: 84175
+        Exp: 50199
       - Level: 38
-        Exp: 90404
+        Exp: 54466
       - Level: 39
-        Exp: 107611
+        Exp: 59096
       - Level: 40
-        Exp: 125915
+        Exp: 64119
       - Level: 41
-        Exp: 153941
+        Exp: 69569
       - Level: 42
-        Exp: 191781
+        Exp: 75482
       - Level: 43
-        Exp: 204351
+        Exp: 771898
       - Level: 44
-        Exp: 248352
+        Exp: 81860
       - Level: 45
-        Exp: 286212
+        Exp: 83413
       - Level: 46
-        Exp: 386371
+        Exp: 88608
       - Level: 47
-        Exp: 409795
+        Exp: 93500
       - Level: 48
-        Exp: 482092
+        Exp: 103147
       - Level: 49
-        Exp: 509596
+        Exp: 113615
       - Level: 50
-        Exp: 999999999
+        Exp: 99999999
   - Jobs:
       Knight: true
       Priest: true
@@ -737,6 +557,9 @@ Body:
       Baby_Dancer: true
       Baby_Crusader2: true
       Soul_Linker: true
+      Star_Gladiator: true
+      Star_Gladiator2: true
+      Gunslinger: true
       Ninja: true
     MaxJobLevel: 50
     JobExp:
@@ -841,139 +664,6 @@ Body:
       - Level: 50
         Exp: 999999999
   - Jobs:
-      Novice_High: true
-    MaxJobLevel: 10
-    JobExp:
-      - Level: 1
-        Exp: 11
-      - Level: 2
-        Exp: 20
-      - Level: 3
-        Exp: 31
-      - Level: 4
-        Exp: 44
-      - Level: 5
-        Exp: 100
-      - Level: 6
-        Exp: 166
-      - Level: 7
-        Exp: 226
-      - Level: 8
-        Exp: 295
-      - Level: 9
-        Exp: 374
-      - Level: 10
-        Exp: 999999999
-  - Jobs:
-      Swordman_High: true
-      Mage_High: true
-      Archer_High: true
-      Acolyte_High: true
-      Merchant_High: true
-      Thief_High: true
-    MaxJobLevel: 50
-    JobExp:
-      - Level: 1
-        Exp: 60
-      - Level: 2
-        Exp: 86
-      - Level: 3
-        Exp: 116
-      - Level: 4
-        Exp: 152
-      - Level: 5
-        Exp: 232
-      - Level: 6
-        Exp: 360
-      - Level: 7
-        Exp: 440
-      - Level: 8
-        Exp: 544
-      - Level: 9
-        Exp: 672
-      - Level: 10
-        Exp: 1040
-      - Level: 11
-        Exp: 1208
-      - Level: 12
-        Exp: 1398
-      - Level: 13
-        Exp: 1604
-      - Level: 14
-        Exp: 1896
-      - Level: 15
-        Exp: 2250
-      - Level: 16
-        Exp: 3336
-      - Level: 17
-        Exp: 3874
-      - Level: 18
-        Exp: 4452
-      - Level: 19
-        Exp: 6080
-      - Level: 20
-        Exp: 7976
-      - Level: 21
-        Exp: 11128
-      - Level: 22
-        Exp: 12544
-      - Level: 23
-        Exp: 14042
-      - Level: 24
-        Exp: 18228
-      - Level: 25
-        Exp: 28683
-      - Level: 26
-        Exp: 38225
-      - Level: 27
-        Exp: 42228
-      - Level: 28
-        Exp: 46425
-      - Level: 29
-        Exp: 58073
-      - Level: 30
-        Exp: 70898
-      - Level: 31
-        Exp: 91195
-      - Level: 32
-        Exp: 99290
-      - Level: 33
-        Exp: 107720
-      - Level: 34
-        Exp: 131043
-      - Level: 35
-        Exp: 156238
-      - Level: 36
-        Exp: 195400
-      - Level: 37
-        Exp: 210438
-      - Level: 38
-        Exp: 226010
-      - Level: 39
-        Exp: 269028
-      - Level: 40
-        Exp: 314788
-      - Level: 41
-        Exp: 384853
-      - Level: 42
-        Exp: 479453
-      - Level: 43
-        Exp: 510878
-      - Level: 44
-        Exp: 620880
-      - Level: 45
-        Exp: 715530
-      - Level: 46
-        Exp: 965928
-      - Level: 47
-        Exp: 1024488
-      - Level: 48
-        Exp: 1205230
-      - Level: 49
-        Exp: 1273990
-      - Level: 50
-        Exp: 999999999
-  - Jobs:
       Lord_Knight: true
       High_Priest: true
       High_Wizard: true
@@ -989,7 +679,34 @@ Body:
       Clown: true
       Gypsy: true
       Paladin2: true
-    MaxJobLevel: 70
+      Rune_Knight_T: true
+      Warlock_T: true
+      Ranger_T: true
+      Arch_Bishop_T: true
+      Mechanic_T: true
+      Guillotine_Cross_T: true
+      Royal_Guard_T: true
+      Sorcerer_T: true
+      Minstrel_T: true
+      Wanderer_T: true
+      Sura_T: true
+      Genetic_T: true
+      Shadow_Chaser_T: true
+      Rune_Knight2: true
+      Rune_Knight_T2: true
+      Royal_Guard2: true
+      Royal_Guard_T2: true
+      Ranger2: true
+      Ranger_T2: true
+      Mechanic2: true
+      Mechanic_T2: true
+      Kagerou: true
+      Oboro: true
+      Rebellion: true
+      Star_Emperor: true
+      Soul_Reaper: true
+      Star_Emperor2: true
+    MaxJobLevel: 50
     JobExp:
       - Level: 1
         Exp: 288
@@ -1052,295 +769,45 @@ Body:
       - Level: 30
         Exp: 479053
       - Level: 31
-        Exp: 513362
+        Exp: 600000
       - Level: 32
-        Exp: 548856
+        Exp: 991854
       - Level: 33
-        Exp: 656197
+        Exp: 1654617
       - Level: 34
-        Exp: 787507
+        Exp: 2588287
       - Level: 35
-        Exp: 927154
+        Exp: 3792864
       - Level: 36
-        Exp: 985696
+        Exp: 5268350
       - Level: 37
-        Exp: 1046034
+        Exp: 7014743
       - Level: 38
-        Exp: 1231134
+        Exp: 9032043
       - Level: 39
-        Exp: 1449220
+        Exp: 11320252
       - Level: 40
-        Exp: 1678177
+        Exp: 13879368
       - Level: 41
-        Exp: 1773024
+        Exp: 16709392
       - Level: 42
-        Exp: 2182221
+        Exp: 19810323
       - Level: 43
-        Exp: 2534978
+        Exp: 23182162
       - Level: 44
-        Exp: 3043585
+        Exp: 26824909
       - Level: 45
-        Exp: 3782865
+        Exp: 30738563
       - Level: 46
-        Exp: 4461912
+        Exp: 34923125
       - Level: 47
-        Exp: 4672971
+        Exp: 39378595
       - Level: 48
-        Exp: 5971896
+        Exp: 44104972
       - Level: 49
-        Exp: 6250158
+        Exp: 49102258
       - Level: 50
-        Exp: 6875174
-      - Level: 51
-        Exp: 7562691
-      - Level: 52
-        Exp: 8318960
-      - Level: 53
-        Exp: 9150856
-      - Level: 54
-        Exp: 10065942
-      - Level: 55
-        Exp: 11877812
-      - Level: 56
-        Exp: 14015818
-      - Level: 57
-        Exp: 16538665
-      - Level: 58
-        Exp: 19515624
-      - Level: 59
-        Exp: 23028437
-      - Level: 60
-        Exp: 28094693
-      - Level: 61
-        Exp: 34275525
-      - Level: 62
-        Exp: 41816141
-      - Level: 63
-        Exp: 51015692
-      - Level: 64
-        Exp: 62239144
-      - Level: 65
-        Exp: 79666104
-      - Level: 66
-        Exp: 101972614
-      - Level: 67
-        Exp: 130524946
-      - Level: 68
-        Exp: 167071930
-      - Level: 69
-        Exp: 213852071
-      - Level: 70
-        Exp: 999999999
-  - Jobs:
-      Gunslinger: true
-      Ninja: true
-    MaxJobLevel: 50
-    JobExp:
-      - Level: 1
-        Exp: 30
-      - Level: 2
-        Exp: 43
-      - Level: 3
-        Exp: 58
-      - Level: 4
-        Exp: 76
-      - Level: 5
-        Exp: 116
-      - Level: 6
-        Exp: 180
-      - Level: 7
-        Exp: 220
-      - Level: 8
-        Exp: 272
-      - Level: 9
-        Exp: 336
-      - Level: 10
-        Exp: 520
-      - Level: 11
-        Exp: 604
-      - Level: 12
-        Exp: 699
-      - Level: 13
-        Exp: 802
-      - Level: 14
-        Exp: 948
-      - Level: 15
-        Exp: 1125
-      - Level: 16
-        Exp: 1668
-      - Level: 17
-        Exp: 1937
-      - Level: 18
-        Exp: 2226
-      - Level: 19
-        Exp: 3040
-      - Level: 20
-        Exp: 3988
-      - Level: 21
-        Exp: 5564
-      - Level: 22
-        Exp: 6272
-      - Level: 23
-        Exp: 7021
-      - Level: 24
-        Exp: 9114
-      - Level: 25
-        Exp: 11473
-      - Level: 26
-        Exp: 15290
-      - Level: 27
-        Exp: 16891
-      - Level: 28
-        Exp: 18570
-      - Level: 29
-        Exp: 23229
-      - Level: 30
-        Exp: 28359
-      - Level: 31
-        Exp: 36478
-      - Level: 32
-        Exp: 39716
-      - Level: 33
-        Exp: 43088
-      - Level: 34
-        Exp: 52417
-      - Level: 35
-        Exp: 62495
-      - Level: 36
-        Exp: 78160
-      - Level: 37
-        Exp: 84175
-      - Level: 38
-        Exp: 90404
-      - Level: 39
-        Exp: 107611
-      - Level: 40
-        Exp: 125915
-      - Level: 41
-        Exp: 153941
-      - Level: 42
-        Exp: 191781
-      - Level: 43
-        Exp: 204351
-      - Level: 44
-        Exp: 248352
-      - Level: 45
-        Exp: 286212
-      - Level: 46
-        Exp: 386371
-      - Level: 47
-        Exp: 409795
-      - Level: 48
-        Exp: 482092
-      - Level: 49
-        Exp: 509596
-      - Level: 50
-        Exp: 999999999
-  - Jobs:
-      Star_Gladiator: true
-      Star_Gladiator2: true
-    MaxJobLevel: 50
-    JobExp:
-      - Level: 1
-        Exp: 27434
-      - Level: 2
-        Exp: 27434
-      - Level: 3
-        Exp: 27434
-      - Level: 4
-        Exp: 27434
-      - Level: 5
-        Exp: 27434
-      - Level: 6
-        Exp: 27434
-      - Level: 7
-        Exp: 27434
-      - Level: 8
-        Exp: 27434
-      - Level: 9
-        Exp: 27434
-      - Level: 10
-        Exp: 27434
-      - Level: 11
-        Exp: 27434
-      - Level: 12
-        Exp: 27434
-      - Level: 13
-        Exp: 27434
-      - Level: 14
-        Exp: 27434
-      - Level: 15
-        Exp: 27434
-      - Level: 16
-        Exp: 27434
-      - Level: 17
-        Exp: 27434
-      - Level: 18
-        Exp: 27434
-      - Level: 19
-        Exp: 54868
-      - Level: 20
-        Exp: 70216
-      - Level: 21
-        Exp: 77154
-      - Level: 22
-        Exp: 84412
-      - Level: 23
-        Exp: 105416
-      - Level: 24
-        Exp: 133924
-      - Level: 25
-        Exp: 165376
-      - Level: 26
-        Exp: 179008
-      - Level: 27
-        Exp: 193338
-      - Level: 28
-        Exp: 235642
-      - Level: 29
-        Exp: 289842
-      - Level: 30
-        Exp: 348402
-      - Level: 31
-        Exp: 373354
-      - Level: 32
-        Exp: 399168
-      - Level: 33
-        Exp: 477234
-      - Level: 34
-        Exp: 572732
-      - Level: 35
-        Exp: 674294
-      - Level: 36
-        Exp: 716870
-      - Level: 37
-        Exp: 760752
-      - Level: 38
-        Exp: 895370
-      - Level: 39
-        Exp: 1053978
-      - Level: 40
-        Exp: 1220492
-      - Level: 41
-        Exp: 1289472
-      - Level: 42
-        Exp: 1587070
-      - Level: 43
-        Exp: 1843620
-      - Level: 44
-        Exp: 2213516
-      - Level: 45
-        Exp: 2521910
-      - Level: 46
-        Exp: 2974608
-      - Level: 47
-        Exp: 3115314
-      - Level: 48
-        Exp: 3981264
-      - Level: 49
-        Exp: 5166772
-      - Level: 50
-        Exp: 999999999
+        Exp: 99999999
   - Jobs:
       Supernovice: true
       Super_Baby: true

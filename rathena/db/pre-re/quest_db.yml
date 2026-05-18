@@ -7121,3 +7121,19 @@ Body:
     Targets:
       - Mob: QUEST_BOSS_WEAVER
         Count: 1
+  - Id: 80030
+    Title: Coal Mines Culling
+    Targets:
+      - Mob: SKEL_WORKER
+        Count: 20
+      - Mob: MYST
+        Count: 15  
+  - Id: 80031
+    Title: Orichalcum Extraction
+  - Id: 80032
+    Title: Mine Spirit's Vengeance
+    Targets:
+      - Mob: JEWEL
+        Count: 1
+  - Id: 80033
+    Title: Orichalcum Delivery

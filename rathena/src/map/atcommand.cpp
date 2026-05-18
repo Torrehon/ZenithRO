@@ -8176,8 +8176,6 @@ ACMD_FUNC(mobinfo)
 						bool is_hat = (id->type == IT_ARMOR && (id->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
 						if (is_hat) {
 							if (droprate < 75) droprate = 75; // Suelo 0.75%
-						} else {
-							if (droprate < 150) droprate = 150; // Suelo 1.50%
 						}
 					}
 				} 
@@ -8192,6 +8190,22 @@ ACMD_FUNC(mobinfo)
 				} else {
 					// Objetos que no son equipo ni cartas (Etc, Pociones) usan el cálculo normal del server
 					droprate = mob_getdroprate(sd, mob, entry->rate, drop_modifier);
+				    
+					// Ajuste para Materiales de Forja y Refinamiento
+					if (id->nameid == 984 || id->nameid == 985) { // Oridecon y Elunium
+						if (droprate < 750) {
+							droprate = 750;
+						} else if (droprate >= 750 && droprate < 1500) {
+							droprate = 1500;
+						}
+					}
+					else if (id->nameid == 756 || id->nameid == 757) { // Rough Oridecon y Rough Elunium
+						if (droprate < 1250) {
+							droprate = 1250;
+						} else if (droprate >= 1250 && droprate < 2500) {
+							droprate = 2500;
+						}
+					}
 				}
 				// --- FIN DICTADURA ABSOLUTA ---
 

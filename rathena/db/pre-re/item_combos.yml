@@ -770,25 +770,97 @@ Body:
       bonus2 bSubRace,RC_Angel,10;
   - Combos:
       - Combo:
-          - Poring_Card
-          - Mastering_Card
-      - Combo:
-          - Lunatic_Card
-          - Eclipse_Card
-      - Combo:
           - Chonchon_Card
           - Dragon_Fly_Card
-      - Combo:
-          - Roda_Frog_Card
-          - Toad_Card
-      - Combo:
-          - Rocker_Card
-          - Vocal_Card
+    Script: |
+      bonus bFlee,4;
+      bonus bAspdRate,2;
+  - Combos:
       - Combo:
           - Wolf_Card
           - Vagabond_Wolf_Card
     Script: |
-      bonus bFlee,18;
+      bonus bAtk,10;
+      bonus bAtkRate,2;
+  - Combos:
+      - Combo:
+          - Poring_Card
+          - Mastering_Card
+    Script: |
+      bonus bCritical,4;
+      bonus bCritAtkRate,10;
+  - Combos:
+      - Combo:
+          - Rocker_Card
+          - Vocal_Card
+    Script: |
+      bonus bLongAtkRate,2;
+      bonus bHit,5;
+  - Combos:
+      - Combo:
+          - Rocker_Card
+          - Rocker_Card
+          - Vocal_Card
+    Script: |
+      bonus bLongAtkRate,4;
+      bonus bHit,10;
+  - Combos:
+      - Combo:
+          - Rocker_Card
+          - Rocker_Card
+          - Rocker_Card
+          - Vocal_Card
+    Script: |
+      bonus bLongAtkRate,6;
+      bonus bHit,15;
+  - Combos:
+      - Combo:
+          - Rocker_Card
+          - Rocker_Card
+          - Rocker_Card
+          - Rocker_Card
+          - Vocal_Card
+    Script: |
+      bonus bLongAtkRate,8;
+      bonus bHit,20;
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,3;
+      bonus bCastrate,-5;
+
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,6;
+      bonus bCastrate,-5;
+
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Lunatic_Card
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatkRate,9;
+      bonus bCastrate,-5;
+
+  - Combos:
+      - Combo:
+          - Lunatic_Card
+          - Lunatic_Card
+          - Lunatic_Card
+          - Lunatic_Card
+          - Eclipse_Card
+    Script: |
+      bonus bMatk,12;
+      bonus bCastrate,-15;
+
   - Combos:
       - Combo:
           - Skeleton_Card
@@ -830,7 +902,7 @@ Body:
       - Combo:
           - Stainer_Card
           - Wander_Man_Card
-          - Shinobi_Card
+          - Thief_Bug_Male_Card
           - Wild_Rose_Card
           - Whikebain_Card
     Script: |
@@ -881,7 +953,7 @@ Body:
       - Combo:
           - The_Paper_Card
           - Wander_Man_Card
-          - Shinobi_Card
+          - Thief_Bug_Male_Card
           - Wild_Rose_Card
           - Dancing_Dragon_Card
     Script: |
@@ -1166,3 +1238,10 @@ Body:
       bonus2 bSPGainRace,RC_Undead,1;
       bonus2 bExpAddRace,RC_Undead,10;
       bonus2 bSkillAtk,"AL_CRUCIS",25;
+  - Combos:
+      - Combo:
+          - Golem_Card
+          - Lava_Golem_Card
+    Script: |
+      bonus bLongAtkRate,5;
+      

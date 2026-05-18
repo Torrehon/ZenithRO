@@ -6,6 +6,20 @@ SKILL_EFFECT_INFO_LIST = {
         targetEffectID = { 1223, 1000, 379 },
         onTarget = true
     },
+      [SKID.WZ_FROSTNOVA] = {
+		beginMotionType = ACTOR_STATE.ST_BEGIN_SKILL,
+		beginEffectID = 12,
+		targetEffectNum = 2,
+        targetEffectID = { 28, 135 },
+        onTarget = true
+    },
+	  [SKID.WZ_WATERBALL] = {
+		beginMotionType = ACTOR_STATE.ST_BEGIN_SKILL,
+		beginEffectID = 12,
+		targetEffectNum = 3,
+        targetEffectID = { 2023, 1020, 109 },
+        onTarget = true
+    },
 	[SKID.KO_JYUMONJIKIRI] = {
 		beginMotionType = ACTOR_STATE.ST_ATTACK2,
 		waveFileName = "effect\\cru_holy cross.wav",

@@ -42020,10 +42020,10 @@ tbl = {
 		identifiedDisplayName = "Poring Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Luk +2",
-			"Perfect Dodge +1",
+			"Luk +1",
+			"Crit +2",
 			"Class:^6666CC Card^000000",
-			"Compound on:^00CC33 Armor^000000",
+			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -42041,7 +42041,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Vit +1",
-			"MaxHP +100",
+			"Vit Def +10",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -42118,9 +42118,8 @@ tbl = {
 		identifiedDisplayName = "Lunatic Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Luk +1",
-			"Critical +1",
-			"Perfect Dodge +1",
+			"Matk +3",
+			"Matk +1 per Refine",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -42181,7 +42180,7 @@ tbl = {
 			"Agi +1",
 			"Flee +2",
 			"Class:^6666CC Card^000000",
-			"Compound on:^999900 Footgear^000000",
+			"Compound on:^999900 Weapon^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -42238,6 +42237,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"MaxHP +400",
+			"Vit Def + 15",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -42275,10 +42275,10 @@ tbl = {
 		identifiedDisplayName = "Roda Frog Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"MaxHP +400",
-			"MaxSP +50",
+			"MaxHP +120",
+			"MaxSP +15",
 			"Class:^6666CC Card^000000",
-			"Compound on:^00CC33 Armor^000000",
+			"Compound on:^00CC33 Weapon^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -42373,7 +42373,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Str +1",
-			"Atk +3",
+			"Atk +1 per Refine",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -42413,9 +42413,9 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Dex +1",
-			"Atk +5",
+			"Atk +1 per Refine",
 			"Class:^6666CC Card^000000",
-			"Compound on:^00CC33 Armor^000000",
+			"Compound on:^00CC33 Weapon^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -42452,6 +42452,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Int +1",
+			"Matk +10",
 			"Class:^6666CC Card^000000",
 			"Compound on:^00CC33 Armor^000000",
 			"Weight:^009900 1^000000"
@@ -42511,7 +42512,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Agi +1",
-			"Flee +1",
+			"Aspd +2% if Refine is over +8",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -42569,7 +42570,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Atk +15",
-			"Critical +1",
+			"Str +1",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -42627,6 +42628,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Def +2",
+			"Vit Def +3 per Refine",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -42646,6 +42648,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Enables use of Level 1 ^008800Detoxify^000000.",
+			"Envenom deals 15% more damage",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -42757,6 +42760,8 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Increases natural HP regeneration by 20%.",
+			"Vit +1",
+			"Vit Def +5",
 			"Class:^6666CC Card^000000",
 			"Compound on:^999900 Footgear^000000",
 			"Weight:^009900 1^000000"
@@ -42780,7 +42785,7 @@ tbl = {
 			"[^6666CCRogue Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Stainer Card^000000",
 			"^008800Wickebine Tres Card^000000",
 			"Str +6",
@@ -42847,8 +42852,8 @@ tbl = {
 		identifiedDisplayName = "Steel Chonchon Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Def +2",
-			"Reduces damage taken from ^33CC00Wind^000000 elemental attacks by 10%.",
+			"Int +1",
+			"Wind magical attack +8%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^00CC33 Armor^000000",
 			"Weight:^009900 1^000000"
@@ -43002,6 +43007,37 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Agi +2",
+			"Aspd +2%",
+			"^FFFFFF_^000000",
+			"[^6666CCThief Card Set^000000]",
+			"^008800Wanderer Card^000000",
+			"^008800Wild Rose Card^000000",
+			"^008800Male Thief Bug Card^000000",
+			"^008800Zhu Po Long Card^000000",
+			"^008800The Paper Card^000000",
+			"Agi +5",
+			"Str +5",
+			"Increase attack speed and movement speed by 5%.",
+			"Recover SP by 1 on each attack.",
+			"Disable the Auto-Intimidate ability of the Wanderer Card",
+			"Thief Class Bonus:",
+			"No Gemstones required to use certain skills.",
+			"^FFFFFF_^000000",
+			"[^6666CCRogue Card Set^000000]",
+			"^008800Wanderer Card^000000",
+			"^008800Wild Rose Card^000000",
+			"^008800Male Thief Bug Card^000000",
+			"^008800Stainer Card^000000",
+			"^008800Wickebine Tres Card^000000",
+			"Str +6",
+			"Agi +4",
+			"Backstab Damage +10%",
+			"A chance of auto casting ^008800Level 5 Strip Armor^000000 if ^008800Level 5 Strip Armor^000000 is learned.",
+			"^FFFFFF_^000000",
+			"[^6666CCRogue class^000000]",
+			"-20% SP Consumption",
+			"Disables the Auto-Intimidate ability of the Wanderer Card.",
+			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
 			"Compound on:^999900 Footgear^000000",
 			"Weight:^009900 1^000000"
@@ -43158,7 +43194,7 @@ tbl = {
 		identifiedDisplayName = "Thara Frog Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCDemihuman^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCDemihuman^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -43216,6 +43252,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Def +1",
+			"Vit Def +10",
 			"Make an Armor indestructible in battle.",
 			"Armor can still be destroyed during upgrade attempts.",
 			"Class:^6666CC Card^000000",
@@ -43312,7 +43349,7 @@ tbl = {
 		identifiedDisplayName = "Orc Warrior Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCBrute^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCBrute^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -43429,11 +43466,10 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Atk +5",
-			"Make a weapon indestructible in battle.",
-			"Weapon can still be destroyed during upgrade attempts.",
+			"Adds this card weight to the equipment weight",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
-			"Weight:^009900 1^000000"
+			"Weight:^009900 30^000000"
 		},
 		slotCount = 0,
 		ClassNum = 0,
@@ -43449,7 +43485,8 @@ tbl = {
 		identifiedDisplayName = "Pirate Skel Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Enables Level 5 ^008800Discount^000000.",
+			"Atk +10",
+			"If ^008800Lightfingers^000000 is mastered, adds 3 Crit and 1% Aspd",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -43468,7 +43505,7 @@ tbl = {
 		identifiedDisplayName = "Bigfoot Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCInsect^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCInsect^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -43547,6 +43584,8 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Vit +3",
+			"Hp +400",
+			"Vit Def +10",
 			"Class:^6666CC Card^000000",
 			"Compound on:^00CC33 Armor^000000",
 			"Weight:^009900 1^000000"
@@ -43643,7 +43682,7 @@ tbl = {
 		identifiedDisplayName = "Rafflesia Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCFish^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCFish^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -44374,7 +44413,7 @@ tbl = {
 		identifiedDisplayName = "Sky Petite Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCDragon^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCDragon^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -44684,7 +44723,7 @@ tbl = {
 		identifiedDisplayName = "Khalitzburg Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCDemon^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCDemon^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -44722,7 +44761,7 @@ tbl = {
 		identifiedDisplayName = "Anubis Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Reduces damage taken from ^6666CCAngel^000000 monsters by 30%.",
+			"Reduces damage taken from ^6666CCAngel^000000 monsters by 20%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -44742,6 +44781,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Enables use of Level 1 ^008800Steal^000000.",
+			"Enables Level 2 passive skill ^008800Lightfingers^000000.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -44935,7 +44975,9 @@ tbl = {
 		identifiedDisplayName = "Gargoyle Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Randomly a defeated ^6666CCInsect^000000 monster will drop ^6666CCBox of Thunder^000000.",
+			"Dex +1",
+			"If a Bow weapon is equipped",
+            "Ranged damage +3%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -44993,8 +45035,8 @@ tbl = {
 		identifiedDisplayName = "Galapago Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Apple Juice^000000, ^008800Banana Juice^000000 and ^008800Carrot Juice^000000 each time an Insect monster is killed.",
-			"Juice item restores 50% more HP.",
+			"Add the chance of gaining ^008800Apple Juice^000000, ^008800Banana Juice^000000, ^008800Grape Juice^000000 and ^008800Carrot Juice^000000 each time a monster is killed.",
+			"Juice item restores 100% more HP.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -45013,15 +45055,13 @@ tbl = {
 		identifiedDisplayName = "Crab Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Atk +5",
-			"Inflict 30% more physical damage on ^6666CCAster^000000.",
+			"Water magic damage +5%",
 			"^FFFFFF_^000000",
-			"[^6666CCBeach Card set^000000]",
+			"[^6666CCHydromancer Card set^000000]",
 			"^008800Shell Fish Card^000000",
 			"^008800Crab Card^000000",
 			"^008800Aster Card^000000",
-			"Increases physical damage inflicted on ^0000BBWater^000000 elemental monsters by 30%.",
-			"Randomly a defeated ^6666CCFish^000000 monster will drop ^6666CCRaw Fish^000000.",
+			"Increases damage inflicted with ^0000BBWater Ball^000000 by 10%.",
 			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
@@ -45141,7 +45181,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Agi +2",
-			"Add Flee +20 if the garment is upgraded up to +9 or higher.",
+			"Add Flee +20 if the garment is upgraded up to +8 or higher.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^008C99 Garment^000000",
 			"Weight:^009900 1^000000"
@@ -45161,7 +45201,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Str +2",
-			"MaxHP and MaxSP +10% if the Footgear is upgraded up to +9 or higher.",
+			"MaxHP and MaxSP +10% if the Footgear is upgraded up to +8 or higher.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^999900 Footgear^000000",
 			"Weight:^009900 1^000000"
@@ -45180,6 +45220,7 @@ tbl = {
 		identifiedDisplayName = "Grand Peco Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
+			"Mdef +3";
 			"Add the chance of auto casting ^008800Level 1 Gloria^000000 on the user when receiving Physical Damage.",
 			"Def +3 and VIT +3 if the user is equipped with an item compounded to the ^008800Peco Peco card^000000.",
 			"Class:^6666CC Card^000000",
@@ -45412,7 +45453,7 @@ tbl = {
 			"[^6666CCThief Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Zhu Po Long Card^000000",
 			"^008800The Paper Card^000000",
 			"Agi +5",
@@ -45481,6 +45522,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Add the chance of auto casting ^008800Level 1 Envenom^000000 on an enemy when the user inflicts Physical Damage.",
+			"If the skill is mastered, it will cast ^008800Level 10 Envenom^000000 instead.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -45519,8 +45561,8 @@ tbl = {
 		identifiedDisplayName = "Dryad Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Green Live^000000 item each time a ^6666CCPlant^000000 monster is killed.",
-			"Add 10% more tolerance against ^CC5500Earth^000000 elemental attack.",
+			"Int +1",
+			"Increases earth magic damage by 10%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6600FF Headgear^000000",
 			"Weight:^009900 1^000000"
@@ -45586,8 +45628,10 @@ tbl = {
 		identifiedDisplayName = "Dragonfly Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Agi +1",
-			"Add Flee +18 if the user is equipped with an item compounded to the ^008800Chon Chon Card^000000.",
+			"Agi +3",
+			"For each Chonchon Card equipped:",
+			"Flee +4",
+			"Aspd +2%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^008C99 Garment^000000",
 			"Weight:^009900 1^000000"
@@ -45666,8 +45710,10 @@ tbl = {
 		identifiedDisplayName = "Wandering Wolf Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Str +1",
-			"Add Flee +18 if the user is equipped with an item compounded to the ^008800Wolf Card^000000.",
+			"Str +3",
+			"For each Wolf card equipped:",
+			"Atk +10",
+			"Atk +2%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^008C99 Garment^000000",
 			"Weight:^009900 1^000000"
@@ -45686,10 +45732,13 @@ tbl = {
 		identifiedDisplayName = "Lava Golem Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Inflict 30% more physical damage on ^6666CCGolems^000000.",
+			"Atk +10",
+			"Adds this card weight to the equipment weight",
+			"Golem Card combo:",
+			"Ranged Damage +5%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
-			"Weight:^009900 1^000000"
+			"Weight:^009900 50^000000"
 		},
 		slotCount = 0,
 		ClassNum = 0,
@@ -45805,7 +45854,9 @@ tbl = {
 		identifiedDisplayName = "Raydric Archer Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Box of Resentment^000000 each time a Demon monster is killed.",
+			"Dex +1",
+			"If a Bow weapon is equipped:",
+			"Crit +5",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -45824,8 +45875,8 @@ tbl = {
 		identifiedDisplayName = "Leib Olmai Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Red Blood^000000 item each time a Brute monster is killed.",
-			"Add 10% more tolerance against ^FF0000Fire^000000 elemental attack.",
+			"Int +1",
+			"Fire element magical damage +10%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6600FF Headgear^000000",
 			"Weight:^009900 1^000000"
@@ -45863,7 +45914,8 @@ tbl = {
 		identifiedDisplayName = "Wraith Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Giggling Box^000000 each time an Undead monster is killed.",
+			"Int +1",
+			"Adds 10% magic damage to Undead race enemies",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -45976,8 +46028,8 @@ tbl = {
 		identifiedDisplayName = "Leaf Cat Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Crystal Blue^000000 item each time a Fish or Shell^6666CCFish^000000 monster is killed.",
-			"Add 10% more tolerance against ^0000BBWater^000000 elemental attack.",
+			"Int +1",
+			"Water element magical damage +10%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6600FF Headgear^000000",
 			"Weight:^009900 1^000000"
@@ -45996,8 +46048,7 @@ tbl = {
 		identifiedDisplayName = "Marin Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Jellopy^000000 or ^008800Large Jellopy^000000 item each time a monster is killed.",
-			"Class:^6666CC Card^000000",
+			"Frost Diver damage +15%",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
 		},
@@ -46015,8 +46066,7 @@ tbl = {
 		identifiedDisplayName = "Mastering Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Luk +1",
-			"Add Flee +18 if the user is equipped with an item compounded to the Poring card.",
+			"Luk +3",
 			"Class:^6666CC Card^000000",
 			"Compound on:^008C99 Garment^000000",
 			"Weight:^009900 1^000000"
@@ -46088,7 +46138,8 @@ tbl = {
 		identifiedDisplayName = "Megalith Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Mdef +7 if the shoes is upgraded no higher than +5.",
+			"Mdef +5",
+			"Additional Mdef +1 per 2 refine levels.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^999900 Footgear^000000",
 			"Weight:^009900 1^000000"
@@ -46145,9 +46196,9 @@ tbl = {
 		identifiedDisplayName = "Mutant Dragonoid Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Atk +15",
+			"Matk +15",
 			"Add the chance of auto casting ^008800Level 3 Fire Ball^000000 on an enemy while doing Physical Attack.",
-			"If the user has mastered the skill at levl 10, it will cast ^008800Level 10 Fire Ball^000000.",
+			"^008800Fire Ball^000000 damage +25%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -46259,7 +46310,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"MaxSP +10%",
-			"Inflict 5% more damage with ^008800Frost Diver^000000.",
+			"Inflict 25% more damage with ^008800Frost Diver^000000.",
 			"^FFFFFF_^000000",
 			"[^6666CCSage Card Set^000000]",
 			"^00FF00Yellow Novus Card^000000",
@@ -46330,13 +46381,10 @@ tbl = {
 		identifiedDescriptionName = {
 			"Add the chance of auto casting ^008800Level 1 Intimidate^000000 on an enemy when doing Physical Attack.",
 			"^FFFFFF_^000000",
-			"[^6666CCThief Classes^000000]",
-			"Flee +20",
-			"^FFFFFF_^000000",
 			"[^6666CCThief Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Zhu Po Long Card^000000",
 			"^008800The Paper Card^000000",
 			"Agi +5",
@@ -46344,12 +46392,13 @@ tbl = {
 			"Increase attack speed and movement speed by 5%.",
 			"Recover SP by 1 on each attack.",
 			"Disable the Auto-Intimidate ability of the Wanderer Card",
-			"Thief Class Bonus: No Gemstones required to use certain skills.",
+			"Thief Class Bonus:",
+			"No Gemstones required to use certain skills.",
 			"^FFFFFF_^000000",
 			"[^6666CCRogue Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Stainer Card^000000",
 			"^008800Wickebine Tres Card^000000",
 			"Str +6",
@@ -46379,7 +46428,10 @@ tbl = {
 		identifiedDisplayName = "Vocal Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Mdef +3",
+			"Dex +3",
+			"For each Rocker card equipped:",
+			"Ranged damage +2%",
+			"Hit +5",
 			"If the user is equipped with an item compounded to the ^008800Rocker Card^000000, it adds Flee +18.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^008C99 Garment^000000",
@@ -46466,7 +46518,7 @@ tbl = {
 		identifiedDisplayName = "Blazzer Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining a Food item each time a monster is killed.",
+			"Fire Wall damage +15%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -46560,9 +46612,12 @@ tbl = {
 		identifiedDisplayName = "Sage Worm Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining a Gemstone item each time a monster is killed.",
+			"Allows the use of ^008800Level 2 Freecast^000000",
+			"Sage class:",
+			"Aspd +3%",
+			"Matk +15",
 			"Class:^6666CC Card^000000",
-			"Compound on:^B40088 Accessory^000000",
+			"Compound on:^B40088 Footgear^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -46674,7 +46729,7 @@ tbl = {
 		identifiedDisplayName = "Stem Worm Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Box of Storms^000000 each time a Brute monster is killed.",
+			"Thunder Storm damage +15%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -46693,8 +46748,8 @@ tbl = {
 		identifiedDisplayName = "Stone Shooter Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Hit +10",
-			"Atk +10",
+			"Ranged damage +5%",
+			"Crit +5",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -46713,7 +46768,7 @@ tbl = {
 		identifiedDisplayName = "Sting Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Def +2 and Mdef +5 if the shield is upgraded up to +9 or higher.",
+			"Increases Earth element magic damage by 2% per refine level.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -46752,7 +46807,7 @@ tbl = {
 		identifiedDisplayName = "Sleeper Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Box of Drowsiness^000000 each time a ^6666CCFish^000000 monster is killed.",
+			"Reduces cast time of Earth Spike skill by 25%, and increases that Earth Spike's damage by 25%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -46800,39 +46855,10 @@ tbl = {
 		identifiedDisplayName = "Shinobi Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Agi +1",
-			"Add the chance of auto casting ^008800Level 5 Cloaking^000000 on the user when receiving Physical Damage.",
-			"If the user has not learned level 3 or higher Cloaking skill or if the user is not an Assassin, this card allows the user to use the skill only when being near to a wall.",
-			"^FFFFFF_^000000",
-			"[^6666CCThief Card Set^000000]",
-			"^008800Wanderer Card^000000",
-			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
-			"^008800Zhu Po Long Card^000000",
-			"^008800The Paper Card^000000",
-			"Agi +5",
-			"Str +5",
-			"Increase attack speed and movement speed by 5%.",
-			"Recover SP by 1 on each attack.",
-			"Disable the Auto-Intimidate ability of the Wanderer Card",
-			"Thief Class Bonus:",
-			"No Gemstones required to use certain skills.",
-			"^FFFFFF_^000000",
-			"[^6666CCRogue Card Set^000000]",
-			"^008800Wanderer Card^000000",
-			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
-			"^008800Stainer Card^000000",
-			"^008800Wickebine Tres Card^000000",
-			"Str +6",
-			"Agi +4",
-			"Backstab Damage +10%",
-			"A chance of auto casting ^008800Level 5 Strip Armor^000000 if ^008800Level 5 Strip Armor^000000 is learned.",
-			"^FFFFFF_^000000",
-			"[^6666CCRogue class^000000]",
-			"-20% SP Consumption",
-			"Disables the Auto-Intimidate ability of the Wanderer Card.",
-			"^FFFFFF_^000000",
+			"Atk +5",
+			"Genin class:",
+			"Throw Shurikens and Throw Kunai damage +15%.",
+			"Throw Huuma Shuriken damage +10%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -46851,9 +46877,9 @@ tbl = {
 		identifiedDisplayName = "Mi Gao Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Receive 50% less damage from ^6666CCGuardians^000000 during War of Emperium hours.",
+			"Heaven's Drive damage +15%",
 			"Class:^6666CC Card^000000",
-			"Compound on:^6666CC Shield^000000",
+			"Compound on:^6666CC Accesory^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -46870,8 +46896,7 @@ tbl = {
 		identifiedDisplayName = "Hermit Plant Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Red Herb^000000, ^008800Yellow Herb^000000 or ^008800White Herb^000000 each time a ^6666CCPlant^000000 monster is killed.",
-			"Herb items restore 50% more HP.",
+			"Add the chance of gaining ^008800Red Herb^000000, ^008800Yellow Herb^000000, ^008800Blue Herb^000000 or ^008800White Herb^000000 each time a monster is killed.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -46941,7 +46966,8 @@ tbl = {
 		identifiedDisplayName = "Anolian Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of auto casting ^008800Level 1 Improve Concentration^000000 on the user when receiving Physical Damage.",
+		    "Enables the use of ^008800Level 2 Improve Concentration^000000",
+			"Add the chance of auto casting ^008800Level 2 Improve Concentration^000000 on the user when receiving Physical Damage.",
 			"If the user has mastered the skill at level 10, it will cast ^008800Level 10 Improve Concentration^000000.",
 			"^FFFFFF_^000000",
 			"^6666CCHunter Card Set^000000",
@@ -46979,7 +47005,7 @@ tbl = {
 			"when hit by a melee attack.",
 			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
-			"Compound on:^00CC33 Armor^000000",
+			"Compound on:^00CC33 Headgear^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -47117,6 +47143,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"MaxHP +300",
+			"Holy elemental magic damage +20%",
 			"When base LUK is 77 or higher: Increases natural HP and SP regeneration by 100%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6600FF Headgear^000000",
@@ -47137,7 +47164,7 @@ tbl = {
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
 			"Vit +2",
-			"MaxHP +800 if the armor is upgraded up to +9 or higher.",
+			"MaxHP +800 and Vit Def +40 if the armor is upgraded up to +8 or higher.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^00CC33 Armor^000000",
 			"Weight:^009900 1^000000"
@@ -47260,15 +47287,13 @@ tbl = {
 		identifiedDisplayName = "Aster Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Atk +5",
-			"Inflict 30% more damage on ^6666CCShell Fish^000000.",
+			"Water Ball damage +5%",
 			"^FFFFFF_^000000",
-			"[^6666CCBeach Card set^000000]",
+			"[^6666CCHydromancer Card set^000000]",
 			"^008800Shell Fish Card^000000",
 			"^008800Crab Card^000000",
 			"^008800Aster Card^000000",
-			"Increases physical damage inflicted on ^0000BBWater^000000 elemental monsters by 30%.",
-			"Randomly a defeated ^6666CCFish^000000 monster will drop ^6666CCRaw Fish^000000.",
+			"Increases damage inflicted with ^0000BBWater Ball^000000 by 10%.",
 			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
@@ -47288,7 +47313,7 @@ tbl = {
 		identifiedDisplayName = "Ancient Mummy Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of auto casting ^008800Level 5 Signum Crucis^000000 on an enemy when the user receives Physical Damage.",
+			"Add the chance of auto casting ^008800Level 3 Signum Crucis^000000 on an enemy when the user receives Physical Damage.",
 			"If the user is equipped with an item compounded to the ^008800Mummy Card^000000,",
 			"it adds Perfect Hit (which never miss its target) +20.",
 			"Class:^6666CC Card^000000",
@@ -47349,7 +47374,8 @@ tbl = {
 		identifiedDisplayName = "Elder Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Inflict 40% more damage on ^6666CCGuardians^000000 during War of Emperium hours.",
+			"Inflict 4% more damage with Lord of Vermillion, Storm Gust and Meteor Storm",
+			"Reduces Cast Time by 2%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^FF0000 Weapon^000000",
 			"Weight:^009900 1^000000"
@@ -47421,8 +47447,8 @@ tbl = {
 		identifiedDisplayName = "Alice Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Receive 40% less damage from ^6666CCBoss^000000 monsters.",
-			"Receive 40% more damage from ^6666CCNormal^000000 monsters.",
+			"Receive 30% less damage from ^6666CCBoss^000000 monsters.",
+			"Receive 30% more damage from ^6666CCNormal^000000 monsters.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^6666CC Shield^000000",
 			"Weight:^009900 1^000000"
@@ -47480,7 +47506,8 @@ tbl = {
 		identifiedDisplayName = "Orc Archer Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Box of Panting^000000 each time a ^6666CCDemihuman^000000 monsters is killed.",
+			"Atk +10",
+			"Arrow Shower damage +15%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -47501,43 +47528,35 @@ tbl = {
 		identifiedDescriptionName = {
 			"Agi +1",
 			"^FFFFFF_^000000",
-			"[^6666CCThief class^000000]",
-			"Perfect Dodge +5",
-			"^FFFFFF_^000000",
 			"[^6666CCThief Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Zhu Po Long Card^000000",
 			"^008800The Paper Card^000000",
 			"Agi +5",
 			"Str +5",
 			"Increase attack speed and movement speed by 5%.",
 			"Recover SP by 1 on each attack.",
-			"Disable the Auto-Intimidate",
-			"ability of the",
-			"Wanderer Card",
+			"Disable the Auto-Intimidate ability of the Wanderer Card",
 			"Thief Class Bonus:",
-			"No Gemstones required to",
-			"use certain skills.",
-			"^6666CCRogue Card Set^000000",
+			"No Gemstones required to use certain skills.",
+			"^FFFFFF_^000000",
+			"[^6666CCRogue Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Stainer Card^000000",
 			"^008800Wickebine Tres Card^000000",
 			"Str +6",
 			"Agi +4",
 			"Backstab Damage +10%",
-			"A chance of auto casting",
-			"Level 5 Strip Armor",
-			"if ^008800Level 5 Strip Armor^000000 is",
-			"learned.",
-			"Rogue Class Bonus:",
+			"A chance of auto casting ^008800Level 5 Strip Armor^000000 if ^008800Level 5 Strip Armor^000000 is learned.",
+			"^FFFFFF_^000000",
+			"[^6666CCRogue class^000000]",
 			"-20% SP Consumption",
-			"Disables the Auto-Intimidate",
-			"ability of the",
-			"Wanderer Card.",
+			"Disables the Auto-Intimidate ability of the Wanderer Card.",
+			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
 			"Compound on:^999900 Footgear^000000",
 			"Weight:^009900 1^000000"
@@ -47604,8 +47623,10 @@ tbl = {
 		identifiedDisplayName = "Wooden Golem Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Def +1",
-			"Increases HP regen by 30%.",
+			"Vit +2",
+			"Def +2",
+			"Vit Def +20",
+			"Increases HP regen by 50%.",			
 			"Class:^6666CC Card^000000",
 			"Compound on:^00CC33 Armor^000000",
 			"Weight:^009900 1^000000"
@@ -47664,7 +47685,7 @@ tbl = {
 		identifiedDisplayName = "Cloud Hermit Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Randomly a defeated ^6666CCPlant^000000 monster will drop ^008800Box of Gloom^000000.",
+			"Reduces cast time of Lightning Bolt skill by 25%, and increases that Lightning Bolt's damage by 25%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -47725,9 +47746,12 @@ tbl = {
 		identifiedDisplayName = "Jing Guai Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Add the chance of gaining ^008800Box of Sunlight^000000 item each time Angel monster is killed.",
+			"Atk +10",
+			"Mace weapon equipped:",
+			"Aspd +3%",
+			"Crit +5",
 			"Class:^6666CC Card^000000",
-			"Compound on:^B40088 Accessory^000000",
+			"Compound on:^B40088 Weapon^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -47744,8 +47768,10 @@ tbl = {
 		identifiedDisplayName = "Eclipse Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Vit +1",
-			"Add Flee +18 if the user is equipped with an item compounded to the ^008800Lunatic Card^000000.",
+			"Int +3",
+			"For each Lunatic card equipped:",
+			"Matk +2%",
+			"Casting Time -3%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^008C99 Garment^000000",
 			"Weight:^009900 1^000000"
@@ -47872,19 +47898,14 @@ tbl = {
 			"[^6666CCThief Card Set^000000]",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Zhu Po Long Card^000000",
 			"^008800The Paper Card^000000",
 			"Agi +5",
 			"Str +5",
 			"Increase attack speed and movement speed by 5%.",
 			"Recover SP by 1 on each attack.",
-			"Disable the Auto-Intimidate",
-			"ability of the",
-			"Wanderer Card",
-			"Thief Class Bonus:",
-			"No Gemstones required to",
-			"use certain skills.",
+			"Disable the Auto-Intimidate ability of the Wanderer Card",
 			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
@@ -47907,7 +47928,7 @@ tbl = {
 			"Atk +5",
 			"Inflict 30% more damage on ^6666CCCrab^000000.",
 			"^FFFFFF_^000000",
-			"[^6666CCBeach Card set^000000]",
+			"[^6666CCHydromancer Card set^000000]",
 			"^008800Shell Fish Card^000000",
 			"^008800Crab Card^000000",
 			"^008800Aster Card^000000",
@@ -49785,7 +49806,7 @@ tbl = {
 			"^6666CCRogue Card Set^000000",
 			"^008800Wanderer Card^000000",
 			"^008800Wild Rose Card^000000",
-			"^008800Shinobi Card^000000",
+			"^008800Male Thief Bug Card^000000",
 			"^008800Stainer Card^000000",
 			"^008800Wickebine Tres Card^000000",
 			"Str +6",
@@ -73031,7 +73052,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC All^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 543,
 		costume = false
 	},
@@ -77719,7 +77740,7 @@ tbl = {
 			"Level Requirement:^009900 1^000000",
 			"Jobs:^6666CC All Jobs^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 125,
 		costume = false
 	},
@@ -258369,7 +258390,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Novice, Swordman Classes, Mage Classes, Archer Classes, Merchant Classes, Thief Classes, Soul Linker and Ninja^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 32,
 		costume = false
 	},
@@ -258386,7 +258407,7 @@ tbl = {
 			"It is said to be the first step in a long journey of awakening.",
 			"-------------------------",
 			"^777777Account Bound.^000000",
-			"ATK + 1 per Job Level (Max 30).",
+			"ATK + 2 per Job Level (Max 60).",
 			"-------------------------",
 			"^0000CC[Swordman Class]^000000",
 			"Soft DEF + 3 per level of ^990000Increase HP Recovery^000000 learned.",
@@ -258399,7 +258420,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Novice, Swordman Classes, Merchant Classes, and Thief Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 3,
 		costume = false
 	},
@@ -258416,7 +258437,7 @@ tbl = {
 			"It is said to be the first step in a long journey of awakening.",
 			"-------------------------",
 			"^777777Account Bound.^000000",
-			"ATK + 1 per Job Level (Max 30).",
+			"ATK + 2 per Job Level (Max 60).",
 			"-------------------------",
 			"^0000CC[Merchant Class]^000000",
 			"Increases damage of ^990000Cart Revolution^000000 by 25%.",
@@ -258429,7 +258450,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Novice, Swordman Classes, Merchant Classes, and Thief Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 6,
 		costume = false
 	},
@@ -258447,7 +258468,7 @@ tbl = {
 			"-------------------------",
 			"^777777Account Bound.^000000",
 			"MATK + 15%",
-			"MATK + 1 per Job Level (Max 30).",
+			"MATK + 2 per Job Level (Max 60).",
 			"-------------------------",
 			"^0000CC[Mage Class]^000000",
 			"Increases magic damage to ^009900Earth^000000 property targets by 1% per level of ^990000Fire Bolt^000000 learned.",
@@ -258461,7 +258482,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Mage Classes, Acolyte Classes and Soul Linker^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 10,
 		costume = false
 	},
@@ -258478,7 +258499,7 @@ tbl = {
 			"It is said to be the first step in a long journey of awakening.",
 			"-------------------------",
 			"^777777Account Bound.^000000",
-			"ATK + 1 per Job Level (Max 30).",
+			"ATK + 2 per Job Level (Max 60).",
 			"-------------------------",
 			"^0000CC[Archer Class]^000000",
 			"ATK + 1 per level of ^990000Vulture's Eye^000000 learned.",
@@ -258491,7 +258512,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Archer Classes and Rogue Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 11,
 		costume = false
 	},
@@ -258522,7 +258543,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Acolyte Classes and Novice Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 62,
 		costume = false
 	},
@@ -258539,7 +258560,7 @@ tbl = {
 			"It is said to be the first step in a long journey of awakening.",
 			"-------------------------",
 			"^777777Account Bound.^000000",
-			"ATK + 1 per Job Level (Max 30).",
+			"ATK + 2 per Job Level (Max 60).",
 			"-------------------------",
 			"^0000CC[Swordman Class]^000000",
 			"Increases ^990000Magnum Break^000000 damage by 25%",
@@ -258552,7 +258573,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Swordman Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 49,
 		costume = false
 	},
@@ -258579,7 +258600,7 @@ tbl = {
 			"Weapon Level: ^7777772^000000",
 			"Jobs: ^777777Taekwon^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 0,
 		costume = false
 	},
@@ -258608,7 +258629,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Hiregun Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 17,
 		costume = false
 	},
@@ -258637,7 +258658,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Hiregun Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 18,
 		costume = false
 	},
@@ -258666,7 +258687,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Ninja Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 1,
 		costume = false
 	},
@@ -258695,7 +258716,7 @@ tbl = {
 			"Level Requirement:^009900 10^000000",
 			"Jobs:^6666CC Ninja Classes^000000"
 		},
-		slotCount = 0,
+		slotCount = 2,
 		ClassNum = 22,
 		costume = false
 	},
@@ -258936,18 +258957,14 @@ tbl = {
 			"A potent cockroach bait with an ultra-sticky adhesive. One touch, and they are done for. The smell is awful, but the results are deadly.",
 			"-------------------------",
 			"Increases physical and magical damage against ^FF0000Insect^000000 race monsters by 10%.",
-			"-------------------------",
-			"^0000CC[Combo with Cleaner's Cloth]^000000",
-			"Gain 10% additional Experience when defeating ^FF0000Insect^000000 race monsters.",
-			"Restores 1 SP each time an ^FF0000Insect^000000 monster is killed.",
-			"Increases ^990000Envenom^000000 damage by 25%.",
+		    "Enables use of Level 2 ^990000Envenom^000000.",
 			"-------------------------",
 			"Class:^6666CC Accessory^000000",
 			"Weight:^009900 10^000000",
 			"Level Requirement:^009900 1^000000",
 			"Jobs:^6666CC All Jobs^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 0,
 		costume = false
 	},
@@ -258970,7 +258987,7 @@ tbl = {
 			"Level Requirement:^009900 1^000000",
 			"Jobs:^6666CC All Jobs^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 0,
 		costume = false
 	},

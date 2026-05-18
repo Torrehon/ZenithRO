@@ -34,7 +34,8 @@ SKILL_DESCRIPT = {
 		"Sword Mastery",
 		"Max Level: 10",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases damage with One-Handed Sword and Dagger. Gain bonus ATK and ASPD based on Job Level. ^000000",
+		"Description: ^777777Increase damage with One Handed Swords and Daggers. Gain bonus ATK and",
+		"ASPD based on Job Level. ^000000",
 		"[Lv 1]:^777777 Mastery ATK +5 ^000000",
 		"[Lv 2]:^777777 Mastery ATK +10 ^000000",
 		"[Lv 3]:^777777 Mastery ATK +15 ^000000",
@@ -44,13 +45,15 @@ SKILL_DESCRIPT = {
 		"[Lv 7]:^777777 Mastery ATK +35 ^000000",
 		"[Lv 8]:^777777 Mastery ATK +40 ^000000",
 		"[Lv 9]:^777777 Mastery ATK +45 ^000000",
-		"[Lv 10]:^777777 Mastery ATK +50 ^000000"
+		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
+		"^FFA500Atk: (Skill Level * Job Level)/10",
+		"Aspd: 0.5% * Skill Level + (Job Level/10)"
 	},
 	[SKID.SM_TWOHAND] = {
 		"Two-Handed Sword Mastery",
 		"Max Level: 10",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases damage with Two-Handed Sword. Gain bonus ATK and CRIT based on Job Level. ^000000",
+		"Description: ^777777Increase damage with Two-Handed Swords. Gain bonus ATK and CRIT based on Job Level. ^000000",
 		"[Lv 1]:^777777 Mastery ATK +5 ^000000",
 		"[Lv 2]:^777777 Mastery ATK +10 ^000000",
 		"[Lv 3]:^777777 Mastery ATK +15 ^000000",
@@ -60,13 +63,16 @@ SKILL_DESCRIPT = {
 		"[Lv 7]:^777777 Mastery ATK +35 ^000000",
 		"[Lv 8]:^777777 Mastery ATK +40 ^000000",
 		"[Lv 9]:^777777 Mastery ATK +45 ^000000",
-		"[Lv 10]:^777777 Mastery ATK +50 ^000000"
+		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
+		"^FFA500Atk: (Skill Level * Job Level)/10",
+		"Crit: (Job Level * 3) / 10"
 	},
 	[SKID.SM_RECOVERY] = {
 		"Increase HP Recovery",
 		"Max Level: 5",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases HP recovery and item effectiveness. ^000000",
+		"Description: ^777777Increases HP recovery and",
+		"item effectiveness. ^000000",
 		"[Lv 1]:^777777 Recovery Item Effectiveness +20% ^000000",
 		"[Lv 2]:^777777 Recovery Item Effectiveness +40% ^000000",
 		"[Lv 3]:^777777 Recovery Item Effectiveness +60% ^000000",
@@ -77,8 +83,8 @@ SKILL_DESCRIPT = {
 		"Bash",
 		"Max Level: 10",
 		"Skill Form: ^6666CCOffensive ^000000",
-		"Description: ^777777Deals powerful damage to a target. Damage varies by weapon type and",
-		"can be critical. Fatal Blow gives 50% critical chance and stun chance over level 5. ^000000",
+		"Description: ^777777Deals powerful damage to a target. Damage varies by weapon type and can be",
+		"critical.^000000",
 		"[Lv 1]:^777777 162% (1H) / 190% (2H) Damage. 3 SP ^000000",
 		"[Lv 2]:^777777 194% (1H) / 230% (2H) Damage. 4 SP ^000000",
 		"[Lv 3]:^777777 226% (1H) / 270% (2H) Damage. 5 SP ^000000",
@@ -94,7 +100,9 @@ SKILL_DESCRIPT = {
 		"Magnum Break",
 		"Max Level: 10",
 		"Skill Form: ^6666CCOffensive ^000000",
-		"Description: ^777777Deals explosive Fire damage to enemies around. Damage varies by weapon type and proximity. ^000000",
+		"Description: ^777777Deals explosive Fire damage to",
+		"enemies around the caster. Damage varies",
+		"by weapon type and proximity. ^000000",
 		"[Lv 1]:^777777 105% (1H) / 220% (2H) Damage. 12 SP ^000000",
 		"[Lv 2]:^777777 110% (1H) / 240% (2H) Damage. 14 SP ^000000",
 		"[Lv 3]:^777777 115% (1H) / 260% (2H) Damage. 16 SP ^000000",
@@ -110,7 +118,10 @@ SKILL_DESCRIPT = {
 		"Provoke",
 		"Max Level: 10",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Enrages a target to decrease its Defense while increasing its Attack Strength for 30 sec. Skill level affect the success chance. Ineffective against the Undead. ^000000",
+		"Description: ^777777Enrages a target to decrease its",
+		"Defense while increasing its Attack Strength for",
+		"30 sec. Skill level affect the success chance.",
+		"Ineffective against the Undead. ^000000",
 		"[Lv 1]:^777777 Damage +5%, Def -10% ^000000",
 		"[Lv 2]:^777777 Damage +8%, Def -15% ^000000",
 		"[Lv 3]:^777777 Damage +11%, Def -20% ^000000",
@@ -126,7 +137,8 @@ SKILL_DESCRIPT = {
 		"Endure",
 		"Max Level: 10",
 		"Skill Form: ^6666CCSupportive ^000000",
-		"Description: ^777777Prevents flinching when taking damage. Does NOT break on hits. ^000000",
+		"Description: ^777777Prevents flinching when taking",
+		"damage. Does NOT break on hits. ^000000",
 		"[Lv 1]:^777777 Duration 6s, MDEF +1. 10 SP ^000000",
 		"[Lv 2]:^777777 Duration 7s, MDEF +2. 10 SP ^000000",
 		"[Lv 3]:^777777 Duration 8s, MDEF +3. 10 SP ^000000",
@@ -154,25 +166,29 @@ SKILL_DESCRIPT = {
 		"Magic Lessons",
 		"Max Level: 5",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Studies the flow of magic to slightly reduce global Cast Time. Job Level grants additional bonus. ^000000",
-		"[Lv 1]:^777777 Cast Time -1% + Job Bonus ^000000",
-		"[Lv 2]:^777777 Cast Time -2% + Job Bonus ^000000",
-		"[Lv 3]:^777777 Cast Time -3% + Job Bonus ^000000",
-		"[Lv 4]:^777777 Cast Time -4% + Job Bonus ^000000",
-		"[Lv 5]:^777777 Cast Time -5% + Job Bonus ^000000"
+		"Description: ^777777Studies the flow of magic to slightly",
+		"reduce Cast Time.",
+		"Job Level grants additional bonus.^000000",
+		"[Lv 1]:^777777 Cast Time -1% + (Job Level/10) ^000000",
+		"[Lv 2]:^777777 Cast Time -2% + (Job Level/10) ^000000",
+		"[Lv 3]:^777777 Cast Time -3% + (Job Level/10) ^000000",
+		"[Lv 4]:^777777 Cast Time -4% + (Job Level/10) ^000000",
+		"[Lv 5]:^777777 Cast Time -5% + (Job Level/10) ^000000"
 	},
 	[SKID.MG_SIGHT] = {
 		"Sight",
 		"Max Level: 1",
 		"Skill Form: ^339900Active ^000000",
 		"Element: ^FF0000Fire ^000000",
-		"Description: ^777777Detects hidden enemies in the caster's vicinity. ^000000"
+		"Description: ^777777Detects hidden enemies in the",
+		"caster's vicinity. ^000000"
 	},
 	[SKID.MG_FIREBOLT] = {
 		"Fire Bolt",
 		"Max Level: 10",
 		"Skill Form: ^FF0000Magical attack ^000000",
-		"Description: ^777777Deals Fire damage with falling bolts. ^000000",
+		"Description: ^777777Deals 100% Matk Fire damage with",
+		"falling bolts. ^000000",
 		"[Lv 1]:^777777 1 Bolt, 0.5s Cast Time ^000000",
 		"[Lv 2]:^777777 2 Bolts, 1s Cast Time ^000000",
 		"[Lv 3]:^777777 3 Bolts, 1.5s Cast Time ^000000",
@@ -188,7 +204,8 @@ SKILL_DESCRIPT = {
 		"Fire Ball",
 		"Max Level: 5",
 		"Skill Form: ^FF0000Magical attack ^000000",
-		"Description: ^777777Deals Fire damage to a target and its surroundings. ^000000",
+		"Description: ^777777Deals Fire damage to a target and",
+		"its surroundings. ^000000",
 		"[Lv 1]:^777777 150% Damage, 1.2s Cast Time ^000000",
 		"[Lv 2]:^777777 200% Damage, 1.2s Cast Time ^000000",
 		"[Lv 3]:^777777 250% Damage, 1.2s Cast Time ^000000",
@@ -203,14 +220,16 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^FF0000Fire ^000000",
 		"Cast Time: ^FF0000 1.2s all levels ^000000",
-		"Description: ^777777Creates a Fire Wall that will block enemies from approaching the caster. ^000000"
+		"Description: ^777777Creates a Fire Wall that will block",
+		"enemies from approaching the caster. ^000000"
 	},
 	[SKID.MG_COLDBOLT] = {
 		"Cold Bolt",
 		"Max Level: 10",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^0000BBWater ^000000",
-		"Description: ^777777Deals Water damage with falling icicles. ^000000",
+		"Description: ^777777Deals 100% Matk Water damage",
+		"with falling icicles. ^000000",
 		"[Lv 1]:^777777 1 Bolt, 0.5s Cast Time ^000000",
 		"[Lv 2]:^777777 2 Bolts, 1s Cast Time ^000000",
 		"[Lv 3]:^777777 3 Bolts, 1.5s Cast Time ^000000",
@@ -241,14 +260,16 @@ SKILL_DESCRIPT = {
 		"Max Level: 10",
 		"Skill Form: ^663399Curse ^000000",
 		"Element: ^cc5500Earth ^000000",
-		"Description: ^777777Curses an enemy by turning it into a stone, rendering it immobile. Consumes 1 Red Gemstone as catalyst. ^000000"
+		"Description: ^777777Curses an enemy by turning it into a stone, rendering it immobile. Consumes 1 Red",
+		"Gemstone as catalyst. ^000000"
 	},
 	[SKID.MG_LIGHTNINGBOLT] = {
 		"Lightning Bolt",
 		"Max Level: 10",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^33CC00Wind ^000000",
-		"Description: ^777777Deals Wind damage with falling lightning. ^000000",
+		"Description: ^777777Deals 100% Matk Wind damage with",
+		"falling lightning. ^000000",
 		"[Lv 1]:^777777 1 Bolt, 0.5s Cast Time ^000000",
 		"[Lv 2]:^777777 2 Bolts, 1s Cast Time ^000000",
 		"[Lv 3]:^777777 3 Bolts, 1.5s Cast Time ^000000",
@@ -279,7 +300,8 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^bb00bbGhost ^000000",
-		"Description: ^777777Strikes enemies in a 3x3 area with Ghost property damage. No split damage. ^000000",
+		"Description: ^777777Strikes enemies in a 3x3 area with",
+		"Ghost property damage. No split damage. ^000000",
 		"[Lv 1]:^777777 150% Damage, 1.2s Cast Time ^000000",
 		"[Lv 2]:^777777 200% Damage, 1.2s Cast Time ^000000",
 		"[Lv 3]:^777777 250% Damage, 1.2s Cast Time ^000000",
@@ -293,7 +315,9 @@ SKILL_DESCRIPT = {
 		"23^CC3399Requirement: Napalm Beat 4 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^bb00bbGhost ^000000",
-		"Description: ^777777Summons ancient spirits to attack an enemy. Very effective against Undead monsters. ^000000"
+		"Description: ^777777Summons ancient spirits to",
+		"attack an enemy.",
+		"Very effective against Undead monsters. ^000000"
 	},
 	[SKID.MG_SAFETYWALL] = {
 		"Safety Wall",
@@ -303,18 +327,22 @@ SKILL_DESCRIPT = {
 		"8^CC3399Requirement: Aspersio 4, Sanctuary 3 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Element: ^bb00bbGhost ^000000",
-		"Description: ^777777Creates a magic barrier on a targeted spot that will block melee physical attacks for the duration of the Safety Wall. ^000000"
+		"Description: ^777777Creates a magic barrier on a",
+		"targeted spot that will block melee physical",
+		"attacks for the duration of the Safety Wall. ^000000"
 	},
 	[SKID.AL_DP] = {
 		"Divine Protection",
 		"Max Level: 5",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases Defense against Demons and Undead monsters. Base level affects Defense rating. ^000000",
+		"Description: ^777777Increases Defense against Demons and Undead monsters. Base level affects",
+		"defense rating. ^000000",
 		"[Lv 1]:^777777 Def +6 ^000000",
 		"[Lv 2]:^777777 Def +12 ^000000",
 		"[Lv 3]:^777777 Def +18 ^000000",
 		"[Lv 4]:^777777 Def +24 ^000000",
-		"[Lv 5]:^777777 Def +30 ^000000"
+		"[Lv 5]:^777777 Def +30 ^000000",
+		"^FFA500Extra Def: (Base Level +1) * 0.10."
 	},
 	[SKID.AL_DEMONBANE] = {
 		"Demon Bane",
@@ -323,12 +351,14 @@ SKILL_DESCRIPT = {
 		"14^CC3399Requirement: Divine Protection 1 ^000000",
 		"23^CC3399Requirement: Divine Protection 1 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases attack strength against Demon and Undead monsters. Base level affects attack rating. ^000000",
+		"Description: ^777777Increases attack strength against Demon and Undead monsters. Base level affects",
+		"attack rating. ^000000",
 		"[Lv 1]:^777777 Damage +6 ^000000",
 		"[Lv 2]:^777777 Damage +12 ^000000",
 		"[Lv 3]:^777777 Damage +18 ^000000",
 		"[Lv 4]:^777777 Damage +24 ^000000",
-		"[Lv 5]:^777777 Damage +30 ^000000"
+		"[Lv 5]:^777777 Damage +30 ^000000",
+		"^FFA500Extra Atk: (Base Level +1) * 0.20."
 	},
 	[SKID.AL_ANGELUS] = {
 		"Angelus",
@@ -337,13 +367,15 @@ SKILL_DESCRIPT = {
 		"23^CC3399Requirement: Divine Protection 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Increases party and self Vit Defense.",
-		"Vit Defense increases even more with Base Level",
-		"Also increases Max HP^000000",
-		"[Lv 1]:^777777 10% / 100 HP ^000000",
-		"[Lv 2]:^777777 20% / 200 HP ^000000",
-		"[Lv 3]:^777777 30% / 300 HP ^000000",
-		"[Lv 4]:^777777 40% / 400 HP ^000000",
-		"[Lv 5]:^777777 50% / 500 HP ^000000"
+		"Vit Defense increases even more with",
+		"Base Level. Also increases Max Hp",
+		"Duration is 120 seconds per level.^000000",
+		"[Lv 1]:^777777 10% Vit Def / 100 HP ^000000",
+		"[Lv 2]:^777777 20% Vit Def / 200 HP ^000000",
+		"[Lv 3]:^777777 30% Vit Def / 300 HP ^000000",
+		"[Lv 4]:^777777 40% Vit Def / 400 HP ^000000",
+		"[Lv 5]:^777777 50% Vit Def / 500 HP ^000000",
+		"^FFA500Extra Vit Def: (Target's Base Level +1)/2"
 	},
 	[SKID.AL_CRUCIS] = {
 		"Signum Crucis",
@@ -354,12 +386,13 @@ SKILL_DESCRIPT = {
 		"Area: 5x5 around the caster",
 		"SP cost: 15 + 2 x skill level",
 		"Description: ^777777Draws a cross, damaging enemies around you and reducing Def and Mdef by 15%.",
-		"Demons and Undeads receive more damage and their defenses are reduced by 35%.^000000",
-		"[Lv 1]:^777777 70% / 120% atk/matk ^000000",
-		"[Lv 2]:^777777 90% / 140% atk/matk ^000000",
-		"[Lv 3]:^777777 110% / 160% atk/matk ^000000",
-		"[Lv 4]:^777777 130% / 180% atk/matk ^000000",
-		"[Lv 5]:^777777 150% / 200% atk/matk ^000000"
+		"Demons and Undeads receive more damage",
+		"and their defenses are reduced by 35%.^000000",
+		"[Lv 1]:^777777 70% / 120% Atk/Matk ^000000",
+		"[Lv 2]:^777777 90% / 140% Atk/Matk ^000000",
+		"[Lv 3]:^777777 110% / 160% Atk/Matk ^000000",
+		"[Lv 4]:^777777 130% / 180% Atk/Matk ^000000",
+		"[Lv 5]:^777777 150% / 200% Atk/Matk ^000000"
 	},
 	[SKID.AL_BLESSING] = {
 		"Blessing",
@@ -367,7 +400,19 @@ SKILL_DESCRIPT = {
 		"4^CC3399Requirement: Divine Protection 1 ^000000",
 		"23^CC3399Requirement: Divine Protection 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Temporarily increases Str, Dex and Int of the target and removes Curse and Stone Curse effect. ^000000"
+		"Description: ^777777Temporarily increases Str, Dex and",
+		"Int of the target and removes Curse and Stone",
+		"Curse effect. Duration is 60 seconds per level.^000000",
+		"[Lv 1]:^777777 Str/Int/Dex +1^000000",
+		"[Lv 2]:^777777 Str/Int/Dex +2^000000",
+		"[Lv 3]:^777777 Str/Int/Dex +3^000000",
+		"[Lv 4]:^777777 Str/Int/Dex +4^000000",
+		"[Lv 5]:^777777 Str/Int/Dex +5^000000",
+		"[Lv 6]:^777777 Str/Int/Dex +6^000000",
+		"[Lv 7]:^777777 Str/Int/Dex +7^000000",
+		"[Lv 8]:^777777 Str/Int/Dex +8^000000",
+		"[Lv 9]:^777777 Str/Int/Dex +9^000000",
+		"[Lv 10]:^777777 Str/Int/Dex +10^000000"
 	},
 	[SKID.AL_HEAL] = {
 		"Heal",
@@ -375,7 +420,8 @@ SKILL_DESCRIPT = {
 		"14^CC3399Requirement: Faith 10^000000",
 		"Skill Form: ^339900Recovery ^000000",
 		"Element: ^777777Holy ^000000",
-		"Description: ^777777 Heals the target based on user's Int, Job Level and Matk.",
+		"Description: ^777777 Heals the target based on user's Int,",
+		"Job Level and 100% of caster's Matk.",
         "Inflicts damage on Undead targets.^000000"
 	},
 	[SKID.AL_HOLYWATER] = {
@@ -391,7 +437,10 @@ SKILL_DESCRIPT = {
 		"14^CC3399Requirement: Faith 5 ^000000",
 		"23^CC3399Requirement: Heal 2 ^000000",
 		"Skill Form: ^339900Recovery ^000000",
-		"Description: ^777777Cures target from Silence, Confusion and Blind status effects. When used on Undead monster, this skill will inflicts Confusin status. ^000000"
+		"Description: ^777777Cures target from Silence,",
+		"Confusion and Blind status effects. When used",
+		"on Undead monster, this skill will inflicts",
+		"Confusion status. ^000000"
 	},
 	[SKID.AL_INCAGI] = {
 		"Increase Agility",
@@ -399,7 +448,19 @@ SKILL_DESCRIPT = {
 		"4^CC3399Requirement: Heal 3 ^000000",
 		"23^CC3399Requirement: Heal 3 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Increases Agi and movement speed of target. This skill consume 15 HP and will fail if the caster has less than 16 HP. ^000000"
+		"Description: ^777777Increases Agi and movement speed of target. This skill consume 15 HP and will fail if",
+		"the caster has less than 16 HP.",
+        "Duration is 60 seconds per level.^000000",
+		"[Lv 1]:^777777 Agi + 3 / Aspd + 0.5%^000000",
+		"[Lv 2]:^777777 Agi + 4 / Aspd + 1%^000000",
+		"[Lv 3]:^777777 Agi + 5 / Aspd + 1.5%^000000",
+		"[Lv 4]:^777777 Agi + 6 / Aspd + 2%^000000",
+		"[Lv 5]:^777777 Agi + 7 / Aspd + 2.5%^000000",
+		"[Lv 6]:^777777 Agi + 8 / Aspd + 3%^000000",
+		"[Lv 7]:^777777 Agi + 9 / Aspd + 3.5%^000000",
+		"[Lv 8]:^777777 Agi + 10 / Aspd + 4%^000000",
+		"[Lv 9]:^777777 Agi + 11 / Aspd + 4.5%^000000",
+		"[Lv 10]:^777777 Agi + 12 / Aspd + 5%^000000"
 	},
 	[SKID.AL_DECAGI] = {
 		"Decrease Agility",
@@ -414,7 +475,8 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"Skill Form: ^339900Active ^000000",
 		"Element: ^777777Holy ^000000",
-		"Description: ^777777Reveals hidden enemies in a 5x5 area around the caster and deals 100% Matk",
+		"Description: ^777777Reveals hidden enemies in a 5x5",
+		"area around the caster and deals 100% Matk",
 		"plus 100% Atk each second for 10 seconds.^000000"
 	},
 	[SKID.AL_PNEUMA] = {
@@ -423,7 +485,9 @@ SKILL_DESCRIPT = {
 		"4^CC3399Requirement: Warp Portal 4 ^000000",
 		"23^CC3399Requirement: Warp Portal 4 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Creates a 3x3 cell cloud around the targeted cell that blocks all ranged Physical attacks. ^000000"
+		"Description: ^777777Creates a 3x3 cell cloud around the",
+		"targeted cell that blocks all ranged Physical",
+		"attacks. ^000000"
 	},
 	[SKID.AL_TELEPORT] = {
 		"Teleport",
@@ -1031,7 +1095,7 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^FF0000Fire ^000000",
 		"Description: ^777777Creates a Fire Pillar trap effect on the targeted cell.",
-		"Consumes 1^0000ff Blue Gemstone^777777 at level 6 and higher. ^000000"
+		"Inflicts Burning status with a chance of 4% per Skill Level.^000000"
 	},
 	[SKID.WZ_SIGHTRASHER] = {
 		"Sightrasher",
@@ -1048,7 +1112,7 @@ SKILL_DESCRIPT = {
 		"9^CC3399Requirement: Thunder Storm 1, Sightrasher 2 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^FF0000Fire ^000000",
-		"Description: ^777777Summons meteors towards a targeted area to inflict area effect damage upon enemies ^000000"
+		"Description: ^777777Summons meteors towards a targeted area to inflict area effect damage upon enemies. ^000000"
 	},
 	[SKID.WZ_JUPITEL] = {
 		"Jupitel Thunder",
@@ -1056,7 +1120,8 @@ SKILL_DESCRIPT = {
 		"9^CC3399Requirement: Napalm Beat 1, Lightning Bolt 1 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^BBBB00Wind ^000000",
-		"Description: ^777777Fires a ball of crackling lightning that will damage and push back the targeted enemy. ^000000"
+		"Description: ^777777Fires a ball of crackling lightning that will damage and push back the targeted enemy.",
+        "Inflicts Electrocute status with a chance of 4% per Skill Level.^000000"
 	},
 	[SKID.WZ_VERMILION] = {
 		"Lord of Vermillion",
@@ -1064,7 +1129,8 @@ SKILL_DESCRIPT = {
 		"9^CC3399Requirement: Thunder Storm 1, Jupitel Thunder 5 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^bbbb00Wind ^000000",
-		"Description: ^777777Summons explosive lightning to strike a targeted area. Increasing skill level will increase damage and skill cast time. ^000000"
+		"Description: ^777777Summons explosive lightning to strike a targeted area. Increasing skill level will increase damage and skill cast time.",
+		"Inflicts Electrocute status with a chance of 4% per Skill Level.^000000"
 	},
 	[SKID.WZ_WATERBALL] = {
 		"Water Ball",
@@ -1072,8 +1138,8 @@ SKILL_DESCRIPT = {
 		"9^CC3399Requirement: Cold Bolt 1, Lightning Bolt 1 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^0000BBWater ^000000",
-		"Description: ^777777Hurls spheres of water at high velocity at a targeted enemy.",
-		"Caster must be standing in ^008800water^777777 in order to cast Water Ball and cannot be used in an underwater map. ^000000"
+		"Description: ^777777Summon a giant ball of water to trap the enemy inside.",
+		"Inflicts Drown status with a chance of 8% per Skill Level.^000000"
 	},
 	[SKID.WZ_ICEWALL] = {
 		"Ice Wall",
@@ -1089,7 +1155,7 @@ SKILL_DESCRIPT = {
 		"9^CC3399Requirement: Frost Diver 1, Ice Wall 1 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^0000BBWater ^000000",
-		"Description: ^777777Creates an aura of icy cold that will simultaneously freeze enemies around the caster. ^000000"
+		"Description: ^777777Creates an aura of icy cold that will simultaneously freeze enemies around the target. ^000000"
 	},
 	[SKID.WZ_STORMGUST] = {
 		"Storm Gust",
@@ -1097,7 +1163,8 @@ SKILL_DESCRIPT = {
 		"9^CC3399Requirement: Frost Diver 1, Jupitel 3 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^0000BBWater ^000000",
-		"Description: ^777777Summons a blizzard on a targeted spot to damage enemies within Storm Gust's range."
+		"Description: ^777777Summons a blizzard on a targeted spot to damage enemies within Storm Gust's range.",
+		"Has a chance to inflict Freezing status.^000000"
 	},
 	[SKID.WZ_EARTHSPIKE] = {
 		"Earth Spike",
@@ -1117,7 +1184,9 @@ SKILL_DESCRIPT = {
 		"4190^CC3399Requirement: Earth Spike 3 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^cc5500Earth ^000000",
-		"Description: ^777777Commands the ground in a targeted area to rise into spikes in order to damage enemies within its range. ^000000"
+		"Description: ^777777Commands the ground in a targeted area to rise into spikes in order to damage enemies within its range.",
+		"Creates 2 instances of the skill, so it might hit twice if they overlap.",
+		"Inflicts Buried status with a chance of 8% per Skill Level.^000000"
 	},
 	[SKID.WZ_QUAGMIRE] = {
 		"Quagmire",
@@ -1128,10 +1197,30 @@ SKILL_DESCRIPT = {
 		"AGI and DEX has maximum of 50 can be reduced. Players will only receive half of the effect. ^000000"
 	},
 	[SKID.WZ_ESTIMATION] = {
-		"Sense",
+		"Arcane Insight",
 		"Max Level: 1",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Reveals detailed information about a targeted monster to the caster and members in caster's party. ^000000"
+		"Description: ^777777State in which the Wizard can detect target's magic weakness. Ignores enemy's Mdef by 10% for 30 seconds.^000000"
+	},
+    [SKID.WZ_MAGUSSOUL] = {
+		"Soul of the Magus",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the Wizard's magic",
+		"dominance.^000000",
+		"^777777Increases magic damage by 10%.^000000",
+		"^777777Lord of Vermillion, Meteor Storm and",
+		"Storm Gust: + 15% damage.^000000",
+		"^777777Arcane Insight: Now ignores 25% of enemy's Mdef.^000000"
+	},
+    [SKID.WZ_HEXERSOUL] = {
+		"Soul of the Hexer",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the Wizard's mastery over elemental enfeeblements.^000000",
+		"^777777DoT statuses have double the chance to occur.^000000",
+		"^777777Increases the matk portion of DoT skills by 100%.^000000",
+		"^777777DoT statuses last 10 more seconds.^000000"
 	},
 	[SKID.BS_IRON] = {
 		"Iron Tempering",
@@ -1590,7 +1679,9 @@ SKILL_DESCRIPT = {
 		"Max Level: 1",
 		"0^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Feign death to avoid the menace of nearby enemies. The Play Dead status is cancelled by casting this skill again. ^000000"
+		"Description: ^777777Feign death to avoid the menace of",
+		"nearby enemies. The Play Dead status is",
+		"cancelled by casting this skill again. ^000000"
 	},
 	[SKID.SM_MOVINGRECOVERY] = {
 		"Moving HP Recovery",
@@ -1598,23 +1689,34 @@ SKILL_DESCRIPT = {
 		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Enables HP regen while moving.",
-		"Only 25% of the HP that is recovered while standing is restored during movement.",
-		"The Increase Recovery skill does not affect HP Recovery While Moving. ^000000"
+		"Only 25% of the HP that is recovered while",
+		"standing is restored during movement.",
+		"The Increase Recovery skill does not affect",
+		"HP Recovery While Moving. ^000000"
 	},
 	[SKID.SM_FATALBLOW] = {
 		"Fatal Blow",
 		"Max Level: 1",
 		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Causes Stun status on targeted enemy when using Level 6 Bash or higher. The chance of inflicting Stun increases with Bash skill level and Base Level of the caster. ^000000"
+		"Description: ^777777Causes Stun status on targeted",
+		"enemy when using Level 6 Bash or higher.",
+		"The chance of inflicting Stun increases with",
+		"Bash skill level and Base Level of the caster.",
+		"It also increases Bash's crit rate by 50.^000000"
 	},
 	[SKID.SM_AUTOBERSERK] = {
 		"Auto Berserk",
 		"Max Level: 1",
 		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive with activation ^000000",
-		"Description: ^777777Empowered by rage, character enters condition that is equivalent to Level 10 Provoke status when HP is reduced to less than 25% of MaxHP.",
-		"Provoked status lasts until character HP is restored to more than 25% of MaxHP or if Provoke effect is nullified. ^000000"
+		"Description: ^777777Empowered by rage, character",
+		"enters condition that is equivalent to Level",
+		"10 Provoke status when HP is reduced to less",
+		"than 25% of MaxHP.",
+		"Provoked status lasts until character HP is",
+		"restored to more than 25% of MaxHP or if",
+		"Provoke effect is nullified. ^000000"
 	},
 	[SKID.AC_MAKINGARROW] = {
 		"Arrow Crafting",
@@ -1691,24 +1793,24 @@ SKILL_DESCRIPT = {
 		"Element: ^777777Holy ^000000",
 		"Description: ^777777Summons a holy light to counter evil.",
         "Each Int point will improve its damage.^000000",
-		"[Lv 1]:^777777 130% matk ^000000",
-		"[Lv 2]:^777777 160% matk ^000000",
-		"[Lv 3]:^777777 190% matk ^000000",
-		"[Lv 4]:^777777 220% matk ^000000",
-		"[Lv 5]:^777777 250% matk ^000000"
+		"[Lv 1]:^777777 130% damage ^000000",
+		"[Lv 2]:^777777 160% damage ^000000",
+		"[Lv 3]:^777777 190% damage ^000000",
+		"[Lv 4]:^777777 220% damage ^000000",
+		"[Lv 5]:^777777 250% damage ^000000"
 	},
 	[SKID.AL_HOLYSMITE] = {
 		"Holy Smite",
 		"Max Level: 5",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Element: ^777777Holy ^000000",
-		"Description: ^777777Smites with holy light to purge fiends.",
-		"Each Str point will improve its damage.^000000",
-		"[Lv 1]:^777777 130% atk ^000000",
-		"[Lv 2]:^777777 160% atk ^000000",
-		"[Lv 3]:^777777 190% atk ^000000",
-		"[Lv 4]:^777777 220% atk ^000000",
-		"[Lv 5]:^777777 250% atk ^000000"
+		"Description: ^777777Smites with holy light to purge",
+		"fiends. Each Str point will improve its damage.^000000",
+		"[Lv 1]:^777777 130% damage ^000000",
+		"[Lv 2]:^777777 160% damage ^000000",
+		"[Lv 3]:^777777 190% damage ^000000",
+		"[Lv 4]:^777777 220% damage ^000000",
+		"[Lv 5]:^777777 250% damage ^000000"
 	},
     [SKID.AL_ZEALOT] = {
 		"Zealot",
@@ -1725,7 +1827,12 @@ SKILL_DESCRIPT = {
 		"Max Level: 1",
 		"2^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Creates a barrier of spiritual energy that will buffer attacks at the caster. Caster's remaining SP affects the amount of damage reduced by the barrier. More SP is drained as attacks buffered by the barrier accumulate. ^000000"
+		"Description: ^777777Creates a barrier of spiritual energy",
+		"that will buffer attacks at the caster.",
+		"Caster's remaining SP affects the amount of",
+		"damage reduced by the barrier. More SP is",
+		"drained as attacks buffered by the barrier",
+		"accumulate. ^000000"
 	},
 	[SKID.RG_SNATCHER] = {
 		"Snatcher",
@@ -4470,10 +4577,10 @@ SKILL_DESCRIPT = {
 		"[Lv 7]:^777777 Mastery ATK +35 ^000000",
 		"[Lv 8]:^777777 Mastery ATK +40 ^000000",
 		"[Lv 9]:^777777 Mastery ATK +45 ^000000",
-		"[Lv 10]:^777777 Mastery ATK +50 ^000000"
+		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
 		"Atk: (Skill Level * Job Level)/10",
 		"Aspd: 1% * Skill Level + (Job Level/10)",
-		"Ranged Damage: 0.5% * Skill Level + (Job Level/10)",
+		"Ranged Damage: 0.5% * Skill Level + (Job Level/10)"
 	},
 	[SKID.GS_SNAKEEYE] = {
 		"Snake's Eye",
@@ -5380,9 +5487,8 @@ SKILL_DESCRIPT = {
        "Pick Up",
         "Max Level: 1",
         "Skill Form: ^6666CCActive ^000000",
-        "Description: ^777777\"Pick up all your stuff.", -- Línea 1
-        "Don't be a mess!\"",                            -- Línea 2
-        " ^000000- Messy Mary"                           -- Línea 3 (Autor)
+        "Description: ^777777\"Pick up all your stuff.", 
+        "Don't be a mess!\" ^000000- Messy Mary"                                            
     },
 	[SKID.PR_REDEMPTIO] = {
 		"Redemptio",

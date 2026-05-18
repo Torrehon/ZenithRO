@@ -972,11 +972,23 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.WZ_ESTIMATION] = {
 		"WZ_ESTIMATION",
-		SkillName = "Sense",
+		SkillName = "Arcane Insight",
 		MaxLv = 1,
-		SpAmount = { 10 },
+		SpAmount = { 30 },
 		bSeperateLv = false,
-		AttackRange = { 9 }
+		AttackRange = { 1 }
+	},
+	[SKID.WZ_MAGUSSOUL] = {
+		"wz_magussoul",
+		SkillName = "Soul of the Magus",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.WZ_HEXERSOUL] = {
+		"wz_hexersoul",
+		SkillName = "Soul of the Hexer",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.BS_IRON] = {
 		"BS_IRON",
@@ -4603,7 +4615,7 @@ SKILL_INFO_LIST = {
 		"NJ_KIRIKAGE",
 		SkillName = "Shadow Slash",
 		MaxLv = 5,
-		SpAmount = { 32, 34, 36, 38, 40},
+		SpAmount = { 18, 21, 24, 27, 30},
 		AttackRange = { 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
 			{ SKID.NJ_KIRIKAGE,3 }
@@ -4624,8 +4636,8 @@ SKILL_INFO_LIST = {
 		"NJ_KASUMIKIRI",
 		SkillName = "Shadow Dash",
 		MaxLv = 10,
-		SpAmount = { 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30},
-		AttackRange = { 9, 9, 9, 9, 9 },
+		SpAmount = { 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
+		AttackRange = { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
 		_NeedSkillList = {
 			{ SKID.NJ_SHADOWJUMP,1 }
 		}

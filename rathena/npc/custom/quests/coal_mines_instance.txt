@@ -1,0 +1,238 @@
+// =============================================
+// Coal Mines Instance Quest & Custom Boss (Sequential Quests)
+// =============================================
+
+// --- 1. MINING SURVEYOR (mjo_dun01) ---
+mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
+	mes "[Garrick]";
+	
+	// Estado 5: Secuencia Completa (Todas las quests cerradas)
+	if (coalmines_quest >= 5) {
+		mes "Thanks to your efforts, the Orichalcum trade route is being evaluated.";
+		mes "The depths are still dangerous, but you've proven you can handle it.";
+		close;
+	}
+
+	// Estado 4: Entrega de Quest (ID: 80033 Activa)
+	if (coalmines_quest == 4) {
+		mes "By the gods... Is that truly a piece of raw Orichalcum?!";
+		next;
+		mes "Look at that sheen... The legends didn't lie. This quality is superb!";
+		next;
+		mes "You have done an amazing job, adventurer. Here is your reward as promised.";
+		next;
+		
+		// --- CIERRE DE LA ÚLTIMA QUEST ---
+		if (checkquest(80033, HAVEQUEST) != -1) { completequest 80033; }
+		
+		// --- RECOMPENSAS ---
+		getexp 18000, 14000; 
+		
+		// [PLACEHOLDER] Descomenta abajo cuando crees el gorro custom
+		// getitem ID_DEL_GORRO, 1; 
+		
+		set coalmines_quest, 5;
+		mes "If I manage to forge something out of this, I'll let you know!";
+		close;
+	}
+
+	// Estado 3: Instrucciones de extracción (ID: 80031 Activa)
+	if (coalmines_quest == 3) {
+		mes "Remember, you need to go to the deepest level (^FF0000mjo_dun03^000000) and find the exposed vein.";
+		mes "Take an ^FF0000Old Pick^000000 with you. The Skeleton Workers down there usually drop them.";
+		close;
+	}
+
+	// Estado 2: Regreso de la cacería (ID: 80030 Completa -> Transición a 80031)
+	if (coalmines_quest == 2) {
+		mes "You are back! Did you clear out those fiends?";
+		next;
+		mes "Excellent work! But now we face the real issue...";
+		next;
+		mes "The Orichalcum is deeply embedded in the walls of the third floor.";
+		mes "I am no fighter, so I cannot go down there myself.";
+		next;
+		mes "Please, take an ^FF0000Old Pick^000000 and try to extract a sample for me.";
+		
+		// --- CAMBIO DE QUEST NATIVA ---
+		if (checkquest(80030, HAVEQUEST) != -1) { completequest 80030; }
+		setquest 80031; // Activa: Orichalcum Extraction
+		
+		set coalmines_quest, 3;
+		close;
+	}
+
+	// Estado 1: Caza en progreso (ID: 80030 Activa)
+	if (coalmines_quest == 1) {
+		if (checkquest(80030, HUNTING) == 2) {
+			set coalmines_quest, 2;
+			mes "Ah, you've finished the inspection! Let's talk.";
+			next;
+			// Forzamos el re-clic automático para avanzar al diálogo del estado 2 directamente
+			// o el jugador puede volver a hablarle.
+		} else {
+			mes "Please hurry. We need to cull their numbers before doing any extraction.";
+			mes "Defeat ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000 so we can secure the perimeter.";
+			close;
+		}
+	}
+
+	// Estado 0: Inicio absoluto de la secuencia
+	if (coalmines_quest == 0) {
+		mes "Greetings, traveler. I am scouting these abandoned mines in search of ^FF0000Orichalcum^000000.";
+		next;
+		mes "It's a legendary mineral capable of forging equipment of unmatched quality.";
+		next;
+		mes "My maps indicate a vein exists on the lowest floor, but the place is crawling with aggressive monsters.";
+		next;
+		if (select("I'll help you.:Not interested.") == 2) close;
+		
+		// --- INICIO DE LA PRIMERA QUEST ---
+		setquest 80030; // Activa: Coal Mines Culling
+		set coalmines_quest, 1;
+		
+		mes "Thank you! Go down there and exterminate ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000.";
+		close;
+	}
+	close;
+}
+
+
+// --- 2. ORICHALCUM VEIN (mjo_dun03) ---
+mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
+
+	if (coalmines_quest < 3) {
+		mes "^888888*An unusual, metallic glint peeks through the rocky wall...*^000000";
+		close;
+	}
+
+	if (coalmines_quest >= 4) {
+		mes "^888888*The vein has been depleted. You should bring the material back to Garrick.*^000000";
+		close;
+	}
+
+	// Fase de Extracción (ID 80031 Activa)
+	if (coalmines_quest == 3) {
+		mes "^888888*You look closely at the wall. This is definitely the Orichalcum Vein.*^000000";
+		next;
+		
+		if (countitem(7318) < 1) { 
+			mes "^888888*You need an Old Pick to strike this mineral.*^000000";
+			close;
+		}
+		
+		if (select("Swing the pick!:Step back.") == 2) close;
+		
+		specialeffect2 153; 
+		soundeffect "mining.wav", 0; 
+		
+		.@chance = rand(1, 100);
+		
+		if (.@chance <= 30) { 
+			mes "^00FF00*Clang! A pristine chunk of Orichalcum falls into your hands!*^000000";
+			next;
+			mes "^FF0000*Suddenly, a deep rumble echoes from behind the wall... Something ancient has woken up.*^000000";
+			next;
+			
+			if (getcharid(1) == 0) {  
+				mes "You must be in a party to face the threat lurking within the walls.";  
+				close;  
+			}
+
+			if (!is_party_leader()) {  
+				mes "Only your party leader can breach the inner cavern.";  
+				next;
+				if (select("Enter Cavern.:Stay.") == 1) {
+					instance_enter("Coal Mines");
+				}
+				close;
+			}
+
+			mes "The wall is cracking open! Will you lead your party inside?";
+			if (select("Enter Instance.:Wait.") == 1) {
+				
+				// 1. Obtenemos el Party ID del jugador
+				.@party_id = getcharid(1); 
+				
+				// 2. Comprobamos si la Party YA tiene una instancia de "Coal Mines" asignada
+				if (instance_id(.@party_id) <= 0) {
+					
+					// 3. Creamos la instancia ASIGNÁNDOLA explícitamente a esta Party
+					// Formato: instance_create("Nombre_Instancia", Owner_ID, IOT_Party)
+					// IOT_Party se define internamente como 1 en rAthena, pero podemos usar el ID directo o omitirlo si rAthena asume Party por defecto, pero especificando el dueño.
+					
+					// Intenta primero con esta línea (versiones modernas):
+					if (instance_create("Coal Mines", .@party_id) < 0) {  
+						mes "The cavern collapsed before you could enter.";  
+						close;  
+					}
+				}
+				
+				// --- TRANSICIÓN DE QUESTS DE EXTRACCIÓN A BOSS DE LA INSTANCIA ---
+				if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; }
+				setquest 80032; 
+				
+				instance_enter("Coal Mines");
+			}
+			close;
+			
+		} else if (.@chance <= 10) { 
+			delitem 7318, 1;
+			mes "^FF0000*Snap! The Old Pick broke against the vein...*^000000";
+			close;
+		} else { 
+			mes "^888888*Sparks fly, but you fail to chip away any piece. Try again.*^000000";
+			close;
+		}
+	}
+}
+
+
+// --- 3. INSIDE INSTANCE (1@mjo o mapa duplicado) ---
+1@mjo,39,255,0	script	Inner Cavern Wall	557,{
+
+	if (coalmines_quest == 4) {
+		mes "The Mine Spirit has been appeased. The area is safe.";
+		next;
+		if (select("Leave Cavern.:Stay here.") == 1) {
+			warp "mjo_dun01", 52, 34;
+		}
+		close;
+	}
+
+	mes "The cavern is unstable. Defeat the guardian to secure your escape!";
+	close;
+
+OnInstanceInit:
+	setmapflag instance_mapname("1@mjo"), mf_noteleport;
+	setmapflag instance_mapname("1@mjo"), mf_nomemo;
+	
+	// Spawnea el Boss usando la ID 20600. 
+	// rAthena mapeará internamente la muerte del boss a la quest 80032 automáticamente si JEWEL está configurado como su Target.
+	monster instance_mapname("1@mjo"), 39, 245, "Mine Spirit", 20600, 1, instance_npcname("Inner Cavern Wall")+"::OnBossDead";
+	end;
+
+OnBossDead:
+	mapannounce instance_mapname("1@mjo"), "The Mine Spirit dissolves into dust! The path back is secure.", bc_map, "0x00FF00";
+	
+	// Sincronización de Quests para toda la Party en la Instancia
+	if (getcharid(1) > 0) .party_id = getcharid(1);
+	.@origin_aid = getcharid(3);
+	getpartymember .party_id, 2;
+	
+	for (.@i = 0; .@i < $@partymembercount; .@i++) {
+		if (attachrid($@partymemberaid[.@i])) {
+			// Si un miembro entró directo sin actualizar la 80031 (por ser miembro), le limpiamos la ventana
+			if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; } 
+			
+			// Completar la Caza del Boss (80032) y activar la Entrega (80033)
+			if (checkquest(80032, HAVEQUEST) != -1) { completequest 80032; }
+			setquest 80033; // Activa: Orichalcum Delivery
+			
+			if (coalmines_quest == 3) { set coalmines_quest, 4; }
+			detachrid;
+		}
+	}
+	attachrid(.@origin_aid);
+	end;
+}

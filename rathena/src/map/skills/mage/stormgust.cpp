@@ -22,25 +22,30 @@ void SkillStormGust::calculateSkillRatio(const Damage* wd, const block_list* src
 	base_skillratio -= 30; // Offset only once
 	base_skillratio += 50 * skill_lv;
 #else
-	base_skillratio += 40 * skill_lv;
+	base_skillratio += 30 * skill_lv;
 #endif
+
+    map_session_data* sd = const_cast<map_session_data*>(BL_CAST(BL_PC, src));
+// --- SOUL OF THE MAGUS: Multiplicador Total ---
+
+	if (sd != nullptr && pc_checkskill(sd, WZ_MAGUSSOUL) > 0) {
+		
+		// 1. Calculamos el ratio de daño total real (Añadiendo el 100% base)
+		int32 total_ratio = 100 + base_skillratio;
+		
+		// 2. Aplicamos el aumento del +15% de daño real (multiplicativo)
+		total_ratio = (total_ratio * 115) / 100;
+		
+		// 3. Devolvemos la variable al formato "extra" que rAthena espera
+		base_skillratio = total_ratio - 100;
+	}
 }
+
 
 void SkillStormGust::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 	// Storm Gust counter was dropped in renewal
-#ifdef RENEWAL
-	sc_start(src,target,SC_FREEZE,65-(5*skill_lv),skill_lv,skill_get_time2(getSkillId(),skill_lv));
-#else
-	status_change* tsc = status_get_sc( target );
 
-	if (tsc != nullptr) {
-		//On third hit, there is a 150% to freeze the target
-		if(tsc->sg_counter >= 3 &&
-			sc_start(src,target,SC_FREEZE,150,skill_lv,skill_get_time2(getSkillId(),skill_lv)))
-			tsc->sg_counter = 0;
-		// Being it only resets on success it'd keep stacking and eventually overflowing on mvps, so we reset at a high value
-		else if( tsc->sg_counter > 250 )
-			tsc->sg_counter = 0;
-	}
-#endif
+
+	sc_start(src,target,SC_FREEZING,15+(2*skill_lv),skill_lv,skill_get_time2(getSkillId(),skill_lv));
+
 }

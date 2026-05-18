@@ -83,5 +83,25 @@ QuestInfoList_C = {
 		Summary = "Defeat the Tormented Weaver.",
 		Hunt1 = "Tormented Weaver",
 		NpcName = "Grandmother Kyung",
-	}
+	},
+	[80030] = {
+		Title = "Coal Mines Culling",
+		Description = {
+			"Clear the path towards the 3rd level",
+			"so Garrick and his team mates can ",
+			"start looking for the Orichalcum."
+		},
+		Summary = "Defeat the Targets.",
+		Hunt1 = "Skeleton Worker",
+		NpcName = "Garrick the Surveyor",
+	},
+	[80031] = {
+		Title = "Orichalcum Extraction",
+		Description = {
+			"Grab an Old Pick from a Skeleton",
+			"Worker, and start mining! "
+		},
+		Summary = "Mine for Orichalcum.",
+		NpcName = "Orichalcum Vein",
+	},
 }

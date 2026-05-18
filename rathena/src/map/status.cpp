@@ -4704,7 +4704,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	// --- INICIO: Merchant Axe Mastery Custom CRIT (Solo 2-Handed) ---
 	// El bonus de crítico ahora es EXCLUSIVO para hachas a dos manos
 	if (sd->status.weapon == W_2HAXE) { 
-		if (pc_checkskill(sd, AM_AXEMASTERY) == 10) {
+		if (pc_checkskill(sd, AM_AXEMASTERY) > 0) {
 			
 			int jlvl = sd->status.job_level;
 			
@@ -4713,9 +4713,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Merchant Axe Mastery Custom CRIT ---
-	if(sc->getSCE(SC_NJ_COMBO)){
-		base_status->cri += 500;
-	}
+
 	if ((skill = pc_checkskill(sd, SHC_SHADOW_SENSE)) > 0)
 	{
 		if (sd->status.weapon == W_DAGGER || sd->status.weapon == W_DOUBLE_DD || 
@@ -6582,9 +6580,18 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			}
 			// --- FIN CÓDIGO CUSTOM ---
 
-			if (sd->matk_rate != 100) {
-				matk_min = matk_min * sd->matk_rate / 100;
-				matk_max = matk_max * sd->matk_rate / 100;
+			// 1. Clonamos el matk_rate actual para no alterar el valor base permanentemente
+			int final_matk_rate = sd->matk_rate;
+
+			// 2. Comprobamos la pasiva de Magus Soul
+			if (pc_checkskill(sd, WZ_MAGUSSOUL) > 0) {
+				final_matk_rate += 10; // +10% de MATK
+			}
+
+			// 3. Aplicamos la multiplicación con nuestro nuevo valor
+			if (final_matk_rate != 100) {
+				matk_min = matk_min * final_matk_rate / 100;
+				matk_max = matk_max * final_matk_rate / 100;
 			}
 		}
 
@@ -7658,6 +7665,8 @@ static int32 status_calc_batk(block_list *bl, status_change *sc, int32 batk)
 		batk -= batk * sc->getSCE(SC__ENERVATION)->val2 / 100;
 	if( sc->getSCE(SC_ZANGETSU) )
 		batk += sc->getSCE(SC_ZANGETSU)->val2;
+	if(sc->getSCE(SC_BURIED))
+		batk -= 25 * batk / 100;
 #ifdef RENEWAL
 	if (sc->getSCE(SC_LOUD))
 		batk += 30;
@@ -8162,6 +8171,8 @@ static defType status_calc_def(block_list *bl, status_change *sc, int32 def)
 		def /= 2;
 	if(sc->getSCE(SC_FREEZE))
 		def /= 2;
+	if(sc->getSCE(SC_ELECTROCUTE))
+		def -= 25 * def / 100;
 	if((sc->hasSCE(SC_POISON) || sc->hasSCE(SC_DPOISON)) && bl->type != BL_PC)
 		def = def * 75 / 100; //Should round down
 	if(sc->getSCE(SC_SIGNUMCRUCIS))
@@ -8273,28 +8284,16 @@ static int16 status_calc_def2(block_list *bl, status_change *sc, int32 def2)
 	if(sc->getSCE(SC_CONCENTRATION))
 		def2 -= def2 * sc->getSCE(SC_CONCENTRATION)->val4/100;
 #endif
-    // --- INICIO CÓDIGO CUSTOM: VANGUARD BALANCE V2 (+Nivel Base & % Cap) ---
-	if(sc->getSCE(SC_GUARD_STANCE)) {
+    // --- INICIO CÓDIGO CUSTOM: VANGUARD BALANCE ---
+	if (sc->getSCE(SC_GUARD_STANCE)) {
 		int skill_lv = sc->getSCE(SC_GUARD_STANCE)->val1;
-		int base_level = status_get_lv(bl);
-		int base_vit = status_get_vit(bl); 
-		
-		// 1. Bonos Planos
-		int flat_bonus = skill_lv * 4;                    // Escudo por nivel de skill (Máx +20)
-		int level_bonus = base_level / 2;                 // Mayor peso al Nivel Base (Máx +49)
-		int vit_bonus = (base_vit * skill_lv) / 10;       // Sinergia con VIT (Máx +49)
-		
-		// Sumamos los bonos planos a tu defensa actual (Soft DEF base)
-		def2 += flat_bonus + level_bonus + vit_bonus;
-		
-		// 2. Modificador Porcentual (Máx 20% al nivel 5)
-		int percentage_multiplier = skill_lv * 4; 
-		
-		// Aplicamos el % sobre la nueva defensa total (incluyendo los bonos de arriba)
-		int percentage_bonus = (def2 * percentage_multiplier) / 100;
-		
-		// Sumamos el bono porcentual para el resultado final
-		def2 += percentage_bonus;
+
+		// 1. Bono plano: +5 de VIT DEF por nivel de skill (Máx +25 a nivel 5)
+		def2 += skill_lv * 5;
+
+		// 2. Bono porcentual: +5% por nivel (Máx +25% a nivel 5)
+		// Se calcula sobre el def2 total que tengas en este momento (incluyendo el bono plano anterior)
+		def2 += (def2 * (skill_lv * 5)) / 100;
 	}
 	// --- FIN CÓDIGO CUSTOM ---
 	if(sc->getSCE(SC_POISON) || sc->getSCE(SC_DPOISON))
@@ -8411,8 +8410,8 @@ static int16 status_calc_mdef2(block_list *bl, status_change *sc, int32 mdef2)
 
 	if(sc->getSCE(SC_MINDBREAKER))
 		mdef2 -= mdef2 * sc->getSCE(SC_MINDBREAKER)->val3/100;
-	if(sc->getSCE(SC_BURNING))
-		mdef2 -= mdef2 * 25 / 100;
+	// if(sc->getSCE(SC_BURNING))
+		// mdef2 -= mdef2 * 25 / 100;
 	if(sc->getSCE(SC_ANALYZE))
 		mdef2 -= mdef2 * (14 * sc->getSCE(SC_ANALYZE)->val1) / 100;
 
@@ -10032,6 +10031,10 @@ static int32 status_get_sc_interval(enum sc_type type)
 		case SC_VOICEOFSIREN:
 			return 2250;
 		case SC_BURNING:
+		case SC_DROWN:
+		case SC_ELECTROCUTE:
+        case SC_BURIED:
+		    return 2000;
 		case SC_PYREXIA:
 			return 3000;
 		case SC_MAGICMUSHROOM:
@@ -10259,6 +10262,18 @@ t_tick status_get_sc_def(const block_list* src, const block_list* bl, sc_type ty
 			break;
 		case SC_BURNING:
 			sc_def = status->agi * 20 + status_get_lv(bl) * 20 + status->luk * 10;
+			tick_def2 = -2000;
+			break;
+		case SC_DROWN:
+			sc_def = status->vit * 20 + status_get_lv(bl) * 20 + status->luk * 10;
+			tick_def2 = -2000;
+			break;
+		case SC_ELECTROCUTE:
+			sc_def = status->dex * 20 + status_get_lv(bl) * 20 + status->luk * 10;
+			tick_def2 = -2000;
+			break;
+		case SC_BURIED:
+			sc_def = status->str * 20 + status_get_lv(bl) * 20 + status->luk * 10;
 			tick_def2 = -2000;
 			break;
 		case SC_FREEZING:
@@ -10711,9 +10726,35 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 			delay = 0;
 			break;
 		case SC_BURNING:
-			// Level 2 Fire Element is immune
-			if (status->def_ele == ELE_FIRE && status->ele_lv == 2)
+		case SC_DROWN:
+		case SC_ELECTROCUTE:
+		case SC_BURIED:
+		
+		// 0. Prevenir el reseteo del temporizador por Spam
+			// Si el objetivo ya tiene EXACTAMENTE el mismo estado que intentamos aplicar, cancelamos para que el DoT siga haciendo daño.
+			if (sc->getSCE(static_cast<sc_type>(type)) != nullptr)
 				return false;
+			
+			// 1. Inmunidades por Elemento
+			if (type == SC_BURNING && status->def_ele == ELE_FIRE && status->ele_lv >= 1) return false;
+			if (type == SC_DROWN && status->def_ele == ELE_WATER && status->ele_lv >= 1) return false;
+			if (type == SC_ELECTROCUTE && status->def_ele == ELE_WIND && status->ele_lv >= 1) return false;
+			if (type == SC_BURIED && status->def_ele == ELE_EARTH && status->ele_lv >= 1) return false;
+
+			// 2. Sobrescritura de Estados (Exclusividad mutua)
+			// Usamos getSCE() en lugar de data[] para respetar el código privado de rAthena
+			if (type != SC_BURNING && sc->getSCE(SC_BURNING) != nullptr) 
+				status_change_end(bl, SC_BURNING, -1);
+				
+			if (type != SC_DROWN && sc->getSCE(SC_DROWN) != nullptr) 
+				status_change_end(bl, SC_DROWN, -1);
+				
+			if (type != SC_ELECTROCUTE && sc->getSCE(SC_ELECTROCUTE) != nullptr) 
+				status_change_end(bl, SC_ELECTROCUTE, -1);
+				
+			if (type != SC_BURIED && sc->getSCE(SC_BURIED) != nullptr) 
+				status_change_end(bl, SC_BURIED, -1);
+				
 			break;
 	}
 
@@ -10786,6 +10827,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_STAGGER:
 			break;
 	    case SC_PSLOW:
+			break;
+	    case SC_ARCINSIGHT:
 			break;
 		case SC_KYRIE:
 		case SC_TUNAPARTY:
@@ -11631,6 +11674,9 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_POISON:
 		case SC_BLEEDING:
 		case SC_BURNING:
+		case SC_DROWN:
+		case SC_ELECTROCUTE:
+        case SC_BURIED:
 		case SC_KILLING_AURA:
 		case SC_WINKCHARM:
 		case SC_VOICEOFSIREN:
@@ -13514,6 +13560,9 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			case SC_DPOISON:
 			case SC_BLEEDING:
 			case SC_BURNING:
+			case SC_DROWN:
+			case SC_ELECTROCUTE:
+            case SC_BURIED:
 			case SC_TOXIN:
 				tick_time = tick;
 				tick = tick_time + max(val4, 0);
@@ -14741,11 +14790,68 @@ TIMER_FUNC(status_change_timer){
 		break;
 
 	case SC_BURNING:
+	case SC_DROWN:
+	case SC_ELECTROCUTE:
+	case SC_BURIED:
 		if (sce->val4 >= 0) {
-			int64 damage = 1000 + (3 * status->max_hp) / 100; // Deals fixed (1000 + 3%*MaxHP)
+			// FIX 1: Usamos 'int' en lugar de 'enum element' para evitar el error de conversión estricta en C++
+			int ele;
+			if (type == SC_BURNING) ele = ELE_FIRE;
+			else if (type == SC_DROWN) ele = ELE_WATER;
+			else if (type == SC_ELECTROCUTE) ele = ELE_WIND;
+			else ele = ELE_EARTH; 
+
+			int64 caster_matk = (sce->val2 > 0) ? sce->val2 : 1000; 
+
+			int hard_mdef = status->mdef;
+			if (hard_mdef > 100) hard_mdef = 100; 
+
+			int64 magic_dmg = caster_matk * (100 - hard_mdef) / 100;
+			magic_dmg -= status->mdef2;
+			if (magic_dmg < 0) magic_dmg = 0;
+
+			// battle_attr_fix aceptará el 'int ele' sin rechistar
+			magic_dmg = battle_attr_fix(bl, bl, magic_dmg, ele, status->def_ele, status->ele_lv);
+
+			int64 percent_dmg = 0;
+			
+			// FIX 2: Usamos tu hallazgo (status->mode & MD_MVP)
+			if (status->mode & MD_MVP) {
+				// Para MVPs: 0.1% de su HP máximo
+				percent_dmg = (status->max_hp) / 1000;
+			} else {
+				// Para Monstruos normales y Jugadores: 0.5% de su HP máximo
+				percent_dmg = (5 * status->max_hp) / 1000;
+			}
+
+			int64 damage = magic_dmg + percent_dmg; 
+
+			if (damage < 1) damage = 1;
+
 			freeLock.lock();
 			clif_damage(*bl, *bl, tick, 0, 1, damage, 1, DMG_NORMAL, 0, false);
 			status_fix_damage(bl, bl, damage, 1, 0);
+			
+			// --- NUEVO: EFECTOS VISUALES CADA VEZ QUE HACE TICK ---
+			if (type == SC_ELECTROCUTE) {
+				// Efecto 260 = El rayo de Thunderstorm cayendo sobre el objetivo
+				// Efecto 254 = El chispazo azul de Jupitel Thunder (puedes probar cuál te gusta más)
+				clif_specialeffect(bl, 1638, AREA); 
+			} 
+			else if (type == SC_BURIED) {
+				// Efecto 284 = Los pinchos de roca de Earth Spike saliendo del suelo
+				// Efecto 209 = La nube de polvo/piedra de Stone Curse
+				clif_specialeffect(bl, 1623, AREA); 
+				clif_specialeffect(bl, 2267, AREA); 
+			}
+			else if (type == SC_DROWN) {
+				// Efecto 111 = Burbujas (de Waterball) o 299 (Frost Diver)
+				clif_specialeffect(bl, 1667, AREA);
+				clif_specialeffect(bl, 109, AREA);
+			}
+			else if (type == SC_BURNING) {
+				clif_specialeffect(bl, 1665, AREA);
+			}
 		}
 		break;
 		

@@ -2545,12 +2545,12 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Armor: true
+      Right_Hand: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus bLuk,2;
-      bonus bFlee2,1;
+      bonus bLuk,1;
+      bonus bCritical2,1;
   - Id: 4002
     AegisName: Fabre_Card
     Name: Fabre Card
@@ -2563,7 +2563,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bVit,1;
-      bonus bMaxHP,100;
+      bonus bDef2,10;
   - Id: 4003
     AegisName: Pupa_Card
     Name: Pupa Card
@@ -2612,9 +2612,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bLuk,1;
-      bonus bCritical,1;
-      bonus bFlee2,1;
+      bonus bMatk, 3;
+      bonus bMatk, getrefine();
   - Id: 4007
     AegisName: Pecopeco_Egg_Card
     Name: Peco Peco Egg Card
@@ -2647,7 +2646,7 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Shoes: true
+      Right_Hand: true
     Flags:
       BuyingStore: true
     Script: |
@@ -2692,6 +2691,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bMaxHP,400;
+      bonus bDef2,15;
   - Id: 4013
     AegisName: Andre_Egg_Card
     Name: Andre Egg Card
@@ -2711,12 +2711,12 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Armor: true
+      Right_Hand: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus bMaxHP,400;
-      bonus bMaxSP,50;
+      bonus bMaxHP,120;
+      bonus bMaxSP,15;
   - Id: 4015
     AegisName: Condor_Card
     Name: Condor Card
@@ -2778,7 +2778,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bStr,1;
-      bonus bBaseAtk,3;
+      bonus bBaseAtk, getrefine();
   - Id: 4020
     AegisName: Farmiliar_Card
     Name: Familiar Card
@@ -2799,12 +2799,12 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Armor: true
+      Right_Hand: true
     Flags:
       BuyingStore: true
     Script: |
       bonus bDex,1;
-      bonus bBaseAtk,5;
+      bonus bBaseAtk,getrefine();
   - Id: 4022
     AegisName: Spore_Card
     Name: Spore Card
@@ -2817,6 +2817,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bVit,2;
+      bonus bDef2,5;
   - Id: 4023
     AegisName: Desert_Wolf_Babe_Card
     Name: Baby Desert Wolf Card
@@ -2829,6 +2830,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bInt,1;
+      bonus bMatk, 10;
   - Id: 4024
     AegisName: Plankton_Card
     Name: Plankton Card
@@ -2867,7 +2869,9 @@ Body:
       BuyingStore: true
     Script: |
       bonus bAgi,1;
-      bonus bFlee,1;
+      if (getrefine()>8) {
+      bonus bAspdRate, 2;
+      }
   - Id: 4027
     AegisName: Kukre_Card
     Name: Kukre Card
@@ -2904,7 +2908,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bBaseAtk,15;
-      bonus bCritical,1;
+      bonus bStr, 1;
   - Id: 4030
     AegisName: Mandragora_Card
     Name: Mandragora Card
@@ -2940,7 +2944,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bDef,2;
+      bonus bDef,3;
+      bonus bDef, getrefine()*3;
   - Id: 4033
     AegisName: Poporing_Card
     Name: Poporing Card
@@ -2953,6 +2958,7 @@ Body:
       BuyingStore: true
     Script: |
       skill "TF_DETOXIFY",1;
+      bonus2 bSkillAtk,"TF_POISON",15;
   - Id: 4034
     AegisName: Worm_Tail_Card
     Name: Wormtail Card
@@ -3015,6 +3021,8 @@ Body:
       BuyingStore: true
     Script: |
       bonus bHPrecovRate,20;
+      bonus bDef2, 5;
+      bonus bVit, 1;
   - Id: 4039
     AegisName: Stainer_Card
     Name: Stainer Card
@@ -3068,8 +3076,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubEle,Ele_Wind,10;
-      bonus bDef,2;
+      bonus2 bMagicAtkEle,Ele_Wind,8;
+      bonus bInt, 1;
   - Id: 4043
     AegisName: Andre_Card
     Name: Andre Card
@@ -3167,11 +3175,12 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Shoes: true
+      Both_Accessory: true
     Flags:
       BuyingStore: true
     Script: |
       bonus bAgi,2;
+      bonus bAspdRate,2;
   - Id: 4051
     AegisName: Yoyo_Card
     Name: Yoyo Card
@@ -3274,8 +3283,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_DemiHuman,30;
-      bonus2 bSubRace,RC_Player_Human,30;
+      bonus2 bSubRace,RC_DemiHuman,20;
+      bonus2 bSubRace,RC_Player_Human,20;
   - Id: 4059
     AegisName: Soldier_Andre_Card
     Name: Soldier Andre Card
@@ -3314,6 +3323,7 @@ Body:
     Script: |
       bonus bUnbreakableArmor;
       bonus bDef,1;
+      bonus bDef2, 10;
   - Id: 4062
     AegisName: Anacondaq_Card
     Name: Anacondaq Card
@@ -3373,8 +3383,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_Brute,30;
-      bonus2 bSubRace,RC_Player_Doram,30;
+      bonus2 bSubRace,RC_Brute,20;
+      bonus2 bSubRace,RC_Player_Doram,20;
   - Id: 4067
     AegisName: Megalodon_Card
     Name: Megalodon Card
@@ -3448,7 +3458,6 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bUnbreakableWeapon;
       bonus bBaseAtk,5;
   - Id: 4073
     AegisName: Pirate_Skel_Card
@@ -3461,7 +3470,11 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      skill "MC_DISCOUNT",5;
+      bonus bAtk, 10;
+      if (getskilllv("TF_LIGHTFINGERS") == 5) {
+         bonus bCritical,3;
+         bonus bAspdRate, 1;
+      }
   - Id: 4074
     AegisName: BigFoot_Card
     Name: Bigfoot Card
@@ -3473,7 +3486,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_Insect,30;
+      bonus2 bSubRace,RC_Insect,20;
   - Id: 4075
     AegisName: Argos_Card
     Name: Argos Card
@@ -3525,6 +3538,8 @@ Body:
       BuyingStore: true
     Script: |
       bonus bVit,3;
+      bonus bMaxHP,400;
+      bonus bDef2, 10;
   - Id: 4079
     AegisName: Mantis_Card
     Name: Mantis Card
@@ -3586,7 +3601,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_Fish,30;
+      bonus2 bSubRace,RC_Fish,20;
   - Id: 4084
     AegisName: Marine_Sphere_Card
     Name: Marine Sphere Card
@@ -4062,7 +4077,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_Dragon,30;
+      bonus2 bSubRace,RC_Dragon,20;
   - Id: 4121
     AegisName: Phreeoni_Card
     Name: Phreeoni Card
@@ -4273,7 +4288,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_Demon,30;
+      bonus2 bSubRace,RC_Demon,20;
   - Id: 4137
     AegisName: Drake_Card
     Name: Drake Card
@@ -4297,7 +4312,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubRace,RC_Angel,30;
+      bonus2 bSubRace,RC_Angel,20;
   - Id: 4139
     AegisName: Joker_Card
     Name: Joker Card
@@ -4310,6 +4325,7 @@ Body:
       BuyingStore: true
     Script: |
       skill "TF_STEAL",1;
+      skill "TF_LIGHTFINGERS",2;
   - Id: 4140
     AegisName: Knight_Of_Abyss_Card
     Name: Abysmal Knight Card
@@ -4437,7 +4453,10 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12028,RC_Insect,100;
+      bonus bDex,1;
+      if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_BOW){
+            bonus bLongAtkRate,3;
+      }
   - Id: 4150
     AegisName: Goat_Card
     Name: Goat Card
@@ -4477,10 +4496,11 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddItemGroupHealRate,IG_Juice,50;
-      bonus3 bAddMonsterDropItem,531,RC_Insect,300;
-      bonus3 bAddMonsterDropItem,532,RC_Insect,300;
-      bonus3 bAddMonsterDropItem,534,RC_Insect,300;
+      bonus2 bAddItemGroupHealRate,IG_Juice,100;
+      bonus2 bAddMonsterDropItem,531,300;
+      bonus2 bAddMonsterDropItem,532,300;
+      bonus2 bAddMonsterDropItem,533,300;
+      bonus2 bAddMonsterDropItem,534,300;  
   - Id: 4153
     AegisName: Crab_Card
     Name: Crab Card
@@ -4492,8 +4512,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bBaseAtk,5;
-      bonus2 bAddDamageClass,1266,30;
+     bonus2 bMagicAtkEle,Ele_Water,5;
   - Id: 4154
     AegisName: Rice_Cake_Boy_Card
     Name: Dumpling Child Card
@@ -4571,7 +4590,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bAgi,2;
-      if (getrefine()>8)
+      if (getrefine()>7)
          bonus bFlee,20;
   - Id: 4160
     AegisName: Antique_Firelock_Card
@@ -4585,7 +4604,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bStr,2;
-      if (getrefine()>8) {
+      if (getrefine()>7) {
          bonus bMaxHPrate,10;
          bonus bMaxSPrate,10;
       }
@@ -4602,6 +4621,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
+      bonus bMdef,5;
       bonus3 bAutoSpellWhenHit,"PR_GLORIA",1,50;
   - Id: 4162
     AegisName: Grizzly_Card
@@ -4795,8 +4815,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAutoSpell,"TF_POISON",1,20;
-      bonus2 bAddSkillBlow,52,5;
+      bonus3 bAutoSpell,"TF_POISON",(getskilllv("TF_POISON") == 10?10:1),20;
   - Id: 4176
     AegisName: Dullahan_Card
     Name: Dullahan Card
@@ -4823,8 +4842,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,993,RC_Plant,100;
-      bonus2 bSubEle,Ele_Earth,10;
+      bonus bInt,1;
+      bonus2 bMagicAtkEle,Ele_Earth,10;
   - Id: 4178
     AegisName: Dragon_Tail_Card
     Name: Dragon Tail Card
@@ -4851,7 +4870,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bAgi,1;
+      bonus bAgi,3;
   - Id: 4180
     AegisName: Driller_Card
     Name: Driller Card
@@ -4903,19 +4922,19 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bStr,1;
+      bonus bStr,3;
   - Id: 4184
     AegisName: Lava_Golem_Card
     Name: Lava Golem Card
     Type: Card
     Buy: 20
-    Weight: 10
+    Weight: 500
     Locations:
       Right_Hand: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddRace2,RC2_Golem,30;
+     bonus bAtk, 10;
   - Id: 4185
     AegisName: Rideword_Card
     Name: Rideword Card
@@ -4958,7 +4977,10 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12030,RC_Demon,100;
+      bonus bDex,1;
+      if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_BOW){
+            bonus bCritical,5;
+      }
   - Id: 4188
     AegisName: Leib_Olmai_Card
     Name: Leib Olmai Card
@@ -4972,8 +4994,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubEle,Ele_Fire,10;
-      bonus3 bAddMonsterDropItem,990,RC_Brute,100;
+      bonus bInt,1;
+      bonus2 bMagicAtkEle,Ele_Fire,10;
   - Id: 4189
     AegisName: Wraith_Dead_Card
     Name: Wraith Dead Card
@@ -4993,11 +5015,13 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Both_Accessory: true
+      Head_Top: true
+      Head_Mid: true
+      Head_Low: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12027,RC_Undead,100;
+      bonus2 bMagicAddRace,RC_Undead,10;
   - Id: 4191
     AegisName: Loli_Ruri_Card
     Name: Loli Ruri Card
@@ -5061,8 +5085,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubEle,Ele_Water,10;
-      bonus3 bAddMonsterDropItem,991,RC_Fish,100;
+      bonus bInt,1;
+      bonus2 bMagicAtkEle,Ele_Water,10;
   - Id: 4196
     AegisName: Marin_Card
     Name: Marin Card
@@ -5074,8 +5098,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddMonsterDropItem,909,2000;
-      bonus2 bAddMonsterDropItem,7126,10;
+      bonus2 bSkillAtk,"MG_FROSTDIVER",15;
   - Id: 4197
     AegisName: Mastering_Card
     Name: Mastering Card
@@ -5087,7 +5110,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bLuk,1;
+      bonus bLuk,3;
   - Id: 4198
     AegisName: Maya_Puple_Card
     Name: Maya Purple Card
@@ -5126,8 +5149,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      if (getrefine()<6)
-         bonus bMdef,7;
+      bonus bMdef,5;
+      bonus bMdef, getrefine()/2;
   - Id: 4201
     AegisName: Majoruros_Card
     Name: Majoruros Card
@@ -5163,8 +5186,9 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bBaseAtk,15;
-      bonus3 bAutoSpell,"MG_FIREBALL",3+2*(getskilllv("MG_FIREBALL") == 10),50;
+      bonus bMatk,15;
+      bonus3 bAutoSpell,"MG_FIREBALL",3,50;
+      bonus2 bSkillAtk,"MG_Fireball",25;
   - Id: 4204
     AegisName: Mini_Demon_Card
     Name: Mini Demon Card
@@ -5230,7 +5254,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bMaxSPrate,10;
-      bonus2 bSkillAtk,"MG_FROSTDIVER",5;
+      bonus2 bSkillAtk,"MG_FROSTDIVER",25;
   - Id: 4209
     AegisName: Violy_Card
     Name: Violy Card
@@ -5269,7 +5293,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bMdef,3;
+      bonus bDex,3;
   - Id: 4212
     AegisName: Bon_Gun_Card
     Name: Bongun Card
@@ -5320,7 +5344,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddMonsterDropItemGroup,IG_Food,10000;
+      bonus2 bSkillAtk,"MG_FIREWALL",25;
   - Id: 4216
     AegisName: Sasquatch_Card
     Name: Sasquatch Card
@@ -5366,13 +5390,15 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Both_Accessory: true
+      Shoes: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddMonsterDropItem,715,30;
-      bonus2 bAddMonsterDropItem,716,30;
-      bonus2 bAddMonsterDropItem,717,30;
+     skill SA_FREECAST,2;
+     if(BaseClass==Job_Sage){
+      bonus bAspdRate,3;
+      bonus bMatk,15;
+     } 
   - Id: 4220
     AegisName: Solider_Card
     Name: Solider Card
@@ -5437,7 +5463,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12032,RC_Brute,100;
+      bonus2 bSkillAtk,"MG_THUNDERSTORM",15;
   - Id: 4225
     AegisName: Stone_Shooter_Card
     Name: Stone Shooter Card
@@ -5449,8 +5475,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bBaseAtk,10;
-      bonus bHit,10;
+      bonus bLongAtkRate,5;
+      bonus bCritical,5;
   - Id: 4226
     AegisName: Sting_Card
     Name: Sting Card
@@ -5462,9 +5488,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bDef,2;
-      if (getrefine()>8)
-         bonus bMdef,5;
+      bonus2 bMagicAtkEle,Ele_Earth,getrefine()*2;
   - Id: 4227
     AegisName: Spring_Rabbit_Card
     Name: Spring Rabbit Card
@@ -5490,7 +5514,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12031,RC_Fish,100;
+      bonus2 bSkillAtk,"WZ_EARTHSPIKE",25;
+      bonus2 bCastrate,"WZ_EARTHSPIKE",-25;
   - Id: 4229
     AegisName: C_Tower_Manager_Card
     Name: Tower Keeper Card
@@ -5517,8 +5542,12 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bAgi,1;
-      bonus3 bAutoSpellWhenHit,"AS_CLOAKING",5,100;
+      bonus bAtk,5;
+      if(BaseClass==Job_Genin){
+      bonus2 bSkillAtk,"NJ_SYURIKEN",15;
+      bonus2 bSkillAtk,"NJ_KUNAI",15;
+      bonus2 bSkillAtk,"NJ_HUUMA",10;
+      } 
   - Id: 4231
     AegisName: Increase_Soil_Card
     Name: Mi Gao Card
@@ -5526,15 +5555,11 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Left_Hand: true
+      Both_Accessory: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddDefMonster,1285,50;
-      bonus2 bAddDefMonster,1286,50;
-      bonus2 bAddDefMonster,1287,50;
-      bonus2 bAddDefMonster,1899,50;
-      bonus2 bAddDefMonster,1900,50;
+      bonus2 bSkillAtk,"WZ_HEAVENDRIVE",15;
   - Id: 4232
     AegisName: Wild_Ginseng_Card
     Name: Hermit Plant Card
@@ -5546,10 +5571,10 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddItemGroupHealRate,IG_Herb,50;
-      bonus3 bAddMonsterDropItem,507,RC_Plant,300;
-      bonus3 bAddMonsterDropItem,508,RC_Plant,200;
-      bonus3 bAddMonsterDropItem,509,RC_Plant,100;
+      bonus2 bAddMonsterDropItem,507,200;
+      bonus2 bAddMonsterDropItem,508,100;
+      bonus2 bAddMonsterDropItem,509,50;
+      bonus2 bAddMonsterDropItem,510,50;
   - Id: 4233
     AegisName: Baby_Leopard_Card
     Name: Baby Leopard Card
@@ -5571,11 +5596,14 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Armor: true
+      Head_Top: true
+      Head_Mid: true
+      Head_Low: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAutoSpellWhenHit,"AC_CONCENTRATION",1+9*(getskilllv("AC_CONCENTRATION") == 10),30;
+      skill "AC_CONCENTRATION",2;
+      bonus3 bAutoSpellWhenHit,"AC_CONCENTRATION",2+8*(getskilllv("AC_CONCENTRATION") == 10),30;
   - Id: 4235
     AegisName: Cookie_XMAS_Card
     Name: Christmas Cookie Card
@@ -5668,6 +5696,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bMaxHP,300;
+      bonus2 bMagicAtkEle,Ele_Holy,20;
       if (readparam(bLuk)>=77) {
          bonus bHPrecovRate,100;
          bonus bSPrecovRate,100;
@@ -5684,8 +5713,9 @@ Body:
       BuyingStore: true
     Script: |
       bonus bVit,2;
-      if (getrefine()>8)
+      if (getrefine()>7)
          bonus bMaxHP,800;
+         bonus Def2, 40;
   - Id: 4243
     AegisName: Antonio_Card
     Name: Antonio Card
@@ -5751,8 +5781,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bBaseAtk,5;
-      bonus2 bAddDamageClass,1074,30;
+      bonus2 bSkillAtk,"WZ_WATERBALL",5;
   - Id: 4248
     AegisName: Ancient_Mummy_Card
     Name: Ancient Mummy Card
@@ -5764,7 +5793,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAutoSpellWhenHit,"AL_CRUCIS",5,30;
+      bonus3 bAutoSpellWhenHit,"AL_CRUCIS",3,30;
   - Id: 4249
     AegisName: Ancient_Worm_Card
     Name: Ancient Worm Card
@@ -5802,11 +5831,10 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bAddDamageClass,1285,40;
-      bonus2 bAddDamageClass,1286,40;
-      bonus2 bAddDamageClass,1287,40;
-      bonus2 bAddDamageClass,1899,40;
-      bonus2 bAddDamageClass,1900,40;
+      bonus2 bSkillAtk,"WZ_VERMILION",4;
+      bonus2 bSkillAtk,"WZ_STORMGUST",4;
+      bonus2 bSkillAtk,"WZ_METEOR",4;
+      bonus bCastrate,-2; 
   - Id: 4252
     AegisName: Alligator_Card
     Name: Alligator Card
@@ -5830,8 +5858,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus2 bSubClass,Class_Boss,40;
-      bonus2 bSubClass,Class_Normal,-40;
+      bonus2 bSubClass,Class_Boss,30;
+      bonus2 bSubClass,Class_Normal,-30;
   - Id: 4254
     AegisName: Tirfing_Card
     Name: Ogretooth Card
@@ -5868,7 +5896,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12034,RC_DemiHuman,100;
+      bonus bAtk,10;
+      bonus2 bSkillAtk,"AC_SHOWER",15;
   - Id: 4257
     AegisName: Wild_Rose_Card
     Name: Wild Rose Card
@@ -5909,8 +5938,10 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bDef,1;
-      bonus bHPrecovRate,30;
+      bonus bDef,2;
+      bonus bHPrecovRate,50;
+      bonus bVit,2;
+      bonus Def2,20;
   - Id: 4260
     AegisName: Wootan_Shooter_Card
     Name: Wootan Shooter Card
@@ -5952,7 +5983,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12029,RC_Plant,100;
+      bonus2 bSkillAtk,"MG_LIGHTNINGBOLT",25;
+      bonus2 bCastrate,"MG_LIGHTNINGBOLT",-25;
   - Id: 4263
     AegisName: Incant_Samurai_Card
     Name: Samurai Spector Card
@@ -5993,11 +6025,15 @@ Body:
     Buy: 20
     Weight: 10
     Locations:
-      Both_Accessory: true
+      Right_Hand: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12033,RC_Angel,100;
+     bonus bAtk,10;
+      if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_MACE) {
+        bonus bAspdRate,3;
+        bonus bCritical,5;
+      }
   - Id: 4266
     AegisName: Eclipse_Card
     Name: Eclipse Card
@@ -6009,7 +6045,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bVit,1;
+      bonus bInt,3;
   - Id: 4267
     AegisName: Explosion_Card
     Name: Explosion Card

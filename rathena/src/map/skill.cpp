@@ -1183,11 +1183,11 @@ struct s_skill_unit_layout *skill_get_unit_layout(uint16 skill_id, uint16 skill_
 
 	nullpo_retr(nullptr, src);
 
-	//Monsters sometimes deploy more units on level 10
-	if (src->type == BL_MOB && skill_lv >= 10) {
-		if (skill_id == WZ_WATERBALL)
-			pos = 4; //9x9 Area
-	}
+	// //Monsters sometimes deploy more units on level 10
+	// if (src->type == BL_MOB && skill_lv >= 10) {
+		// if (skill_id == WZ_WATERBALL)
+			// pos = 4; //9x9 Area
+	// }
 
 	if (pos != -1) // simple single-definition layout
 		return &skill_unit_layout[pos];
@@ -1790,19 +1790,19 @@ int32 skill_counter_additional_effect (block_list* src, block_list *bl, uint16 s
 			sp += sd->bonus.long_sp_gain_value;
 			hp += sd->bonus.long_hp_gain_value;
 		}
-		if( attack_type&BF_MAGIC ) {
-			sp += sd->bonus.magic_sp_gain_value;
-			hp += sd->bonus.magic_hp_gain_value;
-			if( skill_id == WZ_WATERBALL ) {//(bugreport:5303)
-				status_change *sc = nullptr;
-				if( ( sc = status_get_sc(src) ) ) {
-					if(sc->getSCE(SC_SPIRIT) &&
-								sc->getSCE(SC_SPIRIT)->val2 == SL_WIZARD &&
-								sc->getSCE(SC_SPIRIT)->val3 == WZ_WATERBALL)
-								sc->getSCE(SC_SPIRIT)->val3 = 0; //Clear bounced spell check.
-				}
-			}
-		}
+		// if( attack_type&BF_MAGIC ) {
+			// sp += sd->bonus.magic_sp_gain_value;
+			// hp += sd->bonus.magic_hp_gain_value;
+			// if( skill_id == WZ_WATERBALL ) {//(bugreport:5303)
+				// status_change *sc = nullptr;
+				// if( ( sc = status_get_sc(src) ) ) {
+					// if(sc->getSCE(SC_SPIRIT) &&
+								// sc->getSCE(SC_SPIRIT)->val2 == SL_WIZARD &&
+								// sc->getSCE(SC_SPIRIT)->val3 == WZ_WATERBALL)
+								// sc->getSCE(SC_SPIRIT)->val3 = 0; //Clear bounced spell check.
+				// }
+			// }
+		// }
 		if( hp || sp ) { // updated to force healing to allow healing through berserk
 			status_heal(src, hp, sp, battle_config.show_hp_sp_gain ? 3 : 1);
 		}
@@ -2653,11 +2653,11 @@ void skill_attack_blow(block_list *src, block_list *dsrc, block_list *target, ui
 			dir = unit_getdir(target); // Backwards
 			break;
 		// This ensures the storm randomly pushes instead of exactly a cell backwards per official mechanics.
-		case NPC_STORMGUST2:
-		case WZ_STORMGUST:
-			if(!battle_config.stormgust_knockback)
-				dir = rnd()%8;
-			break;
+		// case NPC_STORMGUST2:
+		// case WZ_STORMGUST:
+			// if(!battle_config.stormgust_knockback)
+				// dir = rnd()%8;
+			// break;
 		case MC_CARTREVOLUTION:
 			if (battle_config.cart_revo_knockback)
 				dir = 6; // Official servers push target to the West
@@ -2892,8 +2892,8 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 			dmg.damage = dmg.damage2 = 0;
 			dmg.dmg_lv = ATK_MISS; //This will prevent skill additional effect from taking effect. [Skotlex]
 			sp = sp * tsc->getSCE(SC_MAGICROD)->val2 / 100;
-			if(skill_id == WZ_WATERBALL && skill_lv > 1)
-				sp = sp/((skill_lv|1)*(skill_lv|1)); //Estimate SP cost of a single water-ball
+			// if(skill_id == WZ_WATERBALL && skill_lv > 1)
+				// sp = sp/((skill_lv|1)*(skill_lv|1)); //Estimate SP cost of a single water-ball
 			status_heal(bl, 0, sp, 2);
 		}
 		if( (dmg.damage || dmg.damage2) && tsc && (tsc->getSCE(SC_HALLUCINATIONWALK) && rnd()%100 < tsc->getSCE(SC_HALLUCINATIONWALK)->val3 || tsc->getSCE(SC_NPC_HALLUCINATIONWALK) && rnd()%100 < tsc->getSCE(SC_NPC_HALLUCINATIONWALK)->val3) ) {
@@ -3782,20 +3782,20 @@ TIMER_FUNC(skill_timerskill){
 				case MER_LEXDIVINA:
 					sc_start(src, target, SC_SILENCE, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
 					break;
-				case WZ_WATERBALL:
-				{
-					//Get the next waterball cell to consume
-					struct s_skill_unit_layout *layout;
-					int32 i;
-					layout = skill_get_unit_layout(skl->skill_id, skl->skill_lv, src, skl->x, skl->y);
-					for (i = skl->type; i >= 0 && i < layout->count; i++) {
-						int32 ux = skl->x + layout->dx[i];
-						int32 uy = skl->y + layout->dy[i];
-						unit = map_find_skill_unit_oncell(src, ux, uy, WZ_WATERBALL, nullptr, 0);
-						if (unit)
-							break;
-					}
-				}
+				// case WZ_WATERBALL:
+				// {
+					// //Get the next waterball cell to consume
+					// struct s_skill_unit_layout *layout;
+					// int32 i;
+					// layout = skill_get_unit_layout(skl->skill_id, skl->skill_lv, src, skl->x, skl->y);
+					// for (i = skl->type; i >= 0 && i < layout->count; i++) {
+						// int32 ux = skl->x + layout->dx[i];
+						// int32 uy = skl->y + layout->dy[i];
+						// unit = map_find_skill_unit_oncell(src, ux, uy, WZ_WATERBALL, nullptr, 0);
+						// if (unit)
+							// break;
+					// }
+				// }
 					[[fallthrough]];
 				case WZ_JUPITEL:
 					// Official behaviour is to hit as long as there is a line of sight, regardless of distance
@@ -6299,12 +6299,12 @@ std::shared_ptr<s_skill_unit_group> skill_unitsetting(block_list *src, uint16 sk
 				unit_val1 = 200 + 200*skill_lv;
 				unit_val2 = map_getcell(src->m, ux, uy, CELL_GETTYPE);
 				break;
-			case WZ_WATERBALL:
-				//Check if there are cells that can be turned into waterball units
-				if (!sd || map_getcell(src->m, ux, uy, CELL_CHKWATER) 
-					|| (map_find_skill_unit_oncell(src, ux, uy, SA_DELUGE, nullptr, 1)) != nullptr || (map_find_skill_unit_oncell(src, ux, uy, NJ_SUITON, nullptr, 1)) != nullptr)
-					break; //Turn water, deluge or suiton into waterball cell
-				continue;
+			// case WZ_WATERBALL:
+				// //Check if there are cells that can be turned into waterball units
+				// if (!sd || map_getcell(src->m, ux, uy, CELL_CHKWATER) 
+					// || (map_find_skill_unit_oncell(src, ux, uy, SA_DELUGE, nullptr, 1)) != nullptr || (map_find_skill_unit_oncell(src, ux, uy, NJ_SUITON, nullptr, 1)) != nullptr)
+					// break; //Turn water, deluge or suiton into waterball cell
+				// continue;
 			case GS_DESPERADO:
 				unit_val1 = abs(layout->dx[i]);
 				unit_val2 = abs(layout->dy[i]);
@@ -6905,12 +6905,12 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 				}
 					break;
 #ifndef RENEWAL // The storm gust counter was dropped in renewal
-				case WZ_STORMGUST: //SG counter does not reset per stormgust. IE: One hit from a SG and two hits from another will freeze you.
-					if (tsc)
-						tsc->sg_counter++; //SG hit counter.
-					if (skill_attack(skill_get_type(sg->skill_id),ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0) <= 0 && tsc)
-						tsc->sg_counter=0; //Attack absorbed.
-					break;
+				// case WZ_STORMGUST: //SG counter does not reset per stormgust. IE: One hit from a SG and two hits from another will freeze you.
+					// if (tsc)
+						// tsc->sg_counter++; //SG hit counter.
+					// if (skill_attack(skill_get_type(sg->skill_id),ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0) <= 0 && tsc)
+						// tsc->sg_counter=0; //Attack absorbed.
+					// break;
 #endif
 				case GS_DESPERADO:
 					if (rnd()%100 < unit->val1)
@@ -11089,8 +11089,8 @@ int32 skill_attack_area(block_list *bl, va_list ap)
 
 	switch (skill_id) {
 		case WZ_FROSTNOVA: //Skills that don't require the animation to be removed
-			if (src->x == bl->x && src->y == bl->y)
-				return 0; //Does not hit current cell
+			// if (src->x == bl->x && src->y == bl->y)
+				// return 0; //Does not hit current cell
 			if (map_getcell(bl->m, bl->x, bl->y, CELL_CHKLANDPROTECTOR)) // Attack should not happen if the target is on Land Protector
 				return 0;
 			[[fallthrough]];
@@ -11404,15 +11404,15 @@ int32 skill_cell_overlap(block_list *bl, va_list ap)
 					break;
 			}
 			break;
-		case WZ_WATERBALL:
-			switch (unit->group->skill_id) {
-				case SA_DELUGE:
-				case NJ_SUITON:
-					//Consumes deluge/suiton
-					skill_delunit(unit);
-					return 1;
-			}
-			break;
+		// case WZ_WATERBALL:
+			// switch (unit->group->skill_id) {
+				// case SA_DELUGE:
+				// case NJ_SUITON:
+					// //Consumes deluge/suiton
+					// skill_delunit(unit);
+					// return 1;
+			// }
+			// break;
 		case WZ_ICEWALL:
 #ifndef RENEWAL
 		case HP_BASILICA:

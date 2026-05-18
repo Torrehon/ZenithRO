@@ -263,13 +263,21 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 		next;
 		mes "[Culvert Guardian]";
 		mes "Will you deliver ^FF000020 Red Potions^000000 to the novices trapped on the 2nd floor?";
-		if (select("I'll save them!.:Not interested.") == 1) {
-			if (checkquest(80001) == -1) setquest 80001;
-			set culvert_quest, 1;
-			warp "prt_sewb1",131,247;
+		switch(select("I'll save them!.:Just let me in without the quest.:Not interested.")) {
+			case 1:
+				if (checkquest(80001) == -1) setquest 80001;
+				set culvert_quest, 1;
+				warp "prt_sewb1",131,247;
+				end;
+			case 2:
+				warp "prt_sewb1",131,247;
+				end;
+			case 3:
+				close;
 		}
 	} else {
 		warp "prt_sewb1",131,247;
+		end;
 	}
 	close;
 }

@@ -3105,7 +3105,11 @@ static bool is_attack_critical(struct Damage* wd, block_list *src, const block_l
 #endif
 				break;
 			case NJ_KASUMIKIRI:
+				if(sc->getSCE(SC_NJ_COMBO)){
+		        cri += 500 + 50*skill_lv;
+	            } else {
 				cri += 250 + 50*skill_lv;
+				}
 				break;
 		    // --- INICIO CUSTOM: Heavy Shot ---
 			case AC_HEAVYSHOT:
@@ -5974,7 +5978,6 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 		int32 skillratio = 100; //Skill dmg modifiers.
 		if (sd != nullptr)
 			skillratio += sd->bonus.skill_ratio;
-
 #ifdef RENEWAL
 		// Some skills do not use S.MATK and skillratio
 		bool has_skillratio = false;
@@ -6178,6 +6181,9 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 
 			if (sc != nullptr && sc->getSCE(SC_EXPIATIO))
 				i += 5 * sc->getSCE(SC_EXPIATIO)->val1;
+			// --- ARCANE INSIGHT (Sense Rework) ---
+			if (sc != nullptr && sc->getSCE(SC_ARCINSIGHT))
+				i += sc->getSCE(SC_ARCINSIGHT)->val1;
 
 			if (sd != nullptr) {
 				i += sd->indexed_bonus.ignore_mdef_by_race[tstatus->race] + sd->indexed_bonus.ignore_mdef_by_race[RC_ALL] +

@@ -122,6 +122,15 @@ StateIconList[EFST_IDs.EFST_DUELIST] = {
 		{ "Increases Crit Damage, Atk and Aspd", { 255, 255, 255 } }
 	}
 }
+StateIconList[EFST_IDs.EFST_ARCINSIGHT] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Arcane Insight", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Ignores enemy's magic defense", { 255, 255, 255 } }
+	}
+}
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
@@ -4158,8 +4167,38 @@ StateIconList[EFST_IDs.EFST_BODYSTATE_BURNNING] = {
 	descript = {
 		{ "Burning", COLOR_TITLE_DEBUFF },
 		{ "%s", COLOR_TIME },
-		{ "Damage every 3 seconds" },
+		{ "Fire damage every 2 seconds" },
 		{ "Reduces MDEF" }
+	}
+}
+StateIconList[EFST_IDs.EFST_DROWN] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Drown", COLOR_TITLE_DEBUFF },
+		{ "%s", COLOR_TIME },
+		{ "Water damage every 2 seconds" },
+		{ "Reduces movement speed" }
+	}
+}
+StateIconList[EFST_IDs.EFST_BURIED] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Buried", COLOR_TITLE_DEBUFF },
+		{ "%s", COLOR_TIME },
+		{ "Earth damage every 2 seconds" },
+		{ "Reduces attack" }
+	}
+}
+StateIconList[EFST_IDs.EFST_ELECTROCUTE] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Electrocute", COLOR_TITLE_DEBUFF },
+		{ "%s", COLOR_TIME },
+		{ "Wind damage every 2 seconds" },
+		{ "Reduces defense" }
 	}
 }
 StateIconList[EFST_IDs.EFST_BODYSTATE_IMPRISON] = {

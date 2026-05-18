@@ -34707,6 +34707,7 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
+    Slots: 1
     Refineable: true
     View: 543
     Script: |
@@ -36028,6 +36029,7 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
+    Slots: 1
     Refineable: true
     View: 167
     Script: |
@@ -46300,7 +46302,7 @@ Body:
     Weight: 400
     Attack: 45
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46353,7 +46355,7 @@ Body:
     Weight: 800
     Attack: 60
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46397,7 +46399,7 @@ Body:
     Weight: 1000
     Attack: 65
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46433,16 +46435,16 @@ Body:
               bonus bAspdRate, 5;
             }
         }
-    - Id: 40003
+  - Id: 40003
     AegisName: Dawn_Staff
     Name: Dawn Staff
     Type: Weapon
-    SubType: 1hStaff
+    SubType: Staff
     Buy: 20
     Weight: 600
     Attack: 20
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46450,6 +46452,8 @@ Body:
     Refineable: true
     Jobs:
       Mage: true
+      Wizard: true
+      Sage: true
       Acolyte: true
       SoulLinker: true
     Trade:
@@ -46487,7 +46491,7 @@ Body:
     Weight: 500
     Attack: 50
     Range: 5
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
       Left_Hand: true
@@ -46529,7 +46533,7 @@ Body:
     Weight: 600
     Attack: 60
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46575,7 +46579,7 @@ Body:
     Weight: 1500
     Attack: 85
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
       Left_Hand: true
@@ -46613,7 +46617,7 @@ Body:
     Weight: 200
     Attack: 25
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46651,7 +46655,7 @@ Body:
     Weight: 500
     Attack: 25
     Range: 7
-    Slots: 0
+    Slots: 2
     Locations:
       Both_Hand: true
     WeaponLevel: 2
@@ -46685,7 +46689,7 @@ Body:
     Weight: 1200
     Attack: 65
     Range: 9
-    Slots: 0
+    Slots: 2
     Locations:
       Both_Hand: true
     WeaponLevel: 2
@@ -46718,7 +46722,7 @@ Body:
     Weight: 400
     Attack: 35
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Right_Hand: true
     WeaponLevel: 2
@@ -46751,7 +46755,7 @@ Body:
     Weight: 1000
     Attack: 55
     Range: 1
-    Slots: 0
+    Slots: 2
     Locations:
       Both_Hand: true
     WeaponLevel: 2
@@ -46782,6 +46786,7 @@ Body:
     Buy: 20
     Weight: 100
     ArmorLevel: 1
+    Slots: 1
     Locations:
       Both_Accessory: true
     EquipLevelMin: 1
@@ -46797,6 +46802,7 @@ Body:
     Buy: 20
     Weight: 100
     ArmorLevel: 1
+    Slots: 1
     Locations:
       Both_Accessory: true
     EquipLevelMin: 1

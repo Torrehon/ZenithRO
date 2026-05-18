@@ -7058,12 +7058,12 @@ Body:
   - Id: 1151
     AegisName: MYST
     Name: Myst
-    Level: 38
+    Level: 42
     Hp: 3745
     BaseExp: 1391
-    JobExp: 688
-    Attack: 365
-    Attack2: 445
+    JobExp: 1188
+    Attack: 265
+    Attack2: 345
     MagicDefense: 40
     Agi: 38
     Vit: 18
@@ -7077,7 +7077,7 @@ Body:
     Race: Formless
     Element: Poison
     ElementLevel: 1
-    WalkSpeed: 200
+    WalkSpeed: 300
     AttackDelay: 1576
     AttackMotion: 576
     ClientAttackMotion: 336
@@ -7095,9 +7095,9 @@ Body:
       - Item: Elunium_Stone
         Rate: 97
       - Item: Anodyne
-        Rate: 20
+        Rate: 100
       - Item: Grape
-        Rate: 35
+        Rate: 350
       - Item: Myst_Card
         Rate: 1
         StealProtected: true
@@ -7908,10 +7908,10 @@ Body:
   - Id: 1169
     AegisName: SKEL_WORKER
     Name: Skeleton Worker
-    Level: 30
-    Hp: 2872
-    BaseExp: 397
-    JobExp: 240
+    Level: 35
+    Hp: 3472
+    BaseExp: 897
+    JobExp: 740
     Attack: 242
     Attack2: 288
     MagicDefense: 15
@@ -7927,13 +7927,15 @@ Body:
     Race: Undead
     Element: Undead
     ElementLevel: 1
-    WalkSpeed: 400
+    WalkSpeed: 300
     AttackDelay: 2420
     AttackMotion: 720
     ClientAttackMotion: 432
     DamageMotion: 384
     Ai: 04
     Drops:
+      - Item: Old_Pick
+        Rate: 100
       - Item: Iron
         Rate: 400
       - Item: Lantern
@@ -39148,13 +39150,13 @@ Body:
     AegisName: TATACHO
     Name: Tatacho
     Level: 81
-    Hp: 29500
-    BaseExp: 23700
+    Hp: 39500
+    BaseExp: 21700
     JobExp: 13825
     Attack: 1419
     Attack2: 1785
     Defense: 20
-    MagicDefense: 17
+    MagicDefense: 45
     Str: 106
     Agi: 40
     Vit: 30
@@ -39195,19 +39197,19 @@ Body:
   - Id: 1987
     AegisName: CENTIPEDE
     Name: Centipede
-    Level: 110
+    Level: 82
     Hp: 45662
-    BaseExp: 27397
-    JobExp: 15982
-    Attack: 15000
-    Attack2: 16000
-    Defense: 40
-    MagicDefense: 25
+    BaseExp: 17397
+    JobExp: 13982
+    Attack: 1530
+    Attack2: 1820
+    Defense: 45
+    MagicDefense: 15
     Str: 112
     Agi: 43
     Vit: 30
     Int: 5
-    Dex: 131
+    Dex: 111
     Luk: 12
     AttackRange: 2
     SkillRange: 10
@@ -39294,13 +39296,13 @@ Body:
   - Id: 1989
     AegisName: HILLSRION
     Name: Hillslion
-    Level: 105
+    Level: 79
     Hp: 34600
     BaseExp: 20760
     JobExp: 12110
-    Attack: 5000
-    Attack2: 5500
-    Defense: 28
+    Attack: 1645
+    Attack2: 2068
+    Defense: 15
     MagicDefense: 15
     Str: 105
     Agi: 60
@@ -39317,7 +39319,7 @@ Body:
       Manuk: true
     Element: Earth
     ElementLevel: 1
-    WalkSpeed: 100
+    WalkSpeed: 125
     AttackDelay: 400
     AttackMotion: 780
     ClientAttackMotion: 480
@@ -39344,14 +39346,14 @@ Body:
   - Id: 1990
     AegisName: HARDROCK_MOMMOTH
     Name: Hardrock Mammoth
-    Level: 115
+    Level: 91
     Hp: 4137000
     BaseExp: 827400
     JobExp: 413700
-    Attack: 30000
-    Attack2: 36000
-    Defense: 50
-    MagicDefense: 60
+    Attack: 4156
+    Attack2: 7989
+    Defense: 60
+    MagicDefense: 30
     Str: 115
     Agi: 35
     Int: 30
@@ -39392,12 +39394,12 @@ Body:
     AegisName: TENDRILRION
     Name: Tendrilion
     JapaneseName: Tendrillion
-    Level: 113
+    Level: 90
     Hp: 3657330
     BaseExp: 731466
     JobExp: 365733
-    Attack: 20000
-    Attack2: 24000
+    Attack: 3156
+    Attack2: 5989
     Defense: 33
     MagicDefense: 30
     Str: 113
@@ -39439,18 +39441,18 @@ Body:
   - Id: 1992
     AegisName: CORNUS
     Name: Cornus
-    Level: 108
-    Hp: 41220
+    Level: 87
+    Hp: 61220
     BaseExp: 30854
     JobExp: 4427
-    Attack: 12000
-    Attack2: 13000
+    Attack: 2956
+    Attack2: 3670
     Defense: 35
     MagicDefense: 80
     Str: 110
     Agi: 45
     Vit: 80
-    Int: 200
+    Int: 165
     Dex: 105
     Luk: 10
     AttackRange: 2
@@ -39489,14 +39491,14 @@ Body:
   - Id: 1993
     AegisName: NAGA
     Name: Naga
-    Level: 111
-    Hp: 46708
+    Level: 88
+    Hp: 56708
     BaseExp: 30360
     JobExp: 16348
-    Attack: 8000
-    Attack2: 8800
-    Defense: 38
-    MagicDefense: 15
+    Attack: 2111
+    Attack2: 2423
+    Defense: 55
+    MagicDefense: 5
     Str: 113
     Agi: 42
     Vit: 30
@@ -39536,14 +39538,14 @@ Body:
   - Id: 1994
     AegisName: LUCIOLA_VESPA
     Name: Luciola Vespa
-    Level: 104
-    Hp: 32600
+    Level: 83
+    Hp: 42600
     BaseExp: 16300
     JobExp: 11410
-    Attack: 9000
-    Attack2: 9900
-    Defense: 29
-    MagicDefense: 5
+    Attack: 2435
+    Attack2: 3280
+    Defense: 15
+    MagicDefense: 35
     Str: 104
     Agi: 56
     Vit: 30
@@ -39675,11 +39677,11 @@ Body:
     AegisName: G_TATACHO
     Name: Tatacho
     Level: 81
-    Hp: 29500
+    Hp: 39500
     Attack: 1419
     Attack2: 1785
     Defense: 20
-    MagicDefense: 17
+    MagicDefense: 45
     Str: 106
     Agi: 40
     Vit: 30
@@ -39704,11 +39706,11 @@ Body:
   - Id: 1998
     AegisName: G_HILLSRION
     Name: Hillslion
-    Level: 105
+    Level: 79
     Hp: 34600
-    Attack: 5000
-    Attack2: 5500
-    Defense: 28
+    Attack: 1645
+    Attack2: 2068
+    Defense: 15
     MagicDefense: 15
     Str: 105
     Agi: 60
@@ -39725,7 +39727,7 @@ Body:
       Manuk: true
     Element: Earth
     ElementLevel: 1
-    WalkSpeed: 100
+    WalkSpeed: 125
     AttackDelay: 400
     AttackMotion: 780
     ClientAttackMotion: 480
@@ -40377,12 +40379,12 @@ Body:
   - Id: 2017
     AegisName: RATA
     Name: Rata
-    Level: 107
+    Level: 88
     Hp: 216600
     BaseExp: 70012
     JobExp: 34000
-    Attack: 8000
-    Attack2: 15000
+    Attack: 2567
+    Attack2: 3345
     Defense: 32
     MagicDefense: 52
     Agi: 51
@@ -40415,12 +40417,12 @@ Body:
   - Id: 2018
     AegisName: DUNEYRR
     Name: Duneyrr
-    Level: 107
+    Level: 89
     Hp: 265100
     BaseExp: 83030
     JobExp: 52000
-    Attack: 16000
-    Attack2: 19000
+    Attack: 3146
+    Attack2: 4260
     Defense: 39
     MagicDefense: 35
     Agi: 60
@@ -40457,12 +40459,12 @@ Body:
   - Id: 2019
     AegisName: ANCIENT_TREE
     Name: Ancient Tree
-    Level: 102
+    Level: 87
     Hp: 30030
-    BaseExp: 11020
-    JobExp: 8900
-    Attack: 13200
-    Attack2: 17400
+    BaseExp: 15020
+    JobExp: 12900
+    Attack: 2789
+    Attack2: 3160
     Defense: 39
     MagicDefense: 43
     Agi: 30
@@ -40499,7 +40501,7 @@ Body:
     Name: Rhyncho
     Level: 85
     Hp: 18900
-    BaseExp: 2040
+    BaseExp: 7040
     JobExp: 6000
     Attack: 350
     Attack2: 2300
@@ -40535,7 +40537,7 @@ Body:
     Name: Phylla
     Level: 85
     Hp: 23880
-    BaseExp: 3040
+    BaseExp: 8040
     JobExp: 6600
     Attack: 350
     Attack2: 2550
@@ -40569,16 +40571,16 @@ Body:
   - Id: 2022
     AegisName: S_NYDHOG
     Name: Nidhoggr's Shadow
-    Level: 117
-    Hp: 3450000
-    BaseExp: 4800000
-    JobExp: 3900000
+    Level: 99
+    Hp: 5450000
+    BaseExp: 3800000
+    JobExp: 2900000
     MvpExp: 2400000
-    Attack: 17000
-    Attack2: 49000
+    Attack: 4895
+    Attack2: 9999
     Defense: 60
     MagicDefense: 75
-    Agi: 34
+    Agi: 165
     Vit: 62
     Int: 236
     Dex: 188
@@ -40624,12 +40626,12 @@ Body:
   - Id: 2023
     AegisName: DARK_SHADOW
     Name: Dark Shadow
-    Level: 114
+    Level: 87
     Hp: 42900
     BaseExp: 21000
     JobExp: 14000
-    Attack: 10000
-    Attack2: 15000
+    Attack: 2457
+    Attack2: 3133
     Defense: 35
     MagicDefense: 44
     Agi: 23
@@ -40671,19 +40673,19 @@ Body:
   - Id: 2024
     AegisName: BRADIUM_GOLEM
     Name: Bradium Golem
-    Level: 101
-    Hp: 45200
-    BaseExp: 14000
-    JobExp: 18920
-    Attack: 12000
-    Attack2: 13000
-    Defense: 78
-    MagicDefense: 22
+    Level: 87
+    Hp: 65200
+    BaseExp: 24000
+    JobExp: 28920
+    Attack: 1920
+    Attack2: 2678
+    Defense: 45
+    MagicDefense: 45
     Str: 0
     Agi: 10
     Vit: 82
     Int: 25
-    Dex: 60
+    Dex: 99
     Luk: 12
     AttackRange: 1
     SkillRange: 10
@@ -40805,10 +40807,10 @@ Body:
   - Id: 2027
     AegisName: G_DARK_SHADOW
     Name: Dark Shadow
-    Level: 114
+    Level: 87
     Hp: 42900
-    Attack: 10000
-    Attack2: 15000
+    Attack: 2457
+    Attack2: 3133
     Defense: 35
     MagicDefense: 44
     Agi: 23
@@ -41389,16 +41391,16 @@ Body:
   - Id: 2047
     AegisName: W_NAGA
     Name: Naga
-    Level: 99
-    Hp: 46708
-    Attack: 492
-    Attack2: 605
-    Defense: 61
-    MagicDefense: 15
+    Level: 88
+    Hp: 56708
+    Attack: 2111
+    Attack2: 2423
+    Defense: 55
+    MagicDefense: 5
     Str: 113
     Agi: 42
     Vit: 30
-    Int: 18
+    Int: 108
     Dex: 122
     Luk: 13
     AttackRange: 3
@@ -41443,17 +41445,17 @@ Body:
   - Id: 2049
     AegisName: W_BRADIUM_GOLEM
     Name: Bradium Golem
-    Level: 99
-    Hp: 45200
-    Attack: 720
-    Attack2: 886
-    Defense: 125
-    MagicDefense: 18
+    Level: 87
+    Hp: 65200
+    Attack: 1920
+    Attack2: 2678
+    Defense: 45
+    MagicDefense: 45
     Str: 0
     Agi: 10
     Vit: 82
-    Int: 2
-    Dex: 60
+    Int: 25
+    Dex: 99
     Luk: 12
     AttackRange: 1
     SkillRange: 10
@@ -56186,53 +56188,53 @@ Body:
       - Item: Breeze_Card
         Rate: 5
         StealProtected: true
-  # - Id: 2882
-    # AegisName: C5_BRADIUM_GOLEM
-    # Name: Elusive Bradium Golem
-    # Level: 133
-    # Hp: 228695
-    # BaseExp: 21295
-    # JobExp: 35574
-    # Attack: 1568
-    # Attack2: 103
-    # Defense: 559
-    # MagicDefense: 12
-    # Str: 189
-    # Agi: 25
-    # Vit: 125
-    # Int: 45
-    # Dex: 104
-    # Luk: 33
-    # AttackRange: 1
-    # SkillRange: 10
-    # ChaseRange: 12
-    # Size: Large
-    # Race: Formless
-    # Element: Earth
-    # ElementLevel: 2
-    # WalkSpeed: 300
-    # AttackDelay: 1008
-    # AttackMotion: 1200
-    # ClientAttackMotion: 480
-    # DamageMotion: 540
-    # Ai: 20
-# #   Class: 6   # TODO
-    # Drops:
-      # - Item: Stone_Piece
-        # Rate: 7500
-      # - Item: Stone_Heart
-        # Rate: 10000
-      # - Item: Purified_Bradium
-        # Rate: 1250
-      # - Item: Bradium_Shield
-        # Rate: 25
-      # - Item: Runstone_Rare
-        # Rate: 25
-      # - Item: Bradium
-        # Rate: 1250
+  - Id: 2882
+    AegisName: C5_BRADIUM_GOLEM
+    Name: Elusive Bradium Golem
+    Level: 87
+    Hp: 326000
+    BaseExp: 120000
+    JobExp: 144600
+    Attack: 1920
+    Attack2: 2678
+    Defense: 45
+    MagicDefense: 45
+    Str: 0
+    Agi: 10
+    Vit: 82
+    Int: 25
+    Dex: 99
+    Luk: 12
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 300
+    AttackDelay: 1008
+    AttackMotion: 1200
+    ClientAttackMotion: 480
+    DamageMotion: 540
+    Ai: 20
+#   Class: 6   # TODO
+    Drops:
+      - Item: Stone_Piece
+        Rate: 7500
+      - Item: Stone_Heart
+        Rate: 10000
+      - Item: Purified_Bradium
+        Rate: 1250
+      - Item: Bradium_Shield
+        Rate: 25
+      - Item: Runstone_Rare
+        Rate: 25
+      - Item: Bradium
+        Rate: 1250
       # - Item: Bradium_Goram_Card
         # Rate: 5
-        # StealProtected: true
+        StealProtected: true
   - Id: 2883
     AegisName: C1_BLOOD_BUTTERFLY
     Name: Swift Bloody Butterfly
@@ -57863,4 +57865,62 @@ Body:
       - Item: inc_longing
         Rate: 500
         StealProtected: true
- 
+  - Id: 21077
+    AegisName: S_DUMMY_100_NOTHING2
+    Name: Dummy (Neutral Lv1)
+    Level: 99
+    Hp: 2000000
+    Defense: 80
+    MagicDefense: 80
+    Str: 0
+    Agi: 0
+    Vit: 0
+    Int: 0
+    Dex: 0
+    Luk: 0
+    SkillRange: 0
+    ChaseRange: 0
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 1000
+    ClientAttackMotion: 0
+    Ai: 06
+    Class: Boss
+    Modes:
+      TeleportBlock: true
+  - Id: 20600
+    AegisName: JEWEL
+    Name: Mine Spirit
+    Level: 50
+    Hp: 57500
+    BaseExp: 7500
+    JobExp: 10500
+    Attack: 215
+    Attack2: 299
+    Defense: 35
+    MagicDefense: 55
+    Str: 10
+    Agi: 50
+    Vit: 50
+    Int: 80
+    Dex: 30
+    Luk: 50
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 1008
+    AttackMotion: 1200
+    ClientAttackMotion: 1536
+    DamageMotion: 540
+    Ai: 13
+    Drops:
+      - Item: Accessory_Box
+        Rate: 1000
+        StealProtected: true

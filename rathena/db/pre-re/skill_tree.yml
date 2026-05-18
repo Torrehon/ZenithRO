@@ -575,6 +575,10 @@ Body:
         MaxLevel: 1
       - Name: WZ_SIGHTBLASTER
         MaxLevel: 1
+      - Name: WZ_MAGUSSOUL
+        MaxLevel: 1
+      - Name: WZ_HEXERSOUL
+        MaxLevel: 1
   - Job: Blacksmith
     Inherit:
       Novice: true
@@ -1818,7 +1822,7 @@ Body:
       - Name: NJ_TATAMIGAESHI
         MaxLevel: 5
       - Name: NJ_KIRIKAGE
-        MaxLevel: 5
+        MaxLevel: 10
         Requires:
           - Name: NJ_SHADOWJUMP
             Level: 1

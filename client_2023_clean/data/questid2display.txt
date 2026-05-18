@@ -27772,3 +27772,11 @@ Purify the Tormented Weaver inside the instance.#
 The shadows in Payon Dungeon never truly sleep. I must return to the altar to keep Minji spirit at peace.#
 Defeat the Tormented Weaver.#
 #
+
+80030#Coal Mines Culling#SG_FEEL#QUE_NOIMAGE#
+Make your way to the deepest part of the mines and clear the path.#
+#
+
+80031#Orichalcum Extraction#SG_FEEL#QUE_NOIMAGE#
+Bring some Orichalcum to Garrick.#
+#

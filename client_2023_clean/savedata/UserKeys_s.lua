@@ -8,5 +8,11 @@ USERKEY_1 = {
 	[15] = { EXE = "Hotkey 2-7", KEY1 = 55 },
 	[16] = { EXE = "Hotkey 2-8", KEY1 = 56, KEY2 = 16 },
 	[17] = { EXE = "Hotkey 2-9", KEY1 = 57, KEY2 = 16 },
+	[18] = { EXE = "Hotkey 3-1", KEY1 = 81 },
+	[19] = { EXE = "Hotkey 3-2", KEY1 = 87 },
+	[20] = { EXE = "Hotkey 3-3", KEY1 = 69 },
+	[21] = { EXE = "Hotkey 3-4", KEY1 = 82 },
+	[22] = { EXE = "Hotkey 3-5", KEY1 = 84 },
+	[23] = { EXE = "Hotkey 3-6", KEY1 = 89 },
 }
 

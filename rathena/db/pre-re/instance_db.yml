@@ -56,3 +56,10 @@ Body:
       Map: 1@pay00
       X: 161
       Y: 142
+  - Id: 7
+    Name: Coal Mines
+    TimeLimit: 3600
+    Enter:
+      Map: 1@mjo
+      X: 39
+      Y: 248

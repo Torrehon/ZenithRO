@@ -6,23 +6,61 @@
 #include <config/core.hpp>
 
 #include "map/status.hpp"
+#include "map/clif.hpp"
 
 SkillHeavensDrive::SkillHeavensDrive() : SkillImpl(WZ_HEAVENDRIVE) {
 }
 
 void SkillHeavensDrive::castendPos2(block_list* src, int32 x, int32 y, uint16 skill_lv, t_tick tick, int32& flag) const {
-	//Set flag to 1 to prevent deleting ammo (it will be deleted on group-delete).
-	flag|=1;
+	flag |= 1;
 
-	skill_unitsetting(src,getSkillId(),skill_lv,x,y,0);
+	int32 instances = 1; 
+	int32 spread = 3;    
+
+	for (int32 i = 0; i < instances; i++) {
+		int16 tmpx = x + (rnd() % (spread * 2 + 1)) - spread;
+		int16 tmpy = y + (rnd() % (spread * 2 + 1)) - spread;
+
+		// Dibujamos el efecto visual en las coordenadas aleatorias
+		clif_skill_poseffect(*src, getSkillId(), skill_lv, tmpx, tmpy, tick);
+
+		// Creamos la unidad invisible que hace el daño real (¡con un 0 al final!)
+		skill_unitsetting(src, getSkillId(), skill_lv, tmpx, tmpy, 0);
+	}
 }
 
 void SkillHeavensDrive::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
 #ifdef RENEWAL
 	base_skillratio += 25;
 #endif
+    base_skillratio +=  (skill_lv * 17);
 }
 
 void SkillHeavensDrive::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 	status_change_end(target, SC_SV_ROOTTWIST);
+	
+	// 1. Mantenemos el walkdelay original
+	unit_set_walkdelay(target, tick, skill_get_time2(getSkillId(), skill_lv), 1);
+
+	// 2. Valores Base
+	int32 base_matk = status_get_matk_max(src);
+	int32 final_matk = (base_matk * (20 * skill_lv)) / 100;
+	
+    // 3. Chance de ocurrir
+	int rate = 8 * skill_lv; 
+	int duration = 10000; // 10 segundos base (en milisegundos)
+
+	// --- 4. COMPROBACIÓN: SOUL OF THE HEXER ---
+	// Convertimos la entidad origen a un puntero de jugador (PC)
+	map_session_data* sd = BL_CAST(BL_PC, src);
+	
+	// Si es un jugador y tiene un nivel de WZ_HEXERSOUL mayor a 0...
+	if (sd != nullptr && pc_checkskill(sd, WZ_HEXERSOUL) > 0) {
+		rate *= 2;               // Buf 1: Doble de probabilidad
+		final_matk *= 2;         // Buf 2: +100% de la porción de MATK (el doble)
+		duration += 10000;       // Buf 3: 10 segundos extra (pasa de 10000 a 20000 ms)
+	}
+
+	// 5. Aplicamos SC_BURIED con los valores dinámicos
+	sc_start4(src, target, SC_BURIED, rate, skill_lv, final_matk, 0, 0, duration);
 }

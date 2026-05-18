@@ -148,6 +148,8 @@ Body:
     Dialog: Silence that cannot use skills! You can only escape by eating green potions!
   - Id: 71
     Dialog: Your dreams shall end here!
+  - Id: 72
+    Dialog: You will die buried in these mines!
 
 Footer:
   Imports:

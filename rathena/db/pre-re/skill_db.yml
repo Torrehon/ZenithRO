@@ -802,25 +802,25 @@ Body:
         Reproduce: true
     CastTime:
       - Level: 1
-        Time: 2000
+        Time: 1200
       - Level: 2
-        Time: 1850
+        Time: 1200
       - Level: 3
-        Time: 1700
+        Time: 1200
       - Level: 4
-        Time: 1550
+        Time: 1200
       - Level: 5
-        Time: 1400
+        Time: 1200
       - Level: 6
-        Time: 1250
+        Time: 1200
       - Level: 7
-        Time: 1100
+        Time: 1200
       - Level: 8
-        Time: 950
+        Time: 1200
       - Level: 9
-        Time: 800
+        Time: 1200
       - Level: 10
-        Time: 650
+        Time: 1200
     Duration1:
       - Level: 1
         Time: 5000
@@ -2707,34 +2707,12 @@ Body:
     MaxLevel: 10
     Type: Magic
     TargetType: Ground
-    DamageFlags:
-      IgnoreDefense: true
     Flags:
       IsTrap: true
       IsAutoShadowSpell: true
     Range: 9
     Hit: Multi_Hit
-    HitCount:
-      - Level: 1
-        Count: 3
-      - Level: 2
-        Count: 4
-      - Level: 3
-        Count: 5
-      - Level: 4
-        Count: 6
-      - Level: 5
-        Count: 7
-      - Level: 6
-        Count: 8
-      - Level: 7
-        Count: 9
-      - Level: 8
-        Count: 10
-      - Level: 9
-        Count: 11
-      - Level: 10
-        Count: 12
+    HitCount: 3
     Element: Fire
     SplashArea:
       - Level: 1
@@ -2766,25 +2744,25 @@ Body:
         Reproduce: true
     CastTime:
       - Level: 1
-        Time: 3000
-      - Level: 2
-        Time: 2700
-      - Level: 3
-        Time: 2400
-      - Level: 4
-        Time: 2100
-      - Level: 5
-        Time: 1800
-      - Level: 6
-        Time: 1500
-      - Level: 7
-        Time: 1200
-      - Level: 8
-        Time: 900
-      - Level: 9
-        Time: 600
-      - Level: 10
         Time: 300
+      - Level: 2
+        Time: 600
+      - Level: 3
+        Time: 900
+      - Level: 4
+        Time: 1200
+      - Level: 5
+        Time: 1500
+      - Level: 6
+        Time: 1800
+      - Level: 7
+        Time: 2100
+      - Level: 8
+        Time: 2400
+      - Level: 9
+        Time: 2700
+      - Level: 10
+        Time: 3000
     AfterCastActDelay: 1000
     Duration1: 30000
     Duration2:
@@ -2810,22 +2788,6 @@ Body:
         Time: 2400
     Requires:
       SpCost: 75
-      ItemCost:
-        - Item: Blue_Gemstone
-          Amount: 1
-          Level: 6
-        - Item: Blue_Gemstone
-          Amount: 1
-          Level: 7
-        - Item: Blue_Gemstone
-          Amount: 1
-          Level: 8
-        - Item: Blue_Gemstone
-          Amount: 1
-          Level: 9
-        - Item: Blue_Gemstone
-          Amount: 1
-          Level: 10
     Unit:
       Id: Firepillar_Waiting
       AlternateId: Firepillar_Active
@@ -2834,7 +2796,6 @@ Body:
       Target: Enemy
       Flag:
         NoReiteration: true
-        NoFootSet: true
   - Id: 81
     Name: WZ_SIGHTRASHER
     Description: Sightrasher
@@ -3014,7 +2975,7 @@ Body:
     Unit:
       Id: Dummyskill
       Range: 3
-      Interval: 1000
+      Interval: 800
       Target: Enemy
       Flag:
         PathCheck: true
@@ -3223,7 +3184,7 @@ Body:
       IsAutoShadowSpell: true
     Range: 9
     Hit: Multi_Hit
-    HitCount: 1
+    HitCount: 3
     Element: Water
     CopyFlags:
       Skill:
@@ -3249,7 +3210,7 @@ Body:
       - Level: 9
         Time: 9000
       - Level: 10
-        Time: 10000
+        Time: 1000
     Duration1: 10000
     Requires:
       SpCost:
@@ -3273,33 +3234,14 @@ Body:
           Amount: 25
         - Level: 10
           Amount: 25
-      State: Water
-    Unit:
-      Id: Dummyskill
-      Layout:
-        - Level: 1
-          Size: 0
-        - Level: 2
-          Size: 1
-        - Level: 3
-          Size: 1
-        - Level: 4
-          Size: 2
-        - Level: 5
-          Size: 2
-        - Level: 6
-          Size: 2
-        - Level: 7
-          Size: 2
-        - Level: 8
-          Size: 2
-        - Level: 9
-          Size: 2
-        - Level: 10
-          Size: 2
-      Interval: -1
-      Flag:
-        PathCheck: true
+      # State: Water
+    # Unit:
+      # Id: Dummyskill
+      # Layout: 3
+      # Interval: 1000
+      # Target: Enemy
+      # Flag:
+        # PathCheck: true
   - Id: 87
     Name: WZ_ICEWALL
     Description: Ice Wall
@@ -3327,13 +3269,14 @@ Body:
     Description: Frost Nova
     MaxLevel: 10
     Type: Magic
-    TargetType: Self
+    TargetType: Attack
+    Range: 9
     DamageFlags:
       Splash: true
     Flags:
       IsAutoShadowSpell: true
     Hit: Single
-    HitCount: 1
+    HitCount: 3
     Element: Water
     SplashArea: 2
     CopyFlags:
@@ -3418,7 +3361,7 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Water
-    Knockback: 2
+    # Knockback: 2
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -3530,17 +3473,7 @@ Body:
       TargetHidden: true
     Range: 9
     Hit: Multi_Hit
-    HitCount:
-      - Level: 1
-        Count: 1
-      - Level: 2
-        Count: 2
-      - Level: 3
-        Count: 3
-      - Level: 4
-        Count: 4
-      - Level: 5
-        Count: 5
+    HitCount: 3
     Element: Earth
     CopyFlags:
       Skill:
@@ -3573,7 +3506,7 @@ Body:
           Amount: 44
     Unit:
       Id: Dummyskill
-      Layout: 2
+      Layout: 3
       Interval: 1000
       Target: Enemy
       Flag:
@@ -3640,17 +3573,18 @@ Body:
     Status: Quagmire
   - Id: 93
     Name: WZ_ESTIMATION
-    Description: Sense
+    Description: Arcane Insight
     MaxLevel: 1
     Type: Magic
-    TargetType: Attack
+    TargetType: Self
     DamageFlags:
       NoDamage: true
-    Range: 9
     Hit: Single
     HitCount: 1
+    CastTime: 2000
+    Cooldown: 35000
     Requires:
-      SpCost: 10
+      SpCost: 30
   - Id: 94
     Name: BS_IRON
     Description: Iron Tempering
@@ -14387,15 +14321,15 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 32
+          Amount: 18
         - Level: 2
-          Amount: 34
+          Amount: 21
         - Level: 3
-          Amount: 36
+          Amount: 24
         - Level: 4
-          Amount: 38
+          Amount: 27
         - Level: 5
-          Amount: 40
+          Amount: 30
   - Id: 529
     Name: NJ_SHADOWJUMP
     Description: Shadow Leap
@@ -14447,25 +14381,25 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 12
+          Amount: 6
         - Level: 2
-          Amount: 14
+          Amount: 7
         - Level: 3
-          Amount: 16
+          Amount: 8
         - Level: 4
-          Amount: 18
+          Amount: 9
         - Level: 5
-          Amount: 20
+          Amount: 10
         - Level: 6
-          Amount: 22
+          Amount: 11
         - Level: 7
-          Amount: 24
+          Amount: 12
         - Level: 8
-          Amount: 26
+          Amount: 13
         - Level: 9
-          Amount: 28
+          Amount: 14
         - Level: 10
-          Amount: 30
+          Amount: 15
   - Id: 531
     Name: NJ_UTSUSEMI
     Description: Cicada Skin Sheeding
@@ -17230,6 +17164,16 @@ Body:
   - Id: 1042
     Name: KN_LANCERSOUL
     Description: Soul of the Lancer
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1043
+    Name: WZ_MAGUSSOUL
+    Description: Soul of the Magus
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1044
+    Name: WZ_HEXERSOUL
+    Description: Soul of the Hexer
     MaxLevel: 1
     Type: Weapon
   - Id: 2001

@@ -3364,10 +3364,7 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 						if (drop_rate < 75) {
 							drop_rate = 75;  // Sube al 0.75% solo si es inferior
 						}
-					} else {
-						if (drop_rate < 150) {
-							drop_rate = 150; // Sube al 1.50% solo si es inferior
-						}
+					
 					}
 				}
 			} 
@@ -3379,6 +3376,20 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 					if (mob_lvl < 1) mob_lvl = 1;
 					// Cartas normales: Fórmula dinámica (2% -> 0.10%)
 					drop_rate = (mob_lvl >= 50) ? 10 : (200 - ((mob_lvl - 1) * 190 / 49));
+				}
+			}
+			else if (entry->nameid == 984 || entry->nameid == 985) { // Oridecon (984) y Elunium (985)
+				if (drop_rate < 750) {
+					drop_rate = 750;      // Sube a 7.5% si es menor
+				} else if (drop_rate >= 750 && drop_rate < 1500) {
+					drop_rate = 1500;     // Sube a 15% si está entre 7.5% y 15%
+				}
+			}
+			else if (entry->nameid == 756 || entry->nameid == 757) { // Rough Oridecon (756) y Rough Elunium (757)
+				if (drop_rate < 1250) {
+					drop_rate = 1250;     // Sube a 12.5% si es menor
+				} else if (drop_rate >= 1250 && drop_rate < 2500) {
+					drop_rate = 2500;     // Sube a 25% si está entre 12.5% y 25%
 				}
 			}
 			// --- FIN CUSTOM FORCED DROPS ---

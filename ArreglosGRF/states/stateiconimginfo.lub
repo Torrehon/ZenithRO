@@ -304,7 +304,11 @@ StateIconImgList = {
 		[EFST_IDs.EFST_C_BUFF_9] = "gogi.tga",
 		[EFST_IDs.EFST_NJ_COMBO] = "efst_abyssforceweapon.tga",
 		[EFST_IDs.EFST_MOMENTUM] = "efst_spear_scar.tga",
-		[EFST_IDs.EFST_DUELIST] = "duelist.TGA"
+		[EFST_IDs.EFST_DUELIST] = "duelist.TGA",
+		[EFST_IDs.EFST_ARCINSIGHT] = "arcinsight.tga",
+		[EFST_IDs.EFST_DROWN] = "Bath_Foam_C.tga",
+		[EFST_IDs.EFST_BURIED] = "EFST_CLIMAX_EARTH.TGA",
+		[EFST_IDs.EFST_ELECTROCUTE] = "HANDICAPSTATE_LIGHTNINGSTRIKE.TGA"
 	},
 	[PRIORITY_GREEN] = {
 		[EFST_IDs.EFST_SET_NUM_DEF] = "SETDEF.TGA",
