@@ -1133,6 +1133,14 @@ SKILL_INFO_LIST = {
 		bSeperateLv = false,
 		AttackRange = { 1, 1, 1, 1, 1 }
 	},
+	[SKID.BS_DECIMATION] = {
+		"BS_HAMMERFALL",
+		SkillName = "Cart Decimation",
+		MaxLv = 1,
+		SpAmount = { 25, },
+		bSeperateLv = false,
+		AttackRange = { 1, }
+	},
 	[SKID.BS_ADRENALINE] = {
 		"BS_ADRENALINE",
 		SkillName = "Adrenaline Rush",
@@ -1153,7 +1161,7 @@ SKILL_INFO_LIST = {
 		AttackRange = { 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
 			{ SKID.BS_WEAPONRESEARCH,2 },
-			{ SKID.BS_ADRENALINE,2 }
+			{ SKID.BS_ADRENALINE2,2 }
 		}
 	},
 	[SKID.BS_OVERTHRUST] = {
@@ -1164,7 +1172,7 @@ SKILL_INFO_LIST = {
 		bSeperateLv = false,
 		AttackRange = { 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.BS_ADRENALINE,3 }
+			{ SKID.BS_ADRENALINE2,3 }
 		}
 	},
 	[SKID.BS_MAXIMIZE] = {
@@ -1178,6 +1186,18 @@ SKILL_INFO_LIST = {
 			{ SKID.BS_WEAPONPERFECT,3 },
 			{ SKID.BS_OVERTHRUST,2 }
 		}
+	},
+	[SKID.BS_JUGGERNAUTSOUL] = {
+		"wz_hexersoul",
+		SkillName = "Soul of the Juggernaut",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.BS_FORGEMASTERSOUL] = {
+		"wz_hexersoul",
+		SkillName = "Soul of the Forgemaster",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.HT_SKIDTRAP] = {
 		"HT_SKIDTRAP",
@@ -1198,73 +1218,49 @@ SKILL_INFO_LIST = {
 		SkillName = "Ankle Snare",
 		MaxLv = 5,
 		SpAmount = { 12, 12, 12, 12, 12 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_SKIDTRAP,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_SHOCKWAVE] = {
 		"HT_SHOCKWAVE",
 		SkillName = "Shockwave Trap",
 		MaxLv = 5,
 		SpAmount = { 45, 45, 45, 45, 45 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_ANKLESNARE,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_SANDMAN] = {
 		"HT_SANDMAN",
 		SkillName = "Sandman",
 		MaxLv = 5,
 		SpAmount = { 12, 12, 12, 12, 12 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_FLASHER,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_FLASHER] = {
 		"HT_FLASHER",
 		SkillName = "Flasher",
 		MaxLv = 5,
 		SpAmount = { 12, 12, 12, 12, 12 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_SKIDTRAP,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_FREEZINGTRAP] = {
 		"HT_FREEZINGTRAP",
 		SkillName = "Freezing Trap",
 		MaxLv = 5,
 		SpAmount = { 10, 10, 10, 10, 10 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_FLASHER,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_BLASTMINE] = {
 		"HT_BLASTMINE",
 		SkillName = "Blast Mine",
 		MaxLv = 5,
 		SpAmount = { 10, 10, 10, 10, 10 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_LANDMINE,1 },
-			{ SKID.HT_SANDMAN,1 },
-			{ SKID.HT_FREEZINGTRAP,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_CLAYMORETRAP] = {
 		"HT_CLAYMORETRAP",
 		SkillName = "Claymore Trap",
 		MaxLv = 5,
 		SpAmount = { 15, 15, 15, 15, 15 },
-		AttackRange = { 3, 3, 3, 3, 3 },
-		_NeedSkillList = {
-			{ SKID.HT_SHOCKWAVE,1 },
-			{ SKID.HT_BLASTMINE,1 }
-		}
+		AttackRange = { 3, 3, 3, 3, 3 }
 	},
 	[SKID.HT_REMOVETRAP] = {
 		"HT_REMOVETRAP",
@@ -1273,9 +1269,6 @@ SKILL_INFO_LIST = {
 		SpAmount = { 5 },
 		bSeperateLv = false,
 		AttackRange = { 2 },
-		_NeedSkillList = {
-			{ SKID.HT_LANDMINE,1 }
-		},
 		NeedSkillList = {
 			[JOBID.JT_ROGUE] = {
 				{ SKID.AC_DOUBLE,5 }
@@ -1288,15 +1281,11 @@ SKILL_INFO_LIST = {
 		MaxLv = 1,
 		SpAmount = { 1 },
 		bSeperateLv = false,
-		AttackRange = { 3 },
-		_NeedSkillList = {
-			{ SKID.HT_REMOVETRAP,1 },
-			{ SKID.HT_SHOCKWAVE,1 }
-		}
+		AttackRange = { 3 }
 	},
 	[SKID.HT_BEASTBANE] = {
 		"HT_BEASTBANE",
-		SkillName = "Beast Bane",
+		SkillName = "Hunter's Focus",
 		MaxLv = 10,
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 	},
@@ -1330,7 +1319,7 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.HT_DETECTING] = {
 		"HT_DETECTING",
-		SkillName = "Detect",
+		SkillName = "Falcon Sweep",
 		MaxLv = 4,
 		SpAmount = { 8, 8, 8, 8 },
 		bSeperateLv = false,
@@ -1351,6 +1340,18 @@ SKILL_INFO_LIST = {
 			{ SKID.HT_FALCON },
 			{ SKID.HT_REMOVETRAP,1 }
 		}
+	},
+	[SKID.HT_SHOOTERSOUL] = {
+		"HT_SHOOTERSOUL",
+		SkillName = "Soul of the Sharpshooter",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.HT_TRAPPERSOUL] = {
+		"HT_TRAPPERSOUL",
+		SkillName = "Soul of the Trapper",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.AS_RIGHT] = {
 		"AS_RIGHT",
@@ -3883,7 +3884,7 @@ SKILL_INFO_LIST = {
 		AttackRange = { 1 },
 		Type = "Soul",
 		_NeedSkillList = {
-			{ SKID.BS_ADRENALINE,5 }
+			{ SKID.BS_HAMMERFALL,2 }
 		}
 	},
 	[SKID.SL_HUNTER] = {
@@ -4312,12 +4313,10 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.HT_POWER] = {
 		"HT_POWER",
-		SkillName = "Beast Strafing",
-		MaxLv = 1,
-		SpAmount = { 12 },
-		bSeperateLv = false,
+		SkillName = "Power Strafe",
+		MaxLv = 5,
+		SpAmount = { 13, 16, 19, 22, 25 },
 		AttackRange = { 9 },
-		Type = "Soul",
 		_NeedSkillList = {
 			{ SKID.AC_DOUBLE,10 }
 		}

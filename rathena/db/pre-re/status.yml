@@ -6941,3 +6941,9 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
+  - Status: Pinned
+    Icon: EFST_PINNED
+    CalcFlags:
+      Speed: true
+    Flags:
+      NoRemoveOnDead: false

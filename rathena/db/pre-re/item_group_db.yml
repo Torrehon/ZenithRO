@@ -477,42 +477,42 @@ Body:
           - Index: 116
             Item: Blue_Gemstone
             Rate: 12
-          - Index: 117
-            Item: Dark_Red_Jewel
-            Rate: 12
-          - Index: 118
-            Item: Violet_Jewel
-            Rate: 12
-          - Index: 119
-            Item: Skyblue_Jewel
-            Rate: 12
-          - Index: 120
-            Item: Azure_Jewel
-            Rate: 12
-          - Index: 121
-            Item: Scarlet_Jewel
-            Rate: 12
-          - Index: 122
-            Item: Cardinal_Jewel
-            Rate: 12
-          - Index: 123
-            Item: Cardinal_Jewel_
-            Rate: 12
-          - Index: 124
-            Item: Red_Jewel
-            Rate: 12
-          - Index: 125
-            Item: Blue_Jewel
-            Rate: 12
-          - Index: 126
-            Item: White_Jewel
-            Rate: 12
-          - Index: 127
-            Item: Golden_Jewel
-            Rate: 12
-          - Index: 128
-            Item: Bluish_Green_Jewel
-            Rate: 12
+          # - Index: 117
+            # Item: Dark_Red_Jewel
+            # Rate: 12
+          # - Index: 118
+            # Item: Violet_Jewel
+            # Rate: 12
+          # - Index: 119
+            # Item: Skyblue_Jewel
+            # Rate: 12
+          # - Index: 120
+            # Item: Azure_Jewel
+            # Rate: 12
+          # - Index: 121
+            # Item: Scarlet_Jewel
+            # Rate: 12
+          # - Index: 122
+            # Item: Cardinal_Jewel
+            # Rate: 12
+          # - Index: 123
+            # Item: Cardinal_Jewel_
+            # Rate: 12
+          # - Index: 124
+            # Item: Red_Jewel
+            # Rate: 12
+          # - Index: 125
+            # Item: Blue_Jewel
+            # Rate: 12
+          # - Index: 126
+            # Item: White_Jewel
+            # Rate: 12
+          # - Index: 127
+            # Item: Golden_Jewel
+            # Rate: 12
+          # - Index: 128
+            # Item: Bluish_Green_Jewel
+            # Rate: 12
           - Index: 129
             Item: Crystal_Jewel
             Rate: 12
@@ -4925,36 +4925,36 @@ Body:
           - Index: 14
             Item: Four_Leaf_Clover
             Rate: 1
-          - Index: 15
-            Item: Dark_Red_Jewel
-            Rate: 1
-          - Index: 16
-            Item: Violet_Jewel
-            Rate: 1
-          - Index: 17
-            Item: Skyblue_Jewel
-            Rate: 1
-          - Index: 18
-            Item: Azure_Jewel
-            Rate: 1
-          - Index: 19
-            Item: Scarlet_Jewel
-            Rate: 1
-          - Index: 20
-            Item: Cardinal_Jewel
-            Rate: 1
-          - Index: 21
-            Item: Cardinal_Jewel_
-            Rate: 1
-          - Index: 22
-            Item: Red_Jewel
-            Rate: 1
-          - Index: 23
-            Item: Blue_Jewel
-            Rate: 1
-          - Index: 24
-            Item: White_Jewel
-            Rate: 1
+          # - Index: 15
+            # Item: Dark_Red_Jewel
+            # Rate: 1
+          # - Index: 16
+            # Item: Violet_Jewel
+            # Rate: 1
+          # - Index: 17
+            # Item: Skyblue_Jewel
+            # Rate: 1
+          # - Index: 18
+            # Item: Azure_Jewel
+            # Rate: 1
+          # - Index: 19
+            # Item: Scarlet_Jewel
+            # Rate: 1
+          # - Index: 20
+            # Item: Cardinal_Jewel
+            # Rate: 1
+          # - Index: 21
+            # Item: Cardinal_Jewel_
+            # Rate: 1
+          # - Index: 22
+            # Item: Red_Jewel
+            # Rate: 1
+          # - Index: 23
+            # Item: Blue_Jewel
+            # Rate: 1
+          # - Index: 24
+            # Item: White_Jewel
+            # Rate: 1
           - Index: 25
             Item: Golden_Jewel
             Rate: 1
@@ -5200,42 +5200,42 @@ Body:
           - Index: 34
             Item: Blue_Gemstone
             Rate: 1
-          - Index: 35
-            Item: Dark_Red_Jewel
-            Rate: 1
-          - Index: 36
-            Item: Violet_Jewel
-            Rate: 1
-          - Index: 37
-            Item: Skyblue_Jewel
-            Rate: 1
-          - Index: 38
-            Item: Azure_Jewel
-            Rate: 1
-          - Index: 39
-            Item: Scarlet_Jewel
-            Rate: 1
-          - Index: 40
-            Item: Cardinal_Jewel
-            Rate: 1
-          - Index: 41
-            Item: Cardinal_Jewel_
-            Rate: 1
-          - Index: 42
-            Item: Red_Jewel
-            Rate: 1
-          - Index: 43
-            Item: Blue_Jewel
-            Rate: 1
-          - Index: 44
-            Item: White_Jewel
-            Rate: 1
-          - Index: 45
-            Item: Golden_Jewel
-            Rate: 1
-          - Index: 46
-            Item: Bluish_Green_Jewel
-            Rate: 1
+          # - Index: 35
+            # Item: Dark_Red_Jewel
+            # Rate: 1
+          # - Index: 36
+            # Item: Violet_Jewel
+            # Rate: 1
+          # - Index: 37
+            # Item: Skyblue_Jewel
+            # Rate: 1
+          # - Index: 38
+            # Item: Azure_Jewel
+            # Rate: 1
+          # - Index: 39
+            # Item: Scarlet_Jewel
+            # Rate: 1
+          # - Index: 40
+            # Item: Cardinal_Jewel
+            # Rate: 1
+          # - Index: 41
+            # Item: Cardinal_Jewel_
+            # Rate: 1
+          # - Index: 42
+            # Item: Red_Jewel
+            # Rate: 1
+          # - Index: 43
+            # Item: Blue_Jewel
+            # Rate: 1
+          # - Index: 44
+            # Item: White_Jewel
+            # Rate: 1
+          # - Index: 45
+            # Item: Golden_Jewel
+            # Rate: 1
+          # - Index: 46
+            # Item: Bluish_Green_Jewel
+            # Rate: 1
           - Index: 47
             Item: Crystal_Jewel
             Rate: 1
@@ -5937,42 +5937,42 @@ Body:
           - Index: 14
             Item: Four_Leaf_Clover
             Rate: 1
-          - Index: 15
-            Item: Dark_Red_Jewel
-            Rate: 1
-          - Index: 16
-            Item: Violet_Jewel
-            Rate: 1
-          - Index: 17
-            Item: Skyblue_Jewel
-            Rate: 1
-          - Index: 18
-            Item: Azure_Jewel
-            Rate: 1
-          - Index: 19
-            Item: Scarlet_Jewel
-            Rate: 1
-          - Index: 20
-            Item: Cardinal_Jewel
-            Rate: 1
-          - Index: 21
-            Item: Cardinal_Jewel_
-            Rate: 1
-          - Index: 22
-            Item: Red_Jewel
-            Rate: 1
-          - Index: 23
-            Item: Blue_Jewel
-            Rate: 1
-          - Index: 24
-            Item: White_Jewel
-            Rate: 1
-          - Index: 25
-            Item: Golden_Jewel
-            Rate: 1
-          - Index: 26
-            Item: Bluish_Green_Jewel
-            Rate: 1
+          # - Index: 15
+            # Item: Dark_Red_Jewel
+            # Rate: 1
+          # - Index: 16
+            # Item: Violet_Jewel
+            # Rate: 1
+          # - Index: 17
+            # Item: Skyblue_Jewel
+            # Rate: 1
+          # - Index: 18
+            # Item: Azure_Jewel
+            # Rate: 1
+          # - Index: 19
+            # Item: Scarlet_Jewel
+            # Rate: 1
+          # - Index: 20
+            # Item: Cardinal_Jewel
+            # Rate: 1
+          # - Index: 21
+            # Item: Cardinal_Jewel_
+            # Rate: 1
+          # - Index: 22
+            # Item: Red_Jewel
+            # Rate: 1
+          # - Index: 23
+            # Item: Blue_Jewel
+            # Rate: 1
+          # - Index: 24
+            # Item: White_Jewel
+            # Rate: 1
+          # - Index: 25
+            # Item: Golden_Jewel
+            # Rate: 1
+          # - Index: 26
+            # Item: Bluish_Green_Jewel
+            # Rate: 1
           - Index: 27
             Item: Crystal_Jewel
             Rate: 1
@@ -6152,42 +6152,42 @@ Body:
           - Index: 14
             Item: Four_Leaf_Clover
             Rate: 1
-          - Index: 15
-            Item: Dark_Red_Jewel
-            Rate: 1
-          - Index: 16
-            Item: Violet_Jewel
-            Rate: 1
-          - Index: 17
-            Item: Skyblue_Jewel
-            Rate: 1
-          - Index: 18
-            Item: Azure_Jewel
-            Rate: 1
-          - Index: 19
-            Item: Scarlet_Jewel
-            Rate: 1
-          - Index: 20
-            Item: Cardinal_Jewel
-            Rate: 1
-          - Index: 21
-            Item: Cardinal_Jewel_
-            Rate: 1
-          - Index: 22
-            Item: Red_Jewel
-            Rate: 1
-          - Index: 23
-            Item: Blue_Jewel
-            Rate: 1
-          - Index: 24
-            Item: White_Jewel
-            Rate: 1
-          - Index: 25
-            Item: Golden_Jewel
-            Rate: 1
-          - Index: 26
-            Item: Bluish_Green_Jewel
-            Rate: 1
+          # - Index: 15
+            # Item: Dark_Red_Jewel
+            # Rate: 1
+          # - Index: 16
+            # Item: Violet_Jewel
+            # Rate: 1
+          # - Index: 17
+            # Item: Skyblue_Jewel
+            # Rate: 1
+          # - Index: 18
+            # Item: Azure_Jewel
+            # Rate: 1
+          # - Index: 19
+            # Item: Scarlet_Jewel
+            # Rate: 1
+          # - Index: 20
+            # Item: Cardinal_Jewel
+            # Rate: 1
+          # - Index: 21
+            # Item: Cardinal_Jewel_
+            # Rate: 1
+          # - Index: 22
+            # Item: Red_Jewel
+            # Rate: 1
+          # - Index: 23
+            # Item: Blue_Jewel
+            # Rate: 1
+          # - Index: 24
+            # Item: White_Jewel
+            # Rate: 1
+          # - Index: 25
+            # Item: Golden_Jewel
+            # Rate: 1
+          # - Index: 26
+            # Item: Bluish_Green_Jewel
+            # Rate: 1
           - Index: 27
             Item: Crystal_Jewel
             Rate: 1
@@ -6367,42 +6367,42 @@ Body:
           - Index: 14
             Item: Four_Leaf_Clover
             Rate: 1
-          - Index: 15
-            Item: Dark_Red_Jewel
-            Rate: 1
-          - Index: 16
-            Item: Violet_Jewel
-            Rate: 1
-          - Index: 17
-            Item: Skyblue_Jewel
-            Rate: 1
-          - Index: 18
-            Item: Azure_Jewel
-            Rate: 1
-          - Index: 19
-            Item: Scarlet_Jewel
-            Rate: 1
-          - Index: 20
-            Item: Cardinal_Jewel
-            Rate: 1
-          - Index: 21
-            Item: Cardinal_Jewel_
-            Rate: 1
-          - Index: 22
-            Item: Red_Jewel
-            Rate: 1
-          - Index: 23
-            Item: Blue_Jewel
-            Rate: 1
-          - Index: 24
-            Item: White_Jewel
-            Rate: 1
-          - Index: 25
-            Item: Golden_Jewel
-            Rate: 1
-          - Index: 26
-            Item: Bluish_Green_Jewel
-            Rate: 1
+          # - Index: 15
+            # Item: Dark_Red_Jewel
+            # Rate: 1
+          # - Index: 16
+            # Item: Violet_Jewel
+            # Rate: 1
+          # - Index: 17
+            # Item: Skyblue_Jewel
+            # Rate: 1
+          # - Index: 18
+            # Item: Azure_Jewel
+            # Rate: 1
+          # - Index: 19
+            # Item: Scarlet_Jewel
+            # Rate: 1
+          # - Index: 20
+            # Item: Cardinal_Jewel
+            # Rate: 1
+          # - Index: 21
+            # Item: Cardinal_Jewel_
+            # Rate: 1
+          # - Index: 22
+            # Item: Red_Jewel
+            # Rate: 1
+          # - Index: 23
+            # Item: Blue_Jewel
+            # Rate: 1
+          # - Index: 24
+            # Item: White_Jewel
+            # Rate: 1
+          # - Index: 25
+            # Item: Golden_Jewel
+            # Rate: 1
+          # - Index: 26
+            # Item: Bluish_Green_Jewel
+            # Rate: 1
           - Index: 27
             Item: Crystal_Jewel
             Rate: 1
@@ -6582,42 +6582,42 @@ Body:
           - Index: 14
             Item: Four_Leaf_Clover
             Rate: 1
-          - Index: 15
-            Item: Dark_Red_Jewel
-            Rate: 1
-          - Index: 16
-            Item: Violet_Jewel
-            Rate: 1
-          - Index: 17
-            Item: Skyblue_Jewel
-            Rate: 1
-          - Index: 18
-            Item: Azure_Jewel
-            Rate: 1
-          - Index: 19
-            Item: Scarlet_Jewel
-            Rate: 1
-          - Index: 20
-            Item: Cardinal_Jewel
-            Rate: 1
-          - Index: 21
-            Item: Cardinal_Jewel_
-            Rate: 1
-          - Index: 22
-            Item: Red_Jewel
-            Rate: 1
-          - Index: 23
-            Item: Blue_Jewel
-            Rate: 1
-          - Index: 24
-            Item: White_Jewel
-            Rate: 1
-          - Index: 25
-            Item: Golden_Jewel
-            Rate: 1
-          - Index: 26
-            Item: Bluish_Green_Jewel
-            Rate: 1
+          # - Index: 15
+            # Item: Dark_Red_Jewel
+            # Rate: 1
+          # - Index: 16
+            # Item: Violet_Jewel
+            # Rate: 1
+          # - Index: 17
+            # Item: Skyblue_Jewel
+            # Rate: 1
+          # - Index: 18
+            # Item: Azure_Jewel
+            # Rate: 1
+          # - Index: 19
+            # Item: Scarlet_Jewel
+            # Rate: 1
+          # - Index: 20
+            # Item: Cardinal_Jewel
+            # Rate: 1
+          # - Index: 21
+            # Item: Cardinal_Jewel_
+            # Rate: 1
+          # - Index: 22
+            # Item: Red_Jewel
+            # Rate: 1
+          # - Index: 23
+            # Item: Blue_Jewel
+            # Rate: 1
+          # - Index: 24
+            # Item: White_Jewel
+            # Rate: 1
+          # - Index: 25
+            # Item: Golden_Jewel
+            # Rate: 1
+          # - Index: 26
+            # Item: Bluish_Green_Jewel
+            # Rate: 1
           - Index: 27
             Item: Crystal_Jewel
             Rate: 1
@@ -6842,42 +6842,42 @@ Body:
           - Index: 2
             Item: Blue_Gemstone
             Rate: 100
-          - Index: 3
-            Item: Dark_Red_Jewel
-            Rate: 10
-          - Index: 4
-            Item: Violet_Jewel
-            Rate: 10
-          - Index: 5
-            Item: Skyblue_Jewel
-            Rate: 10
-          - Index: 6
-            Item: Azure_Jewel
-            Rate: 10
-          - Index: 7
-            Item: Scarlet_Jewel
-            Rate: 10
-          - Index: 8
-            Item: Cardinal_Jewel
-            Rate: 10
-          - Index: 9
-            Item: Cardinal_Jewel_
-            Rate: 10
-          - Index: 10
-            Item: Red_Jewel
-            Rate: 10
-          - Index: 11
-            Item: Blue_Jewel
-            Rate: 10
-          - Index: 12
-            Item: White_Jewel
-            Rate: 10
-          - Index: 13
-            Item: Golden_Jewel
-            Rate: 10
-          - Index: 14
-            Item: Bluish_Green_Jewel
-            Rate: 10
+          # - Index: 3
+            # Item: Dark_Red_Jewel
+            # Rate: 10
+          # - Index: 4
+            # Item: Violet_Jewel
+            # Rate: 10
+          # - Index: 5
+            # Item: Skyblue_Jewel
+            # Rate: 10
+          # - Index: 6
+            # Item: Azure_Jewel
+            # Rate: 10
+          # - Index: 7
+            # Item: Scarlet_Jewel
+            # Rate: 10
+          # - Index: 8
+            # Item: Cardinal_Jewel
+            # Rate: 10
+          # - Index: 9
+            # Item: Cardinal_Jewel_
+            # Rate: 10
+          # - Index: 10
+            # Item: Red_Jewel
+            # Rate: 10
+          # - Index: 11
+            # Item: Blue_Jewel
+            # Rate: 10
+          # - Index: 12
+            # Item: White_Jewel
+            # Rate: 10
+          # - Index: 13
+            # Item: Golden_Jewel
+            # Rate: 10
+          # - Index: 14
+            # Item: Bluish_Green_Jewel
+            # Rate: 10
           - Index: 15
             Item: Crystal_Jewel
             Rate: 5
@@ -8415,42 +8415,42 @@ Body:
           - Index: 118
             Item: Blue_Gemstone
             Rate: 14
-          - Index: 119
-            Item: Dark_Red_Jewel
-            Rate: 14
-          - Index: 120
-            Item: Violet_Jewel
-            Rate: 14
-          - Index: 121
-            Item: Skyblue_Jewel
-            Rate: 14
-          - Index: 122
-            Item: Azure_Jewel
-            Rate: 14
-          - Index: 123
-            Item: Scarlet_Jewel
-            Rate: 14
-          - Index: 124
-            Item: Cardinal_Jewel
-            Rate: 14
-          - Index: 125
-            Item: Cardinal_Jewel_
-            Rate: 14
-          - Index: 126
-            Item: Red_Jewel
-            Rate: 14
-          - Index: 127
-            Item: Blue_Jewel
-            Rate: 14
-          - Index: 128
-            Item: White_Jewel
-            Rate: 14
-          - Index: 129
-            Item: Golden_Jewel
-            Rate: 14
-          - Index: 130
-            Item: Bluish_Green_Jewel
-            Rate: 14
+          # - Index: 119
+            # Item: Dark_Red_Jewel
+            # Rate: 14
+          # - Index: 120
+            # Item: Violet_Jewel
+            # Rate: 14
+          # - Index: 121
+            # Item: Skyblue_Jewel
+            # Rate: 14
+          # - Index: 122
+            # Item: Azure_Jewel
+            # Rate: 14
+          # - Index: 123
+            # Item: Scarlet_Jewel
+            # Rate: 14
+          # - Index: 124
+            # Item: Cardinal_Jewel
+            # Rate: 14
+          # - Index: 125
+            # Item: Cardinal_Jewel_
+            # Rate: 14
+          # - Index: 126
+            # Item: Red_Jewel
+            # Rate: 14
+          # - Index: 127
+            # Item: Blue_Jewel
+            # Rate: 14
+          # - Index: 128
+            # Item: White_Jewel
+            # Rate: 14
+          # - Index: 129
+            # Item: Golden_Jewel
+            # Rate: 14
+          # - Index: 130
+            # Item: Bluish_Green_Jewel
+            # Rate: 14
           - Index: 131
             Item: Crystal_Jewel
             Rate: 14

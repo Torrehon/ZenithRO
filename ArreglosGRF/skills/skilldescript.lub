@@ -717,7 +717,8 @@ SKILL_DESCRIPT = {
 		"Description: ^777777Hit the target after careful aiming",
 		"It has a base crit of 50%, increased to 100%",
 		"when the target is affected by Ankle Snare.",
-		"Each point in Luk gives an extra 3% damage ratio.^000000",
+		"Each point in Luk gives an extra 3% damage",
+		"ratio. Ignores Autoguard and Cicada.^000000",
 		"[Lv 1]:^777777 140% damage ^000000",
 		"[Lv 2]:^777777 180% damage ^000000",
 		"[Lv 3]:^777777 220% damage ^000000",
@@ -1349,6 +1350,13 @@ SKILL_DESCRIPT = {
 		"Description: ^777777Pounds a targeted cell to stun enemies in the impacts vicinity.",
 		"This can only be used when an Axe or Mace class weapon is equipped. ^000000"
 	},
+	[SKID.BS_DECIMATION] = {
+		"Cart Decimation",
+		"Max Level: 5",
+		"Skill Form: ^339900Active ^000000",
+		"Description: ^777777Pounds a targeted cell to stun enemies in the impacts vicinity.",
+		"This can only be used when an Axe or Mace class weapon is equipped. ^000000"
+	},
 	[SKID.BS_ADRENALINE] = {
 		"Adrenaline Rush",
 		"Max Level: 5",
@@ -1383,6 +1391,47 @@ SKILL_DESCRIPT = {
 		"Description: ^777777Amplifies Weapon Attack Power by continuously draining a specific amount of SP while skill is active.",
 		"This skill can be canceled by casting it once again. ^000000"
 	},
+    [SKID.BS_JUGGERNAUTSOUL] = {
+		"Soul of the Juggernaut",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the Blacksmith's absolute brute force.^000000",
+		"^008800Hilt Binding^777777: Cart Revolution and Hammer Fall grant ^990000Savagery^777777 stacks (Max 10). Each stack adds ^990000+10%^777777 damage ratio to these skills.^000000",
+		"^008800Skin Tempering^777777: Gain ^990000+0.2%^777777 HP Leech per Savagery stack.^000000",
+		"^008800Hammer Fall^777777: Hits ^0088002 times^777777 when equipped with a Two-Handed Axe.^000000",
+		"^008800Cart Decimation^777777: Consumes all Savagery stacks, dealing ^990000+40%^777777 extra damage ratio per stack.^000000"
+	},
+    [SKID.BS_FORGEMASTERSOUL] = {
+		"Soul of the Forgemaster",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Grants stats based on your Smithing skill levels:^000000",
+		"^008800Dagger^777777: ^990000+7 FLEE/Lv^777777  |  ^008800Sword^777777: ^990000+10 ATK/Lv^000000",
+		"^0088002H Sword^777777: ^990000+5 CRIT/Lv^777777|  ^008800Spear^777777: ^990000+5 HIT/Lv^000000",
+		"^008800Axe^777777: ^990000+10% Dbl Atk/Lv^777777 |  ^008800Knuckle^777777: ^990000+2% ASPD/Lv^000000",
+		"^008800Mace^777777: ^990000+7% Crit Dmg/Lv^000000",
+		"^008800Weaponry Research^777777: ^990000+10%^777777 flat Forge Success.^000000",
+		"^777777Forges gain ^990000Artisan/Masterwork^777777 prefixes instead of maker's name.^000000",
+		"^777777Star Crumbs grant up to ^990000+120 Bonus Damage^777777 on forged weapons.^000000"
+	},
+    [SKID.BS_JUGGERNAUTSOUL] = {
+		"Soul of the Juggernaut",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the Wizard's mastery over elemental enfeeblements.^000000",
+		"^777777DoT statuses have double the chance to occur.^000000",
+		"^777777Increases the matk portion of DoT skills by 100%.^000000",
+		"^777777DoT statuses last 10 more seconds.^000000"
+	},
+    [SKID.BS_FORGEMASTERSOUL] = {
+		"Soul of the Forgemaster",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the Wizard's mastery over elemental enfeeblements.^000000",
+		"^777777DoT statuses have double the chance to occur.^000000",
+		"^777777Increases the matk portion of DoT skills by 100%.^000000",
+		"^777777DoT statuses last 10 more seconds.^000000"
+	},
 	[SKID.HT_SKIDTRAP] = {
 		"Skid Trap",
 		"Max Level: 5",
@@ -1395,22 +1444,22 @@ SKILL_DESCRIPT = {
 		"[Lv 4]:^777777 9 cell sliding range, 120 sec ^000000",
 		"[Lv 5]:^777777 10 cell sliding range, 60 sec ^000000"
 	},
-	[SKID.HT_LANDMINE] = {
+[SKID.HT_LANDMINE] = {
 		"Land Mine",
 		"Max Level: 5",
 		"Skill Form: ^339900Active, Trap ^000000",
-		"Description: ^777777Sets a trap which will explode once an enemy steps on it.",
+		"Description: ^777777Sets an ^008800Earth property^777777 trap that damages enemies when triggered.",
+		"Base damage scales primarily with ^990000INT^777777 and secondarily with ^000099DEX^777777.",
 		"Consumes 1 ^008800Trap^777777. ^000000",
-		"[Lv 1]:^777777 50% damage, 200 sec duration ^000000",
-		"[Lv 2]:^777777 75% damage, 160 sec duration ^000000",
-		"[Lv 3]:^777777 100% damage, 120 sec duration ^000000",
-		"[Lv 4]:^777777 125% damage, 80 sec duration ^000000",
-		"[Lv 5]:^777777 150% damage, 40 sec duration ^000000"
+		"[Lv 1]:^777777 20 sec duration ^000000",
+		"[Lv 2]:^777777 40 sec duration ^000000",
+		"[Lv 3]:^777777 60 sec duration ^000000",
+		"[Lv 4]:^777777 80 sec duration ^000000",
+		"[Lv 5]:^777777 100 sec duration ^000000"
 	},
 	[SKID.HT_ANKLESNARE] = {
 		"Ankle Snare",
 		"Max Level: 5",
-		"11^CC3399Requirement: Skid Trap 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
 		"Description: ^777777Sets a trap that will bind an enemy to the ground for the skill's duration, which is affected by the AGI of the target.",
 		"Consumes 1 ^008800Trap^777777. ^000000"
@@ -1418,7 +1467,6 @@ SKILL_DESCRIPT = {
 	[SKID.HT_SHOCKWAVE] = {
 		"Shockwave Trap",
 		"Max Level: 5",
-		"11^CC3399Requirement: Anklesnare 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
 		"Description: ^777777Sets a trap which will drain SP away from enemies.",
 		"Consumes 2 ^008800Traps^777777. ^000000",
@@ -1431,7 +1479,6 @@ SKILL_DESCRIPT = {
 	[SKID.HT_SANDMAN] = {
 		"Sandman",
 		"Max Level: 5",
-		"11^CC3399Requirement: Flasher 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
 		"Description: ^777777Sets a trap that will cause the enemy that steps on it, as well as enemies within the trap's range, to fall asleep.",
 		"Consumes 1 ^008800Trap^777777. ^000000",
@@ -1444,7 +1491,6 @@ SKILL_DESCRIPT = {
 	[SKID.HT_FLASHER] = {
 		"Flasher",
 		"Max Level: 5",
-		"11^CC3399Requirement: Skid Trap 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
 		"Description: ^777777Sets a trap which will emit intense light, which may inflict the target with the Blind status.",
 		"Consumes 2 ^008800Traps^777777. ^000000",
@@ -1457,36 +1503,37 @@ SKILL_DESCRIPT = {
 	[SKID.HT_FREEZINGTRAP] = {
 		"Freezing Trap",
 		"Max Level: 5",
-		"11^CC3399Requirement: Flasher 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
-		"Description: ^777777Sets a trap which will freeze an enemy once it has been triggered.",
-		"Consumes 2 ^008800Traps^777777. ^000000",
-		"[Lv 1]:^777777 150 sec duration ^000000",
-		"[Lv 2]:^777777 120 sec duration ^000000",
-		"[Lv 3]:^777777 90 sec duration ^000000",
-		"[Lv 4]:^777777 60 sec duration ^000000",
-		"[Lv 5]:^777777 30 sec duration ^000000"
+		"Description: ^777777Sets an ^008800Water property^777777 trap that damages enemies when triggered.",
+		"Base damage scales primarily with ^990000INT^777777 and secondarily with ^000099DEX^777777.",
+		"It has a 30% chance to freeze enemies hit",
+		"Consumes 1 ^008800Trap^777777. ^000000",
+		"[Lv 1]:^777777 20 sec duration ^000000",
+		"[Lv 2]:^777777 40 sec duration ^000000",
+		"[Lv 3]:^777777 60 sec duration ^000000",
+		"[Lv 4]:^777777 80 sec duration ^000000",
+		"[Lv 5]:^777777 100 sec duration ^000000"
 	},
-	[SKID.HT_BLASTMINE] = {
+    [SKID.HT_BLASTMINE] = {
 		"Blast Mine",
 		"Max Level: 5",
-		"11^CC3399Requirement: Sandman 1, Land Mine 1, Freezing Trap 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
-		"Description: ^777777Sets a trap that will automatically explode after a specific time period determined by the level of the skill.",
+		"Description: ^777777Sets an ^008800Wind property^777777 trap that damages enemies when triggered.",
+		"Base damage scales primarily with ^990000INT^777777 and secondarily with ^000099DEX^777777.",
 		"Consumes 1 ^008800Trap^777777. ^000000",
-		"[Lv 1]:^777777 10 sec duration ^000000",
-		"[Lv 2]:^777777 8 sec duration ^000000",
-		"[Lv 3]:^777777 6 sec duration ^000000",
-		"[Lv 4]:^777777 4 sec duration ^000000",
-		"[Lv 5]:^777777 2 sec duration ^000000"
+		"[Lv 1]:^777777 20 sec duration ^000000",
+		"[Lv 2]:^777777 40 sec duration ^000000",
+		"[Lv 3]:^777777 60 sec duration ^000000",
+		"[Lv 4]:^777777 80 sec duration ^000000",
+		"[Lv 5]:^777777 100 sec duration ^000000"
 	},
 	[SKID.HT_CLAYMORETRAP] = {
 		"Claymore Trap",
 		"Max Level: 5",
-		"11^CC3399Requirement: Blast Mine 1, Shockwave Trap 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
-		"Description: ^777777Sets a trap which will inflict splashed damage.",
-		"Consumes 2 ^008800Traps^777777. ^000000",
+		"Description: ^777777Sets an ^008800Fire property^777777 trap that damages enemies when triggered.",
+		"Base damage scales primarily with ^990000INT^777777 and secondarily with ^000099DEX^777777.",
+		"Consumes 1 ^008800Trap^777777. ^000000",
 		"[Lv 1]:^777777 20 sec duration ^000000",
 		"[Lv 2]:^777777 40 sec duration ^000000",
 		"[Lv 3]:^777777 60 sec duration ^000000",
@@ -1504,26 +1551,25 @@ SKILL_DESCRIPT = {
 	[SKID.HT_TALKIEBOX] = {
 		"Talkie Box",
 		"Max Level: 1",
-		"11^CC3399Requirement: Remove Trap 1, Shockwave Trap 1 ^000000",
 		"Skill Form: ^339900Active, Trap ^000000",
 		"Description: ^777777Sets a trap which will last for 600 seconds and will display a prepared message for the person who triggers it.",
 		"Consumes 1 ^008800Trap^777777. ^000000"
 	},
 	[SKID.HT_BEASTBANE] = {
-		"Beast Bane",
+		"Hunter's Focus",
 		"Max Level: 10",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases Attack Power against Brute and Insect monsters. ^000000",
-		"[Lv 1]:^777777 Damage +4 ^000000",
-		"[Lv 2]:^777777 Damage +8 ^000000",
-		"[Lv 3]:^777777 Damage +12 ^000000",
-		"[Lv 4]:^777777 Damage +16 ^000000",
-		"[Lv 5]:^777777 Damage +20 ^000000",
-		"[Lv 6]:^777777 Damage +24 ^000000",
-		"[Lv 7]:^777777 Damage +28 ^000000",
-		"[Lv 8]:^777777 Damage +32 ^000000",
-		"[Lv 9]:^777777 Damage +36 ^000000",
-		"[Lv 10]:^777777 Damage +40 ^000000"
+		"Description: ^777777Increases Attack Power against every Race but Demihuman monsters and players. ^000000",
+		"[Lv 1]:^777777 Damage +2 ^000000",
+		"[Lv 2]:^777777 Damage +4 ^000000",
+		"[Lv 3]:^777777 Damage +6 ^000000",
+		"[Lv 4]:^777777 Damage +8 ^000000",
+		"[Lv 5]:^777777 Damage +10 ^000000",
+		"[Lv 6]:^777777 Damage +12 ^000000",
+		"[Lv 7]:^777777 Damage +14 ^000000",
+		"[Lv 8]:^777777 Damage +16 ^000000",
+		"[Lv 9]:^777777 Damage +18 ^000000",
+		"[Lv 10]:^777777 Damage +20 ^000000"
 	},
 	[SKID.HT_FALCON] = {
 		"Falconry Mastery",
@@ -1554,15 +1600,18 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"11^CC3399Requirement: Falconry Mastery 1 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Commands Falcon to attack a targeted enemy. Leveling this skill also increases the chance of automatic attacks from the Falcon when attacking an enemy with a Bow Class Weapon.",
+		"Description: ^777777Commands Falcon to attack a targeted enemy.",
+		"This skill can be auto-casted when attacking with a Bow type weapon",
+		"Chances of triggering are increased by this skill's level and Dex",
 		"The Falcon's Attack Range is equal to the level of Vulture's Eye skill +3. ^000000"
 	},
 	[SKID.HT_DETECTING] = {
-		"Detect",
+		"Falcon Sweep",
 		"Max Level: 4",
 		"11^CC3399Requirement: Improve Concentration 1, Falconry Mastery 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Commands a Falcon to detect hidden enemies from a distance. ^000000"
+		"Description: ^777777Commands a Falcon to detect hidden enemies from a distance.",
+        "It also can be used to take items from afar.^000000"
 	},
 	[SKID.HT_SPRINGTRAP] = {
 		"Spring Trap",
@@ -1570,6 +1619,24 @@ SKILL_DESCRIPT = {
 		"11^CC3399Requirement: Remove Trap 1, Falconry Mastery ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Commands Falcon to remove a set trap from a distance. ^000000"
+	},
+    [SKID.HT_SHOOTERSOUL] = {
+		"Soul of the Sharpshooter",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens your absolute mastery over archery.^000000",
+		"^008800Momentum^777777: +10 sec base duration (12s at max stacks).^000000",
+		"^008800Hunter's Focus^777777: Grants bonus ^990000CRIT^777777 scaling with your HIT.^000000",
+		"^008800Power Strafe^777777: ^990000+15%^777777 Damage ratio per Momentum stack.^000000"
+	},
+	[SKID.HT_TRAPPERSOUL] = {
+		"Soul of the Trapper",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the true potential of traps and your Falcon.^000000",
+		"^008800Traps^777777: Gain ^990000+150% MATK^777777 damage and inflict ^990000Pinned^777777 (-25% Move Speed) for 10s.^000000",
+		"^008800Blitz Beat^777777: No longer splits damage. ^990000+20%^777777 damage vs Pinned targets.^000000",
+		"^008800Steel Crow^777777: Adds ^990000MATK^777777 scaling to Blitz Beat damage.^000000"
 	},
 	[SKID.AS_RIGHT] = {
 		"Right-Hand Mastery",
@@ -4478,11 +4545,17 @@ SKILL_DESCRIPT = {
 		"Note: ^777777You need a Taekwon Boy on your party to this skill to work. ^000000"
 	},
 	[SKID.HT_POWER] = {
-		"Beast Strafing",
-		"Max Level: 1",
-		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Attacks by using a modified form of Double Strafe that was developed to cause extra damage to Brute monsters.",
-		"Caster's STR affects the amount of inflicted damage. ^000000"
+		"Power Strafe",
+		"Max Level: 5",
+		"Skill Form: ^339900Active, Physical ^000000",
+		"Description: ^777777Fires a powerful volley that hits the target ^0088003 times^777777.^000000",
+		"^777777This skill has a chance to deal ^990000Critical Damage^777777.^000000",
+		"^777777Cooldown: ^9900001 sec^777777.^000000",
+		"[Lv 1]:^777777 120% ATK per hit / 13 SP ^000000",
+		"[Lv 2]:^777777 140% ATK per hit / 16 SP ^000000",
+		"[Lv 3]:^777777 160% ATK per hit / 19 SP ^000000",
+		"[Lv 4]:^777777 180% ATK per hit / 22 SP ^000000",
+		"[Lv 5]:^777777 200% ATK per hit / 25 SP ^000000"
 	},
 	[SKID.GS_GLITTERING] = {
 		"Flip the Coin",
@@ -4578,7 +4651,7 @@ SKILL_DESCRIPT = {
 		"[Lv 8]:^777777 Mastery ATK +40 ^000000",
 		"[Lv 9]:^777777 Mastery ATK +45 ^000000",
 		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
-		"Atk: (Skill Level * Job Level)/10",
+		"Atk: (Skill Level * Job Level)/20",
 		"Aspd: 1% * Skill Level + (Job Level/10)",
 		"Ranged Damage: 0.5% * Skill Level + (Job Level/10)"
 	},

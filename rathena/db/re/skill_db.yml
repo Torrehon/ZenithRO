@@ -13637,20 +13637,29 @@ Body:
   - Id: 499
     Name: HT_POWER
     Description: Beast Strafing
-    MaxLevel: 1
+    MaxLevel: 5
     Type: Weapon
     TargetType: Attack
     Flags:
-      IsSpirit: true
       AlterRangeVulture: true
     Range: -9
     Hit: Multi_Hit
-    HitCount: 2
+    HitCount: 3
     Element: Weapon
     AfterCastActDelay: 100
     Duration1: 100
     Requires:
-      SpCost: 12
+      SpCost:
+        - Level: 1
+          Amount: 13
+        - Level: 2
+          Amount: 16
+        - Level: 3
+          Amount: 19
+        - Level: 4
+          Amount: 22
+        - Level: 5
+          Amount: 25
       Weapon:
         Bow: true
       Ammo:

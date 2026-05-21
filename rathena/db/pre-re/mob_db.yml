@@ -8351,6 +8351,8 @@ Body:
         Rate: 3
       - Item: Cuffs
         Rate: 10
+      - Item: Turban_
+        Rate: 10
       - Item: Iron_Ore
         Rate: 300
       - Item: Iron_Ore
@@ -13362,6 +13364,8 @@ Body:
         Rate: 15
       - Item: Ghost_Bandana
         Rate: 1
+      - Item: Skeleton's_Cape
+        Rate: 5
       - Item: Skeleton_General_Card
         Rate: 1
         StealProtected: true
@@ -16450,7 +16454,7 @@ Body:
         Rate: 5
       - Item: Destroyer_
         Rate: 1
-      - Item: Manteau_
+      - Item: Pauldron
         Rate: 20
       - Item: Steel
         Rate: 2500
@@ -16918,6 +16922,8 @@ Body:
       - Item: Green_Herb
         Rate: 2000
       - Item: Kamaitachi
+        Rate: 5
+      - Item: Improved_Arm_Guard_
         Rate: 5
       - Item: The_Paper_Card
         Rate: 1
@@ -18002,6 +18008,8 @@ Body:
       - Item: Glass_Bead
         Rate: 30
       - Item: Murasame
+        Rate: 5
+      - Item: Arm_Guard_
         Rate: 5
       - Item: Karakasa_Card
         Rate: 1
@@ -45284,10 +45292,16 @@ Body:
         # RandomOptionGroup: Group_5
       # - Item: Velum_Claymore
         # Rate: 5
+      - Item: Gladius_
+        Rate: 350
+      - Item: Gladius
+        Rate: 800
       - Item: Sandstorm
         Rate: 40
       - Item: Ghost_Bandana
-        Rate: 5
+        Rate: 50
+      - Item: Skeleton's_Cape
+        Rate: 50
       - Item: Skeleton_General_Card
         Rate: 5
         StealProtected: true
@@ -45335,10 +45349,16 @@ Body:
         # RandomOptionGroup: Group_5
       # - Item: Velum_Claymore
         # Rate: 5
+      - Item: Gladius_
+        Rate: 350
+      - Item: Gladius
+        Rate: 800
       - Item: Sandstorm
         Rate: 40
       - Item: Ghost_Bandana
-        Rate: 5
+        Rate: 50
+      - Item: Skeleton's_Cape
+        Rate: 50
       - Item: Skeleton_General_Card
         Rate: 5
         StealProtected: true
@@ -45377,6 +45397,8 @@ Body:
       - Item: Iron
         Rate: 1000
       - Item: Lantern
+        Rate: 10000
+      - Item: Old_Pick
         Rate: 10000
       - Item: Elunium_Stone
         Rate: 225
@@ -51680,7 +51702,9 @@ Body:
       - Item: Glass_Bead
         Rate: 75
       - Item: Murasame
-        Rate: 15
+        Rate: 50
+      - Item: Arm_Guard_
+        Rate: 50
       - Item: Karakasa_Card
         Rate: 5
         StealProtected: true
@@ -56889,7 +56913,7 @@ Body:
         Rate: 15
       - Item: Destroyer_
         Rate: 5
-      - Item: Manteau_
+      - Item: Pauldron
         Rate: 50
       # - Item: Runstone_Ancient
         # Rate: 250
@@ -57865,38 +57889,13 @@ Body:
       - Item: inc_longing
         Rate: 500
         StealProtected: true
-  - Id: 21077
-    AegisName: S_DUMMY_100_NOTHING2
-    Name: Dummy (Neutral Lv1)
-    Level: 99
-    Hp: 2000000
-    Defense: 80
-    MagicDefense: 80
-    Str: 0
-    Agi: 0
-    Vit: 0
-    Int: 0
-    Dex: 0
-    Luk: 0
-    SkillRange: 0
-    ChaseRange: 0
-    Size: Medium
-    Race: Formless
-    Element: Neutral
-    ElementLevel: 1
-    WalkSpeed: 1000
-    ClientAttackMotion: 0
-    Ai: 06
-    Class: Boss
-    Modes:
-      TeleportBlock: true
   - Id: 20600
     AegisName: JEWEL
     Name: Mine Spirit
     Level: 50
     Hp: 57500
-    BaseExp: 7500
-    JobExp: 10500
+    BaseExp: 15500
+    JobExp: 17500
     Attack: 215
     Attack2: 299
     Defense: 35
@@ -57921,6 +57920,43 @@ Body:
     DamageMotion: 540
     Ai: 13
     Drops:
+      - Item: Gemstone
+        Rate: 10000
+      - Item: Gold
+        Rate: 100
       - Item: Accessory_Box
         Rate: 1000
+      - Item: Gift_Box
+        Rate: 1000
+      - Item: Branch_Of_Dead_Tree
+        Rate: 1000
+      - Item: Light_Yellow_Pot_Box
+        Rate: 10000
+      - Item: quake_gem
+        Rate: 500
         StealProtected: true
+  - Id: 21077
+    AegisName: S_DUMMY_100_NOTHING2
+    Name: Dummy
+    Level: 99
+    Hp: 2000000
+    Defense: 0
+    MagicDefense: 0
+    Str: 0
+    Agi: 0
+    Vit: 0
+    Int: 0
+    Dex: 0
+    Luk: 0
+    SkillRange: 0
+    ChaseRange: 0
+    Size: Medium
+    Race: Formless
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 1000
+    ClientAttackMotion: 0
+    Ai: 06
+    Class: Boss
+    Modes:
+      TeleportBlock: true

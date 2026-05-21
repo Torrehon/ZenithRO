@@ -2,7 +2,8 @@
 // For more information, see LICENCE in the main folder
 
 #include "blastmine.hpp"
-
+#include "map/pc.hpp"
+#include "map/status.hpp"
 SkillBlastMine::SkillBlastMine() : SkillImpl(HT_BLASTMINE) {
 }
 
@@ -11,4 +12,16 @@ void SkillBlastMine::castendPos2(block_list* src, int32 x, int32 y, uint16 skill
 	flag |= 1;
 
 	skill_unitsetting(src,getSkillId(),skill_lv,x,y,0);
+}
+void SkillBlastMine::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
+
+// --- INICIO CUSTOM: SOUL OF THE TRAPPER (PINNED) ---
+	map_session_data* sd = BL_CAST(BL_PC, src);
+	
+	if (sd && pc_checkskill(sd, HT_TRAPPERSOUL) > 0) {
+		// sc_start(origen, objetivo, estado, probabilidad, valor1_asociado, duración_ms)
+		// Probabilidad = 100 (100%). Valor = 25 (el porcentaje de slow). Tiempo = 10000ms.
+		sc_start(src, target, SC_PINNED, 100, 25, 10000);
+	}
+	// --- FIN CUSTOM
 }

@@ -2299,10 +2299,9 @@ int64 battle_addmastery(map_session_data *sd,block_list *target,int64 dmg,int32 
 
 	damage += (15 * pc_checkskill(sd, NC_MADOLICENCE)); // Attack bonus is granted even without the Madogear
 
-	if((skill = pc_checkskill(sd,HT_BEASTBANE)) > 0 && (status->race == RC_INSECT || status->race == RC_BRUTE || status->race == RC_PLAYER_DORAM) ) {
-		damage += (skill * 4);
-		if (sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_HUNTER)
-			damage += sd->status.str;
+	if ((skill = pc_checkskill(sd, HT_BEASTBANE)) > 0 && target->type != BL_PC && status->race != RC_DEMIHUMAN && status->race != RC_PLAYER_DORAM) {
+		// Añade +40 de daño plano (ignora defensa) a nivel 10 a casi todos los monstruos del juego.
+		damage += (skill * 2);
 	}
 
 #ifdef RENEWAL
@@ -2965,7 +2964,6 @@ static bool is_skill_using_arrow(const block_list* src, int32 skill_id)
 	}
 
 	switch( skill_id ) {
-		case HT_FREEZINGTRAP:
 		case HT_PHANTASMIC:
 		case GS_GROUNDDRIFT:
 		case SS_KUNAIKUSSETSU:
@@ -6555,16 +6553,28 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 			md.damage += (sd ? pc_checkskill(sd,RA_RESEARCHTRAP) * 40 : 0);
 			break;
 #else
-		case HT_LANDMINE:
+        case HT_LANDMINE:
 		case MA_LANDMINE:
-			md.damage = static_cast<decltype(md.damage)>(skill_lv * (sstatus->dex + 75.0) * (100.0 + sstatus->int_) / 100.0);
-			break;
 		case HT_BLASTMINE:
-			md.damage = static_cast<decltype(md.damage)>(skill_lv * (sstatus->dex / 2.0 + 50.0) * (100.0 + sstatus->int_) / 100.0);
-			break;
 		case HT_CLAYMORETRAP:
-			md.damage = static_cast<decltype(md.damage)>(skill_lv * (sstatus->dex / 2.0 + 75.0) * (100.0 + sstatus->int_) / 100.0);
+		case HT_FREEZINGTRAP:
+		{
+			// 1. Fórmula invertida: INT toma el lugar de DEX para escalar el daño base principal.
+			double base_trap_damage = skill_lv * (sstatus->int_ + 100.0) * (120.0 + sstatus->dex) / 100.0;
+			
+			// 2. Bono de Ataque Mágico condicionado a la pasiva
+			double matk_bonus = 0; // Por defecto es 0 para un Hunter normal
+			
+			// Si es un jugador y tiene aprendida Soul of the Trapper
+			if (sd && pc_checkskill(sd, HT_TRAPPERSOUL) > 0) {
+				// Calculamos el 150% (1.5) del MATK máximo
+				matk_bonus = sstatus->matk_max * 1.5;
+			}
+			
+			// 3. Sumamos la base invertida más el bono de MATK al daño final
+			md.damage = static_cast<decltype(md.damage)>(base_trap_damage + matk_bonus);
 			break;
+		}
 #endif
 		case HT_BLITZBEAT:
 		case SN_FALCONASSAULT:
@@ -6578,8 +6588,37 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 				md.damage = skill_lv * 20 + skill * 6 + ((sstatus->agi / 2) *2) + ((sstatus->dex / 10) *2);
 #else
 				md.damage = (sstatus->dex / 10 + sstatus->int_ / 2 + skill * 3 + 40) * 2;
-				if(mflag > 1) //Autocasted Blitz
-					nk.set(NK_SPLASHSPLIT);
+				
+				// --- INICIO CUSTOM: MATK VIA STEEL CROW ---
+				// La variable 'skill' tiene el nivel de HT_STEELCROW (de 1 a 10).
+				// Multiplicamos por 0.10 para dar un 10% de MATK por cada nivel.
+				double matk_multiplier = skill * 0.05;
+				int matk_bonus = static_cast<int>(sstatus->matk_max * matk_multiplier);
+				
+				md.damage += matk_bonus;
+				// --- FIN CUSTOM ---
+
+				if(mflag > 1) { //Autocasted Blitz
+					// --- INICIO CUSTOM: SOUL OF THE TRAPPER (NO SPLIT) ---
+					// Si NO tiene la pasiva, el daño se divide entre los objetivos.
+					if (!(sd && pc_checkskill(sd, HT_TRAPPERSOUL) > 0)) {
+						nk.set(NK_SPLASHSPLIT);
+					}
+					// --- FIN CUSTOM ---
+				}
+				
+				// --- INICIO CUSTOM: SOUL OF THE TRAPPER (DAÑO VS PINNED) ---
+				if (sd && pc_checkskill(sd, HT_TRAPPERSOUL) > 0) {
+					status_change* tsc = status_get_sc(target);
+					
+					// NOTA: Si tu estado de inmovilizar es Ankle Snare clásico, 
+					// cambia SC_PINNED por SC_ANKLESNARE.
+					if (tsc && tsc->getSCE(SC_PINNED)) {
+						// Aumenta el daño final de Blitz Beat en un 20%
+						md.damage = md.damage * 120 / 100;
+					}
+				}
+				// --- FIN CUSTOM ---
 #endif
 				if (skill_id == SN_FALCONASSAULT) {
 					//Div fix of Blitzbeat
@@ -7616,8 +7655,16 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 		TBL_SKILL *su = (TBL_SKILL*)target;
 
 		if (su && su->group) {
-			if (su->group->skill_id == HT_BLASTMINE)
+			// Añadidas todas las trampas elementales para que puedan ser empujadas 3 celdas
+			if (su->group->skill_id == HT_BLASTMINE || 
+			    su->group->skill_id == HT_LANDMINE || 
+			    su->group->skill_id == MA_LANDMINE || 
+			    su->group->skill_id == HT_CLAYMORETRAP || 
+			    su->group->skill_id == HT_FREEZINGTRAP) {
+				
 				skill_blown(src, target, 3, -1, BLOWN_NONE);
+			}
+			
 			if (su->group->skill_id == GN_WALLOFTHORN) {
 				if (--su->val2 <= 0)
 					skill_delunit(su);

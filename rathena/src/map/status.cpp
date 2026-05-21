@@ -4321,6 +4321,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	// Absolute modifiers from passive skills
 	if(pc_checkskill(sd,BS_HILTBINDING)>0)
 		base_status->str++;
+	    base_status->vit++;
 	if((skill=pc_checkskill(sd,SA_DRAGONOLOGY))>0)
 		base_status->int_ += (skill+1)/2; // +1 INT / 2 lv
 	if((skill=pc_checkskill(sd,AC_OWL))>0)
@@ -4385,7 +4386,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		base_status->batk += sd->indexed_bonus.weapon_atk[sd->status.weapon];
 	// Absolute modifiers from passive skills
 	if((skill=pc_checkskill(sd,BS_HILTBINDING))>0)
-		base_status->batk += 4;
+		base_status->batk += 10;
  
 	// --- INICIO: 1-Hand Sword Mastery Custom ---
 	if (sd->status.weapon == W_1HSWORD || sd->status.weapon == W_DAGGER) {
@@ -4427,11 +4428,9 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
     // --- FIN: Bugei (ATK Pasivo) ---
 	// --- INICIO: Vulture's Eye Custom ---
 	if (sd->status.weapon == W_BOW) {
-		
-		// Usamos AC_VULTURE (ID 1)
 		if ((skill = pc_checkskill(sd, AC_VULTURE)) > 0) {
 			int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
-			base_status->batk += (skill * jlv) / 10;
+			base_status->batk += (skill * jlv) / 20;
 		}
 	}
 	// --- FIN: Vulture's Eye Custom ---
@@ -4442,7 +4441,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		
 		if ((skill = pc_checkskill(sd, GS_SINGLEACTION)) > 0) {
 			int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
-			base_status->batk += (skill * jlv) / 10;
+			base_status->batk += (skill * jlv) / 20;
 		}
 	}
 	// --- FIN: Firearms Mastery Custom ---
@@ -4722,6 +4721,18 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		else if (sd->status.weapon == W_KATAR)
 			base_status->cri += 50 + skill * 20;
 	}
+    // --- INICIO CUSTOM: HUNTER'S FOCUS (BEAST BANE) + SOUL OF THE SHARPSHOOTER ---
+	if (pc_checkskill(sd, HT_BEASTBANE) > 0 && pc_checkskill(sd, HT_SHOOTERSOUL) > 0) {
+		int skill_lv = pc_checkskill(sd, HT_BEASTBANE);
+		
+		// Fórmula: (0.5% * Skill Level) del HIT total.
+		// Usamos base_status->hit que contiene el hit final calculado
+		int crit_bonus_internal = (base_status->hit * 5 * skill_lv) / 100;
+		
+		// Lo sumamos a base_status->crit (recuerda que el crítico en rAthena va multiplicado x10)
+		base_status->cri += crit_bonus_internal;
+	}
+	// --- FIN CUSTOM ---
 
 // ----- P.Atk/S.Matk CALCULATION -----
 	if ((skill = pc_checkskill(sd, TR_STAGE_MANNER)) > 0 && (sd->status.weapon == W_BOW || sd->status.weapon == W_MUSICAL || sd->status.weapon == W_WHIP)) {
@@ -8501,7 +8512,7 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 				val = max( val, 25 );
 			if( sc->getSCE(SC_PSLOW) )
 				// Multiplicamos el nivel de la skill (guardado en val1) por 10
-				val = max( val, sc->getSCE(SC_PSLOW)->val1 * 10 );
+				val = max( val, sc->getSCE(SC_PSLOW)->val1 * 10 );	
 			if( sc->getSCE(SC_QUAGMIRE) || sc->getSCE(SC_HALLUCINATIONWALK_POSTDELAY) || (sc->getSCE(SC_GLOOMYDAY) && sc->getSCE(SC_GLOOMYDAY)->val4) )
 				val = max( val, 50 );
 			if( sc->getSCE(SC_DONTFORGETME) )
@@ -10232,6 +10243,10 @@ t_tick status_get_sc_def(const block_list* src, const block_list* bl, sc_type ty
 			if (sd)
 				tick /= 2; // Half duration for players.
 			break;
+		case SC_PINNED:
+			if (sd)
+				tick /= 2; // Half duration for players.
+			break;
 		case SC_JOINTBEAT:
 			tick_def2 = 1000 * ((status->luk / 2 + status->agi / 5) / 2); // (50 * LUK / 100 + 20 * AGI / 100) / 2
 			break;
@@ -10827,6 +10842,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_STAGGER:
 			break;
 	    case SC_PSLOW:
+			break;
+	    case SC_PINNED:
 			break;
 	    case SC_ARCINSIGHT:
 			break;
@@ -12118,8 +12135,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 				else if (type == SC_ADRENALINE2 || type == SC_ADRENALINE) {
 					val3 = (val2) ? 300 : 200; // Aspd increase
 				}
-				if (s_sd && pc_checkskill(s_sd, BS_HILTBINDING) > 0)
-					tick += tick / 10; //If caster has Hilt Binding, duration increases by 10%
+				// if (s_sd && pc_checkskill(s_sd, BS_HILTBINDING) > 0)
+					// tick += tick / 10; //If caster has Hilt Binding, duration increases by 10%
 			}
 			break;
 		case SC_CONCENTRATION:
@@ -14834,18 +14851,16 @@ TIMER_FUNC(status_change_timer){
 			
 			// --- NUEVO: EFECTOS VISUALES CADA VEZ QUE HACE TICK ---
 			if (type == SC_ELECTROCUTE) {
-				// Efecto 260 = El rayo de Thunderstorm cayendo sobre el objetivo
-				// Efecto 254 = El chispazo azul de Jupitel Thunder (puedes probar cuál te gusta más)
+				
 				clif_specialeffect(bl, 1638, AREA); 
 			} 
 			else if (type == SC_BURIED) {
-				// Efecto 284 = Los pinchos de roca de Earth Spike saliendo del suelo
-				// Efecto 209 = La nube de polvo/piedra de Stone Curse
+				
 				clif_specialeffect(bl, 1623, AREA); 
 				clif_specialeffect(bl, 2267, AREA); 
 			}
 			else if (type == SC_DROWN) {
-				// Efecto 111 = Burbujas (de Waterball) o 299 (Frost Diver)
+				
 				clif_specialeffect(bl, 1667, AREA);
 				clif_specialeffect(bl, 109, AREA);
 			}

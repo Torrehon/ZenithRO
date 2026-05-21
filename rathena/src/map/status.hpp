@@ -1457,6 +1457,8 @@ enum sc_type : int16 {
 	SC_ELECTROCUTE,
 	SC_BURIED,
 	SC_ARCINSIGHT,
+	SC_PINNED,
+	SC_SAVAGERY,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -2970,6 +2972,8 @@ enum efst_type : int16{
 	EFST_ELECTROCUTE = 1708,
 	EFST_BURIED = 1709,
 	EFST_ARCINSIGHT = 1710,
+	EFST_PINNED = 1711,
+	EFST_SAVAGERY = 1712,
 	EFST_MAX,
 };
 

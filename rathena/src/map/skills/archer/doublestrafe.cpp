@@ -29,8 +29,7 @@ void SkillDoubleStrafe::castendDamageId(block_list* src, block_list* target, uin
 	// 2. Lógica de Momentum
 	map_session_data* sd = BL_CAST(BL_PC, src);
 	
-	// IMPORTANTE: Asegúrate de que 1025 es la ID de tu skill en skill_db.yml
-	if (sd && pc_checkskill(sd, 1025) > 0) { 
+	if (sd && pc_checkskill(sd, AC_MOMENTUM) > 0) { 
 		
 		status_change* sc = status_get_sc(src);
 		int32 current_stacks = 0;
@@ -44,7 +43,14 @@ void SkillDoubleStrafe::castendDamageId(block_list* src, block_list* target, uin
 		int32 new_stacks = std::min(10, current_stacks + 1);
 
 		// Calculamos la duración: (12 - número de stacks) * 1000 milisegundos
-		t_tick duration = (12 - new_stacks) * 1000;
+		t_tick duration;
+		if (pc_checkskill(sd, HT_SHOOTERSOUL) > 0) {
+			// Con Soul of the Sharpshooter
+			duration = (22 - new_stacks) * 1000;
+		} else {
+			// Sin la pasiva
+			duration = (12 - new_stacks) * 1000;
+		}
 
 		// Refrescamos o iniciamos el estado con la nueva duración y stacks
 		sc_start4(src, src, SC_MOMENTUM, 100, new_stacks, 0, 0, 0, duration);

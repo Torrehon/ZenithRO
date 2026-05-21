@@ -1,5 +1,5 @@
 // =====================================================
-// Custom Hunting System - Payon
+// Custom Hunting System - Payon & Payon Cave
 // Description: Hunting Board & Veteran Hunter Shop
 // =====================================================
 
@@ -8,7 +8,7 @@
 // -----------------------------------------------------
 payon,190,130,4	script	Hunting Board#pay	857,{
 	mes "[^0055FFHunting Board - Payon^000000]";
-	mes "Welcome, hunter. Here is the status of today's contracts in the mountain region.";
+	mes "Welcome, hunter. Here is the status of today's contracts for the mountain region and the caves.";
 	mes "You can take on multiple contracts at once.";
 	next;
 
@@ -19,10 +19,13 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 	.@m2$ = (Hunt_Pay_CD_2 == .@today) ? "^777777[Done] Living Wood^000000" : (Hunt_Pay_M2_Active ? "^0055FF[Report] Living Wood^000000" : "[Accept] Living Wood");
 	.@m3$ = (Hunt_Pay_CD_3 == .@today) ? "^777777[Done] Howling Threat^000000" : (Hunt_Pay_M3_Active ? "^0055FF[Report] Howling Threat^000000" : "[Accept] Howling Threat");
 	.@m4$ = (Hunt_Pay_CD_4 == .@today) ? "^777777[Done] Giant Footprints^000000" : (Hunt_Pay_M4_Active ? "^0055FF[Report] Giant Footprints^000000" : "[Accept] Giant Footprints");
+	.@m5$ = (Hunt_Pay_CD_5 == .@today) ? "^777777[Done] The Restless Bones^000000" : (Hunt_Pay_M5_Active ? "^0055FF[Report] The Restless Bones^000000" : "[Accept] The Restless Bones");
+	.@m6$ = (Hunt_Pay_CD_6 == .@today) ? "^777777[Done] Walking Corpses^000000" : (Hunt_Pay_M6_Active ? "^0055FF[Report] Walking Corpses^000000" : "[Accept] Walking Corpses");
+	.@m7$ = (Hunt_Pay_CD_7 == .@today) ? "^777777[Done] Poisonous Slime^000000" : (Hunt_Pay_M7_Active ? "^0055FF[Report] Poisonous Slime^000000" : "[Accept] Poisonous Slime");
 
-	.@opt = select(.@m1$, .@m2$, .@m3$, .@m4$, "Close");
+	.@opt = select(.@m1$, .@m2$, .@m3$, .@m4$, .@m5$, .@m6$, .@m7$, "Close");
 
-	if (.@opt == 5) close;
+	if (.@opt == 8) close;
 
 	mes "[^0055FFHunting Board - Payon^000000]";
 
@@ -36,15 +39,14 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 		}
 		if (Hunt_Pay_M1_Active) {
 			if (Hunt_Pay_M1_K1 >= 15) {
-				// Cálculo de EXP (Suma Base de la BD * cantidad) y se reduce al 75%
 				.@base = ((getmonsterinfo(1014, MOB_BASEEXP) * 15) * 75 / 100);
 				.@job  = ((getmonsterinfo(1014, MOB_JOBEXP) * 15) * 75 / 100);
 				
 				getexp .@base, .@job;
-				getitem 50006, 5; // Payon Coin
+				getitem 50006, 5;
 				mes "Excellent work! Contract completed.";
-				mes "^00AA00You receive 1x Payon Coin and extra Experience.^000000";
-				Hunt_Pay_CD_1 = .@today; // Inicia el Cooldown
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
+				Hunt_Pay_CD_1 = .@today;
 				Hunt_Pay_M1_Active = 0;
 			} else {
 				mes "Progress: Spore ("+Hunt_Pay_M1_K1+"/15)";
@@ -55,7 +57,6 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 				}
 			}
 		} else {
-			// Ventana de confirmación de misión
 			mes "Contract: ^0055FFMushroom Menace^000000";
 			mes "Objective: Hunt down ^FF000015 Spores^000000.";
 			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
@@ -82,14 +83,13 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 		}
 		if (Hunt_Pay_M2_Active) {
 			if (Hunt_Pay_M2_K1 >= 20) {
-				// Cálculo de EXP al 75%
 				.@base = ((getmonsterinfo(1033, MOB_BASEEXP) * 20) * 75 / 100);
 				.@job  = ((getmonsterinfo(1033, MOB_JOBEXP) * 20) * 75 / 100);
 				
 				getexp .@base, .@job;
-				getitem 50006, 5; // Payon Coin
+				getitem 50006, 5;
 				mes "Excellent work! Contract completed.";
-				mes "^00AA00You receive 1x Payon Coin and extra Experience.^000000";
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
 				Hunt_Pay_CD_2 = .@today;
 				Hunt_Pay_M2_Active = 0;
 			} else {
@@ -97,18 +97,17 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 				next;
 				if (select("Keep hunting:Abandon contract") == 2) {
 					Hunt_Pay_M2_Active = 0;
-					mes "Contract abandoned. You can accept it again anytime.";
+					mes "Contract abandoned.";
 				}
 			}
 		} else {
-			// Ventana de confirmación de misión
 			mes "Contract: ^0055FFLiving Wood^000000";
 			mes "Objective: Hunt down ^FF000020 Elder Willows^000000.";
 			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
 			mes "Do you wish to accept this hunting mission?";
 			next;
 			if (select("Accept Contract:Decline") == 2) {
-				mes "Maybe next time. The board is always here.";
+				mes "Maybe next time.";
 				close;
 			}
 			mes "Contract signed! You are now hunting Elder Willows.";
@@ -128,14 +127,13 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 		}
 		if (Hunt_Pay_M3_Active) {
 			if (Hunt_Pay_M3_K1 >= 30) {
-				// Cálculo de EXP al 75%
 				.@base = ((getmonsterinfo(1013, MOB_BASEEXP) * 30) * 75 / 100);
 				.@job  = ((getmonsterinfo(1013, MOB_JOBEXP) * 30) * 75 / 100);
 				
 				getexp .@base, .@job;
-				getitem 50006, 5; // Payon Coin
+				getitem 50006, 5;
 				mes "Excellent work! Contract completed.";
-				mes "^00AA00You receive 1x Payon Coin and extra Experience.^000000";
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
 				Hunt_Pay_CD_3 = .@today;
 				Hunt_Pay_M3_Active = 0;
 			} else {
@@ -143,18 +141,17 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 				next;
 				if (select("Keep hunting:Abandon contract") == 2) {
 					Hunt_Pay_M3_Active = 0;
-					mes "Contract abandoned. You can accept it again anytime.";
+					mes "Contract abandoned.";
 				}
 			}
 		} else {
-			// Ventana de confirmación de misión
 			mes "Contract: ^0055FFHowling Threat^000000";
 			mes "Objective: Hunt down ^FF000030 Wolves^000000.";
 			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
 			mes "Do you wish to accept this hunting mission?";
 			next;
 			if (select("Accept Contract:Decline") == 2) {
-				mes "Maybe next time. The board is always here.";
+				mes "Maybe next time.";
 				close;
 			}
 			mes "Contract signed! You are now hunting Wolves.";
@@ -174,14 +171,13 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 		}
 		if (Hunt_Pay_M4_Active) {
 			if (Hunt_Pay_M4_K1 >= 20) {
-				// Cálculo de EXP al 75%
 				.@base = ((getmonsterinfo(1060, MOB_BASEEXP) * 20) * 75 / 100);
 				.@job  = ((getmonsterinfo(1060, MOB_JOBEXP) * 20) * 75 / 100);
 				
 				getexp .@base, .@job;
-				getitem 50006, 5; // Payon Coin
+				getitem 50006, 5;
 				mes "Excellent work! Contract completed.";
-				mes "^00AA00You receive 1x Payon Coin and extra Experience.^000000";
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
 				Hunt_Pay_CD_4 = .@today;
 				Hunt_Pay_M4_Active = 0;
 			} else {
@@ -189,23 +185,154 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 				next;
 				if (select("Keep hunting:Abandon contract") == 2) {
 					Hunt_Pay_M4_Active = 0;
-					mes "Contract abandoned. You can accept it again anytime.";
+					mes "Contract abandoned.";
 				}
 			}
 		} else {
-			// Ventana de confirmación de misión
 			mes "Contract: ^0055FFGiant Footprints^000000";
 			mes "Objective: Hunt down ^FF000020 Bigfoots^000000.";
 			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
 			mes "Do you wish to accept this hunting mission?";
 			next;
 			if (select("Accept Contract:Decline") == 2) {
-				mes "Maybe next time. The board is always here.";
+				mes "Maybe next time.";
 				close;
 			}
 			mes "Contract signed! You are now hunting Bigfoots.";
 			Hunt_Pay_M4_Active = 1;
 			Hunt_Pay_M4_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 5: Skeleton (30) - Payon Cave
+	// ==========================================
+	if (.@opt == 5) {
+		if (Hunt_Pay_CD_5 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Pay_M5_Active) {
+			if (Hunt_Pay_M5_K1 >= 30) {
+				.@base = ((getmonsterinfo(1076, MOB_BASEEXP) * 30) * 75 / 100);
+				.@job  = ((getmonsterinfo(1076, MOB_JOBEXP) * 30) * 75 / 100);
+				
+				getexp .@base, .@job;
+				getitem 50006, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
+				Hunt_Pay_CD_5 = .@today;
+				Hunt_Pay_M5_Active = 0;
+			} else {
+				mes "Progress: Skeleton ("+Hunt_Pay_M5_K1+"/30)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Pay_M5_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFThe Restless Bones^000000";
+			mes "Objective: Hunt down ^FF000030 Skeletons^000000 in Payon Cave.";
+			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) {
+				mes "Maybe next time.";
+				close;
+			}
+			mes "Contract signed! You are now hunting Skeletons.";
+			Hunt_Pay_M5_Active = 1;
+			Hunt_Pay_M5_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 6: Zombie (20) - Payon Cave
+	// ==========================================
+	if (.@opt == 6) {
+		if (Hunt_Pay_CD_6 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Pay_M6_Active) {
+			if (Hunt_Pay_M6_K1 >= 20) {
+				.@base = ((getmonsterinfo(1015, MOB_BASEEXP) * 20) * 75 / 100);
+				.@job  = ((getmonsterinfo(1015, MOB_JOBEXP) * 20) * 75 / 100);
+				
+				getexp .@base, .@job;
+				getitem 50006, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
+				Hunt_Pay_CD_6 = .@today;
+				Hunt_Pay_M6_Active = 0;
+			} else {
+				mes "Progress: Zombie ("+Hunt_Pay_M6_K1+"/20)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Pay_M6_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFWalking Corpses^000000";
+			mes "Objective: Hunt down ^FF000020 Zombies^000000 in Payon Cave.";
+			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) {
+				mes "Maybe next time.";
+				close;
+			}
+			mes "Contract signed! You are now hunting Zombies.";
+			Hunt_Pay_M6_Active = 1;
+			Hunt_Pay_M6_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 7: Poporing (10) - Payon Cave
+	// ==========================================
+	if (.@opt == 7) {
+		if (Hunt_Pay_CD_7 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Pay_M7_Active) {
+			if (Hunt_Pay_M7_K1 >= 10) {
+				.@base = ((getmonsterinfo(1031, MOB_BASEEXP) * 10) * 75 / 100);
+				.@job  = ((getmonsterinfo(1031, MOB_JOBEXP) * 10) * 75 / 100);
+				
+				getexp .@base, .@job;
+				getitem 50006, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Payon Coin and extra Experience.^000000";
+				Hunt_Pay_CD_7 = .@today;
+				Hunt_Pay_M7_Active = 0;
+			} else {
+				mes "Progress: Poporing ("+Hunt_Pay_M7_K1+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Pay_M7_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFPoisonous Slime^000000";
+			mes "Objective: Hunt down ^FF000010 Poporings^000000 in Payon Cave.";
+			mes "Reward: ^00AA005x Payon Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) {
+				mes "Maybe next time.";
+				close;
+			}
+			mes "Contract signed! You are now hunting Poporings.";
+			Hunt_Pay_M7_Active = 1;
+			Hunt_Pay_M7_K1 = 0;
 		}
 		close;
 	}
@@ -218,6 +345,7 @@ payon,190,130,4	script	Hunting Board#pay	857,{
 OnNPCKillEvent:
 	.@mob_id = killedrid;
 
+	// Forest Mobs
 	if (Hunt_Pay_M1_Active == 1) {
 		if (.@mob_id == 1014 && Hunt_Pay_M1_K1 < 15) {
 			Hunt_Pay_M1_K1++;
@@ -242,6 +370,26 @@ OnNPCKillEvent:
 			dispbottom "Payon Hunt: Bigfoot ["+Hunt_Pay_M4_K1+"/20]";
 		}
 	}
+
+	// Cave Mobs
+	if (Hunt_Pay_M5_Active == 1) {
+		if (.@mob_id == 1076 && Hunt_Pay_M5_K1 < 30) {
+			Hunt_Pay_M5_K1++;
+			dispbottom "Payon Cave Hunt: Skeleton ["+Hunt_Pay_M5_K1+"/30]";
+		}
+	}
+	if (Hunt_Pay_M6_Active == 1) {
+		if (.@mob_id == 1015 && Hunt_Pay_M6_K1 < 20) {
+			Hunt_Pay_M6_K1++;
+			dispbottom "Payon Cave Hunt: Zombie ["+Hunt_Pay_M6_K1+"/20]";
+		}
+	}
+	if (Hunt_Pay_M7_Active == 1) {
+		if (.@mob_id == 1031 && Hunt_Pay_M7_K1 < 10) {
+			Hunt_Pay_M7_K1++;
+			dispbottom "Payon Cave Hunt: Poporing ["+Hunt_Pay_M7_K1+"/10]";
+		}
+	}
 	end;
 }
 
@@ -250,14 +398,14 @@ OnNPCKillEvent:
 // -----------------------------------------------------
 payon,188,130,4	script	Veteran Hunter#pay	727,{
 	mes "[^0055FFVeteran Hunter^000000]";
-	mes "Greetings, traveler. May the spirits of the forest guide your arrows.";
-	mes "I reward those who help keep the mountain paths safe from the wild beasts.";
+	mes "Greetings, traveler. May the spirits of the forest guide your arrows and keep you safe from the restless dead.";
+	mes "I reward those who help keep the mountain paths and dark caves safe from wild beasts.";
 	mes "Do you wish to exchange your hard-earned Payon Coins for provisions?";
 	mes " ";
 	mes "You currently hold: ^00AA00" + countitem(50006) + " Payon Coins^000000.";
 	next;
 
-	if (select("Show me your wares:I must return to the forest") == 2) {
+	if (select("Show me your wares:I must return to the wild") == 2) {
 		mes "[^0055FFVeteran Hunter^000000]";
 		mes "Walk in harmony with nature, hunter.";
 		close;
@@ -292,15 +440,27 @@ OnBuyItem:
 	}
 	
 	mes "[^0055FFVeteran Hunter^000000]";
-	mes "A wise choice. May these provisions serve you well in the deep woods.";
+	mes "A wise choice. May these provisions serve you well in the deep woods and dark caverns.";
 	mes "Stay alert!";
 	specialeffect2 EF_MONEY;
 	close;
 
 OnInit:
 	setarray .Shop_Data[0], 
-		502, 2,   // Red Potion (Ejemplo: Cuesta 2 monedas)
-		501, 1;   // Red Herb (Ejemplo: Cuesta 1 moneda) 
+		13531, 3,    // Light Red Potion Box
+		13532, 5,    // Light Orange Potion Box
+		13533, 7,    // Light Yellow Potion Box
+		13534, 10,   // Light White Potion Box
+		19639, 50,   // Costume Sakkat
+		19503, 50,   // Costume Munak Hat
+		19687, 50,   // Costume Lush Rose
+		19292, 200,  // Costume Wild Cat Knit Cap
+		19536, 200,  // Costume Rose Corsage
+		19543, 200,  // Costume Oliver Wolf Hood
+		19545, 200,  // Costume Boy's Cap
+		19598, 500,  // Costume Wandering Wolf King Helmet
+		19642, 500,  // Costume Moonlight Flower Hat
+		31415, 500;  // Costume Wanderer's Sakkat
 
 	npcshopdelitem "payon_hunter_shop", 502; 
 	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {

@@ -1,0 +1,642 @@
+// =====================================================
+// Custom Hunting System - Geffen
+// Description: Hunting Board & Veteran Hunter Shop
+// =====================================================
+
+// -----------------------------------------------------
+// 1. Hunting Board - Geffen (Sprite 857)
+// -----------------------------------------------------
+geffen,99,71,4	script	Hunting Board#gef	857,{
+	mes "[^0055FFHunting Board - Geffen^000000]";
+	mes "Welcome, hunter. Here is the status of today's contracts in the magical region of Geffen.";
+	mes "You can take on multiple contracts at once.";
+	next;
+
+	.@today = gettime(DT_YYYYMMDD);
+
+	// Menú dinámico: Cambia el texto según el estado de cada misión
+	.@m1$ = (Hunt_Gef_CD_1 == .@today) ? "^777777[Done] Creepy Crawlers^000000" : (Hunt_Gef_M1_Active ? "^0055FF[Report] Creepy Crawlers^000000" : "[Accept] Creepy Crawlers");
+	.@m2$ = (Hunt_Gef_CD_2 == .@today) ? "^777777[Done] Hard Shells^000000" : (Hunt_Gef_M2_Active ? "^0055FF[Report] Hard Shells^000000" : "[Accept] Hard Shells");
+	.@m3$ = (Hunt_Gef_CD_3 == .@today) ? "^777777[Done] Swamp Hoppers^000000" : (Hunt_Gef_M3_Active ? "^0055FF[Report] Swamp Hoppers^000000" : "[Accept] Swamp Hoppers");
+	.@m4$ = (Hunt_Gef_CD_4 == .@today) ? "^777777[Done] Acorn Tossers^000000" : (Hunt_Gef_M4_Active ? "^0055FF[Report] Acorn Tossers^000000" : "[Accept] Acorn Tossers");
+	.@m5$ = (Hunt_Gef_CD_5 == .@today) ? "^777777[Done] Sweet Rodents^000000" : (Hunt_Gef_M5_Active ? "^0055FF[Report] Sweet Rodents^000000" : "[Accept] Sweet Rodents");
+	.@m6$ = (Hunt_Gef_CD_6 == .@today) ? "^777777[Done] Green Brutes^000000" : (Hunt_Gef_M6_Active ? "^0055FF[Report] Green Brutes^000000" : "[Accept] Green Brutes");
+	.@m7$ = (Hunt_Gef_CD_7 == .@today) ? "^777777[Done] Fierce Matriarchs^000000" : (Hunt_Gef_M7_Active ? "^0055FF[Report] Fierce Matriarchs^000000" : "[Accept] Fierce Matriarchs");
+	.@m8$ = (Hunt_Gef_CD_8 == .@today) ? "^777777[Done] Little Greens^000000" : (Hunt_Gef_M8_Active ? "^0055FF[Report] Little Greens^000000" : "[Accept] Little Greens");
+	.@m9$ = (Hunt_Gef_CD_9 == .@today) ? "^777777[Done] Undead Orcs^000000" : (Hunt_Gef_M9_Active ? "^0055FF[Report] Undead Orcs^000000" : "[Accept] Undead Orcs");
+	.@m10$ = (Hunt_Gef_CD_10 == .@today) ? "^777777[Done] Bony Orcs^000000" : (Hunt_Gef_M10_Active ? "^0055FF[Report] Bony Orcs^000000" : "[Accept] Bony Orcs");
+	.@m11$ = (Hunt_Gef_CD_11 == .@today) ? "^777777[Done] Mutated Orcs^000000" : (Hunt_Gef_M11_Active ? "^0055FF[Report] Mutated Orcs^000000" : "[Accept] Mutated Orcs");
+
+	.@opt = select(.@m1$, .@m2$, .@m3$, .@m4$, .@m5$, .@m6$, .@m7$, .@m8$, .@m9$, .@m10$, .@m11$, "Close");
+
+	if (.@opt == 12) close;
+
+	mes "[^0055FFHunting Board - Geffen^000000]";
+
+	// ==========================================
+	// Misión 1: Fabre (x20)
+	// ==========================================
+	if (.@opt == 1) {
+		if (Hunt_Gef_CD_1 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M1_Active) {
+			if (Hunt_Gef_M1_K1 >= 20) {
+				.@base = ((getmonsterinfo(1007, MOB_BASEEXP) * 20)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1007, MOB_JOBEXP) * 20)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5; // Geffen Coin
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_1 = .@today;
+				Hunt_Gef_M1_Active = 0;
+			} else {
+				mes "Progress: Fabre ("+Hunt_Gef_M1_K1+"/20)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M1_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFCreepy Crawlers^000000";
+			mes "Objective: Hunt down ^FF000020 Fabres^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Fabres.";
+			Hunt_Gef_M1_Active = 1;
+			Hunt_Gef_M1_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 2: Ambernite (x10)
+	// ==========================================
+	if (.@opt == 2) {
+		if (Hunt_Gef_CD_2 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M2_Active) {
+			if (Hunt_Gef_M2_K1 >= 10) {
+				.@base = ((getmonsterinfo(1094, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1094, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_2 = .@today;
+				Hunt_Gef_M2_Active = 0;
+			} else {
+				mes "Progress: Ambernite ("+Hunt_Gef_M2_K1+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M2_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFHard Shells^000000";
+			mes "Objective: Hunt down ^FF000010 Ambernites^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Ambernites.";
+			Hunt_Gef_M2_Active = 1;
+			Hunt_Gef_M2_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 3: Roda Frog (x15)
+	// ==========================================
+	if (.@opt == 3) {
+		if (Hunt_Gef_CD_3 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M3_Active) {
+			if (Hunt_Gef_M3_K1 >= 15) {
+				.@base = ((getmonsterinfo(1012, MOB_BASEEXP) * 15)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1012, MOB_JOBEXP) * 15)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_3 = .@today;
+				Hunt_Gef_M3_Active = 0;
+			} else {
+				mes "Progress: Roda Frog ("+Hunt_Gef_M3_K1+"/15)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M3_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFSwamp Hoppers^000000";
+			mes "Objective: Hunt down ^FF000015 Roda Frogs^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Roda Frogs.";
+			Hunt_Gef_M3_Active = 1;
+			Hunt_Gef_M3_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 4: Coco (x20)
+	// ==========================================
+	if (.@opt == 4) {
+		if (Hunt_Gef_CD_4 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M4_Active) {
+			if (Hunt_Gef_M4_K1 >= 20) {
+				.@base = ((getmonsterinfo(1104, MOB_BASEEXP) * 20)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1104, MOB_JOBEXP) * 20)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_4 = .@today;
+				Hunt_Gef_M4_Active = 0;
+			} else {
+				mes "Progress: Coco ("+Hunt_Gef_M4_K1+"/20)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M4_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFAcorn Tossers^000000";
+			mes "Objective: Hunt down ^FF000020 Cocos^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Cocos.";
+			Hunt_Gef_M4_Active = 1;
+			Hunt_Gef_M4_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 5: Caramel (x10)
+	// ==========================================
+	if (.@opt == 5) {
+		if (Hunt_Gef_CD_5 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M5_Active) {
+			if (Hunt_Gef_M5_K1 >= 10) {
+				.@base = ((getmonsterinfo(1103, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1103, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_5 = .@today;
+				Hunt_Gef_M5_Active = 0;
+			} else {
+				mes "Progress: Caramel ("+Hunt_Gef_M5_K1+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M5_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFSweet Rodents^000000";
+			mes "Objective: Hunt down ^FF000010 Caramels^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Caramels.";
+			Hunt_Gef_M5_Active = 1;
+			Hunt_Gef_M5_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 6: Orc Warrior (x15)
+	// ==========================================
+	if (.@opt == 6) {
+		if (Hunt_Gef_CD_6 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M6_Active) {
+			if (Hunt_Gef_M6_K1 >= 15) {
+				.@base = ((getmonsterinfo(1023, MOB_BASEEXP) * 15)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1023, MOB_JOBEXP) * 15)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_6 = .@today;
+				Hunt_Gef_M6_Active = 0;
+			} else {
+				mes "Progress: Orc Warrior ("+Hunt_Gef_M6_K1+"/15)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M6_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFGreen Brutes^000000";
+			mes "Objective: Hunt down ^FF000015 Orc Warriors^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Orc Warriors.";
+			Hunt_Gef_M6_Active = 1;
+			Hunt_Gef_M6_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 7: Orc Lady (x20)
+	// ==========================================
+	if (.@opt == 7) {
+		if (Hunt_Gef_CD_7 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M7_Active) {
+			if (Hunt_Gef_M7_K1 >= 20) {
+				.@base = ((getmonsterinfo(1273, MOB_BASEEXP) * 20)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1273, MOB_JOBEXP) * 20)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_7 = .@today;
+				Hunt_Gef_M7_Active = 0;
+			} else {
+				mes "Progress: Orc Lady ("+Hunt_Gef_M7_K1+"/20)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M7_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFFierce Matriarchs^000000";
+			mes "Objective: Hunt down ^FF000020 Orc Ladies^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Orc Ladies.";
+			Hunt_Gef_M7_Active = 1;
+			Hunt_Gef_M7_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 8: Orc Baby (x10)
+	// ==========================================
+	if (.@opt == 8) {
+		if (Hunt_Gef_CD_8 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M8_Active) {
+			if (Hunt_Gef_M8_K1 >= 10) {
+				.@base = ((getmonsterinfo(1686, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1686, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_8 = .@today;
+				Hunt_Gef_M8_Active = 0;
+			} else {
+				mes "Progress: Orc Baby ("+Hunt_Gef_M8_K1+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M8_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFLittle Greens^000000";
+			mes "Objective: Hunt down ^FF000010 Orc Babies^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Orc Babies.";
+			Hunt_Gef_M8_Active = 1;
+			Hunt_Gef_M8_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 9: Orc Zombie (x30)
+	// ==========================================
+	if (.@opt == 9) {
+		if (Hunt_Gef_CD_9 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M9_Active) {
+			if (Hunt_Gef_M9_K1 >= 30) {
+				.@base = ((getmonsterinfo(1153, MOB_BASEEXP) * 30)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1153, MOB_JOBEXP) * 30)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_9 = .@today;
+				Hunt_Gef_M9_Active = 0;
+			} else {
+				mes "Progress: Orc Zombie ("+Hunt_Gef_M9_K1+"/30)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M9_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFUndead Orcs^000000";
+			mes "Objective: Hunt down ^FF000030 Orc Zombies^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Orc Zombies.";
+			Hunt_Gef_M9_Active = 1;
+			Hunt_Gef_M9_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 10: Orc Skeleton (x10)
+	// ==========================================
+	if (.@opt == 10) {
+		if (Hunt_Gef_CD_10 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M10_Active) {
+			if (Hunt_Gef_M10_K1 >= 10) {
+				.@base = ((getmonsterinfo(1152, MOB_BASEEXP) * 10)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1152, MOB_JOBEXP) * 10)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_10 = .@today;
+				Hunt_Gef_M10_Active = 0;
+			} else {
+				mes "Progress: Orc Skeleton ("+Hunt_Gef_M10_K1+"/10)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M10_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFBony Orcs^000000";
+			mes "Objective: Hunt down ^FF000010 Orc Skeletons^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Orc Skeletons.";
+			Hunt_Gef_M10_Active = 1;
+			Hunt_Gef_M10_K1 = 0;
+		}
+		close;
+	}
+
+	// ==========================================
+	// Misión 11: Zenorc (x20)
+	// ==========================================
+	if (.@opt == 11) {
+		if (Hunt_Gef_CD_11 == .@today) {
+			mes "You have already completed this contract today.";
+			close;
+		}
+		if (Hunt_Gef_M11_Active) {
+			if (Hunt_Gef_M11_K1 >= 20) {
+				.@base = ((getmonsterinfo(1177, MOB_BASEEXP) * 20)) * 75 / 100;
+				.@job  = ((getmonsterinfo(1177, MOB_JOBEXP) * 20)) * 75 / 100;
+				
+				getexp .@base, .@job;
+				getitem 50005, 5;
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive 5x Geffen Coin and extra Experience.^000000";
+				Hunt_Gef_CD_11 = .@today;
+				Hunt_Gef_M11_Active = 0;
+			} else {
+				mes "Progress: Zenorc ("+Hunt_Gef_M11_K1+"/20)";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					Hunt_Gef_M11_Active = 0;
+					mes "Contract abandoned.";
+				}
+			}
+		} else {
+			mes "Contract: ^0055FFMutated Orcs^000000";
+			mes "Objective: Hunt down ^FF000020 Zenorcs^000000.";
+			mes "Reward: ^00AA005x Geffen Coin & EXP^000000.";
+			mes "Do you wish to accept this hunting mission?";
+			next;
+			if (select("Accept Contract:Decline") == 2) close;
+			mes "Contract signed! You are now hunting Zenorcs.";
+			Hunt_Gef_M11_Active = 1;
+			Hunt_Gef_M11_K1 = 0;
+		}
+		close;
+	}
+}
+
+// -----------------------------------------------------
+// 2. Hidden Kill Event Logic
+// -----------------------------------------------------
+-	script	Hunt_Gef_Kill_Events	-1,{
+OnNPCKillEvent:
+	.@mob_id = killedrid;
+
+	if (Hunt_Gef_M1_Active == 1) {
+		if (.@mob_id == 1007 && Hunt_Gef_M1_K1 < 20) {
+			Hunt_Gef_M1_K1++;
+			dispbottom "Geffen Hunt: Fabre ["+Hunt_Gef_M1_K1+"/20]";
+		}
+	}
+	if (Hunt_Gef_M2_Active == 1) {
+		if (.@mob_id == 1094 && Hunt_Gef_M2_K1 < 10) {
+			Hunt_Gef_M2_K1++;
+			dispbottom "Geffen Hunt: Ambernite ["+Hunt_Gef_M2_K1+"/10]";
+		}
+	}
+	if (Hunt_Gef_M3_Active == 1) {
+		if (.@mob_id == 1012 && Hunt_Gef_M3_K1 < 15) {
+			Hunt_Gef_M3_K1++;
+			dispbottom "Geffen Hunt: Roda Frog ["+Hunt_Gef_M3_K1+"/15]";
+		}
+	}
+	if (Hunt_Gef_M4_Active == 1) {
+		if (.@mob_id == 1104 && Hunt_Gef_M4_K1 < 20) {
+			Hunt_Gef_M4_K1++;
+			dispbottom "Geffen Hunt: Coco ["+Hunt_Gef_M4_K1+"/20]";
+		}
+	}
+	if (Hunt_Gef_M5_Active == 1) {
+		if (.@mob_id == 1103 && Hunt_Gef_M5_K1 < 10) {
+			Hunt_Gef_M5_K1++;
+			dispbottom "Geffen Hunt: Caramel ["+Hunt_Gef_M5_K1+"/10]";
+		}
+	}
+	if (Hunt_Gef_M6_Active == 1) {
+		if (.@mob_id == 1023 && Hunt_Gef_M6_K1 < 15) {
+			Hunt_Gef_M6_K1++;
+			dispbottom "Geffen Hunt: Orc Warrior ["+Hunt_Gef_M6_K1+"/15]";
+		}
+	}
+	if (Hunt_Gef_M7_Active == 1) {
+		if (.@mob_id == 1273 && Hunt_Gef_M7_K1 < 20) {
+			Hunt_Gef_M7_K1++;
+			dispbottom "Geffen Hunt: Orc Lady ["+Hunt_Gef_M7_K1+"/20]";
+		}
+	}
+	if (Hunt_Gef_M8_Active == 1) {
+		if (.@mob_id == 1686 && Hunt_Gef_M8_K1 < 10) {
+			Hunt_Gef_M8_K1++;
+			dispbottom "Geffen Hunt: Orc Baby ["+Hunt_Gef_M8_K1+"/10]";
+		}
+	}
+	if (Hunt_Gef_M9_Active == 1) {
+		if (.@mob_id == 1153 && Hunt_Gef_M9_K1 < 30) {
+			Hunt_Gef_M9_K1++;
+			dispbottom "Geffen Hunt: Orc Zombie ["+Hunt_Gef_M9_K1+"/30]";
+		}
+	}
+	if (Hunt_Gef_M10_Active == 1) {
+		if (.@mob_id == 1152 && Hunt_Gef_M10_K1 < 10) {
+			Hunt_Gef_M10_K1++;
+			dispbottom "Geffen Hunt: Orc Skeleton ["+Hunt_Gef_M10_K1+"/10]";
+		}
+	}
+	if (Hunt_Gef_M11_Active == 1) {
+		if (.@mob_id == 1177 && Hunt_Gef_M11_K1 < 20) {
+			Hunt_Gef_M11_K1++;
+			dispbottom "Geffen Hunt: Zenorc ["+Hunt_Gef_M11_K1+"/20]";
+		}
+	}
+	end;
+}
+
+// -----------------------------------------------------
+// 3. Veteran Hunter Shop (Magic Guild Flavor)
+// -----------------------------------------------------
+geffen,97,71,4	script	Veteran Hunter#gef	735,{
+	mes "[^0055FFVeteran Hunter^000000]";
+	mes "Greetings, traveler. The immense magical energy of Geffen draws all sorts of curious, and often dangerous, beasts.";
+	mes "The Magic Guild rewards those who help keep the perimeter and the nearby Orc Village in check.";
+	mes "Do you wish to exchange your hard-earned Geffen Coins for provisions?";
+	mes " ";
+	mes "You currently hold: ^00AA00" + countitem(50005) + " Geffen Coins^000000.";
+	next;
+
+	if (select("Show me your wares:I must return to my studies") == 2) {
+		mes "[^0055FFVeteran Hunter^000000]";
+		mes "Stay vigilant out there. Magic is a volatile thing.";
+		close;
+	}
+
+	callshop "geffen_hunter_shop",1;
+	npcshopattach "geffen_hunter_shop";
+	end;
+
+OnBuyItem:
+	.@size = getarraysize(@bought_nameid);
+	for (.@i = 0; .@i < .@size; .@i++) {
+		.@item_idx = inarray(.Shop_Data, @bought_nameid[.@i]);
+		if (.@item_idx == -1) {
+			dispbottom "System Error: Item not found in the magical supply line.";
+			end;
+		}
+		.@total_cost += (.Shop_Data[.@item_idx + 1] * @bought_quantity[.@i]);
+	}
+
+	if (.@total_cost > countitem(50005)) {
+		mes "[^0055FFVeteran Hunter^000000]";
+		mes "I am afraid you lack the necessary Geffen Coins for these magical supplies.";
+		mes "Total cost: " + .@total_cost + " Coins.";
+		close;
+	}
+	
+	delitem 50005, .@total_cost;
+	
+	for (.@i = 0; .@i < .@size; .@i++) {
+		getitem @bought_nameid[.@i], @bought_quantity[.@i];
+	}
+	
+	mes "[^0055FFVeteran Hunter^000000]";
+	mes "A wise choice. May these provisions serve you well in your adventures.";
+	mes "Stay vigilant!";
+	specialeffect2 EF_MONEY;
+	close;
+
+OnInit:
+	setarray .Shop_Data[0], 
+		13531, 3,    // Light Red Potion Box
+		13532, 5,    // Light Orange Potion Box
+		13533, 7,    // Light Yellow Potion Box
+		13534, 10,   // Light White Potion Box
+		20093, 50,   // Costume Wizard Hat
+		19551, 50,   // Costume Elven Ears
+		19548, 50,   // Costume Frog Hat
+		19719, 200,  // Costume Coronet
+		19597, 200,  // Costume Magic Eyes
+		20432, 500,  // Costume Khalitzburg Knight Helm
+		19692, 500,  // Costume Antique Pipe
+		19722, 500,  // Costume Black Glasses
+		20290, 500;  // Costume Black Evil Druid Hat
+
+	npcshopdelitem "geffen_hunter_shop", 502; 
+	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {
+		npcshopadditem "geffen_hunter_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
+	}
+	end;
+}
+
+// -----------------------------------------------------
+// 4. Shop Definition (Hidden)
+// -----------------------------------------------------
+-	shop	geffen_hunter_shop	-1,502:-1

@@ -3683,13 +3683,14 @@ Body:
     Type: Weapon
     TargetType: Ground
     DamageFlags:
-      NoDamage: true
+      NoDamage: false
       Splash: true
     Flags:
       AllowOnMado: true
     Range: 1
     Hit: Single
     HitCount: 1
+    Element: Weapon
     SplashArea:
       - Level: 1
         Area: 2
@@ -3705,7 +3706,17 @@ Body:
         Area: 12
     Duration2: 5000
     Requires:
-      SpCost: 10
+      SpCost:
+        - Level: 1
+          Amount: 7
+        - Level: 2
+          Amount: 9
+        - Level: 3
+          Amount: 11
+        - Level: 4
+          Amount: 13
+        - Level: 5
+          Amount: 15
       Weapon:
         Dagger: true
         1hSword: true
@@ -3940,6 +3951,7 @@ Body:
     Type: Misc
     TargetType: Ground
     DamageFlags:
+      Splash: true
       IgnoreFlee: true
       IgnoreDefCard: true
     Flags:
@@ -3950,6 +3962,7 @@ Body:
     Range: 3
     Hit: Single
     HitCount: 1
+    SplashArea: 2
     Element: Earth
     CopyFlags:
       Skill:
@@ -3957,15 +3970,15 @@ Body:
         Reproduce: true
     Duration1:
       - Level: 1
-        Time: 200000
+        Time: 20000
       - Level: 2
-        Time: 160000
+        Time: 40000
       - Level: 3
-        Time: 120000
+        Time: 60000
       - Level: 4
         Time: 80000
       - Level: 5
-        Time: 40000
+        Time: 100000
     Duration2: 5000
     Requires:
       SpCost: 10
@@ -3979,7 +3992,6 @@ Body:
       Target: Enemy
       Flag:
         NoReiteration: true
-        NoFootSet: true
         RemovedByFireRain: true
     Status: Stun
   - Id: 117
@@ -4167,11 +4179,12 @@ Body:
     Name: HT_FREEZINGTRAP
     Description: Freezing Trap
     MaxLevel: 5
-    Type: Weapon
+    Type: Misc
     TargetType: Ground
     DamageFlags:
       Splash: true
-      IgnoreAtkCard: true
+      IgnoreFlee: true
+      IgnoreDefCard: true
     Flags:
       IsTrap: true
       AlterRangeResearchTrap: true
@@ -4180,23 +4193,23 @@ Body:
     Range: 3
     Hit: Single
     HitCount: 1
+    SplashArea: 2
     Element: Water
-    SplashArea: 1
     CopyFlags:
       Skill:
         Plagiarism: true
         Reproduce: true
     Duration1:
       - Level: 1
-        Time: 150000
+        Time: 20000
       - Level: 2
-        Time: 120000
+        Time: 40000
       - Level: 3
-        Time: 90000
-      - Level: 4
         Time: 60000
+      - Level: 4
+        Time: 80000
       - Level: 5
-        Time: 30000
+        Time: 100000
     Duration2:
       - Level: 1
         Time: 3000
@@ -4220,7 +4233,6 @@ Body:
       Target: Enemy
       Flag:
         NoReiteration: true
-        NoFootSet: true
         RemovedByFireRain: true
     Status: Freeze
   - Id: 122
@@ -4241,58 +4253,8 @@ Body:
     Range: 3
     Hit: Single
     HitCount: 1
-    Element: Wind
-    SplashArea: 1
-    CopyFlags:
-      Skill:
-        Plagiarism: true
-        Reproduce: true
-    Duration1:
-      - Level: 1
-        Time: 25000
-      - Level: 2
-        Time: 20000
-      - Level: 3
-        Time: 15000
-      - Level: 4
-        Time: 10000
-      - Level: 5
-        Time: 5000
-    Requires:
-      SpCost: 10
-      ItemCost:
-        - Item: Booby_Trap
-          Amount: 1
-    Unit:
-      Id: Blastmine
-      Range: 1
-      Interval: 1000
-      Target: Enemy
-      Flag:
-        NoReiteration: true
-        NoFootSet: true
-        RemovedByFireRain: true
-  - Id: 123
-    Name: HT_CLAYMORETRAP
-    Description: Claymore Trap
-    MaxLevel: 5
-    Type: Misc
-    TargetType: Ground
-    DamageFlags:
-      Splash: true
-      IgnoreFlee: true
-      IgnoreDefCard: true
-    Flags:
-      IsTrap: true
-      TargetTrap: true
-      AlterRangeResearchTrap: true
-      IgnoreHovering: true
-      AllowOnWarg: true
-    Range: 3
-    Hit: Single
-    HitCount: 1
-    Element: Fire
     SplashArea: 2
+    Element: Wind
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -4309,10 +4271,58 @@ Body:
       - Level: 5
         Time: 100000
     Requires:
-      SpCost: 15
+      SpCost: 10
       ItemCost:
         - Item: Booby_Trap
-          Amount: 2
+          Amount: 1
+    Unit:
+      Id: Blastmine
+      Range: 1
+      Interval: 1000
+      Target: Enemy
+      Flag:
+        NoReiteration: true
+        RemovedByFireRain: true
+  - Id: 123
+    Name: HT_CLAYMORETRAP
+    Description: Claymore Trap
+    MaxLevel: 5
+    Type: Misc
+    TargetType: Ground
+    DamageFlags:
+      Splash: true
+      IgnoreFlee: true
+      IgnoreDefCard: true
+    Flags:
+      IsTrap: true
+      AlterRangeResearchTrap: true
+      IgnoreHovering: true
+      AllowOnWarg: true
+    Range: 3
+    Hit: Single
+    HitCount: 1
+    SplashArea: 2
+    Element: Fire
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
+    Duration1:
+      - Level: 1
+        Time: 20000
+      - Level: 2
+        Time: 40000
+      - Level: 3
+        Time: 60000
+      - Level: 4
+        Time: 80000
+      - Level: 5
+        Time: 100000
+    Requires:
+      SpCost: 10
+      ItemCost:
+        - Item: Booby_Trap
+          Amount: 1
     Unit:
       Id: Claymoretrap
       Range: 1
@@ -4320,7 +4330,6 @@ Body:
       Target: Enemy
       Flag:
         NoReiteration: true
-        NoFootSet: true
         RemovedByFireRain: true
   - Id: 124
     Name: HT_REMOVETRAP
@@ -4422,7 +4431,7 @@ Body:
       State: Falcon
   - Id: 130
     Name: HT_DETECTING
-    Description: Detect
+    Description: Falcon Sweep
     MaxLevel: 4
     Type: Misc
     TargetType: Ground
@@ -12053,21 +12062,30 @@ Body:
   - Id: 459
     Name: BS_ADRENALINE2
     Description: Advanced Adrenaline Rush
-    MaxLevel: 1
+    MaxLevel: 5
     Type: Weapon
     TargetType: Self
     DamageFlags:
       NoDamage: true
       Splash: true
     Flags:
-      IsSpirit: true
       AllowOnMado: true
     Hit: Single
     HitCount: 1
     SplashArea: -1
     Duration1: 150000
     Requires:
-      SpCost: 64
+      SpCost:
+        - Level: 1
+          Amount: 20
+        - Level: 2
+          Amount: 23
+        - Level: 3
+          Amount: 26
+        - Level: 4
+          Amount: 29
+        - Level: 5
+          Amount: 32
       Weapon:
         Fist: true
         Dagger: true
@@ -13261,20 +13279,32 @@ Body:
           Amount: 200
   - Id: 499
     Name: HT_POWER
-    Description: Beast Strafing
-    MaxLevel: 1
+    Description: Power Strafe
+    MaxLevel: 5
     Type: Weapon
     TargetType: Attack
     Flags:
-      IsSpirit: true
       AlterRangeVulture: true
+    DamageFlags:
+      Critical: true
     Range: -9
     Hit: Multi_Hit
-    HitCount: 2
+    HitCount: 3
     Element: Weapon
-    Duration1: 100
+    AfterCastActDelay: 1000
+    CastTime: 1000
     Requires:
-      SpCost: 12
+      SpCost:
+        - Level: 1
+          Amount: 13
+        - Level: 2
+          Amount: 16
+        - Level: 3
+          Amount: 19
+        - Level: 4
+          Amount: 22
+        - Level: 5
+          Amount: 25
       Weapon:
         Bow: true
       Ammo:
@@ -17057,6 +17087,9 @@ Body:
       Critical: true
     Flags:
       AlterRangeVulture: true
+      AllowOnWarg: true
+      IgnoreAutoGuard: true
+      IgnoreCicada: true
     Range: -9
     Hit: Single
     HitCount: 1
@@ -17156,6 +17189,27 @@ Body:
       SpCost: 20
     Flags:
       IsQuest: true
+  - Id: 1031
+    Name: BS_DECIMATION
+    Description: Cart Decimation
+    MaxLevel: 1
+    Type: Weapon
+    TargetType: Self
+    DamageFlags:
+      NoDamage: false
+      Splash: true
+    Hit: Single
+    HitCount: 1
+    Element: Weapon
+    SplashArea: 2  
+    Knockback: 6   
+    Requires:
+      SpCost:
+        - Level: 1
+          Amount: 25
+    Cooldown:
+      - Level: 1
+        Time: 2000
   - Id: 1041
     Name: KN_BLADERSOUL
     Description: Soul of the Blader
@@ -17174,6 +17228,26 @@ Body:
   - Id: 1044
     Name: WZ_HEXERSOUL
     Description: Soul of the Hexer
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1045
+    Name: HT_SHOOTERSOUL
+    Description: Soul of the Sharpshooter
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1046
+    Name: HT_TRAPPERSOUL
+    Description: Soul of the Trapper
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1047
+    Name: BS_JUGGERNAUTSOUL
+    Description: Soul of the Juggernaut
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1048
+    Name: BS_FORGEMASTERSOUL
+    Description: Soul of the Forgemaster
     MaxLevel: 1
     Type: Weapon
   - Id: 2001

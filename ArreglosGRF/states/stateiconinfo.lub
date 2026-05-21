@@ -131,6 +131,24 @@ StateIconList[EFST_IDs.EFST_ARCINSIGHT] = {
 		{ "Ignores enemy's magic defense", { 255, 255, 255 } }
 	}
 }
+StateIconList[EFST_IDs.EFST_PINNED] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Pinned", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Reduces movement speed", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_SAVAGERY] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Arcane Insight", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Empowers Blacksmith's combat skills", { 255, 255, 255 } }
+	}
+}
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,

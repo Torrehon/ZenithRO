@@ -115,6 +115,7 @@
 #include "woodenfairy.cpp"
 #include "woodenwarrior.cpp"
 #include "mc_tomahawk.cpp"
+#include "cartdecimation.cpp"
 
 std::unique_ptr<const SkillImpl> SkillFactoryMerchant::create(const e_skill skill_id) const {
 	switch (skill_id) {
@@ -374,6 +375,8 @@ std::unique_ptr<const SkillImpl> SkillFactoryMerchant::create(const e_skill skil
 			return std::make_unique<SkillUpgradeWeapon>();
         case MC_TOMAHAWK:
 			return std::make_unique<SkillMcTomahawk>();
+		case BS_DECIMATION:
+			return std::make_unique<SkillCartDecimation>();
 
 		default:
 			return nullptr;

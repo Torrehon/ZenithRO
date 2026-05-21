@@ -49,7 +49,25 @@ Body:
           - Shoes
     Script: |
       bonus bAgi,1;
-      bonus bAspdRate,1;
+      bonus bAspdRate,3;
+      bonus bFlee,5;
+  - Combos:
+      - Combo:
+          - Mantle
+          - Shoes
+      - Combo:
+          - Mantle_
+          - Shoes_
+      - Combo:
+          - Mantle
+          - Shoes_
+      - Combo:
+          - Mantle_
+          - Shoes
+    Script: |
+      bonus bDex,1;
+      bonus bAspdRate,3;
+      bonus bHit,5;
   - Combos:
       - Combo:
           - Adventure_Suit
@@ -164,6 +182,24 @@ Body:
           - Rosary
       - Combo:
           - Scapulare
+          - Rosary_
+    Script: |
+      bonus2 bAddRace,RC_Undead,5;
+      bonus2 bAddRace,RC_Demon,5;
+      bonus2 bMagicAddRace,RC_Undead,5;
+      bonus2 bMagicAddRace,RC_Demon,5;
+  - Combos:
+      - Combo:
+          - Saint_Robe
+          - Rosary
+      - Combo:
+          - Saint_Robe_
+          - Rosary_
+      - Combo:
+          - Saint_Robe_
+          - Rosary
+      - Combo:
+          - Saint_Robe
           - Rosary_
     Script: |
       bonus bHealPower,5;
@@ -325,6 +361,109 @@ Body:
           - Thief_Clothes_
     Script: |
       bonus bFlee,10;
+  - Combos:
+      - Combo:
+          - Viking_Helm #Orc Helm
+          - Orcish_Sword
+      - Combo:
+          - Viking_Helm_
+          - Orcish_Sword
+    Script: |
+      bonus bAtk,35;
+      bonus bDef2,20;
+  - Combos:
+      - Combo:
+          - Viking_Helm
+          - Orcish_Axe
+      - Combo:
+          - Viking_Helm_
+          - Orcish_Axe_
+      - Combo:
+          - Viking_Helm_
+          - Orcish_Axe
+      - Combo:
+          - Viking_Helm
+          - Orcish_Axe_
+    Script: |
+      bonus bAtk,15;
+      bonus bDef2,10;
+  - Combos:
+      - Combo:
+          - Gemmed_Crown # Jewel Crown
+          - Erde
+    Script: |
+      bonus2 bSkillAtk,"AM_ACIDTERROR",15;
+      bonus2 bSkillAtk,"AM_DEMONSTRATION",15;
+  - Combos:
+      - Combo:
+          - Gemmed_Crown
+          - Red_Square_Bag
+    Script: |
+      bonus2 bSkillAtk,"AM_ACIDTERROR",15;
+      bonus2 bSkillAtk,"AM_DEMONSTRATION",15;
+  - Combos:
+      - Combo:
+          - Loard_Circlet # Grand Circlet
+          - Clothes_Of_The_Lord # Lord Clothes
+    Script: |
+      bonus bAtk,30;
+  - Combos:
+      - Combo:
+          - Corsair
+          - Cutlas
+      - Combo:
+          - Corsair_
+          - Cutlas_
+      - Combo:
+          - Corsair_
+          - Cutlas
+      - Combo:
+          - Corsair
+          - Cutlas_
+    Script: |
+      bonus bDef,2;
+      skill "SM_BASH",10;
+      skill "SM_FATALBLOW",1;
+      bonus2 bSkillAtk,"SM_BASH",25;
+  - Combos:
+      - Combo:
+          - Deviruchi_Cap
+          - Trident
+      - Combo:
+          - Deviruchi_Cap
+          - Trident_
+      - Combo:
+          - Deviruchi_Cap
+          - Trident__
+    Script: |
+      bonus bAtk,20;
+      skill "KN_PIERCE",5;
+  - Combos:
+      - Combo:
+          - Magician_Hat
+          - Pocket_Watch_
+      - Combo:
+          - Magician_Hat
+          - Pocket_Watch_
+    Script: |
+      bonus bMatk,3;
+      bonus bDelayRate,-5;
+  - Combos:
+      - Combo:
+          - Detective_Hat
+          - Smoking_Pipe
+    Script: |
+      skill "SA_FREECAST",5;
+  - Combos:
+      - Combo:
+          - Winter_Hat
+          - Coat
+      - Combo:
+          - Winter_Hat
+          - Coat_
+    Script: |
+      bonus2 bResEff,Eff_Freeze,10000;
+      bonus2 bResEff,Eff_Freezing,10000;
   - Combos:
       - Combo:
           - Dragon_Slayer
@@ -1388,6 +1527,12 @@ Body:
       bonus2 bSPGainRace,RC_Player_Human,2;
   - Combos:
       - Combo:
+          - Golem_Card
+          - Lava_Golem_Card
+    Script: |
+      bonus bLongAtkRate,5;
+  - Combos:
+      - Combo:
           - Blush
           - Necktie
     Script: |
@@ -1465,69 +1610,9 @@ Body:
       bonus2 bSkillAtk,"AL_CRUCIS",25;
   - Combos:
       - Combo:
-          - Chonchon_Card
-          - Dragon_Fly_Card
+          - quake_gem
+          - Mine_Helm
     Script: |
-      bonus bFlee,4;
-      bonus bAspdRate,2;
-  - Combos:
-      - Combo:
-          - Wolf_Card
-          - Vagabond_Wolf_Card
-    Script: |
-      bonus bAtk,10;
-      bonus bAtkRate,2;
-  - Combos:
-      - Combo:
-          - Poring_Card
-          - Mastering_Card
-    Script: |
-      bonus bCritical,4;
-      bonus bCritAtkRate,10;
-  - Combos:
-      - Combo:
-          - Rocker_Card
-          - Vocal_Card
-    Script: |
-      bonus bLongAtkRate,2;
-      bonus bHit,5;
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,5;
-      bonus bCastrate,-4;
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,10;
-      bonus bCastrate,-8;
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Lunatic_Card
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,15;
-      bonus bCastrate,-12;
-  - Combos:
-      - Combo:
-          - Lunatic_Card
-          - Lunatic_Card
-          - Lunatic_Card
-          - Lunatic_Card
-          - Eclipse_Card
-    Script: |
-      bonus bMatkRate,20;
-      bonus bCastrate,-16;
-  - Combos:
-      - Combo:
-          - Golem_Card
-          - Lava_Golem_Card
-    Script: |
-      bonus bLongAtkRate,5;
+      bonus2 bSPGainRace,RC_Formless,1;
+      bonus2 bExpAddRace,RC_Formless,10;
+      bonus2 bMagicAtkEle,Ele_Earth,10;

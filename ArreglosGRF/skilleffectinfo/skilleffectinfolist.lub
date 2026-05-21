@@ -20,6 +20,20 @@ SKILL_EFFECT_INFO_LIST = {
         targetEffectID = { 2023, 1020, 109 },
         onTarget = true
     },
+	  [SKID.HT_POWER] = {
+		beginMotionType = ACTOR_STATE.ST_BEGIN_SKILL,
+		targetEffectNum = 1,
+        targetEffectID = { 1826 },
+        onTarget = true
+    },
+	  [SKID.BS_DECIMATION] = {
+		beginMotionType = ACTOR_STATE.ST_BEGIN_SKILL,
+		effectNum = 3,
+		effectID = { 1366, 2267, 1885 },
+		targetEffectNum = 1,
+		targetEffectID = { 1708 },
+		onTarget = true
+    },
 	[SKID.KO_JYUMONJIKIRI] = {
 		beginMotionType = ACTOR_STATE.ST_ATTACK2,
 		waveFileName = "effect\\cru_holy cross.wav",

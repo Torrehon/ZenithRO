@@ -1371,7 +1371,7 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 					int32 skill;
 
 					// Automatic trigger of Blitz Beat
-					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 && rnd() % 1000 <= sstatus->luk * 10 / 3 + 1) {
+					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 && rnd() % 1000 <= sstatus->dex * 7 / 3 + 1) {
 						int32 rate;
 
 						if ((sd->class_ & MAPID_THIRDMASK) == MAPID_RANGER)
@@ -2364,7 +2364,7 @@ int32 skill_is_combo(uint16 skill_id) {
 		case TK_DOWNKICK:
 		case TK_COUNTER:
 		case TK_JUMPKICK:
-		case HT_POWER:
+		// case HT_POWER:
 		case SR_DRAGONCOMBO:
 			return 1;
 		case SR_FALLENEMPIRE:
@@ -2502,13 +2502,13 @@ void skill_combo(block_list* src,block_list *dsrc, block_list *bl, uint16 skill_
 			}
 #endif
 			break;
-		case AC_DOUBLE:
-			if (pc_checkskill(sd, HT_POWER)) {
-				duration = 2000;
-				nodelay = 1; //Neither gives walk nor attack delay
-				target_id = 0; //Does not need to be used on previous target
-			}
-			break;
+		// case AC_DOUBLE:
+			// if (pc_checkskill(sd, HT_POWER)) {
+				// duration = 2000;
+				// nodelay = 1; //Neither gives walk nor attack delay
+				// target_id = 0; //Does not need to be used on previous target
+			// }
+			// break;
 		case SR_DRAGONCOMBO:
 			if (pc_checkskill(sd, SR_FALLENEMPIRE) > 0)
 				duration = 1;
@@ -3776,9 +3776,9 @@ TIMER_FUNC(skill_timerskill){
 				case PR_STRECOVERY:
 					sc_start(src, target, SC_BLIND, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
 					break;
-				case BS_HAMMERFALL:
-					sc_start(src, target, SC_STUN, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
-					break;
+				// case BS_HAMMERFALL:
+					// sc_start(src, target, SC_STUN, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
+					// break;
 				case MER_LEXDIVINA:
 					sc_start(src, target, SC_SILENCE, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
 					break;
@@ -8604,10 +8604,10 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
 			if(!sc || !(sc->getSCE(SC_SMA) || sc->getSCE(SC_USE_SKILL_SP_SHA)))
 				return false;
 			break;
-		case HT_POWER:
-			if(!(sc && sc->getSCE(SC_COMBO) && sc->getSCE(SC_COMBO)->val1 == AC_DOUBLE))
-				return false;
-			break;
+		// case HT_POWER:
+			// if(!(sc && sc->getSCE(SC_COMBO) && sc->getSCE(SC_COMBO)->val1 == AC_DOUBLE))
+				// return false;
+			// break;
 #ifndef RENEWAL
 		case CG_HERMODE:
 			if(!npc_check_areanpc(1,sd.m,sd.x,sd.y,skill_get_splash(skill_id, skill_lv))) {
@@ -13055,11 +13055,12 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			case BS_ENCHANTEDSTONE:
 				// Ores & Metals Refining - skill bonuses are straight from kRO website [DracoRPG]
 				i = pc_checkskill(sd,skill_id);
-				//Base chance
-				make_per = sd->status.job_level * 20;
-				make_per += status->dex * 10;
-				make_per += status->luk * 10;
+				
+				// --- INICIO CUSTOM: Refinado por Job Level (Equivalente a 99 DEX / 99 LUK) ---
+				// Job 50 * 60 = 3000 (30% de base pura, reemplaza la pérdida de los stats)
+				make_per = sd->status.job_level * 60;
 				make_per += rnd_value(1, 100) * 10;
+				// --- FIN CUSTOM ---
 				switch (nameid) {
 					case ITEMID_IRON:
 						make_per += 4000+i*500; // Temper Iron bonus: +45/+50/+55/+60/+65
@@ -13320,11 +13321,13 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 				break;
 		}
 	} else { // Weapon Forging
-		//Base chance
-		make_per = sd->status.job_level * 20;
-		make_per += status->dex * 10;
-		make_per += status->luk * 10;
-		make_per += rnd_value(1, 100) * 10;
+		// --- INICIO CUSTOM: Forja por Job Level (Sin DEX/LUK) ---
+		// A Job 50 otorga 3000 (30%). Compensa la pérdida de DEX y LUK.
+		make_per = sd->status.job_level * 60; 
+		
+		// Conservamos un pequeño factor de suerte aleatorio del juego original (+0.1% a +10%)
+		make_per += rnd_value(1, 100) * 10; 
+		// --- FIN CUSTOM ---
 		// Weapon level base chance
 		if (wlv > 0 && wlv < 4) {
 			make_per += (4 / wlv) * 1000; //+40/+20/+10
