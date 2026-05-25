@@ -3364,7 +3364,13 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 						if (drop_rate < 75) {
 							drop_rate = 75;  // Sube al 0.75% solo si es inferior
 						}
-					
+					}
+					// 3. NUEVO: Armaduras que NO son gorros ni accesorios (Pecheras, escudos, botas, garments)
+					// Como filtramos las armas arriba, esto solo afectará a IT_ARMOR
+					else if (it->type == IT_ARMOR) {
+						if (drop_rate < 150) {
+							drop_rate = 150; // Sube al 1.5% solo si es inferior
+						}
 					}
 				}
 			} 

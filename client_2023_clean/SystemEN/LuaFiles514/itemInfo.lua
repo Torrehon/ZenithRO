@@ -25416,8 +25416,8 @@ tbl = {
 			"Vit +3",
 			"Mdef +3",
 			"^663399Indestructible^000000",
-		    "If equipped with^6666CC Excalibur:^000000",
-            "Increases Holy magic damage by 15%",
+			"If equipped with^6666CC Excalibur:^000000",
+			"Increases Holy magic damage by 15%",
 			"Class:^6666CC Shield^000000",
 			"Defense:^0000FF 5^000000",
 			"Weight:^009900 160^000000",
@@ -25545,8 +25545,8 @@ tbl = {
 		identifiedResourceName = "팔목토시",
 		identifiedDescriptionName = {
 			"A wrist protector, designed exclusively for the Ninja class, that is padded with a steel plate for increased defense and durability.",
-		    "If equipped with^6666CC Asura:^000000",
-            "Matk +5%",
+			"If equipped with^6666CC Asura:^000000",
+			"Matk +5%",
 			"Class:^6666CC Shield^000000",
 			"Defense:^0000FF 5^000000",
 			"Weight:^009900 15^000000",
@@ -25568,7 +25568,7 @@ tbl = {
 		identifiedDescriptionName = {
 			"A wrist protector, designed exclusively for the Ninja class, that is padded with a steel plate for increased defense and durability.",
 			"If equipped with^6666CC Asura:^000000",
-            "Matk +5%",
+			"Matk +5%",
 			"Class:^6666CC Shield^000000",
 			"Defense:^0000FF 5^000000",
 			"Weight:^009900 15^000000",
@@ -25591,11 +25591,11 @@ tbl = {
 			"A wrist protector, designed exclusively for the Ninja class, that has been enhanced with high Magic Defense by a gifted artisan.",
 			"Mdef +5",
 			"If equipped with^6666CC Asura:^000000",
-            "Increases Fire magic damage by +25%",
-            "If equipped with^6666CC Kamaitachi:^000000",
-            "Increases Wind magic damage by +25%",
+			"Increases Fire magic damage by +25%",
+			"If equipped with^6666CC Kamaitachi:^000000",
+			"Increases Wind magic damage by +25%",
 			"If equipped with^6666CC Murasame:^000000",
-            "Increases Water magic damage by +25%",
+			"Increases Water magic damage by +25%",
 			"Class:^6666CC Shield^000000",
 			"Defense:^0000FF 4^000000",
 			"Weight:^009900 15^000000",
@@ -25618,11 +25618,11 @@ tbl = {
 			"A wrist protector, designed exclusively for the Ninja class, that has been enhanced with high Magic Defense by a gifted artisan.",
 			"Mdef +5",
 			"If equipped with^6666CC Asura:^000000",
-            "Increases Fire magic damage by +25%",
-            "If equipped with^6666CC Kamaitachi:^000000",
-            "Increases Wind magic damage by +25%",
+			"Increases Fire magic damage by +25%",
+			"If equipped with^6666CC Kamaitachi:^000000",
+			"Increases Wind magic damage by +25%",
 			"If equipped with^6666CC Murasame:^000000",
-            "Increases Water magic damage by +25%",
+			"Increases Water magic damage by +25%",
 			"Class:^6666CC Shield^000000",
 			"Defense:^0000FF 4^000000",
 			"Weight:^009900 15^000000",
@@ -25807,8 +25807,8 @@ tbl = {
 			"Vit +3",
 			"Mdef +3",
 			"^663399Indestructible^000000",
-		    "If equipped with^6666CC Excalibur:^000000",
-            "Increases Holy magic damage by 15%",
+			"If equipped with^6666CC Excalibur:^000000",
+			"Increases Holy magic damage by 15%",
 			"Class:^6666CC Shield^000000",
 			"Defense:^0000FF 5^000000",
 			"Weight:^009900 160^000000",
@@ -27109,7 +27109,7 @@ tbl = {
 		identifiedDescriptionName = {
 			"A hairpin made from indigo blue satin that wards off harmful magic.",
 			"Mdef +3",
-            "If equipped with^6666CC 1 Handed or 2 Handed Staff:^000000",
+			"If equipped with^6666CC 1 Handed or 2 Handed Staff:^000000",
 			"Matk +3%",
 			"Class:^6666CC Headgear^000000",
 			"Defense:^0000FF 1^000000",
@@ -27132,7 +27132,7 @@ tbl = {
 		identifiedDescriptionName = {
 			"A hairpin made from indigo blue satin that wards off harmful magic.",
 			"Mdef +3",
-            "If equipped with^6666CC 1 Handed or 2 Handed Staff:^000000",
+			"If equipped with^6666CC 1 Handed or 2 Handed Staff:^000000",
 			"Matk +3%",
 			"Class:^6666CC Headgear^000000",
 			"Defense:^0000FF 1^000000",
@@ -28020,7 +28020,7 @@ tbl = {
 			"A ceremonial hat worn by monks that contains a sacred force which offers protection from evil.",
 			"Mdef +3",
 			"Str +1",
-			"If equipped with ^6666CCKnuckle Weapon:^000000", 
+			"If equipped with ^6666CCKnuckle Weapon:^000000",
 			"Increases Triple Attack, Chain Combo and Combo Finish damage by 10%",
 			"Class:^6666CC Headgear^000000",
 			"Defense:^0000FF 5^000000",
@@ -29183,7 +29183,7 @@ tbl = {
 		identifiedResourceName = "어드밴쳐슈츠",
 		identifiedDescriptionName = {
 			"A light, comfortable suit made just for young adventurers.",
-            "Hp +50",
+			"Hp +50",
 			"Sp +15",
 			"If equipped with^6666CC Hood and Sandals:^000000",
 			"Hp +150",
@@ -29350,7 +29350,7 @@ tbl = {
 		identifiedResourceName = "아머",
 		identifiedDescriptionName = {
 			"Armor constructed of solid metal plates that have been padded on the inside for comfort.",
-		    "Vit +1",
+			"Vit +1",
 			"Vit Def +10",
 			"If equipped with^6666CC Armor Charm:^000000",
 			"Vit Def +20",
@@ -29904,7 +29904,6 @@ tbl = {
 			"Genin Class:",
 			"Int +1",
 			"Str +1",
-			
 			"^99FF66Ninja Shinobi armor set^000000",
 			"^00FF00Ninja Suit^000000",
 			"^00FF00Shinobi Sash^000000",
@@ -30398,7 +30397,6 @@ tbl = {
 			"Genin Class:",
 			"Int +1",
 			"Str +1",
-
 			"^99FF66Ninja Shinobi armor set^000000",
 			"^00FF00Ninja Suit^000000",
 			"^00FF00Shinobi Sash^000000",
@@ -31475,7 +31473,7 @@ tbl = {
 		identifiedResourceName = "부츠",
 		identifiedDescriptionName = {
 			"A pair of heavy leather boots, padded with Lunatic fur, that is suited to warriors.",
-		    "Atk +5",
+			"Atk +5",
 			"Hit +5",
 			"Class:^6666CC Footgear^000000",
 			"Defense:^0000FF 4^000000",
@@ -45228,7 +45226,7 @@ tbl = {
 		identifiedDescriptionName = {
 			"Dex +1",
 			"If a Bow weapon is equipped",
-            "Ranged damage +3%",
+			"Ranged damage +3%",
 			"Class:^6666CC Card^000000",
 			"Compound on:^B40088 Accessory^000000",
 			"Weight:^009900 1^000000"
@@ -45471,7 +45469,7 @@ tbl = {
 		identifiedDisplayName = "Grand Peco Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Mdef +3";
+			"Mdef +3",
 			"Add the chance of auto casting ^008800Level 1 Gloria^000000 on the user when receiving Physical Damage.",
 			"Def +3 and VIT +3 if the user is equipped with an item compounded to the ^008800Peco Peco card^000000.",
 			"Class:^6666CC Card^000000",
@@ -47217,7 +47215,7 @@ tbl = {
 		identifiedDisplayName = "Anolian Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-		    "Enables the use of ^008800Level 2 Improve Concentration^000000",
+			"Enables the use of ^008800Level 2 Improve Concentration^000000",
 			"Add the chance of auto casting ^008800Level 2 Improve Concentration^000000 on the user when receiving Physical Damage.",
 			"If the user has mastered the skill at level 10, it will cast ^008800Level 10 Improve Concentration^000000.",
 			"^FFFFFF_^000000",
@@ -47877,7 +47875,7 @@ tbl = {
 			"Vit +2",
 			"Def +2",
 			"Vit Def +20",
-			"Increases HP regen by 50%.",			
+			"Increases HP regen by 50%.",
 			"Class:^6666CC Card^000000",
 			"Compound on:^00CC33 Armor^000000",
 			"Weight:^009900 1^000000"
@@ -64339,10 +64337,10 @@ tbl = {
 		identifiedDisplayName = "Monk Hat",
 		identifiedResourceName = "성직자의모자",
 		identifiedDescriptionName = {
-            "A ceremonial hat worn by monks that contains a sacred force which offers protection from evil.",
+			"A ceremonial hat worn by monks that contains a sacred force which offers protection from evil.",
 			"Mdef +3",
 			"Str +1",
-			"If equipped with ^6666CCKnuckle Weapon:^000000", 
+			"If equipped with ^6666CCKnuckle Weapon:^000000",
 			"Increases Triple Attack, Chain Combo and Combo Finish damage by 10%",
 			"Class:^6666CC Headgear^000000",
 			"Defense:^0000FF 5^000000",
@@ -259344,6 +259342,25 @@ tbl = {
 		ClassNum = 0,
 		costume = false
 	},
+	[50009] = {
+		unidentifiedDisplayName = "Elemental Converter[Holy]",
+		unidentifiedResourceName = "염의주문서",
+		unidentifiedDescriptionName = {
+			"An unidentified scroll."
+		},
+		identifiedDisplayName = "Elemental Converter[Holy]",
+		identifiedResourceName = "Elemental_Holy",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the users weapon with",
+			"the ^FF0000Holy^000000 element for 5 minutes.",
+			"^FFFFFF_^000000",
+			"Weight: ^0099001^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
 	[60000] = {
 		unidentifiedDisplayName = "Ora",
 		unidentifiedResourceName = "Ora Ora",
@@ -259356,7 +259373,7 @@ tbl = {
 			"A potent cockroach bait with an ultra-sticky adhesive. One touch, and they are done for. The smell is awful, but the results are deadly.",
 			"-------------------------",
 			"Increases physical and magical damage against ^FF0000Insect^000000 race monsters by 10%.",
-		    "Enables use of Level 2 ^990000Envenom^000000.",
+			"Enables use of Level 2 ^990000Envenom^000000.",
 			"-------------------------",
 			"Class:^6666CC Accessory^000000",
 			"Weight:^009900 10^000000",

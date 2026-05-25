@@ -148,7 +148,7 @@ prt_sewb2,24,68,0	script	Crack in the Wall	550,{
 		close;
 	}
 
-	if (BaseLevel < 15 || BaseLevel > 35) {
+	if (BaseLevel < 15 || BaseLevel > 60) {
 		mes "^888888*The presence remains indifferent. You are either too weak or too seasoned for its hunger...*^000000";
 		close;
 	}
@@ -251,7 +251,7 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 	mes "[Culvert Guardian]";
 	mes "Halt! Entry is restricted due to the mutant infestation.";
 	
-	if (BaseLevel < 15 || BaseLevel > 35) { 
+	if (BaseLevel < 15 || BaseLevel > 60) { 
 		next;
 		mes "[Culvert Guardian]";
 		mes "I cannot let you pass. This sector is designated for adventurers between ^0000FFLevel 15 and 35^000000.";

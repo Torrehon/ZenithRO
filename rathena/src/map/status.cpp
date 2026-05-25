@@ -4044,9 +4044,9 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 #endif
 			if(sd->inventory.u.items_inventory[index].card[0] == CARD0_FORGE) { // Forged weapon
 				wd->star += (sd->inventory.u.items_inventory[index].card[1]>>8);
-				if(wd->star >= 15) wd->star = 40; // 3 Star Crumbs now give +40 dmg
+				//if(wd->star >= 15) wd->star = 40; // 3 Star Crumbs now give +40 dmg
 				if(pc_famerank(MakeDWord(sd->inventory.u.items_inventory[index].card[2],sd->inventory.u.items_inventory[index].card[3]) ,MAPID_BLACKSMITH))
-					wd->star += 10;
+					wd->star += 30;
 				if (!wa->ele) // Do not overwrite element from previous bonuses.
 					wa->ele = (sd->inventory.u.items_inventory[index].card[1]&0x0f);
 			}
@@ -4319,9 +4319,10 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 
 	// Absolute modifiers from passive skills
-	if(pc_checkskill(sd,BS_HILTBINDING)>0)
+	if(pc_checkskill(sd,BS_HILTBINDING)>0){
 		base_status->str++;
 	    base_status->vit++;
+    }
 	if((skill=pc_checkskill(sd,SA_DRAGONOLOGY))>0)
 		base_status->int_ += (skill+1)/2; // +1 INT / 2 lv
 	if((skill=pc_checkskill(sd,AC_OWL))>0)
@@ -4483,6 +4484,13 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Soul Channeling ---
+    // --- INICIO CUSTOM: Forgemaster (Smith Sword -> ATK) ---
+	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_SWORD) > 0) {
+		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+		base_status->batk += (5 * pc_checkskill(sd, BS_SWORD)) * rank_mult;
+	}
+	// --- FIN CUSTOM ---
+
 #else
 	base_status->watk = status_weapon_atk(base_status->rhw);
 	base_status->watk2 = status_weapon_atk(base_status->lhw);
@@ -4657,7 +4665,13 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 
 	if ((skill = pc_checkskill(sd, SU_SOULATTACK)) > 0)
 		base_status->rhw.range += skill_get_range2(sd, SU_SOULATTACK, skill, true);
-
+	
+// --- INICIO CUSTOM: Forgemaster (Smith Spear -> HIT) ---
+	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_SPEAR) > 0) {
+		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+		base_status->hit += (3 * pc_checkskill(sd, BS_SPEAR)) * rank_mult;
+	}
+	// --- FIN CUSTOM ---
 // ----- FLEE CALCULATION -----
 
 	// Absolute modifiers from passive skills
@@ -4671,6 +4685,14 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		base_status->flee += jlvl_bonus;
 	}
 	// --- Fin Custom Skill ---
+	
+	// --- INICIO CUSTOM: Forgemaster (Smith Dagger -> Flee) ---
+	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_DAGGER) > 0) {
+		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+		base_status->flee += (4 * pc_checkskill(sd, BS_DAGGER)) * rank_mult;
+	}
+	// --- FIN CUSTOM ---
+
 	if((skill=pc_checkskill(sd,MO_DODGE))>0)
 		base_status->flee += (skill*3) / 2;
 	if (pc_checkskill(sd, SU_POWEROFLIFE) > 0)
@@ -4731,6 +4753,13 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		
 		// Lo sumamos a base_status->crit (recuerda que el crítico en rAthena va multiplicado x10)
 		base_status->cri += crit_bonus_internal;
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Forgemaster (Smith 2H Sword -> CRIT) ---
+	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_TWOHANDSWORD) > 0) {
+		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+		base_status->cri += (30 * pc_checkskill(sd, BS_TWOHANDSWORD)) * rank_mult;
 	}
 	// --- FIN CUSTOM ---
 
@@ -4899,9 +4928,12 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	// --- FIN: Firearms Mastery Custom ASPD ---
 	if ((skill = pc_checkskill(sd,SG_DEVIL)) > 0 && ((sd->class_&MAPID_THIRDMASK) == MAPID_STAR_EMPEROR || pc_is_maxjoblv(sd)))
 		base_status->aspd_rate -= 30*skill;
-	// if((skill=pc_checkskill(sd,GS_SINGLEACTION))>0 &&
-		// (sd->status.weapon >= W_REVOLVER && sd->status.weapon <= W_GRENADE))
-		// base_status->aspd_rate -= ((skill+1)/2) * 10;
+    // --- INICIO CUSTOM: Forgemaster (Smith Knuckle -> ASPD) ---
+	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_KNUCKLE) > 0) {
+		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+		base_status->aspd_rate += (1 * pc_checkskill(sd, BS_KNUCKLE)) * rank_mult;
+	}
+	// --- FIN CUSTOM ---
 	if(pc_isriding(sd))
 		base_status->aspd_rate += 500-100*pc_checkskill(sd,KN_CAVALIERMASTERY);
 	else if(pc_isridingdragon(sd))
@@ -5165,6 +5197,12 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			sd->bonus.crit_atk_rate += 25;  // +25% de Daño Crítico
 		}
 		// --- FIN CUSTOM ---
+// --- INICIO CUSTOM: Forgemaster (Smith Mace -> Crit Damage) ---
+	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_MACE) > 0) {
+		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+		sd->bonus.crit_atk_rate += (4 * pc_checkskill(sd, BS_MACE)) * rank_mult;
+	}
+	// --- FIN CUSTOM ---
 #ifdef RENEWAL
 		if (sc->getSCE(SC_FORTUNE))
 			sd->bonus.crit_atk_rate += 2 * sc->getSCE(SC_FORTUNE)->val1;
@@ -10046,6 +10084,8 @@ static int32 status_get_sc_interval(enum sc_type type)
 		case SC_ELECTROCUTE:
         case SC_BURIED:
 		    return 2000;
+		case SC_SAVAGERY:
+		    return 1020;
 		case SC_PYREXIA:
 			return 3000;
 		case SC_MAGICMUSHROOM:
@@ -10063,6 +10103,8 @@ static int32 status_get_sc_interval(enum sc_type type)
 			return 5000;
 		case SC_STAR_BURST:
 			return 300;
+		case SC_POTION_HOT:
+			return 1000;
 		default:
 			break;
 	}
@@ -11697,9 +11739,12 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_KILLING_AURA:
 		case SC_WINKCHARM:
 		case SC_VOICEOFSIREN:
+		case SC_SAVAGERY:
+		case SC_POTION_HOT:
 			tick_time = status_get_sc_interval(type);
 			val4 = tick - tick_time; // Remaining time
 			break;
+
 		case SC_TOXIN:
 			if (val3 == 1) // Target
 				tick_time = status_get_sc_interval(type);
@@ -14782,6 +14827,28 @@ TIMER_FUNC(status_change_timer){
 		if (sce->val4 >= 0 && status->hp > status->max_hp / 4)
 			status_percent_damage(nullptr, bl, -1, 0, false);
 		break;
+// --- INICIO CUSTOM: Pociones en el Tiempo ---
+	case SC_POTION_HOT:
+		// Comprobamos val4 por seguridad (es la forma en la que tu rAthena valida el tick)
+		if (sce->val4 >= 0) { 
+			// Curamos usando tu función con AP: status_heal(bl, HP, SP, AP, Flag)
+			status_heal(bl, sce->val1, 0, 0, 2);
+			
+			// Lanzamos el efecto visual si pusimos uno en el YAML
+			if (sce->val2 > 0) {
+				clif_specialeffect(bl, sce->val2, AREA);
+			}
+		}
+		break;
+	// --- FIN CUSTOM ---
+// --- INICIO CUSTOM: Aura visual en bucle ---
+	case SC_SAVAGERY:
+		if (sce->val4 >= 0) { 
+			// Lanzamos el efecto y dejamos que el emulador haga el resto del trabajo
+			clif_specialeffect(bl, 1797, AREA);
+		}
+		break;
+	// --- FIN CUSTOM ---
 
 	case SC_POISON:
 	case SC_DPOISON:
@@ -15912,6 +15979,7 @@ int32 status_change_timer_sub(block_list* bl, va_list ap)
 			status_change_end(bl, type);
 		}
 		break;
+		
 	}
 
 	return 0;

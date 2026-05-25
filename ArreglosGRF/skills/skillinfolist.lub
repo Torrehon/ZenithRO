@@ -1134,7 +1134,7 @@ SKILL_INFO_LIST = {
 		AttackRange = { 1, 1, 1, 1, 1 }
 	},
 	[SKID.BS_DECIMATION] = {
-		"BS_HAMMERFALL",
+		"bs_decimation",
 		SkillName = "Cart Decimation",
 		MaxLv = 1,
 		SpAmount = { 25, },
@@ -1188,13 +1188,13 @@ SKILL_INFO_LIST = {
 		}
 	},
 	[SKID.BS_JUGGERNAUTSOUL] = {
-		"wz_hexersoul",
+		"bs_juggernautsoul",
 		SkillName = "Soul of the Juggernaut",
 		MaxLv = 1,
 		AttackRange = { 1 }
 	},
 	[SKID.BS_FORGEMASTERSOUL] = {
-		"wz_hexersoul",
+		"bs_forgemastersoul",
 		SkillName = "Soul of the Forgemaster",
 		MaxLv = 1,
 		AttackRange = { 1 }
@@ -3878,10 +3878,10 @@ SKILL_INFO_LIST = {
 	[SKID.BS_ADRENALINE2] = {
 		"BS_ADRENALINE2",
 		SkillName = "Full Adrenaline Rush",
-		MaxLv = 1,
+		MaxLv = 5,
 		SpAmount = { 64 },
 		bSeperateLv = false,
-		AttackRange = { 1 },
+		AttackRange = { 1, 1, 1, 1, 1 },
 		Type = "Soul",
 		_NeedSkillList = {
 			{ SKID.BS_HAMMERFALL,2 }

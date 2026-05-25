@@ -57853,11 +57853,11 @@ Body:
     JobExp: 1500
     Attack: 180
     Attack2: 255
-    Defense: 25
-    MagicDefense: 15
+    Defense: 5
+    MagicDefense: 25
     Agi: 20
     Vit: 15
-    Int: 99
+    Int: 55
     Dex: 33
     Luk: 15
     AttackRange: 1

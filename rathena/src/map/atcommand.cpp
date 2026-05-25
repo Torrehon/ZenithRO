@@ -1526,6 +1526,16 @@ ACMD_FUNC(item)
 				item_tmp.nameid = item_id;
 				item_tmp.identify = 1;
 				item_tmp.bound = bound;
+
+				// --- INICIO CUSTOM RANDOM OPTIONS ---
+				// Verificamos si no es apilable para no aplicar options a pociones o manzanas
+				if( !itemdb_isstackable2( item.get() ) ){
+					// En atcommand, 'item' es un smart pointer. Usamos item.get() para sacar el 
+					// 'struct item_data*' que necesita tu función.
+					pc_apply_random_option(item.get(), item_tmp);
+				}
+				// --- FIN CUSTOM RANDOM OPTIONS ---
+
 				if ((flag = pc_additem(sd, &item_tmp, get_count, LOG_TYPE_COMMAND)))
 					clif_additem(sd, 0, 0, flag);
 			}
@@ -8169,13 +8179,24 @@ ACMD_FUNC(mobinfo)
 						// Para MVPs usamos el cálculo oficial del server pero con suelo del 35%
 						droprate = mob_getdroprate(sd, mob, entry->rate, drop_modifier);
 						if (droprate < 3500) droprate = 3500;
-					} else {
+                    } else {
 						// Mobs normales: Calculamos Rate Base x 5 manualmente para ignorar el drops.conf
-						droprate = entry->rate*5; 
+						droprate = entry->rate * 5; 
 
+						// Comprobamos si es un Hat o Accesorios
 						bool is_hat = (id->type == IT_ARMOR && (id->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
-						if (is_hat) {
-							if (droprate < 75) droprate = 75; // Suelo 0.75%
+						bool is_acc = (id->type == IT_ARMOR && (id->equip & EQP_ACC));
+						
+						if (is_hat || is_acc) {
+							if (droprate < 75) {
+								droprate = 75; // Suelo 0.75%
+							}
+						}
+						// Armaduras que NO son gorros ni accesorios (Pecheras, escudos, botas, garments)
+						else if (id->type == IT_ARMOR) {
+							if (droprate < 150) {
+								droprate = 150; // Suelo 1.5%
+							}
 						}
 					}
 				} 

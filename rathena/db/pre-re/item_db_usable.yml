@@ -96,8 +96,16 @@ Body:
     Buy: 50
     Weight: 70
     Script: |
+      // 1. Calculamos la curación base
       .@heal = rand(45, 65);
-    # Cooldown de 3 segundos (3000ms)
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      specialeffect2 EF_POTION_RED;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
     Cooldown: 3000
   - Id: 502
     AegisName: Orange_Potion

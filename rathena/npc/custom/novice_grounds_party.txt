@@ -7,8 +7,18 @@ new_1-2,26,173,5	script	Novice Alard	0,{
 	mes "Hey! Are you also starting your journey?";
 	mes "I've heard there are some giant bugs in the sewers of Prontera. I can't wait to get out of here and test my blade!";
 	next;
+	
+	if (Novice_Alard_Gift == 0) {
+		mes "[Novice Alard]";
+		mes "With all the monsters we're going to crush, our backpacks will be full of loot in no time!";
+		mes "You look like you're going to need some extra space too. Take these, my old man gave me way too many.";
+		getitem 7059, 20; // Kafra Storage Ticket x 20
+		Novice_Alard_Gift = 1;
+		next;
+	}
+
 	mes "[Novice Alard]";
-	mes "My friends are a bit nervous, but I'll protect them. We're going to be legendary adventurers, just watch us!";
+	mes "Berin and Linnea are a bit nervous, but I'll protect them. We're going to be legendary adventurers, just watch us!";
 	close;
 
 OnInit:
@@ -22,10 +32,20 @@ OnInit:
 new_1-2,29,183,9	script	Novice Berin	0,{
 	mes "[Novice Berin]";
 	mes "Ugh... do you think we'll need a lot of Red Potions for our first mission?";
-	mes "Alard says he will protect us, but I have a bad feeling about this...";
+	mes "Alard says he'll protect us, but I still have a really bad feeling about this...";
 	next;
+
+	if (Novice_Berin_Gift == 0) {
+		mes "[Novice Berin]";
+		mes "What if we get lost down there? Or surrounded by monsters? Walking all the way back sounds incredibly dangerous.";
+		mes "Here, please take these. It makes me feel a little better knowing you have a safe way to retreat to the city if things go wrong.";
+		getitem 7060, 20; // Kafra Teleportation Ticket x 20
+		Novice_Berin_Gift = 1;
+		next;
+	}
+
 	mes "[Novice Berin]";
-	mes "I just hope I don't get injured on my very first day out of the Academy.";
+	mes "I just hope I don't get severely injured on my very first day out of the Academy...";
 	close;
 
 OnInit:
@@ -37,11 +57,21 @@ OnInit:
 
 new_1-2,36,180,7	script	Novice Linnea	0,{
 	mes "[Novice Linnea]";
-	mes "Wow! Look at all these people! Everyone looks so strong!";
-	mes "I want to see a real monster, Alard says there is a monster that glows... is that possible?";
+	mes "Wow! Look at all these people! Everyone looks so strong and experienced!";
+	mes "I want to see a real monster! Alard says there is one that even glows... do you think that's actually true?";
 	next;
+
+	if (Novice_Linnea_Gift == 0) {
+		mes "[Novice Linnea]";
+		mes "The world is so huge, and I want to explore every single corner of it! Oh, I know!";
+		mes "You should take some of my Fly Wings. They are super fun to use, you just *poof* and appear somewhere entirely new! Try them out on your adventure!";
+		getitem 12323, 50; // Novice Fly Wing x 50
+		Novice_Linnea_Gift = 1;
+		next;
+	}
+
 	mes "[Novice Linnea]";
-	mes "I'm a bit scared, but as long as we stay together, nothing bad will happen, right?";
+	mes "I'm honestly a little bit scared, but as long as we stay together, nothing bad will happen, right?";
 	close;
 
 OnInit:

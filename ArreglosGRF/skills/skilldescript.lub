@@ -1254,56 +1254,81 @@ SKILL_DESCRIPT = {
 		"Smith Dagger",
 		"Max Level: 3",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Dagger class weapons. ^000000"
+		"Description: ^777777Enables forging of Dagger class",
+		"weapons. If Soul of the Forgemaster is learned,",
+		"increases Flee by 4 * Skill Level, doubled if",
+		"you are in the Blacksmith Forge Rank top 10.^000000"
 	},
 	[SKID.BS_SWORD] = {
 		"Smith Sword",
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Dagger 1 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Sword class weapons. ^000000"
+		"Description: ^777777Enables forging of Sword class",
+		"weapons. If Soul of the Forgemaster is learned,",
+		"increases Atk by 5 * Skill Level, doubled if",
+		"you are in the Blacksmith Forge Rank top 10.^000000"
 	},
 	[SKID.BS_TWOHANDSWORD] = {
 		"Smith Two-Handed Sword",
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Sword 1 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Two-Handed Sword class weapons. ^000000"
+		"Description: ^777777Enables forging of 2 Handed",
+		"Sword class weapons.",
+		"If Soul of the Forgemaster is learned,",
+		"increases Crit by 3 * Skill Level, doubled if",
+		"you are in the Blacksmith Forge Rank top 10.^000000"
 	},
 	[SKID.BS_AXE] = {
 		"Smith Axe",
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Sword 2 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Axe class weapons. ^000000"
+		"Description: ^777777Enables forging of Axe class",
+		"weapons.",
+		"If Soul of the Forgemaster is learned, enables",
+		"Double Attack with a  5% * Skill Level chance,",
+		"doubled if you are in the Blacksmith Forge",
+		"Rank top 10.^000000"
 	},
 	[SKID.BS_MACE] = {
 		"Smith Mace",
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Brass Knuckle 1 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Mace class weapons. ^000000"
+		"Description: ^777777Enables forging of Mace class",
+		"weapons. If Soul of the Forgemaster is learned,",
+		"increases Crit damage by 4 * Skill Level,",
+		"doubled if you are in the Blacksmith Forge",
+		"Rank top 10.^000000"
 	},
 	[SKID.BS_KNUCKLE] = {
 		"Smith Brass Knuckle",
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Dagger 1 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Knuckle class weapons. ^000000"
+		"Description: ^777777Enables forging of Knuckle class",
+		"weapons. If Soul of the Forgemaster is learned,",
+		"increases Aspd by 1 * Skill Level, doubled if",
+		"you are in the Blacksmith Forge Rank top 10.^000000"
 	},
 	[SKID.BS_SPEAR] = {
 		"Smith Spear",
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Dagger 2 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Spear class weapons. ^000000"
+		"Description: ^777777Enables forging of Spear class",
+		"weapons. If Soul of the Forgemaster is learned,",
+		"increases Hit by 3 * Skill Level, doubled if",
+		"you are in the Blacksmith Forge Rank top 10.^000000"
 	},
 	[SKID.BS_HILTBINDING] = {
 		"Hilt Binding",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases the duration of the Adrenaline Rush, Power Thrust and Weapon Perfection skills by 10%.",
-		"This skill also adds +1 STR and +4 ATK. ^000000"
+		"Description: ^777777This skill adds +1 Vit, +1 Str",
+		"and 10 Atk.^000000"
 	},
 	[SKID.BS_FINDINGORE] = {
 		"Finding Ore",
@@ -1347,36 +1372,53 @@ SKILL_DESCRIPT = {
 		"Hammer Fall",
 		"Max Level: 5",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Pounds a targeted cell to stun enemies in the impacts vicinity.",
-		"This can only be used when an Axe or Mace class weapon is equipped. ^000000"
+		"Description: ^777777Pounds a targeted cell to damage",
+		"and stun enemies in the impacts vicinity.",
+		"Damage ratio is 100% + 20% * Skill Level,",
+		"increased by 1% per Vit point.",
+		"Stun chance is 20% + 4% * Skill Level.",
+		"This can only be used when an Axe or Mace",
+		"class weapon is equipped. ^000000"
 	},
 	[SKID.BS_DECIMATION] = {
 		"Cart Decimation",
-		"Max Level: 5",
+		"Max Level: 1",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Pounds a targeted cell to stun enemies in the impacts vicinity.",
-		"This can only be used when an Axe or Mace class weapon is equipped. ^000000"
+		"Description: ^777777Devastating attack that damages",
+		"everything around the caster for 400%",
+        "+ 2% per Vit point.",
+		"If the user is under 'Savagery' status, increases",
+		"its damage by 40% per stack and if its",
+		"casted while at 10 stacks, full damage",
+		"is multiplied by 1,5 times.",
+		"This skill gets cast time while under this",
+		"state, being 0.2 seconds * stack.^000000"
 	},
 	[SKID.BS_ADRENALINE] = {
 		"Adrenaline Rush",
 		"Max Level: 5",
 		"10^CC3399Requirement: Hammerfall 2 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Doubles the Attack Speed of Axe and Mace weapon for the duration of skill. ^000000"
+		"Description: ^777777Increases Aspd by 30% for 60 * Skill Level",
+		"seconds. ^000000"
 	},
 	[SKID.BS_WEAPONPERFECT] = {
 		"Weapon Perfection",
 		"Max Level: 5",
 		"10^CC3399Requirement: Adrenaline Rush 2, Weaponry Research 2 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Nullifies any reduction in damage resulting from monster size. ^000000"
+		"Description: ^777777Nullifies any reduction in damage",
+		"resulting from monster size for 60 seconds per",
+		"Skill Level. ^000000"
 	},
 	[SKID.BS_OVERTHRUST] = {
 		"Over Thrust",
 		"Max Level: 5",
 		"10^CC3399Requirement: Adrenaline Rush 3 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Enhances the Attack Power of equipped weapon with a 0.1% chance of damaging that weapon. ^000000",
+		"Description: ^777777Enhances the Attack Power of",
+        "equipped weapon with a 0.1% chance of damaging that weapon",
+		"for 60 seconds per Skill Level. ^000000",
 		"[Lv 1]:^777777 Damage +5% ^000000",
 		"[Lv 2]:^777777 Damage +10% ^000000",
 		"[Lv 3]:^777777 Damage +15% ^000000",
@@ -1396,41 +1438,18 @@ SKILL_DESCRIPT = {
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the Blacksmith's absolute brute force.^000000",
-		"^008800Hilt Binding^777777: Cart Revolution and Hammer Fall grant ^990000Savagery^777777 stacks (Max 10). Each stack adds ^990000+10%^777777 damage ratio to these skills.^000000",
-		"^008800Skin Tempering^777777: Gain ^990000+0.2%^777777 HP Leech per Savagery stack.^000000",
+		"^008800Hilt Binding^777777: Hammer Fall grants ^990000Savagery^777777 stacks (Max 10). Each stack adds ^990000+10%^777777 damage ratio to this skill.^000000",
+		"^008800Skin Tempering^777777: Gain ^990000+0.2%^777777 HP Leech per Savagery stack when mastered.^000000",
 		"^008800Hammer Fall^777777: Hits ^0088002 times^777777 when equipped with a Two-Handed Axe.^000000",
-		"^008800Cart Decimation^777777: Consumes all Savagery stacks, dealing ^990000+40%^777777 extra damage ratio per stack.^000000"
+		"^008800Cart Decimation^777777: Consumes Savagery stacks to increase its damage.^000000"
 	},
     [SKID.BS_FORGEMASTERSOUL] = {
 		"Soul of the Forgemaster",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Grants stats based on your Smithing skill levels:^000000",
-		"^008800Dagger^777777: ^990000+7 FLEE/Lv^777777  |  ^008800Sword^777777: ^990000+10 ATK/Lv^000000",
-		"^0088002H Sword^777777: ^990000+5 CRIT/Lv^777777|  ^008800Spear^777777: ^990000+5 HIT/Lv^000000",
-		"^008800Axe^777777: ^990000+10% Dbl Atk/Lv^777777 |  ^008800Knuckle^777777: ^990000+2% ASPD/Lv^000000",
-		"^008800Mace^777777: ^990000+7% Crit Dmg/Lv^000000",
+		"Description: ^777777Grants stats based on your Smithing skill levels.^000000",
 		"^008800Weaponry Research^777777: ^990000+10%^777777 flat Forge Success.^000000",
-		"^777777Forges gain ^990000Artisan/Masterwork^777777 prefixes instead of maker's name.^000000",
 		"^777777Star Crumbs grant up to ^990000+120 Bonus Damage^777777 on forged weapons.^000000"
-	},
-    [SKID.BS_JUGGERNAUTSOUL] = {
-		"Soul of the Juggernaut",
-		"Max Level: 1",
-		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Awakens the Wizard's mastery over elemental enfeeblements.^000000",
-		"^777777DoT statuses have double the chance to occur.^000000",
-		"^777777Increases the matk portion of DoT skills by 100%.^000000",
-		"^777777DoT statuses last 10 more seconds.^000000"
-	},
-    [SKID.BS_FORGEMASTERSOUL] = {
-		"Soul of the Forgemaster",
-		"Max Level: 1",
-		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Awakens the Wizard's mastery over elemental enfeeblements.^000000",
-		"^777777DoT statuses have double the chance to occur.^000000",
-		"^777777Increases the matk portion of DoT skills by 100%.^000000",
-		"^777777DoT statuses last 10 more seconds.^000000"
 	},
 	[SKID.HT_SKIDTRAP] = {
 		"Skid Trap",
@@ -1444,7 +1463,7 @@ SKILL_DESCRIPT = {
 		"[Lv 4]:^777777 9 cell sliding range, 120 sec ^000000",
 		"[Lv 5]:^777777 10 cell sliding range, 60 sec ^000000"
 	},
-[SKID.HT_LANDMINE] = {
+    [SKID.HT_LANDMINE] = {
 		"Land Mine",
 		"Max Level: 5",
 		"Skill Form: ^339900Active, Trap ^000000",
@@ -4105,7 +4124,8 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Decreases character's attack delay with all weapons, including ranged by 30%. Decreases nearby party menbers attack delay with all weapons except ranged by 20%.",
 		"These two effects are supposed to stack with each other when used by more than one Smith in a party. Changing from a mace/axe to any other weapon (including bare fists) cancels the effect.",
-		"Does not stack with other skills that directly increase ASPD. ^000000"
+		"Does not stack with other skills that directly increase ASPD.",
+		"Skill duration is 60 seconds per Level.^000000"
 	},
 	[SKID.SL_HUNTER] = {
 		"Hunter Spirit",

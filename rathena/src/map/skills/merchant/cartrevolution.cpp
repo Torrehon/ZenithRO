@@ -11,12 +11,12 @@ void SkillCartRevolution::calculateSkillRatio(const Damage *wd, const block_list
 	const map_session_data *sd = BL_CAST(BL_PC, src);
 
 	// --- NUEVA FÓRMULA:
-	base_skillratio = 100 + (70 * skill_lv);
+	base_skillratio = 100 + (30 * skill_lv);
 
 	// --- BONO EXTRA: Overcharge (20% extra por nivel) ---
 	int32 over_lv = 0;
 	if (sd && (over_lv = pc_checkskill(sd, MC_OVERCHARGE)) > 0) {
-		base_skillratio += (over_lv * 20);
+		base_skillratio += (over_lv * 10);
 	}
 
 }

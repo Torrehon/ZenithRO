@@ -144,9 +144,18 @@ StateIconList[EFST_IDs.EFST_SAVAGERY] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
 	descript = {
-		{ "Arcane Insight", COLOR_TITLE_BUFF },
+		{ "Savagery", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
 		{ "Empowers Blacksmith's combat skills", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_POTION_HOT] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Potion Healing", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Healing over time.", { 255, 255, 255 } }
 	}
 }
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
@@ -745,7 +754,7 @@ StateIconList[EFST_IDs.EFST_HIDING] = {
 }
 StateIconList[EFST_IDs.EFST_WEIGHTOVER50] = {
 	descript = {
-		{ "Weight over 50%", COLOR_TITLE_DEBUFF },
+		{ "Weight over 70%", COLOR_TITLE_DEBUFF },
 		{ "Disables natural HP and SP regeneration" }
 	}
 }

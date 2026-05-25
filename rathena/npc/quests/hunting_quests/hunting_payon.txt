@@ -451,6 +451,12 @@ OnInit:
 		13532, 5,    // Light Orange Potion Box
 		13533, 7,    // Light Yellow Potion Box
 		13534, 10,   // Light White Potion Box
+		12114, 2,    // Fire Converter Scroll
+		12115, 2,    // Water Converter Scroll
+		12116, 2,    // Earth Converter Scroll
+		12117, 2,    // Wind Converter Scroll
+		50008, 3,    // Shadow Converter Scroll
+		50009, 3,    // Holy Converter Scroll
 		19639, 50,   // Costume Sakkat
 		19503, 50,   // Costume Munak Hat
 		19687, 50,   // Costume Lush Rose

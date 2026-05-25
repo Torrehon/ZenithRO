@@ -42,11 +42,10 @@ pay_arche,48,137,4	script	Grandmother Kyung	78,{
 
 	// Estado 0: Inicio de Quest (Con restricción de Nivel)
 	if (payon_quest == 0) {
-		if (BaseLevel < 25 || BaseLevel > 40) {
-			mes "Child, the caves are no place for someone like you yet.";
-			mes "The darkness down there drinks the light of those who are not prepared.";
+		if (BaseLevel < 25 || BaseLevel > 60) {
+			mes "Oh, Min-ji... I hope your soul can rest someday....";
 			next;
-			mes "Come back when you are between ^FF0000Level 25 and 40^000000.";
+			mes "^FF0000Come back when you are between Level 25 and 60^000000.";
 			close;
 		}
 
@@ -72,8 +71,8 @@ pay_arche,48,137,4	script	Grandmother Kyung	78,{
 pay_dun00,163,142,5	script	Pulsing Gravestone	10443,{
 	
 	// Restricción Global de Nivel
-	if (BaseLevel < 25 || BaseLevel > 40) {
-		mes "^888888*The gravestone rejects your presence. It requires souls between Level 25 and 40.*^000000";
+	if (BaseLevel < 25 || BaseLevel > 60) {
+		mes "^888888*The gravestone rejects your presence. It requires souls between Level 25 and 60.*^000000";
 		close;
 	}
 

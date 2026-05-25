@@ -3683,6 +3683,7 @@ Body:
     Type: Weapon
     TargetType: Ground
     DamageFlags:
+      IgnoreAtkCard: true
       NoDamage: false
       Splash: true
     Flags:
@@ -3690,7 +3691,7 @@ Body:
     Range: 1
     Hit: Single
     HitCount: 1
-    Element: Weapon
+    Element: Neutral
     SplashArea:
       - Level: 1
         Area: 2
@@ -3782,15 +3783,15 @@ Body:
     SplashArea: -1
     Duration1:
       - Level: 1
-        Time: 10000
+        Time: 60000
       - Level: 2
-        Time: 20000
+        Time: 120000
       - Level: 3
-        Time: 30000
+        Time: 180000
       - Level: 4
-        Time: 40000
+        Time: 240000
       - Level: 5
-        Time: 50000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -3820,15 +3821,15 @@ Body:
     SplashArea: -1
     Duration1:
       - Level: 1
-        Time: 20000
-      - Level: 2
-        Time: 40000
-      - Level: 3
         Time: 60000
+      - Level: 2
+        Time: 120000
+      - Level: 3
+        Time: 180000
       - Level: 4
-        Time: 80000
+        Time: 240000
       - Level: 5
-        Time: 100000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -12073,7 +12074,17 @@ Body:
     Hit: Single
     HitCount: 1
     SplashArea: -1
-    Duration1: 150000
+    Duration1:
+      - Level: 1
+        Time: 60000
+      - Level: 2
+        Time: 120000
+      - Level: 3
+        Time: 180000
+      - Level: 4
+        Time: 240000
+      - Level: 5
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1

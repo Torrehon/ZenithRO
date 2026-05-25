@@ -1,13 +1,81 @@
 // =============================================
-// Coal Mines Instance Quest & Custom Boss (Sequential Quests)
+// Coal Mines Instance Quest & Custom Boss (Sequential Quests & FFA)
 // =============================================
 
 // --- 1. MINING SURVEYOR (mjo_dun01) ---
 mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 	mes "[Garrick]";
 	
-	// Estado 0: Inicio absoluto
+	// Estado 5: Secuencia Completa (Quest Terminada)
+	if (coalmines_quest >= 5) {
+		// Comprobamos el Cooldown del modo repetible FFA
+		if (#coalmines_cooldown > gettimetick(2)) {
+			.@rest = #coalmines_cooldown - gettimetick(2);
+			mes "Thanks to your efforts, the Orichalcum trade route is being evaluated.";
+			mes "The depths are still dangerous, but you've proven you can handle it.";
+			mes "The spirits in the deep need ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^000000 to reform.";
+		} else {
+			mes "I still sense some tremors coming from the third floor...";
+			mes "If you are feeling brave, you can go back to the vein and challenge the spirits again.";
+		}
+		close;
+	}
+
+	// Estado 4: Entrega de Quest y Recompensa
+	if (coalmines_quest == 4) {
+		mes "By the gods... Is that truly a piece of raw Orichalcum?!";
+		next;
+		mes "Look at that sheen... The legends didn't lie. This quality is superb!";
+		next;
+		mes "You have done an amazing job, adventurer. Here is your reward as promised.";
+		next;
+		
+		if (checkquest(80033, HAVEQUEST) != -1) { completequest 80033; }
+		getexp 110000, 140000; 
+		getitem 5031, 1; // Recompensa (Helmet)
+		
+		set coalmines_quest, 5;
+		mes "If I manage to forge something out of this, I'll let you know!";
+		close;
+	}
+
+	// Estado 3: Instrucciones de extracción
+	if (coalmines_quest == 3) {
+		mes "Remember, you need to go to the deepest level (^FF0000mjo_dun03^000000) and find the exposed vein.";
+		mes "Take an ^FF0000Old Pick^000000 with you. The Skeleton Workers down there usually drop them.";
+		close;
+	}
+
+	// Estado 2: Regreso de la cacería
+	if (coalmines_quest == 2) {
+		mes "You are back! Did you clear out those fiends?";
+		next;
+		goto L_QuestPico;
+	}
+
+	// Estado 1: Caza en progreso
+	if (coalmines_quest == 1) {
+		if (checkquest(80030, HUNTING) == 2) {
+			set coalmines_quest, 2;
+			mes "Ah, you've finished the inspection! Excellent work!";
+			next;
+			goto L_QuestPico; 
+		} else {
+			mes "Please hurry. We need to cull their numbers before doing any extraction.";
+			mes "Defeat ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000 so we can secure the perimeter.";
+			close;
+		}
+	}
+
+	// Estado 0: Inicio absoluto (Con restricción de Nivel)
 	if (coalmines_quest == 0) {
+		if (BaseLevel < 35 || BaseLevel > 60) {
+			mes "These mines are treacherous. Even experienced miners don't dare go deeper.";
+			next;
+			mes "Come back when you are between ^FF0000Level 35 and 60^000000. I cannot risk your life otherwise.";
+			close;
+		}
+
 		mes "Greetings, traveler. I am scouting these abandoned mines in search of ^FF0000Orichalcum^000000.";
 		next;
 		mes "It's a legendary mineral capable of forging equipment of unmatched quality.";
@@ -22,62 +90,9 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 		mes "Thank you! Go down there and exterminate ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000.";
 		close;
 	}
+	end;
 
-	// Estado 1: Caza en progreso
-	if (coalmines_quest == 1) {
-		if (checkquest(80030, HUNTING) == 2) {
-			set coalmines_quest, 2;
-			mes "Ah, you've finished the inspection! Excellent work!";
-			next;
-			goto L_QuestPico; // Salta a la explicación del pico
-		} else {
-			mes "Please hurry. We need to cull their numbers before doing any extraction.";
-			mes "Defeat ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000 so we can secure the perimeter.";
-			close;
-		}
-	}
-
-	// Estado 2: Regreso de la cacería (Si el jugador cerró la ventana por error y vuelve a hablarle)
-	if (coalmines_quest == 2) {
-		mes "You are back! Did you clear out those fiends?";
-		next;
-		goto L_QuestPico; // Salta a la explicación del pico
-	}
-
-	// Estado 3: Instrucciones de extracción
-	if (coalmines_quest == 3) {
-		mes "Remember, you need to go to the deepest level (^FF0000mjo_dun03^000000) and find the exposed vein.";
-		mes "Take an ^FF0000Old Pick^000000 with you. The Skeleton Workers down there usually drop them.";
-		close;
-	}
-
-	// Estado 4: Entrega de Quest y Recompensa
-	if (coalmines_quest == 4) {
-		mes "By the gods... Is that truly a piece of raw Orichalcum?!";
-		next;
-		mes "Look at that sheen... The legends didn't lie. This quality is superb!";
-		next;
-		mes "You have done an amazing job, adventurer. Here is your reward as promised.";
-		next;
-		
-		if (checkquest(80033, HAVEQUEST) != -1) { completequest 80033; }
-		getexp 18000, 14000; 
-		// getitem ID_DEL_GORRO, 1; 
-		
-		set coalmines_quest, 5;
-		mes "If I manage to forge something out of this, I'll let you know!";
-		close;
-	}
-
-	// Estado 5: Secuencia Completa
-	if (coalmines_quest >= 5) {
-		mes "Thanks to your efforts, the Orichalcum trade route is being evaluated.";
-		mes "The depths are still dangerous, but you've proven you can handle it.";
-		close;
-	}
-	end; // Seguridad para que el script no siga bajando si pasa algo raro.
-
-// --- ETIQUETAS DE SALTO (Aisladas del flujo principal) ---
+// --- ETIQUETAS DE SALTO ---
 L_QuestPico:
 	mes "Now we face the real issue...";
 	mes "The Orichalcum is deeply embedded in the northwestern walls of the third floor.";
@@ -96,16 +111,67 @@ L_QuestPico:
 // --- 2. ORICHALCUM VEIN (mjo_dun03) ---
 mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 
+	// Restricción Global de Nivel
+	if (BaseLevel < 35 || BaseLevel > 60) {
+		mes "^888888*The vein rejects your presence. It requires souls between Level 35 and 60.*^000000";
+		close;
+	}
+
 	if (coalmines_quest < 3) {
 		mes "^888888*An unusual, metallic glint peeks through the rocky wall...*^000000";
 		close;
 	}
 
-	if (coalmines_quest >= 4) {
+	// === MODO FFA BOSS REPETIBLE (Mundo Abierto) ===
+	if (coalmines_quest >= 5) {
+		if (#coalmines_cooldown > gettimetick(2)) {
+			.@rest = #coalmines_cooldown - gettimetick(2);
+			mes "^888888*The vein is depleted and silent. The guardian slumbers.*^000000";
+			mes "^888888*It will accept offerings again in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^888888.*^000000";
+			close;
+		}
+
+		mes "^888888*A dark aura seeps from the cracks in the wall...*^000000";
+		next;
+		mes "Do you wish to offer tribute to summon the Mine Spirit?";
+		mes "Requirements: ^FF000010 Iron Ores^000000, ^FF000050 Lanterns^000000 and ^FF00005 Irons^000000.";
+		next;
+		if (select("Make offering.:Cancel.") == 1) {
+			// ID 1002 = Iron Ore, ID 1041 = Lantern, ID 998 = Iron
+			if (countitem(1002) >= 10 && countitem(1041) >= 50 && countitem(998) >= 5) {
+				delitem 1002, 10;
+				delitem 1041, 50;
+				delitem 998, 5;
+				
+				set #coalmines_cooldown, gettimetick(2) + 10800; // 3 Hours Cooldown
+				
+				mes "^888888*You throw the offerings into the dark crevices...*^000000";
+				mes "^888888*A deep, rumbling growl answers you!*^000000";
+				next;
+				mes "^888888*Suddenly, the ground begins to tremble!*^000000";
+				
+				specialeffect2 563;
+				soundeffect "earth_quake.wav", 0;
+				
+				// Iniciamos un temporizador para invocar al monstruo fuera
+				setnpctimer 0;
+				initnpctimer;
+				close;
+			} else {
+				mes "You lack the necessary offerings to awaken the spirit.";
+				close;
+			}
+		}
+		close;
+	}
+	
+	// Estado 4: Recién matado en quest, yendo a entregar a Garrick.
+	if (coalmines_quest == 4) {
 		mes "^888888*The vein has been depleted. You should bring the material back to Garrick.*^000000";
 		close;
 	}
 
+	// === MODO QUEST INSTANCIADO (Primera vez) ===
 	if (coalmines_quest == 3) {
 		mes "^888888*You look closely at the wall. This is definitely the Orichalcum Vein.*^000000";
 		next;
@@ -118,12 +184,9 @@ mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 		if (select("Swing the pick!:Step back.") == 2) close;
 		
 		specialeffect2 153; 
-		//soundeffect "mining.wav", 0; 
 		
 		.@chance = rand(1, 100);
 		
-		// --- LÓGICA DE PROBABILIDAD CORREGIDA ---
-		// 1 al 30 (30% de Éxito)
 		if (.@chance <= 30) { 
 			mes "^00FF00*Clang! A pristine chunk of Orichalcum falls into your hands!*^000000";
 			next;
@@ -147,10 +210,8 @@ mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 			mes "The wall is cracking open! Will you lead your party inside?";
 			if (select("Enter Instance.:Wait.") == 1) {
 				
-				.@party_id = getcharid(1); 
-				
-				if (instance_id(.@party_id) <= 0) {
-					if (instance_create("Coal Mines", .@party_id) < 0) {  
+				if (instance_id(1) <= 0) {
+					if (instance_create("Coal Mines") < 0) {  
 						mes "The cavern collapsed before you could enter.";  
 						close;  
 					}
@@ -159,29 +220,43 @@ mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 				if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; }
 				setquest 80032; 
 				
+				close2;
 				instance_enter("Coal Mines");
+				end;
 			}
 			close;
 			
-		// 31 al 40 (10% de Romper el pico)
 		} else if (.@chance <= 40) { 
 			delitem 7318, 1;
 			mes "^FF0000*Snap! The Old Pick broke against the vein...*^000000";
 			close;
-			
-		// 41 al 100 (60% No pasa nada)
 		} else { 
 			mes "^888888*Sparks fly, but you fail to chip away any piece. Try again.*^000000";
 			close;
 		}
 	}
+
+// Timer para el Boss FFA (Mundo abierto)
+OnTimer1000:
+	monster "mjo_dun03", 39, 251, "Mine Spirit", 20600, 1, "Orichalcum Vein#cm::OnDummyKill";
+	
+	.@mob_gid = $@mobid[0];
+	if (.@mob_gid > 0) { setunitdata .@mob_gid, UMOB_SIZE, 8; }
+	
+	mapannounce "mjo_dun03", "A furious Mine Spirit has been summoned at the Orichalcum vein!", bc_map, "0xFFFF00";
+	stopnpctimer;
+	end;
+
+OnDummyKill:
+	end;
 }
 
 
 // --- 3. INSIDE INSTANCE (1@mjo) ---
 1@mjo,39,255,0	script	Inner Cavern Wall	557,{
 
-	if (coalmines_quest == 4) {
+	// Ahora comprobamos el estado exclusivo de ESTA instancia, no del jugador
+	if ('boss_dead == 1) {
 		mes "The Mine Spirit has been appeased. The area is safe.";
 		next;
 		if (select("Leave Cavern.:Stay here.") == 1) {
@@ -197,7 +272,8 @@ OnInstanceInit:
 	setmapflag instance_mapname("1@mjo"), mf_noteleport;
 	setmapflag instance_mapname("1@mjo"), mf_nomemo;
 	
-	// Iniciamos el temporizador en vez de crear al monstruo de golpe
+	'boss_dead = 0; // Inicializamos la variable a 0 al crear la instancia
+	
 	initnpctimer;
 	end;
 
@@ -213,6 +289,7 @@ OnTimer8000:
 	end;
 
 OnBossDead:
+	'boss_dead = 1; // Marcamos que el boss ha muerto y ya pueden salir
 	mapannounce instance_mapname("1@mjo"), "The Mine Spirit dissolves into dust! The path back is secure.", bc_map, "0x00FF00";
 	
 	if (getcharid(1) > 0) .party_id = getcharid(1);
@@ -221,12 +298,15 @@ OnBossDead:
 	
 	for (.@i = 0; .@i < $@partymembercount; .@i++) {
 		if (attachrid($@partymemberaid[.@i])) {
-			if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; } 
 			
-			if (checkquest(80032, HAVEQUEST) != -1) { completequest 80032; }
-			if (checkquest(80033, HAVEQUEST) == -1) { setquest 80033; }
+			// Si es el modo Quest de Primera vez, les actualizamos su progreso
+			if (coalmines_quest == 3) {
+				if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; } 
+				if (checkquest(80032, HAVEQUEST) != -1) { completequest 80032; }
+				if (checkquest(80033, HAVEQUEST) == -1) { setquest 80033; }
+				set coalmines_quest, 4; 
+			}
 			
-			if (coalmines_quest == 3) { set coalmines_quest, 4; }
 			detachrid;
 		}
 	}

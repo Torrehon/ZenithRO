@@ -1371,7 +1371,8 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 					int32 skill;
 
 					// Automatic trigger of Blitz Beat
-					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 && rnd() % 1000 <= sstatus->dex * 7 / 3 + 1) {
+					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 &&
+						(rnd() % 1000) <= (((sstatus->dex * 4) + (sstatus->int_ * 3)) / 3 + 1)) {
 						int32 rate;
 
 						if ((sd->class_ & MAPID_THIRDMASK) == MAPID_RANGER)
@@ -3021,6 +3022,7 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 		case NPC_CRITICALSLASH:
 		case TF_DOUBLE:
 		case GS_CHAINACTION:
+		case BS_AXE:
 			clif_damage(*src,*bl,tick,dmg.amotion,dmg.dmotion,damage,dmg.div_,dmg.type,dmg.damage2,false);
 			break;
 
@@ -10194,6 +10196,18 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 
 	double time = skill_get_cast(skill_id, skill_lv);
 
+// --- INICIO CUSTOM: Cart Decimation & Savagery ---
+	if (skill_id == BS_DECIMATION) {
+		status_change *sc = status_get_sc(bl);
+		if (sc && sc->getSCE(SC_SAVAGERY)) {
+			// Añade 200 ms (0.2s) por cada carga al tiempo base de la habilidad
+			time += sc->getSCE(SC_SAVAGERY)->val1 * 200;
+		}
+	}
+	// --- FIN CUSTOM ---
+
+
+
 #ifndef RENEWAL_CAST
 	{   
 		#define DEBUG_CAST_TIME // Interruptor del DEBUG
@@ -10297,14 +10311,14 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 		if (time < 0) time = 0;
 
 		// --- 5. DEBUG FINAL CON INTERRUPTOR ---
-		#ifdef DEBUG_CAST_TIME
-		if (sd) {
-			char msg[150];
-			sprintf(msg, "[DEBUG] Skill: %u | FINAL: %d ms | Suma: %d | Items: %d%% | Lessons: -%.1f%% | Ninpo: -%.1f%%", 
-					(unsigned int)skill_id, (int)time, (int)weight, (int)reduce_cast_rate, lessons_reduction/10.0f, ninpo_reduction/10.0f);
-			clif_displaymessage(sd->fd, msg);
-		}
-		#endif
+		//#ifdef DEBUG_CAST_TIME
+		// if (sd) {
+			// char msg[150];
+			// sprintf(msg, "[DEBUG] Skill: %u | FINAL: %d ms | Suma: %d | Items: %d%% | Lessons: -%.1f%% | Ninpo: -%.1f%%", 
+					// (unsigned int)skill_id, (int)time, (int)weight, (int)reduce_cast_rate, lessons_reduction/10.0f, ninpo_reduction/10.0f);
+			// clif_displaymessage(sd->fd, msg);
+		// }
+		//#endif
 	}
 #endif
 
@@ -13335,6 +13349,11 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 		make_per += pc_checkskill(sd,skill_id)*500; // Smithing skills bonus: +5/+10/+15
 		// Weaponry Research bonus: +1/+2/+3/+4/+5/+6/+7/+8/+9/+10
 		make_per += pc_checkskill(sd,BS_WEAPONRESEARCH)*100;
+        // --- INICIO CUSTOM: Soul of the Forgemaster (Éxito) ---
+		if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
+			make_per += 1000; // +10% de éxito plano (1000 = 10%)
+		}
+		// --- FIN CUSTOM ---
 		// Oridecon Research bonus (custom): +1/+2/+3/+4/+5
 		if (battle_config.oridecon_research_fix == 1 && wlv >= 3) {
 			make_per += pc_checkskill(sd, BS_ORIDEOCON) * 100;
@@ -13367,8 +13386,24 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 		tmp_item.identify = 1;
 		if (equip) {
 			tmp_item.card[0] = CARD0_FORGE;
-			tmp_item.card[1] = ((sc*5)<<8)+ele;
-			tmp_item.card[2] = GetWord(sd->status.char_id,0); // CharId
+			
+			// --- INICIO CUSTOM: Soul of the Forgemaster (Daño Star Crumbs) ---
+			int star_damage = sc * 5; // Daño base oficial (5/10/15)
+			
+			if (sc > 0 && pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
+				star_damage = sc * 40; // 30 por cada Star Crumb (30/60/90)
+				
+				// Si está en el Top 10 del ranking, recibe un bono extra de 30
+				if (pc_famerank(sd->status.char_id, JOB_BLACKSMITH) <= 10 && 
+				    pc_famerank(sd->status.char_id, JOB_BLACKSMITH) > 0) {
+					star_damage += 40; // El total queda en 60/90/120
+				}
+			}
+			
+			tmp_item.card[1] = (star_damage << 8) + ele;
+			// --- FIN CUSTOM ---
+			
+			tmp_item.card[2] = GetWord(sd->status.char_id,0); // CharId original
 			tmp_item.card[3] = GetWord(sd->status.char_id,1);
 		} else {
 			//Flag is only used on the end, so it can be used here. [Skotlex]

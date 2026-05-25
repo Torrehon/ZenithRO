@@ -6947,3 +6947,17 @@ Body:
       Speed: true
     Flags:
       NoRemoveOnDead: false
+  - Status: Savagery
+    Icon: EFST_SAVAGERY
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Potion_Hot
+    Icon: EFST_POTION_HOT
+    Flags:
+      NoDispell: true
+      NoBanishingBuster: true
+      NoClearance: true
+      NoRemoveOnDead: false # Queremos que si el jugador muere, la curación cese
+      

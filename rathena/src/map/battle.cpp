@@ -1977,6 +1977,30 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 			}
 		}
 
+    // --- INICIO CUSTOM: Savagery & Skin Tempering Leech ---
+	if (sc && damage > 0 && (flag & BF_WEAPON)) {
+		map_session_data* sd = BL_CAST(BL_PC, src);
+		
+		if (sd && pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0) {
+			int skin_lv = pc_checkskill(sd, BS_SKINTEMPER);
+			
+			if (skin_lv > 0 && sc->getSCE(SC_SAVAGERY)) {
+				int stacks = sc->getSCE(SC_SAVAGERY)->val1;
+				
+				// Fórmula exacta: 0.04% por nivel, por stack.
+				int64 heal_amount = (int64)damage * 4 * skin_lv * stacks / 10000;
+				
+				if (heal_amount > 0) {
+					// ¡LA MAGIA DEL TIPO 3! 
+					// Si la conf dice 'yes', usa 3 (muestra números). Si dice 'no', usa 1 (silencio).
+					status_heal(src, heal_amount, 0, battle_config.show_hp_sp_drain ? 3 : 1);
+				}
+			}
+		}
+	}
+	// --- FIN CUSTOM ---
+
+
 		if ((sce = sc->getSCE(SC_BLOODLUST)) && flag & BF_WEAPON && damage > 0 && rnd_chance(sce->val3, 100))
 			status_heal(src, damage * sce->val4 / 100, 0, 1);
 
@@ -4431,6 +4455,26 @@ static void battle_calc_multi_attack(struct Damage* wd, block_list *src,block_li
 				sc_start(src,src,SC_QD_SHOT_READY,100,target->id,skill_get_time(RL_QD_SHOT,1));
 			}
 		}
+		// --- INICIO CUSTOM: Forgemaster (Smith Axe -> Double Attack solo Hachas) ---
+		// Nos aseguramos de que es un jugador (sd), que tiene la Soul y que no ha hecho ya otro multi-hit (wd->div_ == 1)
+		if (wd->div_ == 1 && sd && pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
+			
+			// Solo funciona si lleva un Hacha (de 1 o de 2 manos)
+			if (sd->weapontype1 == W_1HAXE || sd->weapontype1 == W_2HAXE) {
+				int axe_lv = pc_checkskill(sd, BS_AXE);
+				
+				if (axe_lv > 0) {
+					int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
+					int axe_rate = (5 * axe_lv) * rank_mult; // 10% por nivel (x2 si es ranking)
+					
+					if (rnd() % 100 < axe_rate) {
+						wd->div_ = 2; // Dos golpes
+						wd->type = DMG_MULTI_HIT;
+					}
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
 	}
 }
 
