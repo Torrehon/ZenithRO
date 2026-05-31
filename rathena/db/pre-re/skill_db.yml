@@ -1838,11 +1838,14 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Poison
+    DamageFlags:
+      IgnoreAtkCard: true
     CopyFlags:
       Skill:
         Plagiarism: true
         Reproduce: true
     Duration2: 60000
+    Cooldown: 300
     Requires:
       SpCost:
         - Level: 1
@@ -2188,7 +2191,7 @@ Body:
     Hit: Single
     HitCount: 1
     AfterCastActDelay: 3000
-    Duration1: 60000
+    Duration1: 600000
     Requires:
       SpCost:
         - Level: 1
@@ -2210,8 +2213,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      NoTargetSelf: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -2247,15 +2248,15 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 60000
+        Time: 1200000
       - Level: 2
-        Time: 90000
+        Time: 1200000
       - Level: 3
-        Time: 120000
+        Time: 1200000
       - Level: 4
-        Time: 150000
+        Time: 1200000
       - Level: 5
-        Time: 180000
+        Time: 1800000
     Requires:
       SpCost:
         - Level: 1
@@ -2381,7 +2382,7 @@ Body:
         PathCheck: true
   - Id: 71
     Name: PR_SLOWPOISON
-    Description: Slow Poison
+    Description: Regen
     MaxLevel: 4
     Type: Magic
     TargetType: Support
@@ -2390,25 +2391,26 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CastTime: 3000
     Duration1:
       - Level: 1
-        Time: 10000
+        Time: 15000
       - Level: 2
-        Time: 20000
-      - Level: 3
         Time: 30000
+      - Level: 3
+        Time: 45000
       - Level: 4
-        Time: 40000
+        Time: 60000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 6
+          Amount: 25
         - Level: 2
-          Amount: 8
+          Amount: 50
         - Level: 3
-          Amount: 10
+          Amount: 75
         - Level: 4
-          Amount: 12
+          Amount: 100
     Status: SlowPoison
   - Id: 72
     Name: PR_STRECOVERY
@@ -2439,7 +2441,7 @@ Body:
     HitCount: 1
     CastTime: 2000
     AfterCastActDelay: 2000
-    Duration1: 120000
+    Duration1: 600000
     Requires:
       SpCost:
         - Level: 1
@@ -2479,15 +2481,15 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 30000
+        Time: 120000
       - Level: 2
-        Time: 45000
+        Time: 240000
       - Level: 3
-        Time: 60000
+        Time: 360000
       - Level: 4
-        Time: 75000
+        Time: 480000
       - Level: 5
-        Time: 90000
+        Time: 600000
     Requires:
       SpCost: 40
     Status: Magnificat
@@ -2506,15 +2508,15 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 10000
+        Time: 120000
       - Level: 2
-        Time: 15000
+        Time: 240000
       - Level: 3
-        Time: 20000
+        Time: 360000
       - Level: 4
-        Time: 25000
+        Time: 480000
       - Level: 5
-        Time: 30000
+        Time: 600000
     Requires:
       SpCost: 20
     Status: Gloria
@@ -2605,9 +2607,9 @@ Body:
     Range: 9
     Hit: Single
     AfterCastActDelay: 3000
-    Duration1: 600000
+    Duration1: 1000
     Requires:
-      SpCost: 10
+      SpCost: 75
     Status: Aeterna
   - Id: 79
     Name: PR_MAGNUS
@@ -2643,8 +2645,8 @@ Body:
       Skill:
         Plagiarism: true
         Reproduce: true
-    CastTime: 15000
-    AfterCastActDelay: 4000
+    CastTime: 10000
+    AfterCastActDelay: 3000
     Duration1:
       - Level: 1
         Time: 5000
@@ -2701,6 +2703,7 @@ Body:
         NoOverlap: true
         PathCheck: true
         RemovedByFireRain: true
+        
   - Id: 80
     Name: WZ_FIREPILLAR
     Description: Fire Pillar
@@ -4539,10 +4542,11 @@ Body:
     TargetType: Attack
     Range: 1
     Hit: Multi_Hit
-    HitCount: -8
+    HitCount: 1
+    Damage Flags:
+       Critical: true
     Element: Weapon
     AfterCastActDelay: 2000
-    AfterCastWalkDelay: 2000
     Duration2: 5000
     CastDelayFlags:
       IgnoreStatus: true
@@ -4579,6 +4583,7 @@ Body:
     TargetType: Attack
     DamageFlags:
       Splash: true
+      Critical: true
     Flags:
       TargetTrap: true
       AllowWhenHidden: true
@@ -4597,6 +4602,7 @@ Body:
     HitCount: 1
     Element: Weapon
     SplashArea: 1
+    Cooldown: 300
     Duration2: 1000
     Requires:
       SpCost: 3
@@ -4722,8 +4728,6 @@ Body:
     MaxLevel: 10
     Type: Weapon
     TargetType: Ground
-    DamageFlags:
-      NoDamage: true
     Range: 2
     Hit: Single
     HitCount: 1
@@ -4753,7 +4757,7 @@ Body:
     Requires:
       SpCost: 20
       ItemCost:
-        - Item: Red_Gemstone
+        - Item: Purple_Gemstone
           Amount: 1
     Unit:
       Id: Venomdust
@@ -4784,27 +4788,7 @@ Body:
         Plagiarism: true
         Reproduce: true
     CastTime: 1000
-    Duration1:
-      - Level: 1
-        Time: 11000
-      - Level: 2
-        Time: 10000
-      - Level: 3
-        Time: 9000
-      - Level: 4
-        Time: 8000
-      - Level: 5
-        Time: 7000
-      - Level: 6
-        Time: 6000
-      - Level: 7
-        Time: 5000
-      - Level: 8
-        Time: 4000
-      - Level: 9
-        Time: 3000
-      - Level: 10
-        Time: 2000
+    Duration1: 6000
     Duration2: 60000
     Cooldown:
       - Level: 1
@@ -4850,7 +4834,7 @@ Body:
         - Level: 10
           Amount: 30
       ItemCost:
-        - Item: Red_Gemstone
+        - Item: purple_gemstone
           Amount: 1
     Status: Splasher
   - Id: 142
@@ -16713,7 +16697,7 @@ Body:
         Reproduce: true
     Duration2: 60000
     Requires:
-      SpCost: 15
+      SpCost: 5
       Ammo:
         Dagger: true
       AmmoAmount: 1
@@ -17259,6 +17243,26 @@ Body:
   - Id: 1048
     Name: BS_FORGEMASTERSOUL
     Description: Soul of the Forgemaster
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1049
+    Name: PR_EXORCISTSOUL
+    Description: Soul of the Exorcist
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1050
+    Name: PR_SAINTSOUL
+    Description: Soul of the Saint
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1051
+    Name: AS_EXECSOUL
+    Description: Soul of the Executioner
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1052
+    Name: AS_VIPERSOUL
+    Description: Soul of the Viper
     MaxLevel: 1
     Type: Weapon
   - Id: 2001

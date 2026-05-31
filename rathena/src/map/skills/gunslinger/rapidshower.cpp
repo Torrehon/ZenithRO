@@ -13,7 +13,7 @@ void SkillRapidShower::calculateSkillRatio(const Damage *wd, const block_list *s
 	// 2 de base + 1 por cada 15 de AGI (Sin límite)
 	int hits = 2 + (status_get_agi(src) / 15);
 
-	// 2. Definir el daño total: 30% x nivel de skill x cantidad de hits
+	// 2. Definir el daño total: 10% x nivel de skill x cantidad de hits
 	base_skillratio = 100 + (10 * skill_lv);
 
 	// 3. Aplicar la división de hits

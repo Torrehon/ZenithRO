@@ -540,6 +540,9 @@ int32 skill_calc_heal(block_list *src, block_list *target, uint16 skill_id, uint
 #endif
 		case PR_SANCTUARY:
 			hp = (skill_lv > 6) ? 777 : skill_lv * 100;
+// --- INICIO CUSTOM: Sanctuary +50% MATK ---
+			hp += status_get_matk_max(src) / 2;
+// --- FIN CUSTOM ---
 			break;
 		case NPC_EVILLAND:
 			hp = (skill_lv > 6) ? 666 : skill_lv * 100;
@@ -595,7 +598,7 @@ int32 skill_calc_heal(block_list *src, block_list *target, uint16 skill_id, uint
 				int32 max_matk = status_get_matk_max(src);
 				
 				// 3. Añadimos el MATK a la cura base
-				hp += max_matk ;
+				hp += max_matk / 2 ;
 				
 			} else {
 				// Fórmula original para otras habilidades
@@ -789,6 +792,40 @@ int32 skill_calc_heal(block_list *src, block_list *target, uint16 skill_id, uint
 
 	return (heal) ? max(1, hp) : hp;
 #else
+// --- INICIO CUSTOM: Overheal (Soul of the Saint) ---
+	// Solo aplicamos escudo si estamos curando aliados (heal == true),
+	// y si la habilidad usada es Heal o Sanctuary
+	if (heal && (skill_id == AL_HEAL || skill_id == PR_SANCTUARY)) {
+		
+		// Verificamos si el Priest (sd) tiene la pasiva aprendida
+		if (sd && pc_checkskill(sd, PR_SAINTSOUL) > 0) {
+			
+			// Comprobamos que el objetivo (target) NO tenga Kyrie
+			if (tsc == nullptr || tsc->getSCE(SC_KYRIE) == nullptr) {
+				int32 current_hp = status_get_hp(target);
+				int32 max_hp = status_get_max_hp(target);
+				
+				// Si la curación va a sobrepasar la vida máxima...
+				if (current_hp + hp > max_hp) {
+					// Calculamos el sobrante usando el 'hp' final
+					int32 overhealed_amount = (current_hp + hp) - max_hp;
+					
+					// Escudo = 50% del sobrante
+					int32 shield_hp = overhealed_amount / 2;
+					int32 max_shield = max_hp * 10 / 100; // Tope: 10% del Max HP
+					
+					if (shield_hp > max_shield)
+						shield_hp = max_shield;
+					
+					if (shield_hp > 0) {
+						// Aplicamos el escudo al target. Guardamos HP en 'val2'. Duración: 60s
+						sc_start4(src, target, SC_OVERHEAL, 100, 1, shield_hp, 0, 0, 60000);
+					}
+				}
+			}
+		}
+	}
+// --- FIN CUSTOM ---
 	return hp;
 #endif
 }
@@ -1363,12 +1400,68 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 	}
 
 	switch(skill_id) {
-		case 0:
+        // --- INICIO CUSTOM: Soul of the Exorcist (Magnus Exorcismus) ---
+		case PR_MAGNUS:
+			if (sd) {
+				// Verificamos si tiene aprendida la pasiva PR_EXORCISTSOUL (solo como requisito)
+				if (pc_checkskill(sd, PR_EXORCISTSOUL) > 0) {
+					
+					// 3% de probabilidad por nivel de Magnus Exorcismus (skill_lv)
+					// 1000 = 100%, así que 30 = 3%
+					int32 rate = skill_lv * 30;
+
+					// Si el RNG decide activar el efecto en este hit
+					if ((rnd() % 1000) < rate) {
+						// Comprobamos el nivel aprendido de Holy Light
+						int32 hl_level = pc_checkskill(sd, AL_HOLYLIGHT);
+						
+						if (hl_level > 0) {
+							// Autocastea Holy Light directamente sobre el enemigo (bl)
+							skill_castend_damage_id(src, bl, AL_HOLYLIGHT, hl_level, tick, 0);
+						}
+					}
+				}
+			}
+			break;
+        // --- FIN CUSTOM ---
+		
+		case 0: // Case 0 significa "Normal Attack"
+		
 			{ // Normal attacks (no skill used)
 				if( attack_type&BF_SKILL )
 					break; // If a normal attack is a skill, it's splash damage. [Inkfish]
 				if(sd) {
 					int32 skill;
+					
+					// --- INICIO CUSTOM: Soul of the Exorcist ---
+					// 1. Verificamos que tenga aprendida la pasiva PR_EXORCISTSOUL
+					// 2. Obtenemos el nivel de PR_MACEMASTERY para calcular el porcentaje
+					if (pc_checkskill(sd, PR_EXORCISTSOUL) > 0 && (skill = pc_checkskill(sd, PR_MACEMASTERY)) > 0) {
+						// 2% de probabilidad por nivel de Mace Mastery (1000 = 100%, así que 20 = 2%)
+						int32 rate = skill * 20;
+
+						// Si el RNG decide que el golpe activa el autocast
+						if ((rnd() % 1000) < rate) {
+							// Comprobamos qué arma lleva equipada
+							if (sd->status.weapon == W_BOOK) {
+								// Obtenemos el nivel aprendido de Holy Light
+								int32 hl_level = pc_checkskill(sd, AL_HOLYLIGHT);
+								// Si la tiene aprendida, la lanza a ese nivel
+								if (hl_level > 0) {
+									skill_castend_damage_id(src, bl, AL_HOLYLIGHT, hl_level, tick, 0);
+								}
+							} 
+							else if (sd->status.weapon == W_MACE) {
+								// Obtenemos el nivel aprendido de Holy Smite
+								int32 hs_level = pc_checkskill(sd, AL_HOLYSMITE);
+								// Si la tiene aprendida, la lanza a ese nivel
+								if (hs_level > 0) {
+									skill_castend_damage_id(src, bl, AL_HOLYSMITE, hs_level, tick, 0);
+								}
+							}
+						}
+					}
+                    // --- FIN CUSTOM ---
 
 					// Automatic trigger of Blitz Beat
 					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 &&
@@ -1559,12 +1652,12 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 
 			if (skill == PF_SPIDERWEB) //Special case, due to its nature of coding.
 				type = CAST_GROUND;
-#ifndef RENEWAL
-			else if( skill == AS_SONICBLOW ){
-				// Special case, Sonic Blow autospell should stop the player attacking.
-				unit_stop_attack( sd );
-			}
-#endif
+// #ifndef RENEWAL
+			// else if( skill == AS_SONICBLOW ){
+				// // Special case, Sonic Blow autospell should stop the player attacking.
+				// unit_stop_attack( sd );
+			// }
+// #endif
 
 			sd->state.autocast = 1;
 			skill_consume_requirement(sd,skill,autospl_skill_lv,1);
@@ -3775,6 +3868,7 @@ TIMER_FUNC(skill_timerskill){
 					}
 					sc_start(src, target, SC_SILENCE, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
 					break;
+
 				case PR_STRECOVERY:
 					sc_start(src, target, SC_BLIND, skl->type, skl->skill_lv, skill_get_time2(skl->skill_id, skl->skill_lv));
 					break;
@@ -4630,6 +4724,26 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 				skill_castend_nodamage_id);
 		}
 		break;
+// --- INICIO CUSTOM: Exorcist Soul (Lex Aeterna 2s) ---
+	case PR_LEXAETERNA:
+	{
+		// 1. Leemos el tiempo base del YAML (los 1000ms que pusiste)
+		int32 duration = skill_get_time(skill_id, skill_lv);
+
+		// 2. 'sd' ya está declarado arriba. Si existe y tiene la pasiva, lo subimos a 2000ms
+		if (sd && pc_checkskill(sd, PR_EXORCISTSOUL) > 0) {
+			duration = 2000; 
+		}
+
+		// 3. Aplicamos el estado usando 'bl' (el objetivo directo)
+		sc_start(src, bl, SC_AETERNA, 100, skill_lv, duration);
+
+		// 4. Mostramos la animación (usando *bl con asterisco, ¡como aprendimos antes!)
+		clif_skill_nodamage(src, *bl, skill_id, skill_lv, 1);
+		break;
+	}
+// --- FIN CUSTOM ---
+
 	default: {
 		std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id);
 
@@ -5822,6 +5936,70 @@ std::shared_ptr<s_skill_unit_group> skill_unitsetting(block_list *src, uint16 sk
 	target = skill_get_unit_target(skill_id);
 	layout = skill_get_unit_layout(skill_id,skill_lv,src,x,y);
 
+// --- INICIO CUSTOM: Venom Dust Dinámico y Corrección de Bug (Soul of the Viper) ---
+	if (skill_id == AS_VENOMDUST) {
+		
+		static struct s_skill_unit_layout viper_layout_normal;
+		static struct s_skill_unit_layout viper_layout_5x5;
+		static bool viper_init = false;
+
+		if (!viper_init) {
+			// Construimos el normal (Cruz de 5 casillas)
+			int c_norm = 0;
+			const int32 original_dx[] = {-1, 0, 0, 0, 1};
+			const int32 original_dy[] = { 0,-1, 0, 1, 0};
+			for (int i = 0; i < 5; i++) {
+				viper_layout_normal.dx[c_norm] = original_dx[i];
+				viper_layout_normal.dy[c_norm] = original_dy[i];
+				c_norm++;
+			}
+			viper_layout_normal.count = 5;
+
+			// Construimos la bestialidad (Cuadrado 5x5 de 25 casillas)
+			int c5 = 0;
+			for (int cy = -2; cy <= 2; cy++) {
+				for (int cx = -2; cx <= 2; cx++) {
+					viper_layout_5x5.dx[c5] = cx;
+					viper_layout_5x5.dy[c5] = cy;
+					c5++;
+				}
+			}
+			viper_layout_5x5.count = 25;
+			viper_init = true;
+		}
+
+		// Asignamos el molde puenteando la función defectuosa del núcleo
+		if (src && src->type == BL_PC && pc_checkskill(BL_CAST(BL_PC, src), AS_VIPERSOUL) > 0) {
+			layout = &viper_layout_5x5;
+			range = 1; // Rango extendido
+		} else {
+			layout = &viper_layout_normal;
+			range = 1; // Rango original (Cross)
+		}
+
+		// 1. Limpieza de Área: Escaneamos TODAS las celdas que va a ocupar nuestra nueva nube
+		for (int i = 0; i < layout->count; i++) {
+			int32 ux = x + layout->dx[i];
+			int32 uy = y + layout->dy[i];
+			
+			// Si encontramos un Venom Dust en CUALQUIERA de las casillas...
+			block_list *found_bl = map_find_skill_unit_oncell(src, ux, uy, AS_VENOMDUST, nullptr, 0);
+			if (found_bl != nullptr) {
+				skill_unit *existing_su = (skill_unit *)found_bl;
+				
+				// ...eliminamos ese Venom Dust entero del mapa
+				if (existing_su->group != nullptr) {
+					skill_delunitgroup(existing_su->group);
+				}
+			}
+		}
+
+	} else {
+		// Para el resto de habilidades del juego
+		layout = skill_get_unit_layout(skill_id, skill_lv, src, x, y);
+	}
+	// --- FIN CUSTOM ---
+
 	sd = BL_CAST(BL_PC, src);
 	status_data* status = status_get_status_data(*src);
 	sc = status_get_sc(src);	// for traps, firewall and fogwall - celest
@@ -7011,10 +7189,10 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 			break;
 
 		case UNT_MAGNUS:
-#ifndef RENEWAL
-			if (!battle_check_undead(tstatus->race,tstatus->def_ele) && tstatus->race!=RC_DEMON)
-				break;
-#endif
+// #ifndef RENEWAL
+			// if (!battle_check_undead(tstatus->race,tstatus->def_ele) && tstatus->race!=RC_DEMON)
+				// break;
+// #endif
 			skill_attack(BF_MAGIC,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
 			break;
 
@@ -7102,8 +7280,21 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 			break;
 
 		case UNT_VENOMDUST:
-			if(tsc && !tsc->getSCE(type))
-				status_change_start(ss,bl,type,10000,sg->skill_lv,sg->src_id,0,0,skill_get_time2(sg->skill_id,sg->skill_lv),SCSTART_NONE);
+			if (tsc && !tsc->getSCE(type)) {
+				status_change_start(ss, bl, type, 10000, sg->skill_lv, sg->src_id, 0, 0, skill_get_time2(sg->skill_id, sg->skill_lv), SCSTART_NONE);
+			}
+
+			// --- INICIO CUSTOM: Gatillo de Daño para Venom Dust ---
+			if (ss && ss->type == BL_PC) {
+				map_session_data *sd = BL_CAST(BL_PC, ss);
+				
+				if (pc_checkskill(sd, AS_VIPERSOUL) > 0) {
+					// Disparamos el ataque. El motor irá a venomdust.cpp a ver el ratio (100%),
+					// y luego a skill_db.yml a ver si puede hacer crítico (no podrá).
+					skill_attack(BF_WEAPON, ss, unit, bl, AS_VENOMDUST, 1, tick, 0); 
+				}
+			}
+			// --- FIN CUSTOM ---
 			break;
 
 		case UNT_MAGENTATRAP:

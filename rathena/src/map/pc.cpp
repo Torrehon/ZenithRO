@@ -15494,6 +15494,12 @@ uint16 pc_maxparameter( const map_session_data* sd, e_params param ) {
 */
 int16 pc_maxaspd( const map_session_data* sd ) {
 	nullpo_ret(sd);
+	
+	// --- INICIO CUSTOM: Límite 193 ASPD para Katar + Soul of the Executioner ---
+	if (sd->weapontype1 == W_KATAR && pc_checkskill(sd, AS_EXECSOUL) > 0) {
+		return 193;
+	}
+	// --- FIN CUSTOM ---
 
 	return (( sd->class_&JOBL_THIRD) ? battle_config.max_third_aspd : (
 			((sd->class_&MAPID_SECONDMASK) == MAPID_KAGEROUOBORO || (sd->class_&MAPID_SECONDMASK) == MAPID_REBELLION) ? battle_config.max_extended_aspd : (

@@ -628,8 +628,8 @@ Character in the same account already joined.#
  Blessing canceled.#
  Signum Crusis initiated.#
  Signum Crusis canceled.#
- Slow Poison initiated.#
- Slow Poison canceled.#
+ Regen initiated.#
+ Regen canceled.#
  SP Regeneration is increased.#
  Magnificat canceled.#
  LUK increased.#

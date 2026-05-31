@@ -499,6 +499,7 @@ Body:
     CalcFlags:
       Regen: true
     Flags:
+      NoSave: true
       NoClearance: true
       RemoveOnHermode: true
   - Status: Impositio
@@ -552,6 +553,7 @@ Body:
       RemoveOnHermode: true
     EndOnStart:
       Assumptio: true
+      Overheal: true
   - Status: Magnificat
     Icon: EFST_MAGNIFICAT
     DurationLookup: PR_MAGNIFICAT
@@ -6868,8 +6870,6 @@ Body:
     Icon: EFST_NJ_COMBO
     Flags:
       NoRemoveOnDead: false
-      NoClearbuff: false
-      NoDispell: false
   - Status: Lightfingers
     Icon: EFST_LIGHTFINGERS
     CalcFlags:
@@ -6878,8 +6878,6 @@ Body:
     Icon: EFST_MOMENTUM
     Flags:
       NoRemoveOnDead: false
-      NoClearbuff: false
-      NoDispell: false
   - Status: Exposed
     Icon: EFST_EXPOSED
     Flags:
@@ -6906,8 +6904,6 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
-      NoClearbuff: false
-      NoDispell: false
   - Status: Drown
     Icon: EFST_DROWN
     CalcFlags:
@@ -6959,5 +6955,16 @@ Body:
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
-      NoRemoveOnDead: false # Queremos que si el jugador muere, la curación cese
+      NoRemoveOnDead: false
+  - Status: Overheal
+    Icon: EFST_OVERHEAL
+    Flags:
+      SuperNoviceAngel: true
+      RemoveOnHermode: true
+  - Status: Asfocus
+    Icon: EFST_ASFOCUS
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
       

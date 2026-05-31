@@ -1302,6 +1302,24 @@ bool battle_status_block_damage(block_list *src, block_list *target, status_chan
 			status_change_end(target, SC_KYRIE);
 	}
 
+    // --- INICIO CUSTOM: Absorción de Daño por Overheal ---
+	if ((sce = sc->getSCE(SC_OVERHEAL)) && damage > 0) {
+		// Restamos el daño al HP del escudo (guardado en val2)
+		sce->val2 -= static_cast<int32>(cap_value(damage, INT_MIN, INT_MAX));
+		clif_specialeffect(target, 782, AREA);
+		// Verificamos si el escudo aguantó el golpe
+		if (sce->val2 >= 0) {
+			damage = 0; // El escudo absorbió todo el daño
+		} else {
+			damage = -sce->val2; // El escudo se rompió, pasa el daño restante
+		}
+		
+		// Si el escudo se queda en 0 o menos HP, se destruye el estado
+		if (sce->val2 <= 0)
+			status_change_end(target, SC_OVERHEAL);
+	}
+	// --- FIN CUSTOM ---
+
 	int32 element;
 	if (flag & BF_WEAPON) {
 		status_data* sstatus = status_get_status_data(*src);
@@ -1740,14 +1758,12 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 		if (tsc->getSCE(SC_SHIELDCHAINRUSH))
 			damage += damage / 10;
 
-		if (tsc->getSCE(SC_AETERNA) && skill_id != PF_SOULBURN) {
-			if (src->type != BL_MER || !skill_id)
-				damage *= 2; // Lex Aeterna only doubles damage of regular attacks from mercenaries
-
-#ifndef RENEWAL
-			if( skill_id != ASC_BREAKER || !(flag&BF_WEAPON) )
-#endif
-				status_change_end(bl, SC_AETERNA); //Shouldn't end until Breaker's non-weapon part connects.
+        if (tsc->getSCE(SC_AETERNA) && skill_id != PF_SOULBURN) {
+			if (src->type != BL_MER || !skill_id) {
+        // --- INICIO CUSTOM: Lex Aeterna (Daño 1.3x) ---
+				// Reducimos el multiplicador de x2 a x1.3
+				damage = (damage * 130) / 100; 
+			}
 		}
 
 #ifdef RENEWAL
@@ -2414,8 +2430,10 @@ int64 battle_addmastery(map_session_data *sd,block_list *target,int64 dmg,int32 
 				damage += (skill * 5);
 			break;
 		case W_BOOK:
-			if((skill = pc_checkskill(sd,SA_ADVANCEDBOOK)) > 0)
+			if ((skill = pc_checkskill(sd, SA_ADVANCEDBOOK)) > 0)
 				damage += (skill * 5);
+			if ((skill = pc_checkskill(sd, PR_MACEMASTERY)) > 0)
+				damage += (skill * 5); 
 			break;
 		case W_KATAR:
 			if((skill = pc_checkskill(sd,AS_KATAR)) > 0)
@@ -3086,6 +3104,12 @@ static bool is_attack_critical(struct Damage* wd, block_list *src, const block_l
 		const map_session_data *tsd = BL_CAST(BL_PC, target);
 		int16 cri = sstatus->cri;
 
+		if (sd && skill_id == 0 && wd && wd->type == DMG_MULTI_HIT) {
+			if (sd->weapontype1 == W_KATAR) {
+				cri = cri / 2;
+			}
+		}
+
 		if (sd) {
 			cri += sd->indexed_bonus.critaddrace[tstatus->race] + sd->indexed_bonus.critaddrace[RC_ALL];
 			if(!skill_id && is_skill_using_arrow(src, skill_id)) {
@@ -3105,6 +3129,26 @@ static bool is_attack_critical(struct Damage* wd, block_list *src, const block_l
 			cri *= 2;
 
 		switch(skill_id) {
+			// --- INICIO CUSTOM: Grimtooth (Soul of the Executioner) ---
+			case AS_GRIMTOOTH:
+				if (!sd || pc_checkskill(sd, AS_EXECSOUL) <= 0) {
+					return false; // Sin la pasiva, se anula el crítico
+				}
+				break;
+			// --- FIN CUSTOM ---
+			
+			// --- INICIO CUSTOM: Sonic Blow (Soul of the Executioner) ---
+			case AS_SONICBLOW:
+				if (!sd || pc_checkskill(sd, AS_EXECSOUL) <= 0) {
+					return false; // Sin la pasiva, se anula el crítico
+				} else {
+					if (sc && sc->getSCE(SC_CLOAKING)) {
+						return true; // 100% de Crítico si ataca desde Cloaking
+					}
+				}
+				break;
+			// --- FIN CUSTOM ---
+			
 			case 0:
 				if(sc && !sc->getSCE(SC_AUTOCOUNTER))
 					break;
@@ -4303,6 +4347,21 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 					if (sd->bonus.crit_atk_rate > 0) {
 						ATK_ADDRATE(wd->damage, wd->damage2, sd->bonus.crit_atk_rate);
 					}
+
+					// --- INICIO CUSTOM: Generar Stacks de Assassin's Focus ---
+					// Si es un ataque básico (0), usa Katar, tiene la Soul y tiene Katar Mastery:
+					if (skill_id == 0 && sd->weapontype1 == W_KATAR && pc_checkskill(sd, AS_EXECSOUL) > 0 && pc_checkskill(sd, AS_KATAR) > 0) {
+						status_change *sc_focus = status_get_sc(src);
+						int stacks = 1;
+
+						if (sc_focus && sc_focus->getSCE(SC_ASFOCUS)) {
+							stacks = sc_focus->getSCE(SC_ASFOCUS)->val1 + 1;
+							if (stacks > 10) stacks = 10; // Límite de 10 stacks
+						}
+						// Aplicar buff al Assassin: 100% chance, val1=stacks, 10 segundos
+						sc_start4(src, src, SC_ASFOCUS, 100, stacks, 0, 0, 0, 10000); 
+					}
+					// --- FIN CUSTOM ---
 				}
 				else if (std::shared_ptr<s_skill_db> skill_tmp = skill_db.find(skill_id); skill_tmp == nullptr || !skill_tmp->inf2[INF2_IGNORENONCRITATKBONUS]) {
 					// custom, officially non_crit_atk_rate did not exist on pre-renewal
@@ -4310,6 +4369,19 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 						ATK_ADDRATE(wd->damage, wd->damage2, sd->bonus.non_crit_atk_rate);
 					}
 				}
+				
+				// --- INICIO CUSTOM: Soul of the Viper (+30% Daño a Poisoned) ---
+				// Si el atacante tiene la pasiva AS_VIPERSOUL
+				if (pc_checkskill(sd, AS_VIPERSOUL) > 0) {
+					// Comprobamos si el objetivo tiene el estado SC_POISON
+					const status_change *tsc_viper = status_get_sc(target);
+					if (tsc_viper && tsc_viper->getSCE(SC_POISON)) {
+						// Aumenta el daño físico base calculado hasta el momento en un 30%
+						ATK_ADDRATE(wd->damage, wd->damage2, 30);
+					}
+				}
+				// --- FIN CUSTOM ---
+				
                 if(sd->status.party_id && (skill=pc_checkskill(sd,TK_POWER)) > 0) {
 					if( (i = party_foreachsamemap(party_sub_count, sd, 0)) > 1 ) { // exclude the player himself [Inkfish]
 						// Reduce count by one (self) [Tydus1]
@@ -6044,6 +6116,7 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 			case PR_ASPERSIO:
 				ad.damage = 40;
 				break;
+				
 			case ALL_RESURRECTION:
 			case PR_TURNUNDEAD:
 				//Undead check is on skill_castend_damageid code.
@@ -6054,8 +6127,23 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 				i = 20 * skill_lv + sstatus->luk + sstatus->int_ + status_get_lv(src)
 				  	+ 200 - 200 * tstatus->hp / tstatus->max_hp;
 #endif
+
+// --- INICIO CUSTOM: Exorcist Soul (+20% Turn Undead) ---
+				// Nos aseguramos de que SOLO afecte a Turn Undead y lo lance un jugador
+				if (skill_id == PR_TURNUNDEAD && src != nullptr && src->type == BL_PC) {
+					map_session_data* sd = BL_CAST(BL_PC, src);
+					
+					// Si el Priest tiene la pasiva aprendida, sumamos el 20% plano antes del límite
+					if (sd && pc_checkskill(sd, PR_EXORCISTSOUL) > 0) {
+						i += 200; 
+					}
+				}
+// --- FIN CUSTOM ---
+
+				// Límite oficial del 70% de éxito (actuará de tapón para la pasiva también)
 				if(i > 700)
 					i = 700;
+
 				if(rnd()%1000 < i && !status_has_mode(tstatus,MD_STATUSIMMUNE))
 					ad.damage = tstatus->hp;
 				else {
@@ -6584,6 +6672,7 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 				md.damage = 30;
 			md.flag |= BF_WEAPON;
 			break;
+			
 		case NPC_KILLING_AURA:
 			md.damage = 10000;
 			break;

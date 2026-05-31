@@ -2046,12 +2046,12 @@ Body:
   - Id: 1045
     AegisName: MARC
     Name: Marc
-    Level: 36
-    Hp: 6900
-    BaseExp: 988
-    JobExp: 625
-    Attack: 220
-    Attack2: 280
+    Level: 45
+    Hp: 8900
+    BaseExp: 2188
+    JobExp: 1925
+    Attack: 320
+    Attack2: 380
     Defense: 5
     MagicDefense: 10
     Agi: 36
@@ -3123,10 +3123,10 @@ Body:
   - Id: 1068
     AegisName: HYDRA
     Name: Hydra
-    Level: 14
-    Hp: 660
-    BaseExp: 59
-    JobExp: 40
+    Level: 24
+    Hp: 960
+    BaseExp: 259
+    JobExp: 240
     Attack: 22
     Attack2: 28
     MagicDefense: 40
@@ -3167,12 +3167,12 @@ Body:
   - Id: 1069
     AegisName: SWORD_FISH
     Name: Swordfish
-    Level: 30
-    Hp: 4299
-    BaseExp: 1251
-    JobExp: 638
-    Attack: 168
-    Attack2: 199
+    Level: 38
+    Hp: 5299
+    BaseExp: 1851
+    JobExp: 1638
+    Attack: 198
+    Attack2: 259
     Defense: 5
     MagicDefense: 20
     Agi: 30
@@ -7389,12 +7389,12 @@ Body:
   - Id: 1158
     AegisName: PHEN
     Name: Phen
-    Level: 26
-    Hp: 3347
-    BaseExp: 357
-    JobExp: 226
-    Attack: 138
-    Attack2: 150
+    Level: 32
+    Hp: 4347
+    BaseExp: 1357
+    JobExp: 1226
+    Attack: 158
+    Attack2: 180
     MagicDefense: 15
     Agi: 26
     Vit: 26
@@ -57806,7 +57806,7 @@ Body:
     Hp: 7560
     BaseExp: 300
     JobExp: 300
-    Attack: 50
+    Attack: 80
     Attack2: 90
     Defense: 5
     MagicDefense: 5
@@ -57837,12 +57837,12 @@ Body:
         Rate: 1000
       - Item: Light_Red_Pot_Box
         Rate: 10000
-      - Item: ora3000
-        Rate: 500
       - Item: Insect_Feeler
         Rate: 10000
       - Item: Solid_Shell
         Rate: 10000
+      - Item: ora3000
+        Rate: 500
         StealProtected: true
   - Id: 3502
     AegisName: QUEST_BOSS_WEAVER
@@ -57857,7 +57857,7 @@ Body:
     MagicDefense: 25
     Agi: 20
     Vit: 15
-    Int: 55
+    Int: 45
     Dex: 33
     Luk: 15
     AttackRange: 1
@@ -57903,7 +57903,7 @@ Body:
     Str: 10
     Agi: 50
     Vit: 50
-    Int: 80
+    Int: 55
     Dex: 30
     Luk: 50
     AttackRange: 1
@@ -57935,6 +57935,52 @@ Body:
       - Item: quake_gem
         Rate: 500
         StealProtected: true
+  - Id: 20647
+    AegisName: EP17_2_BATH_MERMAID
+    Name: Depths Mermaid
+    Level: 60
+    Hp: 93560
+    BaseExp: 24650
+    JobExp: 28970
+    Attack: 290
+    Attack2: 368
+    Defense: 5
+    MagicDefense: 50
+    Str: 33
+    Agi: 45
+    Vit: 10
+    Int: 65
+    Dex: 45
+    Luk: 50
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 400
+    AttackDelay: 2000
+    AttackMotion: 900
+    ClientAttackMotion: 324
+    DamageMotion: 480
+    Ai: 13
+    Drops:
+      - Item: Heart_Of_Mermaid
+        Rate: 5000
+      - Item: Fin
+        Rate: 5000
+      - Item: Sharp_Scale
+        Rate: 1200
+      - Item: Accessory_Box
+        Rate: 1000
+      - Item: Gift_Box
+        Rate: 1000
+      - Item: Branch_Of_Dead_Tree
+        Rate: 1000
+      - Item: Light_Yellow_Pot_Box
+        Rate: 10000
+        StealProtected: true
   - Id: 21077
     AegisName: S_DUMMY_100_NOTHING2
     Name: Dummy
@@ -57957,6 +58003,5 @@ Body:
     WalkSpeed: 1000
     ClientAttackMotion: 0
     Ai: 06
-    Class: Boss
     Modes:
       TeleportBlock: true

@@ -949,38 +949,46 @@ SKILL_DESCRIPT = {
 		"^777777[Brandish Spear]:^000000 ^777777The skill now hits 3 times.^000000"
 	},
 	[SKID.PR_MACEMASTERY] = {
-		"Mace Mastery",
+		"Righteous Mastery",
 		"Max Level: 10",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases damage with Mace class weapons. ^000000",
-		"[Lv 1]:^777777 Damage +3 ^000000",
-		"[Lv 2]:^777777 Damage +6 ^000000",
-		"[Lv 3]:^777777 Damage +9 ^000000",
-		"[Lv 4]:^777777 Damage +12 ^000000",
-		"[Lv 5]:^777777 Damage +15 ^000000",
-		"[Lv 6]:^777777 Damage +18 ^000000",
-		"[Lv 7]:^777777 Damage +21 ^000000",
-		"[Lv 8]:^777777 Damage +24 ^000000",
-		"[Lv 9]:^777777 Damage +27 ^000000",
-		"[Lv 10]:^777777 Damage +30 ^000000"
+		"Description: ^777777Increase damage with Maces",
+		"and Books. Gain bonus ATK with Maces,",
+		"MATK with Books and ASPD basedon Job Level. ^000000",
+		"[Lv 1]:^777777 Mastery ATK +5 ^000000",
+		"[Lv 2]:^777777 Mastery ATK +10 ^000000",
+		"[Lv 3]:^777777 Mastery ATK +15 ^000000",
+		"[Lv 4]:^777777 Mastery ATK +20 ^000000",
+		"[Lv 5]:^777777 Mastery ATK +25 ^000000",
+		"[Lv 6]:^777777 Mastery ATK +30 ^000000",
+		"[Lv 7]:^777777 Mastery ATK +35 ^000000",
+		"[Lv 8]:^777777 Mastery ATK +40 ^000000",
+		"[Lv 9]:^777777 Mastery ATK +45 ^000000",
+		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
+		"^FFA500Atk: (Skill Level * Job Level)/10",
+		"Matk: (Skill Level * Job Level)/10",
+		"Aspd: 0.5% * Skill Level + (Job Level/10)"
 	},
 	[SKID.PR_IMPOSITIO] = {
 		"Impositio Manus",
 		"Max Level: 5",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Blesses a targeted player by increasing the weapon damage of that character for 1 minute. ^000000",
-		"[Lv 1]:^777777 Damage +5 ^000000",
-		"[Lv 2]:^777777 Damage +10 ^000000",
-		"[Lv 3]:^777777 Damage +15 ^000000",
-		"[Lv 4]:^777777 Damage +20 ^000000",
-		"[Lv 5]:^777777 Damage +25 ^000000"
+		"Description: ^777777Blesses a targeted player by",
+		"increasing the weapon damage and Matk of",
+		"that character for 10 minutes. ^000000",
+		"[Lv 1]:^777777 Damage +6 ^000000",
+		"[Lv 2]:^777777 Damage +12 ^000000",
+		"[Lv 3]:^777777 Damage +18 ^000000",
+		"[Lv 4]:^777777 Damage +24 ^000000",
+		"[Lv 5]:^777777 Damage +30 ^000000"
 	},
 	[SKID.PR_SUFFRAGIUM] = {
 		"Suffragium",
 		"Max Level: 3",
 		"8^CC3399Requirement: Impositio Manus 2 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777This invocation can only be used on others and will not work on caster. Reduces cast time of a skill for a single cast. ^000000",
+		"Description: ^777777Reduces cast time of a skill for",
+		"a single cast. ^000000",
 		"[Lv 1]:^777777 15% reduction, 30 sec ^000000",
 		"[Lv 2]:^777777 30% reduction, 20 sec ^000000",
 		"[Lv 3]:^777777 45% reduction, 10 sec ^000000"
@@ -990,13 +998,15 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"8^CC3399Requirement: Aqua Benedicta 1, Impositio Manus 3 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Endows the targeted player's weapon with the Holy elemental for the skill's duration.",
+		"Description: ^777777Endows the targeted player's",
+		"weapon with the Holy elemental for the",
+		"skill's duration.",
 		"Requires 1 ^008800Holy Water^777777 for each cast. ^000000",
-		"[Lv 1]:^777777 60 sec duration ^000000",
-		"[Lv 2]:^777777 90 sec duration ^000000",
-		"[Lv 3]:^777777 120 sec duration ^000000",
-		"[Lv 4]:^777777 150 sec duration ^000000",
-		"[Lv 5]:^777777 180 sec duration ^000000"
+		"[Lv 1]:^777777 360 sec duration ^000000",
+		"[Lv 2]:^777777 720 sec duration ^000000",
+		"[Lv 3]:^777777 1080 sec duration ^000000",
+		"[Lv 4]:^777777 1440 sec duration ^000000",
+		"[Lv 5]:^777777 1800 sec duration ^000000"
 	},
 	[SKID.PR_BENEDICTIO] = {
 		"Benedictio Sanctissimi Sacramenti",
@@ -1016,10 +1026,17 @@ SKILL_DESCRIPT = {
 		"Each cast requires 1 ^008800Blue Gemstone^777777. ^000000"
 	},
 	[SKID.PR_SLOWPOISON] = {
-		"Slow Poison",
+		"Regen",
 		"Max Level: 4",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Slow the effect of ^663399Poison^777777 on a character that is affected by Poison status. ^000000"
+		"Description: ^777777Increases target's Hp regeneration.",
+		"Heals 3% of Max Hp each 2 seconds.",
+		"This status cleanses Poison, and can be",
+		"disabled when succesfuly poisoned.^000000",
+		"[Lv 1]:^777777 15 sec duration ^000000",
+		"[Lv 2]:^777777 30 sec duration ^000000",
+		"[Lv 3]:^777777 45 sec duration ^000000",
+		"[Lv 4]:^777777 60 sec duration ^000000"
 	},
 	[SKID.PR_STRECOVERY] = {
 		"Status Recovery",
@@ -1033,7 +1050,7 @@ SKILL_DESCRIPT = {
 		"Max Level: 10",
 		"8^CC3399Requirement: Angelus 2 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Create a perfect barrier around a character that will be able to withstand a certain number of attacks, before barrier is broken. Otherwise, it lasts for 2 minutes.",
+		"Description: ^777777Create a perfect barrier around a character that will be able to withstand a certain number of attacks, before barrier is broken. Otherwise, it lasts for 10 minutes.",
 		"Holy Light skill immediately cancels this skill. ^000000",
 		"[Lv 1]:^777777 12% of MaxHP, block 5 attacks ^000000",
 		"[Lv 2]:^777777 14% of MaxHP, block 6 attacks ^000000",
@@ -1050,7 +1067,13 @@ SKILL_DESCRIPT = {
 		"Magnificat",
 		"Max Level: 5",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Doubles the caster and party's SP regen for the duration of the skill. ^000000"
+		"Description: ^777777Doubles the caster and party's",
+		"SP regen for the duration of the skill. ^000000",
+		"[Lv 1]:^777777 120 sec duration ^000000",
+		"[Lv 2]:^777777 240 sec duration ^000000",
+		"[Lv 3]:^777777 360 sec duration ^000000",
+		"[Lv 4]:^777777 480 sec duration ^000000",
+		"[Lv 5]:^777777 600 sec duration ^000000"
 	},
 	[SKID.PR_GLORIA] = {
 		"Gloria",
@@ -1058,7 +1081,12 @@ SKILL_DESCRIPT = {
 		"8^CC3399Requirement: Kyrie Eleison 4, Magnificat 3 ^000000",
 		"4190^CC3399Requirement: Sanctuary 7 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Adds 30 LUK to the caster and party members for the duration of the skill. ^000000"
+		"Description: ^777777Adds 30 LUK to the caster and party members for the duration of the skill. ^000000",
+		"[Lv 1]:^777777 120 sec duration ^000000",
+		"[Lv 2]:^777777 240 sec duration ^000000",
+		"[Lv 3]:^777777 360 sec duration ^000000",
+		"[Lv 4]:^777777 480 sec duration ^000000",
+		"[Lv 5]:^777777 600 sec duration ^000000"
 	},
 	[SKID.PR_LEXDIVINA] = {
 		"Lex Divina",
@@ -1079,15 +1107,41 @@ SKILL_DESCRIPT = {
 		"Max Level: 1",
 		"8^CC3399Requirement: Lex Divina 5 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Weakens an enemy so that it will receive twice as much damage from the next attack that hits it. Ineffective against enemies afflicted by the ^663399Frozen^777777 or ^663399Stone Curse^777777 status. ^000000"
+		"Description: ^777777Weakens an enemy so that it will",
+		"receive 1/3 more damage for the next second.",
+		"Ineffective against enemies afflicted by the",
+		"^663399Frozen^777777 or ^663399Stone Curse^777777 status. ^000000"
 	},
 	[SKID.PR_MAGNUS] = {
 		"Magnus Exorcismus",
 		"Max Level: 10",
 		"8^CC3399Requirement: Safety Wall 1, Lex Aeterna 1, Turn Undead 3 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
-		"Description: ^777777Summons a purifying cross on the ground to exterminate Demon and Undead monsters.",
+		"Description: ^777777Summons a purifying cross on the",
+		"ground. Deals 70% * Skill Level Matk damage,",
+		"increased to 100% if the targets are Demon",
+		"or Undead",
 		"Each cast requires 1 ^008800Blue Gemstone^777777. ^000000"
+	},
+    [SKID.PR_EXORCISTSOUL] = {
+		"Soul of the Exorcist",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Channels divine wrath to purge the wicked and smite the impure.^000000",
+		"^777777[Righteous Mastery]:^000000 ^777777Grants a 2% chance per skill level to autocast Holy Smite (with Maces) or Holy Light (with Books) when attacking.^000000",
+		"^777777[Magnus Exorcismus]:^000000 ^777777Each wave of hits has a 3% chance per skill level to autocast Holy Light.^000000",
+		"^777777[Lex Aeterna]:^000000 ^777777Increases the target's damage taken by 1.3x for 2 seconds. Adds a 3-second cooldown.^000000",
+		"^777777[Turn Undead]:^000000 ^777777Increases the base success chance by 20% (Max chance remains 70%).^000000"
+	},
+	[SKID.PR_SAINTSOUL] = {
+		"Soul of the Saint",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Channels divine grace to mend the broken and shield the innocent.^000000",
+		"^777777[Heal]:^000000 ^777777Overhealing grants a shield absorbing damage equal to 50% of the healed amount (Max 10% of target's Max HP). Lasts 1 min. Kyrie Eleison will overwrite this shield.^000000",
+		"^777777[Blessing] & [Inc. Agility]:^000000 ^777777Now applies to all party members within a 9x9 area around the target.^000000",
+		"^777777[Sanctuary]:^000000 ^777777Increases healing by (Max MATK / 2). Overhealing grants the same shield effect as Heal.^000000",
+		"^777777[Kyrie Eleison]:^000000 ^777777Increases the shield's Max HP threshold by 10% and blocks 5 additional hits at all levels.^000000"
 	},
 	[SKID.WZ_FIREPILLAR] = {
 		"Fire Pillar",
@@ -1752,6 +1806,24 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777When struck by this skill, the target will then explode after a few seconds, dealing splash damage around it and poisoning enemies by chance.",
 		"Each cast requires 1 ^008800Red Gemstone^777777. ^000000"
+	},
+    [SKID.AS_EXECSOUL] = {
+		"Soul of the Executioner",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens your absolute mastery over archery.^000000",
+		"^008800Momentum^777777: +10 sec base duration (12s at max stacks).^000000",
+		"^008800Hunter's Focus^777777: Grants bonus ^990000CRIT^777777 scaling with your HIT.^000000",
+		"^008800Power Strafe^777777: ^990000+15%^777777 Damage ratio per Momentum stack.^000000"
+	},
+	[SKID.AS_VIPERSOUL] = {
+		"Soul of the Viper",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the true potential of traps and your Falcon.^000000",
+		"^008800Traps^777777: Gain ^990000+150% MATK^777777 damage and inflict ^990000Pinned^777777 (-25% Move Speed) for 10s.^000000",
+		"^008800Blitz Beat^777777: No longer splits damage. ^990000+20%^777777 damage vs Pinned targets.^000000",
+		"^008800Steel Crow^777777: Adds ^990000MATK^777777 scaling to Blitz Beat damage.^000000"
 	},
 	[SKID.NV_FIRSTAID] = {
 		"First Aid",

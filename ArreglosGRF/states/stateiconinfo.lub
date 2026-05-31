@@ -158,6 +158,24 @@ StateIconList[EFST_IDs.EFST_POTION_HOT] = {
 		{ "Healing over time.", { 255, 255, 255 } }
 	}
 }
+StateIconList[EFST_IDs.EFST_OVERHEAL] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Overheal", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Barrier based on surplus healing.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_ASFOCUS] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Assassin Focus", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Attack speed increased when landing critical hits.", { 255, 255, 255 } }
+	}
+}
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
@@ -594,7 +612,8 @@ StateIconList[EFST_IDs.EFST_INC_AGI] = {
 		{ "Increase Agility", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
 		{ "Increases Movement Speed" },
-		{ "Increases AGI" }
+		{ "Increases AGI" },
+		{ "Increases Attack Speed" }
 	}
 }
 StateIconList[EFST_IDs.EFST_SHOUT] = {
@@ -668,7 +687,7 @@ StateIconList[EFST_IDs.EFST_ANGELUS] = {
 	descript = {
 		{ "Angelus", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
-		{ "Increases DEF" }
+		{ "Increases Vit Def and Hp" }
 	}
 }
 StateIconList[EFST_IDs.EFST_MARSHOFABYSS] = {
@@ -1653,9 +1672,9 @@ StateIconList[EFST_IDs.EFST_SLOWPOISON] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
 	descript = {
-		{ "Slow Poison", COLOR_TITLE_BUFF },
+		{ "Regen", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
-		{ "Temporarily stop the poison spread" }
+		{ "Heals Hp every 2 seconds"}
 	}
 }
 StateIconList[EFST_IDs.EFST_CLOAKING] = {

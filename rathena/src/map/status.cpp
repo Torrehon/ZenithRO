@@ -4490,6 +4490,25 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		base_status->batk += (5 * pc_checkskill(sd, BS_SWORD)) * rank_mult;
 	}
 	// --- FIN CUSTOM ---
+    // --- INICIO: Righteous Mastery Custom ---
+	if (sd->status.weapon == W_MACE) {
+		
+		if ((skill = pc_checkskill(sd, PR_MACEMASTERY)) > 0) {
+			int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+			base_status->batk += (skill * jlv) / 10;
+		}
+	}
+	// --- FIN: Righteous Mastery Custom ---
+	
+	    // --- INICIO: Katar Custom ---
+	if (sd->status.weapon == W_KATAR) {
+		
+		if ((skill = pc_checkskill(sd, AS_KATAR)) > 0) {
+			int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+			base_status->batk += (skill * jlv) / 10;
+		}
+	}
+	// --- FIN: Katar Mastery Custom ---
 
 #else
 	base_status->watk = status_weapon_atk(base_status->rhw);
@@ -4862,6 +4881,19 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			base_status->aspd_rate -= aspd_bonus; 
 		}
 	}
+	if (sd->status.weapon == W_MACE || sd->status.weapon == W_BOOK ) {
+		if ((skill = pc_checkskill(sd, PR_MACEMASTERY)) > 0) {
+			
+			// Obtenemos el Job Level actual
+			int jlvl = sd->status.job_level;
+			
+			// Aplicamos tu fórmula: (sklv * 5) + (jlvl * 5 / 10)
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			
+			// En rAthena, RESTAR a aspd_rate AUMENTA la velocidad de ataque
+			base_status->aspd_rate -= aspd_bonus; 
+		}
+	}
 	// --- FIN: 1-Hand Sword Mastery Custom ASPD ---
 	// --- INICIO: Spear Mastery Custom ASPD ---
 	if (sd->status.weapon == W_1HSPEAR || sd->status.weapon == W_2HSPEAR) {
@@ -4878,6 +4910,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Spear Mastery Custom ASPD ---
+	
 	// --- INICIO: Vulture's Eye Custom ASPD ---
 	if (sd->status.weapon == W_BOW) {
 		if ((skill = pc_checkskill(sd, AC_VULTURE)) > 0) {
@@ -4893,15 +4926,17 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Vulture's Eye Custom ASPD ---
-	// --- INICIO: Merchant Axe Mastery Custom ASPD ---
-	if (sd->status.weapon == W_1HAXE || sd->status.weapon == W_2HAXE) { // <--- Cambio aquí
-		if (pc_checkskill(sd, AM_AXEMASTERY) > 0) {
-			int jlvl = sd->status.job_level;
-			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
-			base_status->aspd_rate -= aspd_bonus;
-		}
-	}
-	// --- FIN: Merchant Axe Mastery Custom ASPD ---
+	
+	// // --- INICIO: Merchant Axe Mastery Custom ASPD ---
+	// if (sd->status.weapon == W_1HAXE || sd->status.weapon == W_2HAXE) { // <--- Cambio aquí
+		// if (pc_checkskill(sd, AM_AXEMASTERY) > 0) {
+			// int jlvl = sd->status.job_level;
+			// int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			// base_status->aspd_rate -= aspd_bonus;
+		// }
+	// }
+	// // --- FIN: Merchant Axe Mastery Custom ASPD ---
+	
 	// --- INICIO: Bugei Custom ASPD ---
 	if (sd->status.weapon == W_HUUMA || sd->status.weapon == W_DAGGER) {
 		if ((skill = pc_checkskill(sd, NJ_TOBIDOUGU)) > 0) {
@@ -4917,6 +4952,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Bugei Custom ASPD ---
+	
 	// --- INICIO: Firearms Mastery Custom ASPD ---
 	if (sd->status.weapon == W_REVOLVER || sd->status.weapon == W_GATLING) { 
 		if (pc_checkskill(sd, GS_SINGLEACTION) > 0) {
@@ -4926,14 +4962,41 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Firearms Mastery Custom ASPD ---
+	
 	if ((skill = pc_checkskill(sd,SG_DEVIL)) > 0 && ((sd->class_&MAPID_THIRDMASK) == MAPID_STAR_EMPEROR || pc_is_maxjoblv(sd)))
 		base_status->aspd_rate -= 30*skill;
+	
     // --- INICIO CUSTOM: Forgemaster (Smith Knuckle -> ASPD) ---
 	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_KNUCKLE) > 0) {
 		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
-		base_status->aspd_rate += (1 * pc_checkskill(sd, BS_KNUCKLE)) * rank_mult;
+		base_status->aspd_rate -= (10 * pc_checkskill(sd, BS_KNUCKLE)) * rank_mult;
 	}
 	// --- FIN CUSTOM ---
+	
+	// --- INICIO: Katar Mastery Custom ASPD ---
+	if (sd->status.weapon == W_KATAR) {
+		if ((skill = pc_checkskill(sd, AS_KATAR)) > 0) {
+			
+			// Obtenemos el Job Level actual
+			int jlvl = sd->status.job_level;
+			
+			// Aplicamos tu fórmula: (sklv * 5) + (jlvl * 5 / 10)
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			
+			// En rAthena, RESTAR a aspd_rate AUMENTA la velocidad de ataque
+			base_status->aspd_rate -= aspd_bonus; 
+		}
+	}
+	// --- FIN: Katar mastery Custom ASPD ---
+	
+// --- INICIO CUSTOM: Assassin's Focus (+1% ASPD por stack) ---
+	if (sc && sc->getSCE(SC_ASFOCUS)) {
+		// Cada stack (val1) da 10 puntos a la variable, lo que equivale a 1% de ASPD.
+		// Al llegar a 10 stacks, restará 100 (10% extra de ASPD).
+		base_status->aspd_rate -= sc->getSCE(SC_ASFOCUS)->val1 * 10; 
+	}
+	// --- FIN CUSTOM ---
+	
 	if(pc_isriding(sd))
 		base_status->aspd_rate += 500-100*pc_checkskill(sd,KN_CAVALIERMASTERY);
 	else if(pc_isridingdragon(sd))
@@ -5749,8 +5812,8 @@ void status_calc_regen_rate(block_list *bl, struct regen_data *regen, status_cha
 		return;
 
 	// No HP or SP regen
-	if ((sc->getSCE(SC_POISON) && !sc->getSCE(SC_SLOWPOISON))
-		|| (sc->getSCE(SC_DPOISON) && !sc->getSCE(SC_SLOWPOISON))
+	if  (sc->getSCE(SC_POISON)
+		|| sc->getSCE(SC_DPOISON)
 		|| sc->getSCE(SC_BERSERK)
 		|| sc->getSCE(SC_TRICKDEAD)
 		|| sc->getSCE(SC_BLEEDING)
@@ -6773,6 +6836,20 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 #endif
 
 			amotion = status_calc_fix_aspd(&bl, sc, amotion);
+			
+			// --- INICIO DEL "MURO" DE ASPD ---
+			// Barrera en 185 ASPD (150 amotion)
+			int32 amotion_wall = 150; 
+			
+			if (amotion < amotion_wall) {
+				int32 excess_speed = amotion_wall - amotion;
+				
+				// Retienen el 75% del exceso de velocidad. 
+				// Multiplicamos por 3 y dividimos por 4 para evitar usar decimales (flotantes) en C++.
+				amotion = amotion_wall - (excess_speed * 3 / 4); 
+			}
+			// --- FIN DEL MURO ---
+			
 			status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
 
 			status->adelay = AMOTION_DIVIDER_NOPC * status->amotion;
@@ -7833,17 +7910,29 @@ uint16 status_calc_pseudobuff_matk( map_session_data* sd, status_change *sc, int
 		matk += 15 * skill_lv + (skill_lv > 4 ? 25 : 0);
 	}
 	
-	// --- INICIO: Soul Channeling Custom (MATK Permanente) ---
-	if (uint16 skill_lv = pc_checkskill(sd, TK_SPTIME); skill_lv > 0) {
-	// Condición: Si Iron Body (TK_HPTIME) está aprendida, se cancela.
-		if (pc_checkskill(sd, TK_HPTIME) == 0) {
-			int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
-			matk += (skill_lv * jlv) / 10;
+    // --- INICIO: Soul Channeling Custom (MATK Permanente) ---
+	if (sd != nullptr) { // Verificamos que sea un jugador
+		if (uint16 skill_lv = pc_checkskill(sd, TK_SPTIME); skill_lv > 0) {
+		// Condición: Si Iron Body (TK_HPTIME) está aprendida, se cancela.
+			if (pc_checkskill(sd, TK_HPTIME) == 0) {
+				int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+				matk += (skill_lv * jlv) / 10;
+			}
 		}
 	}
 	// --- FIN: Soul Channeling Custom ---
 	
-
+	// --- INICIO: Righteous Mastery Custom ---
+	if (sd != nullptr) { 
+		if (sd->status.weapon == W_BOOK) {
+			// Añadimos 'uint16' para declarar la variable 'skill'
+			if (uint16 skill = pc_checkskill(sd, PR_MACEMASTERY); skill > 0) {
+				int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+				matk += (skill * jlv) / 10;
+			}
+		}
+	}
+    // --- FIN: Righteous Mastery Custom ---
 	if (sc == nullptr || sc->empty())
 		return static_cast<uint16>( cap_value(matk,0,USHRT_MAX) );
 
@@ -7857,6 +7946,8 @@ uint16 status_calc_pseudobuff_matk( map_session_data* sd, status_change *sc, int
 	if (sce = sc->getSCE(SC_VOLCANO))
 		matk += sce->val2;
 #endif
+	if (sce = sc->getSCE(SC_IMPOSITIO))
+		matk += sce->val2;
 	if (sce = sc->getSCE(SC_DORAM_MATK))
 		matk += sce->val1;
 	if (sce = sc->getSCE(SC_AQUAPLAY_OPTION))
@@ -10105,6 +10196,8 @@ static int32 status_get_sc_interval(enum sc_type type)
 			return 300;
 		case SC_POTION_HOT:
 			return 1000;
+		case SC_SLOWPOISON:
+            return 2000;		
 		default:
 			break;
 	}
@@ -10759,6 +10852,22 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 
 	// Type-specific checks that need to happen before the delay
 	switch (type) {
+    // --- INICIO CUSTOM: Exclusividad Regen y Veneno ---
+		case SC_SLOWPOISON:
+			// Si entra Regen, eliminamos los venenos
+			if (sc->getSCE(SC_POISON) != nullptr) 
+				status_change_end(bl, SC_POISON, -1);
+			if (sc->getSCE(SC_DPOISON) != nullptr) 
+				status_change_end(bl, SC_DPOISON, -1);
+			break;
+
+		case SC_POISON:
+		case SC_DPOISON:
+			// Si entra veneno, eliminamos Regen
+			if (sc->getSCE(SC_SLOWPOISON) != nullptr) 
+				status_change_end(bl, SC_SLOWPOISON, -1);
+			break;
+    // --- FIN CUSTOM ---
 		case SC_STONE:
 		case SC_STONEWAIT:
 		case SC_FREEZE:
@@ -11379,7 +11488,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 	switch(type)
 	{
 		/* Permanent effects */
-		case SC_AETERNA:
+		//case SC_AETERNA:
 		case SC_MODECHANGE:
 		case SC_WEIGHT50:
 		case SC_WEIGHT90:
@@ -11491,6 +11600,21 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 				val2 = status->max_hp * (val1 * 2 + 10) / 100;
 				val3 = (val1 / 2 + 5);
 			}
+			// --- INICIO CUSTOM: Soul of the Saint (Mejora Kyrie) ---
+			// Verificamos que el caster exista y sea un jugador
+			if (src != nullptr && src->type == BL_PC) {
+				map_session_data* sd = BL_CAST(BL_PC, src);
+				
+				// Si el Priest tiene la pasiva aprendida
+				if (sd && pc_checkskill(sd, PR_SAINTSOUL) > 0) {
+					// Añadimos un 10% del HP máximo del objetivo al escudo resultante
+					val2 += (status->max_hp * 10) / 100; 
+					
+					// Añadimos 5 golpes extra a la resistencia
+					val3 += 5; 
+				}
+			}
+			// --- FIN CUSTOM ---
 			break;
 		case SC_MAGICPOWER:
 			val3 = 5 * val1; // Matk% increase
@@ -11741,6 +11865,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_VOICEOFSIREN:
 		case SC_SAVAGERY:
 		case SC_POTION_HOT:
+		case SC_SLOWPOISON:
 			tick_time = status_get_sc_interval(type);
 			val4 = tick - tick_time; // Remaining time
 			break;
@@ -12178,9 +12303,10 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 #endif
 				}
 				else if (type == SC_ADRENALINE2 || type == SC_ADRENALINE) {
-					val3 = (val2) ? 300 : 200; // Aspd increase
+					val3 = (val2) ? 200 : 100; // Aspd increase
 				}
 				// if (s_sd && pc_checkskill(s_sd, BS_HILTBINDING) > 0)
+					// tick += tick / 10; //If caster has Hilt Binding, duration increases by 10%
 					// tick += tick / 10; //If caster has Hilt Binding, duration increases by 10%
 			}
 			break;
@@ -12199,7 +12325,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val2 = 5*val1; // def increase
 			break;
 		case SC_IMPOSITIO:
-			val2 = 5*val1; // WATK/MATK increase
+			val2 = 6*val1; // WATK/MATK increase
 			break;
 		case SC_MELTDOWN:
 			val2 = 100*val1; // Chance to break weapon
@@ -14841,6 +14967,18 @@ TIMER_FUNC(status_change_timer){
 		}
 		break;
 	// --- FIN CUSTOM ---
+    case SC_SLOWPOISON:
+		if (sce->val4 >= 0) {
+			// Calculamos el 3% del HP Máximo
+			uint32 heal_amount = status->max_hp * 3 / 100;
+			
+			// Curamos HP (usando tu estructura con AP incluido)
+			status_heal(bl, heal_amount, 0, 0, 2);
+			
+			// Opcional: Añadir un efecto visual de curación cada vez que haga tick
+			//clif_specialeffect(bl, 312, AREA); // BUSCAR "TEMPORARY_COMMUNION_BUFF"
+		}
+		break;
 // --- INICIO CUSTOM: Aura visual en bucle ---
 	case SC_SAVAGERY:
 		if (sce->val4 >= 0) { 
@@ -14852,7 +14990,7 @@ TIMER_FUNC(status_change_timer){
 
 	case SC_POISON:
 	case SC_DPOISON:
-		if (sce->val4 >= 0 && !sc->getSCE(SC_SLOWPOISON)) {
+		if (sce->val4 >= 0) {
 			uint32 damage = 0;
 			if (sd)
 				damage = (type == SC_DPOISON) ? 2 + status->max_hp / 50 : 2 + status->max_hp * 3 / 200;

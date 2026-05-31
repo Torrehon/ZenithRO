@@ -12,19 +12,27 @@ SkillSonicBlow::SkillSonicBlow() : WeaponSkillImpl(AS_SONICBLOW) {
 }
 
 void SkillSonicBlow::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
-#ifdef RENEWAL
-	const status_data* tstatus = status_get_status_data(*target);
+	
+	// 1. Calcular la cantidad de hits en función de la AGI total
+	// 3 de base + 1 por cada 18 de AGI
+	int hits = 3 + (status_get_agi(src) / 18);
 
-	base_skillratio += 100 + 100 * skill_lv;
-	if (tstatus->hp < (tstatus->max_hp / 2))
-		base_skillratio += base_skillratio / 2;
-#else
-	const map_session_data* sd = BL_CAST( BL_PC, src );
+	// 2. Definir el daño total: 
+	base_skillratio = 15 * skill_lv;
 
-	base_skillratio += 200 + 50 * skill_lv;
-	if (sd && pc_checkskill(sd, AS_SONICACCEL) > 0)
-		base_skillratio += base_skillratio / 10;
-#endif
+	// 3. --- CUSTOM: Bono de daño por Soul of the Executioner ---
+	const map_session_data* sd = BL_CAST(BL_PC, src);
+	if (sd && pc_checkskill(sd, AS_EXECSOUL) > 0) {
+		const status_data* tstatus = status_get_status_data(*target);
+		if (tstatus && tstatus->hp < (tstatus->max_hp / 2)) {
+			base_skillratio += base_skillratio / 2; // +50% extra de daño
+		}
+	}
+
+	// 4. Aplicar la división de hits
+	if (wd != nullptr) {
+		const_cast<Damage*>(wd)->div_ = hits;
+	}
 }
 
 void SkillSonicBlow::applyAdditionalEffects(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {

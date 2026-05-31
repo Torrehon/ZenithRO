@@ -93,44 +93,85 @@ Body:
     AegisName: Red_Potion
     Name: Red Potion
     Type: Healing
-    Buy: 50
+    Buy: 120
     Weight: 70
-    Script: |
+    Script: |        
+      if (getstatus(SC_POTION_HOT)) {
+         dispbottom "Healing potion is in cooldown.";
+          end; 
+      }
       // 1. Calculamos la curación base
-      .@heal = rand(45, 65);
+      .@heal = rand(95, 120);
       
       // 2. Curación instantánea
       heal .@heal, 0;
-      specialeffect2 EF_POTION_RED;
+      //specialeffect2 EF_POTION1;
       
       // 3. Curación en el tiempo (SC_POTION_HOT)
       // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
       sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
-    Cooldown: 3000
+    Delay:
+       Duration: 2000
   - Id: 502
     AegisName: Orange_Potion
     Name: Orange Potion
     Type: Healing
-    Buy: 200
+    Buy: 500
     Weight: 100
-    Script: |
-      itemheal rand(105,145),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(300, 390);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION2;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 503
     AegisName: Yellow_Potion
     Name: Yellow Potion
     Type: Healing
-    Buy: 550
+    Buy: 1000
     Weight: 130
-    Script: |
-      itemheal rand(175,235),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(560, 720);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION3;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 504
     AegisName: White_Potion
     Name: White Potion
     Type: Healing
-    Buy: 1200
+    Buy: 2000
     Weight: 150
-    Script: |
-      itemheal rand(325,405),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(880, 1060);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION1;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 505
     AegisName: Blue_Potion
     Name: Blue Potion
@@ -505,24 +546,60 @@ Body:
     Type: Healing
     Buy: 150
     Weight: 10
-    Script: |
-      itemheal rand(45,65),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(105, 125);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION1;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 4000, .@heal / 2, 312, 0, 0;
+    Delay:
+      Duration: 4000
   - Id: 546
     AegisName: Yellow_Slim_Potion
     Name: Condensed Yellow Potion
     Type: Healing
     Buy: 600
     Weight: 20
-    Script: |
-      itemheal rand(175,235),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(560, 720);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION3;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 4000, .@heal / 2, 312, 0, 0;
+    Delay:
+      Duration: 4000
   - Id: 547
     AegisName: White_Slim_Potion
     Name: Condensed White Potion
     Type: Healing
     Buy: 1650
     Weight: 20
-    Script: |
-      itemheal rand(325,405),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(880, 1060);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION4;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 4000, .@heal / 2, 312, 0, 0;
+    Delay:
+      Duration: 4000
   - Id: 548
     AegisName: Cheese
     Name: Cheese
@@ -725,8 +802,20 @@ Body:
     Weight: 10
     Flags:
       BuyingStore: true
-    Script: |
-      itemheal rand(22,33),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(35, 45);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION1;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 2, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 570
     AegisName: Lucky_Candy
     Name: Lucky Candy
@@ -1032,7 +1121,19 @@ Body:
     Buy: 50
     Weight: 10
     Script: |
-      itemheal rand(45,65),0;
+
+      // 1. Calculamos la curación base
+      .@heal = rand(95, 120);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION1;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 599
     AegisName: Light_Orange_Pot
     Name: Light Orange Potion
@@ -1040,7 +1141,19 @@ Body:
     Buy: 200
     Weight: 10
     Script: |
-      itemheal rand(105,145),0;
+
+      // 1. Calculamos la curación base
+      .@heal = rand(300, 390);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION2;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 601
     AegisName: Wing_Of_Fly
     Name: Fly Wing
@@ -2030,16 +2143,40 @@ Body:
     Type: Healing
     Buy: 550
     Weight: 10
-    Script: |
-      itemheal rand(175,235),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(560, 720);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION3;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 11501
     AegisName: Light_White_Pot
     Name: Light White Potion
     Type: Healing
     Buy: 1200
     Weight: 10
-    Script: |
-      itemheal rand(325,405),0;
+    Script: |        
+
+      // 1. Calculamos la curación base
+      .@heal = rand(880, 1060);
+      
+      // 2. Curación instantánea
+      heal .@heal, 0;
+      //specialeffect2 EF_POTION4;
+      
+      // 3. Curación en el tiempo (SC_POTION_HOT)
+      // sc_start4 SC_Name, Duración_ms, Val1(Cura_Tick), Val2(Effect_ID), 0, 0
+      sc_start4 SC_POTION_HOT, 2000, .@heal / 4, 312, 0, 0;
+    Delay:
+      Duration: 2000
   - Id: 11502
     AegisName: Light_Blue_Pot
     Name: Light Blue Potion
@@ -22142,7 +22279,7 @@ Body:
       } else {
         dispbottom "You need a Wayfarer Stone to power this map.";
       }      
-  - Id: 50008
+  - Id: 51008
     AegisName: scroll_shadow
     Name: Elemental Converter
     Type: Delayconsume
@@ -22152,7 +22289,7 @@ Body:
       BuyingStore: true
     Script: |
       itemskill "ITEM_ENCHANTARMS",8;
-  - Id: 50009
+  - Id: 51009
     AegisName: Elemental_Holy
     Name: Elemental Converter
     Type: Delayconsume

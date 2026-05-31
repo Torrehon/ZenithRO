@@ -11,6 +11,15 @@ SkillGrimtooth::SkillGrimtooth() : SkillImplRecursiveDamageSplash(AS_GRIMTOOTH) 
 
 void SkillGrimtooth::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
 	base_skillratio += 20 * skill_lv;
+
+	const map_session_data* sd = BL_CAST(BL_PC, src);
+	if (sd && pc_checkskill(sd, AS_EXECSOUL) > 0) {
+		const status_data* tstatus = status_get_status_data(*target);
+		if (tstatus && tstatus->hp > 0 && tstatus->hp < (tstatus->max_hp / 2)) {
+			base_skillratio += (base_skillratio * 25) / 100; // +25% extra de daño
+		}
+	}
+
 }
 
 void SkillGrimtooth::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {

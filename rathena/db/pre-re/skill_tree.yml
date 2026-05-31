@@ -490,6 +490,10 @@ Body:
             Level: 3
       - Name: PR_REDEMPTIO
         MaxLevel: 1
+      - Name: PR_EXORCISTSOUL
+        MaxLevel: 1
+      - Name: PR_SAINTSOUL
+        MaxLevel: 1
   - Job: Wizard
     Inherit:
       Novice: true
@@ -815,6 +819,10 @@ Body:
       - Name: AS_SONICACCEL
         MaxLevel: 1
       - Name: AS_VENOMKNIFE
+        MaxLevel: 1
+      - Name: AS_EXECSOUL
+        MaxLevel: 1
+      - Name: AS_VIPERSOUL
         MaxLevel: 1
   - Job: Knight2
     Inherit:

@@ -259324,6 +259324,46 @@ tbl = {
 		costume = false
 	},
 	[50008] = {
+		unidentifiedDisplayName = "Medal",
+		unidentifiedResourceName = "valorproof",
+		unidentifiedDescriptionName = {
+			" "
+		},
+		identifiedDisplayName = "Proof of Valor",
+		identifiedResourceName = "valorproof",
+		identifiedDescriptionName = {
+			"^0000CCProof of Valor^000000",
+			"_______________________________________",
+			"A shiny badge awarded to true Adventurers.",
+			"_______________________________________",
+			"^0000CCUsage:^000000",
+			"Unlocks 2nd job advancement",
+			"_______________________________________",
+			"^FF0000Account Bound.^000000",
+			"Weight: ^0088001^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50009] = {
+		unidentifiedDisplayName = "Purple Gemstone",
+		unidentifiedResourceName = "purple_gemstone",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Purple Gemstone",
+		identifiedResourceName = "purple_gemstone",
+		identifiedDescriptionName = {
+			"An enchanted crystal that is used in conjuction with certain poison skills. Once used, it is powerless and immediately destroyed.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51008] = {
 		unidentifiedDisplayName = "Elemental Converter[Shadow]",
 		unidentifiedResourceName = "ø∞¿«¡÷πÆº≠",
 		unidentifiedDescriptionName = {
@@ -259342,7 +259382,7 @@ tbl = {
 		ClassNum = 0,
 		costume = false
 	},
-	[50009] = {
+	[51009] = {
 		unidentifiedDisplayName = "Elemental Converter[Holy]",
 		unidentifiedResourceName = "ø∞¿«¡÷πÆº≠",
 		unidentifiedDescriptionName = {

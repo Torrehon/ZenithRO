@@ -729,7 +729,7 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.PR_SLOWPOISON] = {
 		"PR_SLOWPOISON",
-		SkillName = "Slow Poison",
+		SkillName = "Regen",
 		MaxLv = 4,
 		SpAmount = { 6, 8, 10, 12 },
 		bSeperateLv = false,
@@ -823,6 +823,18 @@ SKILL_INFO_LIST = {
 			{ SKID.PR_LEXAETERNA,1 },
 			{ SKID.PR_TURNUNDEAD,3 }
 		}
+	},
+	[SKID.PR_EXORCISTSOUL] = {
+		"pr_exorcistsoul",
+		SkillName = "Soul of the Exorcist",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.PR_SAINTSOUL] = {
+		"pr_saintsoul",
+		SkillName = "Soul of the Saint",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.WZ_FIREPILLAR] = {
 		"WZ_FIREPILLAR",
@@ -1449,6 +1461,18 @@ SKILL_INFO_LIST = {
 			{ SKID.AS_VENOMDUST,5 },
 			{ SKID.AS_POISONREACT,5 }
 		}
+	},
+	[SKID.AS_EXECSOUL] = {
+		"AS_EXECSOUL",
+		SkillName = "Soul of the Executioner",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.AS_VIPERSOUL] = {
+		"AS_VIPERSOUL",
+		SkillName = "Soul of the Viper",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.NV_FIRSTAID] = {
 		"NV_FIRSTAID",

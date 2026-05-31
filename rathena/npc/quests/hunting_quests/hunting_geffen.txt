@@ -623,8 +623,8 @@ OnInit:
 		12115, 2,    // Water Converter Scroll
 		12116, 2,    // Earth Converter Scroll
 		12117, 2,    // Wind Converter Scroll
-		50008, 3,    // Shadow Converter Scroll
-		50009, 3,    // Holy Converter Scroll
+		51008, 3,    // Shadow Converter Scroll
+		51009, 3,    // Holy Converter Scroll
 		20093, 50,   // Costume Wizard Hat
 		19551, 50,   // Costume Elven Ears
 		19548, 50,   // Costume Frog Hat

@@ -2026,6 +2026,8 @@
 	export_constant(SC_PINNED);
 	export_constant(SC_SAVAGERY);
 	export_constant(SC_POTION_HOT);
+	export_constant(SC_OVERHEAL);
+	export_constant(SC_ASFOCUS);
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
 	export_constant(EFST_BLANK);
@@ -3514,6 +3516,8 @@
 	export_constant(EFST_PINNED);
 	export_constant(EFST_SAVAGERY);
 	export_constant(EFST_POTION_HOT);
+	export_constant(EFST_OVERHEAL);
+	export_constant(EFST_ASFOCUS);
 	export_constant(EFST_MAX);
 	
 

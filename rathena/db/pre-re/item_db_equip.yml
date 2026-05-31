@@ -24568,8 +24568,6 @@ Body:
       All: true
       Novice: false
       SuperNovice: false
-    Classes:
-      Upper: true
     Locations:
       Both_Accessory: true
     ArmorLevel: 1
@@ -24589,8 +24587,6 @@ Body:
       All: true
       Novice: false
       SuperNovice: false
-    Classes:
-      Upper: true
     Locations:
       Both_Accessory: true
     ArmorLevel: 1
