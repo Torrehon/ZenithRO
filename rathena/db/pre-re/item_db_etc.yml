@@ -7577,13 +7577,14 @@ Body:
     Name: Dragon Egg Card
     Type: Card
     Buy: 20
-    Weight: 10
+    Weight: 800
     Locations:
-      Both_Accessory: true
+      Left_Hand: true
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAddMonsterDropItem,12048,RC_Dragon,50;
+        bonus bMaxHPrate, 6;
+        bonus bDef2, 25;
   - Id: 4386
     AegisName: Detale_Card
     Name: Detardeurus Card

@@ -3520,6 +3520,7 @@ static bool battle_skill_stacks_masteries_vvs(uint16 skill_id, e_bonus_chk_flag 
 		// PC skills that are unaffected
 		case PA_SHIELDCHAIN:
 		case CR_SHIELDBOOMERANG:
+		case CR_SHIELDCHARGE:
 		case AM_ACIDTERROR:
 		case MO_INVESTIGATE:
 		case MO_EXTREMITYFIST:
@@ -4203,7 +4204,6 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 			}
 #endif
 			break;
-		case CR_SHIELDBOOMERANG:
 		case PA_SHIELDCHAIN:
 			wd->damage = sstatus->batk;
 			if (sd) {
@@ -4222,8 +4222,9 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 				// Shield Boomerang and Rapid Smiting calculate DEF before the skill ratio
 				battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv);
 #endif
-			} else
+			} else {
 				ATK_ADD(wd->damage, wd->damage2, sstatus->rhw.atk2); //Else use Atk2
+			}
 			break;
 		case RK_DRAGONBREATH:
 		case RK_DRAGONBREATH_WATER:
@@ -5673,6 +5674,23 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 			battle_calc_skill_base_damage(&wd, src, target, skill_id, skill_lv); // base skill damage
 
 #ifndef RENEWAL
+
+		// --- INICIO CUSTOM: Venom Splasher MATK ---
+		// Lo inyectamos antes del ATK_RATE para que se multiplique por el 900% de la habilidad.
+		if (skill_id == AS_SPLASHER && sd && pc_checkskill(sd, AS_VIPERSOUL) > 0) {
+			
+			int32 base_matk = sstatus->matk_min;
+			if (sstatus->matk_max > sstatus->matk_min) {
+				base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+			}
+
+			int64 matk_portion = (base_matk * 125) / 100;
+
+			// ATK_ADD lo suma de forma segura tanto a la mano derecha como a la izquierda (si llevas 2 armas)
+			ATK_ADD(wd.damage, wd.damage2, matk_portion);
+		}
+		// --- FIN CUSTOM ---
+
 		// Skill ratio
 		ATK_RATE(wd.damage, wd.damage2, battle_calc_attack_skill_ratio(&wd, src, target, skill_id, skill_lv));
 
@@ -6499,7 +6517,9 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 			ad.damage = total_atk + matk_portion;
 		}
 		break;
+		
 		} 
+		
 		if(ad.damage<1)
 			ad.damage=1;
 		else if(sc) { //only applies when hit

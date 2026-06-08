@@ -259,7 +259,7 @@ SKILL_INFO_LIST = {
 		AttackRange = { 9, 9, 9, 9, 9, },
 		NeedSkillList = {
 			[JOBID.JT_CRUSADER] = {
-				{ SKID.CR_TRUST,10 },
+				{ SKID.CR_TRUST,3 },
 				{ SKID.AL_DEMONBANE,1 }
 			}
 		}
@@ -336,7 +336,7 @@ SKILL_INFO_LIST = {
 		},
 		NeedSkillList = {
 			[JOBID.JT_CRUSADER] = {
-				{ SKID.CR_TRUST,5 }
+				{ SKID.CR_TRUST,1 }
 			}
 		}
 	},
@@ -899,9 +899,9 @@ SKILL_INFO_LIST = {
 	[SKID.WZ_WATERBALL] = {
 		"WZ_WATERBALL",
 		SkillName = "Water Ball",
-		MaxLv = 5,
-		SpAmount = { 15, 20, 20, 25, 25 },
-		AttackRange = { 9, 9, 9, 9, 9 },
+		MaxLv = 10,
+		SpAmount = { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60 },
+		AttackRange = { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
 		_NeedSkillList = {
 			{ SKID.MG_COLDBOLT,1 },
 			{ SKID.MG_LIGHTNINGBOLT,1 }
@@ -1991,7 +1991,7 @@ SKILL_INFO_LIST = {
 	[SKID.CR_TRUST] = {
 		"CR_TRUST",
 		SkillName = "Faith",
-		MaxLv = 10,
+		MaxLv = 5,
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 	},
 	[SKID.CR_AUTOGUARD] = {
@@ -2042,7 +2042,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
 		AttackRange = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
 		_NeedSkillList = {
-			{ SKID.CR_TRUST,7 }
+			{ SKID.CR_TRUST,3 }
 		}
 	},
 	[SKID.CR_GRANDCROSS] = {
@@ -2052,7 +2052,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 37, 44, 51, 58, 65, 72, 78, 86, 93, 100 },
 		AttackRange = { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
 		_NeedSkillList = {
-			{ SKID.CR_TRUST,10 },
+			{ SKID.CR_TRUST,5 },
 			{ SKID.CR_HOLYCROSS,6 }
 		}
 	},
@@ -2994,7 +2994,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 80, 80, 80, 80, 80, 100, 100, 100, 100, 100 },
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.CR_TRUST,8 },
+			{ SKID.CR_TRUST,5 },
 			{ SKID.AL_DP,1 },
 			{ SKID.AL_DEMONBANE,1 }
 		}

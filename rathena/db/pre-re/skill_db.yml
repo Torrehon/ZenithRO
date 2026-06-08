@@ -3180,7 +3180,7 @@ Body:
   - Id: 86
     Name: WZ_WATERBALL
     Description: Water Ball
-    MaxLevel: 5
+    MaxLevel: 10
     Type: Magic
     TargetType: Attack
     Flags:
@@ -3222,21 +3222,21 @@ Body:
         - Level: 2
           Amount: 20
         - Level: 3
-          Amount: 20
+          Amount: 25
         - Level: 4
-          Amount: 25
+          Amount: 30
         - Level: 5
-          Amount: 25
+          Amount: 35
         - Level: 6
-          Amount: 25
+          Amount: 40
         - Level: 7
-          Amount: 25
+          Amount: 45
         - Level: 8
-          Amount: 25
+          Amount: 50
         - Level: 9
-          Amount: 25
+          Amount: 55
         - Level: 10
-          Amount: 25
+          Amount: 60
       # State: Water
     # Unit:
       # Id: Dummyskill
@@ -4728,6 +4728,9 @@ Body:
     MaxLevel: 10
     Type: Weapon
     TargetType: Ground
+    DamageFlags:
+      IgnoreAtkCard: true
+      IgnoreFlee: true
     Range: 2
     Hit: Single
     HitCount: 1
@@ -4781,7 +4784,7 @@ Body:
     Range: 1
     Hit: Single
     HitCount: 1
-    Element: Weapon
+    Element: Poison
     SplashArea: 2
     CopyFlags:
       Skill:
@@ -6462,7 +6465,7 @@ Body:
   - Id: 248
     Name: CR_TRUST
     Description: Faith
-    MaxLevel: 10
+    MaxLevel: 5
   - Id: 249
     Name: CR_AUTOGUARD
     Description: Guard
@@ -6509,6 +6512,7 @@ Body:
     Range: 3
     Hit: Single
     HitCount: 1
+    Element: Weapon
     Knockback:
       - Level: 1
         Amount: 5
@@ -6548,6 +6552,7 @@ Body:
         Size: 11
     Hit: Single
     HitCount: 1
+    Element: Weapon
     CopyFlags:
       Skill:
         Plagiarism: true

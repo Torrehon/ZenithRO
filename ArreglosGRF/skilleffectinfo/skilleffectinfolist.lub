@@ -34,6 +34,13 @@ SKILL_EFFECT_INFO_LIST = {
 		targetEffectID = { 1708 },
 		onTarget = true
     },
+	  [SKID.PR_SLOWPOISON] = {
+		beginMotionType = ACTOR_STATE.ST_BEGIN_SKILL,
+		beginEffectID = 12,
+		targetEffectNum = 1,
+        targetEffectID = { 1813 },
+        onTarget = true
+    },
 	[SKID.KO_JYUMONJIKIRI] = {
 		beginMotionType = ACTOR_STATE.ST_ATTACK2,
 		waveFileName = "effect\\cru_holy cross.wav",

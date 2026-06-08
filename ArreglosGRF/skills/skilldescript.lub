@@ -417,7 +417,7 @@ SKILL_DESCRIPT = {
 	[SKID.AL_HEAL] = {
 		"Heal",
 		"Max Level: 5",
-		"14^CC3399Requirement: Faith 10^000000",
+		"14^CC3399Requirement: Faith 3^000000",
 		"Skill Form: ^339900Recovery ^000000",
 		"Element: ^777777Holy ^000000",
 		"Description: ^777777 Heals the target based on user's Int,",
@@ -434,7 +434,7 @@ SKILL_DESCRIPT = {
 		"Cure",
 		"Max Level: 1",
 		"4^CC3399Requirement: Heal 2 ^000000",
-		"14^CC3399Requirement: Faith 5 ^000000",
+		"14^CC3399Requirement: Faith 1 ^000000",
 		"23^CC3399Requirement: Heal 2 ^000000",
 		"Skill Form: ^339900Recovery ^000000",
 		"Description: ^777777Cures target from Silence,",
@@ -1189,7 +1189,7 @@ SKILL_DESCRIPT = {
 	},
 	[SKID.WZ_WATERBALL] = {
 		"Water Ball",
-		"Max Level: 5",
+		"Max Level: 10",
 		"9^CC3399Requirement: Cold Bolt 1, Lightning Bolt 1 ^000000",
 		"Skill Form: ^FF0000Magical attack ^000000",
 		"Element: ^0000BBWater ^000000",
@@ -2304,7 +2304,7 @@ SKILL_DESCRIPT = {
 	},
 	[SKID.CR_TRUST] = {
 		"Faith",
-		"Max Level: 10",
+		"Max Level: 5",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Increases MaxHP and resistance against Holy elemental attacks. ^000000"
 	},
@@ -2344,7 +2344,7 @@ SKILL_DESCRIPT = {
 	[SKID.CR_HOLYCROSS] = {
 		"Holy Cross",
 		"Max Level: 10",
-		"14^CC3399Requirement: Faith 7 ^000000",
+		"14^CC3399Requirement: Faith 3 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Element: ^777777Holy ^000000",
 		"Description: ^777777Attacks an enemy with a double hit Holy attack that has the chance of causing the Blind status. ^000000"
@@ -2352,7 +2352,7 @@ SKILL_DESCRIPT = {
 	[SKID.CR_GRANDCROSS] = {
 		"Grand Cross",
 		"Max Level: 10",
-		"14^CC3399Requirement: Faith 10, Holy Cross 6 ^000000",
+		"14^CC3399Requirement: Faith 5, Holy Cross 6 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Element: ^777777Holy ^000000",
 		"Description: ^777777Summons a cross of holy light on the ground around the caster that will damage enemies that come into contact with it. Grand Cross will cause the Blind effect on Undead and Demon monster aside from Boss monster.",
@@ -3268,7 +3268,7 @@ SKILL_DESCRIPT = {
 	[SKID.PA_GOSPEL] = {
 		"Gospel",
 		"Max Level: 10",
-		"14^CC3399Requirement: Faith 8, Divine Protection 3, Demon Bane 5 ^000000",
+		"14^CC3399Requirement: Faith 5, Divine Protection 3, Demon Bane 5 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Range: ^7777777 cells around the caster ^000000",
 		"Description: ^777777Sings a hymn that will cause one out of 10 different negative status effects to enemies and will endow one out of 10 positive statuses upon Party Members within this skill's range.",

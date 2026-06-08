@@ -36,8 +36,8 @@ void SkillSpearBoomerang::calculateSkillRatio(const Damage* wd, const block_list
 				}
 			}
 
-			// Aplicamos tu cálculo final (dividido entre 4)
-			base_skillratio += (weapon_weight / 4);
+			// Aplicamos tu cálculo final (dividido entre 2)
+			base_skillratio += (weapon_weight / 2);
 		}
 	}
 }

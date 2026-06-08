@@ -14956,8 +14956,6 @@ Body:
       Rogue: true
       Swordman: true
       Thief: true
-    Classes:
-      Upper: true
     Locations:
       Left_Hand: true
     ArmorLevel: 1

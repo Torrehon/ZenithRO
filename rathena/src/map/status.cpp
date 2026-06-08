@@ -14983,7 +14983,7 @@ TIMER_FUNC(status_change_timer){
 	case SC_SAVAGERY:
 		if (sce->val4 >= 0) { 
 			// Lanzamos el efecto y dejamos que el emulador haga el resto del trabajo
-			clif_specialeffect(bl, 1797, AREA);
+			clif_specialeffect(bl, 1727, AREA);
 		}
 		break;
 	// --- FIN CUSTOM ---
@@ -15057,20 +15057,20 @@ TIMER_FUNC(status_change_timer){
 			// --- NUEVO: EFECTOS VISUALES CADA VEZ QUE HACE TICK ---
 			if (type == SC_ELECTROCUTE) {
 				
-				clif_specialeffect(bl, 1638, AREA); 
+				clif_specialeffect(bl, 2223, AREA); 
 			} 
 			else if (type == SC_BURIED) {
 				
-				clif_specialeffect(bl, 1623, AREA); 
-				clif_specialeffect(bl, 2267, AREA); 
+				clif_specialeffect(bl, 2231, AREA); 
+				// clif_specialeffect(bl, 2267, AREA); 
 			}
 			else if (type == SC_DROWN) {
 				
-				clif_specialeffect(bl, 1667, AREA);
+				clif_specialeffect(bl, 2215, AREA);
 				clif_specialeffect(bl, 109, AREA);
 			}
 			else if (type == SC_BURNING) {
-				clif_specialeffect(bl, 1665, AREA);
+				clif_specialeffect(bl, 2207, AREA);
 			}
 		}
 		break;

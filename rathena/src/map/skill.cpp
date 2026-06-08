@@ -7291,7 +7291,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 				if (pc_checkskill(sd, AS_VIPERSOUL) > 0) {
 					// Disparamos el ataque. El motor irá a venomdust.cpp a ver el ratio (100%),
 					// y luego a skill_db.yml a ver si puede hacer crítico (no podrá).
-					skill_attack(BF_WEAPON, ss, unit, bl, AS_VENOMDUST, 1, tick, 0); 
+					skill_attack(BF_WEAPON,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
 				}
 			}
 			// --- FIN CUSTOM ---
