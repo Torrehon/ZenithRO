@@ -3170,7 +3170,7 @@ static int32 status_get_hpbonus(block_list *bl, enum e_status_bonus type) {
 
 			bonus += sd->bonus.hp;
 			if ((skill_lv = pc_checkskill(sd,CR_TRUST)) > 0)
-				bonus += skill_lv * 200;
+				bonus += skill_lv * 400;
 			if (pc_checkskill(sd,SU_SPRITEMABLE) > 0)
 				bonus += 1000;
 			if (pc_checkskill(sd, SU_POWEROFSEA) > 0) {
@@ -3219,6 +3219,22 @@ static int32 status_get_hpbonus(block_list *bl, enum e_status_bonus type) {
 		}
 	} else if (type == STATUS_BONUS_RATE) {
 		status_change *sc = status_get_sc(bl);
+
+		// --- INICIO CUSTOM: Guardian Soul (+5% Max HP por aliado en Devotion) ---
+		if (bl->type == BL_PC) {
+			map_session_data *sd = map_id2sd(bl->id);
+			if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
+				int devotion_count = 0;
+				for (int i = 0; i < 5; i++) {
+					if (sd->devotion[i] > 0) {
+						devotion_count++;
+					}
+				}
+				// Sumamos 5% directamente a la variable bonus por cada aliado
+				bonus += (5 * devotion_count);
+			}
+		}
+		// --- FIN CUSTOM ---
 
 		//Bonus by SC
 		// !CHECKME: status_get_hpbonus shouldn't be used for SC from usable items
@@ -5043,7 +5059,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 
 	// Anti-element and anti-race
 	if((skill=pc_checkskill(sd,CR_TRUST))>0)
-		sd->indexed_bonus.subele[ELE_HOLY] += skill*5;
+		sd->indexed_bonus.subele[ELE_HOLY] += skill*10;
 	if((skill=pc_checkskill(sd,BS_SKINTEMPER))>0) {
 		sd->indexed_bonus.subele[ELE_NEUTRAL] += skill;
 		sd->indexed_bonus.subele[ELE_FIRE] += skill*5;
@@ -5232,6 +5248,27 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		if(sc->getSCE(SC_PROVIDENCE)) {
 			sd->indexed_bonus.subele[ELE_HOLY] += sc->getSCE(SC_PROVIDENCE)->val2;
 			sd->indexed_bonus.subrace[RC_DEMON] += sc->getSCE(SC_PROVIDENCE)->val2;
+
+			// --- INICIO CUSTOM: Templar Soul (Providence Ofensivo) ---
+			if (pc_checkskill(sd, CR_TEMPLARSOUL) > 0) {
+				int32 prov_lv = sc->getSCE(SC_PROVIDENCE)->val1; // Nivel de la skill
+				int32 bonus_damage = 2 * prov_lv;               // 2% por nivel
+
+				// Daño Físico: Mano derecha
+				sd->right_weapon.addrace[RC_DEMON] += bonus_damage;
+				sd->right_weapon.addrace[RC_UNDEAD] += bonus_damage;
+				
+				// Daño Físico: Mano izquierda
+				if (!battle_config.left_cardfix_to_right) {
+					sd->left_weapon.addrace[RC_DEMON] += bonus_damage;
+					sd->left_weapon.addrace[RC_UNDEAD] += bonus_damage;
+				}
+
+				// Daño Mágico: Indexado por raza (CORREGIDO)
+				sd->indexed_bonus.magic_addrace[RC_DEMON] += bonus_damage;
+				sd->indexed_bonus.magic_addrace[RC_UNDEAD] += bonus_damage;
+			}
+			// --- FIN CUSTOM ---
 		}
 		if( sc->getSCE(SC_FIRE_CLOAK_OPTION) ) {
 			i = sc->getSCE(SC_FIRE_CLOAK_OPTION)->val2;
@@ -8777,8 +8814,14 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 		speed = speed * speed_rate / 100;
 	if( sc->getSCE(SC_STEELBODY) )
 		speed = 200;
-	if( sc->getSCE(SC_DEFENDER) )
-		speed = max(speed, 200);
+	// --- CUSTOM: Guardian Soul anula la penalización de Defender ---
+	if( sc->getSCE(SC_DEFENDER) ) {
+		// Comprobamos si el jugador NO tiene la pasiva (o si es un monstruo usando la skill)
+		if (sd == nullptr || pc_checkskill(sd, CR_GUARDIANSOUL) == 0) {
+			speed = max(speed, 200);
+		}
+	}
+	// --------------------------------------------------------------
 	if (sc->getSCE(SC_ARMOR))
 		speed = max(speed, 200);
 	if( sc->getSCE(SC_WALKSPEED) && sc->getSCE(SC_WALKSPEED)->val1 > 0 ) // ChangeSpeed
@@ -8998,6 +9041,26 @@ static int16 status_calc_aspd_rate(block_list *bl, status_change *sc, int32 aspd
 		
 		if (max < quicken_mod)
 			max = quicken_mod;
+	}
+	// --- NUEVO CÓDIGO DE LANZAS ---
+	if (sc->getSCE(SC_SPEARQUICKEN)) {
+		map_session_data* sd = BL_CAST(BL_PC, bl);
+		
+		// Cogemos el valor que guardó el bloque que acabas de encontrar (Ej: 300 al lvl 10)
+		int quicken_mod = sc->getSCE(SC_SPEARQUICKEN)->val2; 
+		
+		if (sd != nullptr) {
+			if (sd->weapontype1 == W_1HSPEAR) {
+				// Le quitamos 100 (10%) para que una lanza a 1 mano pegue más lento
+				quicken_mod -= 100; 
+			} else if (sd->weapontype1 != W_2HSPEAR) {
+				// Si no tiene ni lanza de 1 mano ni de 2 manos, anulamos el buff
+				quicken_mod = 0; 
+			}
+		}
+		
+		// Aplicamos el bono final
+		if (max < quicken_mod) max = quicken_mod;
 	}
 	if (sc->getSCE(SC_ONEHAND) &&
 		max < sc->getSCE(SC_ONEHAND)->val2)
@@ -10197,6 +10260,7 @@ static int32 status_get_sc_interval(enum sc_type type)
 		case SC_POTION_HOT:
 			return 1000;
 		case SC_SLOWPOISON:
+		case SC_FAITHFUL:
             return 2000;		
 		default:
 			break;
@@ -11643,7 +11707,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val3 = 0; // Not need to keep this info.
 			break;
 		case SC_PROVIDENCE:
-			val2 = val1*5; // Race/Ele resist
+			val2 = val1*3; // Race/Ele resist
 			break;
 		case SC_REFLECTSHIELD:
 			val2 = 10+val1*3; // %Dmg reflected
@@ -11866,6 +11930,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_SAVAGERY:
 		case SC_POTION_HOT:
 		case SC_SLOWPOISON:
+		case SC_FAITHFUL:
 			tick_time = status_get_sc_interval(type);
 			val4 = tick - tick_time; // Remaining time
 			break;
@@ -12180,6 +12245,11 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 					i--;
 				}
 			}
+			// --- INICIO CUSTOM: Actualizar HP del Crusader al DAR Devotion ---
+			if (d_bl->type == BL_PC) {
+				status_calc_pc(BL_CAST(BL_PC, d_bl), SCO_FORCE);
+			}
+			// --- FIN CUSTOM ---
 			break;
 		}
 
@@ -14297,14 +14367,21 @@ int32 status_change_end( block_list* bl, enum sc_type type, int32 tid ){
 				status_calc_pc(sd, SCO_NONE);
 			}
 			break;
+			
 		case SC_DEVOTION:
 			{
 				block_list *d_bl = map_id2bl(val1);
 				if( d_bl ) {
-					if( d_bl->type == BL_PC )
+					if( d_bl->type == BL_PC ) {
 						((TBL_PC*)d_bl)->devotion[val2] = 0;
+						
+						// --- INICIO CUSTOM: Actualizar HP del Crusader al PERDER Devotion ---
+						status_calc_pc(BL_CAST(BL_PC, d_bl), SCO_FORCE);
+						// --- FIN CUSTOM ---
+					}
 					else if( d_bl->type == BL_MER )
 						((TBL_MER*)d_bl)->devotion_flag = 0;
+					
 					clif_devotion(d_bl, nullptr);
 				}
 			}
@@ -14953,7 +15030,7 @@ TIMER_FUNC(status_change_timer){
 		if (sce->val4 >= 0 && status->hp > status->max_hp / 4)
 			status_percent_damage(nullptr, bl, -1, 0, false);
 		break;
-// --- INICIO CUSTOM: Pociones en el Tiempo ---
+	// --- INICIO CUSTOM: Pociones en el Tiempo ---
 	case SC_POTION_HOT:
 		// Comprobamos val4 por seguridad (es la forma en la que tu rAthena valida el tick)
 		if (sce->val4 >= 0) { 
@@ -14972,18 +15049,34 @@ TIMER_FUNC(status_change_timer){
 			// Calculamos el 3% del HP Máximo
 			uint32 heal_amount = status->max_hp * 3 / 100;
 			
-			// Curamos HP (usando tu estructura con AP incluido)
+			// Curamos HP
 			status_heal(bl, heal_amount, 0, 0, 2);
 			
 			// Opcional: Añadir un efecto visual de curación cada vez que haga tick
 			//clif_specialeffect(bl, 312, AREA); // BUSCAR "TEMPORARY_COMMUNION_BUFF"
 		}
 		break;
-// --- INICIO CUSTOM: Aura visual en bucle ---
+	case SC_FAITHFUL:
+			if (sce->val4 >= 0) {
+				// sce->val1 contiene nuestros stacks (de 1 a 10).
+				// 0.2% por stack = (MaxHP * 2 * Stacks) / 1000
+				uint32 heal_amount = (status->max_hp * 2 * sce->val1) / 1000;
+				
+				if (heal_amount < 1) heal_amount = 1; // Seguridad por si la vida es muy baja
+				
+				// status_heal(bl, HP, SP, tipo_animacion, forzar)
+				// El 2 final indica el tipo de curación (suele mostrar números verdes si el cliente lo soporta)
+				status_heal(bl, heal_amount, 0, 0, 2);
+				
+				// Efecto visual opcional.
+				clif_specialeffect(bl, 1852, AREA);  // Competentia Loop
+			}
+			break;
+	// --- INICIO CUSTOM: Aura visual en bucle ---
 	case SC_SAVAGERY:
 		if (sce->val4 >= 0) { 
 			// Lanzamos el efecto y dejamos que el emulador haga el resto del trabajo
-			clif_specialeffect(bl, 1727, AREA);
+			clif_specialeffect(bl, 1727, AREA); // Dragonic Aura Buff Bottom
 		}
 		break;
 	// --- FIN CUSTOM ---

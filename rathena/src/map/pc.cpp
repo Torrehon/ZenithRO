@@ -3753,24 +3753,30 @@ void pc_bonus(map_session_data *sd,int32 type,int32 val)
 				sd->indexed_bonus.param_bonus[type - SP_POW + PARAM_POW] += val;
 			break;
 		case SP_ATK1:
-			if (sd->state.lr_flag == LR_FLAG_NONE) {
+			// --- INICIO CUSTOM: Fix ATK en Escudos ---
+			// Si NO es un arma secundaria (gorros, armaduras, ESCUDOS, etc), va a la mano principal
+			if (sd->state.lr_flag != LR_FLAG_WEAPON) {
 				bonus = status->rhw.atk + val;
 				status->rhw.atk = cap_value(bonus, 0, USHRT_MAX);
 			}
-			else if (sd->state.lr_flag == LR_FLAG_WEAPON) {
+			// Si es un arma secundaria (Assassin dual-wield), va a la mano izquierda
+			else {
 				bonus = status->lhw.atk + val;
 				status->lhw.atk =  cap_value(bonus, 0, USHRT_MAX);
 			}
+			// --- FIN CUSTOM ---
 			break;
 		case SP_ATK2:
-			if (sd->state.lr_flag == LR_FLAG_NONE) {
+			// --- INICIO CUSTOM: Fix ATK en Escudos ---
+			if (sd->state.lr_flag != LR_FLAG_WEAPON) {
 				bonus = status->rhw.atk2 + val;
 				status->rhw.atk2 = cap_value(bonus, 0, USHRT_MAX);
 			}
-			else if (sd->state.lr_flag == LR_FLAG_WEAPON) {
+			else {
 				bonus = status->lhw.atk2 + val;
 				status->lhw.atk2 =  cap_value(bonus, 0, USHRT_MAX);
 			}
+			// --- FIN CUSTOM ---
 			break;
 		case SP_BASE_ATK:
 			if (sd->state.lr_flag != LR_FLAG_ARROW) {

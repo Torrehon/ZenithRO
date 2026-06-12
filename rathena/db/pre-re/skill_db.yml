@@ -4766,7 +4766,7 @@ Body:
       Id: Venomdust
       Layout: -1
       Range: 1
-      Interval: 1000
+      Interval: 2000
       Target: Enemy
       Flag:
         RemovedByFireRain: true
@@ -6684,7 +6684,7 @@ Body:
     Unit:
       Id: Dummyskill
       Layout: -1
-      Interval: 300
+      Interval: 800
       Target: Enemy
       Flag:
         PathCheck: true
@@ -6735,8 +6735,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      NoTargetSelf: true
     Range: 9
     Hit: Single
     HitCount: 1

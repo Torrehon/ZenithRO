@@ -207,9 +207,6 @@ SKILL_INFO_LIST = {
 		"AL_DEMONBANE",
 		SkillName = "Demon Bane",
 		MaxLv = 5,
-		_NeedSkillList = {
-			{ SKID.AL_DP,1 }
-		}
 	},
 	[SKID.AL_RUWACH] = {
 		"AL_RUWACH",
@@ -1992,7 +1989,7 @@ SKILL_INFO_LIST = {
 		"CR_TRUST",
 		SkillName = "Faith",
 		MaxLv = 5,
-		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+		AttackRange = { 1, 1, 1, 1, 1, }
 	},
 	[SKID.CR_AUTOGUARD] = {
 		"CR_AUTOGUARD",
@@ -2101,6 +2098,18 @@ SKILL_INFO_LIST = {
 		_NeedSkillList = {
 			{ SKID.KN_SPEARMASTERY,10 }
 		}
+	},
+	[SKID.CR_TEMPLARSOUL] = {
+		"CR_TEMPLARSOUL",
+		SkillName = "Soul of the Templar",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.CR_GUARDIANSOUL] = {
+		"CR_GUARDIANSOUL",
+		SkillName = "Soul of the Guardian",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.MO_IRONHAND] = {
 		"MO_IRONHAND",

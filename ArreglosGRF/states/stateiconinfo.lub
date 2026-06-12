@@ -173,7 +173,16 @@ StateIconList[EFST_IDs.EFST_ASFOCUS] = {
 	descript = {
 		{ "Assassin Focus", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
-		{ "Attack speed increased when landing critical hits.", { 255, 255, 255 } }
+		{ "Increases attack speed when landing critical hits.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_FAITHFUL] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Faithful", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Heals Hp every 2 seconds.", { 255, 255, 255 } }
 	}
 }
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {

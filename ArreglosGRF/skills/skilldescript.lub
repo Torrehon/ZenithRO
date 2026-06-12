@@ -2389,6 +2389,25 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Increases attack speed when using spear weapon for skill duration. ^000000"
 	},
+    [SKID.CR_TEMPLARSOUL] = {
+		"Soul of the Templar",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the true potential of swords.^000000",
+		"^777777[Bowling Bash]:^000000 ^777777With a 2H Sword, hits 3 times if there are 3 enemies, or 4 times for 4 or more enemies.^000000",
+		"^777777[Auto Counter]:^000000 ^777777A successful block grants 'Duelist', increasing Crit Damage by 25%, Aspd by 10% and Atk by 30 for 20 seconds.^000000",
+		"^777777[Sword Quicken]:^000000 ^777777Increases Crit by 1 and Hit by 2 per skill level.^000000"
+	},
+	[SKID.CR_GUARDIANSOUL] = {
+		"Soul of the Guardian",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Awakens the true potential of spears.^000000",
+		"^777777[Pierce]:^000000 ^777777Grants a base Critical rate of 50 to the skill.^000000",
+		"^777777[Spear Boomerang]:^000000 ^777777Weapon's weight increases final damage by 1/4.^000000",
+		"^777777[Spear Stab]:^000000 ^777777If equipped with 2 Hand Spear, applies 'Stagger', increasing the ratio of the next Brandish Spear by 150%.^000000",
+		"^777777[Brandish Spear]:^000000 ^777777The skill now hits 3 times.^000000"
+	},
 	[SKID.MO_IRONHAND] = {
 		"Iron Hand",
 		"Max Level: 10",

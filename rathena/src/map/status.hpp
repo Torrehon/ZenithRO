@@ -1462,6 +1462,7 @@ enum sc_type : int16 {
 	SC_POTION_HOT,
 	SC_OVERHEAL,
 	SC_ASFOCUS,
+	SC_FAITHFUL,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -2980,6 +2981,7 @@ enum efst_type : int16{
 	EFST_POTION_HOT = 1713,
 	EFST_OVERHEAL = 1714,
 	EFST_ASFOCUS = 1715,
+	EFST_FAITHFUL = 1716,
 	EFST_MAX,
 };
 

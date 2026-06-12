@@ -4567,6 +4567,16 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 			if (src == bl && skill_get_unit_id(skill_id))
 				return skill_castend_pos2(src,bl->x,bl->y,skill_id,skill_lv,tick,0);
 	}
+	
+	// --- INICIO CUSTOM: AoE Providence (Templar Soul) ---
+	if (skill_id == CR_PROVIDENCE && sd && pc_checkskill(sd, CR_TEMPLARSOUL) > 0 && sd->status.party_id > 0 && !(flag & 1)) {
+		if (dstsd != nullptr && sd->status.party_id == dstsd->status.party_id) {
+			// Radio 2 = Área de 5x5 celdas
+			party_foreachsamemap(skill_area_sub, dstsd, 2, src, skill_id, skill_lv, tick, flag | BCT_PARTY | 1, skill_castend_nodamage_id);
+			return 0;
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	type = skill_get_sc(skill_id);
 	tsc = status_get_sc(bl);

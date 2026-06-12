@@ -853,9 +853,6 @@ Body:
             Level: 1
       - Name: AL_DP
         MaxLevel: 5
-        Requires:
-          - Name: AL_CURE
-            Level: 1
       - Name: AL_DEMONBANE
         MaxLevel: 5
         Requires:

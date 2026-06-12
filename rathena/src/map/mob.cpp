@@ -3612,6 +3612,21 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 		if (sd) {
 			std::shared_ptr<s_mob_db> mission_mdb = mob_db.find(sd->mission_mobid), mob = mob_db.find(md->mob_id);
 
+			// --- INICIO CUSTOM: Templar Soul (Faithful Stacks al matar) ---
+			if (pc_checkskill(sd, CR_TEMPLARSOUL) > 0 && pc_checkskill(sd, CR_TRUST) >= 5) {
+				int stacks = 1;
+				
+				// Comprobamos si ya tiene el estado directamente desde sd->sc
+				if (sd->sc.getSCE(SC_FAITHFUL)) {
+					stacks = sd->sc.getSCE(SC_FAITHFUL)->val1 + 1;
+					if (stacks > 10) stacks = 10; // Límite de 10 stacks
+				}
+				
+				// sc_start(origen, destino, estado, probabilidad%, val1(stacks), duración_ms)
+				sc_start(sd, sd, SC_FAITHFUL, 100, stacks, 60000); 
+			}
+			// --- FIN CUSTOM ---
+
 			if ((sd->mission_mobid == md->mob_id) || (mission_mdb != nullptr &&
 				((battle_config.taekwon_mission_mobname == 1 && util::vector_exists(status_get_race2(md), RC2_GOBLIN) && util::vector_exists(mission_mdb->race2, RC2_GOBLIN)) ||
 				(battle_config.taekwon_mission_mobname == 2 && mob->jname.compare(mission_mdb->jname) == 0))))

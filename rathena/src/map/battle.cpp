@@ -5690,6 +5690,18 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 			ATK_ADD(wd.damage, wd.damage2, matk_portion);
 		}
 		// --- FIN CUSTOM ---
+		
+		// --- INICIO CÓDIGO CUSTOM: Templar Soul (Holy Cross con MATK) ---
+		if (skill_id == CR_HOLYCROSS && sd && sd->status.weapon == W_1HSWORD && pc_checkskill(sd, CR_TEMPLARSOUL) > 0) {
+			int32 base_matk = sstatus->matk_min;
+			if (sstatus->matk_max > sstatus->matk_min) {
+				base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+			}
+
+			// Sumamos el MATK resultante directamente al daño base del golpe
+			ATK_ADD(wd.damage, wd.damage2, base_matk);
+		}
+		// --- FIN CÓDIGO CUSTOM ---
 
 		// Skill ratio
 		ATK_RATE(wd.damage, wd.damage2, battle_calc_attack_skill_ratio(&wd, src, target, skill_id, skill_lv));
@@ -6342,6 +6354,14 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 				for (const auto &raceit : race2)
 					i += sd->indexed_bonus.ignore_mdef_by_race2[raceit];
 			}
+			// --- INICIO CÓDIGO CUSTOM: Templar Soul (Grand Cross ignora MDEF) ---
+			if (skill_id == CR_GRANDCROSS && sd && pc_checkskill(sd, CR_TEMPLARSOUL) > 0) {
+				// Filtramos si el objetivo es Raza Demon o Raza Undead
+				if (tstatus->race == RC_DEMON || tstatus->race == RC_UNDEAD) {
+					i += 15; // Sumamos un 15% al multiplicador de ignorar MDEF
+				}
+			}
+			// --- FIN CÓDIGO CUSTOM ---
 
 			i = cap_value(i, 0, 100);
 
