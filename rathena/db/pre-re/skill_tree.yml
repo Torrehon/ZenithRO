@@ -922,6 +922,10 @@ Body:
             Level: 10
       - Name: CR_SHRINK
         MaxLevel: 1
+      - Name: CR_TEMPLARSOUL
+        MaxLevel: 1
+      - Name: CR_GUARDIANSOUL
+        MaxLevel: 1      
   - Job: Monk
     Inherit:
       Novice: true
@@ -3120,7 +3124,7 @@ Body:
           - Name: NJ_SHADOWJUMP
             Level: 3
       - Name: NJ_BUNSINJYUTSU
-        MaxLevel: 10
+        MaxLevel: 5
         Requires:
           - Name: NJ_UTSUSEMI
             Level: 3
@@ -3172,10 +3176,13 @@ Body:
           - Name: NJ_NEN
             Level: 1
       - Name: NJ_SHADOWPATH
-        MaxLevel: 5 
-        Requires:
-          - Name: KO_YAMIKUMO
-            Level: 1
+        MaxLevel: 5
+      - Name: NJ_DUAL
+        MaxLevel: 1
+      - Name: NJ_KENSEISOUL
+        MaxLevel: 1
+      - Name: NJ_KUJISOUL
+        MaxLevel: 1
   - Job: Hiregun
     Inherit:
       Novice: true
@@ -3231,8 +3238,7 @@ Body:
           - Name: GS_TRIPLEACTION
             Level: 1 
       - Name: GS_AMMOCRAFT
-        MaxLevel: 1 
-            
+        MaxLevel: 1  
   - Job: Gangsi
     Inherit:
       Novice: true

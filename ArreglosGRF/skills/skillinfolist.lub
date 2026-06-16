@@ -4758,7 +4758,7 @@ SKILL_INFO_LIST = {
 		SkillName = "Snow Flake Draft",
 		MaxLv = 5,
 		SpAmount = { 40, 45, 50, 55, 60 },
-		AttackRange = { 1, 1, 1, 1, 1 },
+		AttackRange = { 9, 9, 9, 9, 9 },
 		_NeedSkillList = {
 			{ SKID.NJ_NINPOU,10 },
 			{ SKID.NJ_SUITON,3 }
@@ -4827,6 +4827,21 @@ SKILL_INFO_LIST = {
 		"NJ_SHADOWPATH",
 		SkillName = "Shadow Path",
 		MaxLv = 5,
+	},
+	[SKID.NJ_DUAL] = {
+		"NJ_DUAL",
+		SkillName = "Dual Wield",
+		MaxLv = 1,
+	},
+	[SKID.NJ_KENSEISOUL] = {
+		"NJ_KENSEISOUL",
+		SkillName = "Soul of the Kensei",
+		MaxLv = 1,
+	},
+	[SKID.NJ_KUJISOUL] = {
+		"NJ_KUJISOUL",
+		SkillName = "Soul of the Kuji",
+		MaxLv = 1,
 	},
 	[SKID.MB_FIGHTING] = {
 		"MB_FIGHTING",

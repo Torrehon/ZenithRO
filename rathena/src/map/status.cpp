@@ -8077,7 +8077,17 @@ static int16 status_calc_critical(block_list *bl, status_change *sc, int32 criti
 		critical += sc->getSCE(SC_BEYONDOFWARCRY)->val3;
 	if (sc->getSCE(SC_INTENSIVE_AIM))
 		critical += 300;
-
+	// --- INICIO CUSTOM: Spear Quicken + Guardian Soul (CRIT) ---
+	if (sc->getSCE(SC_SPEARQUICKEN)) {		
+		// Comprobamos si es un jugador
+		map_session_data *sd = BL_CAST(BL_PC, bl);
+		
+		// Si tiene Guardian Soul y lleva una Lanza a 2 Manos
+		if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0 && sd->status.weapon == W_2HSPEAR) {
+			critical += 2*sc->getSCE(SC_SPEARQUICKEN)->val1*10;
+		}
+	}
+	// --- FIN CUSTOM ---
 	return (int16)cap_value(critical,10,SHRT_MAX);
 }
 
@@ -8223,6 +8233,16 @@ static int16 status_calc_flee(block_list *bl, status_change *sc, int32 flee)
 	if (sc->getSCE(SC_NIBELUNGEN) && sc->getSCE(SC_NIBELUNGEN)->val2 == RINGNBL_FLEE)
 		flee += 50;
 #endif
+
+	// --- INICIO CUSTOM: Spear Quicken + Guardian Soul (FLEE) ---
+	if (sc->getSCE(SC_SPEARQUICKEN)) {
+		map_session_data *sd = BL_CAST(BL_PC, bl);
+		
+		if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0 && sd->status.weapon == W_2HSPEAR) {
+			flee += 2 * sc->getSCE(SC_SPEARQUICKEN)->val1;
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	// Rate value
 	if(sc->getSCE(SC_INCFLEERATE))
@@ -8455,7 +8475,17 @@ static int16 status_calc_def2(block_list *bl, status_change *sc, int32 def2)
 		// --- FIN CÓDIGO CUSTOM ---
 #endif
 	}
-
+	// --- INICIO CUSTOM: Spear Quicken + Guardian Soul (VIT DEF con Lanza a 1 Mano) ---
+	if (sc->getSCE(SC_SPEARQUICKEN)) {
+		map_session_data *sd = BL_CAST(BL_PC, bl);
+		
+		// Comprobamos si tiene la pasiva y empuña lanza a 1 mano
+		if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0 && sd->status.weapon == W_1HSPEAR) {
+			int sq_lv = sc->getSCE(SC_SPEARQUICKEN)->val1; // Nivel de la habilidad
+			def2 += 5 * sq_lv; // +5 de Soft DEF por cada nivel (Nivel 10 = +50 de DEF)
+		}
+	}
+	// --- FIN CUSTOM ---
 #ifndef RENEWAL
 	// Mantenemos Concentration aislado en Pre-Renewal para que no se mezcle con Angelus
 	if(sc->getSCE(SC_CONCENTRATION))
@@ -9157,6 +9187,15 @@ static int16 status_calc_aspd_rate(block_list *bl, status_change *sc, int32 aspd
 	}
 	if( sc->getSCE(SC_FREEZING) )
 		aspd_rate += 300;
+	// --- NUEVO CÓDIGO SUITON (WATER ESCAPE) ---
+	if (sc->getSCE(SC_SUITON) && sc->getSCE(SC_SUITON)->val1 == 10) {
+		// val2 contiene la penalización de AGI original. 
+		// Si es mayor a 0, significa que NO es un Ninja y debe sufrir los efectos.
+		if (sc->getSCE(SC_SUITON)->val2 > 0) {
+			aspd_rate += 100; // Sumar 100 equivale a reducir la ASPD un 10%
+		}
+	}
+	// --- FIN SUITON ---
 	if( sc->getSCE(SC_HALLUCINATIONWALK_POSTDELAY) )
 		aspd_rate += 500;
 	if( sc->getSCE(SC_PARALYSE) && sc->getSCE(SC_PARALYSE)->val3 == 1 )
@@ -12498,7 +12537,11 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val3=skill_get_blewcount(NJ_UTSUSEMI, val1); // knockback value.
 			break;
 		case SC_BUNSINJYUTSU:
-			val2=(val1+1)/2; // Number of hits blocked
+			if (val1 == 5) {
+				val2 = 7; // Nivel 5: 5 bloqueos base + 2 adicionales (compensado por el Orbe)
+			} else {
+				val2 = val1; // Niveles 1 al 4: Bloquea una cantidad igual al nivel de la skill
+			}
 			break;
 		case SC_CHANGE:
 			val2= 30*val1; // Vit increase

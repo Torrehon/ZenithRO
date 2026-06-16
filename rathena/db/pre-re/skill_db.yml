@@ -2176,7 +2176,7 @@ Body:
     Type: Weapon
   - Id: 65
     Name: PR_MACEMASTERY
-    Description: Mace Mastery
+    Description: Righteous Mastery
     MaxLevel: 10
     Type: Weapon
   - Id: 66
@@ -6515,15 +6515,15 @@ Body:
     Element: Weapon
     Knockback:
       - Level: 1
-        Amount: 5
+        Amount: 2
       - Level: 2
-        Amount: 6
+        Amount: 3
       - Level: 3
-        Amount: 7
+        Amount: 4
       - Level: 4
-        Amount: 8
+        Amount: 5
       - Level: 5
-        Amount: 9
+        Amount: 6
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -6604,6 +6604,8 @@ Body:
     TargetType: Attack
     Flags:
       TargetTrap: true
+    DamageFlags:
+      Critical: true
     Range: -2
     Hit: Multi_Hit
     HitCount: -2
@@ -6814,6 +6816,7 @@ Body:
           Amount: 60
       Weapon:
         2hSpear: true
+        1hSpear: true
     Status: SpearQuicken
   - Id: 259
     Name: MO_IRONHAND
@@ -14211,7 +14214,6 @@ Body:
     TargetType: Attack
     DamageFlags:
       Splash: true
-      SplashSplit: true
     Flags:
       TargetTrap: true
     Range: 9
@@ -14229,7 +14231,7 @@ Body:
         Count: -5
     Element: Weapon
     SplashArea: 1
-    CastTime: 3000
+    CastTime: 2000
     AfterCastActDelay: 2000
     Requires:
       SpCost:
@@ -14249,7 +14251,7 @@ Body:
     Name: NJ_ZENYNAGE
     Description: Throw Zeny
     MaxLevel: 10
-    Type: Misc
+    Type: Weapon
     TargetType: Attack
     DamageFlags:
       IgnoreElement: true
@@ -14259,35 +14261,37 @@ Body:
       IgnoreGvgReduction: true
     Range: 7
     Hit: Single
-    HitCount: 1
+    HitCount: -5
     CopyFlags:
       Skill:
         Plagiarism: true
         Reproduce: true
-    AfterCastActDelay: 5000
+    CastTime: 1000
+    Cooldown: 2000
+    AfterCastActDelay: 1000
     Requires:
-      SpCost: 50
+      SpCost: 25
       ZenyCost:
         - Level: 1
-          Amount: 500
+          Amount: 300
         - Level: 2
-          Amount: 1000
+          Amount: 600
         - Level: 3
-          Amount: 1500
+          Amount: 900
         - Level: 4
-          Amount: 2000
+          Amount: 1200
         - Level: 5
-          Amount: 2500
+          Amount: 1500
         - Level: 6
-          Amount: 3000
+          Amount: 1800
         - Level: 7
-          Amount: 3500
+          Amount: 2100
         - Level: 8
-          Amount: 4000
+          Amount: 2400
         - Level: 9
-          Amount: 4500
+          Amount: 2700
         - Level: 10
-          Amount: 5000
+          Amount: 3000
   - Id: 527
     Name: NJ_TATAMIGAESHI
     Description: Improvised Defense
@@ -14470,7 +14474,7 @@ Body:
   - Id: 532
     Name: NJ_BUNSINJYUTSU
     Description: Mirror Image
-    MaxLevel: 10
+    MaxLevel: 5
     Type: Magic
     TargetType: Self
     DamageFlags:
@@ -14481,45 +14485,25 @@ Body:
       - Level: 1
         Time: 4000
       - Level: 2
-        Time: 3500
+        Time: 4000
       - Level: 3
         Time: 3000
       - Level: 4
-        Time: 2500
+        Time: 3000
       - Level: 5
-        Time: 2000
-      - Level: 6
-        Time: 1500
-      - Level: 7
-        Time: 1000
-      - Level: 8
-        Time: 1000
-      - Level: 9
-        Time: 1000
-      - Level: 10
         Time: 1000
     AfterCastActDelay: 1000
     Duration1:
       - Level: 1
         Time: 60000
       - Level: 2
-        Time: 80000
-      - Level: 3
-        Time: 100000
-      - Level: 4
         Time: 120000
-      - Level: 5
-        Time: 140000
-      - Level: 6
-        Time: 160000
-      - Level: 7
+      - Level: 3
         Time: 180000
-      - Level: 8
-        Time: 200000
-      - Level: 9
-        Time: 220000
-      - Level: 10
+      - Level: 4
         Time: 240000
+      - Level: 5
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -14545,6 +14529,7 @@ Body:
       ItemCost:
         - Item: Shadow_Orb
           Amount: 1
+          Level: 5
     Status: Bunsinjyutsu
   - Id: 533
     Name: NJ_NINPOU
@@ -14638,6 +14623,9 @@ Body:
     Hit: Multi_Hit
     HitCount: 1
     Element: Fire
+    Knockback:
+      - Level: 10
+        Amount: 2
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -14670,6 +14658,7 @@ Body:
       ItemCost:
         - Item: Flame_Stone
           Amount: 1
+          Level: 10
     Unit:
       Id: Kaen
       Layout: -1
@@ -14692,8 +14681,8 @@ Body:
       Skill:
         Plagiarism: true
         Reproduce: true
-    CastTime: 3000
-    AfterCastActDelay: 2000
+    CastTime: 4000
+    Cooldown: 1000
     Duration1: 100
     Requires:
       SpCost:
@@ -14710,9 +14699,20 @@ Body:
       ItemCost:
         - Item: Flame_Stone
           Amount: 1
+          Level: 5
     Unit:
       Id: Dummyskill
-      Layout: 2
+      Layout:
+        - Level: 1
+          Size: 1
+        - Level: 2
+          Size: 1
+        - Level: 3
+          Size: 1
+        - Level: 4
+          Size: 1
+        - Level: 5
+          Size: 2
       Interval: 1000
       Target: Enemy
       Flag:
@@ -14876,6 +14876,7 @@ Body:
       ItemCost:
         - Item: Ice_Stone
           Amount: 1
+          Level: 10
     Unit:
       Id: Suiton
       Layout:
@@ -14909,9 +14910,10 @@ Body:
     Description: Ice Meteor
     MaxLevel: 5
     Type: Magic
-    TargetType: Self
-    Hit: Single
-    HitCount: 1
+    TargetType: Attack
+    Range: 9
+    Hit: Multi_Hit
+    HitCount: -3
     Element: Water
     CopyFlags:
       Skill:
@@ -14928,19 +14930,8 @@ Body:
         Time: 3500
       - Level: 5
         Time: 4000
-    AfterCastActDelay: 2000
+    Cooldown: 1000
     Duration1: 100
-    Duration2:
-      - Level: 1
-        Time: 5000
-      - Level: 2
-        Time: 10000
-      - Level: 3
-        Time: 15000
-      - Level: 4
-        Time: 20000
-      - Level: 5
-        Time: 25000
     Requires:
       SpCost:
         - Level: 1
@@ -14956,14 +14947,24 @@ Body:
       ItemCost:
         - Item: Ice_Stone
           Amount: 1
+          Level: 5
     Unit:
       Id: Dummyskill
-      Layout: 3
+      Layout:
+        - Level: 1
+          Size: 1
+        - Level: 2
+          Size: 1
+        - Level: 3
+          Size: 1
+        - Level: 4
+          Size: 1
+        - Level: 5
+          Size: 2
       Interval: 1000
       Target: Enemy
       Flag:
         PathCheck: true
-    Status: Freeze
   - Id: 540
     Name: NJ_HUUJIN
     Description: Wind Blade
@@ -15046,16 +15047,17 @@ Body:
     Description: Lightning Strike of Destruction
     MaxLevel: 5
     Type: Magic
-    TargetType: Self
+    TargetType: Attack
     Range: 9
-    Hit: Single
-    HitCount: 1
+    Hit: Multi_Hit
+    HitCount: -3
     Element: Wind
     CopyFlags:
       Skill:
         Plagiarism: true
         Reproduce: true
     CastTime: 4000
+    Cooldown: 1000
     Duration1: 100
     Requires:
       SpCost:
@@ -15072,19 +15074,20 @@ Body:
       ItemCost:
         - Item: Wind_Stone
           Amount: 1
+          Level: 5
     Unit:
       Id: Dummyskill
       Layout:
         - Level: 1
-          Size: 2
+          Size: 1
         - Level: 2
-          Size: 2
+          Size: 1
         - Level: 3
-          Size: 3
+          Size: 1
         - Level: 4
-          Size: 3
+          Size: 1
         - Level: 5
-          Size: 4
+          Size: 2
       Interval: 1000
       Target: Enemy
       Flag:
@@ -15111,6 +15114,7 @@ Body:
     Hit: Multi_Hit
     HitCount: 1
     Element: Wind
+    Knockback: 4
     SplashArea: 1
     ActiveInstance:
       - Level: 1
@@ -15140,9 +15144,6 @@ Body:
           Amount: 36
         - Level: 5
           Amount: 40
-      ItemCost:
-        - Item: Wind_Stone
-          Amount: 1
   - Id: 543
     Name: NJ_NEN
     Description: Soul
@@ -15190,13 +15191,34 @@ Body:
     Status: Nen
   - Id: 544
     Name: NJ_ISSEN
-    Description: Final Strike
+    Description: Zantetsuken
     MaxLevel: 10
+    CastTime:
+      - Level: 1
+        Time: 1000
+      - Level: 2
+        Time: 2000
+      - Level: 3
+        Time: 3000
+      - Level: 4
+        Time: 4000
+      - Level: 5
+        Time: 5000
+      - Level: 6
+        Time: 6000
+      - Level: 7
+        Time: 7000
+      - Level: 8
+        Time: 8000
+      - Level: 9
+        Time: 9000
+      - Level: 10
+        Time: 10000
     Type: Weapon
     TargetType: Attack
     DamageFlags:
       IgnoreFlee: true
-    Range: -5
+    Range: 2
     Hit: Single
     HitCount: 1
     Requires:
@@ -15221,6 +15243,7 @@ Body:
           Amount: 95
         - Level: 10
           Amount: 100
+    CastCancel: false
   - Id: 572
     Name: SL_DEATHKNIGHT
     Description: SL_DEATHKNIGHT
@@ -17208,6 +17231,12 @@ Body:
     Cooldown:
       - Level: 1
         Time: 2000
+    CastCancel: false
+  - Id: 1032
+    Name: NJ_DUAL
+    Description: Dual Wield
+    MaxLevel: 1
+    Type: Weapon
   - Id: 1041
     Name: KN_BLADERSOUL
     Description: Soul of the Blader
@@ -17266,6 +17295,26 @@ Body:
   - Id: 1052
     Name: AS_VIPERSOUL
     Description: Soul of the Viper
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1053
+    Name: CR_TEMPLARSOUL
+    Description: Soul of the Templar
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1054
+    Name: CR_GUARDIANSOUL
+    Description: Soul of the Guardian
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1055
+    Name: NJ_KENSEISOUL
+    Description: Soul of the Kensei
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1056
+    Name: NJ_KUJISOUL
+    Description: Soul of the Kuji
     MaxLevel: 1
     Type: Weapon
   - Id: 2001

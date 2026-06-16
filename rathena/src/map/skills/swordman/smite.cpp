@@ -52,15 +52,25 @@ void SkillSmite::applyAdditionalEffects(block_list* src, block_list* target, uin
 void SkillSmite::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 &flag) const {
 	map_session_data *sd = BL_CAST(BL_PC, src);
 
-	// 1. Guardamos el ID del objetivo principal para no golpearle dos veces con el área
+	// 1. Guardamos el ID del objetivo principal para no pegarle dos veces
 	skill_area_temp[1] = target->id;
 
-	// 2. Ejecutamos el golpe normal al objetivo principal
-	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
-
-	// 3. Si tiene la pasiva, creamos el área de efecto 3x3 (radio 1)
+	// 2. ¡PRIMERO EL ÁREA! Si tiene la pasiva, creamos el área de efecto 3x3 (radio 1)
+	// Lo hacemos antes para que el objetivo principal sirva de "ancla" antes de salir volando.
 	if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
-		// Buscamos enemigos en rango 1 desde el target y replicamos el golpe
 		map_foreachinallrange(skill_area_sub, target, 1, BL_CHAR, src, getSkillId(), skill_lv, tick, flag | BCT_ENEMY | 1, skill_castend_nodamage_id);
 	}
+
+	// 3. Ejecutamos el golpe normal al objetivo principal (que lo empujará y aturdirá)
+	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
 }
+
+void SkillSmite::castendNoDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 &flag) const {
+	// Esta función ahora actúa como nuestra "recepción de explosión"
+	if (skill_area_temp[1] != target->id) { // Solo si NO es el objetivo principal...
+		
+		// Golpeamos al enemigo del área.
+		WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
+	}
+}
+// --- FIN CUSTOM ---

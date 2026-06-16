@@ -966,6 +966,7 @@ Body:
       Aspd: true
       Cri: true
       Flee: true
+      Def2: true
     Opt3:
       Quicken: true
     Flags:

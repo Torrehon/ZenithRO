@@ -12,7 +12,8 @@ SkillRagingFireDragon::SkillRagingFireDragon() : SkillImpl(NJ_BAKUENRYU) {
 void SkillRagingFireDragon::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	base_skillratio += 50 + 150 * skill_lv;
+	// Nueva fórmula custom de daño: 100% + 80% * Skill Level
+	base_skillratio += 80 * skill_lv;
 	if(sd && sd->spiritcharm_type == CHARM_TYPE_FIRE && sd->spiritcharm > 0)
 		base_skillratio += 100 * sd->spiritcharm;
 }

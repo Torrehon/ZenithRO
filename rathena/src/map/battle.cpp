@@ -4172,9 +4172,19 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 			}
 #else
 		case NJ_ISSEN:
-			wd->damage = 40 * sstatus->str + sstatus->hp * 8 * skill_lv / 100;
+		{
+			// Multiplicador base: 500% + 50% por nivel de skill
+			int skillratio = 500 + (50 * skill_lv);
+
+			// Escalado con STR: Cada punto de STR añade 2% adicional al multiplicador.
+			skillratio += (sstatus->str * 2);
+
+			// Aplicamos el porcentaje al daño del arma derecha
+			wd->damage = wd->damage * skillratio / 100;
+
 			wd->damage2 = 0;
 			break;
+		}
 		case LK_SPIRALPIERCE:
 		case ML_SPIRALPIERCE:
 			if (sd) {
@@ -6877,24 +6887,6 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 				md.damage /= 2;
 #endif
 			break;
-		case NJ_ZENYNAGE:
-			md.damage = skill_get_zeny( skill_id, skill_lv );
-
-			if( md.damage == 0 ){
-				md.damage = 2;
-			}
-
-			md.damage += rnd_value( static_cast<decltype(md.damage)>( 0 ), md.damage );
-
-			// Specific to Boss Class
-			if( status_get_class_( target ) == CLASS_BOSS ){
-				md.damage /= 3;
-			}
-
-			if( tsd != nullptr ){
-				md.damage /= 2;
-			}
-			break;
 		case KO_MUCHANAGE:
 			md.damage = skill_get_zeny( skill_id, skill_lv );
 
@@ -7079,13 +7071,6 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 				struct Damage wd = battle_calc_weapon_attack(src,target,skill_id,skill_lv,mflag);
 
 				md.damage += wd.damage;
-			}
-			break;
-		case NJ_ZENYNAGE:
-			if (sd) {
-				if (md.damage > sd->status.zeny)
-					md.damage = sd->status.zeny;
-				pc_payzeny( sd, static_cast<int32>( md.damage ), LOG_TYPE_CONSUME );
 			}
 			break;
 	}

@@ -1872,6 +1872,23 @@ int32 skill_counter_additional_effect (block_list* src, block_list *bl, uint16 s
 		clif_skill_nodamage(src,*bl,HW_SOULDRAIN,rate);
 		status_heal(src, 0, status_get_lv(bl)*(95+15*rate)/100, 2);
 	}
+	
+	// --- REEMBOLSO ZENYNAGE (KENSEI SOUL) ---
+	if (sd && skill_id == NJ_ZENYNAGE && status_isdead(*bl) && pc_checkskill(sd, NJ_KENSEISOUL) > 0) {
+		int zeny_refund = 300 * skill_lv;
+		
+		sd->status.zeny += zeny_refund;
+		if (sd->status.zeny > MAX_ZENY) {
+			sd->status.zeny = MAX_ZENY; // Límite de seguridad
+		}
+		
+		// Actualiza el Zeny en la pantalla del jugador
+		clif_updatestatus(*sd, SP_ZENY);
+		
+		// Efecto visual opcional: Vuelve a mostrar la animación sobre el enemigo para indicar el robo de dinero
+		clif_skill_nodamage(src, *bl, NJ_ZENYNAGE, skill_lv);
+	}
+	// ----------------------------------------
 
 	if( sd && status_isdead(*bl) ) {
 		int32 sp = 0, hp = 0;
@@ -8921,14 +8938,14 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
 			}
 			break;
 		case NJ_ISSEN:
-#ifdef RENEWAL
-			if (status->hp < (status->hp/100)) {
-#else
-			if (status->hp < 2) {
-#endif
-				clif_skill_fail( sd, skill_id );
-				return false;
-			}
+// #ifdef RENEWAL
+			// if (status->hp < (status->hp/100)) {
+// #else
+			// if (status->hp < 2) {
+// #endif
+				// clif_skill_fail( sd, skill_id );
+				// return false;
+			// }
 			[[fallthrough]];
 		case NJ_BUNSINJYUTSU:
 			if (!(sc && sc->getSCE(SC_NEN))) {
@@ -9923,8 +9940,6 @@ void skill_consume_requirement(map_session_data *sd, uint16 skill_id, uint16 ski
 
 		if(require.zeny > 0)
 		{
-			if( skill_id == NJ_ZENYNAGE )
-				require.zeny = 0; //Zeny is reduced on skill_attack.
 			if( sd->status.zeny < require.zeny )
 				require.zeny = sd->status.zeny;
 			pc_payzeny(sd,require.zeny,LOG_TYPE_CONSUME);

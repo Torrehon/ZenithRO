@@ -5388,6 +5388,18 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Enables movement while in ^008800Hiding^777777 status. Movement speed is slower than normal walk. ^000000"
 	},
+	[SKID.NJ_DUAL] = {
+		"Dual Wield",
+		"Max Level: 1",
+		"17^CC3399Requirement: Finish Quest ^000000",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Allows the user to equip",
+		"weapons in both hands. While dual",
+		"wielding, single target ninja spells",
+		"hit count is doubled, final damage is",
+		"70% of the original and cast time is",
+		"doubled.^000000"
+	},
 	[SKID.MB_FIGHTING] = {},
 	[SKID.MB_NEUTRAL] = {},
 	[SKID.MB_TAIMING_PUTI] = {},

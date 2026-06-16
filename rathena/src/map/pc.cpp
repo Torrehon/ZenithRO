@@ -12352,11 +12352,11 @@ bool pc_equipitem(map_session_data *sd,int16 n,int32 req_pos,bool equipswitch)
 				}
 			}
 		}
-	} else if ((pos == EQP_ARMS || (pos == EQP_HAND_R && sd->class_ == JOB_NINJA)) && id->equip == EQP_HAND_R) { // Dual wield capable weapon 
+	} else if ((pos == EQP_ARMS || (pos == EQP_HAND_R && sd->class_ == JOB_NINJA && pc_checkskill(sd, NJ_DUAL) > 0)) && id->equip == EQP_HAND_R) { // Dual wield capable weapon 
 		pos = (req_pos & EQP_ARMS);
 		
-		// Si el cliente no especifica posición, o si es un Chunin intentando poner la segunda daga
-		if (pos == EQP_ARMS || (sd->class_ == JOB_NINJA && equip_index[EQI_HAND_R] >= 0)) {
+		// Si el cliente no especifica posición, o si es un Ninja con la skill intentando poner la segunda arma
+		if (pos == EQP_ARMS || (sd->class_ == JOB_NINJA && pc_checkskill(sd, NJ_DUAL) > 0 && equip_index[EQI_HAND_R] >= 0)) {
 #ifdef RENEWAL
 			pos = (equip_index[EQI_HAND_R] >= 0 && equip_index[EQI_HAND_L] < 0) ? EQP_HAND_L : EQP_HAND_R;
 #else
