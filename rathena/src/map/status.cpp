@@ -2449,6 +2449,9 @@ uint16 status_base_atk(const block_list *bl, const struct status_data *status, i
 			case W_HUUMA:
 				flag = 2; // Híbrido Custom
 				break;
+			case W_BOOK:
+				flag = 3; // --- CUSTOM: Libros (Escalan con INT) ---
+				break;
 		}
 	}
 
@@ -2458,6 +2461,12 @@ uint16 status_base_atk(const block_list *bl, const struct status_data *status, i
 #endif
 		str = status->dex;
 		dex = status->str;
+	} else if (flag == 3) { // --- CUSTOM: Si es Libro, usa INT como stat principal ---
+#ifdef RENEWAL
+		dstr =
+#endif
+		str = status->int_; // Asignamos INT a la variable de fuerza
+		dex = status->dex;
 	} else { // Armas melee y Huuma
 #ifdef RENEWAL
 		dstr =
@@ -2497,7 +2506,7 @@ uint16 status_base_atk(const block_list *bl, const struct status_data *status, i
 				*/
 				str = (total_str + total_dex) * 10 / 15;
 			} 
-			else { // --- Fórmula Estándar (Melee o Rango) ---
+			else { // --- Fórmula Estándar (Melee, Rango, o Libros con su INT ya inyectada) ---
 				dstr = str / 10;
 				str += dstr * dstr;
 				str += dex / 5 + status->luk / 5;
@@ -4340,7 +4349,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	    base_status->vit++;
     }
 	if((skill=pc_checkskill(sd,SA_DRAGONOLOGY))>0)
-		base_status->int_ += (skill+1)/2; // +1 INT / 2 lv
+		base_status->int_ += skill; // +1 INT * lv
 	if((skill=pc_checkskill(sd,AC_OWL))>0)
 		base_status->dex += skill;
 	if((skill = pc_checkskill(sd,RA_RESEARCHTRAP))>0)
@@ -4506,6 +4515,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		base_status->batk += (5 * pc_checkskill(sd, BS_SWORD)) * rank_mult;
 	}
 	// --- FIN CUSTOM ---
+	
     // --- INICIO: Righteous Mastery Custom ---
 	if (sd->status.weapon == W_MACE) {
 		
@@ -4880,9 +4890,21 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	// Relative modifiers from passive skills
 	// Renewal modifiers are handled in status_base_amotion_pc
 #ifndef RENEWAL_ASPD
+	// --- INICIO: Advanced Book Custom ASPD ---
+		if (sd->status.weapon == W_BOOK) {
+		if ((skill = pc_checkskill(sd, SA_ADVANCEDBOOK)) > 0) {
+			// Obtenemos el Job Level actual
+			int jlvl = sd->status.job_level;
+			
+			// Aplicamos tu fórmula: (sklv * 5) + (jlvl * 5 / 10)
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			
+			// En rAthena, RESTAR a aspd_rate AUMENTA la velocidad de ataque
+			base_status->aspd_rate -= aspd_bonus; 
+		}
+	}
+	// --- FIN: Advanced Book Custom ASPD ---
 	
-	if((skill=pc_checkskill(sd,SA_ADVANCEDBOOK))>0 && sd->status.weapon == W_BOOK)
-		base_status->aspd_rate -= 5*skill;
 	// --- INICIO: 1-Hand Sword Mastery Custom ASPD ---
 	if (sd->status.weapon == W_1HSWORD || sd->status.weapon == W_DAGGER) {
 		if ((skill = pc_checkskill(sd, SM_SWORD)) > 0) {
@@ -4897,6 +4919,9 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			base_status->aspd_rate -= aspd_bonus; 
 		}
 	}
+	// --- FIN: 1-Hand Sword Mastery Custom ASPD ---
+	
+	// --- INICIO: Righteous Mastery Custom ASPD ---
 	if (sd->status.weapon == W_MACE || sd->status.weapon == W_BOOK ) {
 		if ((skill = pc_checkskill(sd, PR_MACEMASTERY)) > 0) {
 			
@@ -4910,7 +4935,8 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			base_status->aspd_rate -= aspd_bonus; 
 		}
 	}
-	// --- FIN: 1-Hand Sword Mastery Custom ASPD ---
+	// --- FIN: Righteous Mastery Custom ASPD ---
+	
 	// --- INICIO: Spear Mastery Custom ASPD ---
 	if (sd->status.weapon == W_1HSPEAR || sd->status.weapon == W_2HSPEAR) {
 		if ((skill = pc_checkskill(sd, KN_SPEARMASTERY)) > 0) {
@@ -5069,18 +5095,35 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		    sd->indexed_bonus.subele[ELE_NEUTRAL] += (skill*5)/10;
 		}
 	}
-	if((skill=pc_checkskill(sd,SA_DRAGONOLOGY))>0) {
-		uint8 dragon_matk = skill * 2;
+	// --- INICIO CUSTOM: Bestiary (Antigua Dragonology) ---
+	if ((skill = pc_checkskill(sd, SA_DRAGONOLOGY)) > 0) {
+		// El bono es de 2% por nivel de habilidad tanto para Daño como para Resistencia
+		int bonus = skill * 2; 
 
-		skill = skill * 4;
+		// Creamos una lista con todas las razas válidas (Excluye DemiHuman, Player_Human y Player_Doram)
+		int valid_races[] = {
+			RC_ANGEL, RC_BRUTE, RC_DEMON, RC_DRAGON, 
+			RC_FISH, RC_FORMLESS, RC_INSECT, RC_PLANT, RC_UNDEAD
+		};
 
-		sd->right_weapon.addrace[RC_DRAGON]+=skill;
-		if( !battle_config.left_cardfix_to_right ){
-			sd->left_weapon.addrace[RC_DRAGON] += skill;
+		// Recorremos la lista aplicando los bonos a cada raza
+		for (int i = 0; i < ARRAYLENGTH(valid_races); i++) {
+			int race = valid_races[i];
+
+			// 1. Daño Físico (Mano derecha y mano izquierda)
+			sd->right_weapon.addrace[race] += bonus;
+			if (!battle_config.left_cardfix_to_right) {
+				sd->left_weapon.addrace[race] += bonus;
+			}
+			
+			// 2. Daño Mágico
+			sd->indexed_bonus.magic_addrace[race] += bonus;
+			
+			// 3. Resistencia
+			sd->indexed_bonus.subrace[race] += bonus;
 		}
-		sd->indexed_bonus.magic_addrace[RC_DRAGON]+=dragon_matk;
-		sd->indexed_bonus.subrace[RC_DRAGON]+=skill;
 	}
+	// --- FIN CUSTOM ---
 	if ((skill = pc_checkskill(sd, AB_EUCHARISTICA)) > 0) {
 		sd->right_weapon.addrace[RC_DEMON] += skill;
 		sd->right_weapon.addele[ELE_DARK] += skill;
@@ -5226,6 +5269,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 #endif
 		}
 #ifdef RENEWAL
+
 		if (sc->getSCE(SC_BASILICA)) {
 			i = sc->getSCE(SC_BASILICA)->val1 * 5;
 			sd->right_weapon.addele[ELE_DARK] += i;
@@ -5236,6 +5280,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			}
 			sd->indexed_bonus.magic_atk_ele[ELE_HOLY] += sc->getSCE(SC_BASILICA)->val1 * 3;
 		}
+
 		if (sc->getSCE(SC_FIREWEAPON))
 			sd->indexed_bonus.magic_atk_ele[ELE_FIRE] += sc->getSCE(SC_FIREWEAPON)->val1;
 		if (sc->getSCE(SC_WINDWEAPON))
@@ -5270,6 +5315,20 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			}
 			// --- FIN CUSTOM ---
 		}
+		// --- INICIO CUSTOM: Endows (+1% Daño Mágico por nivel) ---
+		if (sc->getSCE(SC_FIREWEAPON)) {
+			sd->indexed_bonus.magic_atk_ele[ELE_FIRE] += sc->getSCE(SC_FIREWEAPON)->val1;
+		}
+		if (sc->getSCE(SC_WINDWEAPON)) {
+			sd->indexed_bonus.magic_atk_ele[ELE_WIND] += sc->getSCE(SC_WINDWEAPON)->val1;
+		}
+		if (sc->getSCE(SC_WATERWEAPON)) {
+			sd->indexed_bonus.magic_atk_ele[ELE_WATER] += sc->getSCE(SC_WATERWEAPON)->val1;
+		}
+		if (sc->getSCE(SC_EARTHWEAPON)) {
+			sd->indexed_bonus.magic_atk_ele[ELE_EARTH] += sc->getSCE(SC_EARTHWEAPON)->val1;
+		}
+		// --- FIN CUSTOM ---
 		if( sc->getSCE(SC_FIRE_CLOAK_OPTION) ) {
 			i = sc->getSCE(SC_FIRE_CLOAK_OPTION)->val2;
 			sd->indexed_bonus.subele[ELE_FIRE] += i;
@@ -7970,6 +8029,19 @@ uint16 status_calc_pseudobuff_matk( map_session_data* sd, status_change *sc, int
 		}
 	}
     // --- FIN: Righteous Mastery Custom ---
+	
+	// --- INICIO: Advanced Book Custom ---
+	if (sd != nullptr) { 
+		if (sd->status.weapon == W_BOOK) {
+			// Añadimos 'uint16' para declarar la variable 'skill'
+			if (uint16 skill = pc_checkskill(sd, SA_ADVANCEDBOOK); skill > 0) {
+				int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+				matk += (skill * jlv) / 10;
+			}
+		}
+	}
+    // --- FIN: Advanced Book Custom ---
+	
 	if (sc == nullptr || sc->empty())
 		return static_cast<uint16>( cap_value(matk,0,USHRT_MAX) );
 
@@ -7983,6 +8055,8 @@ uint16 status_calc_pseudobuff_matk( map_session_data* sd, status_change *sc, int
 	if (sce = sc->getSCE(SC_VOLCANO))
 		matk += sce->val2;
 #endif
+	if (sce = sc->getSCE(SC_VOLCANO))
+		matk += sce->val2;
 	if (sce = sc->getSCE(SC_IMPOSITIO))
 		matk += sce->val2;
 	if (sce = sc->getSCE(SC_DORAM_MATK))
@@ -11099,6 +11173,10 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			break;
 	    case SC_PINNED:
 			break;
+	    case SC_HAKAI:
+			break;
+	    case SC_ZANTETSU:
+			break;
 	    case SC_ARCINSIGHT:
 			break;
 		case SC_KYRIE:
@@ -11790,19 +11868,16 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val4 = 5 + val1*2; // Chance of casting
 #endif
 			break;
+			
 		case SC_VOLCANO:
 			{
 				int8 enchant_eff[] = { 10, 14, 17, 19, 20 }; // Enchant addition
 				uint8 i = max((val1-1)%5, 0);
 
-#ifdef RENEWAL
-				val2 = 5 + val1 * 5; // ATK/MATK increase
-#else
-				val2 = val1*10; // Watk increase
-				if (status->def_ele != ELE_FIRE)
-					val2 = 0;
-#endif
+				// --- INICIO CUSTOM: Volcano (Igual que Renewal, sin importar armadura) ---
+				val2 = 5 + val1 * 5; // ATK y MATK increase (+30 a nivel 5)
 				val3 = enchant_eff[i];
+				// --- FIN CUSTOM ---
 			}
 			break;
 		case SC_VIOLENTGALE:
@@ -11810,28 +11885,24 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 				int8 enchant_eff[] = { 10, 14, 17, 19, 20 }; // Enchant addition
 				uint8 i = max((val1-1)%5, 0);
 
-				val2 = val1*3; // Flee increase
-#ifndef RENEWAL
-				if (status->def_ele != ELE_WIND)
-					val2 = 0;
-#endif
+				// --- INICIO CUSTOM: Violent Gale (Igual que Renewal, sin importar armadura) ---
+				val2 = val1 * 3; // Flee increase (+15 a nivel 5)
 				val3 = enchant_eff[i];
+				// --- FIN CUSTOM ---
 			}
 			break;
 		case SC_DELUGE:
 			{
-				int8 deluge_eff[]  = {  5,  9, 12, 14, 15 }; // HP addition rate n/100
 				int8 enchant_eff[] = { 10, 14, 17, 19, 20 }; // Enchant addition
 				uint8 i = max((val1-1)%5, 0);
 
-				val2 = deluge_eff[i]; // HP increase
-#ifndef RENEWAL
-				if (status->def_ele != ELE_WATER)
-					val2 = 0;
-#endif
+				// --- INICIO CUSTOM: Deluge (2% HP por nivel, sin importar armadura) ---
+				val2 = val1 * 2; // HP addition rate (+10% HP a nivel 5)
 				val3 = enchant_eff[i];
+				// --- FIN CUSTOM ---
 			}
 			break;
+			
 		case SC_SUITON:
 			if (!val2 || (sd && (sd->class_&MAPID_FIRSTMASK) == MAPID_NINJA)) {
 				// No penalties.

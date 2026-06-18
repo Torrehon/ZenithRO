@@ -10,7 +10,26 @@
 #include "map/status.hpp"
 #include "map/unit.hpp"
 
-SkillFinalStrike::SkillFinalStrike() : WeaponSkillImpl(NJ_ISSEN) {
+SkillFinalStrike::SkillFinalStrike() : WeaponSkillImpl(NJ_ISSEN) {}
+
+void SkillFinalStrike::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
+	// Multiplicador base: 500% + 50% por nivel
+	int32 ratio = 500 + (50 * skill_lv);
+
+	// Escalado con STR: Cada punto de STR añade 2% adicional
+	ratio += (status_get_str(src) * 2);
+
+	// Lógica Zantetsuken Ready
+	const status_change *sc = status_get_sc(src);
+	if (sc && sc->getSCE(SC_ZANTETSU)) {
+		if (skill_lv == 10) {
+			ratio *= 2; // Nivel 10: Dobla todo el daño final
+		} else {
+			ratio += 200; // Resto de niveles: Aumenta ratio en 200%
+		}
+	}
+
+	base_skillratio += ratio;
 }
 
 void SkillFinalStrike::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 &flag) const {
@@ -32,6 +51,8 @@ void SkillFinalStrike::castendDamageId(block_list *src, block_list *target, uint
 	else
 		y = 0;
 
+	status_change *sc = status_get_sc(src);
+
 #ifdef RENEWAL
 	// Doesn't have slide effect in GVG
 	if (skill_check_unit_movepos(5, src, target->x + x, target->y + y, 1, 1)) {
@@ -42,12 +63,21 @@ void SkillFinalStrike::castendDamageId(block_list *src, block_list *target, uint
 	status_set_hp(src, umax(status_get_max_hp(src) / 100, 1), 0);
 	status_change_end(src, SC_NEN);
 	status_change_end(src, SC_HIDING);
+	
+	// CONSUMIR MARCA ZANTETSU
+	if (sc && sc->getSCE(SC_ZANTETSU)) {
+		status_change_end(src, SC_ZANTETSU);
+	}
 #else
 	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
 
-	status_set_hp(src, 1, 0);
 	status_change_end(src, SC_NEN);
 	status_change_end(src, SC_HIDING);
+	
+	// CONSUMIR MARCA ZANTETSU
+	if (sc && sc->getSCE(SC_ZANTETSU)) {
+		status_change_end(src, SC_ZANTETSU);
+	}
 
 	// Doesn't have slide effect in GVG
 	if (skill_check_unit_movepos(5, src, target->x + x, target->y + y, 1, 1)) {

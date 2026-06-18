@@ -5,6 +5,7 @@
 
 #include <config/core.hpp>
 #include "map/status.hpp"
+#include "map/pc.hpp"
 
 SkillThrowShuriken::SkillThrowShuriken() : SkillImplRecursiveDamageSplash(NJ_SYURIKEN) {
 }
@@ -28,4 +29,15 @@ void SkillThrowShuriken::calculateSkillRatio(const Damage *wd, const block_list 
 	
 	// 3. Aplicamos a la base
 	base_skillratio += total_ratio - 100;
+}
+
+// NUEVA FUNCIÓN: Se ejecuta inmediatamente después de calcular el daño
+void SkillThrowShuriken::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
+	map_session_data* sd = BL_CAST(BL_PC, src);
+
+	// Si es un jugador y tiene la pasiva aprendida, aplica la marca
+	if (sd != nullptr && pc_checkskill(sd, NJ_KENSEISOUL) > 0) {
+		// sc_start(origen, objetivo, Estado, Probabilidad (10000 = 100%), nivel, Duración en ms)
+		sc_start(src, target, SC_HAKAI, 10000, skill_lv, 10000);
+	}
 }

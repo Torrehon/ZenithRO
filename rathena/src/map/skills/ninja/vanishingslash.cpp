@@ -8,7 +8,6 @@ SkillVanishingSlash::SkillVanishingSlash() : WeaponSkillImpl(NJ_KASUMIKIRI) {}
 void SkillVanishingSlash::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
 	// 100% por nivel
 	int32 ratio = 100 * skill_lv;
-
 	const status_change *sc = status_get_sc(src);
 	
 	// +200% si el combo está activo
@@ -28,8 +27,10 @@ void SkillVanishingSlash::castendDamageId(block_list *src, block_list *target, u
 	// 1. EJECUTAR DAÑO (Aprovecha el bono del combo)
 	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
 
-	// 2. CONSUMIR COMBO (Después del impacto)
+	// 2. CONSUMIR COMBO Y APLICAR ZANTETSUKEN READY
 	if (sc && sc->getSCE(SC_NJ_COMBO)) {
 		status_change_end(src, SC_NJ_COMBO);
+		// Aplicamos Zantetsuken Ready (10000 = 100% de chance, dura 10000ms = 10s)
+		sc_start(src, src, SC_ZANTETSU, 10000, skill_lv, 10000);
 	}
 }

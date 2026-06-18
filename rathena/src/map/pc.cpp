@@ -1470,15 +1470,19 @@ int32 pc_equippoint_sub( const map_session_data* sd, const item_data* id){
 
 	ep = id->equip;
 
-	if(sd->class_ == JOB_NINJA) {
-			return EQP_ARMS; 
-		}
-		
+	// Las armas que se pueden usar a dos manos (Dual Wield)
 	if(id->subtype == W_DAGGER || id->subtype == W_1HSWORD || id->subtype == W_1HAXE) {
 		
-		
-		if(pc_checkskill(sd,AS_LEFT) > 0 || (sd->class_&MAPID_SECONDMASK) == MAPID_ASSASSIN || (sd->class_&MAPID_SECONDMASK) == MAPID_NINJA) {
+		// 1. Lógica para Asesinos y Super Novices con Left Hand Mastery
+		if(pc_checkskill(sd, AS_LEFT) > 0 || (sd->class_ & MAPID_SECONDMASK) == MAPID_ASSASSIN) {
 			if (ep == EQP_WEAPON || ep == EQP_HAND_R) return EQP_ARMS;
+		}
+		// 2. Lógica EXCLUSIVA para Ninjas: Requiere la skill NJ_DUAL
+		else if((sd->class_ & MAPID_SECONDMASK) == MAPID_NINJA && pc_checkskill(sd, NJ_DUAL) > 0) {
+			// El Ninja oficialmente solo puede usar dos Dagas, no espadas ni hachas
+			if (id->subtype == W_DAGGER) { 
+				if (ep == EQP_WEAPON || ep == EQP_HAND_R) return EQP_ARMS;
+			}
 		}
 		
 	}

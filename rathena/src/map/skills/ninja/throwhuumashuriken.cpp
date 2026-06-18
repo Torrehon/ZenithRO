@@ -6,6 +6,8 @@
 #include <config/core.hpp>
 
 #include "map/clif.hpp"
+#include "map/pc.hpp"      
+#include "map/status.hpp" 
 
 SkillThrowHuumaShuriken::SkillThrowHuumaShuriken() : SkillImplRecursiveDamageSplash(NJ_HUUMA) {
 }
@@ -16,6 +18,27 @@ void SkillThrowHuumaShuriken::calculateSkillRatio(const Damage *wd, const block_
 #else
 	base_skillratio += 50 + 150 * skill_lv;
 #endif
+
+	// --- MEJORA KENSEI SOUL ---
+	// Comprobamos si el atacante es un jugador y tiene la pasiva aprendida
+	const map_session_data* sd = BL_CAST(BL_PC, src);
+	
+	if (sd != nullptr && pc_checkskill(sd, NJ_KENSEISOUL) > 0) {
+		// Obtenemos los stats del jugador
+		int str_bonus = status_get_str(src);
+		int dex_bonus = status_get_dex(src);
+		
+		// Sumamos 1% de ratio por cada punto de STR y DEX
+		base_skillratio += (str_bonus + dex_bonus);
+	}
+	// --- DETECCIÓN DE HAKAI (+300% Daño) ---
+	if (target != nullptr) {
+		const status_change* tsc = status_get_sc(target);
+		if (tsc && tsc->getSCE(SC_HAKAI)) {
+			base_skillratio += 300;
+		}
+	}
+	// --------------------------------------
 }
 
 void SkillThrowHuumaShuriken::splashSearch(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 flag) const {

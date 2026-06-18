@@ -7356,9 +7356,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      PartyOnly: true
-      GuildOnly: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -7378,7 +7375,7 @@ Body:
     Requires:
       SpCost: 40
       ItemCost:
-        - Item: Boody_Red
+        - Item: Scarlet_Pts
           Amount: 1
     Status: FireWeapon
   - Id: 281
@@ -7389,9 +7386,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      PartyOnly: true
-      GuildOnly: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -7411,7 +7405,7 @@ Body:
     Requires:
       SpCost: 40
       ItemCost:
-        - Item: Crystal_Blue
+        - Item: Indigo_Pts
           Amount: 1
     Status: WaterWeapon
   - Id: 282
@@ -7422,9 +7416,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      PartyOnly: true
-      GuildOnly: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -7444,7 +7435,7 @@ Body:
     Requires:
       SpCost: 40
       ItemCost:
-        - Item: Wind_Of_Verdure
+        - Item: Yellow_Wish_Pts
           Amount: 1
     Status: WindWeapon
   - Id: 283
@@ -7455,9 +7446,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      PartyOnly: true
-      GuildOnly: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -7477,12 +7465,12 @@ Body:
     Requires:
       SpCost: 40
       ItemCost:
-        - Item: Yellow_Live
+        - Item: Lime_Green_Pts
           Amount: 1
     Status: EarthWeapon
   - Id: 284
     Name: SA_DRAGONOLOGY
-    Description: Dragonology
+    Description: Bestiary
     MaxLevel: 5
     Type: Weapon
   - Id: 285
@@ -7524,8 +7512,8 @@ Body:
         - Level: 5
           Amount: 40
       ItemCost:
-        - Item: Yellow_Gemstone
-          Amount: 1
+        - Item: Scarlet_Pts
+          Amount: 3
     Unit:
       Id: Volcano
       Layout: 3
@@ -7573,8 +7561,8 @@ Body:
         - Level: 5
           Amount: 40
       ItemCost:
-        - Item: Yellow_Gemstone
-          Amount: 1
+        - Item: Indigo_Pts
+          Amount: 3
     Unit:
       Id: Deluge
       Layout: 3
@@ -7622,8 +7610,8 @@ Body:
         - Level: 5
           Amount: 40
       ItemCost:
-        - Item: Yellow_Gemstone
-          Amount: 1
+        - Item: Yellow_Wish_Pts
+          Amount: 3
     Unit:
       Id: Violentgale
       Layout: 3
@@ -15218,6 +15206,7 @@ Body:
     TargetType: Attack
     DamageFlags:
       IgnoreFlee: true
+      IgnoreDefense: true
     Range: 2
     Hit: Single
     HitCount: 1

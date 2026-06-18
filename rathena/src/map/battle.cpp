@@ -4171,20 +4171,6 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 				wd->damage = battle_calc_base_damage(src, sstatus, &sstatus->rhw, sc, tstatus->size, 0); //Monsters have no weight and use ATK instead
 			}
 #else
-		case NJ_ISSEN:
-		{
-			// Multiplicador base: 500% + 50% por nivel de skill
-			int skillratio = 500 + (50 * skill_lv);
-
-			// Escalado con STR: Cada punto de STR añade 2% adicional al multiplicador.
-			skillratio += (sstatus->str * 2);
-
-			// Aplicamos el porcentaje al daño del arma derecha
-			wd->damage = wd->damage * skillratio / 100;
-
-			wd->damage2 = 0;
-			break;
-		}
 		case LK_SPIRALPIERCE:
 		case ML_SPIRALPIERCE:
 			if (sd) {

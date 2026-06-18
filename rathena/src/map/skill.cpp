@@ -10541,6 +10541,17 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 	// config cast time multiplier
 	if (battle_config.cast_rate != 100)
 		time = time * battle_config.cast_rate / 100;
+	
+	// --- INICIO CUSTOM: REDUCCIÓN DE CASTEO ZANTETSUKEN READY ---
+	if (skill_id == NJ_ISSEN) {
+		status_change *sc = status_get_sc(bl);
+		if (sc && sc->getSCE(SC_ZANTETSU)) {
+			// Reduce el tiempo de casteo final en un 75% (lo multiplicamos por 0.25)
+			time = time * 25 / 100;
+		}
+	}
+	// --- FIN CUSTOM ---
+	
 	// return final cast time
 	time = max((int32)time, 0);
 	//ShowInfo("Castime castfix = %f\n",time);

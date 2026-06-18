@@ -1463,6 +1463,9 @@ enum sc_type : int16 {
 	SC_OVERHEAL,
 	SC_ASFOCUS,
 	SC_FAITHFUL,
+	SC_HAKAI,
+	SC_ZANTETSU,
+	SC_OVERCAST,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -2982,6 +2985,9 @@ enum efst_type : int16{
 	EFST_OVERHEAL = 1714,
 	EFST_ASFOCUS = 1715,
 	EFST_FAITHFUL = 1716,
+	EFST_HAKAI = 1717,
+	EFST_ZANTETSU = 1718,
+	EFST_OVERCAST = 1719,
 	EFST_MAX,
 };
 

@@ -583,9 +583,12 @@ SKILL_DESCRIPT = {
 		"^0000FF[Level 2]^000000 : 140% ATK / 8 SP / 5% Curse",
 		"^0000FF[Level 3]^000000 : 160% ATK / 8 SP / 5% Curse",
 		"^0000FF[Level 4]^000000 : 180% ATK / 8 SP / 5% Curse",
-		"^0000FF[Level 5]^000000 : 200% ATK x 2 Hits / 16 SP / 25% Curse",
-		"Bonus: Up to ^0000FF+100% Ratio^000000 from Axe Mastery.",
-		"Range: 9 cells. Requires an Axe equipped."
+		"^0000FF[Level 5]^000000 : 200% ATK x 2 Hits / 16 SP /",
+		"25% Curse",
+		"Bonus: Up to ^0000FF+100% Ratio^000000 from Axe",
+		"Mastery.",
+		"Range: 9 cells. Requires an Axe",
+		"equipped."
 	},
 	[SKID.MC_IDENTIFY] = {
 		"Item Appraisal",
@@ -660,7 +663,9 @@ SKILL_DESCRIPT = {
 		"[Lv 7]:^777777 Range and Hit +7 ^000000",
 		"[Lv 8]:^777777 Range and Hit +8 ^000000",
 		"[Lv 9]:^777777 Range and Hit +9 ^000000",
-		"[Lv 10]:^777777 Range and Hit +10 ^000000"
+		"[Lv 10]:^777777 Range and Hit +10 ^000000",
+		"^FFA500Atk: (Skill Level * Job Level)/10",
+		"Aspd: 0.5% * Skill Level + Job Level/10"
 	},
 	[SKID.AC_CONCENTRATION] = {
 		"Improve Concentration",
@@ -744,7 +749,9 @@ SKILL_DESCRIPT = {
 		"weapons by 7% per level.",
 		"This skill also affects Left-Hand damage with",
 		"^008800Katar^777777 class weapons.",
-        "Double attacks can deal critical damage^000000"
+        "Double attacks can deal critical damage",
+		"When using Katars, this skill critical",
+		"chance is not doubled.^000000"
 	},
 	[SKID.TF_MISS] = {
 		"Improve Dodge",
@@ -836,7 +843,9 @@ SKILL_DESCRIPT = {
 		"[Lv 7]:^777777 Mastery ATK +35 ^000000",
 		"[Lv 8]:^777777 Mastery ATK +40 ^000000",
 		"[Lv 9]:^777777 Mastery ATK +45 ^000000",
-		"[Lv 10]:^777777 Mastery ATK +50 ^000000"
+		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
+		"^FFA500Atk: (Skill Level * Job Level)/10",
+		"Aspd: 0.5% * Skill Level + Job Level/10"
 	},
 	[SKID.KN_PIERCE] = {
 		"Pierce",
@@ -867,8 +876,12 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"7^CC3399Requirement: Pierce 3 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Attacks an enemy and those around him in a 3x3 radius with a forceful spear stab that will knock them back.",
-		"Damage ratio is 100% + 50% * Skill Level.",
+		"Description: ^777777Attacks an enemy and those",
+		"around him in a 3x3 radius with a",
+		"forceful spear stab that will knock",
+		"them back.",
+		"Damage ratio is 100% + 50% *",
+		"Skill Level.",
 		"Requires ^008800Spear^777777 class weapon ^000000."
 	},
 	[SKID.KN_SPEARBOOMERANG] = {
@@ -876,8 +889,10 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"7^CC3399Requirement: Pierce 3 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Attacks an enemy from a distance by hurling a spear.",
-		"Damage ratio is 100% + 50% * Skill Level.",
+		"Description: ^777777Attacks an enemy from a",
+		"distance by hurling a spear.",
+		"Damage ratio is 100% + 50% *",
+		"Skill Level.",
 		"Requires ^008800Spear^777777 class weapon ^000000."
 	},
 	[SKID.KN_TWOHANDQUICKEN] = {
@@ -885,7 +900,10 @@ SKILL_DESCRIPT = {
 		"Max Level: 10",
 		"7^CC3399Requirement: Two-Handed Sword Mastery 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Temporarily increases attack speed with swords. If you unequip the sword, this effect will dissapear. ^000000",
+		"Description: ^777777Temporarily increases",
+		"attack speed with swords. If you",
+		"unequip the sword, this effect will",
+		"dissapear. ^000000",
 		"[Lv 1]:^777777 30 sec duration ^000000",
 		"[Lv 2]:^777777 60 sec duration ^000000",
 		"[Lv 3]:^777777 90 sec duration ^000000",
@@ -902,7 +920,10 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"7^CC3399Requirement: Two-Handed Sword Mastery 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777After receiving melee damage from an enemy, automatically retaliate with a mighty critical attack. ^000000"
+		"Description: ^777777After receiving melee",
+		"damage from an enemy, automatically",
+		"retaliate with a mighty critical",
+		"attack. ^000000"
 	},
 	[SKID.KN_BOWLINGBASH] = {
 		"Bowling Bash",
@@ -967,15 +988,15 @@ SKILL_DESCRIPT = {
 		"[Lv 10]:^777777 Mastery ATK +50 ^000000",
 		"^FFA500Atk: (Skill Level * Job Level)/10",
 		"Matk: (Skill Level * Job Level)/10",
-		"Aspd: 0.5% * Skill Level + (Job Level/10)"
+		"Aspd: 0.5% * Skill Level + Job Level/10"
 	},
 	[SKID.PR_IMPOSITIO] = {
 		"Impositio Manus",
 		"Max Level: 5",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Blesses a targeted player by",
-		"increasing the weapon damage and Matk of",
-		"that character for 10 minutes. ^000000",
+		"Description: ^777777Blesses a targeted player",
+		"by increasing the weapon damage and",
+		"Matk for 10 minutes. ^000000",
 		"[Lv 1]:^777777 Damage +6 ^000000",
 		"[Lv 2]:^777777 Damage +12 ^000000",
 		"[Lv 3]:^777777 Damage +18 ^000000",
@@ -987,8 +1008,8 @@ SKILL_DESCRIPT = {
 		"Max Level: 3",
 		"8^CC3399Requirement: Impositio Manus 2 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Reduces cast time of a skill for",
-		"a single cast. ^000000",
+		"Description: ^777777Reduces cast time of a",
+		"skill for a single cast. ^000000",
 		"[Lv 1]:^777777 15% reduction, 30 sec ^000000",
 		"[Lv 2]:^777777 30% reduction, 20 sec ^000000",
 		"[Lv 3]:^777777 45% reduction, 10 sec ^000000"
@@ -996,7 +1017,8 @@ SKILL_DESCRIPT = {
 	[SKID.PR_ASPERSIO] = {
 		"Aspersio",
 		"Max Level: 5",
-		"8^CC3399Requirement: Aqua Benedicta 1, Impositio Manus 3 ^000000",
+		"8^CC3399Requirement: Aqua Benedicta 1,",
+		"Impositio Manus 3 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Endows the targeted player's",
 		"weapon with the Holy elemental for the",
@@ -1740,17 +1762,21 @@ SKILL_DESCRIPT = {
 		"Katar Mastery",
 		"Max Level: 10",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Increases damaged inflicted with Katar class weapons. ^000000",
-		"[Lv 1]:^777777 Damage +3 ^000000",
-		"[Lv 2]:^777777 Damage +6 ^000000",
-		"[Lv 3]:^777777 Damage +9 ^000000",
-		"[Lv 4]:^777777 Damage +12 ^000000",
-		"[Lv 5]:^777777 Damage +15 ^000000",
-		"[Lv 6]:^777777 Damage +18 ^000000",
-		"[Lv 7]:^777777 Damage +21 ^000000",
-		"[Lv 8]:^777777 Damage +24 ^000000",
-		"[Lv 9]:^777777 Damage +27 ^000000",
-		"[Lv 10]:^777777 Damage +30 ^000000"
+		"Description: ^777777Increases damage inflicted",
+		"with Katar class weapons.Also increases",
+		"Atk and Aspd based on Job Level.^000000",
+		"[Lv 1]:^777777 Damage +5 ^000000",
+		"[Lv 2]:^777777 Damage +10 ^000000",
+		"[Lv 3]:^777777 Damage +15 ^000000",
+		"[Lv 4]:^777777 Damage +20 ^000000",
+		"[Lv 5]:^777777 Damage +25 ^000000",
+		"[Lv 6]:^777777 Damage +30 ^000000",
+		"[Lv 7]:^777777 Damage +35 ^000000",
+		"[Lv 8]:^777777 Damage +40 ^000000",
+		"[Lv 9]:^777777 Damage +45 ^000000",
+		"[Lv 10]:^777777 Damage +50 ^000000",
+		"^FFA500Atk: (Skill Level * Job Level)/10",
+		"Aspd: 0.5% * Skill Level + Job Level/10"
 	},
 	[SKID.AS_CLOAKING] = {
 		"Cloaking",
@@ -1765,7 +1791,12 @@ SKILL_DESCRIPT = {
 		"Max Level: 10",
 		"12^CC3399Requirement: Katar Mastery 4 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Directs a flurry of rapid Katar strikes that will have a chance of inflicting the ^663399Stun^777777 status on the target.",
+		"Description: ^777777Directs a flurry of rapid",
+		"Katar strikes that will have a chance",
+		"of inflicting the ^663399Stun^777777 status on the",
+		"target. Number of hits is 3 + Agi/18",
+		"and damage is 100% per hit.",
+		"This skill can score critical hits",
 		"Requires ^008800Katar^777777 class weapon. ^000000"
 	},
 	[SKID.AS_GRIMTOOTH] = {
@@ -1773,7 +1804,9 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"12^CC3399Requirement: Sonic Blow 5, Cloaking 2 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Strikes an enemy with Katar while in ^008800Hiding^777777 status.",
+		"Description: ^777777Strikes an enemy with",
+		"Katar while in ^008800Hiding^777777 status.",
+		"This skill can score critical hits",
 		"Requires ^008800Katar^777777 class weapon. ^000000"
 	},
 	[SKID.AS_ENCHANTPOISON] = {
@@ -1797,7 +1830,11 @@ SKILL_DESCRIPT = {
 		"Max Level: 10",
 		"12^CC3399Requirement: Enchant Poison 5 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Contaminates a targeted area with toxin that will inflict the ^663399Poison^777777 status on enemies that come into contact with it. ^000000"
+		"Description: ^777777Contaminates a targeted",
+		"area with toxin that will inflict the",
+		"^663399Poison^777777 status on enemies that come into",
+		"contact with it.",
+		"It requires a ^663399Purple Gemstone^777777 ^000000"
 	},
 	[SKID.AS_SPLASHER] = {
 		"Venom Splasher",
@@ -1805,25 +1842,42 @@ SKILL_DESCRIPT = {
 		"12^CC3399Requirement: Venom Dust 5, Poison React 5 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777When struck by this skill, the target will then explode after a few seconds, dealing splash damage around it and poisoning enemies by chance.",
-		"Each cast requires 1 ^008800Red Gemstone^777777. ^000000"
+		"It requires a ^663399Purple Gemstone^777777 ^000000"
 	},
     [SKID.AS_EXECSOUL] = {
 		"Soul of the Executioner",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Awakens your absolute mastery over archery.^000000",
-		"^008800Momentum^777777: +10 sec base duration (12s at max stacks).^000000",
-		"^008800Hunter's Focus^777777: Grants bonus ^990000CRIT^777777 scaling with your HIT.^000000",
-		"^008800Power Strafe^777777: ^990000+15%^777777 Damage ratio per Momentum stack.^000000"
+		"Description: ^777777Awakens your assassination instincts.^000000",
+		"^008800Katar Mastery^777777: Dealing critical hits",
+		"with Weapon Attacks grants 'Assassin's",
+		"Focus', increasing Aspd by 1% up to",
+		"10 times. When using Katars, maximum",
+		"Aspd becomes 193 instead of 190.^000000",
+		"^008800Sonic Blow^777777: Deals critical damage",
+		"if used while cloaked. It deals 50%",
+		"more damage to targets under 50% Hp.^000000",
+		"^008800Grimtooth^777777: It deals 25% more damage",
+		"to targets under 50% Hp.^000000"
 	},
 	[SKID.AS_VIPERSOUL] = {
 		"Soul of the Viper",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Awakens the true potential of traps and your Falcon.^000000",
-		"^008800Traps^777777: Gain ^990000+150% MATK^777777 damage and inflict ^990000Pinned^777777 (-25% Move Speed) for 10s.^000000",
-		"^008800Blitz Beat^777777: No longer splits damage. ^990000+20%^777777 damage vs Pinned targets.^000000",
-		"^008800Steel Crow^777777: Adds ^990000MATK^777777 scaling to Blitz Beat damage.^000000"
+		"Description: ^777777Awakens the true potential of",
+		"your poisonous tools.^000000",
+		"^008800Enchant Poison^777777: If learned, increases",
+		"damage to poisoned enemies by 30%",
+		"passively.^000000",
+		"^008800Poison React^777777: If learned, Envenom",
+		"becomes a 3x3 area skill.^000000",
+		"^008800Venom Dust^777777: Enemies inside the",
+		"poison cloud receive 100% poison damage",
+		"every 2 seconds. This skill's area",
+		"becomes 5x5. Damage is also increased",
+		"with user's Int.^000000",
+		"^008800Venom Splasher^777777: Damage formula now",
+		"adds 25% of user's Matk.^000000"
 	},
 	[SKID.NV_FIRSTAID] = {
 		"First Aid",
@@ -2321,24 +2375,41 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"14^CC3399Requirement: Auto Guard 5 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Smashes a Shield into an enemy, pushing it a few cells backward with a chance of causing Stun status.",
-		"Requires ^008800Shield^777777. ^000000"
+		"Description: ^777777Smashes a Shield into an",
+		"enemy, pushing it a few cells backward",
+		"with a chance of causing Stun status.",
+		"It benefits from weapon's element.",
+		"Requires ^008800Shield^777777. ^000000",
+		"[Lv 1]:^777777 130% damage ^000000",
+		"[Lv 2]:^777777 160% damage ^000000",
+		"[Lv 3]:^777777 190% damage ^000000",
+		"[Lv 4]:^777777 220% damage ^000000",
+		"[Lv 5]:^777777 250% damage ^000000"
 	},
 	[SKID.CR_SHIELDBOOMERANG] = {
 		"Shield Boomerang",
 		"Max Level: 5",
 		"14^CC3399Requirement: Shield Charge 3 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Attacks an enemy from a distance by throwing a Shield.",
-		"The Shield's weight and refine level affect the amount of damage that is inflicted.",
-		"Requires ^008800Shield^777777. ^000000"
+		"Description: ^777777Attacks an enemy from a",
+		"distance by throwing a Shield.",
+		"It benefits from weapon's element.",
+		"Requires ^008800Shield^777777. ^000000",
+		"[Lv 1]:^777777 150% damage ^000000",
+		"[Lv 2]:^777777 200% damage ^000000",
+		"[Lv 3]:^777777 250% damage ^000000",
+		"[Lv 4]:^777777 300% damage ^000000",
+		"[Lv 5]:^777777 350% damage ^000000"
 	},
 	[SKID.CR_REFLECTSHIELD] = {
 		"Reflect Shield",
 		"Max Level: 10",
 		"14^CC3399Requirement: Shield Boomerang 3 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Reflects a certain amount of damage back to the enemy after they inflict damage with melee physical attack.",
+		"Description: ^777777Reflects a certain amount",
+		"of damage back to the enemy after they",
+		"inflict damage with melee physical",
+		"attack.",
 		"Requires ^008800Shield^777777. ^000000"
 	},
 	[SKID.CR_HOLYCROSS] = {
@@ -2347,7 +2418,22 @@ SKILL_DESCRIPT = {
 		"14^CC3399Requirement: Faith 3 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Element: ^777777Holy ^000000",
-		"Description: ^777777Attacks an enemy with a double hit Holy attack that has the chance of causing the Blind status. ^000000"
+		"Description: ^777777Attacks an enemy with a",
+		"double hit Holy attack that has the",
+		"chance of causing the Blind status.^000000",
+		"Damage dealt varies if used with 2 or",
+		"1 handed spears.",
+		"This skill can deal critical damage",
+		"[Lv 1]:^777777 135% / 150% (1H) / 170% (2H) Damage^000000",
+		"[Lv 2]:^777777 170% / 200% (1H) / 240% (2H) Damage^000000",
+		"[Lv 3]:^777777 205% / 250% (1H) / 310% (2H) Damage^000000",
+		"[Lv 4]:^777777 240% / 300% (1H) / 275% (2H) Damage^000000",
+		"[Lv 5]:^777777 275% / 350% (1H) / 310% (2H) Damage^000000",
+		"[Lv 6]:^777777 310% / 400% (1H) / 345% (2H) Damage^000000",
+		"[Lv 7]:^777777 345% / 450% (1H) / 380% (2H) Damage^000000",
+		"[Lv 8]:^777777 380% / 500% (1H) / 415% (2H) Damage^000000",
+		"[Lv 9]:^777777 415% / 550% (1H) / 450% (2H) Damage^000000",
+		"[Lv 10]:^777777 450% / 600% (1H) / 800% (2H) Damage^000000"
 	},
 	[SKID.CR_GRANDCROSS] = {
 		"Grand Cross",
@@ -2372,7 +2458,10 @@ SKILL_DESCRIPT = {
 		"Max Level: 5",
 		"14^CC3399Requirement: Divine Protection 5, Heal 5 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Temporarily increases party member's resistance to Demon and Holy elemental monsters. ^000000"
+		"Description: ^777777Temporarily increases",
+		"party member's resistance to Demon and",
+		"Holy elemental monsters by 2% per Skill",
+		"level. ^000000"
 	},
 	[SKID.CR_DEFENDER] = {
 		"Defender",
@@ -2387,26 +2476,51 @@ SKILL_DESCRIPT = {
 		"Max Level: 10",
 		"14^CC3399Requirement: Spear Mastery 10 ^000000",
 		"Skill Form: ^339900Active ^000000",
-		"Description: ^777777Increases attack speed when using spear weapon for skill duration. ^000000"
+		"Description: ^777777Increases attack speed",
+		"when using Spear weapons for skill",
+		"duration. Aspd bonus for 1 Hand Spears",
+		"is 20%, while 2 Hand Spears get 30%.^000000"
 	},
-    [SKID.CR_TEMPLARSOUL] = {
+	[SKID.CR_TEMPLARSOUL] = {
 		"Soul of the Templar",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Awakens the true potential of swords.^000000",
-		"^777777[Bowling Bash]:^000000 ^777777With a 2H Sword, hits 3 times if there are 3 enemies, or 4 times for 4 or more enemies.^000000",
-		"^777777[Auto Counter]:^000000 ^777777A successful block grants 'Duelist', increasing Crit Damage by 25%, Aspd by 10% and Atk by 30 for 20 seconds.^000000",
-		"^777777[Sword Quicken]:^000000 ^777777Increases Crit by 1 and Hit by 2 per skill level.^000000"
+		"Description: ^777777Awakens the true potential",
+		"of holy magic and devotions.^000000",
+		"^777777[Trust]:^000000 ^777777When maxed, defeating an enemy",
+		"grants a 'Faithful' stack (Max 10) for",
+		"60 seconds. Restores 0.2% Max HP per",
+		"stack every 2 seconds.^000000",
+		"^777777[Holy Cross]:^000000 ^777777When equipped with a 1H",
+		"Sword, adds your MATK to the damage",
+		"formula.^000000",
+		"^777777[Grand Cross]:^000000 ^777777Ignores 15% of the MDEF",
+		"of Demon and Undead race enemies.^000000",
+		"^777777[Providence]:^000000 ^777777Becomes a 5x5 AoE party",
+		"buff. Increases physical and magical",
+		"damage dealt to Demon and Undead",
+		"enemies by 2% per skill level.^000000"
 	},
 	[SKID.CR_GUARDIANSOUL] = {
 		"Soul of the Guardian",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Awakens the true potential of spears.^000000",
-		"^777777[Pierce]:^000000 ^777777Grants a base Critical rate of 50 to the skill.^000000",
-		"^777777[Spear Boomerang]:^000000 ^777777Weapon's weight increases final damage by 1/4.^000000",
-		"^777777[Spear Stab]:^000000 ^777777If equipped with 2 Hand Spear, applies 'Stagger', increasing the ratio of the next Brandish Spear by 150%.^000000",
-		"^777777[Brandish Spear]:^000000 ^777777The skill now hits 3 times.^000000"
+		"Description: ^777777Awakens the true potential",
+		"of shields and spears.^000000",
+		"^777777[Smite]:^000000 ^777777Deals damage in a 3x3 area.",
+		"Shield weight (including cards) and",
+		"refine rate increase the damage ratio.^000000",
+		"^777777[Shield Boomerang]:^000000 ^777777Shield weight",
+		"(including custom cards) and refine",
+		"rate increase the damage ratio.^000000",
+		"^777777[Defender]:^000000 ^777777No longer reduces movement",
+		"speed.^000000",
+		"^777777[Spear Quicken]:^000000 ^777777With a 2H Spear, adds",
+		"+2 Crit and Flee per skill level. With",
+		"a 1H Spear, adds +5 Vit DEF per skill",
+		"level.^000000",
+		"^777777[Devotion]:^000000 ^777777Increases Max HP by 5% for",
+		"each ally under this status.^000000"
 	},
 	[SKID.MO_IRONHAND] = {
 		"Iron Hand",
@@ -2513,7 +2627,7 @@ SKILL_DESCRIPT = {
 	[SKID.MO_EXPLOSIONSPIRITS] = {
 		"Critical Explosion",
 		"Max Level: 5",
-		"15^CC3399Requirement: Absorp Sprits 1 ^000000",
+		"15^CC3399Requirement: Absorb Sprits 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Temporarily increases caster's Critical Attack rate for period of time. During the Explosion Spirits tatus, SP regen is reduced by 50%.",
 		"Each cast requires 5 ^008800Spirit Spheres^777777. ^000000"
@@ -5366,7 +5480,7 @@ SKILL_DESCRIPT = {
 		"[Lv 5]:^777777 Str and Int +5, 90 sec ^000000"
 	},
 	[SKID.NJ_ISSEN] = {
-		"Killing Strike",
+		"Zantetsuken",
 		"Max Level: 10",
  		"25^CC3399Requirement: Throwing Mastery 7, Shadow Slash 5, Ninja Aura 1 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",

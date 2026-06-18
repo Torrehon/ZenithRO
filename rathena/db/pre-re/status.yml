@@ -1125,6 +1125,7 @@ Body:
     CalcFlags:
       Batk: true
       Watk: true
+      Matk: true
     Flags:
       NoSave: true
       NoClearance: true
@@ -6964,6 +6965,24 @@ Body:
       RemoveOnHermode: true
   - Status: Asfocus
     Icon: EFST_ASFOCUS
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Faithful
+    Icon: EFST_FAITHFUL
+    CalcFlags:
+      Regen: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Hakai
+    Icon: EFST_HAKAI
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false  
+  - Status: Zantetsu
+    Icon: EFST_ZANTETSU
     CalcFlags:
       All: true
     Flags:
