@@ -4370,6 +4370,7 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 			}
 		}
 		break;
+	
 	default:
 		if (std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id); skill != nullptr && skill->impl != nullptr) {
 			skill->impl->castendDamageId(src, bl, skill_lv, tick, flag);
@@ -5366,8 +5367,8 @@ TIMER_FUNC(skill_castend_id){
 #endif
 		}
 
-		if (sd && ud->skill_id != SA_ABRACADABRA) // they just set the data so leave it as it is.[Inkfish]
-			sd->skillitem = sd->skillitemlv = sd->skillitem_keep_requirement = 0;
+		// if (sd && ud->skill_id != SA_ABRACADABRA) // they just set the data so leave it as it is.[Inkfish]
+			// sd->skillitem = sd->skillitemlv = sd->skillitem_keep_requirement = 0;
 
 		if (ud->skilltimer == INVALID_TIMER) {
 			if(md) md->skill_idx = -1;
@@ -6786,12 +6787,32 @@ static int32 skill_unit_onplace(skill_unit *unit, block_list *bl, t_tick tick)
 			break;
 
 		case UNT_SUITON:
+			// 1. Efecto base original (Ralentización)
 			if(!sce)
 				sc_start4(ss, bl,type,100,sg->skill_lv,
-				map_flag_vs(bl->m) || battle_check_target(unit,bl,BCT_ENEMY)>0?1:0, //Send val3 =1 to reduce agi.
+				map_flag_vs(bl->m) || battle_check_target(unit,bl,BCT_ENEMY)>0?1:0, 
 				0,0,sg->limit);
-			break;
 
+			// --- 2. CUSTOM: Drown a nivel 10 con daño de MATK ---
+			// Aplica Drown a cualquier enemigo que pise el área si la habilidad es nivel 10
+			if (sg->skill_lv == 10 && battle_check_target(unit, bl, BCT_ENEMY) > 0) {
+				if (!sc || !sc->getSCE(SC_DROWN)) {
+					
+					// Obtenemos el MATK máximo del lanzador (Ninja o Monstruo)
+					int32 caster_matk = status_get_matk_max(ss);
+					
+					// Seguro anti-trampa: Si el lanzador tiene 0 de MATK, pasamos 1 
+					// para evitar que status.cpp asuma el valor por defecto de 1000.
+					if (caster_matk <= 0) {
+						caster_matk = 1;
+					}
+
+					// sc_start4(origen, objetivo, Estado, Probabilidad, val1(lv), val2(MATK), val3, val4, Duración)
+					sc_start4(ss, bl, SC_DROWN, 10000, sg->skill_lv, caster_matk, 0, 0, sg->limit);
+				}
+			}
+			// ----------------------------------------------------
+			break;
 		case UNT_HERMODE:
 			if (sg->src_id!=bl->id && battle_check_target(unit,bl,BCT_PARTY|BCT_GUILD) > 0)
 				status_change_clear_buffs(bl, SCCB_HERMODE); //Should dispell only allies.
@@ -7996,7 +8017,16 @@ int32 skill_unit_onleft(uint16 skill_id, block_list *bl, t_tick tick)
 		case HW_GRAVITATION:
 		case HP_BASILICA:
 #endif
+		// --- CUSTOM: Suiton y Drown ---
 		case NJ_SUITON:
+			// 1. Borra el estado base del charco (Agilidad reducida)
+			if (sce)
+				status_change_end(bl, type, INVALID_TIMER);
+			// 2. Borra el estado de ahogo si lo tenía aplicado
+			if (sc && sc->getSCE(SC_DROWN))
+				status_change_end(bl, SC_DROWN, INVALID_TIMER);
+			break;
+		// ------------------------------
 		case SC_MAELSTROM:
 		case EL_WATER_BARRIER:
 		case EL_ZEPHYR:
@@ -10220,7 +10250,7 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 					else {
 						if( sd->special_state.no_gemstone || (sc && sc->getSCE(SC_INTOABYSS)) )
 						{	// All gem skills except Hocus Pocus and Ganbantein can cast for free with Mistress card -helvetica
-							if (skill_id != SA_ABRACADABRA && skill_id != HW_GANBANTEIN)
+							if (skill_id != HW_GANBANTEIN)
 		 						req.itemid[i] = req.amount[i] = 0;
 							else if( --req.amount[i] < 1 )
 								req.amount[i] = 1; // Hocus Pocus always use at least 1 gem
@@ -10507,11 +10537,19 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
             }
 		}
 
-		// --- 3. STATUS CHANGES (BRAGI / MEMORIZE) ---
+		// --- 3. STATUS CHANGES  ---
 		if (sc != nullptr && !sc->empty()) {
 			if (!(flag & 2) && sc->getSCE(SC_POEMBRAGI))
 				reduce_cast_rate += sc->getSCE(SC_POEMBRAGI)->val2;
 
+			// --- INICIO CUSTOM: Overcast (Penalización de Casteo) ---
+			if (sc->getSCE(SC_OVERCAST)) {
+				// Queremos que el casteo sea MÁS LENTO. Como 'reduce_cast_rate' 
+				// acelera el casteo, nosotros le RESTAMOS un 10% por nivel.
+				reduce_cast_rate -= sc->getSCE(SC_OVERCAST)->val1 * 10;
+			}
+			// --- FIN CUSTOM ---
+			
 			if (sc->getSCE(SC_MEMORIZE)) {
 				if (!sd || pc_checkskill(sd, skill_id) > 0) {
 					if (!(flag & 2))
@@ -10750,8 +10788,8 @@ int32 skill_delayfix(block_list *bl, uint16 skill_id, uint16 skill_lv)
 {
 	nullpo_ret(bl);
 
-	if (skill_id == SA_ABRACADABRA)
-		return 0; //Will use picked skill's delay.
+	// if (skill_id == SA_ABRACADABRA)
+		// return 0; //Will use picked skill's delay.
 
 	if (bl->type&battle_config.no_skill_delay)
 		return battle_config.min_skill_delay_limit;
@@ -11065,7 +11103,7 @@ void skill_weaponrefine( map_session_data& sd, int32 idx ){
 }
 
 /*==========================================
- *
+ * skill_autospell
  *------------------------------------------*/
 int32 skill_autospell(map_session_data *sd, uint16 skill_id)
 {
@@ -11080,39 +11118,53 @@ int32 skill_autospell(map_session_data *sd, uint16 skill_id)
 	if (skill_lv == 0 || lv == 0)
 		return 0; // Player must learn the skill before doing auto-spell [Lance]
 
+	// 1. Calculamos primero el comportamiento clásico sin Soul
 #ifdef RENEWAL
-	if ((skill_id == MG_COLDBOLT || skill_id == MG_FIREBOLT || skill_id == MG_LIGHTNINGBOLT) && sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_SAGE)
-		maxlv = 10; //Soul Linker bonus. [Skotlex]
-	else
-		maxlv = skill_lv / 2; // Half of Autospell's level unless player learned a lower level (capped below)
+	maxlv = skill_lv / 2; // Half of Autospell's level unless player learned a lower level (capped below)
 #else
-	if(skill_id==MG_NAPALMBEAT)	maxlv=3;
-	else if(skill_id==MG_COLDBOLT || skill_id==MG_FIREBOLT || skill_id==MG_LIGHTNINGBOLT){
-		if (sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_SAGE)
-			maxlv = 10; //Soul Linker bonus. [Skotlex]
-		else if(skill_lv==2) maxlv=1;
+	// AÑADIDO: WZ_EARTHSPIKE
+	if(skill_id==MG_COLDBOLT || skill_id==MG_FIREBOLT || skill_id==MG_LIGHTNINGBOLT || skill_id==WZ_EARTHSPIKE){
+		if(skill_lv<=2) maxlv=1;
 		else if(skill_lv==3) maxlv=2;
 		else if(skill_lv>=4) maxlv=3;
 	}
 	else if(skill_id==MG_SOULSTRIKE){
-		if(skill_lv==5) maxlv=1;
+		if(skill_lv<=5) maxlv=1;
 		else if(skill_lv==6) maxlv=2;
 		else if(skill_lv>=7) maxlv=3;
 	}
-	else if(skill_id==MG_FIREBALL){
-		if(skill_lv==8) maxlv=1;
-		else if(skill_lv>=9) maxlv=2;
+	// AÑADIDO: WZ_HEAVENDRIVE
+	else if(skill_id==MG_NAPALMBEAT || skill_id==MG_FIREBALL || skill_id==MG_THUNDERSTORM || skill_id==MG_FROSTDIVER || skill_id==WZ_HEAVENDRIVE){ 
+		// Escala unificada para todas las áreas
+		if(skill_lv<=5) maxlv=1;
+		else if(skill_lv<=8) maxlv=2;
+		else maxlv=3; // Nivel 9 y 10 de Auto Spell dan nivel 3 base
 	}
-	else if(skill_id==MG_FROSTDIVER) maxlv=1;
 	else return 0;
 #endif
 
+	// --- INICIO CUSTOM: Auto Cast (Soul of the Lore) ---
+	// 2. Si tiene la pasiva, el buff registra el nivel MÁXIMO posible
+	if (pc_checkskill(sd, SA_LORESOUL) > 0) {
+		// Magias Unitarget -> Nivel Máximo 10 (AÑADIDO: WZ_EARTHSPIKE)
+		if (skill_id == MG_COLDBOLT || skill_id == MG_FIREBOLT || skill_id == MG_LIGHTNINGBOLT || skill_id == MG_SOULSTRIKE || skill_id == WZ_EARTHSPIKE) {
+			maxlv = 10; 
+		}
+		// Magias de Área -> Nivel Máximo 5 (AÑADIDO: WZ_HEAVENDRIVE)
+		else if (skill_id == MG_NAPALMBEAT || skill_id == MG_FIREBALL || skill_id == MG_THUNDERSTORM || skill_id == MG_FROSTDIVER || skill_id == WZ_HEAVENDRIVE) {
+			maxlv = 5; 
+		}
+	}
+	// --- FIN CUSTOM ---
+
+	// Aseguramos que el nivel nunca supere el nivel máximo que el jugador ha aprendido
 	maxlv = min(lv, maxlv);
 
 	sc_start4(sd,sd,SC_AUTOSPELL,100,skill_lv,skill_id,maxlv,0,
 		skill_get_time(SA_AUTOSPELL,skill_lv));
 	return 0;
 }
+
 
 /**
  * Count the number of players with Gangster Paradise, Peaceful Break, or Happy Break.
@@ -11131,8 +11183,8 @@ static int32 skill_sit_count(block_list *bl, va_list ap)
 	if (flag&1 && pc_checkskill(sd, RG_GANGSTER) > 0)
 		return 1;
 
-	if (flag&2 && (pc_checkskill(sd, TK_HPTIME) > 0 || pc_checkskill(sd, TK_SPTIME) > 0))
-		return 1;
+	// if (flag&2 && (pc_checkskill(sd, TK_HPTIME) > 0 || pc_checkskill(sd, TK_SPTIME) > 0))
+		// return 1;
 
 	return 0;
 }
@@ -11154,11 +11206,11 @@ static int32 skill_sit_in(block_list *bl, va_list ap)
 	if (flag&1 && pc_checkskill(sd, RG_GANGSTER) > 0)
 		sd->state.gangsterparadise = 1;
 
-	if (flag&2 && (pc_checkskill(sd, TK_HPTIME) > 0 || pc_checkskill(sd, TK_SPTIME) > 0 )) {
-		sd->state.rest = 1;
-		status_calc_regen(bl, &sd->battle_status, &sd->regen);
-		status_calc_regen_rate(bl, &sd->regen, &sd->sc);
-	}
+	// if (flag&2 && (pc_checkskill(sd, TK_HPTIME) > 0 || pc_checkskill(sd, TK_SPTIME) > 0 )) {
+		// sd->state.rest = 1;
+		// status_calc_regen(bl, &sd->battle_status, &sd->regen);
+		// status_calc_regen_rate(bl, &sd->regen, &sd->sc);
+	// }
 
 	return 0;
 }
@@ -11204,13 +11256,13 @@ int32 skill_sit(map_session_data *sd, bool sitting)
 		flag |= 1;
 		range = skill_get_splash(RG_GANGSTER, lv);
 	}
-	if ((lv = pc_checkskill(sd, TK_HPTIME)) > 0) {
-		flag |= 2;
-		range = skill_get_splash(TK_HPTIME, lv);
-	} else if ((lv = pc_checkskill(sd, TK_SPTIME)) > 0) {
-		flag |= 2;
-		range = skill_get_splash(TK_SPTIME, lv);
-	}
+	// if ((lv = pc_checkskill(sd, TK_HPTIME)) > 0) {
+		// flag |= 2;
+		// range = skill_get_splash(TK_HPTIME, lv);
+	// } else if ((lv = pc_checkskill(sd, TK_SPTIME)) > 0) {
+		// flag |= 2;
+		// range = skill_get_splash(TK_SPTIME, lv);
+	// }
 
 	if (sitting)
 		clif_status_load(sd, EFST_SIT, 1);

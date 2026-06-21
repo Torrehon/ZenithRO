@@ -5775,6 +5775,7 @@ Body:
       - Level: 99
         Sp: 208
   - Jobs:
+      Genin: true
       Mage: true
       Mage_High: true
       Baby_Mage: true
@@ -6588,7 +6589,6 @@ Body:
       - Level: 99
         Sp: 307
   - Jobs:
-      Genin: true
       Thief: true
       Thief_High: true
       Baby_Thief: true

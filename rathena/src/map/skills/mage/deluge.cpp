@@ -2,6 +2,7 @@
 // For more information, see LICENCE in the main folder
 
 #include "deluge.hpp"
+#include "map/pc.hpp" // Necesario para comprobar las habilidades del jugador
 
 SkillDeluge::SkillDeluge() : SkillImpl(SA_DELUGE) {
 }
@@ -22,3 +23,19 @@ void SkillDeluge::castendPos2(block_list* src, int32 x, int32 y, uint16 skill_lv
 	}
 	skill_unitsetting(src,getSkillId(),skill_lv,x,y,0);
 }
+
+// --- INICIO CUSTOM: Daño de Deluge (Soul of the Arcanist) ---
+void SkillDeluge::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
+	
+	base_skillratio = 0; // Barrera oficial: 0 daño nativo para Sages normales
+
+	if (src && src->type == BL_PC) {
+		map_session_data* sd = const_cast<map_session_data*>(BL_CAST(BL_PC, src));
+		
+		// Si el Sage tiene la pasiva aprendida, el área gana un 100% de MATK
+		if (pc_checkskill(sd, SA_ARCSOUL) > 0) {
+			base_skillratio = 100;
+		}
+	}
+}
+// --- FIN CUSTOM ---

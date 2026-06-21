@@ -185,6 +185,33 @@ StateIconList[EFST_IDs.EFST_FAITHFUL] = {
 		{ "Heals Hp every 2 seconds.", { 255, 255, 255 } }
 	}
 }
+StateIconList[EFST_IDs.EFST_HAKAI] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Hakai", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Receives more damage from Throw Huuma Shuriken.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_ZANTETSU] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Zantetsuken Ready", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Next Zantetsuken cast time is greatly reduced and damage is doubled.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_OVERCAST] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Overcast", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Magic damage increases at the cost of a longer cast time.", { 255, 255, 255 } }
+	}
+}
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,

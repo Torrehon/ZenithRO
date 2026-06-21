@@ -10,12 +10,38 @@
 SkillKamaitachi::SkillKamaitachi() : SkillImpl(NJ_KAMAITACHI) {
 }
 
+// --- CUSTOM: Función para añadir impactos (hits) visuales y mecánicos ---
+void SkillKamaitachi::modifyDamageData(Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv) const {
+	const map_session_data* sd = BL_CAST(BL_PC, &src);
+
+	int hits = 1;
+
+	// Si tiene la pasiva Soul of the Kuji y lo usa a nivel 5, da 2 hits
+	if (sd != nullptr && pc_checkskill(sd, NJ_KUJISOUL) > 0 && skill_lv == 5) {
+		hits = 2;
+	}
+
+	dmg.div_ = hits;
+}
+
 void SkillKamaitachi::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	base_skillratio += 60 * skill_lv;
+	int hits = 1;
+	if (sd != nullptr && pc_checkskill(sd, NJ_KUJISOUL) > 0 && skill_lv == 5) {
+		hits = 2;
+	}
+
+	// Calculamos el ratio de un solo hit (Base 100% + 60% por nivel)
+	int ratio_per_hit = 100 + (60 * skill_lv);
+	
+	// Añadimos el bono de los Charms
 	if(sd && sd->spiritcharm_type == CHARM_TYPE_WIND && sd->spiritcharm > 0)
-		base_skillratio += 100 * sd->spiritcharm;
+		ratio_per_hit += 100 * sd->spiritcharm;
+
+	// Multiplicamos por los hits totales para no perder daño al dividirlo
+	int total_ratio = ratio_per_hit * hits;
+
 }
 
 void SkillKamaitachi::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {

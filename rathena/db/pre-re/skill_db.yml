@@ -7479,8 +7479,6 @@ Body:
     MaxLevel: 5
     Type: Magic
     TargetType: Ground
-    DamageFlags:
-      NoDamage: true
     Flags:
       IgnoreHovering: true
     Range: 2
@@ -7528,8 +7526,6 @@ Body:
     MaxLevel: 5
     Type: Magic
     TargetType: Ground
-    DamageFlags:
-      NoDamage: true
     Flags:
       IgnoreHovering: true
     Range: 2
@@ -7577,8 +7573,6 @@ Body:
     MaxLevel: 5
     Type: Magic
     TargetType: Ground
-    DamageFlags:
-      NoDamage: true
     Flags:
       IgnoreHovering: true
     Range: 2
@@ -7701,7 +7695,7 @@ Body:
           Amount: 1
   - Id: 290
     Name: SA_ABRACADABRA
-    Description: Hocus-pocus
+    Description: Overcast
     MaxLevel: 10
     Type: Magic
     TargetType: Self
@@ -7709,11 +7703,10 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
+    CastTime: 5000
+    Cooldown: 25000
     Requires:
       SpCost: 50
-      ItemCost:
-        - Item: Yellow_Gemstone
-          Amount: 2
   - Id: 291
     Name: SA_MONOCELL
     Description: Monocell
@@ -14583,23 +14576,23 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 15
+          Amount: 12
         - Level: 2
-          Amount: 20
+          Amount: 14
         - Level: 3
-          Amount: 18
+          Amount: 16
         - Level: 4
-          Amount: 23
+          Amount: 18
         - Level: 5
-          Amount: 21
+          Amount: 20
         - Level: 6
-          Amount: 26
+          Amount: 22
         - Level: 7
           Amount: 24
         - Level: 8
-          Amount: 29
+          Amount: 26
         - Level: 9
-          Amount: 27
+          Amount: 28
         - Level: 10
           Amount: 30
   - Id: 535
@@ -14763,23 +14756,23 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 15
+          Amount: 12
         - Level: 2
-          Amount: 20
+          Amount: 14
         - Level: 3
-          Amount: 18
+          Amount: 16
         - Level: 4
-          Amount: 23
+          Amount: 18
         - Level: 5
-          Amount: 21
+          Amount: 20
         - Level: 6
-          Amount: 26
+          Amount: 22
         - Level: 7
           Amount: 24
         - Level: 8
-          Amount: 29
+          Amount: 26
         - Level: 9
-          Amount: 27
+          Amount: 28
         - Level: 10
           Amount: 30
   - Id: 538
@@ -15011,23 +15004,23 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 15
+          Amount: 12
         - Level: 2
-          Amount: 20
+          Amount: 14
         - Level: 3
-          Amount: 18
+          Amount: 16
         - Level: 4
-          Amount: 23
+          Amount: 18
         - Level: 5
-          Amount: 21
+          Amount: 20
         - Level: 6
-          Amount: 26
+          Amount: 22
         - Level: 7
           Amount: 24
         - Level: 8
-          Amount: 29
+          Amount: 26
         - Level: 9
-          Amount: 27
+          Amount: 28
         - Level: 10
           Amount: 30
   - Id: 541
@@ -15132,6 +15125,10 @@ Body:
           Amount: 36
         - Level: 5
           Amount: 40
+      ItemCost:
+        - Item: Wind_Stone
+          Amount: 1
+          Level: 5
   - Id: 543
     Name: NJ_NEN
     Description: Soul
@@ -17304,6 +17301,16 @@ Body:
   - Id: 1056
     Name: NJ_KUJISOUL
     Description: Soul of the Kuji
+    MaxLevel: 1
+    Type: Weapon  
+  - Id: 1057
+    Name: SA_ARCSOUL
+    Description: Soul of the Arcanist
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1058
+    Name: SA_LORESOUL
+    Description: Soul of the Loremaster
     MaxLevel: 1
     Type: Weapon
   - Id: 2001
@@ -26145,15 +26152,15 @@ Body:
       Id: Psychic_Wave
       Range:
         - Level: 1
-          Size: 3
+          Size: 2
         - Level: 2
           Size: 3
         - Level: 3
-          Size: 4
+          Size: 3
         - Level: 4
           Size: 4
         - Level: 5
-          Size: 5
+          Size: 4
       Interval: 500
       Target: Enemy
       Flag:

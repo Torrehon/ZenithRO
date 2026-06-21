@@ -4544,6 +4544,27 @@ static void battle_calc_multi_attack(struct Damage* wd, block_list *src,block_li
 			}
 		}
 		// --- FIN CUSTOM ---
+		
+		// --- INICIO CUSTOM: Advanced Book Double Attack (Soul of the Lore) ---
+		// Nos aseguramos de que es un jugador (sd), tiene la Soul y no ha hecho ya otro multi-hit (wd->div_ == 1)
+		if (wd->div_ == 1 && sd && pc_checkskill(sd, SA_LORESOUL) > 0) {
+			
+			// Solo funciona si lleva un Libro equipado
+			if (sd->weapontype1 == W_BOOK) {
+				int book_lv = pc_checkskill(sd, SA_ADVANCEDBOOK);
+				
+				if (book_lv > 0) {
+					int book_rate = 5 * book_lv; // 5% por nivel (Máximo 50% al nivel 10)
+					
+					if (rnd() % 100 < book_rate) {
+						wd->div_ = 2; // Dos golpes visuales y de daño
+						wd->type = DMG_MULTI_HIT;
+					}
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
+		
 	}
 }
 
@@ -6001,6 +6022,30 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		battle_calc_attack_plant(&wd, src, target, skill_id, skill_lv);
 		return wd;
 	}
+	
+	// --- INICIO CUSTOM: Endows (+1% o +2% Daño Físico por nivel) ---
+	if (sc && sd) {
+		int endow_bonus = 0;
+		// Comprobamos si tiene la pasiva Soul of the Arcanist
+		int endow_mult = (pc_checkskill(sd, SA_ARCSOUL) > 0) ? 2 : 1;
+		
+		// Comprobamos si el arma tiene el elemento del Endow Y si tiene el buff activo
+		if (sstatus->rhw.ele == ELE_FIRE && sc->getSCE(SC_FIREWEAPON)) 
+			endow_bonus = sc->getSCE(SC_FIREWEAPON)->val1 * endow_mult;
+		else if (sstatus->rhw.ele == ELE_WATER && sc->getSCE(SC_WATERWEAPON)) 
+			endow_bonus = sc->getSCE(SC_WATERWEAPON)->val1 * endow_mult;
+		else if (sstatus->rhw.ele == ELE_WIND && sc->getSCE(SC_WINDWEAPON)) 
+			endow_bonus = sc->getSCE(SC_WINDWEAPON)->val1 * endow_mult;
+		else if (sstatus->rhw.ele == ELE_EARTH && sc->getSCE(SC_EARTHWEAPON)) 
+			endow_bonus = sc->getSCE(SC_EARTHWEAPON)->val1 * endow_mult;
+		
+		// ATK_ADDRATE suma directamente el porcentaje de daño final
+		if (endow_bonus > 0) {
+			ATK_ADDRATE(wd.damage, wd.damage2, endow_bonus);
+		}
+	}
+	// --- FIN CUSTOM ---
+	
 	// --- SINERGIA: TRACER SHOT (EXPOSED) ---
 	// Si el objetivo tiene la marca y recibe un ataque a distancia (BF_LONG)
 	// Se calcula aquí para que el +10% incluya el daño elemental, crítico y cartas
@@ -6606,6 +6651,18 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
             }
         }
 	    
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Overcast (Solo casteo manual) ---
+	if (sc && sc->getSCE(SC_OVERCAST)) {
+		// Gracias a sd->state.autocast, esto ignora magias automáticas de cartas y de Hindsight
+		if (sd && sd->state.autocast == 0) {
+			int overcast_bonus = sc->getSCE(SC_OVERCAST)->val1 * 5; // +5% de daño por nivel
+			
+			// MATK_ADDRATE suma un % directo al daño actual (Si es 50, suma 50%)
+			MATK_ADDRATE(overcast_bonus);
+		}
 	}
 	// --- FIN CUSTOM ---
 	
@@ -7886,41 +7943,81 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 			}
 		}
 	}
-	if (sc && sc->getSCE(SC_AUTOSPELL) && rnd()%100 < sc->getSCE(SC_AUTOSPELL)->val4) {
-		int32 sp = 0;
+	
+	if (sc && sc->getSCE(SC_AUTOSPELL)) {
 		uint16 skill_id = sc->getSCE(SC_AUTOSPELL)->val2;
-		uint16 skill_lv = sc->getSCE(SC_AUTOSPELL)->val3;
-		int32 i = rnd()%100;
-		if (sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_SAGE)
-			i = 0; //Max chance, no skill_lv reduction. [Skotlex]
-		//reduction only for skill_lv > 1
-		if (skill_lv > 1) {
-			if (i >= 50) skill_lv /= 2;
-			else if (i >= 15) skill_lv--;
+		int32 chance = sc->getSCE(SC_AUTOSPELL)->val4;
+
+		// --- INICIO CUSTOM: Balance de activación para Magias de Área (50% de probabilidad) ---
+		// Si la habilidad seleccionada es de área, reducimos el chance de activación a la mitad.
+		if (skill_id == MG_NAPALMBEAT || skill_id == MG_FIREBALL || skill_id == MG_THUNDERSTORM || skill_id == MG_FROSTDIVER || skill_id == WZ_HEAVENDRIVE) {
+			chance /= 2; 
 		}
-		sp = skill_get_sp(skill_id,skill_lv) * 2 / 3;
+		// --- FIN CUSTOM ---
 
-		if (status_charge(src, 0, sp)) {
-			struct unit_data *ud = unit_bl2ud(src);
+		// Realizamos la comprobación de activación con el chance ya balanceado
+		if (rnd() % 100 < chance) {
+			int32 sp = 0;
+			uint16 skill_lv = sc->getSCE(SC_AUTOSPELL)->val3; // Este es nuestro "techo"
 
-			switch (skill_get_casttype(skill_id)) {
-				case CAST_GROUND:
-					skill_castend_pos2(src, target->x, target->y, skill_id, skill_lv, tick, flag);
-					break;
-				case CAST_NODAMAGE:
-					skill_castend_nodamage_id(src, target, skill_id, skill_lv, tick, flag);
-					break;
-				case CAST_DAMAGE:
-					skill_castend_damage_id(src, target, skill_id, skill_lv, tick, flag);
-					break;
+			// --- INICIO CUSTOM: Auto Cast RNG al golpear (Soul of the Lore) ---
+			if (sd && pc_checkskill(sd, SA_LORESOUL) > 0) {
+				
+				int techo = skill_lv; 
+				
+				if (techo > 0) { 
+					if (skill_id == MG_COLDBOLT || skill_id == MG_FIREBOLT || skill_id == MG_LIGHTNINGBOLT || skill_id == MG_SOULSTRIKE || skill_id == WZ_EARTHSPIKE) {
+						int min_lv = (techo < 3) ? techo : 3; // El suelo será 3 (o menos si la aprendió al 1 o 2)
+						skill_lv = (rnd() % (techo - min_lv + 1)) + min_lv;
+					} 
+					else {
+						skill_lv = (rnd() % techo) + 1;
+					}
+				}
+
+			} else {
+				// Comportamiento original sin la Soul (Penalización clásica del Sage)
+				int32 i = rnd()%100;
+				if (skill_lv > 1) {
+					if (i >= 50) skill_lv /= 2;
+					else if (i >= 15) skill_lv--;
+				}
 			}
-			if (ud) {
-				int32 autospell_tick = skill_delayfix(src, skill_id, skill_lv);
+			// --- FIN CUSTOM ---
 
-				if (DIFF_TICK(ud->canact_tick, tick + autospell_tick) < 0) {
-					ud->canact_tick = i64max(tick + autospell_tick, ud->canact_tick);
-					if (battle_config.display_status_timers && sd)
-						clif_status_change(src, EFST_POSTDELAY, 1, autospell_tick, 0, 0, 0);
+			sp = skill_get_sp(skill_id,skill_lv) * 2 / 3;
+
+			if (status_charge(src, 0, sp)) {
+				struct unit_data *ud = unit_bl2ud(src);
+
+				// --- INICIO CUSTOM: Overcast Fix (Forzamos la variable Autocast) ---
+				if (sd) sd->state.autocast = 1;
+				// --- FIN CUSTOM ---
+
+				switch (skill_get_casttype(skill_id)) {
+					case CAST_GROUND:
+						skill_castend_pos2(src, target->x, target->y, skill_id, skill_lv, tick, flag);
+						break;
+					case CAST_NODAMAGE:
+						skill_castend_nodamage_id(src, target, skill_id, skill_lv, tick, flag);
+						break;
+					case CAST_DAMAGE:
+						skill_castend_damage_id(src, target, skill_id, skill_lv, tick, flag);
+						break;
+				}
+
+				// --- INICIO CUSTOM: Overcast Fix (Apagamos la variable) ---
+				if (sd) sd->state.autocast = 0;
+				// --- FIN CUSTOM ---
+
+				if (ud) {
+					int32 autospell_tick = skill_delayfix(src, skill_id, skill_lv);
+
+					if (DIFF_TICK(ud->canact_tick, tick + autospell_tick) < 0) {
+						ud->canact_tick = i64max(tick + autospell_tick, ud->canact_tick);
+						if (battle_config.display_status_timers && sd)
+							clif_status_change(src, EFST_POSTDELAY, 1, autospell_tick, 0, 0, 0);
+					}
 				}
 			}
 		}

@@ -2465,7 +2465,7 @@ uint16 status_base_atk(const block_list *bl, const struct status_data *status, i
 #ifdef RENEWAL
 		dstr =
 #endif
-		str = status->int_; // Asignamos INT a la variable de fuerza
+		str = status->int_/2; // Asignamos INT a la variable de fuerza
 		dex = status->dex;
 	} else { // Armas melee y Huuma
 #ifdef RENEWAL
@@ -5095,10 +5095,12 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		    sd->indexed_bonus.subele[ELE_NEUTRAL] += (skill*5)/10;
 		}
 	}
-	// --- INICIO CUSTOM: Bestiary (Antigua Dragonology) ---
+	// --- INICIO CUSTOM: Bestiary (Antigua Dragonology + Soul of the Lore) ---
 	if ((skill = pc_checkskill(sd, SA_DRAGONOLOGY)) > 0) {
-		// El bono es de 2% por nivel de habilidad tanto para Daño como para Resistencia
-		int bonus = skill * 2; 
+		
+		// Si tiene Soul of the Lore, el bono es 2%. Si no, se queda en tu 1% base.
+		int multiplier = (pc_checkskill(sd, SA_LORESOUL) > 0) ? 2 : 1;
+		int bonus = skill * multiplier; 
 
 		// Creamos una lista con todas las razas válidas (Excluye DemiHuman, Player_Human y Player_Doram)
 		int valid_races[] = {
@@ -5315,20 +5317,25 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			}
 			// --- FIN CUSTOM ---
 		}
-		// --- INICIO CUSTOM: Endows (+1% Daño Mágico por nivel) ---
+		
+		// --- INICIO CUSTOM: Endows (+1% o +2% Daño Mágico por nivel) ---
+		// Comprobamos si tiene la pasiva Soul of the Arcanist
+		int endow_mult = (pc_checkskill(sd, SA_ARCSOUL) > 0) ? 2 : 1;
+
 		if (sc->getSCE(SC_FIREWEAPON)) {
-			sd->indexed_bonus.magic_atk_ele[ELE_FIRE] += sc->getSCE(SC_FIREWEAPON)->val1;
+			sd->indexed_bonus.magic_atk_ele[ELE_FIRE] += sc->getSCE(SC_FIREWEAPON)->val1 * endow_mult;
 		}
 		if (sc->getSCE(SC_WINDWEAPON)) {
-			sd->indexed_bonus.magic_atk_ele[ELE_WIND] += sc->getSCE(SC_WINDWEAPON)->val1;
+			sd->indexed_bonus.magic_atk_ele[ELE_WIND] += sc->getSCE(SC_WINDWEAPON)->val1 * endow_mult;
 		}
 		if (sc->getSCE(SC_WATERWEAPON)) {
-			sd->indexed_bonus.magic_atk_ele[ELE_WATER] += sc->getSCE(SC_WATERWEAPON)->val1;
+			sd->indexed_bonus.magic_atk_ele[ELE_WATER] += sc->getSCE(SC_WATERWEAPON)->val1 * endow_mult;
 		}
 		if (sc->getSCE(SC_EARTHWEAPON)) {
-			sd->indexed_bonus.magic_atk_ele[ELE_EARTH] += sc->getSCE(SC_EARTHWEAPON)->val1;
+			sd->indexed_bonus.magic_atk_ele[ELE_EARTH] += sc->getSCE(SC_EARTHWEAPON)->val1 * endow_mult;
 		}
 		// --- FIN CUSTOM ---
+		
 		if( sc->getSCE(SC_FIRE_CLOAK_OPTION) ) {
 			i = sc->getSCE(SC_FIRE_CLOAK_OPTION)->val2;
 			sd->indexed_bonus.subele[ELE_FIRE] += i;
@@ -8735,8 +8742,17 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 	if( sd && sd->ud.skilltimer != INVALID_TIMER && (pc_checkskill(sd,SA_FREECAST) > 0 || sd->ud.skill_id == LG_EXEEDBREAK) ) {
 		if( sd->ud.skill_id == LG_EXEEDBREAK )
 			speed_rate = 160 - 10 * sd->ud.skill_lv;
-		else
-			speed_rate = 175 - 5 * pc_checkskill(sd,SA_FREECAST);
+		else {
+			// --- INICIO CUSTOM: Free Cast (Soul of the Lore) ---
+			// Si tiene la pasiva, el delay de movimiento se queda en 100% (sin penalización)
+			if (pc_checkskill(sd, SA_LORESOUL) > 0) {
+				speed_rate = 100; 
+			} else {
+				// Comportamiento original
+				speed_rate = 175 - 5 * pc_checkskill(sd,SA_FREECAST);
+			}
+			// --- FIN CUSTOM ---
+		}
 	} else {
 		int32 val = 0;
 
@@ -11871,34 +11887,40 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			
 		case SC_VOLCANO:
 			{
-				int8 enchant_eff[] = { 10, 14, 17, 19, 20 }; // Enchant addition
-				uint8 i = max((val1-1)%5, 0);
+				map_session_data* sd = BL_CAST(BL_PC, src);
 
-				// --- INICIO CUSTOM: Volcano (Igual que Renewal, sin importar armadura) ---
+				// --- INICIO CUSTOM: Volcano (Soul of the Arcanist + Renewal) ---
 				val2 = 5 + val1 * 5; // ATK y MATK increase (+30 a nivel 5)
-				val3 = enchant_eff[i];
+				
+				// 10% máximo sin la soul (2% por nivel), 20% máximo con la soul (4% por nivel)
+				int multiplier = (sd && pc_checkskill(sd, SA_ARCSOUL) > 0) ? 4 : 2;
+				val3 = val1 * multiplier;
 				// --- FIN CUSTOM ---
 			}
 			break;
 		case SC_VIOLENTGALE:
 			{
-				int8 enchant_eff[] = { 10, 14, 17, 19, 20 }; // Enchant addition
-				uint8 i = max((val1-1)%5, 0);
+				map_session_data* sd = BL_CAST(BL_PC, src);
 
-				// --- INICIO CUSTOM: Violent Gale (Igual que Renewal, sin importar armadura) ---
+				// --- INICIO CUSTOM: Violent Gale (Soul of the Arcanist + Renewal) ---
 				val2 = val1 * 3; // Flee increase (+15 a nivel 5)
-				val3 = enchant_eff[i];
+				
+				// 10% máximo sin la soul (2% por nivel), 20% máximo con la soul (4% por nivel)
+				int multiplier = (sd && pc_checkskill(sd, SA_ARCSOUL) > 0) ? 4 : 2;
+				val3 = val1 * multiplier;
 				// --- FIN CUSTOM ---
 			}
 			break;
 		case SC_DELUGE:
 			{
-				int8 enchant_eff[] = { 10, 14, 17, 19, 20 }; // Enchant addition
-				uint8 i = max((val1-1)%5, 0);
+				map_session_data* sd = BL_CAST(BL_PC, src);
 
-				// --- INICIO CUSTOM: Deluge (2% HP por nivel, sin importar armadura) ---
+				// --- INICIO CUSTOM: Deluge (Soul of the Arcanist + Renewal) ---
 				val2 = val1 * 2; // HP addition rate (+10% HP a nivel 5)
-				val3 = enchant_eff[i];
+				
+				// 10% máximo sin la soul (2% por nivel), 20% máximo con la soul (4% por nivel)
+				int multiplier = (sd && pc_checkskill(sd, SA_ARCSOUL) > 0) ? 4 : 2;
+				val3 = val1 * multiplier;
 				// --- FIN CUSTOM ---
 			}
 			break;
@@ -15230,7 +15252,7 @@ TIMER_FUNC(status_change_timer){
 			else if (type == SC_ELECTROCUTE) ele = ELE_WIND;
 			else ele = ELE_EARTH; 
 
-			int64 caster_matk = (sce->val2 > 0) ? sce->val2 : 1000; 
+			int64 caster_matk = (sce->val2 > 0) ? sce->val2 : 0; 
 
 			int hard_mdef = status->mdef;
 			if (hard_mdef > 100) hard_mdef = 100; 

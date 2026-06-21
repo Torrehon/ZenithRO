@@ -29,9 +29,10 @@ new_1-3,85,33,3	script	Messy Mary	729,{
     mes "Do you want to try and learn it with me? We can practice together!";
     mes "I just need some 'training supplies' to get the movement right:";
     mes " "; 
-    mes "^0000FF- 10x Fluff (ID 914)          ^000000";
+    mes "^0000FF- 2x Feather of Birds (ID 916)          ^000000";
     mes "^0000FF- 10x Jellopy (ID 909)        ^000000";
-    mes "^0000FF- 10x Feather (ID 949)        ^000000";
+    mes "^0000FF- 5x Clover (ID 705)        ^000000";
+    mes "^0000FF- 5x Tree Root (ID 902)        ^000000";
     mes " "; 
     mes "If we gather these, I'm sure we can master the skill together!";
     next;
@@ -42,10 +43,10 @@ new_1-3,85,33,3	script	Messy Mary	729,{
         close;
     }
 
-    if (countitem(914) < 10 || countitem(909) < 10 || countitem(949) < 10) {
+    if (countitem(916) < 2	 || countitem(909) < 10 || countitem(705) < 5 || countitem(902) < 5) {
         mes "^FF0000[Messy Mary]^000000";
         mes "Wait, I don't think we have enough for a proper practice session.";
-        mes "We need ^FF000010 of each^000000 to really get the hang of it. I'll be here waiting!";
+        mes "We need all those items to really get the hang of it. I'll be here waiting!";
         close;
     }
 
@@ -63,9 +64,10 @@ new_1-3,85,33,3	script	Messy Mary	729,{
     mes "I think we finally understood how it's done!";
     next;
 
-    delitem 914, 10;
+    delitem 916, 2;
     delitem 909, 10;
-    delitem 949, 10;
+    delitem 705, 5;
+    delitem 902, 5;
     
     set Has_Pickup_Skill, 1;
     skill 1013,1,0; 

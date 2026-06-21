@@ -1145,6 +1145,19 @@ Body:
         MaxLevel: 1
       - Name: SA_ELEMENTWIND
         MaxLevel: 1
+      - Name: SO_PSYCHIC_WAVE
+        MaxLevel: 5
+        Requires:
+          - Name: SA_VOLCANO
+            Level: 1
+          - Name: SA_DELUGE
+            Level: 1
+          - Name: SA_VIOLENTGALE
+            Level: 1
+      - Name: SA_ARCSOUL
+        MaxLevel: 1
+      - Name: SA_LORESOUL
+        MaxLevel: 1
   - Job: Rogue
     Inherit:
       Novice: true

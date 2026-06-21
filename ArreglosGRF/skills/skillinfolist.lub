@@ -2453,6 +2453,18 @@ SKILL_INFO_LIST = {
 			{ SKID.SA_LANDPROTECTOR,1 }
 		}
 	},
+	[SKID.SA_ARCSOUL] = {
+		"SA_ARCSOUL",
+		SkillName = "Soul of the Arcanist",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.SA_LORESOUL] = {
+		"SA_LORESOUL",
+		SkillName = "Soul of the Loremaster",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
 	[SKID.SA_MONOCELL] = {
 		"SA_MONOCELL",
 		SkillName = "Monocell",
@@ -7499,7 +7511,9 @@ SKILL_INFO_LIST = {
 		MaxLv = 5,
 		SpAmount = { 48, 56, 64, 70, 78 },
 		_NeedSkillList = {
-			{ SKID.SA_DISPELL,1 }
+			{ SKID.SA_DELUGE,1 },
+			{ SKID.SA_VIOLENTGALE,1 },
+			{ SKID.SA_VOLCANO,1 }
 		}
 	},
 	[SKID.SO_CLOUD_KILL] = {

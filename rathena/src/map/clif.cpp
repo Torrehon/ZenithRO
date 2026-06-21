@@ -8450,13 +8450,16 @@ void clif_autospell( map_session_data& sd, uint16 skill_lv ){
 	};
 #else
 	const std::vector<s_autospell_requirement> autospell_skills = {
-		{ MG_NAPALMBEAT, 0 },
 		{ MG_COLDBOLT, 1 },
 		{ MG_FIREBOLT, 1 },
 		{ MG_LIGHTNINGBOLT, 1 },
-		{ MG_SOULSTRIKE, 4 },
+		{ MG_SOULSTRIKE, 3 },
+		{ WZ_EARTHSPIKE, 3 },	   // Añadida Tierra (Unitarget)
+		{ MG_NAPALMBEAT, 7 },		
 		{ MG_FIREBALL, 7 },
-		{ MG_FROSTDIVER, 9 },
+		{ MG_THUNDERSTORM, 7 },    // Añadida Rayo (Área)
+		{ MG_FROSTDIVER, 7 },
+		{ WZ_HEAVENDRIVE, 7 }      // Añadida Tierra (Área)
 	};
 #endif
 

@@ -6987,4 +6987,10 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
+  - Status: Overcast
+    Icon: EFST_OVERCAST
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
       
