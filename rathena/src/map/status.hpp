@@ -1466,6 +1466,7 @@ enum sc_type : int16 {
 	SC_HAKAI,
 	SC_ZANTETSU,
 	SC_OVERCAST,
+	SC_UNNERVED,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -2988,6 +2989,7 @@ enum efst_type : int16{
 	EFST_HAKAI = 1717,
 	EFST_ZANTETSU = 1718,
 	EFST_OVERCAST = 1719,
+	EFST_UNNERVED = 1720,
 	EFST_MAX,
 };
 

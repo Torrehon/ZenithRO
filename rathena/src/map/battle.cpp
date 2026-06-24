@@ -5719,6 +5719,25 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 			ATK_ADD(wd.damage, wd.damage2, base_matk);
 		}
 		// --- FIN CÓDIGO CUSTOM ---
+		
+		// --- INICIO CUSTOM: Soul of the Dissonant (Dissonance / Ugly Dance con MATK) ---
+		if ((skill_id == BA_DISSONANCE || skill_id == DC_UGLYDANCE) && sd && pc_checkskill(sd, BD_DISSONANT) > 0) {
+			
+			// Calculamos un valor de MATK aleatorio entre el mínimo y el máximo
+			int32 base_matk = sstatus->matk_min;
+			if (sstatus->matk_max > sstatus->matk_min) {
+				base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+			}
+
+			// Opcional: Si quisieras que solo aplicara un porcentaje del MATK (ej. 100%), lo dejas tal cual.
+			// Si quisieras que aplicara un 150% del MATK base, harías: base_matk = (base_matk * 150) / 100;
+
+			// Sumamos el MATK resultante al daño base del ataque físico de forma segura
+			ATK_ADD(wd.damage, wd.damage2, base_matk);
+		}
+		// --- FIN CUSTOM ---
+
+
 
 		// Skill ratio
 		ATK_RATE(wd.damage, wd.damage2, battle_calc_attack_skill_ratio(&wd, src, target, skill_id, skill_lv));
@@ -6658,9 +6677,9 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 	if (sc && sc->getSCE(SC_OVERCAST)) {
 		// Gracias a sd->state.autocast, esto ignora magias automáticas de cartas y de Hindsight
 		if (sd && sd->state.autocast == 0) {
-			int overcast_bonus = sc->getSCE(SC_OVERCAST)->val1 * 5; // +5% de daño por nivel
+			int overcast_bonus = sc->getSCE(SC_OVERCAST)->val1 * (25/10); // +2,5% de daño por nivel
 			
-			// MATK_ADDRATE suma un % directo al daño actual (Si es 50, suma 50%)
+			// MATK_ADDRATE suma un % directo al daño actual (Si es 25, suma 25%)
 			MATK_ADDRATE(overcast_bonus);
 		}
 	}
@@ -6854,13 +6873,7 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 				}
 			}
 			break;
-#ifndef RENEWAL
-		case BA_DISSONANCE:
-			md.damage = 30 + 10 * skill_lv;
-			md.damage += skill_lv * pc_checkskill(sd, BA_MUSICALLESSON);
-			break;
-		
-#endif
+
 		case NPC_SELFDESTRUCTION:
 			md.damage = sstatus->hp;
 			break;

@@ -8790,9 +8790,18 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 			if( sc->getSCE(SC_LONGING) )
 				val = max( val, 50 - 10 * sc->getSCE(SC_LONGING)->val1 );
 #endif
-			else
-			if( sd && sc->getSCE(SC_DANCING) )
-				val = max( val, 500 - (40 + 10 * (sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER)) * pc_checkskill(sd,(sd->status.sex?BA_MUSICALLESSON:DC_DANCINGLESSON)) );
+		else
+			if( sd && sc->getSCE(SC_DANCING) ) {
+				// --- INICIO CUSTOM: BD_RESONANT remueve penalización (Efecto Soul Link eliminado) ---
+				if (pc_checkskill(sd, BD_RESONANT) > 0) {
+					val = max(val, 0); // 0 penalización = Velocidad normal
+				} else {
+					// Cálculo base sin el bono de Soul Linker (500 - 40 * Nivel de la pasiva)
+					val = max(val, 500 - 40 * pc_checkskill(sd, (sd->status.sex ? BA_MUSICALLESSON : DC_DANCINGLESSON)));
+				}
+				// --- FIN CUSTOM ---
+			}
+			
 
 			if( sc->getSCE(SC_DECREASEAGI) )
 				val = max( val, 25 );
@@ -11987,33 +11996,50 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val3 = val1 * 5; // Status ailment resistance
 			break;
 		case SC_WHISTLE:
-			val2 = 18 + 2 * val1; // Flee increase
-			val3 = ((val1 + 1) / 2) * 10; // Perfect dodge increase
+			// --- INICIO CUSTOM: Dejamos que val2 y val3 (Flee y Perfect Dodge) vengan de skill.cpp con la fórmula de DEX ---
+			// val2 = 18 + 2 * val1; // Flee increase (ELIMINADO / COMENTADO)
+			// val3 = ((val1 + 1) / 2) * 10; // Perfect dodge increase (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_ASSNCROS:
-			val2 = val1 < 10 ? val1 * 2 - 1 : 20; // ASPD increase
+			// --- INICIO CUSTOM: Dejamos que val2 (ASPD) venga de skill.cpp con la fórmula de DEX ---
+			// val2 = val1 < 10 ? val1 * 2 - 1 : 20; // ASPD increase (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_POEMBRAGI:
-			val2 = 2 * val1; // Cast time reduction
-			val3 = 3 * val1; // After-cast delay reduction
+			// --- INICIO CUSTOM: Dejamos que val2 y val3 vengan de skill.cpp con la fórmula de DEX e INT ---
+			// val2 = 2 * val1; // Cast time reduction (ELIMINADO / COMENTADO)
+			// val3 = 3 * val1; // After-cast delay reduction (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_APPLEIDUN:
-			val2 = val1 < 10 ? 9 + val1 : 20; // HP rate increase
-			val3 = 2 * val1; // Potion recovery rate
+			// --- INICIO CUSTOM: Dejamos que val2 (Max HP) venga de skill.cpp con la INT ---
+			// val2 = val1 < 10 ? 9 + val1 : 20; // HP rate increase (ELIMINADO / COMENTADO)
+			
+			val3 = 2 * val1; // Potion recovery rate (Este lo dejamos intacto, 2% por nivel)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_HUMMING:
-			val2 = 4 * val1; // Hit increase
+			// --- INICIO CUSTOM: Dejamos que val2 (Hit) venga de skill.cpp con la fórmula de DEX ---
+			// val2 = 4 * val1; // Hit increase (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_DONTFORGETME:
-			val2 = 1 + 30 * val1; // ASPD decrease
-			val3 = 5 + 2 * val1; // Movement speed adjustment.
+			// --- INICIO CUSTOM: Dejamos que val2 y val3 vengan de skill.cpp con INT y DEX ---
+			// val2 = 1 + 30 * val1; // ASPD decrease (ELIMINADO / COMENTADO)
+			// val3 = 5 + 2 * val1; // Movement speed adjustment (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_FORTUNE:
-			val2 = val1 * 10; // Critical increase
+			// --- INICIO CUSTOM: Dejamos que val2 (Crit) venga de skill.cpp con la fórmula de DEX ---
+			// val2 = val1 * 10; // Critical increase (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 		case SC_SERVICE4U:
-			val2 = val1 < 10 ? 9 + val1 : 20; // MaxSP percent increase
-			val3 = 5 + val1; // SP cost reduction
+			// --- INICIO CUSTOM: Dejamos que val2 y val3 vengan de skill.cpp con INT ---
+			// val2 = val1 < 10 ? 9 + val1 : 20; // MaxSP percent increase (ELIMINADO / COMENTADO)
+			// val3 = 5 + val1; // SP cost reduction (ELIMINADO / COMENTADO)
+			// --- FIN CUSTOM ---
 			break;
 #endif
 		case SC_EXPLOSIONSPIRITS:
@@ -13408,13 +13434,18 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			break;
 #ifndef RENEWAL
 		case SC_APPLEIDUN:
-		{
-			map_session_data * s_sd = BL_CAST(BL_PC, src);
+			// --- INICIO CUSTOM: Apple of Idun (Pre-Renewal Override) ---
+			// Comentamos este bloque para evitar que machaque el val2 (Max HP %) que mandamos desde skill.cpp
+			/*
+			{
+				map_session_data * s_sd = BL_CAST(BL_PC, src);
 
-			val2 = (5 + 2 * val1) + (status_get_vit(src) / 10); //HP Rate: (5 + 2 * skill_lv) + (vit/10) + (BA_MUSICALLESSON level)
-			if (s_sd)
-				val2 += pc_checkskill(s_sd, BA_MUSICALLESSON) / 2;
-		}
+				val2 = (5 + 2 * val1) + (status_get_vit(src) / 10); //HP Rate: (5 + 2 * skill_lv) + (vit/10) + (BA_MUSICALLESSON level)
+				if (s_sd)
+					val2 += pc_checkskill(s_sd, BA_MUSICALLESSON) / 2;
+			}
+			*/
+			// --- FIN CUSTOM ---
 		[[fallthrough]];
 		case SC_WHISTLE:
 		case SC_ASSNCROS:
@@ -15524,9 +15555,21 @@ TIMER_FUNC(status_change_timer){
 				// Dissonance marker is set
 				if (unit->val2&(1 << UF_ENSEMBLE))
 					break;
-				// Standing in the area, but cannot affect self
-				if (unit->group->src_id == bl->id && !(sc != nullptr && sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER))
-					break;
+				
+				// --- INICIO CUSTOM: Standing in the area, but cannot affect self (Exclusivo BD_RESONANT) ---
+				if (unit->group->src_id == bl->id) {
+					bool has_resonant = false;
+					if (bl->type == BL_PC) {
+						map_session_data* sd = BL_CAST(BL_PC, bl);
+						if (sd && pc_checkskill(sd, BD_RESONANT) > 0)
+							has_resonant = true;
+					}
+					// Si es el lanzador de la canción y no tiene la pasiva, rompemos el ciclo (no se renueva el bufo)
+					if (!has_resonant)
+						break;
+				}
+				// --- FIN CUSTOM ---
+
 				// Restore pseudo-infinite duration
 				sce->val4 = 0;
 				// Update icon duration

@@ -8205,11 +8205,12 @@ Body:
     Name: BA_DISSONANCE
     Description: Unchained Serenade
     MaxLevel: 5
-    Type: Misc
+    Type: Weapon
     TargetType: Self
     DamageFlags:
       NoDamage: true
       IgnoreFlee: true
+    Element: Weapon
     Flags:
       IsSong: true
       IgnoreLandProtector: true
@@ -8281,7 +8282,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 60000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8329,7 +8330,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 120000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8377,7 +8378,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 180000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8425,7 +8426,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 180000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8499,10 +8500,12 @@ Body:
     Name: DC_UGLYDANCE
     Description: Hip Shaker
     MaxLevel: 5
-    Type: Misc
+    Type: Weapon
     TargetType: Self
     DamageFlags:
       NoDamage: true
+      IgnoreFlee: true
+    Element: Weapon
     Flags:
       IsSong: true
       IgnoreLandProtector: true
@@ -8574,7 +8577,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 60000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8622,7 +8625,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 180000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8670,7 +8673,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 120000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -8718,7 +8721,7 @@ Body:
     Hit: Single
     HitCount: 1
     Duration1: 180000
-    Duration2: 20000
+    Duration2: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -16814,32 +16817,30 @@ Body:
     Name: BA_PANGVOICE
     Description: Pang Voice
     MaxLevel: 1
-    Type: Misc
+    Type: Magic
     TargetType: Attack
-    DamageFlags:
-      NoDamage: true
     Flags:
       IsQuest: true
     Range: 9
     Hit: Single
-    CastTime: 1000
+    Element: Weapon
+    CastTime: 3000
     AfterCastActDelay: 2000
     Duration1: 30000
     Requires:
-      SpCost: 20
+      SpCost: 40
   - Id: 1011
     Name: DC_WINKCHARM
     Description: Wink of Charm
     MaxLevel: 1
-    Type: Misc
+    Type: Magic
     TargetType: Attack
-    DamageFlags:
-      NoDamage: true
     Flags:
       IsQuest: true
     Range: 9
     Hit: Single
-    CastTime: 1000
+    Element: Weapon
+    CastTime: 3000
     AfterCastActDelay: 2000
     Duration1: 30000
     Duration2: 10000
@@ -17311,6 +17312,16 @@ Body:
   - Id: 1058
     Name: SA_LORESOUL
     Description: Soul of the Loremaster
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1059
+    Name: BD_RESONANT
+    Description: Soul of the Resonant
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1060
+    Name: BD_DISSONANT
+    Description: Soul of the Dissonant
     MaxLevel: 1
     Type: Weapon
   - Id: 2001

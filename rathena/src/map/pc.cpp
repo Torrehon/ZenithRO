@@ -2788,22 +2788,25 @@ void pc_calc_skilltree(map_session_data *sd)
 		}
 	}
 
-	// Enable Bard/Dancer spirit linked skills.
-	if (sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER) {
+// --- INICIO CUSTOM: Soul of the Resonant Linked Skills ---
+	if (pc_checkskill(sd, BD_RESONANT) > 0) {
 		std::vector<std::vector<uint16>> linked_skills = { { BA_WHISTLE, DC_HUMMING },
 														   { BA_ASSASSINCROSS, DC_DONTFORGETME },
 														   { BA_POEMBRAGI, DC_FORTUNEKISS },
 														   { BA_APPLEIDUN, DC_SERVICEFORYOU } };
 
 		for (const auto &skill : linked_skills) {
-			if (pc_checkskill(sd, skill[!sd->status.sex]) < 10)
-				continue;
-
-			// Tag it as a non-savable, non-uppable, bonus skill
-			pc_skill(sd, skill[sd->status.sex], 10, ADDSKILL_TEMP);
+			// Leemos a qué nivel tienes tu propia canción
+			int my_skill_lv = pc_checkskill(sd, skill[!sd->status.sex]);
+			
+			if (my_skill_lv > 0) {
+				// Te regala la versión del sexo opuesto exactamente a ese mismo nivel
+				pc_skill(sd, skill[sd->status.sex], my_skill_lv, ADDSKILL_TEMP);
+			}
 		}
 	}
-}
+	// --- FIN CUSTOM ---
+} 
 
 //Checks if you can learn a new skill after having leveled up a skill.
 static void pc_check_skilltree(map_session_data *sd)

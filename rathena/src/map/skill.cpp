@@ -533,9 +533,20 @@ int32 skill_calc_heal(block_list *src, block_list *target, uint16 skill_id, uint
 	switch( skill_id ) {
 #ifndef RENEWAL
 		case BA_APPLEIDUN:
-			hp = 30 + 5 * skill_lv + (status_get_vit(src) / 2); // HP recovery
-			if (sd)
+			// --- INICIO CUSTOM: Apple of Idun (Curación y Soul of the Resonant) ---
+			// hp controla la curación base del área (con INT del lanzador).
+			hp = 30 + (5 * skill_lv) + status_get_int(src); 
+			
+			if (sd) {
+				// Musical Lessons
 				hp += 5 * pc_checkskill(sd, BA_MUSICALLESSON);
+				
+				// Soul of the Resonant: Añade el MATK a la cura
+				if (pc_checkskill(sd, BD_RESONANT) > 0) {
+					hp += status_get_matk_max(src); 
+				}
+			}
+			// --- FIN CUSTOM ---
 			break;
 #endif
 		case PR_SANCTUARY:
@@ -4425,9 +4436,9 @@ static int32 skill_apply_songs(block_list* target, va_list ap)
 		switch (skill_id) {
 			// Attack type songs
 		case BA_DISSONANCE:
-			skill_attack(BF_MAGIC, src, src, target, skill_id, skill_lv, tick, 0);
-			return 1;
 		case DC_UGLYDANCE:
+			skill_attack(BF_WEAPON, src, src, target, skill_id, skill_lv, tick, 0);
+			return 1;
 		case BD_LULLABY:
 			return skill_additional_effect(src, target, skill_id, skill_lv, BF_LONG | BF_SKILL | BF_MISC, ATK_DEF, tick);
 		default: // Buff/Debuff type songs
@@ -5886,44 +5897,12 @@ int32 skill_dance_overlap(skill_unit& unit, e_dance_overlap flag)
  * @param unit Skill unit data (from BA_DISSONANCE or DC_UGLYDANCE)
  * @param revert false = Convert, true = Revert
  * @return Whether the unit is currently overlapping with another song/dance (causing dissonance) or not
- * @TODO: This should be completely removed later and rewritten
- *	The entire execution of the overlapping songs instances is dirty and hacked together
- *	Overlapping cells should be checked on unit entry, not infinitely loop checked causing 1000's of executions a song/dance
  */
 static bool skill_dance_switch(skill_unit* unit, bool revert)
 {
-	std::shared_ptr<s_skill_unit_group> group;
-
-	if( unit == nullptr || (group = unit->group) == nullptr )
-		return false;
-
-	// Not a song or dance
-	if(!(group->state.song_dance&0x1))
-		return false;
-
-	// val2&(1 << UF_ENSEMBLE) signalizes if the unit is currently overlapping with another song/dance
-	bool overlap = unit->val2&(1 << UF_ENSEMBLE);
-
-	// No need to convert if there is no overlap
-	// But we still need to revert even if the cell is no longer overlapping
-	if (!revert && !overlap)
-		return false;
-
-	// Transform or restore the skill group depending on flag
-	uint16 skill_id;
-	if (!revert && overlap) {
-		//Transform
-		skill_id = unit->val2&(1 << UF_SONG) ? BA_DISSONANCE : DC_UGLYDANCE;
-	} else {
-		//Restore (val1 contains original skill ID)
-		skill_id = unit->val1;
-	}
-	group->skill_id = skill_id;
-	group->unit_id = skill_get_unit_id(skill_id);
-	group->target_flag = skill_get_unit_target(skill_id);
-	group->interval = skill_get_unit_interval(skill_id);
-
-	return overlap;
+	// Mecánica de solapamiento desactivada para optimizar el rendimiento del servidor.
+	// Las canciones ya no se transformarán en Dissonance o Ugly Dance al cruzarse.
+	return false;
 }
 
 /**
@@ -6158,66 +6137,126 @@ std::shared_ptr<s_skill_unit_group> skill_unitsetting(block_list *src, uint16 sk
 		}
 		break;
 	}
-
+	case BA_APPLEIDUN:
+		// --- INICIO CUSTOM: Apple of Idun (Max HP y Pociones) ---
+		// val1 (viaja como val2 al status) = Aumento de Max HP %.
+		// Fórmula: 2 * Skill Level + INT / 10
+		val1 = (2 * skill_lv) + (status->int_ / 10);
+		
+		// val2 (viaja como val3 al status) = Bono de recuperación de pociones.
+		// Fórmula original: 2% por nivel de habilidad.
+		val2 = 2 * skill_lv;
+		// --- FIN CUSTOM ---
+		break;
 	case BA_WHISTLE:
-		val1 = skill_lv + status->agi / 10; // Flee increase
-		val2 = (skill_lv + 1) / 2 + status->luk / 30; // Perfect dodge increase
+		// --- INICIO CUSTOM: A Whistle ---
+		// val1 (viaja como val2 al status) = Flee
+		// Fórmula: 1 * Skill Level + DEX / 10
+		val1 = skill_lv + (status->dex / 10); 
+		
+		// val2 (viaja como val3 al status) = Perfect Dodge
+		// Fórmula: Skill Level / 2 + DEX / 30
+		val2 = (skill_lv / 2) + (status->dex / 30); 
+		
 		if (sd) {
+			// Musical Lessons
 			val1 += pc_checkskill(sd, BA_MUSICALLESSON) / 2;
 			val2 += pc_checkskill(sd, BA_MUSICALLESSON) / 5;
 		}
+		// --- FIN CUSTOM ---
 		break;
 	case DC_HUMMING:
-		val1 = 1 + 2 * skill_lv + status->dex / 10; // Hit increase
-		if (sd)
+		// --- INICIO CUSTOM: Humming ---
+		val1 = (2 * skill_lv) + (status->dex / 10); // Hit increase
+		if (sd) {
 			val1 += pc_checkskill(sd, DC_DANCINGLESSON);
+		}
+		// --- FIN CUSTOM ---
 		break;
 	case BA_POEMBRAGI:
-		val1 = 3 * skill_lv + status->dex / 10; // Casting time reduction
-		//For some reason at level 10 the base delay reduction is 50%.
-		val2 = (skill_lv < 10 ? 3 * skill_lv : 50) + status->int_ / 5; // After-cast delay reduction
+		// --- INICIO CUSTOM: Poem of Bragi ---
+		// Reduce casteo en: 2% * Skill Level + DEX / 10
+		val1 = 2 * skill_lv + status->dex / 10; 
+		
+		// Reduce delay en: 1% * Skill Level + INT / 10
+		val2 = skill_lv + status->int_ / 10; 
+
 		if (sd) {
+			// Musical Lessons añade 1% por nivel de la pasiva a ambos efectos
 			val1 += pc_checkskill(sd, BA_MUSICALLESSON);
-			val2 += 2 * pc_checkskill(sd, BA_MUSICALLESSON);
+			val2 += pc_checkskill(sd, BA_MUSICALLESSON);
 		}
-		break;
+		
+		// Limites de seguridad para que no sobrepase el 100% de reducción
+		if (val1 > 100) val1 = 100;
+		if (val2 > 100) val2 = 100;
+		// --- FIN CUSTOM ---
+		break;	
 	case DC_DONTFORGETME:
-#ifdef RENEWAL
-		val1 = 3 * skill_lv + status->dex / 15; // ASPD decrease
-		val2 = 2 * skill_lv + status->agi / 20; // Movement speed adjustment.
-#else
-		val1 = 5 + 3 * skill_lv + status->dex / 10; // ASPD decrease
-		val2 = 5 + 3 * skill_lv + status->agi / 10; // Movement speed adjustment.
-#endif		
+		// --- INICIO CUSTOM: Slow Grace ---
+		// val1 = Reducción de ASPD (%)
+		// Fórmula: 3% * Skill Level + DEX / 10
+		val1 = (3 * skill_lv) + (status->dex / 10);
+		
+		// val2 = Reducción de Movement Speed (%)
+		// Fórmula: 2% * Skill Level + INT / 10
+		val2 = (2 * skill_lv) + (status->int_ / 10); 
+		
 		if (sd) {
+			// Dance Lessons añade 1% a ambos por nivel
 			val1 += pc_checkskill(sd, DC_DANCINGLESSON);
-#ifdef RENEWAL
-			val2 += pc_checkskill(sd, DC_DANCINGLESSON) / 2;
-#else
 			val2 += pc_checkskill(sd, DC_DANCINGLESSON);
-#endif
 		}
-		val1 *= 10; //Because 10 is actually 1% aspd
+		
+		// Multiplicamos val1 por 10 porque internamente 10 puntos = 1% de ASPD
+		// (val2 no se multiplica porque la MS sí usa el % directo)
+		val1 *= 10; 
+		// --- FIN CUSTOM ---
 		break;
 	case DC_SERVICEFORYOU:
-		val1 = 15 + skill_lv + (status->int_ / 10); // MaxSP percent increase
-		val2 = 20 + 3 * skill_lv + (status->int_ / 10); // SP cost reduction
+		// --- INICIO CUSTOM: Service For You ---
+		// val1 (viaja como val2) = Aumento de Max SP %
+		// Fórmula: 15% + Skill Level + INT / 10
+		val1 = 15 + skill_lv + (status->int_ / 10); 
+		
+		// val2 (viaja como val3) = Reducción de coste de SP %
+		// Fórmula: 20% + 3 * Skill Level + INT / 10
+		val2 = 20 + (3 * skill_lv) + (status->int_ / 10); 
+		
 		if (sd) {
+			// Dance Lessons añade 1% por cada 2 niveles de la pasiva a ambos
 			val1 += pc_checkskill(sd, DC_DANCINGLESSON) / 2;
 			val2 += pc_checkskill(sd, DC_DANCINGLESSON) / 2;
 		}
+		// --- FIN CUSTOM ---
 		break;
 	case BA_ASSASSINCROSS:
-		if (sd)
-			val1 = pc_checkskill(sd, BA_MUSICALLESSON) / 2;
-		val1 += 5 + skill_lv + (status->agi / 20);
-		val1 *= 10; // ASPD works with 1000 as 100%
+		// --- INICIO CUSTOM: Assassin Cross of Sunset ---
+		// Internamente ASPD funciona con 1000 = 100% (cada 10 puntos = 1%).
+		// 10% Base = 100
+		// 1% * Skill Level = 10 * skill_lv
+		// DEX / 20 = (status->dex / 20) * 10 = status->dex / 2
+		val1 = 100 + (10 * skill_lv) + (status->dex / 2);
+
+		if (sd) {
+			// Musical Lessons añade 0.5% por nivel (0.5 * 10 = 5 puntos por nivel)
+			val1 += 5 * pc_checkskill(sd, BA_MUSICALLESSON);
+		}
+		// --- FIN CUSTOM ---
 		break;
 	case DC_FORTUNEKISS:
-		val1 = 10 + skill_lv + (status->luk / 10); // Critical increase
-		val1 *= 10; //Because every 10 crit is an actual cri point.
-		if (sd)
-			val1 += 5 * pc_checkskill(sd, DC_DANCINGLESSON);
+		// --- INICIO CUSTOM: Fortune's Kiss ---
+		// Fórmula base: 1 * Skill Level + DEX / 10
+		val1 = skill_lv + (status->dex / 10);
+		
+		// Multiplicamos por 10 porque internamente 10 puntos = 1 Crit
+		val1 *= 10; 
+		
+		if (sd) {
+			// Dance Lessons añade 1 Crit (10 puntos internos) por cada 2 niveles
+			val1 += (pc_checkskill(sd, DC_DANCINGLESSON) / 2) * 10;
+		}
+		// --- FIN CUSTOM ---
 		break;
 	case BD_DRUMBATTLEFIELD:
 		val1 = (skill_lv+1)*25;	//Atk increase
@@ -6813,7 +6852,8 @@ static int32 skill_unit_onplace(skill_unit *unit, block_list *bl, t_tick tick)
 			}
 			// ----------------------------------------------------
 			break;
-		case UNT_HERMODE:
+			
+case UNT_HERMODE:
 			if (sg->src_id!=bl->id && battle_check_target(unit,bl,BCT_PARTY|BCT_GUILD) > 0)
 				status_change_clear_buffs(bl, SCCB_HERMODE); //Should dispell only allies.
 			[[fallthrough]];
@@ -6824,12 +6864,24 @@ static int32 skill_unit_onplace(skill_unit *unit, block_list *bl, t_tick tick)
 		case UNT_ROKISWEIL:
 		case UNT_INTOABYSS:
 		case UNT_SIEGFRIED:
-			 //Needed to check when a dancer/bard leaves their ensemble area.
-			if (sg->src_id==bl->id && !(sc && sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER))
+		{
+			// --- INICIO CUSTOM: BD_RESONANT (Ensembles) ---
+			bool has_resonant = false;
+			if (bl->type == BL_PC) {
+				map_session_data* tsd = BL_CAST(BL_PC, bl);
+				if (tsd && pc_checkskill(tsd, BD_RESONANT) > 0)
+					has_resonant = true;
+			}
+			
+			//Needed to check when a dancer/bard leaves their ensemble area.
+			if (sg->src_id==bl->id && !has_resonant)
 				return skill_id;
+			// --- FIN CUSTOM ---
+
 			if (!sce)
 				sc_start4(ss, bl,type,100,sg->skill_lv,sg->val1,sg->val2,0,sg->limit);
 			break;
+		}
 		case UNT_WHISTLE:
 		case UNT_ASSASSINCROSS:
 		case UNT_POEMBRAGI:
@@ -6838,8 +6890,18 @@ static int32 skill_unit_onplace(skill_unit *unit, block_list *bl, t_tick tick)
 		case UNT_DONTFORGETME:
 		case UNT_FORTUNEKISS:
 		case UNT_SERVICEFORYOU:
-			if (sg->src_id==bl->id && !(sc && sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER))
+		{
+			// --- INICIO CUSTOM: BD_RESONANT (Canciones Individuales) ---
+			bool has_resonant = false;
+			if (bl->type == BL_PC) {
+				map_session_data* tsd = BL_CAST(BL_PC, bl);
+				if (tsd && pc_checkskill(tsd, BD_RESONANT) > 0)
+					has_resonant = true;
+			}
+
+			if (sg->src_id==bl->id && !has_resonant)
 				return 0;
+			// --- FIN CUSTOM ---
 
 			if (!sc) return 0;
 
@@ -6859,6 +6921,7 @@ static int32 skill_unit_onplace(skill_unit *unit, block_list *bl, t_tick tick)
 				}
 			}
 			break;
+		}
 
 		case UNT_FOGWALL:
 			if (!sce)
@@ -7429,13 +7492,9 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 			skill_additional_effect(ss, bl, sg->skill_id, sg->skill_lv, BF_LONG|BF_SKILL|BF_MISC, ATK_DEF, tick);
 			break;
 
-		case UNT_UGLYDANCE:	//Ugly Dance [Skotlex]
-			if (ss->id != bl->id)
-				skill_additional_effect(ss, bl, sg->skill_id, sg->skill_lv, BF_LONG|BF_SKILL|BF_MISC, ATK_DEF, tick);
-			break;
-
 		case UNT_DISSONANCE:
-			skill_attack(BF_MISC, ss, unit, bl, sg->skill_id, sg->skill_lv, tick, 0);
+		case UNT_UGLYDANCE:
+			skill_attack(BF_WEAPON, ss, unit, bl, sg->skill_id, sg->skill_lv, tick, 0);
 			break;
 
 		case UNT_APPLEIDUN: { //Apple of Idun [Skotlex]
@@ -7446,8 +7505,19 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 				if (md && md->mob_id == MOBID_EMPERIUM)
 					break;
 #endif
-				if (sg->src_id == bl->id && !(tsc && tsc->getSCE(SC_SPIRIT) && tsc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER))
-					break; // affects self only when soullinked
+				// --- INICIO CUSTOM: BD_RESONANT permite curarse a uno mismo ---
+				bool has_resonant = false;
+				if (bl->type == BL_PC) {
+					map_session_data *sd = BL_CAST(BL_PC, bl);
+					if (sd && pc_checkskill(sd, BD_RESONANT) > 0)
+						has_resonant = true;
+				}
+
+				// Si el objetivo es el caster, y NO tiene la pasiva (ni el Soul Link original), no se cura.
+				if (sg->src_id == bl->id && !has_resonant && !(tsc && tsc->getSCE(SC_SPIRIT) && tsc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER))
+					break; 
+				// --- FIN CUSTOM ---
+
 				heal = skill_calc_heal(ss,bl,sg->skill_id, sg->skill_lv, true);
 				if (tsc->getSCE(SC_AKAITSUKI) && heal)
 					heal = ~heal + 1;
@@ -7951,8 +8021,20 @@ int32 skill_unit_onout(skill_unit *src, block_list *bl, t_tick tick)
 		case UNT_DONTFORGETME:
 		case UNT_FORTUNEKISS:
 		case UNT_SERVICEFORYOU:
-			if (sg->src_id==bl->id && !(sc && sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_BARDDANCER))
+		{ 
+			// --- CUSTOM: Self-buff exclusivo de BD_RESONANT (Ignora Soul Link) ---
+			bool has_resonant = false;
+			
+			if (bl->type == BL_PC) {
+				map_session_data* tsd = BL_CAST(BL_PC, bl);
+				if (tsd && pc_checkskill(tsd, BD_RESONANT) > 0)
+					has_resonant = true;
+			}
+
+			// Si es el caster y NO tiene tu Soul de soporte, bloqueamos el bufo.
+			if (sg->src_id == bl->id && !has_resonant)
 				return -1;
+		}
 	}
 	return sg->skill_id;
 }
@@ -10545,8 +10627,8 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 			// --- INICIO CUSTOM: Overcast (Penalización de Casteo) ---
 			if (sc->getSCE(SC_OVERCAST)) {
 				// Queremos que el casteo sea MÁS LENTO. Como 'reduce_cast_rate' 
-				// acelera el casteo, nosotros le RESTAMOS un 10% por nivel.
-				reduce_cast_rate -= sc->getSCE(SC_OVERCAST)->val1 * 10;
+				// acelera el casteo, nosotros le RESTAMOS un 5% por nivel.
+				reduce_cast_rate -= sc->getSCE(SC_OVERCAST)->val1 * 5;
 			}
 			// --- FIN CUSTOM ---
 			

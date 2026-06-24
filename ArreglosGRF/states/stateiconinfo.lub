@@ -212,6 +212,15 @@ StateIconList[EFST_IDs.EFST_OVERCAST] = {
 		{ "Magic damage increases at the cost of a longer cast time.", { 255, 255, 255 } }
 	}
 }
+StateIconList[EFST_IDs.EFST_UNNERVED] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Unnerved", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases damage taken by Dissonance and Ugly Dance skills.", { 255, 255, 255 } }
+	}
+}
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
@@ -1720,6 +1729,33 @@ StateIconList[EFST_IDs.EFST_CLOAKING] = {
 		{ "Cloaking", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
 		{ "Can't be seen by others" }
+	}
+}
+StateIconList[EFST_IDs.EFST_POEMBRAGI] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Poem of Bragi", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Decreases Cast Time and skill delay" }
+	}
+}
+StateIconList[EFST_IDs.EFST_APPLEIDUN] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Apple of Idun", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Maximum Hp" }
+	}
+}
+StateIconList[EFST_IDs.EFST_HUMMING] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Humming", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Hit rate" }
 	}
 }
 StateIconList[EFST_IDs.EFST_PARTYFLEE] = {

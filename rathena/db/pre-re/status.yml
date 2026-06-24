@@ -6993,4 +6993,10 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
+  - Status: Unnerved
+    Icon: EFST_UNNERVED
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
       

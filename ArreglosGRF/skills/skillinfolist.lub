@@ -2675,6 +2675,18 @@ SKILL_INFO_LIST = {
 		SkillName = "Ragnarok",
 		AttackRange = {}
 	},
+	[SKID.BD_RESONANT] = {
+		"BD_RESONANT",
+		SkillName = "Soul of the Resonant",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.BD_DISSONANT] = {
+		"BD_DISSONANT",
+		SkillName = "Soul of the Dissonant",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
 	[SKID.BA_MUSICALLESSON] = {
 		"BA_MUSICALLESSON",
 		SkillName = "Musical Lesson",
