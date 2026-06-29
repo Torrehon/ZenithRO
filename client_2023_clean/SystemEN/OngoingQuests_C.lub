@@ -126,4 +126,48 @@ QuestInfoList_C = {
 		Summary = "Talk to Garrick",
 		NpcName = "Garrick the Surveyor",
 	},
+	[80040] = {
+		Title = "Byalan Culling",
+		Description = {
+			"The archaeological team needs you",
+			"to clear the way to the 3rd floor",
+			"by defeating some sea monsters."
+		},
+		Summary = "Defeat the Targets.",
+		Hunt1 = "Marc",
+		Hunt2 = "Swordfish",
+		Hunt3 = "Phen",
+		NpcName = "Archeologist Dan",
+	},
+	[80041] = {
+		Title = "Deep Sea Excavation",
+		Description = {
+			"Join Alard's competition and then",
+			"help the Chief Archeologist find the",
+			"Trident of the Depths in the kelp."
+		},
+		Summary = "Find the Trident of the Depths.",
+		NpcName = "Alard",
+	},
+	[80042] = {
+		Title = "Mermaid of the Depths",
+		Description = {
+			"Breach the seal with the Trident and",
+			"protect the expedition from the horde",
+			"of sea creatures."
+		},
+		Summary = "Defeat the Mermaid of the Depths.",
+		Hunt1 = "Depths Mermaid",
+		NpcName = "Chief Archeologist",
+	},
+	[80043] = {
+		Title = "Byalan Expedition Complete",
+		Description = {
+			"You secured the depths.",
+			"Speak to the Chief Archeologist",
+			"to warp back and receive rewards."
+		},
+		Summary = "Talk to the Chief Archeologist",
+		NpcName = "Chief Archeologist",
+	},
 }

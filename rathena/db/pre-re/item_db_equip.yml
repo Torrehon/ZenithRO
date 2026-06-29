@@ -34187,17 +34187,14 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 70
+    EquipLevelMin: 60
     Refineable: true
     View: 509
     Script: |
-      bonus bStr,2;
-      bonus bFlee,10;
-      bonus2 bSubEle,Ele_Wind, 5;
-      if (getrefine()>6) {
-         bonus bDef, 1;
-         bonus bBaseAtk,15;
-      }
+      bonus bInt,2;
+      bonus bMdef,3;
+      bonus2 bSubEle,Ele_Water, 5;
+      skill "WZ_WATERBALL",3;
   - Id: 5513
     AegisName: Aquarius_Crown
     Name: Aquarius Crown
@@ -34229,7 +34226,7 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 70
+    EquipLevelMin: 1
     Refineable: true
     View: 511
     Script: |
@@ -34250,17 +34247,14 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 70
+    EquipLevelMin: 1
     Refineable: true
     View: 512
     Script: |
-      bonus bInt,2;
-      bonus bMdef,5;
+      bonus bStr,2;
+      bonus bDef2,10;
       bonus2 bSubEle,Ele_Water, 5;
-      if (getrefine()>6) {
-         bonus bDef, 1;
-         bonus bMatkRate,2;
-      }
+      skill "SA_FROSTWEAPON",1;
   - Id: 5516
     AegisName: Hawk_Eyes01
     Name: hawk Eyes
@@ -35392,20 +35386,14 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 70
+    EquipLevelMin: 60
     Refineable: true
     View: 560
-    Trade:
-      NoDrop: true
-      NoSell: true
-      NoGuildStorage: true
     Script: |
       bonus bInt,2;
-      bonus2 bSubEle,Ele_water, 5;
-      if (getrefine()>6) {
-         bonus bMdef,1;
-         bonus bHealPower, 3;
-         bonus bMatkRate,2;
+      bonus bMdef,3;
+      bonus2 bSubEle,Ele_Water, 5;
+      skill "WZ_WATERBALL",3;
       }
   - Id: 5582
     AegisName: Cancer_Crown

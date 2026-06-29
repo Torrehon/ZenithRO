@@ -6686,7 +6686,7 @@ Body:
     Unit:
       Id: Dummyskill
       Layout: -1
-      Interval: 800
+      Interval: 1000
       Target: Enemy
       Flag:
         PathCheck: true
@@ -8249,10 +8249,13 @@ Body:
     DamageFlags:
       NoDamage: true
       Splash: true
+    Flags:
+      AllowWhenPerforming: true
     Hit: Single
     HitCount: 1
     SplashArea: -1
-    AfterCastActDelay: 4000
+    Cooldown: 4000
+    AfterCastActDelay: 1000
     Duration1: 15000
     Duration2: 12000
     Requires:
@@ -8544,10 +8547,13 @@ Body:
     DamageFlags:
       NoDamage: true
       Splash: true
+    Flags:
+      AllowWhenPerforming: true
     Hit: Single
     HitCount: 1
     SplashArea: -1
-    AfterCastActDelay: 4000
+    AfterCastActDelay: 1000
+    Cooldown: 4000
     Duration1: 5000
     Duration2: 5000
     Requires:
@@ -15154,15 +15160,15 @@ Body:
         Time: 1000
     Duration1:
       - Level: 1
-        Time: 30000
-      - Level: 2
-        Time: 45000
-      - Level: 3
         Time: 60000
+      - Level: 2
+        Time: 120000
+      - Level: 3
+        Time: 180000
       - Level: 4
-        Time: 75000
+        Time: 240000
       - Level: 5
-        Time: 90000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -16819,8 +16825,6 @@ Body:
     MaxLevel: 1
     Type: Magic
     TargetType: Attack
-    Flags:
-      IsQuest: true
     Range: 9
     Hit: Single
     Element: Weapon

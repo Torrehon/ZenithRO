@@ -2,9 +2,9 @@
 <clientinfo>
 	<desc>Ragnarok Client Information</desc>
 	<servicetype>korea</servicetype>
-	<servertype>primary</servertype>
+	<servertype>sakray</servertype>
 	<connection>
-		<display>Local</display>
+		<display>Zenith</display>
       		<address>26.156.71.155</address>
       		<port>6900</port>
       		<version>64</version>

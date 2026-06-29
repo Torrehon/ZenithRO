@@ -27780,3 +27780,33 @@ Make your way to the deepest part of the mines and clear the path.#
 80031#Orichalcum Extraction#SG_FEEL#QUE_NOIMAGE#
 Bring some Orichalcum to Garrick.#
 #
+
+80032#Mine Spirit's Vengeance#SG_FEEL#QUE_NOIMAGE#
+Stop the Mine Spirit before it makes the mines collapse!#
+Defeat the Mine Spirit inside the instance.#
+#
+
+80033#Orichalcum Delivery#SG_FEEL#QUE_NOIMAGE#
+You conquered the mines. Go back to Garrick and give him the Orichalcum.#
+Talk to Garrick the Surveyor.#
+#
+
+80040#Byalan Culling#SG_FEEL#QUE_NOIMAGE#
+Defeat Marcs, Swordfish, and Phens in the Byalan Dungeon to clear a path for the archaeological team.#
+Defeat 10 Marcs, 10 Swordfish, and 10 Phens.#
+#
+
+80041#Deep Sea Excavation#SG_FEEL#QUE_NOIMAGE#
+Participate in Alard's competition and search the nearby kelp patches on the 3rd floor of the dungeon to find the Trident of the Depths.#
+Find the Trident of the Depths.#
+#
+
+80042#Mermaid of the Depths#SG_FEEL#QUE_NOIMAGE#
+Use the Trident of the Depths to breach the seal and defeat the Mermaid of the Depths inside the instanced chambers.#
+Defeat the Mermaid of the Depths inside the instance.#
+#
+
+80043#Byalan Expedition Complete#SG_FEEL#QUE_NOIMAGE#
+You have defeated the guardian of the deep. Return to the surface and report to Archeologist Dan to claim your rewards and conclude the expedition.#
+Talk to Archeologist Dan at the surface.#
+#

@@ -8,7 +8,6 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 	
 	// Estado 5: Secuencia Completa (Quest Terminada)
 	if (coalmines_quest >= 5) {
-		// Comprobamos el Cooldown del modo repetible FFA
 		if (#coalmines_cooldown > gettimetick(2)) {
 			.@rest = #coalmines_cooldown - gettimetick(2);
 			mes "Thanks to your efforts, the Orichalcum trade route is being evaluated.";
@@ -30,7 +29,7 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 		mes "You have done an amazing job, adventurer. Here is your reward as promised.";
 		next;
 		
-		if (checkquest(80033, HAVEQUEST) != -1) { completequest 80033; }
+		if (checkquest(80033) == 0 || checkquest(80033) == 1) { completequest 80033; }
 		getexp 110000, 140000; 
 		getitem 5031, 1; // Recompensa (Helmet)
 		
@@ -39,32 +38,11 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 		close;
 	}
 
-	// Estado 3: Instrucciones de extracción
-	if (coalmines_quest == 3) {
-		mes "Remember, you need to go to the deepest level (^FF0000mjo_dun03^000000) and find the exposed vein.";
-		mes "Take an ^FF0000Old Pick^000000 with you. The Skeleton Workers down there usually drop them.";
+	// Estados 1 al 3: Derivamos al jugador al Scout del piso 3
+	if (coalmines_quest >= 1 && coalmines_quest <= 3) {
+		mes "My scout is waiting for you on the third floor (^FF0000mjo_dun03^000000).";
+		mes "Report to him once you have secured the perimeter.";
 		close;
-	}
-
-	// Estado 2: Regreso de la cacería
-	if (coalmines_quest == 2) {
-		mes "You are back! Did you clear out those fiends?";
-		next;
-		goto L_QuestPico;
-	}
-
-	// Estado 1: Caza en progreso
-	if (coalmines_quest == 1) {
-		if (checkquest(80030, HUNTING) == 2) {
-			set coalmines_quest, 2;
-			mes "Ah, you've finished the inspection! Excellent work!";
-			next;
-			goto L_QuestPico; 
-		} else {
-			mes "Please hurry. We need to cull their numbers before doing any extraction.";
-			mes "Defeat ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000 so we can secure the perimeter.";
-			close;
-		}
 	}
 
 	// Estado 0: Inicio absoluto (Con restricción de Nivel)
@@ -87,24 +65,63 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 		setquest 80030; 
 		set coalmines_quest, 1;
 		
-		mes "Thank you! Go down there and exterminate ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000.";
+		mes "Thank you! Go down to the third floor and exterminate ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000.";
+		mes "I have a Scout stationed down there. Talk to him when you finish the task.";
 		close;
 	}
 	end;
+}
 
-// --- ETIQUETAS DE SALTO ---
-L_QuestPico:
-	mes "Now we face the real issue...";
-	mes "The Orichalcum is deeply embedded in the northwestern walls of the third floor.";
-	mes "I am no fighter, so I cannot go down there myself.";
-	next;
-	mes "Please, take an ^FF0000Old Pick^000000 and try to extract a sample for me.";
+
+// --- 1.5. MINER SCOUT (mjo_dun03) ---
+mjo_dun03,300,258,4	script	Miner Scout	855,{
+	mes "[Miner Scout]";
 	
-	if (checkquest(80030, HAVEQUEST) != -1) { completequest 80030; }
-	if (checkquest(80031, HAVEQUEST) == -1) { setquest 80031; } 
-	
-	set coalmines_quest, 3;
-	close;
+	if (coalmines_quest == 0) {
+		mes "If you want to help, talk to Garrick on the first floor.";
+		close;
+	}
+
+	if (coalmines_quest == 1) {
+		if (checkquest(80030, HUNTING) == 2) {
+			mes "Ah, you've finished the inspection! Excellent work clearing those fiends!";
+			next;
+			mes "Now we face the real issue...";
+			mes "The Orichalcum is deeply embedded in the northwestern walls of this floor.";
+			mes "I am no fighter, so I cannot go there myself.";
+			next;
+			mes "Please, take an ^FF0000Old Pick^000000 and try to extract a sample for Garrick.";
+			
+			if (checkquest(80030) == 0 || checkquest(80030) == 1) { completequest 80030; }
+			if (checkquest(80031) == -1) { setquest 80031; } 
+			
+			set coalmines_quest, 2;
+			close;
+		} else {
+			mes "Garrick sent you? Good.";
+			mes "Please hurry. We need to cull their numbers before doing any extraction.";
+			mes "Defeat ^FF000020 Skeleton Workers^000000 and ^FF000015 Mysts^000000.";
+			close;
+		}
+	}
+
+	if (coalmines_quest == 2) {
+		mes "Remember, the vein is located in the northwestern corner of this floor.";
+		mes "Take an ^FF0000Old Pick^000000 with you and strike the wall to break it open.";
+		close;
+	}
+
+	if (coalmines_quest == 3) {
+		mes "The wall has been broken, revealing a deep crack!";
+		mes "Please let your party leader coordinate the team to open the gateway.";
+		close;
+	}
+
+	if (coalmines_quest >= 4) {
+		mes "You actually got a sample! Take it back to Garrick on the first floor immediately!";
+		close;
+	}
+	end;
 }
 
 
@@ -117,62 +134,77 @@ mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 		close;
 	}
 
-	if (coalmines_quest < 3) {
-		mes "^888888*An unusual, metallic glint peeks through the rocky wall...*^000000";
+	if (getcharid(1) == 0) {  
+		mes "You must be in a party to interact with this vein.";  
+		close;  
+	}
+
+	// ==========================================================
+	// 1. EL "FIX": LA GRIETA ABIERTA Y LA INSTANCIA YA CREADA
+	// Si el líder ya abrió la instancia, los miembros pueden entrar
+	// y el script actualizará sus quests automáticamente.
+	// ==========================================================
+	if (instance_id(IM_PARTY) > 0) {
+		mes "^888888*A deep crack in the wall reveals a hidden passage. You can hear ominous echoes from inside.*^000000";
+		next;
+		if (select("Enter the crack.:Wait.") == 1) {
+			
+			// Sincronización automática de Quest para miembros rezagados
+			if (coalmines_quest < 3) { set coalmines_quest, 3; }
+			if (checkquest(80030) == 0 || checkquest(80030) == 1) { completequest 80030; }
+			if (checkquest(80031) == 0 || checkquest(80031) == 1) { completequest 80031; }
+			if (checkquest(80032) == -1) { setquest 80032; }
+			
+			close2;
+			instance_enter("Coal Mines");
+			end;
+		}
 		close;
 	}
 
-	// === MODO FFA BOSS REPETIBLE (Mundo Abierto) ===
-	if (coalmines_quest >= 5) {
-		if (#coalmines_cooldown > gettimetick(2)) {
-			.@rest = #coalmines_cooldown - gettimetick(2);
-			mes "^888888*The vein is depleted and silent. The guardian slumbers.*^000000";
-			mes "^888888*It will accept offerings again in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^888888.*^000000";
+	// ==========================================================
+	// 2. PARED ROTA, PERO LA INSTANCIA NO HA SIDO CREADA YET
+	// ==========================================================
+	if (coalmines_quest == 3) {
+		if (!is_party_leader()) {
+			mes "^888888*The wall is broken, revealing a deep crack. An ominous aura seeps from inside...*^000000";
+			next;
+			mes "Only your party leader can coordinate the entry and open the gateway.";
 			close;
 		}
 
-		mes "^888888*A dark aura seeps from the cracks in the wall...*^000000";
+		mes "^888888*The wall has been broken, revealing a deep crack.*^000000";
+		mes "Do you wish to open the gateway to the Coal Mines?";
 		next;
-		mes "Do you wish to offer tribute to summon the Mine Spirit?";
-		mes "Requirements: ^FF000010 Iron Ores^000000, ^FF000050 Lanterns^000000 and ^FF00005 Irons^000000.";
-		next;
-		if (select("Make offering.:Cancel.") == 1) {
-			// ID 1002 = Iron Ore, ID 1041 = Lantern, ID 998 = Iron
-			if (countitem(1002) >= 10 && countitem(1041) >= 50 && countitem(998) >= 5) {
-				delitem 1002, 10;
-				delitem 1041, 50;
-				delitem 998, 5;
-				
-				set #coalmines_cooldown, gettimetick(2) + 10800; // 3 Hours Cooldown
-				
-				mes "^888888*You throw the offerings into the dark crevices...*^000000";
-				mes "^888888*A deep, rumbling growl answers you!*^000000";
+		if (select("Open Gateway.:Wait.") == 1) {
+			if (instance_create("Coal Mines") < 0) {  
 				next;
-				mes "^888888*Suddenly, the ground begins to tremble!*^000000";
-				
-				specialeffect2 563;
-				soundeffect "earth_quake.wav", 0;
-				
-				// Iniciamos un temporizador para invocar al monstruo fuera
-				setnpctimer 0;
-				initnpctimer;
-				close;
-			} else {
-				mes "You lack the necessary offerings to awaken the spirit.";
-				close;
+				mes "The cavern collapsed before you could enter. (Instance error)";  
+				close;  
 			}
+			
+			// Sincronizamos la quest de la instancia para los miembros en el mapa
+			.@origin_aid = getcharid(3);
+			getpartymember getcharid(1), 2; // El parámetro '2' busca miembros en el mismo mapa
+			for (.@i = 0; .@i < $@partymembercount; .@i++) {
+				if (attachrid($@partymemberaid[.@i])) {
+					if (checkquest(80032) == -1) { setquest 80032; }
+					detachrid;
+				}
+			}
+			attachrid(.@origin_aid);
+			
+			close2;
+			instance_enter("Coal Mines");
+			end;
 		}
 		close;
 	}
-	
-	// Estado 4: Recién matado en quest, yendo a entregar a Garrick.
-	if (coalmines_quest == 4) {
-		mes "^888888*The vein has been depleted. You should bring the material back to Garrick.*^000000";
-		close;
-	}
 
-	// === MODO QUEST INSTANCIADO (Primera vez) ===
-	if (coalmines_quest == 3) {
+	// ==========================================================
+	// 3. MODO QUEST: PICAR LA PARED (Cualquier miembro del grupo puede picar si tiene la quest en estado 2)
+	// ==========================================================
+	if (coalmines_quest == 2) {
 		mes "^888888*You look closely at the wall. This is definitely the Orichalcum Vein.*^000000";
 		next;
 		
@@ -190,40 +222,22 @@ mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 		if (.@chance <= 30) { 
 			mes "^00FF00*Clang! A pristine chunk of Orichalcum falls into your hands!*^000000";
 			next;
-			mes "^FF0000*Suddenly, a deep rumble echoes from behind the wall... Something ancient has woken up.*^000000";
-			next;
+			mes "^FF0000*Suddenly, a deep rumble echoes from behind the wall... A huge crack opens!*^000000";
 			
-			if (getcharid(1) == 0) {  
-				mes "You must be in a party to face the threat lurking within the walls.";  
-				close;  
-			}
-
-			if (!is_party_leader()) {  
-				mes "Only your party leader can breach the inner cavern.";  
-				next;
-				if (select("Enter Cavern.:Stay.") == 1) {
-					instance_enter("Coal Mines");
+			// Sincronizamos la quest para TODOS los miembros cercanos instantáneamente
+			.@origin_aid = getcharid(3);
+			getpartymember getcharid(1), 2; // El parámetro '2' busca miembros en el mismo mapa
+			for (.@i = 0; .@i < $@partymembercount; .@i++) {
+				if (attachrid($@partymemberaid[.@i])) {
+					if (coalmines_quest < 3) { set coalmines_quest, 3; }
+					if (checkquest(80030) == 0 || checkquest(80030) == 1) { completequest 80030; }
+					if (checkquest(80031) == 0 || checkquest(80031) == 1) { completequest 80031; }
+					if (checkquest(80032) == -1) { setquest 80032; }
+					detachrid;
 				}
-				close;
 			}
-
-			mes "The wall is cracking open! Will you lead your party inside?";
-			if (select("Enter Instance.:Wait.") == 1) {
-				
-				if (instance_id(1) <= 0) {
-					if (instance_create("Coal Mines") < 0) {  
-						mes "The cavern collapsed before you could enter.";  
-						close;  
-					}
-				}
-				
-				if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; }
-				setquest 80032; 
-				
-				close2;
-				instance_enter("Coal Mines");
-				end;
-			}
+			attachrid(.@origin_aid);
+			
 			close;
 			
 		} else if (.@chance <= 40) { 
@@ -234,6 +248,57 @@ mjo_dun03,39,255,0	script	Orichalcum Vein#cm	557,{
 			mes "^888888*Sparks fly, but you fail to chip away any piece. Try again.*^000000";
 			close;
 		}
+	}
+
+	// === MODO FFA BOSS REPETIBLE (Mundo Abierto) ===
+	if (coalmines_quest >= 5) {
+		if (#coalmines_cooldown > gettimetick(2)) {
+			.@rest = #coalmines_cooldown - gettimetick(2);
+			mes "^888888*The vein is depleted and silent. The guardian slumbers.*^000000";
+			mes "^888888*It will accept offerings again in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^888888.*^000000";
+			close;
+		}
+
+		mes "^888888*A dark aura seeps from the cracks in the wall...*^000000";
+		next;
+		mes "Do you wish to offer tribute to summon the Mine Spirit?";
+		mes "Requirements: ^FF000010 Iron Ores^000000, ^FF000050 Lanterns^000000 and ^FF00005 Irons^000000.";
+		next;
+		if (select("Make offering.:Cancel.") == 1) {
+			if (countitem(1002) >= 10 && countitem(1041) >= 50 && countitem(998) >= 5) {
+				delitem 1002, 10;
+				delitem 1041, 50;
+				delitem 998, 5;
+				
+				set #coalmines_cooldown, gettimetick(2) + 10800; // 3 Hours Cooldown
+				
+				mes "^888888*You throw the offerings into the dark crevices...*^000000";
+				mes "^888888*A deep, rumbling growl answers you!*^000000";
+				next;
+				mes "^888888*Suddenly, the ground begins to tremble!*^000000";
+				
+				specialeffect2 563;
+				soundeffect "earth_quake.wav", 0;
+				
+				setnpctimer 0;
+				initnpctimer;
+				close;
+			} else {
+				mes "You lack the necessary offerings to awaken the spirit.";
+				close;
+			}
+		}
+		close;
+	}
+	
+	if (coalmines_quest == 4) {
+		mes "^888888*The vein has been depleted. You should bring the material back to Garrick.*^000000";
+		close;
+	}
+
+	if (coalmines_quest < 2) {
+		mes "^888888*An unusual, metallic glint peeks through the rocky wall...*^000000";
+		close;
 	}
 
 // Timer para el Boss FFA (Mundo abierto)
@@ -251,11 +316,9 @@ OnDummyKill:
 	end;
 }
 
-
 // --- 3. INSIDE INSTANCE (1@mjo) ---
 1@mjo,39,255,0	script	Inner Cavern Wall	557,{
 
-	// Ahora comprobamos el estado exclusivo de ESTA instancia, no del jugador
 	if ('boss_dead == 1) {
 		mes "The Mine Spirit has been appeased. The area is safe.";
 		next;
@@ -272,8 +335,7 @@ OnInstanceInit:
 	setmapflag instance_mapname("1@mjo"), mf_noteleport;
 	setmapflag instance_mapname("1@mjo"), mf_nomemo;
 	
-	'boss_dead = 0; // Inicializamos la variable a 0 al crear la instancia
-	
+	'boss_dead = 0; 
 	initnpctimer;
 	end;
 
@@ -289,7 +351,7 @@ OnTimer8000:
 	end;
 
 OnBossDead:
-	'boss_dead = 1; // Marcamos que el boss ha muerto y ya pueden salir
+	'boss_dead = 1; 
 	mapannounce instance_mapname("1@mjo"), "The Mine Spirit dissolves into dust! The path back is secure.", bc_map, "0x00FF00";
 	
 	if (getcharid(1) > 0) .party_id = getcharid(1);
@@ -299,11 +361,10 @@ OnBossDead:
 	for (.@i = 0; .@i < $@partymembercount; .@i++) {
 		if (attachrid($@partymemberaid[.@i])) {
 			
-			// Si es el modo Quest de Primera vez, les actualizamos su progreso
 			if (coalmines_quest == 3) {
-				if (checkquest(80031, HAVEQUEST) != -1) { completequest 80031; } 
-				if (checkquest(80032, HAVEQUEST) != -1) { completequest 80032; }
-				if (checkquest(80033, HAVEQUEST) == -1) { setquest 80033; }
+				if (checkquest(80031) == 0 || checkquest(80031) == 1) { completequest 80031; } 
+				if (checkquest(80032) == 0 || checkquest(80032) == 1) { completequest 80032; }
+				if (checkquest(80033) == -1) { setquest 80033; }
 				set coalmines_quest, 4; 
 			}
 			

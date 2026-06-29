@@ -15,7 +15,7 @@ void SkillUnchainedSerenade::calculateSkillRatio(const Damage *wd, const block_l
 	const map_session_data* sd = BL_CAST( BL_PC, src );
 
 	// Porcentaje base físico: 60% a nivel 1, 260% a nivel 5 (sin contar el Job Level)
-	base_skillratio += 10 + skill_lv * 50;
+	base_skillratio += (skill_lv * 50) - 100;
 
 	// --- INICIO CUSTOM: UNNERVED ---
 	// Si hay un objetivo y tiene el estado Unnerved activo, aumentamos este multiplicador en un 25%

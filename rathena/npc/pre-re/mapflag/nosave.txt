@@ -41,3 +41,4 @@ e_tower	mapflag	nosave	SavePoint
 //============================================================
 1@sewb2	mapflag	nosave	SavePoint
 1@pay00	mapflag	nosave	SavePoint
+1@iz_dun03	mapflag	nosave	SavePoint

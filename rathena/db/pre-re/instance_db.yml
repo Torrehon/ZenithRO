@@ -63,3 +63,10 @@ Body:
       Map: 1@mjo
       X: 39
       Y: 248
+  - Id: 8
+    Name: Byalan
+    TimeLimit: 3600
+    Enter:
+      Map: 1@iz_dun03
+      X: 31
+      Y: 171

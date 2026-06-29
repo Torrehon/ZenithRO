@@ -43,7 +43,7 @@ void SkillUnbarringOctave::applyAdditionalEffects(block_list *src, block_list *t
 
 void SkillUnbarringOctave::castendNoDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	clif_skill_nodamage(src, *target, getSkillId(), skill_lv);
-	skill_addtimerskill(src, tick + 3000, target->id, src->x, src->y, getSkillId(), skill_lv, 0, flag);
+	skill_addtimerskill(src, tick + 500, target->id, src->x, src->y, getSkillId(), skill_lv, 0, flag);
 	
 	// --- CUSTOM: Eliminado el bloque de código que forzaba el texto/broma en monstruos ---
 }

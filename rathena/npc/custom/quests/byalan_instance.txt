@@ -1,0 +1,573 @@
+// =============================================
+// Byalan Dungeon Instance Quest & Custom Boss
+// =============================================
+
+// --- 1. EXPEDITION OFFICER (izlu2dun) ---
+izlu2dun,114,88,4	script	Archeologist Dan	754,{
+	mes "[Archeologist Dan]";
+	
+	if (byalan_quest >= 4) {
+		mes "The archaeological expedition was a success! Thank you, adventurer.";
+		next;
+		mes "[Archeologist Dan]";
+		mes "Please keep that Trident of the Depths safe until we find a way to reach the deepest zones of the dungeon.";
+		close;
+	}
+
+	if (byalan_quest == 3) {
+		mes "[Archeologist Dan]";
+		mes "Welcome back, hero! The Chief Archeologist sent word that you defeated the Mermaid of the Depths and secured the ruins!";
+		next;
+		mes "[Archeologist Dan]";
+		mes "Izlude owes you a great debt. During our excavation, we discovered two ancient headgears imbued with the power of the depths.";
+		next;
+		mes "[Archeologist Dan]";
+		mes "They will be much safer and more useful in the hands of experienced adventurers like you. Please choose one as your reward:";
+		next;
+		switch(select("Pisces Crown (Physical Stats):Cancer Diadem (Magical Stats)")) {
+			case 1:
+				getitem 5515, 1; // Pisces Crown
+				break;
+			case 2:
+				getitem 5581, 1; // Cancer Diadem
+				break;
+		}
+		
+		// Recompensas comunes
+		getitem 50008, 1; // Proof of Valor
+		getexp 175000, 210000;
+		
+		if (checkquest(80043) == 0 || checkquest(80043) == 1) { completequest 80043; }
+		set byalan_quest, 4;
+		
+		mes "[Archeologist Dan]";
+		mes "Use the Proof of Valor when you reach Job Level 50 to change your class at your Guild.";
+		next;
+		mes "[Archeologist Dan]";
+		mes "Also, we should keep that Trident of the Depths safe until we find a way to reach the deepest zones of the dungeon. Safe travels!";
+		close;
+	}
+
+	if (byalan_quest == 2) {
+		mes "Have you found Alard's team on the 3rd floor? They are waiting for you at coordinates ^0000FF31,171^000000 on the 3rd floor.";
+		close;
+	}
+
+	if (byalan_quest == 1) {
+		if (checkquest(80040, HUNTING) == 2) {
+			mes "Ah, you've cleared the path! Excellent work.";
+			next;
+			mes "[Archeologist Dan]";
+			mes "Now, head down to the 3rd floor (^FF0000iz_dun03^000000).";
+			mes "You don't need to report back to me anymore. Speak directly to the Chief Archeologist at coordinates ^0000FF31,171^000000.";
+			
+			if (checkquest(80040) == 0 || checkquest(80040) == 1) { completequest 80040; }
+			if (checkquest(80041) == -1) { setquest 80041; }
+			
+			set byalan_quest, 2;
+			close;
+		} else {
+			mes "Please hurry. Clear the monsters so we can proceed with the exploration.";
+			mes "Defeat ^FF000010 Marcs^000000, ^FF000010 Swordfish^000000, and ^FF000010 Phens^000000.";
+			next;
+			mes "[Archeologist Dan]";
+			mes "Once done, you don't need to return to the surface. Head straight down to the 3rd floor and report directly to the Chief Archeologist.";
+			close;
+		}
+	}
+
+	// byalan_quest == 0
+	if (byalan_quest == 0) {
+		if (BaseLevel < 50 || BaseLevel > 65) {
+			mes "This expedition is too dangerous for novices and too trivial for grandmasters.";
+			next;
+			mes "Please return when you are between ^FF0000Level 50 and 65^000000.";
+			close;
+		}
+
+		mes "Greetings, adventurer! The archaeological team of Izlude is preparing to explore the deeper chambers of Byalan Dungeon.";
+		next;
+		mes "[Archeologist Dan]";
+		mes "We've cast a specialized breathing spell that allows our team to breathe normally underwater, but the ruins are teeming with aggressive sea monsters.";
+		next;
+		mes "[Archeologist Dan]";
+		mes "We hired Alard and his scouting group, but despite their efforts, we need more adventurers to cull the local population so we can proceed with the excavation.";
+		next;
+		mes "Would you be willing to assist us?";
+		next;
+		if (select("I will help.:No, thank you.") == 2) close;
+		
+		set byalan_quest, 1;
+		if (checkquest(80040) == -1) { setquest 80040; }
+		mes "Thank you! Please defeat ^FF000010 Marcs^000000, ^FF000010 Swordfish^000000, and ^FF000010 Phens^000000 on the upper floors.";
+		next;
+		mes "[Archeologist Dan]";
+		mes "Once done, you don't need to return to the surface. Head straight down to the 3rd floor and report directly to the Chief Archeologist.";
+		close;
+	}
+	end;
+}
+
+izlu2dun,104,85,4	script	Adventurer Alard#start	1,{
+	mes "[Adventurer Alard]";
+	mes "Make sure you pack enough supplies. Undersea combat is no joke, but don't worry—we've handled way tougher missions than this before. We're much stronger now!";
+	close;
+OnInit:
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 1;
+	setunitdata .GID, UNPC_HAIRSTYLE, 2;
+	setunitdata .GID, UNPC_HAIRCOLOR, 1;
+	end;
+}
+
+izlu2dun,105,88,4	script	Adventurer Linnea#start	3,{
+	mes "[Adventurer Linnea]";
+	mes "I hope my gear is waterproof...";
+	close;
+OnInit:
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 0;
+	setunitdata .GID, UNPC_HAIRSTYLE, 7;
+	setunitdata .GID, UNPC_HAIRCOLOR, 6;
+	end;
+}
+
+izlu2dun,102,88,4	script	Adventurer Berin#start	6,{
+	mes "[Adventurer Berin]";
+	mes "This specialized breathing spell is amazing. I can feel the pressure of the sea, but it doesn't bother me!";
+	close;
+OnInit:
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 1;
+	setunitdata .GID, UNPC_HAIRSTYLE, 5;
+	setunitdata .GID, UNPC_HAIRCOLOR, 2;
+	end;
+}
+
+
+// --- 2. YACIMIENTO DE BYALAN PISO 3 (iz_dun03) ---
+iz_dun03,34,167,4	script	Adventurer Alard#bya	1,{
+	mes "[Adventurer Alard]";
+	
+	if (byalan_quest < 2) {
+		mes "Yo! The Chief Archeologist has some updates for us. Speak to him first.";
+		close;
+	}
+	
+	if (byalan_quest == 4) {
+		mes "That was an incredible expedition! I'm glad we survived.";
+		close;
+	}
+	
+	if (byalan_quest == 3) {
+		mes "The boss is dead, but you should speak to the Chief Archeologist to warp back and report our findings.";
+		close;
+	}
+	
+	// byalan_quest == 2
+	if (byalan_alard_won == 1) {
+		mes "You already compared scores with me! Talk to the Chief Archeologist now.";
+		close;
+	}
+	
+	mes "Hey! You made it to the 3rd floor. We've been exploring these deep ruins, and let me tell you, we are far stronger than the last time we met in the Culverts. We can handle anything now!";
+	next;
+	mes "[Adventurer Alard]";
+	mes "Want to join the competition?";
+	mes "We assign points to these materials:";
+	mes "- ^0000FFGill^000000: 1 point";
+	mes "- ^0000FFSharp Scale^000000: 2 points";
+	mes "- ^0000FFFish Tail^000000: 2 points";
+	mes "- ^0000FFAncient Lips^000000: 20 points";
+	next;
+	if (select("Compare points.:Maybe later.") == 2) close;
+	
+	.@alard_score = rand(110, 130);
+	.@score = countitem(956)*1 + countitem(963)*2 + countitem(1023)*2 + countitem(1054)*20;
+	
+	mes "[Adventurer Alard]";
+	mes "Let's see... my score for this run is ^FF0000" + .@alard_score + "^000000 points.";
+	next;
+	mes "[Adventurer Alard]";
+	mes "Your materials are worth ^0000FF" + .@score + "^000000 points.";
+	next;
+	
+	if (.@score > .@alard_score) {
+		mes "[Adventurer Alard]";
+		mes "Unbelievable! You beat my score! You win the bet!";
+		next;
+		getitem 13533, 1; // Potion Box
+		set byalan_alard_won, 1;
+		set byalan_trident_spot, rand(1, 5); // Initialize the trident spot
+		mes "Here is your reward, as promised.";
+		next;
+		mes "[Adventurer Alard]";
+		mes "Now, you should speak with the Chief Archeologist. He wants to explain the true purpose of this research.";
+		close;
+	} else {
+		mes "[Adventurer Alard]";
+		mes "Hah! Not enough to beat me this time, so no potion box for you.";
+		next;
+		set byalan_alard_won, 1;
+		set byalan_trident_spot, rand(1, 5); // Initialize the trident spot
+		mes "[Adventurer Alard]";
+		mes "But competition aside, we have work to do. Speak with the Chief Archeologist to see what he needs.";
+		close;
+	}
+OnInit:
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 1;
+	setunitdata .GID, UNPC_HAIRSTYLE, 2;
+	setunitdata .GID, UNPC_HAIRCOLOR, 1;
+	end;
+}
+
+iz_dun03,36,162,4	script	Adventurer Berin#bya	6,{
+	mes "[Adventurer Berin]";
+	mes "Byalan Dungeon is deep, but nothing is too tough for our crew. We've conquered sewers and worse!";
+	close;
+OnInit:
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 1;
+	setunitdata .GID, UNPC_HAIRSTYLE, 5;
+	setunitdata .GID, UNPC_HAIRCOLOR, 2;
+	end;
+}
+
+iz_dun03,33,174,4	script	Adventurer Linnea#bya	3,{
+	mes "[Adventurer Linnea]";
+	mes "I was a bit scared back in the culverts, but now? I'm ready to dive into the deepest abysses!";
+	close;
+OnInit:
+	.GID = getnpcid(0);
+	setunitdata .GID, UNPC_SEX, 0;
+	setunitdata .GID, UNPC_HAIRSTYLE, 7;
+	setunitdata .GID, UNPC_HAIRCOLOR, 6;
+	end;
+}
+
+iz_dun03,34,171,4	script	Chief Archeologist#bya	804,{
+	mes "[Chief Archeologist]";
+	
+	if (byalan_quest == 1) {
+		if (checkquest(80040, HUNTING) == 2) {
+			mes "Ah! You must be the adventurer Dan sent! You cleared the monsters on the upper floors. Excellent work.";
+			next;
+			mes "[Chief Archeologist]";
+			mes "Let me explain the situation. My team and I are exploring these deep ruins thanks to a specialized breathing spell, but we need extra muscle to protect the site.";
+			next;
+			mes "[Chief Archeologist]";
+			mes "Now that the paths are clear, we can begin the excavation.";
+			
+			if (checkquest(80040) == 0 || checkquest(80040) == 1) { completequest 80040; }
+			if (checkquest(80041) == -1) { setquest 80041; }
+			set byalan_quest, 2;
+			next;
+		} else {
+			mes "You must be the adventurer Dan told me about. Please help us clear the upper floors first.";
+			mes "Defeat ^FF000010 Marcs^000000, ^FF000010 Swordfish^000000, and ^FF000010 Phens^000000, then return to me.";
+			close;
+		}
+	}
+
+	if (byalan_quest == 0) {
+		mes "We are preparing our analysis. Please speak to our colleague Dan at the surface.";
+		close;
+	}
+	
+	if (byalan_quest == 4) {
+		mes "The deep waters are quiet for now. Thank you again.";
+		close;
+	}
+	
+	if (byalan_quest == 3) {
+		mes "We must return to the surface. Ready?";
+		next;
+		if (select("Yes.:No.") == 1) {
+			warp "izlu2dun", 114, 88;
+		}
+		close;
+	}
+
+	// byalan_quest == 2
+	if (byalan_alard_won == 0) {
+		mes "Alard is managing the supplies. Speak to him first.";
+		close;
+	}
+	
+	if (countitem(50010) < 1) {
+		mes "Ah, adventurer! The deposits here are ancient.";
+		mes "I've discovered a hidden mechanism, but it requires a key artifact called the ^FF0000Trident of the Depths^000000.";
+		next;
+		mes "[Chief Archeologist]";
+		mes "It is said to be hidden nearby. Search the seaweed patches in this sector.";
+		close;
+	}
+
+	// Player has Trident of the Depths (50010)
+	if (getcharid(1) == 0) {
+		mes "You have found the Trident! Excellent!";
+		mes "However, we need a party to breach the seal and secure the area.";
+		close;
+	}
+
+	// ==========================================================
+	// 1. EL "FIX": GATEWAY ABIERTO Y LA INSTANCIA YA CREADA
+	// Permite reingresar a cualquier miembro
+	// ==========================================================
+	if (instance_id(IM_PARTY) > 0) {
+		mes "^888888*A glowing purple gateway is open here. You can hear faint wails from inside.*^000000";
+		next;
+		if (select("Enter the gateway.:Wait.") == 1) {
+			close2;
+			instance_enter("Byalan");
+			end;
+		}
+		close;
+	}
+
+	if (!is_party_leader()) {
+		mes "Only your party leader can initiate the breach of the seal.";
+		close;
+	}
+
+	mes "You have the Trident of the Depths! Are you ready to open the gateway and face the guardian?";
+	next;
+	if (select("Open Gateway.:Wait.") == 1) {
+		if (instance_id(IM_PARTY) <= 0) {
+			if (instance_create("Byalan") < 0) {
+				mes "Gateway failure. (Instance error).";
+				close;
+			}
+		}
+		close2;
+		instance_enter("Byalan");
+		end;
+	}
+	close;
+}
+
+
+// --- 2.5. ALGAS MARINAS (iz_dun03) ---
+iz_dun03,47,179,0	script	Seaweed#bya1	2191,{
+	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+		progressbar "0x00FF00", 3;
+		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
+		if (byalan_trident_spot == 1) {
+			mes "^00FF00*You found something wedged between the rocks...*^000000";
+			mes "^00FF00*It's the Trident of the Depths!*^000000";
+			getitem 50010, 1;
+			specialeffect2 154;
+		} else {
+			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
+		}
+		close;
+	}
+	mes "^888888*Just some ordinary seaweed swaying in the current.*^000000";
+	close;
+}
+
+iz_dun03,45,151,0	script	Seaweed#bya2	2191,{
+	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+		progressbar "0x00FF00", 3;
+		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
+		if (byalan_trident_spot == 2) {
+			mes "^00FF00*You found something wedged between the rocks...*^000000";
+			mes "^00FF00*It's the Trident of the Depths!*^000000";
+			getitem 50010, 1;
+			specialeffect2 154;
+		} else {
+			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
+		}
+		close;
+	}
+	mes "^888888*Just some ordinary seaweed swaying in the current.*^000000";
+	close;
+}
+
+iz_dun03,30,136,0	script	Seaweed#bya3	2191,{
+	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+		progressbar "0x00FF00", 3;
+		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
+		if (byalan_trident_spot == 3) {
+			mes "^00FF00*You found something wedged between the rocks...*^000000";
+			mes "^00FF00*It's the Trident of the Depths!*^000000";
+			getitem 50010, 1;
+			specialeffect2 154;
+		} else {
+			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
+		}
+		close;
+	}
+	mes "^888888*Just some ordinary seaweed swaying in the current.*^000000";
+	close;
+}
+
+iz_dun03,86,158,0	script	Seaweed#bya4	2191,{
+	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+		progressbar "0x00FF00", 3;
+		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
+		if (byalan_trident_spot == 4) {
+			mes "^00FF00*You found something wedged between the rocks...*^000000";
+			mes "^00FF00*It's the Trident of the Depths!*^000000";
+			getitem 50010, 1;
+			specialeffect2 154;
+		} else {
+			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
+		}
+		close;
+	}
+	mes "^888888*Just some ordinary seaweed swaying in the current.*^000000";
+	close;
+}
+
+iz_dun03,109,175,0	script	Seaweed#bya5	2191,{
+	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+		progressbar "0x00FF00", 3;
+		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
+		if (byalan_trident_spot == 5) {
+			mes "^00FF00*You found something wedged between the rocks...*^000000";
+			mes "^00FF00*It's the Trident of the Depths!*^000000";
+			getitem 50010, 1;
+			specialeffect2 154;
+		} else {
+			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
+		}
+		close;
+	}
+	mes "^888888*Just some ordinary seaweed swaying in the current.*^000000";
+	close;
+}
+
+
+// --- 3. INSIDE INSTANCE (1@iz_dun03) ---
+1@iz_dun03,30,170,4	script	Chief Archeologist#iz	804,{
+	if ('boss_dead == 1) {
+		mes "[Chief Archeologist]";
+		mes "Thank you for saving us! The Mermaid of the Depths has been defeated.";
+		next;
+		if (byalan_quest == 2 || byalan_quest == 3) {
+			mes "[Chief Archeologist]";
+			mes "We must return to the surface immediately. Please report to Dan at the dungeon entrance in the center of the island to claim your rewards and conclude the expedition.";
+			next;
+			
+			// Sincronización de quest
+			.@origin_aid = getcharid(3);
+			getpartymember getcharid(1), 2;
+			for (.@i = 0; .@i < $@partymembercount; .@i++) {
+				if (attachrid($@partymemberaid[.@i])) {
+					if (byalan_quest < 3) { set byalan_quest, 3; }
+					if (checkquest(80041) == 0 || checkquest(80041) == 1) { completequest 80041; }
+					if (checkquest(80042) == 0 || checkquest(80042) == 1) { completequest 80042; }
+					if (checkquest(80043) == -1) { setquest 80043; }
+					detachrid;
+				}
+			}
+			attachrid(.@origin_aid);
+		}
+		
+		mes "[Chief Archeologist]";
+		mes "Would you like to return to the surface?";
+		next;
+		if (select("Yes, please.:Stay here.") == 1) {
+			warp "izlu2dun", 114, 88;
+		}
+		close;
+	}
+
+	mes "[Chief Archeologist]";
+	mes "Defeat the sea creatures to secure the area!";
+	close;
+
+OnInstanceInit:
+	setmapflag instance_mapname("1@iz_dun03"), mf_noteleport;
+	setmapflag instance_mapname("1@iz_dun03"), mf_nomemo;
+	'boss_dead = 0;
+	'mobs_alive = 0;
+	'wave = 0;
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce instance_mapname("1@iz_dun03"), "Archeologist Chief: The seal is broken! Protect the camp from the upcoming horde!", bc_map, "0xFFFF00";
+	end;
+
+OnTimer4000:
+	mapannounce instance_mapname("1@iz_dun03"), "A horde of aggressive sea creatures is approaching!", bc_map, "0xFF0000";
+	// Spawn Wave 1: 5 Vadon (agresivos), 2 Obeaune, 1 Marse (agresivo)
+	'wave = 1;
+	'mobs_alive = 8;
+	
+	setarray .@spawn_x[0], 32, 34, 37, 40, 42, 38, 34, 33;
+	setarray .@spawn_y[0], 177, 179, 177, 173, 168, 162, 161, 163;
+	
+	// Vadon (ID 1066) - Spawn 5
+	for (.@i = 0; .@i < 5; .@i++) {
+		monster instance_mapname("1@iz_dun03"), .@spawn_x[.@i], .@spawn_y[.@i], "Aggressive Vadon", 1066, 1, instance_npcname("Chief Archeologist#iz")+"::OnMobKilled";
+		setunitdata $@mobid[0], UMOB_MODE, (MD_CANMOVE | MD_AGGRESSIVE | MD_CANATTACK);
+	}
+	
+	// Obeaune (ID 1044) - Spawn 2
+	for (.@i = 5; .@i < 7; .@i++) {
+		monster instance_mapname("1@iz_dun03"), .@spawn_x[.@i], .@spawn_y[.@i], "Aggressive Obeaune", 1044, 1, instance_npcname("Chief Archeologist#iz")+"::OnMobKilled";
+		setunitdata $@mobid[0], UMOB_MODE, (MD_CANMOVE | MD_AGGRESSIVE | MD_CANATTACK);
+	}
+	
+	// Marse (ID 1144) - Spawn 1
+	monster instance_mapname("1@iz_dun03"), .@spawn_x[7], .@spawn_y[7], "Aggressive Marse", 1144, 1, instance_npcname("Chief Archeologist#iz")+"::OnMobKilled";
+	setunitdata $@mobid[0], UMOB_MODE, (MD_CANMOVE | MD_AGGRESSIVE | MD_CANATTACK);
+	
+	stopnpctimer;
+	end;
+
+OnMobKilled:
+	'mobs_alive--;
+	if ('mobs_alive <= 0) {
+		if ('wave == 1) {
+			'wave = 2;
+			'mobs_alive = 6;
+			mapannounce instance_mapname("1@iz_dun03"), "The sea grows more violent! A second wave is emerging!", bc_map, "0xFF0000";
+			
+			setarray .@spawn_x[0], 32, 34, 37, 40, 42, 38, 34, 33;
+			setarray .@spawn_y[0], 177, 179, 177, 173, 168, 162, 161, 163;
+			
+			// Wave 2: 2 Marc (ID 1045), 4 Swordfish (ID 1069)
+			for (.@i = 0; .@i < 2; .@i++) {
+				monster instance_mapname("1@iz_dun03"), .@spawn_x[.@i], .@spawn_y[.@i], "Aggressive Marc", 1045, 1, instance_npcname("Chief Archeologist#iz")+"::OnMobKilled";
+			}
+			for (.@i = 2; .@i < 6; .@i++) {
+				monster instance_mapname("1@iz_dun03"), .@spawn_x[.@i], .@spawn_y[.@i], "Aggressive Swordfish", 1069, 1, instance_npcname("Chief Archeologist#iz")+"::OnMobKilled";
+			}
+			
+		} else if ('wave == 2) {
+			'wave = 3;
+			mapannounce instance_mapname("1@iz_dun03"), "The waters grow calm... but a colossal presence approaches...", bc_map, "0xFFFF00";
+			sleep 4000;
+			mapannounce instance_mapname("1@iz_dun03"), "The Mermaid of the Depths emerges from the abyss!", bc_map, "0xFF0000";
+			soundeffectall "earth_quake.wav", 0, instance_mapname("1@iz_dun03");
+			
+			monster instance_mapname("1@iz_dun03"), 37, 177, "Mermaid of the Depths", 20647, 1, instance_npcname("Chief Archeologist#iz")+"::OnBossKilled";
+			.@mob_gid = $@mobid[0];
+			if (.@mob_gid > 0) { setunitdata .@mob_gid, UMOB_SIZE, 8; }
+		}
+	}
+	end;
+
+OnBossKilled:
+	'boss_dead = 1;
+	mapannounce instance_mapname("1@iz_dun03"), "The Mermaid of the Depths has been defeated! The area is safe.", bc_map, "0x00FF00";
+	
+	// Sincronizar quest
+	if (getcharid(1) > 0) .party_id = getcharid(1);
+	.@origin_aid = getcharid(3);
+	getpartymember .party_id, 2;
+	for (.@i = 0; .@i < $@partymembercount; .@i++) {
+		if (attachrid($@partymemberaid[.@i])) {
+			if (byalan_quest == 2) { set byalan_quest, 3; }
+			if (checkquest(80042) == 0 || checkquest(80042) == 1) { completequest 80042; }
+			detachrid;
+		}
+	}
+	attachrid(.@origin_aid);
+	end;
+}

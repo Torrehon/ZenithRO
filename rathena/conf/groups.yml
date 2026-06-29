@@ -123,6 +123,7 @@ Body:
       broadcast: true
       localbroadcast: true
       storage: true
+      warp: true
     LogCommands: true
     Permissions:
       all_commands: true

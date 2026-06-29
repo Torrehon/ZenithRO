@@ -29,7 +29,7 @@ pay_arche,48,137,4	script	Grandmother Kyung	78,{
 		getexp 12000, 10000;
 		set Zeny, Zeny + 5000;
 		set payon_quest, 4;
-		if (checkquest(80020, HAVEQUEST) != -1) { completequest 80020; }
+		if (checkquest(80020) == 0 || checkquest(80020) == 1) { completequest 80020; }
 		mes "You've brought peace to our family. No more shadows... no more silk.";
 		close;
 	}
@@ -60,7 +60,10 @@ pay_arche,48,137,4	script	Grandmother Kyung	78,{
 		if (select("I will find her.:I am sorry.") == 2) close;
 		
 		set payon_quest, 1;
+		getitem 523, 3; // Give 3 Holy Waters
 		if (checkquest(80020) == -1) { setquest 80020; }
+		mes "Please take these bottles of ^FF0000Holy Water^000000. You will need them to cleanse the corruption.";
+		next;
 		mes "The gravestone is located on the first level of the caves. Beware of the threads.";
 		close;
 	}
@@ -73,6 +76,27 @@ pay_dun00,163,142,5	script	Pulsing Gravestone	10443,{
 	// Restricción Global de Nivel
 	if (BaseLevel < 25 || BaseLevel > 60) {
 		mes "^888888*The gravestone rejects your presence. It requires souls between Level 25 and 60.*^000000";
+		close;
+	}
+
+	if (getcharid(1) == 0) { 
+		mes "You must be in a party to cleanse this corrupted gravestone."; 
+		close; 
+	}
+
+	// ==========================================================
+	// 1. EL "FIX": GATEWAY ABIERTO Y LA INSTANCIA YA CREADA
+	// Permite reingresar a cualquier miembro (incluido si murieron y perdieron el agua bendita)
+	// ==========================================================
+	if (instance_id(IM_PARTY) > 0) {
+		mes "^888888*A glowing purple gateway is open here. You can hear faint wails from inside.*^000000";
+		next;
+		if (select("Enter the gateway.:Wait.") == 1) {
+			if (payon_quest == 1) { set payon_quest, 2; }
+			close2;
+			instance_enter("Payon Dungeon");
+			end;
+		}
 		close;
 	}
 
@@ -128,35 +152,26 @@ pay_dun00,163,142,5	script	Pulsing Gravestone	10443,{
 		close;
 	}
 
-	if (getcharid(1) == 0) { 
-		mes "You must be in a party to cleanse this corrupted gravestone."; 
-		close; 
-	}
-
 	if (!is_party_leader()) { 
 		mes "Only your party leader can initiate the cleansing ritual."; 
-		next;
-		if (select("Enter Instance.:Stay.") == 1) {
-			instance_enter("Payon Dungeon");
-		}
 		close;
 	}
 
 	mes "Are you ready to enter the darkness and cleanse the gravestone?";
 	if (select("Open Gateway.:Wait.") == 1) {
-		if (instance_id(1) <= 0) {
-			if (instance_create("Payon Dungeon") < 0) { 
-				mes "The gateway is currently barred. (Instance error)."; 
-				close; 
-			}
+		if (instance_create("Payon Dungeon") < 0) { 
+			mes "The gateway is currently barred. (Instance error)."; 
+			close; 
 		}
+		close2;
 		instance_enter("Payon Dungeon");
+		end;
 	}
 	close;
 
 // Timer para el Boss FFA (Fuera de la instancia)
 OnTimer1000:
-	monster "pay_dun00", 141, 136, "Tormented Weaver", 3502, 1, "Gravestone::OnDummyKill";
+	monster "pay_dun00", 141, 136, "Tormented Weaver", 3502, 1, "Pulsing Gravestone::OnDummyKill";
 	.@mob_gid = $@mobid[0];
 	if (.@mob_gid > 0) { setunitdata .@mob_gid, UMOB_SIZE, 8; }
 	mapannounce "pay_dun00", "A furious spirit has been summoned at the ancient gravestone!", bc_map, "0xFFFF00";

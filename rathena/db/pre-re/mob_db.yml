@@ -42430,6 +42430,34 @@ Body:
     ClientAttackMotion: 288
     DamageMotion: 864
     Ai: 20
+  - Id: 2191
+    AegisName: MD_SEAWEED
+    Name: Seaweed
+    Level: 100
+    Hp: 100000
+    Attack: 1
+    Attack2: 1
+    Defense: 1
+    MagicDefense: 1
+    AttackRange: 1
+    SkillRange: 0
+    ChaseRange: 0
+    Size: Small
+    Race: Fish
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackDelay: 384
+    AttackMotion: 720
+    ClientAttackMotion: 240
+    DamageMotion: 360
+    Ai: 10
+    Class: Battlefield
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
   - Id: 2696 # INICIO CHAMPION MONSTERS #
     AegisName: C3_PORING
     Name: Poring Ringleader
@@ -57898,8 +57926,8 @@ Body:
     JobExp: 17500
     Attack: 215
     Attack2: 299
-    Defense: 35
-    MagicDefense: 55
+    Defense: 45
+    MagicDefense: 25
     Str: 10
     Agi: 50
     Vit: 50

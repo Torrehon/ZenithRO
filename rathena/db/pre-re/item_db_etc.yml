@@ -21354,7 +21354,20 @@ Body:
     Weight: 10
     Flags:
       BuyingStore: true
-    
+  - Id: 50010
+    AegisName: tridephts
+    Name: Morocc Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
 
 # This file is a part of rAthena.
 #   Copyright(C) 2021 rAthena Development Team

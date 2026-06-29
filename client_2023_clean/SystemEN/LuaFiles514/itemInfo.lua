@@ -259363,6 +259363,24 @@ tbl = {
 		ClassNum = 0,
 		costume = false
 	},
+	[50010] = {
+		unidentifiedDisplayName = "Trident",
+		unidentifiedResourceName = "Trident",
+		unidentifiedDescriptionName = {
+			" "
+		},
+		identifiedDisplayName = "Trident of the Depths",
+		identifiedResourceName = "tridepths",
+		identifiedDescriptionName = {
+			"Old artifact found in Byalan's ruins. Some expert archeologists believe that this Trident can open the doors to the hidden underwater palace area.",
+			"_______________________________________",
+			"^FF0000Account Bound.^000000",
+			"Weight: ^0088000^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
 	[51008] = {
 		unidentifiedDisplayName = "Elemental Converter[Shadow]",
 		unidentifiedResourceName = "ø∞¿«¡÷πÆº≠",

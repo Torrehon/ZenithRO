@@ -5,7 +5,7 @@
 	<servertype>sakray</servertype>
 	<connection>
 		<display>Local</display>
-      		<address>127.0.0.1</address>
+      		<address>26.156.71.155</address>
       		<port>6900</port>
       		<version>64</version>
       		<langtype>1</langtype>
