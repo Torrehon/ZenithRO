@@ -35394,7 +35394,6 @@ Body:
       bonus bMdef,3;
       bonus2 bSubEle,Ele_Water, 5;
       skill "WZ_WATERBALL",3;
-      }
   - Id: 5582
     AegisName: Cancer_Crown
     Name: Cancer Crown

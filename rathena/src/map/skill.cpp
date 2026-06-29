@@ -10574,7 +10574,7 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 			time = (int)(time * (0.01f + 0.99f * base_mult * final_push));
 		}
 
-		// --- 2. CÁLCULO DE EQUIPO Y MAGIC LESSONS ---
+		// --- 2. CÁLCULO DE EQUIPO Y PASIVAS ---
 		if (sd) {
 			if (!(flag & 4)) {
 				if (sd->castrate != 100)
@@ -10617,6 +10617,11 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
                     time = time * 200 / 100; // Aumento directo del 100%
                 }
             }
+			int spirits_lv = pc_checkskill(sd, MO_SPIRITSRECOVERY);
+			if (spirits_lv > 0) {
+				int spirits_reduction = (spirits_lv * 10) + ((sd->status.job_level / 10) * 10);
+				time = time * (1000 - spirits_reduction) / 1000;
+			}
 		}
 
 		// --- 3. STATUS CHANGES  ---
@@ -10894,9 +10899,11 @@ int32 skill_delayfix(block_list *bl, uint16 skill_id, uint16 skill_lv)
 		case SR_DRAGONCOMBO:
 		case SR_FALLENEMPIRE:
 		case SJ_PROMINENCEKICK:
-			//If delay not specified, it will be 1000 - 4*agi - 2*dex
+			// 1. Aumentamos el tiempo base original de 1000 a 2000 (2 segundos)
 			if (time == 0)
-				time = 1000;
+				time = 750;
+			
+			// 2. Mantenemos la reducción original para que AGI y DEX sigan importando
 			time -= (4 * status_get_agi(bl) + 2 * status_get_dex(bl));
 			break;
 #ifndef RENEWAL

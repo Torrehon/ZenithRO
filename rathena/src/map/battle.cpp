@@ -5733,7 +5733,7 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 			// Si quisieras que aplicara un 150% del MATK base, harías: base_matk = (base_matk * 150) / 100;
 
 			// Sumamos el MATK resultante al daño base del ataque físico de forma segura
-			ATK_ADD(wd.damage, wd.damage2, base_matk/2);
+			ATK_ADD(wd.damage, wd.damage2, base_matk);
 		}
 		// --- FIN CUSTOM ---
 
@@ -7730,7 +7730,7 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 #ifdef RENEWAL
 		int32 triple_rate = 30; //Base Rate
 #else
-		int32 triple_rate = 30 - skillv; //Base Rate
+		int32 triple_rate = 30; //Base Rate
 #endif
 
 		if (sc && sc->getSCE(SC_SKILLRATE_UP) && sc->getSCE(SC_SKILLRATE_UP)->val1 == MO_TRIPLEATTACK) {

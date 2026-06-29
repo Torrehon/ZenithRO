@@ -4424,6 +4424,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: 1-Hand Sword Mastery Custom ---
+	
 	// --- INICIO: 2-Hand Sword Mastery Custom ATK ---
 	if (sd->status.weapon == W_2HSWORD) {
 		
@@ -4436,6 +4437,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: 2-Hand Sword Mastery Custom ATK ---
+	
 	// --- INICIO: Merchant Axe Mastery Custom ATK ---
 	if (sd->status.weapon == W_1HAXE || sd->status.weapon == W_2HAXE) { // <--- Cambio aquí
 		if ((skill = pc_checkskill(sd, AM_AXEMASTERY)) > 0) {
@@ -4444,6 +4446,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Merchant Axe Mastery Custom ATK ---
+	
 	// --- INICIO: Bugei (ATK Pasivo) ---
 	if (sd->status.weapon == W_HUUMA || sd->status.weapon == W_DAGGER) {
 	    if ((skill = pc_checkskill(sd, NJ_TOBIDOUGU)) > 0) {
@@ -4452,6 +4455,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	    }
     }
     // --- FIN: Bugei (ATK Pasivo) ---
+	
 	// --- INICIO: Vulture's Eye Custom ---
 	if (sd->status.weapon == W_BOW) {
 		if ((skill = pc_checkskill(sd, AC_VULTURE)) > 0) {
@@ -4460,6 +4464,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Vulture's Eye Custom ---
+	
 	// --- INICIO: Firearms Mastery Custom ---
 	if (sd->status.weapon == W_REVOLVER || sd->status.weapon == W_RIFLE || 
 	    sd->status.weapon == W_GATLING || sd->status.weapon == W_SHOTGUN || 
@@ -4471,6 +4476,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Firearms Mastery Custom ---
+	
 	// --- INICIO: Iron Body Custom ---		
 	if ((skill = pc_checkskill(sd, TK_HPTIME)) > 0) {		
 		// Condición: Si Soul Channeling (Antigua TK_ENJOYREST) está aprendida, la skill se cancela.
@@ -4480,6 +4486,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		    }
 	    }
 	// --- FIN: Iron Body Custom ---
+	
 	// --- INICIO: Spear Mastery Custom (ATK Pasivo) ---
 	if (sd->status.weapon == W_2HSPEAR || sd->status.weapon == W_1HSPEAR) {
 	    if ((skill = pc_checkskill(sd, KN_SPEARMASTERY)) > 0) {
@@ -4488,6 +4495,16 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	    }
     }
     // --- FIN: Spear Mastery Custom (ATK Pasivo) ---
+	
+	// --- INICIO: Iron Hands Custom Atk ---
+	if (sd->status.weapon == W_FIST || sd->status.weapon == W_KNUCKLE) {
+		if ((skill = pc_checkskill(sd, MO_IRONHAND)) > 0) {
+		    int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+		    base_status->batk += (skill * sd->status.job_level) / 10;
+		}
+	}
+	// --- FIN: Iron Hands Custom Atk ---
+	
     // --- INICIO: Soul Channeling (Bonus Híbrido en BATK) ---
 	if ((skill = pc_checkskill(sd, TK_SPTIME)) > 0) {
 		if (pc_checkskill(sd, TK_HPTIME) == 0) { // Cancelado por Iron Body
@@ -4739,7 +4756,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	// --- FIN CUSTOM ---
 
 	if((skill=pc_checkskill(sd,MO_DODGE))>0)
-		base_status->flee += (skill*3) / 2;
+		base_status->flee += skill*2;
 	if (pc_checkskill(sd, SU_POWEROFLIFE) > 0)
 		base_status->flee += 20;
 	if ((skill = pc_checkskill(sd, SHC_SHADOW_SENSE)) > 0)
@@ -4969,15 +4986,15 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 	// --- FIN: Vulture's Eye Custom ASPD ---
 	
-	// // --- INICIO: Merchant Axe Mastery Custom ASPD ---
-	// if (sd->status.weapon == W_1HAXE || sd->status.weapon == W_2HAXE) { // <--- Cambio aquí
-		// if (pc_checkskill(sd, AM_AXEMASTERY) > 0) {
-			// int jlvl = sd->status.job_level;
-			// int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
-			// base_status->aspd_rate -= aspd_bonus;
-		// }
-	// }
-	// // --- FIN: Merchant Axe Mastery Custom ASPD ---
+	// --- INICIO: Merchant Axe Mastery Custom ASPD ---
+	if (sd->status.weapon == W_1HAXE || sd->status.weapon == W_2HAXE) { // <--- Cambio aquí
+		if (pc_checkskill(sd, AM_AXEMASTERY) > 0) {
+			int jlvl = sd->status.job_level;
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			base_status->aspd_rate -= aspd_bonus;
+		}
+	}
+	// --- FIN: Merchant Axe Mastery Custom ASPD ---
 	
 	// --- INICIO: Bugei Custom ASPD ---
 	if (sd->status.weapon == W_HUUMA || sd->status.weapon == W_DAGGER) {
@@ -5031,7 +5048,23 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 	// --- FIN: Katar mastery Custom ASPD ---
 	
-// --- INICIO CUSTOM: Assassin's Focus (+1% ASPD por stack) ---
+	// --- INICIO: Iron Hands Custom ASPD ---
+	if (sd->status.weapon == W_FIST || sd->status.weapon == W_KNUCKLE) {
+		if ((skill = pc_checkskill(sd, MO_IRONHAND)) > 0) {
+			
+			// Obtenemos el Job Level actual
+			int jlvl = sd->status.job_level;
+			
+			// Aplicamos tu fórmula: (sklv * 5) + (jlvl * 5 / 10)
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			
+			// En rAthena, RESTAR a aspd_rate AUMENTA la velocidad de ataque
+			base_status->aspd_rate -= aspd_bonus; 
+		}
+	}
+	// --- FIN: Iron Hands Custom ASPD ---
+	
+	// --- INICIO CUSTOM: Assassin's Focus (+1% ASPD por stack) ---
 	if (sc && sc->getSCE(SC_ASFOCUS)) {
 		// Cada stack (val1) da 10 puntos a la variable, lo que equivale a 1% de ASPD.
 		// Al llegar a 10 stacks, restará 100 (10% extra de ASPD).
@@ -8414,9 +8447,13 @@ static defType status_calc_def(block_list *bl, status_change *sc, int32 def)
 #endif
 	if(sc->getSCE(SC_KEEPING))
 		return 90;
-#ifndef RENEWAL /// Steel Body does not provide 90 DEF in [RENEWAL]
-	if(sc->getSCE(SC_STEELBODY))
-		return 90;
+#ifndef RENEWAL /// Steel Body custom DEF bonus
+	if (sc && sc->getSCE(SC_STEELBODY)) {
+		int skill_lv = sc->getSCE(SC_STEELBODY)->val1; 
+		
+		// Usamos status_get_vit(bl) que es 100% seguro aquí
+		def += (skill_lv * 2) + (status_get_vit(bl) / 3);
+	}
 #endif
 	if (sc->getSCE(SC_NYANGGRASS)) {
 		if (bl->type == BL_PC)
@@ -8628,9 +8665,13 @@ static defType status_calc_mdef(block_list *bl, status_change *sc, int32 mdef)
 	if(sc->getSCE(SC_BERSERK))
 		return 0;
 
-#ifndef RENEWAL /// Steel Body does not provide 90 MDEF in [RENEWAL]
-	if(sc->getSCE(SC_STEELBODY))
-		return 90;
+#ifndef RENEWAL /// Steel Body custom MDEF bonus
+	if (sc && sc->getSCE(SC_STEELBODY)) {
+		int skill_lv = sc->getSCE(SC_STEELBODY)->val1; 
+		
+		// Usamos status_get_int(bl) 
+		mdef += (skill_lv * 2) + (status_get_int(bl) / 3);
+	}
 #endif
 	if (sc->getSCE(SC_NYANGGRASS)) {
 		if (bl->type == BL_PC)

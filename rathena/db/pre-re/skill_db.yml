@@ -6686,7 +6686,7 @@ Body:
     Unit:
       Id: Dummyskill
       Layout: -1
-      Interval: 1000
+      Interval: 800
       Target: Enemy
       Flag:
         PathCheck: true
@@ -6867,6 +6867,8 @@ Body:
     Range: -1
     Hit: Multi_Hit
     HitCount: -3
+    DamageFlags:
+      Critical: true
     Element: Weapon
     CopyFlags:
       Skill:
@@ -6986,20 +6988,20 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
-    CastTime: 5000
+    CastTime: 1000
     Duration1:
       - Level: 1
-        Time: 30000
-      - Level: 2
         Time: 60000
-      - Level: 3
-        Time: 90000
-      - Level: 4
+      - Level: 2
         Time: 120000
+      - Level: 3
+        Time: 180000
+      - Level: 4
+        Time: 240000
       - Level: 5
-        Time: 150000
+        Time: 300000
     Requires:
-      SpCost: 200
+      SpCost: 50
       SpiritSphereCost: 5
     Status: SteelBody
     CastCancel: false
@@ -7071,9 +7073,10 @@ Body:
     DamageFlags:
       NoDamage: true
     Hit: Single
-    Duration1: 180000
+    CastTime: 1000
+    Duration1: 300000
     Requires:
-      SpCost: 15
+      SpCost: 50
       SpiritSphereCost: 5
     Status: ExplosionSpirits
   - Id: 271
@@ -7157,6 +7160,8 @@ Body:
     Range: -2
     Hit: Multi_Hit
     HitCount: -4
+    DamageFlags:
+      Critical: true
     Element: Weapon
     CopyFlags:
       Skill:
@@ -7206,6 +7211,7 @@ Body:
     Type: Weapon
     TargetType: Self
     DamageFlags:
+      Critical: true
       Splash: true
     Flags:
       NoTargetSelf: true
@@ -8249,13 +8255,10 @@ Body:
     DamageFlags:
       NoDamage: true
       Splash: true
-    Flags:
-      AllowWhenPerforming: true
     Hit: Single
     HitCount: 1
     SplashArea: -1
-    Cooldown: 4000
-    AfterCastActDelay: 1000
+    AfterCastActDelay: 4000
     Duration1: 15000
     Duration2: 12000
     Requires:
@@ -8547,13 +8550,10 @@ Body:
     DamageFlags:
       NoDamage: true
       Splash: true
-    Flags:
-      AllowWhenPerforming: true
     Hit: Single
     HitCount: 1
     SplashArea: -1
-    AfterCastActDelay: 1000
-    Cooldown: 4000
+    AfterCastActDelay: 4000
     Duration1: 5000
     Duration2: 5000
     Requires:
@@ -15160,15 +15160,15 @@ Body:
         Time: 1000
     Duration1:
       - Level: 1
-        Time: 60000
+        Time: 30000
       - Level: 2
-        Time: 120000
+        Time: 45000
       - Level: 3
-        Time: 180000
+        Time: 60000
       - Level: 4
-        Time: 240000
+        Time: 75000
       - Level: 5
-        Time: 300000
+        Time: 90000
     Requires:
       SpCost:
         - Level: 1
@@ -16825,6 +16825,8 @@ Body:
     MaxLevel: 1
     Type: Magic
     TargetType: Attack
+    Flags:
+      IsQuest: true
     Range: 9
     Hit: Single
     Element: Weapon
@@ -16927,16 +16929,16 @@ Body:
     TargetType: Attack
     DamageFlags:
       Splash: true
-      IgnoreAtkCard: true
     Flags:
       IsQuest: true
-    Range: -1
+    Range: 7
     Hit: Single
     HitCount: 1
     Element: Weapon
     SplashArea: 1
     Knockback: 5
     AfterCastActDelay: 2000
+    CastTime: 1000
     Duration2: 5000
     Requires:
       HpCost: 10
