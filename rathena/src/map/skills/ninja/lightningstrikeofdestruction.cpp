@@ -38,14 +38,16 @@ void SkillLightningStrikeOfDestruction::castendPos2(block_list* src, int32 x, in
 
 // --- SOUL OF THE KUJI: 30% Electrocute al nivel 5 ---
 void SkillLightningStrikeOfDestruction::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
-	map_session_data* sd = BL_CAST(BL_PC, src);
 
+    int32 base_matk = status_get_matk_max(src);
+	
+	map_session_data* sd = BL_CAST(BL_PC, src);
 	// Comprobamos que el usuario tiene la pasiva aprendida
 	if (sd != nullptr && pc_checkskill(sd, NJ_KUJISOUL) > 0) {
 		// Comprobamos el nivel de la habilidad
 		if (skill_lv == 5) {
-			// sc_start(origen, objetivo, Estado, Probabilidad 3000 = 30%, nivel, Duración en ms)
-			sc_start(src, target, SC_ELECTROCUTE, 3000, skill_lv, 10000); 
+			sc_start4(src, target, SC_ELECTROCUTE, 30, skill_lv, base_matk, 0, 0, 10000);
+
 		}
 	}
 }

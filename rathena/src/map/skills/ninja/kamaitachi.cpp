@@ -32,8 +32,8 @@ void SkillKamaitachi::calculateSkillRatio(const Damage *wd, const block_list *sr
 		hits = 2;
 	}
 
-	// Calculamos el ratio de un solo hit (Base 100% + 60% por nivel)
-	int ratio_per_hit = 100 + (60 * skill_lv);
+	// Calculamos el ratio de un solo hits
+	int ratio_per_hit = (70 * skill_lv);
 	
 	// Añadimos el bono de los Charms
 	if(sd && sd->spiritcharm_type == CHARM_TYPE_WIND && sd->spiritcharm > 0)
@@ -41,6 +41,7 @@ void SkillKamaitachi::calculateSkillRatio(const Damage *wd, const block_list *sr
 
 	// Multiplicamos por los hits totales para no perder daño al dividirlo
 	int total_ratio = ratio_per_hit * hits;
+	base_skillratio += (total_ratio - 100);
 
 }
 

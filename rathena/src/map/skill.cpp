@@ -5394,8 +5394,14 @@ TIMER_FUNC(skill_castend_id){
 	{	//When Asura fails... (except when it fails from Wall of Fog)
 		//Consume SP/spheres
 		skill_consume_requirement(sd,ud->skill_id, ud->skill_lv,1);
-		status_set_sp(src, 0, 0);
-		sc_start(src, src, SC_EXTREMITYFIST, 100, ud->skill_lv, skill_get_time(ud->skill_id, ud->skill_lv));
+		
+		// CUSTOM: Consume solo el 50% del SP actual.
+		int32 current_sp = status_get_sp(src);
+		status_set_sp(src, current_sp / 2, 0);
+		
+		// ELIMINADO: La penalización de recuperación de SP
+		// sc_start(src, src, SC_EXTREMITYFIST, 100, ud->skill_lv, skill_get_time(ud->skill_id, ud->skill_lv));
+		
 		status_change_end(src, SC_EXPLOSIONSPIRITS);
 		status_change_end(src, SC_BLADESTOP);
 		if( target && target->m == src->m ) { //Move character to target anyway.

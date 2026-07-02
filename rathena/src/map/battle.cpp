@@ -4717,9 +4717,9 @@ static int64 battle_calc_skill_constant_addition(struct Damage* wd, block_list *
 
 	//Constant/misc additions from skills
 	switch (skill_id) {
-		case MO_EXTREMITYFIST:
-			atk = 250 + 150 * skill_lv;
-			break;
+		// case MO_EXTREMITYFIST:
+			// atk = 250 + 150 * skill_lv;
+			// break;
 		case PA_SHIELDCHAIN:
 			if (sd) {
 				int16 index = sd->equip_index[EQI_HAND_L];

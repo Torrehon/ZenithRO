@@ -102058,8 +102058,7 @@ Body:
     Range: 5
     Slots: 2
     Locations:
-      Right_Hand: true
-      Left_Hand: true
+      Both_Hand: true
     WeaponLevel: 2
     EquipLevelMin: 10
     Refineable: true
@@ -102344,6 +102343,851 @@ Body:
               bonus2 bSkillAtk, "NJ_SYURIKEN", getskilllv("NJ_TOBIDOUGU");
               bonus2 bSkillAtk, "NJ_KUNAI", getskilllv("NJ_TOBIDOUGU");
       }
+  - Id: 40012
+    AegisName: T_Kukri
+    Name: Twilight Kukri
+    Type: Weapon
+    SubType: Dagger
+    Buy: 20
+    Weight: 500
+    Attack: 70
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Thief: true
+      Rogue: true
+      Archer: true
+      Hunter: true
+      Genin: true
+      Ninja: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bMatkRate,10;
+      bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Rogue) {
+          bonus2 bSkillAtk, "RG_BACKSTAP", 15; 
+          bonus2 bSkillAtk, "RG_RAID", 15; 
+          bonus bAgi,2;
+          }
+      if (BaseClass == Job_Hunter) {
+          bonus2 bSkillAtk, "HT_LANDMINE", 15; 
+          bonus2 bSkillAtk, "HT_CLAYMORETRAP", 15; 
+          bonus2 bSkillAtk, "HT_FREEZINGTRAP", 15; 
+          bonus2 bSkillAtk, "HT_BLASTMINE", 15; 
+          bonus bInt,2;
+          }
+      if (BaseClass == Job_Ninja) {
+          bonus2 bSkillAtk, "NJ_HYOUSENSOU", 15; 
+          bonus2 bSkillAtk, "NJ_KOUENKA", 15; 
+          bonus2 bSkillAtk, "NJ_HUUJIN", 15; 
+          bonus bInt,2;
+          }
+  - Id: 40013
+    AegisName: T_Edge
+    Name: Twilight Edge
+    Type: Weapon
+    SubType: 1hSword
+    Buy: 20
+    Weight: 800
+    Attack: 85
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Swordman: true
+      Crusader: true
+      Thief: true
+      Assassin: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bMatkRate,10;
+      bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Crusader) {
+          bonus2 bSkillAtk, "CR_GRANDCROSS", 10; 
+          bonus bInt,2;
+          }
+      if (BaseClass == Job_Assassin) {
+          bonus2 bSkillAtk, "AS_SPLASHER", 15; 
+          bonus bInt,2;
+          }
+  - Id: 40014
+    AegisName: T_LBow
+    Name: Twilight Long Bow
+    Type: Weapon
+    SubType: Bow
+    Buy: 20
+    Weight: 900
+    Attack: 50
+    Range: 5
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Archer: true
+      Hunter: true
+      Thief: true
+      Rogue: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Rogue) {
+          bonus2 bSkillAtk, "AC_DOUBLE", 15; 
+          bonus bDex,2;
+          }
+      if (BaseClass == Job_Hunter) {
+          bonus2 bSkillAtk, "HT_POWER", 15; 
+          bonus bAspdRate,5;
+          }
+  - Id: 40015
+    AegisName: T_Flail
+    Name: Twilight Flail
+    Type: Weapon
+    SubType: Mace
+    Buy: 20
+    Weight: 1200
+    Attack: 80
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Acolyte: true
+      Priest: true
+      Monk: true
+      Merchant: true
+      Alchemist: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Priest) {
+          bonus2 bSkillAtk, "AL_HOLYSMITE", 25; 
+          bonus bAspdRate,5;
+          }
+      if (BaseClass == Job_Monk) {
+          bonus2 bSkillAtk, "MO_FINGEROFFENSIVE", 15; 
+          bonus2 bSkillAtk, "MO_INVESTIGATE", 15; 
+          bonus bStr,2;
+          }
+      if (BaseClass == Job_Alchemist) {
+          bonus2 bSkillAtk, "AM_ACIDTERROR", 15; 
+          bonus2 bSkillAtk, "AM_DEMONSTRATION", 15; 
+          bonus bInt,2;
+          }
+  - Id: 40016
+    AegisName: T_Staff
+    Name: Twilight Staff
+    Type: Weapon
+    SubType: 2hStaff
+    Buy: 20
+    Weight: 1300
+    Attack: 40
+    Range: 1
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Mage: true
+      Wizard: true
+      Sage: true
+      Acolyte: true
+      Priest: true
+      SoulLinker: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bMatkRate,20;
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Wizard) {
+          bonus2 bSkillAtk, "WZ_FIREPILLAR", 15; 
+          bonus2 bSkillAtk, "WZ_WATERBALL", 15; 
+          bonus2 bSkillAtk, "WZ_JUPITEL", 15; 
+          bonus2 bSkillAtk, "WZ_HEAVENDRIVE", 15; 
+          bonus bInt,2;
+          }
+      if (BaseClass == Job_Sage) {
+          bonus2 bSkillAtk, "SO_PSYCHIC_WAVE", 15; 
+          bonus bDex,2;
+          }
+      if (BaseClass == Job_Priest) {
+          bonus bHealPower,15;
+          bonus bInt,2;
+          }
+  - Id: 40017
+    AegisName: T_Cleaver
+    Name: Twilight Cleaver
+    Type: Weapon
+    SubType: 2hAxe
+    Buy: 20
+    Weight: 2200
+    Attack: 120
+    Range: 1
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Blacksmith) {
+          bonus2 bSkillAtk, "MC_MAMMONITE", 15; 
+          bonus2 bSkillAtk, "BS_HAMMERFALL", 15; 
+          bonus2 bSkillAtk, "BS_DECIMATION", 15; 
+          bonus bVit,2;
+          }
+      if (BaseClass == Job_Alchemist) {
+          bonus bMaxHP,500;
+          bonus bMaxSP,50;
+          bonus bFlee,10;
+          bonus bHit,10;
+          bonus bCritical,10;
+          bonus bAspdRate,5;
+          skill "BS_ADRENALINE2",1;
+          }
+  - Id: 40018
+    AegisName: T_Slayer
+    Name: Twilight Slayer
+    Type: Weapon
+    SubType: 2hSword
+    Buy: 20
+    Weight: 2000
+    Attack: 110
+    Range: 1
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Swordman: true
+      Knight: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Knight) {
+          bonus2 bSkillAtk, "KN_BOWLINGBASH", 15; 
+          bonus bAgi,2;
+          bonus bCritical,5;
+          bonus bCritAtkRate,10;
+          }
+  - Id: 40019
+    AegisName: T_Lance
+    Name: Twilight Lance
+    Type: Weapon
+    SubType: 2hSpear
+    Buy: 20
+    Weight: 1900
+    Attack: 100
+    Range: 3
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Knight) {
+          bonus2 bSkillAtk, "KN_BRANDISHSPEAR", 15; 
+          bonus2 bSkillAtk, "KN_SPEARSTAB", 15; 
+          bonus bStr,2;
+          }
+      if (BaseClass == Job_Crusader) {
+          bonus2 bSkillAtk, "CR_HOLYCROSS", 25; 
+          bonus bAgi,2;
+          }
+  - Id: 40020
+    AegisName: T_Pike
+    Name: Twilight Pike
+    Type: Weapon
+    SubType: 1hSpear
+    Buy: 20
+    Weight: 1600
+    Attack: 70
+    Range: 3
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Knight) {
+          bonus2 bSkillAtk, "KN_SPEARBOOMERANG", 15; 
+          bonus2 bSkillAtk, "KN_PIERCE", 15; 
+          bonus bVit,2;
+          }
+      if (BaseClass == Job_Crusader) {
+          bonus2 bSkillAtk, "CR_SHIELDBOOMERANG", 15; 
+          bonus2 bSkillAtk, "CR_SHIELDCHARGE", 15; 
+          bonus bStr,2;
+          }
+  - Id: 40021
+    AegisName: T_Jamadhar
+    Name: Twilight Jamadhar
+    Type: Weapon
+    SubType: Katar
+    Buy: 20
+    Weight: 800
+    Attack: 90
+    Range: 1
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Assassin: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Assassin) {
+          bonus2 bSkillAtk, "AS_SONICBLOW", 15; 
+          bonus2 bSkillAtk, "AS_GRIMTOOTH", 15; 
+          bonus bAgi,2;
+          }
+  - Id: 40022
+    AegisName: T_Codex
+    Name: Twilight Codex
+    Type: Weapon
+    SubType: Book
+    Buy: 20
+    Weight: 750
+    Attack: 50
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Sage: true
+      Priest: true
+      StarGladiator: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bMatkRate,15;
+      bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Sage) {
+          bonus2 bSkillAtk, "MG_FIREBOLT",10; 
+          bonus2 bSkillAtk, "MG_FIREBALL",10; 
+          bonus2 bSkillAtk, "MG_COLDBOLT",10;
+          bonus2 bSkillAtk, "MG_FROSTDIVER",10;
+          bonus2 bSkillAtk, "MG_LIGHTNINGBOLT",10;
+          bonus2 bSkillAtk, "MG_THUNDERSTORM",10;
+          bonus2 bSkillAtk, "MG_NAPALMBEAT",10;
+          bonus2 bSkillAtk, "MG_SOULSTRIKE",10;
+          bonus2 bSkillAtk, "MG_FIREWALL",10;
+          bonus bAgi,2;
+          }
+      if (BaseClass == Job_Priest) {
+          bonus2 bSkillAtk, "PR_MAGNUS",15; 
+          bonus bDex,2;
+          }
+  - Id: 40023
+    AegisName: T_Claws
+    Name: Twilight Claws
+    Type: Weapon
+    SubType: Knuckle
+    Buy: 20
+    Weight: 650
+    Attack: 85
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Monk: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Monk) {
+          bonus2 bSkillAtk,"MO_TRIPLEATTACK",15;
+          bonus2 bSkillAtk,"MO_CHAINCOMBO",15;
+          bonus2 bSkillAtk,"MO_COMBOFINISH",15;
+          bonus bAgi,2;
+          }
+  - Id: 40024
+    AegisName: T_Violin
+    Name: Twilight Violin
+    Type: Weapon
+    SubType: Musical
+    Buy: 20
+    Weight: 800
+    Attack: 100
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      BardDancer: true
+    Gender: Male
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Bard) {
+          bonus2 bSkillAtk,"BA_DISSONANCE",15;
+          bonus2 bSkillAtk,"BA_MUSICALSTRIKE",15;
+          bonus bInt,2;
+          }
+  - Id: 40025
+    AegisName: T_Whip
+    Name: Twilight Violin
+    Type: Weapon
+    SubType: Whip
+    Buy: 20
+    Weight: 800
+    Attack: 100
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      BardDancer: true
+    Gender: Female
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
+      if (BaseClass == Job_Bard) {
+          bonus2 bSkillAtk,"DC_UGLYDANCE",15;
+          bonus2 bSkillAtk,"DC_THROWARROW",15;
+          bonus bInt,2;
+          }
+  - Id: 40026
+    AegisName: T_Bracers
+    Name: Twilight Bracers
+    Type: Weapon
+    SubType: Bandage
+    Buy: 20
+    Weight: 300
+    Attack: 70
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Taekwon: true
+      StarGladiator: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+  - Id: 40027
+    AegisName: T_Huuma
+    Name: Twilight Huuma Shuriken
+    Type: Weapon
+    SubType: Huuma
+    Buy: 20
+    Weight: 1600
+    Attack: 90
+    Range: 1
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Genin: true
+      Ninja: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Ninja) {
+          bonus2 bSkillAtk,"NJ_HUUMA",15;
+          bonus2 bSkillAtk,"NJ_KASUMIKIRI",15;
+          bonus bDex,2;
+          }
+  - Id: 40026
+    AegisName: T_Bracers
+    Name: Twilight Bracers
+    Type: Weapon
+    SubType: Bandage
+    Buy: 20
+    Weight: 300
+    Attack: 70
+    Range: 1
+    Slots: 2
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Taekwon: true
+      StarGladiator: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+  - Id: 40027
+    AegisName: T_Huuma
+    Name: Twilight Huuma Shuriken
+    Type: Weapon
+    SubType: Huuma
+    Buy: 20
+    Weight: 1600
+    Attack: 90
+    Range: 1
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Genin: true
+      Ninja: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Ninja) {
+          bonus2 bSkillAtk,"NJ_HUUMA",15;
+          bonus2 bSkillAtk,"NJ_KASUMIKIRI",15;
+          bonus bDex,2;
+          }
+  - Id: 40028
+    AegisName: T_Gatling
+    Name: Twilight Gatling Gun
+    Type: Weapon
+    SubType: Gatling
+    Buy: 20
+    Weight: 2400
+    Attack: 75
+    Range: 9
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Gunslinger) {
+          bonus2 bSkillAtk,"GS_RAPIDSHOWER",15;
+          bonus bAgi,2;
+          bonus bCritical,10;
+          bonus bAspdRate,5;
+          }
+  - Id: 40029
+    AegisName: T_Shotgun
+    Name: Twilight Shotgun
+    Type: Weapon
+    SubType: Shotgun
+    Buy: 20
+    Weight: 1300
+    Attack: 100
+    Range: 9
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Gunslinger) {
+          bonus2 bSkillAtk,"GS_FULLBUSTER",15;
+          bonus2 bSkillAtk,"GS_SPREADATTACK",15;
+          bonus bVit,2;
+          }
+  - Id: 40030
+    AegisName: T_Launcher
+    Name: Twilight Grenade Launcher
+    Type: Weapon
+    SubType: Grenade
+    Buy: 20
+    Weight: 1200
+    Attack: 200
+    Range: 9
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Gunslinger) {
+          bonus2 bSkillAtk,"GS_GROUNDDRIFT",15;
+          bonus bDex,2;
+          }
+  - Id: 40031
+    AegisName: T_Rifle
+    Name: Twilight Rifle
+    Type: Weapon
+    SubType: Rifle
+    Buy: 20
+    Weight: 900
+    Attack: 110
+    Range: 9
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Gunslinger) {
+          bonus2 bSkillAtk,"GS_TRACKING",15;
+          bonus bDex,2;
+          }
+  - Id: 40032
+    AegisName: T_Revolver
+    Name: Twilight Revolver
+    Type: Weapon
+    SubType: Revolver
+    Buy: 20
+    Weight: 500
+    Attack: 40
+    Range: 7
+    Slots: 2
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 60
+    Refineable: true
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAtk, min(JobLevel, 50);
+      if (BaseClass == Job_Gunslinger) {
+          bonus2 bSkillAtk,"GS_RAPIDSHOWER",15;
+          bonus2 bSkillAtk,"GS_DESPERADO",15;
+          bonus bAgi,2;
+          }
   - Id: 60000
     AegisName: ora3000
     Name: Ora Ora 3000

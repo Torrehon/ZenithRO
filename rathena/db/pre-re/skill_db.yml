@@ -16929,8 +16929,8 @@ Body:
     TargetType: Attack
     DamageFlags:
       Splash: true
-    Flags:
-      IsQuest: true
+    # Flags:
+      # IsQuest: true
     Range: 7
     Hit: Single
     HitCount: 1
