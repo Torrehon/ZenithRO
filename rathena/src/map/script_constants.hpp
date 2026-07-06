@@ -2033,6 +2033,7 @@
 	export_constant(SC_ZANTETSU);
 	export_constant(SC_OVERCAST);
 	export_constant(SC_UNNERVED);
+	export_constant(SC_RELENTLESS);
 	
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
@@ -3529,6 +3530,7 @@
 	export_constant(EFST_ZANTETSU);
 	export_constant(EFST_OVERCAST);
 	export_constant(EFST_UNNERVED);
+	export_constant(EFST_RELENTLESS);
 	export_constant(EFST_MAX);
 	
 

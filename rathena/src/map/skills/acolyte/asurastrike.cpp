@@ -14,7 +14,6 @@ SkillAsuraStrike::SkillAsuraStrike() : WeaponSkillImpl(MO_EXTREMITYFIST) {
 }
 
 void SkillAsuraStrike::castendDamageId(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& flag) const {
-	// INICIALIZAMOS x e y a 0 AQUÍ PARA EVITAR EL WARNING
 	int16 x = 0, y = 0, i = 3; // Move 3 cells (From caster)
 	int16 dir = map_calc_dir(src,target->x,target->y);
 
@@ -26,12 +25,15 @@ void SkillAsuraStrike::castendDamageId(block_list* src, block_list* target, uint
 #endif
 	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
 
-	// CUSTOM: Consume solo el 50% del SP actual en lugar de todo.
+	// --- INICIO CUSTOM: Asura consume la mitad del SP actual ---
 	int32 current_sp = status_get_sp(src);
 	status_set_sp(src, current_sp / 2, 0);
 
 	status_change_end(src, SC_EXPLOSIONSPIRITS);
 	status_change_end(src, SC_BLADESTOP);
+	// IMPORTANTE: Ya no aplicamos el SC_EXTREMITYFIST, por lo que el jugador 
+	// NO sufre la penalización de no poder regenerar SP durante 5 minutos.
+	// --- FIN CUSTOM ---
 
 	// Lógica de coordenadas para el empuje (Dash)
 	if (dir > 0 && dir < 4)
@@ -56,15 +58,39 @@ void SkillAsuraStrike::castendDamageId(block_list* src, block_list* target, uint
 
 void SkillAsuraStrike::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
 	const status_data* sstatus = status_get_status_data(*src);
+	const map_session_data* sd = BL_CAST(BL_PC, src);
 
 	// Calculamos el SP que se va a consumir (el 50% del actual)
 	int32 sp_consumido = sstatus->sp / 2;
-	
-	// Forma correcta de obtener el nivel en rAthena:
 	int32 base_level = status_get_lv(src); 
 
-	// CUSTOM FORMULA: 100% (base) + 140% * Skill Level + (SP Consumido * Base Level) / 5
-	base_skillratio += (140 * skill_lv) + ((sp_consumido * base_level) / 5);
+	// 100% (Base de la skill) + 140% * Skill Level (Común para las 3 ramas)
+	base_skillratio += (140 * skill_lv);
+
+	// --- INICIO CUSTOM: Bifurcación de Fórmulas ---
+	if (sd && pc_checkskill(sd, MO_PUGILIST) > 0) {
+		// RAMA 1: PUGILIST
+		base_skillratio += (sp_consumido * base_level) / 8;
+		
+		const status_change* sc = status_get_sc(src);
+		if (sc && sc->getSCE(SC_RELENTLESS)) {
+			int stacks = sc->getSCE(SC_RELENTLESS)->val1;
+			base_skillratio += (sstatus->vit * stacks * 10);
+		}
+	} 
+	else if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
+		// RAMA 2: ASCETIC
+		base_skillratio += (sp_consumido * base_level) / 10;
+		
+		// sd->spiritball_old guarda cuántas esferas tenía justo en el momento de castear
+		int spheres = sd->spiritball_old;
+		base_skillratio += (sstatus->int_ * (spheres * 200));
+	} 
+	else {
+		// RAMA 3: BÁSICO (No tiene ninguna de las almas)
+		base_skillratio += (sp_consumido * base_level) / 5;
+	}
+	// --- FIN CUSTOM ---
 
 #ifdef RENEWAL
 	if (wd->miscflag&1)

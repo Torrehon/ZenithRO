@@ -2269,6 +2269,18 @@ SKILL_INFO_LIST = {
 			{ SKID.MO_CHAINCOMBO,3 }
 		}
 	},
+	[SKID.MO_PUGILIST] = {
+		"MO_PUGILIST",
+		SkillName = "Soul of the Pugilist",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.MO_ASCETIC] = {
+		"MO_ASCETIC",
+		SkillName = "Soul of the Ascetic",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},	
 	[SKID.SA_ADVANCEDBOOK] = {
 		"SA_ADVANCEDBOOK",
 		SkillName = "Advanced Book",

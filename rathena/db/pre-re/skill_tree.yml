@@ -1020,6 +1020,10 @@ Body:
         MaxLevel: 1
       - Name: MO_BALKYOUNG
         MaxLevel: 1
+      - Name: MO_PUGILIST
+        MaxLevel: 1
+      - Name: MO_ASCETIC
+        MaxLevel: 1
   - Job: Sage
     Inherit:
       Novice: true

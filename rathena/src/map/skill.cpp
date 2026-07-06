@@ -1473,7 +1473,35 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 						}
 					}
                     // --- FIN CUSTOM ---
+					
+					// --- INICIO CUSTOM: Soul of the Pugilist (Iron Fists) ---
+					if (pc_checkskill(sd, MO_PUGILIST) > 0) {
+						int32 ironhand_lv = pc_checkskill(sd, MO_IRONHAND);
+						
+						if (ironhand_lv > 0) {
+							// 1% de probabilidad por nivel. En base 1000, multiplicamos por 10 (ej: Nivel 10 = 100/1000 = 10%)
+							int32 rate = ironhand_lv * 30;
 
+							if ((rnd() % 1000) < rate) {
+								
+								// 1. Calculamos el límite de esferas del Pugilista
+								int max_spheres = 5; // Límite base
+								if (sd->sc.getSCE(SC_RAISINGDRAGON)) {
+									max_spheres += sd->sc.getSCE(SC_RAISINGDRAGON)->val1;
+								}
+
+								// 2. Comprobamos que no haya superado su límite de esferas
+								if (sd->spiritball < max_spheres) {
+									// Añadimos 1 esfera (600000 ms = 10 minutos de duración estándar)
+									pc_addspiritball(sd, 600000, max_spheres);
+									
+									// Efecto visual para que el jugador sepa que saltó la pasiva
+									//clif_specialeffect(&sd->bl, 11, AREA); 
+								}
+							}
+						}
+					}
+					// --- FIN CUSTOM ---
 					// Automatic trigger of Blitz Beat
 					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 &&
 						(rnd() % 1000) <= (((sstatus->dex * 4) + (sstatus->int_ * 3)) / 3 + 1)) {
@@ -1900,6 +1928,22 @@ int32 skill_counter_additional_effect (block_list* src, block_list *bl, uint16 s
 		clif_skill_nodamage(src, *bl, NJ_ZENYNAGE, skill_lv);
 	}
 	// ----------------------------------------
+	
+	// --- INICIO CUSTOM: Ascetic (Recupera 1 Esfera al matar con Ki Explosion) ---
+	if (sd && skill_id == MO_BALKYOUNG && status_isdead(*bl) && pc_checkskill(sd, MO_ASCETIC) > 0) {
+		
+		int max_spheres = 10; // El Asceta tiene un límite base de 10 esferas
+		if (sd->sc.getSCE(SC_RAISINGDRAGON)) {
+			max_spheres += sd->sc.getSCE(SC_RAISINGDRAGON)->val1;
+		}
+
+		// Comprobamos si tiene espacio para más esferas
+		if (sd->spiritball < max_spheres) {
+			// pc_addspiritball añade 1 esfera. El segundo parámetro es la duración en ms (10 mins).
+			pc_addspiritball(sd, 600000, max_spheres);
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	if( sd && status_isdead(*bl) ) {
 		int32 sp = 0, hp = 0;
@@ -8669,6 +8713,42 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
 
 	if( sc->empty() )
 		sc = nullptr;
+	
+	// --- INICIO CUSTOM: Steel Body Bloqueo y Excepciones ---
+	if (sc && sc->getSCE(SC_STEELBODY)) {
+		bool skill_allowed = false;
+
+		// 1. Siempre permitimos castear el propio Steel Body
+		if (skill_id == MO_STEELBODY) {
+			skill_allowed = true;
+		}
+
+		// 2. Excepción del Pugilista: Permitir combos
+		if (pc_checkskill(&sd, MO_PUGILIST) > 0) {
+			if (skill_id == MO_CHAINCOMBO ||
+				skill_id == MO_COMBOFINISH ||
+				skill_id == CH_TIGERFIST ||
+				skill_id == CH_CHAINCRUSH) {
+				skill_allowed = true;
+			}
+		}
+
+		// 3. Excepción del Asceta: Permitir habilidades espirituales
+		if (pc_checkskill(&sd, MO_ASCETIC) > 0) {
+			if (skill_id == MO_FINGEROFFENSIVE ||
+				skill_id == MO_INVESTIGATE ||
+				skill_id == MO_CALLSPIRITS ||
+				skill_id == MO_BALKYOUNG) {
+				skill_allowed = true;
+			}
+		}
+
+		// Si la habilidad no entra en ninguna de las excepciones de arriba, la bloqueamos.
+		if (!skill_allowed) {
+			return false; // Aquí el Monk de Acero queda "silenciado"
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	if( sd.skillitem == skill_id )
 	{
@@ -8795,14 +8875,38 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
 			}
 			break;
 		case MO_CALLSPIRITS:
+		{
+			int max_spheres = skill_lv; // Por defecto (1 a 5)
+
+			// --- INICIO CUSTOM: Ascetic Max Spheres ---
+			if (pc_checkskill(&sd, MO_ASCETIC) > 0) {
+				max_spheres = 10; // Si es Asceta, el base es 10
+			}
+			// --- FIN CUSTOM ---
+
 			if(sc && sc->getSCE(SC_RAISINGDRAGON))
-				skill_lv += sc->getSCE(SC_RAISINGDRAGON)->val1;
-			if(sd.spiritball >= skill_lv) {
+				max_spheres += sc->getSCE(SC_RAISINGDRAGON)->val1;
+
+			if(sd.spiritball >= max_spheres) {
 				clif_skill_fail( sd, skill_id );
 				return false;
 			}
 			break;
+		}
 		case MO_FINGEROFFENSIVE:
+			// --- INICIO CUSTOM: Finger Offensive Ascetic ---
+			if (pc_checkskill(&sd, MO_ASCETIC) > 0) {
+				require.spiritball = 1;               // El servidor solo le exige tener 1 esfera
+				sd.spiritball_old = (int8)skill_lv;   // Cast explícito para evitar el warning de pérdida de datos
+			}
+			// --- FIN CUSTOM ---
+			else if (sd.spiritball > 0 && sd.spiritball < require.spiritball)
+				sd.spiritball_old = require.spiritball = sd.spiritball;
+			else
+				sd.spiritball_old = require.spiritball;
+			break;
+			
+		// Mantenemos las otras dos skills intactas
 		case GS_FLING:
 		case SR_RIDEINLIGHTNING:
 			if( sd.spiritball > 0 && sd.spiritball < require.spiritball )
@@ -10397,33 +10501,58 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 		case MO_COMBOFINISH:
 		case CH_TIGERFIST:
 		case CH_CHAINCRUSH:
-			if(sc && sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_MONK)
-				req.sp = 2; //Monk Spirit makes monk/champion combo skills cost 2 SP regardless of original cost
+			// ELIMINADO: Efecto clásico de Monk Spirit (SP = 2)
+			// if(sc && sc->getSCE(SC_SPIRIT) && sc->getSCE(SC_SPIRIT)->val2 == SL_MONK)
+			//	req.sp = 2; 
+
+			// CUSTOM: Soul of the Pugilist reduce el coste de SP de los combos a la mitad
+			if (sd && pc_checkskill(sd, MO_PUGILIST) > 0) {
+				req.sp /= 2; // Divide el costo original entre 2 (redondeando hacia abajo si es impar)
+			}
 			break;
 		case MO_BODYRELOCATION:
-			if( sc && sc->getSCE(SC_EXPLOSIONSPIRITS) )
+			if (sc && sc->getSCE(SC_EXPLOSIONSPIRITS))
 				req.spiritball = 0;
 			break;
 		case MO_EXTREMITYFIST:
-			if( sc ) {
-				if( sc->getSCE(SC_BLADESTOP) )
+			if (sc) {
+				if (sc->getSCE(SC_BLADESTOP))
 					req.spiritball--;
-				else if( sc->getSCE(SC_COMBO) ) {
+				else if (sc->getSCE(SC_COMBO)) {
 #ifndef RENEWAL
-					switch( sc->getSCE(SC_COMBO)->val1 ) {
-						case MO_COMBOFINISH:
-							req.spiritball = 4;
-							break;
-						case CH_CHAINCRUSH: //It should consume whatever is left as long as it's at least 1.
-							req.spiritball = sd->spiritball?sd->spiritball:1;
-							break;
+					switch (sc->getSCE(SC_COMBO)->val1) {
+					case MO_COMBOFINISH:
+						req.spiritball = 4;
+						break;
+					case CH_CHAINCRUSH: // It should consume whatever is left as long as it's at least 1.
+						req.spiritball = sd->spiritball ? sd->spiritball : 1;
+						break;
 					}
 #else
 					req.spiritball = sd->spiritball ? sd->spiritball : 1;
 #endif
-				} else if( sc->getSCE(SC_RAISINGDRAGON) && sd->spiritball > 5)
+				}
+				else if (sc->getSCE(SC_RAISINGDRAGON) && sd->spiritball > 5)
 					req.spiritball = sd->spiritball; // must consume all regardless of the amount required
 			}
+
+			// --- INICIO CUSTOM: Asura Strike Asceta (Escalado de Esferas) ---
+			if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
+				// Si tiene más de 5 esferas, le exigimos que gaste todas
+				if (sd->spiritball > 5) {
+					req.spiritball = sd->spiritball;
+				}
+				// Guardamos el consumo real en spiritball_old para que asurastrike.cpp calcule el daño extra por INT
+				sd->spiritball_old = req.spiritball;
+			}
+			// --- FIN CUSTOM ---
+			break;
+		case MO_FINGEROFFENSIVE:
+			// --- INICIO CUSTOM: Finger Offensive Asceta (Coste 1 Esfera) ---
+			if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
+				req.spiritball = 1;
+			}
+			// --- FIN CUSTOM ---
 			break;
 		case LG_RAGEBURST:
 			req.spiritball = sd->spiritball?sd->spiritball:1;
@@ -10449,6 +10578,7 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 			if (sc && (sc->getSCE(SC_SECOND_JUDGE) || sc->getSCE(SC_THIRD_EXOR_FLAME)))
 				req.spiritball = 0;
 			break;
+			
 		case SO_SUMMON_AGNI:
 		case SO_SUMMON_AQUA:
 		case SO_SUMMON_VENTUS:
@@ -10640,6 +10770,13 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 				// Queremos que el casteo sea MÁS LENTO. Como 'reduce_cast_rate' 
 				// acelera el casteo, nosotros le RESTAMOS un 5% por nivel.
 				reduce_cast_rate -= sc->getSCE(SC_OVERCAST)->val1 * 5;
+			}
+			// --- FIN CUSTOM ---
+			
+			// --- INICIO CUSTOM: Critical Explosion Asceta (-Casteo) ---
+			// Sumar a reduce_cast_rate acelera el casteo un 2% por nivel de la habilidad
+			if (sc->getSCE(SC_EXPLOSIONSPIRITS) && sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
+				reduce_cast_rate += sc->getSCE(SC_EXPLOSIONSPIRITS)->val1 * 2;
 			}
 			// --- FIN CUSTOM ---
 			

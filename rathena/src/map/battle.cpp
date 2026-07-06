@@ -4717,9 +4717,7 @@ static int64 battle_calc_skill_constant_addition(struct Damage* wd, block_list *
 
 	//Constant/misc additions from skills
 	switch (skill_id) {
-		// case MO_EXTREMITYFIST:
-			// atk = 250 + 150 * skill_lv;
-			// break;
+			
 		case PA_SHIELDCHAIN:
 			if (sd) {
 				int16 index = sd->equip_index[EQI_HAND_L];
@@ -5720,6 +5718,39 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		}
 		// --- FIN CÓDIGO CUSTOM ---
 		
+		// ... (tus otras Souls: Venom Splasher, Holy Cross, Ugly Dance, etc.) ...
+
+		// --- INICIO CUSTOM: Ascetic Soul (MATK Híbrido Escalar) ---
+		if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
+			if (skill_id == MO_EXTREMITYFIST || 
+				skill_id == MO_FINGEROFFENSIVE || 
+				skill_id == MO_INVESTIGATE || 
+				skill_id == MO_BALKYOUNG) {
+				
+				// 1. Calculamos el MATK aleatorio entre el mínimo y el máximo
+				int32 base_matk = sstatus->matk_min;
+				if (sstatus->matk_max > sstatus->matk_min) {
+					base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+				}
+
+				int64 matk_portion = 0;
+
+				// 2. Asignamos el porcentaje según la habilidad
+				if (skill_id == MO_EXTREMITYFIST) {
+					// Asura Strike suma el 100% del MATK base
+					// Como esto ocurre antes del ATK_RATE, el multiplicador de SP lo elevará a las nubes
+					matk_portion = base_matk; 
+				} else {
+					// Finger Offensive, Investigate y Ki Explosion suman un 25% del MATK base
+					matk_portion = (base_matk * 25) / 100;
+				}
+
+				// 3. Lo inyectamos de forma segura en las variables de daño base
+				ATK_ADD(wd.damage, wd.damage2, matk_portion);
+			}
+		}
+		// --- FIN CUSTOM ---
+		
 		// --- INICIO CUSTOM: Soul of the Dissonant (Dissonance / Ugly Dance con MATK) ---
 		if ((skill_id == BA_DISSONANCE || skill_id == DC_UGLYDANCE) && sd && pc_checkskill(sd, BD_DISSONANT) > 0) {
 			
@@ -6665,7 +6696,7 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
         if (sd) {
             int crit_chance = (sd->battle_status.cri * 10) * 2/3; 
             if (rnd() % 1000 < crit_chance) {
-            ad.damage = ad.damage * 160 / 100; // +60% de daño si entra el crítico
+            ad.damage = ad.damage * 140 / 100; // +40% de daño si entra el crítico
             ad.type = DMG_MULTI_HIT_CRITICAL;  // Estética de impacto múltiple crítico
             }
         }

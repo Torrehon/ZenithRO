@@ -4755,8 +4755,18 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 	// --- FIN CUSTOM ---
 
-	if((skill=pc_checkskill(sd,MO_DODGE))>0)
-		base_status->flee += skill*2;
+	if((skill = pc_checkskill(sd, MO_DODGE)) > 0) {
+		// Efecto base original: +2 de Flee por nivel
+		base_status->flee += skill * 2;
+		
+		// --- INICIO CUSTOM: Soul of the Pugilist ---
+		// Si tiene la pasiva aprendida, suma +1 extra de Flee por cada nivel de Dodge
+		if (pc_checkskill(sd, MO_PUGILIST) > 0) {
+			base_status->flee += skill; 
+		}
+		// --- FIN CUSTOM ---
+	}
+	
 	if (pc_checkskill(sd, SU_POWEROFLIFE) > 0)
 		base_status->flee += 20;
 	if ((skill = pc_checkskill(sd, SHC_SHADOW_SENSE)) > 0)
@@ -5069,6 +5079,14 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		// Cada stack (val1) da 10 puntos a la variable, lo que equivale a 1% de ASPD.
 		// Al llegar a 10 stacks, restará 100 (10% extra de ASPD).
 		base_status->aspd_rate -= sc->getSCE(SC_ASFOCUS)->val1 * 10; 
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Soul of the Pugilist (Relentless ASPD) ---
+	// Condición doble: Debe tener Relentless Y Critical Explosion activo
+	if (sc && sc->getSCE(SC_RELENTLESS) && sc->getSCE(SC_EXPLOSIONSPIRITS)) {
+		// Cada stack (val1) da +1% de ASPD (10 puntos que se restan)
+		base_status->aspd_rate -= sc->getSCE(SC_RELENTLESS)->val1 * 10; 
 	}
 	// --- FIN CUSTOM ---
 	
@@ -5962,13 +5980,13 @@ void status_calc_regen_rate(block_list *bl, struct regen_data *regen, status_cha
 	// No natural SP regen
 	if (sc->getSCE(SC_DANCING) ||
 		sc->getSCE(SC_MAXIMIZEPOWER) ||
-#ifndef RENEWAL
-		(bl->type == BL_PC && (((TBL_PC*)bl)->class_&MAPID_SECONDMASK) == MAPID_MONK &&
-		(sc->getSCE(SC_EXTREMITYFIST) || sc->getSCE(SC_EXPLOSIONSPIRITS)) && (!sc->getSCE(SC_SPIRIT) || sc->getSCE(SC_SPIRIT)->val2 != SL_MONK)) ||
-#else
-		(bl->type == BL_PC && (((TBL_PC*)bl)->class_&MAPID_SECONDMASK) == MAPID_MONK &&
-		sc->getSCE(SC_EXTREMITYFIST) && (!sc->getSCE(SC_SPIRIT) || sc->getSCE(SC_SPIRIT)->val2 != SL_MONK)) ||
-#endif
+// #ifndef RENEWAL
+		// (bl->type == BL_PC && (((TBL_PC*)bl)->class_&MAPID_SECONDMASK) == MAPID_MONK &&
+		// (sc->getSCE(SC_EXTREMITYFIST) || sc->getSCE(SC_EXPLOSIONSPIRITS)) && (!sc->getSCE(SC_SPIRIT) || sc->getSCE(SC_SPIRIT)->val2 != SL_MONK)) ||
+// #else
+		// (bl->type == BL_PC && (((TBL_PC*)bl)->class_&MAPID_SECONDMASK) == MAPID_MONK &&
+		// sc->getSCE(SC_EXTREMITYFIST) && (!sc->getSCE(SC_SPIRIT) || sc->getSCE(SC_SPIRIT)->val2 != SL_MONK)) ||
+// #endif
 		(sc->getSCE(SC_OBLIVIONCURSE) && sc->getSCE(SC_OBLIVIONCURSE)->val3 == 1))
 		regen->flag &= ~RGN_SP;
 
@@ -7916,6 +7934,15 @@ static int32 status_calc_batk(block_list *bl, status_change *sc, int32 batk)
 		batk += 20;
 	if(sc->hasSCE(SC_DUELIST))
 		batk += 30;
+	// --- INICIO CUSTOM: Critical Explosion Asceta (+ATK) ---
+	if (sc->getSCE(SC_EXPLOSIONSPIRITS) && bl->type == BL_PC) {
+		map_session_data* sd = BL_CAST(BL_PC, bl);
+		if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
+			// val1 guarda el nivel de la habilidad (ej: Nivel 5 * 6 = 30 ATK)
+			batk += 6 * sc->getSCE(SC_EXPLOSIONSPIRITS)->val1;
+		}
+	}
+	// --- FIN CUSTOM ---
 #endif
 	if(sc->getSCE(SC_ASH))
 		batk -= batk * sc->getSCE(SC_ASH)->val4 / 100;
@@ -8202,6 +8229,15 @@ static int16 status_calc_critical(block_list *bl, status_change *sc, int32 criti
 		}
 	}
 	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Soul of the Pugilist (Relentless CRIT) ---
+	// Condición doble: Debe tener Relentless Y Critical Explosion activo
+	if (sc->getSCE(SC_RELENTLESS) && sc->getSCE(SC_EXPLOSIONSPIRITS)) {
+		// Cada stack (val1) da +2 de Crit (Multiplicamos por 20 porque 1 Crit = 10 puntos)
+		critical += sc->getSCE(SC_RELENTLESS)->val1 * 20;
+	}
+	// --- FIN CUSTOM ---
+	
 	return (int16)cap_value(critical,10,SHRT_MAX);
 }
 

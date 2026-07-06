@@ -13,25 +13,26 @@ SkillThrowSpiritSphere::SkillThrowSpiritSphere() : WeaponSkillImpl(MO_FINGEROFFE
 }
 
 void SkillThrowSpiritSphere::modifyDamageData(Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv) const {
-	const map_session_data* sd = BL_CAST(BL_PC, &src);
-
-	if (sd != nullptr) {
-		if (battle_config.finger_offensive_type)
-			dmg.div_ = 1;
-#ifndef RENEWAL
-		else if ((sd->spiritball + sd->spiritball_old) < dmg.div_)
-			dmg.div_ = sd->spiritball + sd->spiritball_old;
-#endif
-	}
+	// --- INICIO CUSTOM ---
+	// Al dejar esta función vacía, evitamos que el servidor modifique 'dmg.div_'.
+	// Así, si la habilidad da 5 golpes, CADA GOLPE hará el daño completo.
+	// --- FIN CUSTOM ---
 }
 
 void SkillThrowSpiritSphere::castendDamageId(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	map_session_data* sd = BL_CAST(BL_PC, src);
 
 	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
+	
 	if (battle_config.finger_offensive_type && sd) {
-		for (int32 i = 1; i < sd->spiritball_old; i++)
+		// --- INICIO CUSTOM: Golpes del Asceta ---
+		// El Asceta lanza tantos golpes como nivel de skill (ej: 5).
+		// El Monk normal lanza tantos golpes como esferas gastó.
+		int32 hits = (pc_checkskill(sd, MO_ASCETIC) > 0) ? skill_lv : sd->spiritball_old;
+		
+		for (int32 i = 1; i < hits; i++)
 			skill_addtimerskill(src, tick + i * 200, target->id, 0, 0, getSkillId(), skill_lv, BF_WEAPON, flag);
+		// --- FIN CUSTOM ---
 	}
 	status_change_end(src, SC_BLADESTOP);
 }
@@ -44,6 +45,16 @@ void SkillThrowSpiritSphere::calculateSkillRatio(const Damage* wd, const block_l
 	if (tsc && tsc->getSCE(SC_BLADESTOP))
 		base_skillratio += base_skillratio / 2;
 #else
-	base_skillratio += 50 * skill_lv;
+	base_skillratio += 60 * skill_lv;
+
+	// --- INICIO CUSTOM: Asceta Steel Body (INT Bonus) ---
+	const map_session_data* sd = BL_CAST(BL_PC, src);
+	const status_change* sc = status_get_sc(src);
+	
+	if (sd && pc_checkskill(sd, MO_ASCETIC) > 0 && sc && sc->getSCE(SC_STEELBODY)) {
+		const status_data* sstatus = status_get_status_data(*src);
+		base_skillratio += sstatus->int_ * 2; // Ratio de INT * 2
+	}
+	// --- FIN CUSTOM ---
 #endif
 }

@@ -15,8 +15,16 @@ void SkillSummoningSpiritSphere::castendNoDamageId(block_list* src, block_list* 
 
 	if(sd) {
 		int32 limit = skill_lv;
+		
+		// --- INICIO CUSTOM: Límite de esferas del Asceta ---
+		if (pc_checkskill(sd, MO_ASCETIC) > 0) {
+			limit = 10; // Si es Asceta, el límite base sube a 10
+		}
+		// --- FIN CUSTOM ---
+
 		if( sd->sc.getSCE(SC_RAISINGDRAGON) )
 			limit += sd->sc.getSCE(SC_RAISINGDRAGON)->val1;
+			
 		clif_skill_nodamage(src,*target,getSkillId(),skill_lv);
 		pc_addspiritball(sd,skill_get_time(getSkillId(),skill_lv),limit);
 	}

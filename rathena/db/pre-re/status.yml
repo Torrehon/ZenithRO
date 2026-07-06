@@ -1019,8 +1019,7 @@ Body:
     Icon: EFST_EXPLOSIONSPIRITS
     DurationLookup: MO_EXPLOSIONSPIRITS
     CalcFlags:
-      Cri: true
-      Regen: true
+      All: true
     Opt3:
       ExplosionSpirits: true
     Flags:
@@ -1503,8 +1502,8 @@ Body:
   - Status: Steelbody
     Icon: EFST_STEELBODY
     DurationLookup: MO_STEELBODY
-    States:
-      NoCast: true
+    # States:
+      # NoCast: true
     CalcFlags:
       Def: true
       Mdef: true
@@ -6995,6 +6994,12 @@ Body:
       NoRemoveOnDead: false
   - Status: Unnerved
     Icon: EFST_UNNERVED
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Relentless
+    Icon: EFST_RELENTLESS
     CalcFlags:
       All: true
     Flags:

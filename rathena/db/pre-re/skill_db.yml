@@ -6825,7 +6825,7 @@ Body:
     Type: Weapon
   - Id: 260
     Name: MO_SPIRITSRECOVERY
-    Description: Spiritual Cadence
+    Description: Spirit Mastery
     MaxLevel: 5
     Type: Weapon
   - Id: 261
@@ -6953,7 +6953,7 @@ Body:
       Skill:
         Plagiarism: true
         Reproduce: true
-    CastTime: 1000
+    CastTime: 700
     AfterCastActDelay: 500
     AfterCastWalkDelay:
       - Level: 2
@@ -7120,6 +7120,7 @@ Body:
       - Level: 5
         Time: 1000
     Duration1: 300000
+    Cooldown: 30000
     Requires:
       SpCost: 1
       Weapon:
@@ -17328,6 +17329,16 @@ Body:
   - Id: 1060
     Name: BD_DISSONANT
     Description: Soul of the Dissonant
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1061
+    Name: MO_PUGILIST
+    Description: Soul of the Pugilist
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1062
+    Name: MO_ASCETIC
+    Description: Soul of the Ascetic
     MaxLevel: 1
     Type: Weapon
   - Id: 2001
