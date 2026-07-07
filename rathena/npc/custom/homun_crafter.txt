@@ -1,0 +1,49 @@
+function	script	F_Craft_Embryo	{
+	// IDs de los materiales requeridos
+	set .@dew, 7141;
+	set .@seed, 7140;
+	set .@tube, 7143;
+	set .@bowl, 7134;
+
+	if (countitem(.@dew) < 1 || countitem(.@seed) < 1 || countitem(.@tube) < 1 || countitem(.@bowl) < 1) {
+		mes "[Creation Guide]";
+		mes "Carefully reading the manual, you realize you lack the necessary materials to create an Embryo.";
+		mes " ";
+		mes "Required:";
+		mes "1x Morning Dew of Yggdrasil";
+		mes "1x Seed of Life";
+		mes "1x Glass Tube";
+		mes "1x Medicine Bowl";
+		close;
+	}
+
+	mes "[Creation Guide]";
+	mes "You prepare the medicine bowl and the glass tube.";
+	mes "Which specific Embryo do you wish to synthesize?";
+	next;
+	
+	switch(select("Lif Embryo (Support):Amistr Embryo (Tank):Filir Embryo (Damage):Vanilmirth Embryo (Magic)")) {
+		case 1: set .@embryo_id, 50018; break; // Lif
+		case 2: set .@embryo_id, 50019; break; // Amistr
+		case 3: set .@embryo_id, 50017; break; // Filir
+		case 4: set .@embryo_id, 50016; break; // Vanilmirth
+	}
+
+	// Consumir los materiales
+	delitem .@dew, 1;
+	delitem .@seed, 1;
+	delitem .@tube, 1;
+	delitem .@bowl, 1;
+
+	// Entregar el Embryo específico
+	getitem .@embryo_id, 1;
+	
+	// Efecto visual y de sonido para darle inmersión
+	specialeffect2 EF_POTION_CREATE;
+	soundeffect "cooking.wav", 0;
+	
+	mes "[Creation Guide]";
+	mes "Synthesis successful!";
+	mes "You have obtained a new Embryo.";
+	close;
+}

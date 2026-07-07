@@ -9,7 +9,8 @@ SkillSummonFlora::SkillSummonFlora() : SkillImpl(AM_CANNIBALIZE) {
 }
 
 void SkillSummonFlora::castendPos2(block_list* src, int32 x, int32 y, uint16 skill_lv, t_tick tick, int32& flag) const {
-	int32 summons[5] = { MOBID_G_MANDRAGORA, MOBID_G_HYDRA, MOBID_G_FLORA, MOBID_G_PARASITE, MOBID_G_GEOGRAPHER };
+	// Nivel 1: Mandragora, Nivel 2: Rafflesia, Nivel 3: Parasite, Nivel 4: Geographer, Nivel 5: Wooden Golem
+	int32 summons[5] = { MOBID_G_MANDRAGORA, MOBID_G_RAFFLESIA, MOBID_G_PARASITE, MOBID_G_GEOGRAPHER, MOBID_G_WOODEN_GOLEM };
 	int32 class_ = summons[skill_lv-1];
 	enum mob_ai ai = AI_FLORA;
 	mob_data *md;

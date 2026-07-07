@@ -2961,6 +2961,10 @@ int32 status_calc_mob_(mob_data* md, uint8 opt)
 			switch(ud->skill_id) {
 				case AM_SPHEREMINE:
 					status->max_hp = 2000 + 400*ud->skill_lv;
+					if (ud->skill_lv == 5) {
+						// Aumenta un 50% extra en el nivel máximo
+						status->max_hp += status->max_hp / 2; 
+					}
 					break;
 				case KO_ZANZOU:
 					status->max_hp = 3000 + 3000 * ud->skill_lv;

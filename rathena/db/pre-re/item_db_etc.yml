@@ -15619,14 +15619,14 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
-  - Id: 7419
-    AegisName: Embryo_HandBook
-    Name: Embryo Creation Guide
-    Type: Etc
-    Buy: 48000
-    Weight: 10
-    Flags:
-      BuyingStore: true
+  # - Id: 7419
+    # AegisName: Embryo_HandBook
+    # Name: Embryo Creation Guide
+    # Type: Etc
+    # Buy: 48000
+    # Weight: 10
+    # Flags:
+      # BuyingStore: true
   - Id: 7420
     AegisName: Skull_
     Name: Skull
@@ -21472,6 +21472,60 @@ Body:
     Weight: 0
     Flags:
       BuyingStore: true
+  - Id: 50011
+    AegisName: s_bomb
+    Name: Small Bottle Grenade
+    Type: Etc
+    Buy: 200
+    Weight: 10
+  - Id: 50012
+    AegisName: s_acid
+    Name: Small Acid Bottle
+    Type: Etc
+    Buy: 200
+    Weight: 10
+  - Id: 50013
+    AegisName: s_plantbottle
+    Name: Small Plant Bottle
+    Type: Etc
+    Buy: 500
+    Weight: 10
+  - Id: 50014
+    AegisName: s_minibottle
+    Name: Small Marine Sphere Bottle
+    Type: Etc
+    Buy: 500
+    Weight: 10
+  - Id: 50015
+    AegisName: s_coatingbottle
+    Name: Small Glistening Coat
+    Type: Etc
+    Buy: 1000
+    Weight: 10
+  - Id: 50016
+    AegisName: Vanilmirth_Embryo
+    Name: Vanilmirth Embryo
+    Type: Etc
+    Buy: 10
+    Weight: 10
+  - Id: 50017
+    AegisName: Filir_Embryo
+    Name: Filir Embryo
+    Type: Etc
+    Buy: 10
+    Weight: 10
+  - Id: 50018
+    AegisName: Lif_Embryo
+    Name: Lif Embryo
+    Type: Etc
+    Buy: 10
+    Weight: 10
+  - Id: 50019
+    AegisName: Amistr_Embryo
+    Name: Amistr Embryo
+    Type: Etc
+    Buy: 10
+    Weight: 10
 
 # This file is a part of rAthena.
 #   Copyright(C) 2021 rAthena Development Team

@@ -9879,7 +9879,7 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 		case AM_CANNIBALIZE:
 		case AM_SPHEREMINE: {
 			int32 c=0;
-			int32 summons[5] = { MOBID_G_MANDRAGORA, MOBID_G_HYDRA, MOBID_G_FLORA, MOBID_G_PARASITE, MOBID_G_GEOGRAPHER };
+			int32 summons[5] = { MOBID_G_MANDRAGORA, MOBID_G_RAFFLESIA, MOBID_G_FLORA, MOBID_G_GEOGRAPHER, MOBID_G_WOODEN_GOLEM };
 			int32 maxcount = (skill_id==AM_CANNIBALIZE)? 6-skill_lv : skill_get_maxcount(skill_id,skill_lv);
 			int32 mob_class = (skill_id==AM_CANNIBALIZE)? summons[skill_lv-1] :MOBID_MARINE_SPHERE;
 			if(battle_config.land_skill_limit && maxcount>0 && (battle_config.land_skill_limit&BL_PC)) {
@@ -13608,13 +13608,15 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			case AB_ANCILLA:
 				make_per = 100000; //100% success
 				break;
-			case AM_PHARMACY: // Potion Preparation - reviewed with the help of various Ragnainfo sources [DracoRPG]
+			case AM_PHARMACY: // Potion Preparation - Rework: INT & Job Level focus
 			case AM_TWILIGHT1:
 			case AM_TWILIGHT2:
 			case AM_TWILIGHT3:
 				make_per = pc_checkskill(sd,AM_LEARNINGPOTION)*50
-					+ pc_checkskill(sd,AM_PHARMACY)*300 + sd->status.job_level*20
-					+ (status->int_/2)*10 + status->dex*10+status->luk*10;
+					+ pc_checkskill(sd,AM_PHARMACY)*300 
+					+ sd->status.job_level*40 // A Job 50 otorga +20% de éxito
+					+ status->int_*15;        // A 100 INT otorga +15% de éxito
+				
 				if (hom_is_active(sd->hd)) {//Player got a homun
 					int32 skill;
 					if ((skill = hom_checkskill(sd->hd,HVAN_INSTRUCT)) > 0) //His homun is a vanil with instruction change

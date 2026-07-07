@@ -20,7 +20,10 @@ void SkillAcidTerror::calculateSkillRatio(const Damage* wd, const block_list* sr
 	if (sd && pc_checkskill(sd, AM_LEARNINGPOTION))
 		base_skillratio += 100; // !TODO: What's this bonus increase?
 #else
-	base_skillratio += -50 + 50 * skill_lv;
+	// Pre-Renewal: 100% base + 40% por nivel
+	// Nivel 1: +40  (140% total)
+	// Nivel 5: +200 (300% total)
+	base_skillratio += 40 * skill_lv;
 #endif
 }
 

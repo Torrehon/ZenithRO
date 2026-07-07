@@ -2137,6 +2137,16 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+  - Id: 7419
+    AegisName: Embryo_HandBook
+    Name: Embryo Creation Guide
+    Type: Usable
+    Buy: 25000
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      callfunc "F_Craft_Embryo";
   - Id: 11500
     AegisName: Light_Yellow_Pot
     Name: Light Yellow Potion

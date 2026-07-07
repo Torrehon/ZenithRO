@@ -6129,9 +6129,9 @@ Body:
           Amount: 1
   - Id: 229
     Name: AM_DEMONSTRATION
-    Description: Bomb
+    Description: Demonstration
     MaxLevel: 5
-    Type: Weapon
+    Type: Magic
     TargetType: Ground
     DamageFlags:
       NoDamage: true
@@ -6142,7 +6142,6 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
-    Element: Fire
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -6162,8 +6161,21 @@ Body:
     Requires:
       SpCost: 10
       ItemCost:
+        - Item: s_bomb
+          Amount: 1
+          Level: 1
+        - Item: s_bomb
+          Amount: 1
+          Level: 2
+        - Item: s_bomb
+          Amount: 1
+          Level: 3
+        - Item: s_bomb
+          Amount: 1
+          Level: 4
         - Item: Fire_Bottle
           Amount: 1
+          Level: 5
     Unit:
       Id: Demonstration
       Range: 1
@@ -6171,12 +6183,11 @@ Body:
       Target: Enemy
       Flag:
         NoReiteration: true
-        NoFootSet: true
   - Id: 230
     Name: AM_ACIDTERROR
     Description: Acid Terror
     MaxLevel: 5
-    Type: Weapon
+    Type: Magic
     TargetType: Attack
     DamageFlags:
       IgnoreAtkCard: true
@@ -6187,7 +6198,17 @@ Body:
       IgnoreCicada: true
     Range: 9
     Hit: Single
-    HitCount: 1
+    HitCount:
+      - Level: 1
+        Count: 1
+      - Level: 2
+        Count: 1
+      - Level: 3
+        Count: 1
+      - Level: 4
+        Count: 1
+      - Level: 5
+        Count: 2
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -6208,8 +6229,21 @@ Body:
     Requires:
       SpCost: 15
       ItemCost:
+        - Item: s_acid
+          Amount: 1
+          Level: 1
+        - Item: s_acid
+          Amount: 1
+          Level: 2
+        - Item: s_acid
+          Amount: 1
+          Level: 3
+        - Item: s_acid
+          Amount: 1
+          Level: 4
         - Item: Acid_Bottle
           Amount: 1
+          Level: 5
     Status: Bleeding
   - Id: 231
     Name: AM_POTIONPITCHER
@@ -6275,8 +6309,21 @@ Body:
     Requires:
       SpCost: 20
       ItemCost:
+        - Item: s_plantbottle
+          Amount: 1
+          Level: 1
+        - Item: s_plantbottle
+          Amount: 1
+          Level: 2
+        - Item: s_plantbottle
+          Amount: 1
+          Level: 3
         - Item: MenEater_Plant_Bottle
           Amount: 1
+          Level: 4
+        - Item: MenEater_Plant_Bottle
+          Amount: 1
+          Level: 5
   - Id: 233
     Name: AM_SPHEREMINE
     Description: Summon Marine Sphere
@@ -6294,8 +6341,21 @@ Body:
     Requires:
       SpCost: 10
       ItemCost:
+        - Item: s_minibottle
+          Amount: 1
+          Level: 1
+        - Item: s_minibottle
+          Amount: 1
+          Level: 2
+        - Item: s_minibottle
+          Amount: 1
+          Level: 3
+        - Item: s_minibottle
+          Amount: 1
+          Level: 4
         - Item: Mini_Bottle
           Amount: 1
+          Level: 5
   - Id: 234
     Name: AM_CP_WEAPON
     Description: Alchemical Weapon
@@ -6310,7 +6370,7 @@ Body:
     CastTime: 2000
     Duration1:
       - Level: 1
-        Time: 120000
+        Time: 60000
       - Level: 2
         Time: 240000
       - Level: 3
@@ -6322,8 +6382,21 @@ Body:
     Requires:
       SpCost: 30
       ItemCost:
+        - Item: s_coatingbottle
+          Amount: 1
+          Level: 1
         - Item: Coating_Bottle
           Amount: 1
+          Level: 2
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 3
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 4
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 5
     Status: Cp_Weapon
   - Id: 235
     Name: AM_CP_SHIELD
@@ -6339,7 +6412,7 @@ Body:
     CastTime: 2000
     Duration1:
       - Level: 1
-        Time: 120000
+        Time: 60000
       - Level: 2
         Time: 240000
       - Level: 3
@@ -6351,8 +6424,21 @@ Body:
     Requires:
       SpCost: 25
       ItemCost:
+        - Item: s_coatingbottle
+          Amount: 1
+          Level: 1
         - Item: Coating_Bottle
           Amount: 1
+          Level: 2
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 3
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 4
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 5
     Status: Cp_Shield
   - Id: 236
     Name: AM_CP_ARMOR
@@ -6368,7 +6454,7 @@ Body:
     CastTime: 2000
     Duration1:
       - Level: 1
-        Time: 120000
+        Time: 60000
       - Level: 2
         Time: 240000
       - Level: 3
@@ -6380,8 +6466,21 @@ Body:
     Requires:
       SpCost: 25
       ItemCost:
+        - Item: s_coatingbottle
+          Amount: 1
+          Level: 1
         - Item: Coating_Bottle
           Amount: 1
+          Level: 2
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 3
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 4
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 5
     Status: Cp_Armor
   - Id: 237
     Name: AM_CP_HELM
@@ -6397,7 +6496,7 @@ Body:
     CastTime: 2000
     Duration1:
       - Level: 1
-        Time: 120000
+        Time: 60000
       - Level: 2
         Time: 240000
       - Level: 3
@@ -6409,8 +6508,21 @@ Body:
     Requires:
       SpCost: 25
       ItemCost:
+        - Item: s_coatingbottle
+          Amount: 1
+          Level: 1
         - Item: Coating_Bottle
           Amount: 1
+          Level: 2
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 3
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 4
+        - Item: Coating_Bottle
+          Amount: 1
+          Level: 5
     Status: Cp_Helm
   - Id: 238
     Name: AM_BIOETHICS

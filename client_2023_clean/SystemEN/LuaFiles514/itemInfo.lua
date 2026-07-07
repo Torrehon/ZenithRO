@@ -259173,7 +259173,7 @@ tbl = {
 		unidentifiedDescriptionName = {
 			" "
 		},
-		identifiedDisplayName = "Training Recommendation 1",
+		identifiedDisplayName = "Training Recommendation I",
 		identifiedResourceName = "training_r1",
 		identifiedDescriptionName = {
 			"^0000CCLevel 1 Training Recommendation^000000",
@@ -259376,6 +259376,159 @@ tbl = {
 			"_______________________________________",
 			"^FF0000Account Bound.^000000",
 			"Weight: ^0088000^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50011] = {
+		unidentifiedDisplayName = "Small Bottle Grenade",
+		unidentifiedResourceName = "È­¿°º´",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Small Bottle Grenade",
+		identifiedResourceName = "s_bomb",
+		identifiedDescriptionName = {
+			"A small bottle containing flammable liquid.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50012] = {
+		unidentifiedDisplayName = "Small Acid Bottle",
+		unidentifiedResourceName = "¿°»êº´",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Small Acid Bottle",
+		identifiedResourceName = "s_acid",
+		identifiedDescriptionName = {
+			"A small bottle holding highly corrosive acid.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50013] = {
+		unidentifiedDisplayName = "Small Plant Bottle",
+		unidentifiedResourceName = "½ÄÀÎ½Ä¹°º´",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Small Plant Bottle",
+		identifiedResourceName = "s_plantbottle",
+		identifiedDescriptionName = {
+			"A small bottle containing a dormant Flora.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50014] = {
+		unidentifiedDisplayName = "Small Marine Sphere Bottle",
+		unidentifiedResourceName = "±â·Úº´",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Small Marine Sphere Bottle",
+		identifiedResourceName = "s_minibottle",
+		identifiedDescriptionName = {
+			"A bottle containing a dormant Marine Sphere.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50015] = {
+		unidentifiedDisplayName = "Small Glistening Coat",
+		unidentifiedResourceName = "ÄÚÆÃ¾à",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Small Glistening Coat",
+		identifiedResourceName = "s_coatingbottle",
+		identifiedDescriptionName = {
+			"A bottle which contains shining liquid.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50016] = {
+		unidentifiedDisplayName = "Embryo",
+		unidentifiedResourceName = "¿¥ºê¸®¿À",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Vanilmirth Embryo",
+		identifiedResourceName = "Vanilmirth_Embryo",
+		identifiedDescriptionName = {
+			"A Vanilmirth embryo.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50017] = {
+		unidentifiedDisplayName = "Embryo",
+		unidentifiedResourceName = "¿¥ºê¸®¿À",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Filir Embryo",
+		identifiedResourceName = "Filir_Embryo",
+		identifiedDescriptionName = {
+			"A Filir embryo.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50018] = {
+		unidentifiedDisplayName = "Embryo",
+		unidentifiedResourceName = "¿¥ºê¸®¿À",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Lif Embryo",
+		identifiedResourceName = "Lif_Embryo",
+		identifiedDescriptionName = {
+			"A Lif embryo.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50019] = {
+		unidentifiedDisplayName = "Embryo",
+		unidentifiedResourceName = "¿¥ºê¸®¿À",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Amistr Embryo",
+		identifiedResourceName = "Amistr_Embryo",
+		identifiedDescriptionName = {
+			"An Amistr embryo.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
 		ClassNum = 0,
