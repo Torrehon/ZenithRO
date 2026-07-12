@@ -2696,6 +2696,12 @@
 1587,Kraben@NPC_STUNATTACK,attack,179,1,500,0,5000,no,target,always,0,,,,,,6,
 //1588,Christmas Orc@NPC_EMOTION,idle,197,1,500,0,5000,yes,self,always,0,,,,,,,
 1589,Mandragora@NPC_REVENGE,idle,333,1,10000,0,0,yes,target,masterattacked,,,,,,,,
+1589,Mandragora@MG_FIREBOLT,attack,19,3,1500,1000,5000,yes,target,always,0,,,,,,,
+1589,Mandragora@MG_FIREBOLT,chase,19,3,1500,1000,5000,yes,target,always,0,,,,,,,
+1589,Mandragora@MG_COLDBOLT,attack,14,3,1500,1000,5000,yes,target,always,0,,,,,,,
+1589,Mandragora@MG_COLDBOLT,chase,14,3,1500,1000,5000,yes,target,always,0,,,,,,,
+1589,Mandragora@MG_LIGHTNINGBOLTBOLT,attack,20,3,1500,1000,5000,yes,target,always,0,,,,,,,
+1589,Mandragora@MG_LIGHTNINGBOLTBOLT,chase,20,3,1500,1000,5000,yes,target,always,0,,,,,,,
 1590,Geographer@AL_HEAL,idle,28,9,10000,500,5000,yes,friend,friendhpltmaxrate,90,,,,,,,
 1590,Geographer@NPC_REVENGE,idle,333,1,10000,0,0,yes,target,masterattacked,,,,,,,,
 //1609,Dancing Dragon@NPC_AGIUP,loot,350,1,10000,0,10000,yes,self,always,0,,,,,,18,
@@ -5818,4 +5824,9 @@
 20647,EP17_2_BATH_MERMAID@WZ_WATERBALL,attack,86,5,500,500,10000,yes,target,always,0,,,,,,6,
 20647,EP17_2_BATH_MERMAID@WZ_FROSTNOVA,attack,88,2,1500,500,5000,yes,target,always,0,,,,,,,
 20647,EP17_2_BATH_MERMAID@WZ_STORMGUST,attack,89,1,1500,2500,30000,yes,target,always,0,,,,,,,
-20647,EP17_2_BATH_MERMAID@WZ_QUAGMIRE,attack,92,3,1000,300,60000,yes,target,always,0,,,,,,,28,
+20647,EP17_2_BATH_MERMAID@WZ_QUAGMIRE,attack,92,3,1000,300,60000,yes,target,always,0,,,,,,,28
+
+// Custom Plants:
+
+20572,Wooden Golem@CR_AUTOGUARD,idle,249,3,10000,0,9999999,no,self,onspawn,0,,,,,,9,
+20572,Wooden Golem@CR_DEVOTION,idle,255,5,10000,0,9999999,no,master,always,0,,,,,,9,

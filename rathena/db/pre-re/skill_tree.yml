@@ -1358,6 +1358,10 @@ Body:
         Requires:
           - Name: AM_PHARMACY
             Level: 10
+      - Name: AM_APOTHECARY
+        MaxLevel: 1
+      - Name: AM_BIOMANCER
+        MaxLevel: 1
      # - Name: AM_TWILIGHT4
        # MaxLevel: 1
        # Requires:

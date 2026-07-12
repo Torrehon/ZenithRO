@@ -1929,6 +1929,33 @@ void clif_hominfo( const map_session_data* sd, const homun_data *hd, int32 flag 
 #endif
 }
 
+/// Custom Homunculus System
+/// Presents a list of embryos that can be revived
+/// 01a6 <packet len>.W { <index>.W }*
+void clif_sendembryo(map_session_data* sd)
+{
+	int i, n = 0, fd;
+
+	nullpo_retv(sd);
+	fd = sd->fd;
+
+	WFIFOHEAD(fd, MAX_INVENTORY * 2 + 4);
+	WFIFOW(fd, 0) = 0x1a6;
+	for (i = 0, n = 0; i < MAX_INVENTORY; i++) {
+		if (sd->inventory.u.items_inventory[i].nameid <= 0 || sd->inventory_data[i] == NULL ||
+			(sd->inventory_data[i]->nameid != 7142 && !(sd->inventory_data[i]->nameid >= 50016 && sd->inventory_data[i]->nameid <= 50019)) ||
+			sd->inventory.u.items_inventory[i].amount <= 0)
+			continue;
+		WFIFOW(fd, n * 2 + 4) = i + 2;
+		n++;
+	}
+	WFIFOW(fd, 2) = 4 + n * 2;
+	WFIFOSET(fd, WFIFOW(fd, 2));
+
+	sd->menuskill_id = AM_CALLHOMUN;
+	sd->menuskill_val = -1;
+}
+
 
 /// Notification about a change in homunuculus' state.
 /// 0230 <type>.B <state>.B <id>.L <data>.L (ZC_CHANGESTATE_MER)
@@ -8521,6 +8548,16 @@ void clif_devotion( const block_list* src, const map_session_data* tsd ) {
 
 		WBUFW(buf,26) = skill_get_range2(src, ML_DEVOTION, mercenary_checkskill(md, ML_DEVOTION), false);
 	}
+	// === BYPASS TÓTEM: Dibujar el hilo para monstruos esclavos ===
+	else if( src->type == BL_MOB ){
+		const mob_data *md = static_cast<const mob_data*>(src);
+		if( md && md->master_id )
+			WBUFL(buf,6) = md->master_id;
+
+		// Asumimos nivel 5 de Devotion para la longitud del hilo del Golem
+		WBUFW(buf,26) = skill_get_range2(src, CR_DEVOTION, 5, false);
+	}
+	// =============================================================
 	else
 	{
 		int32 i;
@@ -8538,7 +8575,6 @@ void clif_devotion( const block_list* src, const map_session_data* tsd ) {
 	else
 		clif_send(buf, packet_len(0x1cf), src, AREA);
 }
-
 /// Notifies the client of an object's spirits.
 /// 01d0 <id>.L <amount>.W (ZC_SPIRITS)
 /// 01e1 <id>.L <amount>.W (ZC_SPIRITS2)
@@ -14750,14 +14786,23 @@ void clif_parse_CatchPet(int32 fd, map_session_data *sd){
 }
 
 
+/// Pet and new homunculus system
 /// Answer to pet incubator egg selection dialog (CZ_SELECT_PETEGG).
 /// 01a7 <index>.W
-void clif_parse_SelectEgg(int32 fd, map_session_data *sd){
-	if (sd->menuskill_id != SA_TAMINGMONSTER || sd->menuskill_val != -1)
+void clif_parse_SelectEgg(int32 fd, map_session_data *sd) {
+	if (sd->menuskill_val != -1)
 		return;
 
-	pet_select_egg(sd,RFIFOW(fd,packet_db[RFIFOW(fd,0)].pos[0])-2);
-	clif_menuskill_clear(sd);
+	if (sd->menuskill_id == SA_TAMINGMONSTER) {
+		pet_select_egg(sd, RFIFOW(fd, packet_db[RFIFOW(fd, 0)].pos[0]) - 2);
+		clif_menuskill_clear(sd);
+	}
+
+	if (sd->menuskill_id == AM_CALLHOMUN) {		
+		hom_call(sd, RFIFOW(fd, packet_db[RFIFOW(fd, 0)].pos[0]) - 2);
+		//if (sd->pd) clif_send_petstatus(sd);
+		clif_menuskill_clear(sd);
+	}
 }
 
 

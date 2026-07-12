@@ -1202,7 +1202,9 @@ void clif_homskillup( const homun_data& hd, uint16 skill_id );
 void clif_hom_food( const map_session_data& sd, int32 foodid, bool success );
 void clif_send_homdata( homun_data& hd, e_hom_state2 state );
 void clif_homunculus_updatestatus( const map_session_data& sd, _sp type );
-
+// Custom Homunculus System
+void clif_sendembryo(map_session_data* sd);
+//
 void clif_configuration( const map_session_data* sd, enum e_config_type type, bool enabled );
 void clif_viewequip_ack( const map_session_data& sd, const map_session_data& tsd );
 void clif_equipcheckbox( const map_session_data& sd );
@@ -1445,6 +1447,7 @@ void clif_pet_evolution_result( const map_session_data* sd, e_pet_evolution_resu
 void clif_parse_skill_toid( map_session_data* sd, uint16 skill_id, uint16 skill_lv, int32 target_id );
 
 void clif_inventory_expansion_info( const map_session_data* sd );
+
 
 // Barter System
 void clif_barter_open( map_session_data& sd, npc_data& nd );

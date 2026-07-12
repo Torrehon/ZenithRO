@@ -3387,16 +3387,22 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 			struct status_change_entry *sce = tsc->getSCE(SC_DEVOTION);
 			block_list *d_bl = map_id2bl(sce->val1);
 
-			if (d_bl && (
-				(d_bl->type == BL_MER && ((TBL_MER*)d_bl)->master && ((TBL_MER*)d_bl)->master->id == bl->id) ||
-				(d_bl->type == BL_PC && ((TBL_PC*)d_bl)->devotion[sce->val2] == bl->id)
-				) && check_distance_bl(bl, d_bl, sce->val3) )
+			// === BYPASS TOTAL TÓTEM ===
+			bool is_valid_devotion = false;
+			if (d_bl) {
+				if (d_bl->type == BL_MER && ((TBL_MER*)d_bl)->master && ((TBL_MER*)d_bl)->master->id == bl->id && check_distance_bl(bl, d_bl, sce->val3))
+					is_valid_devotion = true;
+				else if (d_bl->type == BL_PC && ((TBL_PC*)d_bl)->devotion[sce->val2] == bl->id && check_distance_bl(bl, d_bl, sce->val3))
+					is_valid_devotion = true;
+				else if (d_bl->type == BL_MOB && ((mob_data*)d_bl)->master_id == bl->id)
+					is_valid_devotion = true; // El Golem ignora el chequeo de distancia
+			}
+
+			if (is_valid_devotion)
 			{
 				int64 devotion_damage = damage;
 
-				// Needed to check the devotion master for Rebound Shield status.
 				status_change *d_sc = status_get_sc(d_bl);
-
 				if (d_sc && d_sc->getSCE(SC_REBOUND_S))
 					devotion_damage -= devotion_damage * d_sc->getSCE(SC_REBOUND_S)->val2 / 100;
 
@@ -3405,16 +3411,17 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 					battle_fix_damage(src, d_bl, devotion_damage, 0, 0);
 				} else {
 					bool isDevotRdamage = false;
-
 					if (battle_config.devotion_rdamage && battle_config.devotion_rdamage > rnd()%100)
 						isDevotRdamage = true;
-					// If !isDevotRdamage, reflected magics are done directly on the target not on paladin
-					// This check is only for magical skill.
-					// For BF_WEAPON skills types track var rdamage and function battle_calc_return_damage
+					
 					clif_damage(*bl, (!isDevotRdamage) ? *bl : *d_bl, gettick(), 0, 0, devotion_damage, 0, DMG_NORMAL, 0, false);
 					battle_fix_damage(bl, (!isDevotRdamage) ? bl : d_bl, devotion_damage, 0, 0);
 				}
+				
+				// ANULADOR MANUAL: Forzamos que el jugador reciba 0 de daño
+				damage = 0; 
 			} else {
+				// LIMPIEZA: Si el Golem muere o te alejas, se rompe el hilo y recibes el daño
 				status_change_end(bl, SC_DEVOTION);
 				if (!dmg.amotion)
 					battle_fix_damage(src, bl, damage, dmg.dmotion, 0);
@@ -7578,7 +7585,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 
 		case UNT_TATAMIGAESHI:
 		case UNT_DEMONSTRATION:
-			skill_attack(BF_WEAPON,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
+			skill_attack(BF_MAGIC,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
 			break;
 
 		case UNT_GOSPEL:
@@ -9816,6 +9823,27 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
  * @param skill_lv Level of used skill
  * @return true: All condition passed, false: Failed
  */
+ static int skill_count_flora_points_sub(struct block_list *bl, va_list ap) {
+	struct mob_data *md = (struct mob_data *)bl;
+	int master_id = va_arg(ap, int);
+	int *points = va_arg(ap, int *);
+
+	if (md->master_id != master_id)
+		return 0;
+
+	int cost = 0;
+	switch (md->mob_id) {
+		case MOBID_G_MANDRAGORA: cost = 2; break;
+		case MOBID_G_RAFFLESIA:  cost = 3; break;
+		case MOBID_G_PARASITE:   cost = 4; break;
+		case MOBID_G_GEOGRAPHER: cost = 5; break;
+		case MOBID_G_WOODEN_GOLEM: cost = 6; break;
+	}
+
+	*points += cost;
+	return 1;
+}
+ 
 bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint16 skill_lv ){
 	struct s_skill_condition require;
 	struct status_data *status;
@@ -9878,17 +9906,37 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 			break;
 		case AM_CANNIBALIZE:
 		case AM_SPHEREMINE: {
-			int32 c=0;
-			int32 summons[5] = { MOBID_G_MANDRAGORA, MOBID_G_RAFFLESIA, MOBID_G_FLORA, MOBID_G_GEOGRAPHER, MOBID_G_WOODEN_GOLEM };
-			int32 maxcount = (skill_id==AM_CANNIBALIZE)? 6-skill_lv : skill_get_maxcount(skill_id,skill_lv);
-			int32 mob_class = (skill_id==AM_CANNIBALIZE)? summons[skill_lv-1] :MOBID_MARINE_SPHERE;
-			if(battle_config.land_skill_limit && maxcount>0 && (battle_config.land_skill_limit&BL_PC)) {
-				i = map_foreachinmap(skill_check_condition_mob_master_sub, sd.m, BL_MOB, sd.id, mob_class, skill_id, &c);
-				if(c >= maxcount ||
-					(skill_id==AM_CANNIBALIZE && c != i && battle_config.alchemist_summon_setting&4))
-				{	//Fails when: exceed max limit. There are other plant types already out.
-					clif_skill_fail( sd, skill_id );
-					return false;
+			if (skill_id == AM_SPHEREMINE) {
+				int32 c = 0;
+				int32 maxcount = skill_get_maxcount(skill_id, skill_lv);
+				
+				if(battle_config.land_skill_limit && maxcount > 0 && (battle_config.land_skill_limit & BL_PC)) {
+					i = map_foreachinmap(skill_check_condition_mob_master_sub, sd.m, BL_MOB, sd.id, MOBID_MARINE_SPHERE, skill_id, &c);
+					if(c >= maxcount) {
+						clif_skill_fail( sd, skill_id );
+						return false;
+					}
+				}
+			} else { 
+				int32 current_points = 0;
+				int32 plant_costs[5] = { 2, 3, 4, 5, 6 };
+				int32 spawn_cost = plant_costs[skill_lv - 1]; // Lo que cuesta la planta que estás invocando
+				
+				// Buscamos el nivel real que tiene el jugador en su árbol de habilidades
+				int32 learned_lv = pc_checkskill(&sd, AM_CANNIBALIZE);
+				int32 max_points = 3 + learned_lv; 
+				
+				if (pc_checkskill(&sd, AM_BIOMANCER) > 0) {
+					max_points += 5;
+				}
+
+				if(battle_config.land_skill_limit && (battle_config.land_skill_limit & BL_PC)) {
+					map_foreachinmap(skill_count_flora_points_sub, sd.m, BL_MOB, sd.id, &current_points);
+					
+					if(current_points + spawn_cost > max_points) {
+						clif_skill_fail( sd, skill_id );
+						return false;
+					}
 				}
 			}
 			break;
@@ -10401,8 +10449,8 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 							break;
 #else
 						case AM_CALLHOMUN:
-							if (sd->status.hom_id) //Don't delete items when hom is already out.
-								continue;
+							// if (sd->status.hom_id) //Don't delete items when hom is already out.
+								// continue;
 							break;
 #endif
 						case AB_ADORAMUS:

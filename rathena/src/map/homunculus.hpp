@@ -222,7 +222,7 @@ void hom_revive(homun_data *hd, uint32 hp, uint32 sp);
 void hom_reset_stats(homun_data *hd);
 int32 hom_shuffle(homun_data *hd); // [Zephyrus]
 void hom_save(homun_data *hd);
-bool hom_call(map_session_data *sd);
+bool hom_call(map_session_data *sd, short hom_index);
 bool hom_create_request(map_session_data *sd, int32 class_);
 void hom_menu(map_session_data *sd,int32 type);
 int32 hom_food(map_session_data *sd, homun_data *hd);

@@ -24101,13 +24101,14 @@ Body:
     AegisName: G_MANDRAGORA
     Name: Mandragora
     Level: 12
-    Hp: 405
-    Attack: 26
-    Attack2: 35
+    Hp: 1405
+    Attack: 50
+    Attack2: 85
+    Defense: 10
     MagicDefense: 25
     Agi: 12
     Vit: 24
-    Int: 0
+    Int: 75
     Dex: 36
     Luk: 15
     AttackRange: 4
@@ -24118,7 +24119,7 @@ Body:
     Element: Earth
     ElementLevel: 3
     WalkSpeed: 1000
-    AttackDelay: 1768
+    AttackDelay: 1300
     AttackMotion: 768
     ClientAttackMotion: 384
     DamageMotion: 576
@@ -24145,7 +24146,7 @@ Body:
     Element: Earth
     ElementLevel: 3
     WalkSpeed: 1000
-    AttackDelay: 1308
+    AttackDelay: 1300
     AttackMotion: 1008
     ClientAttackMotion: 480
     DamageMotion: 480
@@ -57884,7 +57885,7 @@ Body:
   - Id: 20572
     AegisName: G_WOODEN_GOLEM
     Name: Wooden Golem
-    Level: 51
+    Level: 79
     Hp: 9200
     Attack: 570
     Attack2: 657
@@ -57897,7 +57898,7 @@ Body:
     Luk: 155
     AttackRange: 1
     SkillRange: 10
-    ChaseRange: 12
+    ChaseRange: 10
     Size: Large
     Race: Plant
     RaceGroups:

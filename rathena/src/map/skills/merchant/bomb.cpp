@@ -29,6 +29,9 @@ void SkillBomb::calculateSkillRatio(const Damage* wd, const block_list* src, con
 		base_skillratio += 10 + (10 * skill_lv);
 	}
 }
+void SkillBomb::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 &flag) const {
+	skill_attack(BF_MAGIC, src, src, target, getSkillId(), skill_lv, tick, flag);
+}
 void SkillBomb::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 #ifdef RENEWAL
 	skill_break_equip(src,target, EQP_WEAPON, 300 * skill_lv, BCT_ENEMY);

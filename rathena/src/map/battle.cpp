@@ -4399,9 +4399,9 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 			if (tsd != nullptr && tsd->bonus.crit_def_rate != 0 && !skill_id && (bflag & BDMG_CRIT)) {
 				ATK_ADDRATE(wd->damage, wd->damage2, -tsd->bonus.crit_def_rate);
 			}
-			//Acid Terror ignores DEF but will substract VIT from base attack value instead
-			if (skill_id == AM_ACIDTERROR)
-				ATK_ADD(wd->damage, wd->damage2, -tstatus->def2);
+			// //Acid Terror ignores DEF but will substract VIT from base attack value instead
+			// if (skill_id == AM_ACIDTERROR)
+				// ATK_ADD(wd->damage, wd->damage2, -tstatus->def2);
 #endif
 			break;
 	} //End switch(skill_id)

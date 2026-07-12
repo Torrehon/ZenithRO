@@ -6,6 +6,7 @@
 #include "map/clif.hpp"
 #include "map/pc.hpp"
 #include "map/status.hpp"
+#include "map/mob.hpp" // <-- Añadimos esta línea
 
 SkillSacrifice::SkillSacrifice() : SkillImpl(CR_DEVOTION) {
 }
@@ -13,12 +14,29 @@ SkillSacrifice::SkillSacrifice() : SkillImpl(CR_DEVOTION) {
 void SkillSacrifice::castendNoDamageId(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	map_session_data* sd = BL_CAST(BL_PC, src);
 	map_session_data* dstsd = BL_CAST(BL_PC, target);
+	sc_type type = skill_get_sc(getSkillId());
+
+	// === BYPASS PARA EL TÓTEM (MOB CASTING) ===
+	if (src->type == BL_MOB) {
+		mob_data* md = BL_CAST(BL_MOB, src);
+		// Solo permite que la invocación se lo lance a su Master
+		if (!dstsd || md->master_id != target->id) 
+			return; 
+
+		// Aplicamos el buff directamente saltándonos los chequeos de Paladin
+		clif_skill_nodamage(src, *target, getSkillId(), skill_lv,
+			sc_start4(src, target, type, 10000, src->id, 0, skill_get_range2(src, getSkillId(), skill_lv, true), 0, skill_get_time2(getSkillId(), skill_lv)));
+		
+		// Invocamos el gráfico del hilo mágico 
+		clif_devotion(src, nullptr);
+		
+		return;
+	}
+	// ==========================================
 
 	if (!sd) {
 		return;
 	}
-
-	sc_type type = skill_get_sc(getSkillId());
 
 	int32 count, lv;
 	if( !dstsd )

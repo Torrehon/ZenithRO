@@ -319,7 +319,8 @@ StateIconImgList = {
 		[EFST_IDs.EFST_SLOWPOISON] = "REGEN.TGA",
 		[EFST_IDs.EFST_ASFOCUS] = "EFST_SECOND_JUDGE.TGA",
 		[EFST_IDs.EFST_ZANTETSU] = "zantetsu.tga",
-		[EFST_IDs.EFST_OVERCAST] = "efst_first_faith_power.tga"		
+		[EFST_IDs.EFST_OVERCAST] = "efst_first_faith_power.tga",		
+		[EFST_IDs.EFST_DEVOTION] = "efst_def.TGA"
 	},
 	[PRIORITY_GREEN] = {
 		[EFST_IDs.EFST_SET_NUM_DEF] = "SETDEF.TGA",

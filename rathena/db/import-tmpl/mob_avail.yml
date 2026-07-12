@@ -43,7 +43,11 @@ Header:
   Type: MOB_AVAIL_DB
   Version: 1
 
-#Body:
+Body:
+  - Mob: G_WOODEN_GOLEM
+    Sprite: WOODEN_GOLEM
+
+
   # Examples
 #  - Mob: PORING
 #    Sprite: BAPHOMET

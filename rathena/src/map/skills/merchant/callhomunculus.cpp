@@ -15,8 +15,15 @@ SkillCallHomunculus::SkillCallHomunculus() : SkillImpl(AM_CALLHOMUN) {
 void SkillCallHomunculus::castendNoDamageId(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	map_session_data* sd = BL_CAST(BL_PC, src);
 
-	if (sd && !hom_call(sd))
+	// Si el jugador no tiene un homúnculo activo vinculado en la base de datos, abre el menú del Embryo
+	if (sd && !sd->status.hom_id) {
+		clif_sendembryo(sd);
+		clif_skill_nodamage(src, *target, getSkillId(), skill_lv, 1);
+	}
+	// Si ya tiene uno (o intenta revivir el seleccionado), ejecuta el hom_call
+	else if (sd && !hom_call(sd, 0)) {
 		clif_skill_fail( *sd, getSkillId() );
+	}
 #ifdef RENEWAL
 	else if (sd && hom_is_active(sd->hd))
 		skill_area_temp[0] = 1; // Already passed pre-cast checks

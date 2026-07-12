@@ -9,7 +9,7 @@
 #include "map/pc.hpp"
 #include "map/status.hpp"
 
-SkillAcidTerror::SkillAcidTerror() : WeaponSkillImpl(AM_ACIDTERROR) {
+SkillAcidTerror::SkillAcidTerror() : SkillImpl(AM_ACIDTERROR) {
 }
 
 void SkillAcidTerror::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
@@ -26,7 +26,9 @@ void SkillAcidTerror::calculateSkillRatio(const Damage* wd, const block_list* sr
 	base_skillratio += 40 * skill_lv;
 #endif
 }
-
+void SkillAcidTerror::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 &flag) const {
+	skill_attack(BF_MAGIC, src, src, target, getSkillId(), skill_lv, tick, flag);
+}
 void SkillAcidTerror::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 	sc_start2(src,target,SC_BLEEDING,(skill_lv*3),skill_lv,src->id,skill_get_time2(getSkillId(),skill_lv));
 #ifdef RENEWAL
