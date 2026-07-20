@@ -5792,26 +5792,11 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 	}
 	// --- FIN CUSTOM ---
 	
-	// --- INICIO CUSTOM: Amistr Bulwark y Juggernaut (Testeando Hard DEF) ---
-
-	// Conversión de Hard DEF a Ataque
-	// IDs de Amistr: 6003 (Oveja), 6004 (Hipo). Evolucionados: 6011 (Oveja Evo), 6012 (Hipo Evo)
-	if (hd->homunculus.class_ == 6003 || hd->homunculus.class_ == 6004 || 
-		hd->homunculus.class_ == 6011 || hd->homunculus.class_ == 6012) {
-		
-		int hard_def = status->def; 
-		if (hard_def > 0) {
-			// Sigue sumando la mitad de la armadura como Ataque Base
-			status->batk += (hard_def / 2); 
-		}
-	}
-	// --- FIN CUSTOM ---
 	
 #ifndef RENEWAL
 	status->rhw.atk = status->dex;
 	status->rhw.atk2 = status->str + hom.level;
 #endif
-
 	status_calc_misc(hd, status, hom.level);
 	status_cpy(&hd->battle_status, status);
 	return 1;

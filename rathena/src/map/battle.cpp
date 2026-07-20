@@ -2680,7 +2680,7 @@ static int64 battle_calc_base_damage(block_list *src, struct status_data *status
 
 	if (sd)
 		battle_add_weapon_damage(sd, &damage, type);
-
+	
 #ifdef RENEWAL
 	if (flag&BDMG_CRIT)
 		damage = (damage * 14) / 10;
@@ -5690,6 +5690,24 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 
 #ifndef RENEWAL
 
+		// --- INICIO CUSTOM: Juggernaut Amistr (Llamada directa a DEF -> Daño Base) ---
+		if (src->type == BL_HOM) {
+			homun_data *hd = (homun_data *)src;
+			
+			// IDs de Amistr: 6003, 6004, 6011, 6012
+			if (hd->homunculus.class_ == 6003 || hd->homunculus.class_ == 6004 || 
+				hd->homunculus.class_ == 6011 || hd->homunculus.class_ == 6012) {
+				
+				// Llamamos directamente a su Hard DEF 
+				int bono_ataque = sstatus->def / 2; 
+				
+				if (bono_ataque > 0) {
+					ATK_ADD(wd.damage, wd.damage2, bono_ataque);
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
+
 		// --- INICIO CUSTOM: Venom Splasher MATK ---
 		// Lo inyectamos antes del ATK_RATE para que se multiplique por el 900% de la habilidad.
 		if (skill_id == AS_SPLASHER && sd && pc_checkskill(sd, AS_VIPERSOUL) > 0) {
@@ -5718,7 +5736,6 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		}
 		// --- FIN CÓDIGO CUSTOM ---
 		
-		// ... (tus otras Souls: Venom Splasher, Holy Cross, Ugly Dance, etc.) ...
 
 		// --- INICIO CUSTOM: Ascetic Soul (MATK Híbrido Escalar) ---
 		if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {

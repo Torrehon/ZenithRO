@@ -1,51 +1,164 @@
--	script	MANA_ENGINE	-1,{
+// ==========================================================
+// Sistema de Ciclo Ambiental Dinámico y Mana Engine
+// Estados Globales: Día (0), Noche (1), Lluvia de Estrellas (2)
+// ==========================================================
 
-OnHour00:OnHour03:OnHour06:OnHour09:OnHour12:OnHour15:OnHour18:OnHour21:
-OnManualTrigger:
-    // Seteamos el multiplicador: 600 = 6x, 800 = 8x.
-    // Como tu base es 500 (5x), calculamos cuanto extra dar.
-	set $ManaEventRate, rand(600, 800); 
-	set .@int, $ManaEventRate / 100;
-	set .@dec, $ManaEventRate % 100;
-
-	announce "¡El flujo de mana ha estallado! Bonus manual de EXP de " + .@int + "." + .@dec + "x activo por 1 hora.", bc_all;
-
-	sleep 3600000; // 1 hora de evento
-
-	set $ManaEventRate, 0; // Apagamos el evento
-	announce "El flujo de mana se ha estabilizado. Los rates vuelven a 5.00x", bc_all;
+-	script	EnvCycleManager	-1,{
+OnInit:
+	if ($StarShowerChance == 0) set $StarShowerChance, 20; 
+	
+	// Valores base por seguridad al arrancar
+	set $Global_EnvState, 0;
+	set $ManaEvent_Active, 0;
+	set $ManaEvent_Reloaded, 0;
+	setbattleflag "base_exp_rate", 500;
+	setbattleflag "job_exp_rate", 500;
 	end;
 
-// ESTA ES LA CLAVE: Se ejecuta CADA VEZ que alguien mata un mob
-OnNPCKillEvent:
-    if ($ManaEventRate <= 500) end; // Si el evento está apagado o es menor al base, no hace nada.
+// ==========================================================
+// Gatillos Manuales (Llamados desde el NPC Interruptor)
+// ==========================================================
+OnManualStart:
+	set $StarShowerChance, 100; // Forzamos el éxito
+	goto L_TriggerCycle;
+	end;
 
-    // Calculamos la diferencia. Si el evento es 8x (800) y el base es 5x (500), 
-    // el extra es un 60% más (300 de 500).
-    // Usamos 'killedrid' para saber qué bicho murió.
-    set .@base_exp, strmobinfo(2, killedrid);
-    set .@job_exp, strmobinfo(3, killedrid);
+OnManualStop:
+	set $ManaEvent_Active, 0;
+	set $ManaEvent_Reloaded, 0;
+	setbattleflag "base_exp_rate", 500;
+	setbattleflag "job_exp_rate", 500;
+	
+	// Si estaba activa la lluvia, limpiamos el clima y lo hacemos de día por defecto
+	if ($Global_EnvState == 2) {
+		set $Global_EnvState, 0;
+		day;
+		atcommand "@clearweather";
+	}
+	
+	// Recarga de mobs (Requiere RID)
+	if (getusers(1) > 0) {
+		if (query_sql("SELECT char_id FROM `char` WHERE online=1 LIMIT 1", .@target_ids)) {
+			attachrid(.@target_ids[0]);
+			atcommand "@reloadmobdb";
+		}
+	}
+	
+	announce "The mana flow has been manually stabilized. EXP rates are back to 5.00x.", bc_all|bc_blue;
+	end;
 
-    // Calculamos el bonus: (EXP_BASE * (Rate_Evento - Rate_Servidor)) / 100
-    // Ejemplo: (1000 exp * (800 - 500)) / 100 = 3000 de EXP extra.
-    set .@extra_base, (.@base_exp * ($ManaEventRate - 500)) / 100;
-    set .@extra_job, (.@job_exp * ($ManaEventRate - 500)) / 100;
+// ==========================================================
+// Gatillo Automático (Cada 3 horas)
+// ==========================================================
+OnHour00:OnHour03:OnHour06:OnHour09:OnHour12:OnHour15:OnHour18:OnHour21:
+L_TriggerCycle: 
 
-    // Entregamos la experiencia extra directamente al jugador
-    if (.@extra_base > 0) getexp .@extra_base, .@extra_job;
-    end;
+	set .@roll, rand(1, 100);
+
+	if (.@roll <= $StarShowerChance) {
+		// ==============================================
+		// ¡ÉXITO! LLUVIA DE ESTRELLAS (Estado 2)
+		// ==============================================
+		set $Global_EnvState, 2;
+		set $StarShowerChance, 20; 
+		
+		night;
+		atcommand "@leaves"; 
+		
+		// MANA ENGINE: Calculo Aleatorio 6x - 8x
+		set .@new_rate, rand(600, 800);
+		set .@int, .@new_rate / 100;
+		set .@dec, .@new_rate % 100;
+
+		setbattleflag "base_exp_rate", .@new_rate;
+		setbattleflag "job_exp_rate", .@new_rate;
+
+		set $ManaEvent_Active, 1;
+		set $ManaEvent_Reloaded, 0;
+		
+		// Recarga de Mobs (Requiere RID)
+		if (getusers(1) > 0) {
+			if (query_sql("SELECT char_id FROM `char` WHERE online=1 LIMIT 1", .@target_ids)) {
+				attachrid(.@target_ids[0]);
+				atcommand "@reloadmobdb";
+				set $ManaEvent_Reloaded, 1;
+			}
+		}
+
+		announce "A breathtaking meteor shower illuminates the dark sky! Mana flow burst, EXP bonus " + .@int + "." + .@dec + "x active.", bc_all|bc_blue;
+
+	} else {
+		// ==============================================
+		// FALLO: CICLO NORMAL (Aumentamos probabilidad)
+		// ==============================================
+		set $StarShowerChance, $StarShowerChance + 10;
+		
+		// Apagamos el motor de exp si estaba encendido
+		if ($ManaEvent_Active == 1) {
+			set $ManaEvent_Active, 0;
+			set $ManaEvent_Reloaded, 0;
+			setbattleflag "base_exp_rate", 500;
+			setbattleflag "job_exp_rate", 500;
+			
+			if (getusers(1) > 0) {
+				if (query_sql("SELECT char_id FROM `char` WHERE online=1 LIMIT 1", .@target_ids)) {
+					attachrid(.@target_ids[0]);
+					atcommand "@reloadmobdb";
+				}
+			}
+		}
+
+		// Alternamos entre Día y Noche
+		if ($Global_EnvState == 0 || $Global_EnvState == 2) {
+			set $Global_EnvState, 1;
+			night;
+			atcommand "@clearweather";
+			announce "The moon takes over as a quiet night falls.", bc_all|bc_blue;
+		} else {
+			set $Global_EnvState, 0;
+			day;
+			atcommand "@clearweather";
+			announce "The sun rises, bringing a warm new day.", bc_all|bc_yellow;
+		}
+	}
+	end;
+
+OnPCLoginEvent:
+	if ($ManaEvent_Active == 1 && $ManaEvent_Reloaded == 0) {
+		atcommand "@reloadmobdb";
+		set $ManaEvent_Reloaded, 1;
+	}
+	end;
 }
 
-// NPC INTERRUPTOR
-prontera,155,180,5	script	Mana_Control	122,{
-	mes "[Mana Control]";
-	mes "Este método inyecta EXP directamente al matar.";
+// ==========================================================
+// NPC CONTROL (PRONTERA 155, 180)
+// ==========================================================
+prontera,155,180,5	script	Mana Control	122,{
+	mes "[Environment & Mana Control]";
+	mes "Hello. (Testing Mode Active)";
+	mes "Global State: ^0000FF" + (($Global_EnvState == 2) ? "Star Shower" : (($Global_EnvState == 1) ? "Night" : "Day")) + "^000000";
+	mes "Next Shower Chance: ^FF0000" + $StarShowerChance + "%^000000";
+	mes "Mana Event: " + (($ManaEvent_Active) ? "^00FF00Active^000000" : "^FF0000Inactive^000000");
 	next;
-	if (select("Activar Evento:Desactivar Evento") == 1) {
-		donpcevent "MANA_ENGINE::OnManualTrigger";
-	} else {
-		set $ManaEventRate, 0;
-		announce "Evento de Mana cancelado manualmente.", bc_all;
+	
+	switch(select("Force Star Shower (6x-8x):Stop Event:Cancel")) {
+		case 1:
+			mes "[Mana Control]";
+			mes "Triggering global event and reloading database...";
+			close2;
+			donpcevent "EnvCycleManager::OnManualStart";
+			end;
+		
+		case 2:
+			mes "[Mana Control]";
+			mes "Restoring rates to 5.00x and clearing weather...";
+			close2;
+			donpcevent "EnvCycleManager::OnManualStop";
+			end;
+
+		case 3:
+			close;
+			end;
 	}
-	close;
 }
