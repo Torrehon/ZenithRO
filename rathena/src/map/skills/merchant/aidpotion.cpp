@@ -26,6 +26,18 @@ void SkillAidPotion::castendNoDamageId(block_list* src, block_list* target, uint
 		flag |= SKILL_NOCONSUME_REQ;
 		return;
 	}
+
+	// --- INICIO CUSTOM: Cooldown Check en el Objetivo ---
+	if (tsc && tsc->getSCE(SC_POTION_HOT)) {
+		if (sd) {
+			clif_skill_fail(*sd, getSkillId());
+			clif_displaymessage(sd->fd, "The target is already under an active potion effect.");
+		}
+		flag |= SKILL_NOCONSUME_REQ;
+		return;
+	}
+	// --- FIN CUSTOM ---
+
 	if( sd ) {
 		int32 x,bonus=100;
 		struct s_skill_condition require = skill_get_requirement(sd, getSkillId(), skill_lv);
@@ -44,10 +56,25 @@ void SkillAidPotion::castendNoDamageId(block_list* src, block_list* target, uint
 		potion_flag = 1;
 		potion_hp = potion_sp = potion_per_hp = potion_per_sp = 0;
 		potion_target = target->id;
-		run_script(sd->inventory_data[j]->script,0,sd->id,0);
+		
+		// --- INICIO CUSTOM: Aid Potion Rework (Bypass Item Script) ---
+		// Anulamos el run_script para que no se ejecute sobre el creador
+		// run_script(sd->inventory_data[j]->script,0,sd->id,0);
+		
+		// Calculamos la curación base simulando los rand() de la base de datos
+		switch(skill_lv) {
+			case 1: potion_hp = rnd() % 26 + 95; break;   // Red: rand(95, 120)
+			case 2: potion_hp = rnd() % 91 + 300; break;  // Orange: rand(300, 390)
+			case 3: potion_hp = rnd() % 161 + 560; break; // Yellow: rand(560, 720)
+			case 4: potion_hp = rnd() % 181 + 880; break; // White: rand(880, 1060)
+			case 5: potion_sp = rnd() % 21 + 40; break;   // Blue: rand(40, 60)
+		}
+		// --- FIN CUSTOM ---
+
 		potion_flag = potion_target = 0;
-		if( sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_ALCHEMIST )
-			bonus += sd->status.base_level;
+		
+		// ELIMINADO: Bono de Soul Linker (SL_ALCHEMIST) eliminado por diseño del servidor.
+
 		if( potion_per_hp > 0 || potion_per_sp > 0 ) {
 			hp = tstatus->max_hp * potion_per_hp / 100;
 			hp = hp * (100 + pc_checkskill(sd,AM_POTIONPITCHER)*10 + pc_checkskill(sd,AM_LEARNINGPOTION)*5)*bonus/10000;
@@ -145,5 +172,55 @@ void SkillAidPotion::castendNoDamageId(block_list* src, block_list* target, uint
 			sp = 0;
 		}
 	}
+
+	// --- INICIO CUSTOM: Cálculo de Overheal (White Potion) idéntico a Priest ---
+	int32 white_potion_shield = 0;
+	if (sd && pc_checkskill(sd, AM_APOTHECARY) > 0 && skill_lv == 4) {
+		if (tsc == nullptr || tsc->getSCE(SC_KYRIE) == nullptr) {
+			int32 current_hp = status_get_hp(target);
+			int32 max_hp = status_get_max_hp(target);
+			
+			if (current_hp + hp > max_hp) {
+				int32 overhealed_amount = (current_hp + hp) - max_hp;
+				
+				// Escudo = 50% del sobrante
+				white_potion_shield = overhealed_amount / 2;
+				int32 max_shield = max_hp * 10 / 100; // Tope: 10% del Max HP
+				
+				if (white_potion_shield > max_shield)
+					white_potion_shield = max_shield;
+			}
+		}
+	}
+	// --- FIN CUSTOM ---
+
 	status_heal(target,hp,sp,0);
+
+	// --- INICIO CUSTOM: Aplicación de Buffs Potion Pitcher ---
+	if (sd) {
+		// 1. Aplicamos el HoT (Curación en el tiempo) AL OBJETIVO
+		if (hp > 0 && skill_lv <= 4) { // Solo pociones de HP
+			// Replicamos el script: sc_start4 SC_POTION_HOT, 2000ms, .@heal / 4, 312, 0, 0
+			// Usamos el 'hp' final amplificado por Potion Pitcher y VIT.
+			sc_start4(src, target, SC_POTION_HOT, 100, hp / 4, 312, 0, 0, 2000);
+		}
+
+		// 2. Aplicamos las pasivas de Apothecary
+		if (pc_checkskill(sd, AM_APOTHECARY) > 0) {
+			int duration = 120000; // 120 segundos
+			
+			switch(skill_lv) {
+				case 1: sc_start(src, target, SC_RPOT, 100, 1, duration); break;
+				case 2: sc_start(src, target, SC_OPOT, 100, 1, duration); break;
+				case 3: sc_start(src, target, SC_YPOT, 100, 1, duration); break;
+				case 4: // White Potion (OVERHEAL)
+					if (white_potion_shield > 0) {
+						sc_start4(src, target, SC_OVERHEAL, 100, 1, white_potion_shield, 0, 0, duration);
+					}
+					break;
+				case 5: sc_start(src, target, SC_BPOT, 100, 1, duration); break;
+			}
+		}
+	}
+	// --- FIN CUSTOM ---
 }

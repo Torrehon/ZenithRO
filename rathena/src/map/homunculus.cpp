@@ -292,7 +292,7 @@ int32 hom_vaporize(map_session_data *sd, int32 flag)
 	status_change_end(sd, SC_HOMUN_TIME);
 #endif
 
-	if (hd->homunculus.intimacy > 0) {	
+	if (hd->homunculus.intimacy >= 0) {	
 		memset(&tmp_item, 0, sizeof(tmp_item));
 
 		switch (hom_class2mapid(hd->homunculus.class_)) {
@@ -1173,14 +1173,35 @@ bool hom_call(map_session_data *sd, short hom_index)
 
 		if (ed.card[1] != 0) {
 			if (sd->status.char_id == MakeDWord(ed.card[2], ed.card[3])) {
-				pc_delitem(sd, n, 1, 0, 0, LOG_TYPE_CONSUME);
+				if (pc_delitem(sd, n, 1, 0, 0, LOG_TYPE_CONSUME) != 0) {
+					ShowError("hom_call: Failed to delete saved embryo at slot %d (nameid: %d, amount: %d)\n", n, sd->inventory.u.items_inventory[n].nameid, sd->inventory.u.items_inventory[n].amount);
+					return false;
+				}
 				sd->status.hom_id = ed.card[1];
 			} else {
 				return false; // Cannot revive someone else's homunculus
 			}			
 		} else {
-			pc_delitem(sd, n, 1, 0, 0, LOG_TYPE_CONSUME);
-			return hom_create_request(sd, HM_CLASS_BASE + rnd_value(0, 7));
+			int class_id = HM_CLASS_BASE + rnd_value(0, 7);
+			switch (ed.nameid) {
+				case 50018: // Lif
+					class_id = HM_CLASS_BASE + 0 + (rnd_value(0, 1) ? 0 : 4);
+					break;
+				case 50019: // Amistr
+					class_id = HM_CLASS_BASE + 1 + (rnd_value(0, 1) ? 0 : 4);
+					break;
+				case 50017: // Filir
+					class_id = HM_CLASS_BASE + 2 + (rnd_value(0, 1) ? 0 : 4);
+					break;
+				case 50016: // Vanilmirth
+					class_id = HM_CLASS_BASE + 3 + (rnd_value(0, 1) ? 0 : 4);
+					break;
+			}
+			if (pc_delitem(sd, n, 1, 0, 0, LOG_TYPE_CONSUME) != 0) {
+				ShowError("hom_call: Failed to delete blank embryo at slot %d (nameid: %d, amount: %d)\n", n, sd->inventory.u.items_inventory[n].nameid, sd->inventory.u.items_inventory[n].amount);
+				return false;
+			}
+			return hom_create_request(sd, class_id);
 		}
 	}
 

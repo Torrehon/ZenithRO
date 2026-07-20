@@ -14799,8 +14799,15 @@ void clif_parse_SelectEgg(int32 fd, map_session_data *sd) {
 	}
 
 	if (sd->menuskill_id == AM_CALLHOMUN) {		
+		PACKET_ZC_CHANGESTATE_PET packet{};
+		packet.PacketType = HEADER_ZC_CHANGESTATE_PET;
+		packet.type = CHANGESTATEPET_UPDATE_EGG;
+		packet.GID = 0;
+		packet.data = 1;
+		clif_send(&packet, sizeof(packet), sd, SELF);
+
 		hom_call(sd, RFIFOW(fd, packet_db[RFIFOW(fd, 0)].pos[0]) - 2);
-		//if (sd->pd) clif_send_petstatus(sd);
+
 		clif_menuskill_clear(sd);
 	}
 }

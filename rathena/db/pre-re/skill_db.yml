@@ -3752,7 +3752,7 @@ Body:
       - Level: 4
         Time: 120000
       - Level: 5
-        Time: 150000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -6135,10 +6135,10 @@ Body:
     TargetType: Ground
     DamageFlags:
       NoDamage: true
-      IgnoreAtkCard: true
-    Flags:
-      IgnoreAutoGuard: true
-      IgnoreCicada: true
+      # IgnoreAtkCard: true
+    # Flags:
+      # IgnoreAutoGuard: true
+      # IgnoreCicada: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -6528,8 +6528,8 @@ Body:
     Name: AM_BIOETHICS
     Description: Bioethics
     MaxLevel: 1
-    Flags:
-      IsQuest: true
+    # Flags:
+      # IsQuest: true
   - Id: 243
     Name: AM_CALLHOMUN
     Description: Call Homunculus
@@ -6540,9 +6540,9 @@ Body:
     SplashArea: 1
     Requires:
       SpCost: 10
-      ItemCost:
-        - Item: Germination_Breed
-          Amount: 1
+      # ItemCost:
+        # - Item: Germination_Breed
+          # Amount: 1
   - Id: 244
     Name: AM_REST
     Description: Vaporize
@@ -11672,7 +11672,7 @@ Body:
     DamageFlags:
       NoDamage: true
     Flags:
-      IsSpirit: true
+      IsQuest: true
       PartyOnly: true
       GuildOnly: true
     Range: 9
@@ -13332,7 +13332,7 @@ Body:
     DamageFlags:
       NoDamage: true
     Flags:
-      IsSpirit: true
+      IsQuest: true
     Hit: Single
     CastTime: 3000
     AfterCastActDelay: 10000
@@ -13351,7 +13351,7 @@ Body:
     DamageFlags:
       NoDamage: true
     Flags:
-      IsSpirit: true
+      IsQuest: true
     Hit: Single
     CastTime: 3000
     AfterCastActDelay: 10000
@@ -13370,7 +13370,7 @@ Body:
     DamageFlags:
       NoDamage: true
     Flags:
-      IsSpirit: true
+      IsQuest: true
     Hit: Single
     CastTime: 3000
     AfterCastActDelay: 10000
@@ -30778,29 +30778,27 @@ Body:
     MaxLevel: 1
   - Id: 8001
     Name: HLIF_HEAL
-    Description: Healing Touch
+    Description: Healing Wind
     MaxLevel: 5
     Type: Magic
     TargetType: Self
     DamageFlags:
       NoDamage: true
+    CastTime: 2000
     AfterCastActDelay: 2000
     AfterCastWalkDelay: 1000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 13
+          Amount: 30
         - Level: 2
-          Amount: 16
+          Amount: 35
         - Level: 3
-          Amount: 19
+          Amount: 40
         - Level: 4
-          Amount: 22
+          Amount: 45
         - Level: 5
-          Amount: 25
-      ItemCost:
-        - Item: Red_Slim_Potion
-          Amount: 1
+          Amount: 50
   - Id: 8002
     Name: HLIF_AVOID
     Description: Avoid
@@ -30808,7 +30806,7 @@ Body:
     TargetType: Self
     DamageFlags:
       NoDamage: true
-    AfterCastActDelay: 35000
+    AfterCastActDelay: 3000
     AfterCastWalkDelay: 1000
     Duration1:
       - Level: 1

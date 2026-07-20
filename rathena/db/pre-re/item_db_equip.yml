@@ -102377,24 +102377,24 @@ Body:
       bonus bMatkRate,10;
       bonus bAtk, min(JobLevel, 50);
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Rogue) {
+      if (Class == Job_Rogue || Class == Job_Stalker) {
           bonus2 bSkillAtk, "RG_BACKSTAP", 15; 
           bonus2 bSkillAtk, "RG_RAID", 15; 
           bonus bAgi,2;
-          }
-      if (BaseClass == Job_Hunter) {
+      }
+      if (Class == Job_Hunter || Class == Job_Sniper) {
           bonus2 bSkillAtk, "HT_LANDMINE", 15; 
           bonus2 bSkillAtk, "HT_CLAYMORETRAP", 15; 
           bonus2 bSkillAtk, "HT_FREEZINGTRAP", 15; 
           bonus2 bSkillAtk, "HT_BLASTMINE", 15; 
           bonus bInt,2;
-          }
-      if (BaseClass == Job_Ninja) {
+      }
+      if (Class == Job_Ninja) {
           bonus2 bSkillAtk, "NJ_HYOUSENSOU", 15; 
           bonus2 bSkillAtk, "NJ_KOUENKA", 15; 
           bonus2 bSkillAtk, "NJ_HUUJIN", 15; 
           bonus bInt,2;
-          }
+      }
   - Id: 40013
     AegisName: T_Edge
     Name: Twilight Edge
@@ -102427,14 +102427,14 @@ Body:
       bonus bMatkRate,10;
       bonus bAtk, min(JobLevel, 50);
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Crusader) {
+      if (Class == Job_Crusader || Class == Job_Paladin) {
           bonus2 bSkillAtk, "CR_GRANDCROSS", 10; 
           bonus bInt,2;
-          }
-      if (BaseClass == Job_Assassin) {
+      }
+      if (Class == Job_Assassin || Class == Job_Assassin_Cross) {
           bonus2 bSkillAtk, "AS_SPLASHER", 15; 
           bonus bInt,2;
-          }
+      }
   - Id: 40014
     AegisName: T_LBow
     Name: Twilight Long Bow
@@ -102465,14 +102465,14 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Rogue) {
+      if (Class == Job_Rogue || Class == Job_Stalker) {
           bonus2 bSkillAtk, "AC_DOUBLE", 15; 
           bonus bDex,2;
-          }
-      if (BaseClass == Job_Hunter) {
+      }
+      if (Class == Job_Hunter || Class == Job_Sniper) {
           bonus2 bSkillAtk, "HT_POWER", 15; 
           bonus bAspdRate,5;
-          }
+      }
   - Id: 40015
     AegisName: T_Flail
     Name: Twilight Flail
@@ -102505,20 +102505,20 @@ Body:
     Script: |
       bonus bAtk, min(JobLevel, 50);
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Priest) {
+      if (Class == Job_Priest || Class == Job_High_Priest) {
           bonus2 bSkillAtk, "AL_HOLYSMITE", 25; 
           bonus bAspdRate,5;
-          }
-      if (BaseClass == Job_Monk) {
+      }
+      if (Class == Job_Monk || Class == Job_Champion) {
           bonus2 bSkillAtk, "MO_FINGEROFFENSIVE", 15; 
           bonus2 bSkillAtk, "MO_INVESTIGATE", 15; 
           bonus bStr,2;
-          }
-      if (BaseClass == Job_Alchemist) {
+      }
+      if (Class == Job_Alchemist || Class == Job_Creator) {
           bonus2 bSkillAtk, "AM_ACIDTERROR", 15; 
           bonus2 bSkillAtk, "AM_DEMONSTRATION", 15; 
           bonus bInt,2;
-          }
+      }
   - Id: 40016
     AegisName: T_Staff
     Name: Twilight Staff
@@ -102552,21 +102552,21 @@ Body:
     Script: |
       bonus bMatkRate,20;
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Wizard) {
+      if (Class == Job_Wizard || Class == Job_High_Wizard) {
           bonus2 bSkillAtk, "WZ_FIREPILLAR", 15; 
           bonus2 bSkillAtk, "WZ_WATERBALL", 15; 
           bonus2 bSkillAtk, "WZ_JUPITEL", 15; 
           bonus2 bSkillAtk, "WZ_HEAVENDRIVE", 15; 
           bonus bInt,2;
-          }
-      if (BaseClass == Job_Sage) {
+      }
+      if (Class == Job_Sage || Class == Job_Professor) {
           bonus2 bSkillAtk, "SO_PSYCHIC_WAVE", 15; 
           bonus bDex,2;
-          }
-      if (BaseClass == Job_Priest) {
+      }
+      if (Class == Job_Priest || Class == Job_High_Priest) {
           bonus bHealPower,15;
           bonus bInt,2;
-          }
+      }
   - Id: 40017
     AegisName: T_Cleaver
     Name: Twilight Cleaver
@@ -102596,21 +102596,21 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Blacksmith) {
+      if (Class == Job_Blacksmith || Class == Job_Whitesmith) {
           bonus2 bSkillAtk, "MC_MAMMONITE", 15; 
           bonus2 bSkillAtk, "BS_HAMMERFALL", 15; 
           bonus2 bSkillAtk, "BS_DECIMATION", 15; 
           bonus bVit,2;
-          }
-      if (BaseClass == Job_Alchemist) {
+      }
+      if (Class == Job_Alchemist || Class == Job_Creator) {
           bonus bMaxHP,500;
           bonus bMaxSP,50;
           bonus bFlee,10;
           bonus bHit,10;
           bonus bCritical,10;
           bonus bAspdRate,5;
-          skill "BS_ADRENALINE2",1;
-          }
+          skill "BS_ADRENALINE",5;
+      }
   - Id: 40018
     AegisName: T_Slayer
     Name: Twilight Slayer
@@ -102639,12 +102639,12 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Knight) {
+      if (Class == Job_Knight || Class == Job_Lord_Knight) {
           bonus2 bSkillAtk, "KN_BOWLINGBASH", 15; 
           bonus bAgi,2;
           bonus bCritical,5;
           bonus bCritAtkRate,10;
-          }
+      }
   - Id: 40019
     AegisName: T_Lance
     Name: Twilight Lance
@@ -102674,15 +102674,15 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Knight) {
+      if (Class == Job_Knight || Class == Job_Lord_Knight) {
           bonus2 bSkillAtk, "KN_BRANDISHSPEAR", 15; 
           bonus2 bSkillAtk, "KN_SPEARSTAB", 15; 
           bonus bStr,2;
-          }
-      if (BaseClass == Job_Crusader) {
+      }
+      if (Class == Job_Crusader || Class == Job_Paladin) {
           bonus2 bSkillAtk, "CR_HOLYCROSS", 25; 
           bonus bAgi,2;
-          }
+      }
   - Id: 40020
     AegisName: T_Pike
     Name: Twilight Pike
@@ -102712,16 +102712,16 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Knight) {
+      if (Class == Job_Knight || Class == Job_Lord_Knight) {
           bonus2 bSkillAtk, "KN_SPEARBOOMERANG", 15; 
           bonus2 bSkillAtk, "KN_PIERCE", 15; 
           bonus bVit,2;
-          }
-      if (BaseClass == Job_Crusader) {
+      }
+      if (Class == Job_Crusader || Class == Job_Paladin) {
           bonus2 bSkillAtk, "CR_SHIELDBOOMERANG", 15; 
           bonus2 bSkillAtk, "CR_SHIELDCHARGE", 15; 
           bonus bStr,2;
-          }
+      }
   - Id: 40021
     AegisName: T_Jamadhar
     Name: Twilight Jamadhar
@@ -102749,11 +102749,11 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Assassin) {
+      if (Class == Job_Assassin || Class == Job_Assassin_Cross) {
           bonus2 bSkillAtk, "AS_SONICBLOW", 15; 
           bonus2 bSkillAtk, "AS_GRIMTOOTH", 15; 
           bonus bAgi,2;
-          }
+      }
   - Id: 40022
     AegisName: T_Codex
     Name: Twilight Codex
@@ -102785,7 +102785,7 @@ Body:
       bonus bMatkRate,15;
       bonus bAtk, min(JobLevel, 50);
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Sage) {
+      if (Class == Job_Sage || Class == Job_Professor) {
           bonus2 bSkillAtk, "MG_FIREBOLT",10; 
           bonus2 bSkillAtk, "MG_FIREBALL",10; 
           bonus2 bSkillAtk, "MG_COLDBOLT",10;
@@ -102796,11 +102796,11 @@ Body:
           bonus2 bSkillAtk, "MG_SOULSTRIKE",10;
           bonus2 bSkillAtk, "MG_FIREWALL",10;
           bonus bAgi,2;
-          }
-      if (BaseClass == Job_Priest) {
+      }
+      if (Class == Job_Priest || Class == Job_High_Priest) {
           bonus2 bSkillAtk, "PR_MAGNUS",15; 
           bonus bDex,2;
-          }
+      }
   - Id: 40023
     AegisName: T_Claws
     Name: Twilight Claws
@@ -102828,12 +102828,12 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Monk) {
+      if (Class == Job_Monk || Class == Job_Champion) {
           bonus2 bSkillAtk,"MO_TRIPLEATTACK",15;
           bonus2 bSkillAtk,"MO_CHAINCOMBO",15;
           bonus2 bSkillAtk,"MO_COMBOFINISH",15;
           bonus bAgi,2;
-          }
+      }
   - Id: 40024
     AegisName: T_Violin
     Name: Twilight Violin
@@ -102863,14 +102863,14 @@ Body:
     Script: |
       bonus bAtk, min(JobLevel, 50);
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Bard) {
+      if (Class == Job_Bard || Class == Job_Clown) {
           bonus2 bSkillAtk,"BA_DISSONANCE",15;
           bonus2 bSkillAtk,"BA_MUSICALSTRIKE",15;
           bonus bInt,2;
-          }
+      }
   - Id: 40025
     AegisName: T_Whip
-    Name: Twilight Violin
+    Name: Twilight Whip
     Type: Weapon
     SubType: Whip
     Buy: 20
@@ -102897,11 +102897,11 @@ Body:
     Script: |
       bonus bAtk, min(JobLevel, 50);
       bonus bMatk, min(JobLevel, 50);
-      if (BaseClass == Job_Bard) {
+      if (Class == Job_Dancer || Class == Job_Gypsy) {
           bonus2 bSkillAtk,"DC_UGLYDANCE",15;
           bonus2 bSkillAtk,"DC_THROWARROW",15;
           bonus bInt,2;
-          }
+      }
   - Id: 40026
     AegisName: T_Bracers
     Name: Twilight Bracers
@@ -102958,72 +102958,11 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Ninja) {
+      if (Class == Job_Ninja) {
           bonus2 bSkillAtk,"NJ_HUUMA",15;
           bonus2 bSkillAtk,"NJ_KASUMIKIRI",15;
           bonus bDex,2;
-          }
-  - Id: 40026
-    AegisName: T_Bracers
-    Name: Twilight Bracers
-    Type: Weapon
-    SubType: Bandage
-    Buy: 20
-    Weight: 300
-    Attack: 70
-    Range: 1
-    Slots: 2
-    Locations:
-      Right_Hand: true
-    WeaponLevel: 3
-    EquipLevelMin: 60
-    Refineable: true
-    Jobs:
-      Taekwon: true
-      StarGladiator: true
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
-    Script: |
-      bonus bAtk, min(JobLevel, 50);
-  - Id: 40027
-    AegisName: T_Huuma
-    Name: Twilight Huuma Shuriken
-    Type: Weapon
-    SubType: Huuma
-    Buy: 20
-    Weight: 1600
-    Attack: 90
-    Range: 1
-    Slots: 2
-    Locations:
-      Both_Hand: true
-    WeaponLevel: 3
-    EquipLevelMin: 60
-    Refineable: true
-    Jobs:
-      Genin: true
-      Ninja: true
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
-    Script: |
-      bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Ninja) {
-          bonus2 bSkillAtk,"NJ_HUUMA",15;
-          bonus2 bSkillAtk,"NJ_KASUMIKIRI",15;
-          bonus bDex,2;
-          }
+      }
   - Id: 40028
     AegisName: T_Gatling
     Name: Twilight Gatling Gun
@@ -103052,12 +102991,12 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Gunslinger) {
+      if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_RAPIDSHOWER",15;
           bonus bAgi,2;
           bonus bCritical,10;
           bonus bAspdRate,5;
-          }
+      }
   - Id: 40029
     AegisName: T_Shotgun
     Name: Twilight Shotgun
@@ -103086,11 +103025,11 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Gunslinger) {
+      if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_FULLBUSTER",15;
           bonus2 bSkillAtk,"GS_SPREADATTACK",15;
           bonus bVit,2;
-          }
+      }
   - Id: 40030
     AegisName: T_Launcher
     Name: Twilight Grenade Launcher
@@ -103119,10 +103058,10 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Gunslinger) {
+      if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_GROUNDDRIFT",15;
           bonus bDex,2;
-          }
+      }
   - Id: 40031
     AegisName: T_Rifle
     Name: Twilight Rifle
@@ -103151,7 +103090,7 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Gunslinger) {
+      if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_TRACKING",15;
           bonus bDex,2;
           }
@@ -103183,7 +103122,7 @@ Body:
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
-      if (BaseClass == Job_Gunslinger) {
+      if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_RAPIDSHOWER",15;
           bonus2 bSkillAtk,"GS_DESPERADO",15;
           bonus bAgi,2;
@@ -103296,3 +103235,87 @@ Body:
       Thief: true
       Assassin: true
       Rogue: true
+  - Id: 60994
+    AegisName: f_chem
+    Name: Fire Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true
+  - Id: 60995
+    AegisName: w_chem
+    Name: Water Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true
+  - Id: 60996
+    AegisName: l_chem
+    Name: Lightning Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true
+  - Id: 60997
+    AegisName: e_chem
+    Name: Earth Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true
+  - Id: 60998
+    AegisName: p_chem
+    Name: Poison Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true
+  - Id: 60999
+    AegisName: h_chem
+    Name: Holy Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true
+  - Id: 61000
+    AegisName: s_chem
+    Name: Shadow Chemical Powder
+    Type: Shadowgear
+    Locations:
+      Shadow_Shoes: true
+    EquipLevelMin: 60
+    Refineable: false
+    Jobs:
+      Alchemist: true
+      Creator: true
+      Genetic: true

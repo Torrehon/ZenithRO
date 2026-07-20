@@ -63,9 +63,9 @@ Body:
     Status:
       - Type: Hp
         Base: 150
-        GrowthMinimum: 60
-        GrowthMaximum: 100
-        EvolutionMinimum: 1
+        GrowthMinimum: 60    # Vuelve a su mínimo original
+        GrowthMaximum: 75    # (-25%) Techo bajado
+        EvolutionMinimum: 3
         EvolutionMaximum: 10
       - Type: Sp
         Base: 40
@@ -75,38 +75,38 @@ Body:
         EvolutionMaximum: 20
       - Type: Str
         Base: 17
-        GrowthMinimum: 5
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 8     # Antes 5 (Algo mejor que el original, pero con RNG)
+        GrowthMaximum: 14    # (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Agi
         Base: 20
-        GrowthMinimum: 5
-        GrowthMaximum: 19
+        GrowthMinimum: 8     # Antes 5
+        GrowthMaximum: 14    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Vit
         Base: 15
-        GrowthMinimum: 5
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 10     # Antes 5
+        GrowthMaximum: 14    # (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Int
         Base: 35
-        GrowthMinimum: 4
-        GrowthMaximum: 20
+        GrowthMinimum: 11     # Antes 4
+        GrowthMaximum: 15    # (-25%)
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Dex
         Base: 24
-        GrowthMinimum: 6
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 9     # Antes 6
+        GrowthMaximum: 15    # (-25%)
+        EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Luk
         Base: 12
-        GrowthMinimum: 6
-        GrowthMaximum: 20
+        GrowthMinimum: 9     # Antes 6
+        GrowthMaximum: 15    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 3
     SkillTree:
@@ -134,8 +134,8 @@ Body:
     Status:
       - Type: Hp
         Base: 320
-        GrowthMinimum: 80
-        GrowthMaximum: 130
+        GrowthMinimum: 80    # Vuelve a su mínimo original
+        GrowthMaximum: 98    # (-25%) Techo bajado
         EvolutionMinimum: 10
         EvolutionMaximum: 20
       - Type: Sp
@@ -146,38 +146,38 @@ Body:
         EvolutionMaximum: 10
       - Type: Str
         Base: 20
-        GrowthMinimum: 8
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 11    # Antes 8 (Asegura un pelín más de fuerza)
+        GrowthMaximum: 15    # (-25%)
+        EvolutionMinimum: 3
         EvolutionMaximum: 10
       - Type: Agi
         Base: 17
-        GrowthMinimum: 4
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 9     # Antes 4 (Protege de quedarse sin evasión/ASPD)
+        GrowthMaximum: 14    # (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Vit
         Base: 35
-        GrowthMinimum: 4
-        GrowthMaximum: 20
+        GrowthMinimum: 11     # Antes 4 (Protege la salud del tanque)
+        GrowthMaximum: 15    # (-25%)
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Int
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 10
+        GrowthMinimum: 4     # Antes 1
+        GrowthMaximum: 8     # Aproximación del -25%
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Dex
         Base: 24
-        GrowthMinimum: 3
-        GrowthMaximum: 19
+        GrowthMinimum: 8     # Antes 3 (Para que no falle tantos golpes)
+        GrowthMaximum: 14    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Luk
         Base: 12
-        GrowthMinimum: 3
-        GrowthMaximum: 19
+        GrowthMinimum: 8     # Antes 3
+        GrowthMaximum: 14    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 5
     SkillTree:
@@ -205,51 +205,51 @@ Body:
     Status:
       - Type: Hp
         Base: 90
-        GrowthMinimum: 45
-        GrowthMaximum: 75
+        GrowthMinimum: 45    # Mantenemos su mínimo original (sigue siendo frágil)
+        GrowthMaximum: 56    # Antes 75 (-25%)
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Sp
         Base: 25
-        GrowthMinimum: 3
-        GrowthMaximum: 6
+        GrowthMinimum: 3     # INTACTO
+        GrowthMaximum: 6     # INTACTO
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Str
         Base: 29
-        GrowthMinimum: 4
-        GrowthMaximum: 20
+        GrowthMinimum: 9     # Antes 4 (Asegura que pegue decente si hay mala suerte)
+        GrowthMaximum: 15    # Antes 20 (-25%)
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Agi
         Base: 35
-        GrowthMinimum: 8
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 10    # Antes 8 (Su stat principal, blindado un poco más)
+        GrowthMaximum: 15    # Antes 20 (-25%)
+        EvolutionMinimum: 4  # Antes 1
         EvolutionMaximum: 10
       - Type: Vit
         Base: 9
-        GrowthMinimum: 1
-        GrowthMaximum: 10
+        GrowthMinimum: 4     # Antes 1 (Un 1 en VIT por nivel era un chiste de mal gusto)
+        GrowthMaximum: 8     # Antes 10 (Aproximación del -25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Int
         Base: 8
-        GrowthMinimum: 3
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 8     # Antes 3
+        GrowthMaximum: 14    # Antes 19 (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 4
       - Type: Dex
         Base: 30
-        GrowthMinimum: 4
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 9     # Antes 4 (Protegemos su precisión)
+        GrowthMaximum: 15    # Antes 20 (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Luk
         Base: 9
-        GrowthMinimum: 3
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 8     # Antes 3
+        GrowthMaximum: 14    # Antes 19 (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
     SkillTree:
       - Skill: HFLI_MOON
@@ -276,52 +276,52 @@ Body:
     Status:
       - Type: Hp
         Base: 80
-        GrowthMinimum: 30
-        GrowthMaximum: 150
-        EvolutionMinimum: 1
-        EvolutionMaximum: 30
+        GrowthMinimum: 90    # Antes 30 (Asegura que no sea de papel)
+        GrowthMaximum: 112   # Antes 150 (-25%)
+        EvolutionMinimum: 10 # Antes 1
+        EvolutionMaximum: 22 # Aproximación del -25%
       - Type: Sp
         Base: 11
-        GrowthMinimum: 0
-        GrowthMaximum: 7
+        GrowthMinimum: 0     # INTACTO
+        GrowthMaximum: 7     # INTACTO
         EvolutionMinimum: 1
         EvolutionMaximum: 30
       - Type: Str
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    # Antes 1
+        GrowthMaximum: 23    # Antes 30 (-25%)
+        EvolutionMinimum: 4  # Antes 1
+        EvolutionMaximum: 8  # (-25%)
       - Type: Agi
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Vit
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Int
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Dex
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Luk
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8
     SkillTree:
       - Skill: HVAN_CAPRICE
         MaxLevel: 5
@@ -345,9 +345,9 @@ Body:
     Status:
       - Type: Hp
         Base: 150
-        GrowthMinimum: 60
-        GrowthMaximum: 100
-        EvolutionMinimum: 1
+        GrowthMinimum: 60    # Vuelve a su mínimo original
+        GrowthMaximum: 75    # (-25%) Techo bajado
+        EvolutionMinimum: 3
         EvolutionMaximum: 10
       - Type: Sp
         Base: 40
@@ -357,38 +357,38 @@ Body:
         EvolutionMaximum: 20
       - Type: Str
         Base: 17
-        GrowthMinimum: 5
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 8     # Antes 5 (Algo mejor que el original, pero con RNG)
+        GrowthMaximum: 14    # (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Agi
         Base: 20
-        GrowthMinimum: 5
-        GrowthMaximum: 19
+        GrowthMinimum: 8     # Antes 5
+        GrowthMaximum: 14    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Vit
         Base: 15
-        GrowthMinimum: 5
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 10     # Antes 5
+        GrowthMaximum: 14    # (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Int
         Base: 35
-        GrowthMinimum: 4
-        GrowthMaximum: 20
+        GrowthMinimum: 11     # Antes 4
+        GrowthMaximum: 15    # (-25%)
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Dex
         Base: 24
-        GrowthMinimum: 6
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 9     # Antes 6
+        GrowthMaximum: 15    # (-25%)
+        EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Luk
         Base: 12
-        GrowthMinimum: 6
-        GrowthMaximum: 20
+        GrowthMinimum: 9     # Antes 6
+        GrowthMaximum: 15    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 3
     SkillTree:
@@ -416,8 +416,8 @@ Body:
     Status:
       - Type: Hp
         Base: 320
-        GrowthMinimum: 80
-        GrowthMaximum: 130
+        GrowthMinimum: 80    # Vuelve a su mínimo original
+        GrowthMaximum: 98    # (-25%) Techo bajado
         EvolutionMinimum: 10
         EvolutionMaximum: 20
       - Type: Sp
@@ -428,38 +428,38 @@ Body:
         EvolutionMaximum: 10
       - Type: Str
         Base: 20
-        GrowthMinimum: 8
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 11    # Antes 8 (Asegura un pelín más de fuerza)
+        GrowthMaximum: 15    # (-25%)
+        EvolutionMinimum: 3
         EvolutionMaximum: 10
       - Type: Agi
         Base: 17
-        GrowthMinimum: 4
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 9     # Antes 4 (Protege de quedarse sin evasión/ASPD)
+        GrowthMaximum: 14    # (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Vit
         Base: 35
-        GrowthMinimum: 4
-        GrowthMaximum: 20
+        GrowthMinimum: 11     # Antes 4 (Protege la salud del tanque)
+        GrowthMaximum: 15    # (-25%)
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Int
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 10
+        GrowthMinimum: 4     # Antes 1
+        GrowthMaximum: 8     # Aproximación del -25%
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Dex
         Base: 24
-        GrowthMinimum: 3
-        GrowthMaximum: 19
+        GrowthMinimum: 8     # Antes 3 (Para que no falle tantos golpes)
+        GrowthMaximum: 14    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Luk
         Base: 12
-        GrowthMinimum: 3
-        GrowthMaximum: 19
+        GrowthMinimum: 8     # Antes 3
+        GrowthMaximum: 14    # (-25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 5
     SkillTree:
@@ -487,51 +487,51 @@ Body:
     Status:
       - Type: Hp
         Base: 90
-        GrowthMinimum: 45
-        GrowthMaximum: 75
+        GrowthMinimum: 45    # Mantenemos su mínimo original (sigue siendo frágil)
+        GrowthMaximum: 56    # Antes 75 (-25%)
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Sp
         Base: 25
-        GrowthMinimum: 3
-        GrowthMaximum: 6
+        GrowthMinimum: 3     # INTACTO
+        GrowthMaximum: 6     # INTACTO
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Str
         Base: 29
-        GrowthMinimum: 4
-        GrowthMaximum: 20
+        GrowthMinimum: 9     # Antes 4 (Asegura que pegue decente si hay mala suerte)
+        GrowthMaximum: 15    # Antes 20 (-25%)
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Agi
         Base: 35
-        GrowthMinimum: 8
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 10    # Antes 8 (Su stat principal, blindado un poco más)
+        GrowthMaximum: 15    # Antes 20 (-25%)
+        EvolutionMinimum: 4  # Antes 1
         EvolutionMaximum: 10
       - Type: Vit
         Base: 9
-        GrowthMinimum: 1
-        GrowthMaximum: 10
+        GrowthMinimum: 4     # Antes 1 (Un 1 en VIT por nivel era un chiste de mal gusto)
+        GrowthMaximum: 8     # Antes 10 (Aproximación del -25%)
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Int
         Base: 8
-        GrowthMinimum: 3
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 8     # Antes 3
+        GrowthMaximum: 14    # Antes 19 (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 4
       - Type: Dex
         Base: 30
-        GrowthMinimum: 4
-        GrowthMaximum: 20
-        EvolutionMinimum: 1
+        GrowthMinimum: 9     # Antes 4 (Protegemos su precisión)
+        GrowthMaximum: 15    # Antes 20 (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
       - Type: Luk
         Base: 9
-        GrowthMinimum: 3
-        GrowthMaximum: 19
-        EvolutionMinimum: 1
+        GrowthMinimum: 8     # Antes 3
+        GrowthMaximum: 14    # Antes 19 (-25%)
+        EvolutionMinimum: 2
         EvolutionMaximum: 5
     SkillTree:
       - Skill: HFLI_MOON
@@ -558,52 +558,52 @@ Body:
     Status:
       - Type: Hp
         Base: 80
-        GrowthMinimum: 30
-        GrowthMaximum: 150
-        EvolutionMinimum: 1
-        EvolutionMaximum: 30
+        GrowthMinimum: 90    # Antes 30 (Asegura que no sea de papel)
+        GrowthMaximum: 112   # Antes 150 (-25%)
+        EvolutionMinimum: 10 # Antes 1
+        EvolutionMaximum: 22 # Aproximación del -25%
       - Type: Sp
         Base: 11
-        GrowthMinimum: 0
-        GrowthMaximum: 7
+        GrowthMinimum: 0     # INTACTO
+        GrowthMaximum: 7     # INTACTO
         EvolutionMinimum: 1
         EvolutionMaximum: 30
       - Type: Str
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    # Antes 1
+        GrowthMaximum: 23    # Antes 30 (-25%)
+        EvolutionMinimum: 4  # Antes 1
+        EvolutionMaximum: 8  # (-25%)
       - Type: Agi
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Vit
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Int
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Dex
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8  
       - Type: Luk
         Base: 11
-        GrowthMinimum: 1
-        GrowthMaximum: 30
-        EvolutionMinimum: 1
-        EvolutionMaximum: 10
+        GrowthMinimum: 16    
+        GrowthMaximum: 23    
+        EvolutionMinimum: 4  
+        EvolutionMaximum: 8
     SkillTree:
       - Skill: HVAN_CAPRICE
         MaxLevel: 5

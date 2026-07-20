@@ -1911,7 +1911,6 @@ SKILL_INFO_LIST = {
 		"AM_BIOETHICS",
 		SkillName = "Bioethics",
 		MaxLv = 1,
-		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.AM_BIOTECHNOLOGY] = {
@@ -1984,6 +1983,18 @@ SKILL_INFO_LIST = {
 		_NeedSkillList = {
 			{ SKID.AM_CALLHOMUN,1 }
 		}
+	},
+	[SKID.AM_APOTHECARY] = {
+		"AM_APOTHECARY",
+		SkillName = "Soul of the Apothecary",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.AM_BIOMANCER] = {
+		"AM_BIOMANCER",
+		SkillName = "Soul of the Biomancer",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.CR_TRUST] = {
 		"CR_TRUST",
@@ -3637,6 +3648,7 @@ SKILL_INFO_LIST = {
 		"TK_SHATTER",
 		SkillName = "Shattering Kicks",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.TK_SKICK] = {
@@ -3825,10 +3837,10 @@ SKILL_INFO_LIST = {
 		"AM_BERSERKPITCHER",
 		SkillName = "Berserk Pitcher",
 		MaxLv = 1,
+		Type = "Quest",
 		SpAmount = { 10 },
 		bSeperateLv = false,
 		AttackRange = { 9 },
-		Type = "Soul",
 	},
 	[SKID.SL_MONK] = {
 		"SL_MONK",
@@ -4351,7 +4363,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 200 },
 		bSeperateLv = false,
 		AttackRange = { 1 },
-		Type = "Soul",
+		Type = "Quest",
 		_NeedSkillList = {
 			{ SKID.AM_PHARMACY,10 }
 		}
@@ -4363,7 +4375,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 200 },
 		bSeperateLv = false,
 		AttackRange = { 1 },
-		Type = "Soul",
+		Type = "Quest",
 		_NeedSkillList = {
 			{ SKID.AM_PHARMACY,10 }
 		}
@@ -4375,7 +4387,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 200 },
 		bSeperateLv = false,
 		AttackRange = { 1 },
-		Type = "Soul",
+		Type = "Quest",
 		_NeedSkillList = {
 			{ SKID.AM_PHARMACY,10 }
 		}

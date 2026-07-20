@@ -32244,15 +32244,15 @@ Body:
     Name: Rafflesia
     Level: 17
     Hp: 1333
-    Attack: 105
-    Attack2: 127
+    Attack: 165
+    Attack2: 227
     MagicDefense: 2
-    Agi: 18
+    Agi: 45
     Vit: 24
     Int: 11
-    Dex: 37
+    Dex: 60
     Luk: 10
-    AttackRange: 3
+    AttackRange: 2
     SkillRange: 10
     ChaseRange: 12
     Size: Small
@@ -58008,8 +58008,8 @@ Body:
     Name: Dummy
     Level: 99
     Hp: 2000000
-    Defense: 0
-    MagicDefense: 0
+    Defense: 40
+    MagicDefense: 80
     Str: 0
     Agi: 0
     Vit: 0

@@ -6217,7 +6217,7 @@ enum e_additem_result pc_additem(map_session_data *sd,struct item *item,int32 am
 	for (int j = 0; j < MAX_SLOTS; j++) {
 		// Revisamos las cartas que trae el objeto que estamos recibiendo
 		if (item->card[j] > 0) {
-			auto card_it = itemdb_search(item->card[j]);
+			std::shared_ptr<item_data> card_it = item_db.find(item->card[j]);
 			if (card_it != nullptr) {
 				real_w += card_it->weight;
 			}
@@ -6332,7 +6332,7 @@ char pc_delitem(map_session_data *sd,int32 n,int32 amount,int32 type, int16 reas
 	uint32 real_w = sd->inventory_data[n]->weight;
 	for (int j = 0; j < MAX_SLOTS; j++) {
 		if (sd->inventory.u.items_inventory[n].card[j] > 0) {
-			auto card_it = itemdb_search(sd->inventory.u.items_inventory[n].card[j]);
+			std::shared_ptr<item_data> card_it = item_db.find(sd->inventory.u.items_inventory[n].card[j]);
 			if (card_it != nullptr) {
 				real_w += card_it->weight;
 			}

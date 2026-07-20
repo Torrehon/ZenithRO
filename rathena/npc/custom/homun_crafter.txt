@@ -1,26 +1,19 @@
 function	script	F_Craft_Embryo	{
-	// IDs de los materiales requeridos
-	set .@dew, 7141;
-	set .@seed, 7140;
-	set .@tube, 7143;
-	set .@bowl, 7134;
-
-	if (countitem(.@dew) < 1 || countitem(.@seed) < 1 || countitem(.@tube) < 1 || countitem(.@bowl) < 1) {
-		mes "[Creation Guide]";
+	if (countitem(7141) < 1 || countitem(7140) < 1 || countitem(7143) < 1 || countitem(7134) < 1) {
+		mes "^FF0000[Creation Guide]^000000";
 		mes "Carefully reading the manual, you realize you lack the necessary materials to create an Embryo.";
 		mes " ";
 		mes "Required:";
-		mes "1x Morning Dew of Yggdrasil";
-		mes "1x Seed of Life";
-		mes "1x Glass Tube";
-		mes "1x Medicine Bowl";
+		mes "^0000FF- 1x Morning Dew of Yggdrasil^000000";
+		mes "^0000FF- 1x Seed of Life^000000";
+		mes "^0000FF- 1x Glass Tube^000000";
+		mes "^0000FF- 1x Medicine Bowl^000000";
 		close;
 	}
 
-	mes "[Creation Guide]";
+	mes "^FF0000[Creation Guide]^000000";
 	mes "You prepare the medicine bowl and the glass tube.";
 	mes "Which specific Embryo do you wish to synthesize?";
-	next;
 	
 	switch(select("Lif Embryo (Support):Amistr Embryo (Tank):Filir Embryo (Damage):Vanilmirth Embryo (Magic)")) {
 		case 1: set .@embryo_id, 50018; break; // Lif
@@ -30,20 +23,22 @@ function	script	F_Craft_Embryo	{
 	}
 
 	// Consumir los materiales
-	delitem .@dew, 1;
-	delitem .@seed, 1;
-	delitem .@tube, 1;
-	delitem .@bowl, 1;
+	delitem 7141, 1;
+	delitem 7140, 1;
+	delitem 7143, 1;
+	delitem 7134, 1;
 
 	// Entregar el Embryo específico
 	getitem .@embryo_id, 1;
 	
-	// Efecto visual y de sonido para darle inmersión
-	specialeffect2 EF_POTION_CREATE;
-	soundeffect "cooking.wav", 0;
-	
-	mes "[Creation Guide]";
+	mes " ";
 	mes "Synthesis successful!";
 	mes "You have obtained a new Embryo.";
 	close;
+}
+
+-	script	HomunCrafterNPC	-1,{
+OnUse:
+	callfunc "F_Craft_Embryo";
+	end;
 }

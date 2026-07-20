@@ -2034,7 +2034,12 @@
 	export_constant(SC_OVERCAST);
 	export_constant(SC_UNNERVED);
 	export_constant(SC_RELENTLESS);
-	
+	export_constant(SC_CHEMBURN);
+	export_constant(SC_RPOT);
+	export_constant(SC_OPOT);
+	export_constant(SC_YPOT);
+	export_constant(SC_BPOT);
+	export_constant(SC_WPOT);
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
 	export_constant(EFST_BLANK);
@@ -3531,6 +3536,12 @@
 	export_constant(EFST_OVERCAST);
 	export_constant(EFST_UNNERVED);
 	export_constant(EFST_RELENTLESS);
+	export_constant(EFST_CHEMBURN);
+	export_constant(EFST_RPOT);
+	export_constant(EFST_OPOT);
+	export_constant(EFST_YPOT);
+	export_constant(EFST_BPOT);
+	export_constant(EFST_WPOT);
 	export_constant(EFST_MAX);
 	
 

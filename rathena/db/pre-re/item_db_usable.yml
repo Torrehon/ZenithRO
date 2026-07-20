@@ -2144,9 +2144,10 @@ Body:
     Buy: 25000
     Weight: 10
     Flags:
+      NoConsume: true
       BuyingStore: true
     Script: |
-      callfunc "F_Craft_Embryo";
+      doevent "HomunCrafterNPC::OnUse";
   - Id: 11500
     AegisName: Light_Yellow_Pot
     Name: Light Yellow Potion

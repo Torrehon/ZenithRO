@@ -4356,6 +4356,25 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 	if (!battle_config.mob_skill_rate || md->ud.skilltimer != INVALID_TIMER || ms.empty() || status_has_mode(&md->status,MD_NOCAST))
 		return 0;
 
+	// --- INICIO CUSTOM: Candado de Skills (Biomancer) ---
+	if (md->master_id && (
+		md->mob_id == MOBID_G_MANDRAGORA ||
+		md->mob_id == MOBID_G_RAFFLESIA ||
+		md->mob_id == MOBID_G_PARASITE ||
+		md->mob_id == MOBID_G_GEOGRAPHER ||
+		md->mob_id == MOBID_G_WOODEN_GOLEM
+		)) {
+		block_list* mbl = map_id2bl(md->master_id);
+		if (mbl && mbl->type == BL_PC) {
+			map_session_data* sd = BL_CAST(BL_PC, mbl);
+			// Si el amo NO tiene la pasiva aprendida, abortamos las skills
+			if (pc_checkskill(sd, AM_BIOMANCER) <= 0) {
+				return false;
+			}
+		}
+	}
+	// --- FIN CUSTOM ---
+
 	// Monsters check their non-attack-state skills once per second, but we ignore this for events for now
 	if (event == -1)
 		md->last_skillcheck = tick;

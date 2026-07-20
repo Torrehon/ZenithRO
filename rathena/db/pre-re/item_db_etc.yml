@@ -21508,24 +21508,32 @@ Body:
     Type: Etc
     Buy: 10
     Weight: 10
+    Flags:
+      UniqueId: true
   - Id: 50017
     AegisName: Filir_Embryo
     Name: Filir Embryo
     Type: Etc
     Buy: 10
     Weight: 10
+    Flags:
+      UniqueId: true
   - Id: 50018
     AegisName: Lif_Embryo
     Name: Lif Embryo
     Type: Etc
     Buy: 10
     Weight: 10
+    Flags:
+      UniqueId: true
   - Id: 50019
     AegisName: Amistr_Embryo
     Name: Amistr Embryo
     Type: Etc
     Buy: 10
     Weight: 10
+    Flags:
+      UniqueId: true
 
 # This file is a part of rAthena.
 #   Copyright(C) 2021 rAthena Development Team

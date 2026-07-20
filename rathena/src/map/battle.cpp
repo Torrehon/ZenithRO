@@ -6191,6 +6191,34 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 
 	//Initialize variables that will be used afterwards
 	s_ele = battle_get_magic_element(ad, *src, *target, skill_id, skill_lv);
+	
+	// --- INICIO CUSTOM: Apothecary Elemental Override (Magic) ---
+	if (skill_id == AM_DEMONSTRATION || skill_id == AM_ACIDTERROR) {
+		// Comprobamos que el atacante es un jugador (incluso si el daño viene de una Unit)
+		if (src && src->type == BL_PC) {
+			map_session_data *sd_caster = BL_CAST(BL_PC, src);
+			
+			if (pc_checkskill(sd_caster, AM_APOTHECARY) > 0) {
+				if (sd_caster->equip_index[EQI_SHADOW_SHOES] >= 0) {
+					int index = sd_caster->equip_index[EQI_SHADOW_SHOES];
+					
+					// Restauramos tu método original, que es el correcto en el C++ actual
+					if (sd_caster->inventory_data[index] != nullptr) {
+						uint32 nameid = sd_caster->inventory_data[index]->nameid;
+
+						if (nameid == 60994) s_ele = ELE_FIRE;
+						else if (nameid == 60995) s_ele = ELE_WATER;
+						else if (nameid == 60996) s_ele = ELE_WIND;
+						else if (nameid == 60997) s_ele = ELE_EARTH;
+						else if (nameid == 60998) s_ele = ELE_POISON;
+						else if (nameid == 60999) s_ele = ELE_HOLY;
+						else if (nameid == 61000) s_ele = ELE_DARK;
+					}
+				}
+			}
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	//Set miscellaneous data that needs be filled
 	if(sd) {
@@ -7894,6 +7922,17 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 	if (sd && sd->bonus.splash_range > 0 && damage > 0)
 		skill_castend_damage_id(src, target, 0, 1, tick, 0);
 
+	// --- INICIO CUSTOM: Splash 3x3 para Amistr Evolucionado ---
+	if (src->type == BL_HOM && damage > 0) {
+		homun_data* hd = (homun_data*)src;
+		// 6011 (Amistr Oveja Evo) y 6012 (Amistr Hipo Evo)
+		if (hd->homunculus.class_ == 6011 || hd->homunculus.class_ == 6012) {
+			// Lanzamos el Ataque Splash invisible (Skill 0), Rango 1 (3x3)
+			skill_castend_damage_id(src, target, 0, 1, tick, 0);
+		}
+	}
+	// --- FIN CUSTOM ---
+
 	bool is_norm_attacked = false;
 
 	if ( target->type == BL_SKILL && damage > 0 ) {
@@ -7941,9 +7980,10 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 			struct status_change_entry *sce = tsc->getSCE(SC_DEVOTION);
 			block_list *d_bl = map_id2bl(sce->val1);
 
-			if( d_bl && (
+			if( d_bl && !status_isdead(*d_bl) && (
 				(d_bl->type == BL_MER && ((TBL_MER*)d_bl)->master && ((TBL_MER*)d_bl)->master->id == target->id) ||
-				(d_bl->type == BL_PC && ((TBL_PC*)d_bl)->devotion[sce->val2] == target->id)
+				(d_bl->type == BL_PC && ((TBL_PC*)d_bl)->devotion[sce->val2] == target->id) ||
+				(d_bl->type == BL_MOB && ((mob_data*)d_bl)->master_id == target->id)
 				) && check_distance_bl(target, d_bl, sce->val3) )
 			{
 				// Only trigger if the devoted player was hit
@@ -8676,7 +8716,9 @@ int32 battle_check_target( const block_list* src, const block_list* target, int3
 	if( t_bl == s_bl )
 	{ //No need for further testing.
 		state |= BCT_SELF|BCT_PARTY|BCT_GUILD;
-		if( state&BCT_ENEMY && strip_enemy )
+		if (src->type != BL_PC)
+			state &= ~BCT_ENEMY; // Summons/homunculi/mercenaries never attack friendly entities of the same master
+		else if( state&BCT_ENEMY && strip_enemy )
 			state&=~BCT_ENEMY;
 		return (flag&state)?1:-1;
 	}

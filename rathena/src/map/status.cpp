@@ -2965,13 +2965,57 @@ int32 status_calc_mob_(mob_data* md, uint8 opt)
 						// Aumenta un 50% extra en el nivel máximo
 						status->max_hp += status->max_hp / 2; 
 					}
+					
+					// --- INICIO CUSTOM: Biomancer HP Inheritance (Sphere Mine) ---
+					if (mbl && mbl->type == BL_PC) {
+						map_session_data *sd = BL_CAST(BL_PC, mbl);
+						
+						// Si el creador tiene Biomancer, la mina recibe un blindaje extra
+						if (sd && pc_checkskill(sd, AM_BIOMANCER) > 0) {
+							// Hereda el 100% de la vida máxima del Alchemist directamente de sus stats de batalla
+							status->max_hp += sd->battle_status.max_hp;
+						}
+					}
+					// --- FIN CUSTOM ---
 					break;
 				case KO_ZANZOU:
 					status->max_hp = 3000 + 3000 * ud->skill_lv;
 					break;
 				case AM_CANNIBALIZE:
-					status->max_hp = 1500 + 200*ud->skill_lv + 10*status_get_lv(mbl);
+					// --- INICIO CUSTOM: HP Base ---
+					// Usamos += para conservar el HP original de la base de datos (mob_db)
+					// y le sumamos 200 de HP por cada nivel de la habilidad.
+					status->max_hp += 200 * ud->skill_lv;
 					status->mode = static_cast<e_mode>(status->mode|MD_CANATTACK|MD_AGGRESSIVE);
+					// --- FIN CUSTOM ---
+					
+					// --- INICIO CUSTOM: Biomancer Stat Inheritance ---
+					// Si el maestro existe y es un jugador (PC)
+					if (mbl && mbl->type == BL_PC) {
+						map_session_data *sd = BL_CAST(BL_PC, mbl);
+						
+						// Verificamos si tiene la pasiva aprendida
+						if (sd && pc_checkskill(sd, AM_BIOMANCER) > 0) {
+							
+							// ==========================================
+							// CONFIGURACIÓN DE BALANCEO
+							// ==========================================
+							int hp_rate = 100;
+							int stats_rate = 25; // Hereda un 25% de los stats básicos
+							// ==========================================
+
+							// Accedemos directamente a sd->battle_status
+							status->max_hp += sd->battle_status.max_hp * hp_rate / 100;
+							
+							status->str += sd->battle_status.str * stats_rate / 100;
+							status->agi += sd->battle_status.agi * stats_rate / 100;
+							status->vit += sd->battle_status.vit * stats_rate / 100;
+							status->int_ += sd->battle_status.int_ * stats_rate / 100;
+							status->dex += sd->battle_status.dex * stats_rate / 100;
+							status->luk += sd->battle_status.luk * stats_rate / 100;
+						}
+					}
+					// --- FIN CUSTOM ---
 					break;
 				case MH_SUMMON_LEGION:
 				{
@@ -3246,6 +3290,12 @@ static int32 status_get_hpbonus(block_list *bl, enum e_status_bonus type) {
 				// Sumamos 5% directamente a la variable bonus por cada aliado
 				bonus += (5 * devotion_count);
 			}
+		}
+		// --- FIN CUSTOM ---
+		
+		// --- INICIO CUSTOM: Red Potion Buff (Soul of the Apothecary) ---
+		if (sc && sc->getSCE(SC_RPOT)) {
+			bonus += 5; // Suma un 5% al Max HP
 		}
 		// --- FIN CUSTOM ---
 
@@ -3732,7 +3782,7 @@ bool status_calc_weight(map_session_data *sd, enum e_status_calc_weight_opt flag
 			for (int j = 0; j < MAX_SLOTS; j++) {
 				int card_id = sd->inventory.u.items_inventory[i].card[j];
 				if (card_id > 0) {
-					auto card_data = itemdb_search(card_id);
+					std::shared_ptr<item_data> card_data = item_db.find(card_id);
 					if (card_data != nullptr && card_data->weight > 10) {
 						// Multiplicamos por amount para mantener la consistencia matemática
 						sd->weight += card_data->weight * sd->inventory.u.items_inventory[i].amount;
@@ -5127,6 +5177,10 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 
 	if(sc->getSCE(SC_SERVICE4U))
 		sd->dsprate -= sc->getSCE(SC_SERVICE4U)->val3;
+	// --- INICIO CUSTOM: Blue Potion Buff (-20% SP Cost) ---
+	if(sc->getSCE(SC_BPOT))
+		sd->dsprate -= 20; // Reduce el coste de SP un 20%
+	// --- FIN CUSTOM ---
 
 	// Underflow protections.
 	if(sd->dsprate < 0)
@@ -5716,14 +5770,49 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 		if(hom.class_ == 6052) // Eleanor
 			sc_start(hd, hd, SC_STYLE_CHANGE, 100, MH_MD_FIGHTING, INFINITE_TICK);
 	}
+	
+	// --- INICIO CUSTOM: Biomancer Homunculus Base Stat Inheritance ---
+	if (hd->master && pc_checkskill(hd->master, AM_BIOMANCER) > 0) {
+		// ==========================================
+		// CONFIGURACIÓN DE BALANCEO
+		// ==========================================
+		int hp_rate = 25;     // Mantiene el 25% de HP extra como blindaje
+		int stats_rate = 25;  // Hereda un 25% de los stats básicos
+		// ==========================================
 
+		// Accedemos directamente a la batalla del maestro (hd->master->battle_status)
+		status->max_hp += hd->master->battle_status.max_hp * hp_rate / 100;
+		
+		status->str += hd->master->battle_status.str * stats_rate / 100;
+		status->agi += hd->master->battle_status.agi * stats_rate / 100;
+		status->vit += hd->master->battle_status.vit * stats_rate / 100;
+		status->int_ += hd->master->battle_status.int_ * stats_rate / 100;
+		status->dex += hd->master->battle_status.dex * stats_rate / 100;
+		status->luk += hd->master->battle_status.luk * stats_rate / 100;
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Amistr Bulwark y Juggernaut (Testeando Hard DEF) ---
+
+	// Conversión de Hard DEF a Ataque
+	// IDs de Amistr: 6003 (Oveja), 6004 (Hipo). Evolucionados: 6011 (Oveja Evo), 6012 (Hipo Evo)
+	if (hd->homunculus.class_ == 6003 || hd->homunculus.class_ == 6004 || 
+		hd->homunculus.class_ == 6011 || hd->homunculus.class_ == 6012) {
+		
+		int hard_def = status->def; 
+		if (hard_def > 0) {
+			// Sigue sumando la mitad de la armadura como Ataque Base
+			status->batk += (hard_def / 2); 
+		}
+	}
+	// --- FIN CUSTOM ---
+	
 #ifndef RENEWAL
 	status->rhw.atk = status->dex;
 	status->rhw.atk2 = status->str + hom.level;
 #endif
 
 	status_calc_misc(hd, status, hom.level);
-
 	status_cpy(&hd->battle_status, status);
 	return 1;
 }
@@ -5846,6 +5935,7 @@ void status_calc_regen(block_list *bl, struct status_data *status, struct regen_
 	if( sd && sd->hprecov_rate != 100 )
 		val = val*sd->hprecov_rate/100;
 
+	
 	reg_flag = bl->type == BL_PC ? 0 : 1;
 
 	regen->hp = cap_value(val, reg_flag, SHRT_MAX);
@@ -5917,10 +6007,10 @@ void status_calc_regen(block_list *bl, struct status_data *status, struct regen_
 			val = regen->hp*(100+5*skill)/100;
 			regen->hp = cap_value(val, 1, SHRT_MAX);
 		}
-		if( (skill = hom_checkskill(hd,HLIF_BRAIN)) > 0 ) {
-			val = regen->sp*(100+3*skill)/100;
-			regen->sp = cap_value(val, 1, SHRT_MAX);
-		}
+		// if( (skill = hom_checkskill(hd,HLIF_BRAIN)) > 0 ) {
+			// val = regen->sp*(100+3*skill)/100;
+			// regen->sp = cap_value(val, 1, SHRT_MAX);
+		// }
 	} else if( bl->type == BL_MER ) {
 		val = static_cast<decltype(val)>((status->max_hp * status->vit / 10000.0 + 1.0) * 6.0);
 		regen->hp = cap_value(val, 1, SHRT_MAX);
@@ -6061,6 +6151,11 @@ void status_calc_regen_rate(block_list *bl, struct regen_data *regen, status_cha
 	}
 	if (sc->getSCE(SC_SHRIMPBLESSING))
 		regen->rate.sp += 50;
+	// --- INICIO CUSTOM: Yellow Potion Buff (+20% HP Regen) ---
+	if (sc->getSCE(SC_YPOT)) {
+		regen->rate.hp += 20;
+	}
+	// --- FIN CUSTOM ---
 #ifdef RENEWAL
 	if (sc->getSCE(SC_NIBELUNGEN)) {
 		if (sc->getSCE(SC_NIBELUNGEN)->val2 == RINGNBL_HPREGEN)
@@ -7936,6 +8031,8 @@ static int32 status_calc_batk(block_list *bl, status_change *sc, int32 batk)
 		batk += 100;
     if(sc->hasSCE(SC_LOUD))
 		batk += 20;
+    if(sc->hasSCE(SC_OPOT))
+		batk += 15;
 	if(sc->hasSCE(SC_DUELIST))
 		batk += 30;
 	// --- INICIO CUSTOM: Critical Explosion Asceta (+ATK) ---
@@ -8159,6 +8256,8 @@ uint16 status_calc_pseudobuff_matk( map_session_data* sd, status_change *sc, int
 	if (sc->getSCE(SC_CLIMAX_DES_HU))
 		matk += 100;
 	if (sc->hasSCE(SC_LOUD))
+		matk += 20;
+	if (sc->hasSCE(SC_BPOT))
 		matk += 20;
 	return static_cast<uint16>( cap_value(matk,0,USHRT_MAX) );
 }
@@ -8511,7 +8610,7 @@ static defType status_calc_def(block_list *bl, status_change *sc, int32 def)
 		def += sc->getSCE(SC_ASSUMPTIO)->val1 * 50;
 #endif
 	if (bl->type == BL_HOM && sc->getSCE(SC_DEFENCE))
-		def += sc->getSCE(SC_DEFENCE)->val2;
+		def += sc->getSCE(SC_DEFENCE)-> val2 * 2;
 	if(sc->getSCE(SC_INCDEFRATE))
 		def += def * sc->getSCE(SC_INCDEFRATE)->val1/100;
 	if(sc->getSCE(SC_EARTH_INSIGNIA) && sc->getSCE(SC_EARTH_INSIGNIA)->val1 == 2)
@@ -8661,6 +8760,31 @@ static int16 status_calc_def2(block_list *bl, status_change *sc, int32 def2)
 		def2 += (def2 * (skill_lv * 5)) / 100;
 	}
 	// --- FIN CÓDIGO CUSTOM ---
+	
+	// --- INICIO CUSTOM: Yellow Potion Buff (+30 Vit Def) ---
+	if (sc && sc->getSCE(SC_YPOT)) {
+		def2 += 30;
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Amistr Bulwark (Vit DEF Mixta para Master y Homúnculo) ---
+	if(sc->getSCE(SC_DEFENCE) && (bl->type == BL_PC || bl->type == BL_HOM)) {
+		int skill_lv = sc->getSCE(SC_DEFENCE)->val1;
+		
+		int flat_bonus = 10 * skill_lv;
+		int percentage_multiplier = 5 * skill_lv; // Ej: 25% al nivel 5
+		
+		// 1. Añadimos el bono plano a la Vit Def actual
+		def2 += flat_bonus;
+
+		// 2. Calculamos el porcentaje sobre el NUEVO TOTAL
+		int percentage_bonus = (def2 * percentage_multiplier) / 100;
+
+		// 3. Sumamos el porcentaje extra
+		def2 += percentage_bonus;
+	}
+	// --- FIN CUSTOM ---
+	
 	if(sc->getSCE(SC_POISON) || sc->getSCE(SC_DPOISON))
 		def2 = def2 * 75 / 100; //Should round down
 	if(sc->getSCE(SC_SKE))
@@ -8734,6 +8858,13 @@ static defType status_calc_mdef(block_list *bl, status_change *sc, int32 mdef)
 		mdef += 25 * mdef / 100;
 	if(sc->getSCE(SC_BURNING))
 		mdef -= 25 * mdef / 100;
+	// --- INICIO CUSTOM: Chemical Burn (Soul of the Apothecary) ---
+	if(sc->getSCE(SC_CHEMBURN)) {
+		// val1 contiene el número de stacks (1 a 10).
+		// Se reduce 3% por cada stack (máximo 30%).
+		mdef -= mdef * (3 * sc->getSCE(SC_CHEMBURN)->val1) / 100;
+	}
+	// --- FIN CUSTOM ---
 	if( sc->getSCE(SC_NEUTRALBARRIER) )
 		mdef += mdef * sc->getSCE(SC_NEUTRALBARRIER)->val2 / 100;
 	if(sc->getSCE(SC_ANALYZE))

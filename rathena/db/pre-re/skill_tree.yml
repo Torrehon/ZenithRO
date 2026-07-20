@@ -1333,14 +1333,14 @@ Body:
             Level: 1
       - Name: AM_REST
         MaxLevel: 1
-        Requires:
-          - Name: AM_BIOETHICS
-            Level: 1
+        # Requires:
+          # - Name: AM_BIOETHICS
+            # Level: 1
       - Name: AM_RESURRECTHOMUN
         MaxLevel: 5
-        Requires:
-          - Name: AM_CALLHOMUN
-            Level: 1
+        # Requires:
+          # - Name: AM_CALLHOMUN
+            # Level: 1
       - Name: AM_BERSERKPITCHER
         MaxLevel: 1
       - Name: AM_TWILIGHT1

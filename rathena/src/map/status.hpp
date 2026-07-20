@@ -1468,6 +1468,12 @@ enum sc_type : int16 {
 	SC_OVERCAST,
 	SC_UNNERVED,
 	SC_RELENTLESS,
+	SC_CHEMBURN,
+	SC_RPOT,
+	SC_OPOT,
+	SC_YPOT,
+	SC_BPOT,
+	SC_WPOT,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -2992,6 +2998,12 @@ enum efst_type : int16{
 	EFST_OVERCAST = 1719,
 	EFST_UNNERVED = 1720,
 	EFST_RELENTLESS = 1721,
+	EFST_CHEMBURN = 1722,
+	EFST_RPOT = 1723,
+	EFST_OPOT = 1724,
+	EFST_YPOT = 1725,
+	EFST_BPOT = 1726,
+	EFST_WPOT = 1727,
 	EFST_MAX,
 };
 

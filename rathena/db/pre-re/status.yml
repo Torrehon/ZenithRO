@@ -2538,6 +2538,7 @@ Body:
     DurationLookup: HAMI_DEFENCE
     CalcFlags:
       Def: true
+      Def2: true
       Vit: true
     Flags:
       NoSave: true
@@ -7004,4 +7005,41 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
+  - Status: ChemBurn
+    Icon: EFST_CHEMBURN
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Rpot
+    Icon: EFST_RPOT
+    CalcFlags:
+      MaxHp: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: OPot
+    Icon: EFST_OPOT
+    CalcFlags:
+      Batk: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: YPot
+    Icon: EFST_YPOT
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: WPot
+    Icon: EFST_WPOT
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: BPot
+    Icon: EFST_BPOT
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+      
       
