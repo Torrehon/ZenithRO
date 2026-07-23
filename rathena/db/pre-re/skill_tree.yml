@@ -1187,7 +1187,7 @@ Body:
           - Name: TF_STEAL
             Level: 1
       - Name: RG_STEALCOIN
-        MaxLevel: 10
+        MaxLevel: 5
         Requires:
           - Name: RG_SNATCHER
             Level: 4
@@ -1195,7 +1195,7 @@ Body:
         MaxLevel: 10
         Requires:
           - Name: RG_STEALCOIN
-            Level: 4
+            Level: 3
       - Name: RG_TUNNELDRIVE
         MaxLevel: 5
         Requires:
@@ -1209,25 +1209,25 @@ Body:
           - Name: RG_TUNNELDRIVE
             Level: 2
       - Name: RG_STRIPWEAPON
-        MaxLevel: 5
+        MaxLevel: 3
         Requires:
           - Name: RG_STRIPARMOR
-            Level: 5
+            Level: 1
       - Name: RG_STRIPSHIELD
-        MaxLevel: 5
+        MaxLevel: 3
         Requires:
           - Name: RG_STRIPHELM
-            Level: 5
+            Level: 1
       - Name: RG_STRIPARMOR
-        MaxLevel: 5
+        MaxLevel: 3
         Requires:
           - Name: RG_STRIPSHIELD
-            Level: 5
+            Level: 1
       - Name: RG_STRIPHELM
-        MaxLevel: 5
+        MaxLevel: 3
         Requires:
           - Name: RG_STEALCOIN
-            Level: 2
+            Level: 1
       - Name: RG_INTIMIDATE
         MaxLevel: 5
         Requires:
@@ -1238,8 +1238,8 @@ Body:
       - Name: RG_GRAFFITI
         MaxLevel: 1
         Requires:
-          - Name: RG_FLAGGRAFFITI
-            Level: 5
+          - Name: RG_GANGSTER
+            Level: 1
       - Name: RG_FLAGGRAFFITI
         MaxLevel: 5
         Requires:
@@ -1248,13 +1248,10 @@ Body:
       - Name: RG_CLEANER
         MaxLevel: 1
         Requires:
-          - Name: RG_GANGSTER
+          - Name: RG_GRAFFITI
             Level: 1
       - Name: RG_GANGSTER
         MaxLevel: 1
-        Requires:
-          - Name: RG_STRIPSHIELD
-            Level: 3
       - Name: RG_COMPULSION
         MaxLevel: 5
         Requires:
@@ -2378,13 +2375,13 @@ Body:
         MaxLevel: 5
         Requires:
           - Name: RG_STRIPWEAPON
-            Level: 5
+            Level: 3
           - Name: RG_STRIPSHIELD
-            Level: 5
+            Level: 3
           - Name: RG_STRIPARMOR
-            Level: 5
+            Level: 3
           - Name: RG_STRIPHELM
-            Level: 5
+            Level: 3
   - Job: Creator
     Inherit:
       Novice: true

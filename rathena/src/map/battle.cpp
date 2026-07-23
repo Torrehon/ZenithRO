@@ -1769,9 +1769,9 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 #ifdef RENEWAL
 		if( tsc->getSCE(SC_RAID) ) {
 			if (status_get_class_(bl) == CLASS_BOSS)
-				damage += damage * 15 / 100;
+				damage += damage * 10 / 100;
 			else
-				damage += damage * 30 / 100;
+				damage += damage * 20 / 100;
 		}
 #endif
 
@@ -4586,12 +4586,18 @@ static uint16 battle_get_atkpercent( const block_list& bl, uint16 skill_id, cons
 
 	int32 atkpercent = 100;
 
-	if (sc.getSCE(SC_CURSE))
+	// --- INICIO CUSTOM: Curse en MVPs (Sin penalización de ATK) ---
+	if (sc.getSCE(SC_CURSE) && status_get_class_((block_list*)&bl) != CLASS_BOSS)
 		atkpercent -= 25;
+	// --- FIN CUSTOM ---
+	
 	if (sc.getSCE(SC_PROVOKE))
 		atkpercent += sc.getSCE(SC_PROVOKE)->val2;
 	if (sc.getSCE(SC_STRIPWEAPON) && bl.type != BL_PC)
 		atkpercent -= sc.getSCE(SC_STRIPWEAPON)->val2;
+	// --- CUSTOM: Buff de Graffiti (+5% ATK) ---
+	if (sc.getSCE(SC_GRAFFITI))
+		atkpercent += 5;
 	if (sc.getSCE(SC_CONCENTRATION))
 		atkpercent += sc.getSCE(SC_CONCENTRATION)->val2;
 	if (sc.getSCE(SC_TRUESIGHT))
@@ -6121,6 +6127,52 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		// Aumenta el daño final en un 10%
 		ATK_ADDRATE(wd.damage, wd.damage2, 10); 
 	}
+	
+	// --- INICIO CUSTOM: Opportunist (RG_GANGSTER) Físico ---
+	if (sd && pc_checkskill(sd, RG_GANGSTER) > 0) {
+		status_change* tsc = status_get_sc(target);
+		if (tsc) { // Eliminamos tsc->count > 0 porque ya no existe
+			int status_count = 0;
+
+			// Estados Clásicos
+			if (tsc->getSCE(SC_BLIND)) status_count++;
+			if (tsc->getSCE(SC_SILENCE)) status_count++;
+			if (tsc->getSCE(SC_BLEEDING)) status_count++;
+			if (tsc->getSCE(SC_CURSE)) status_count++;
+			if (tsc->getSCE(SC_POISON)) status_count++;
+			if (tsc->getSCE(SC_CONFUSION)) status_count++;
+			if (tsc->getSCE(SC_FREEZE)) status_count++;
+
+			// Estados Elementales Custom
+			if (tsc->getSCE(SC_BURNING)) status_count++;
+			if (tsc->getSCE(SC_ELECTROCUTE)) status_count++;
+			if (tsc->getSCE(SC_BURIED)) status_count++;
+			if (tsc->getSCE(SC_DROWN)) status_count++;
+
+			// Estados de Back Stab
+			if (tsc->getSCE(SC_LACERATION)) status_count++;
+			if (tsc->getSCE(SC_CONCUSSION)) status_count++;
+			if (tsc->getSCE(SC_MARKED)) status_count++;
+
+			// Estados Divest (Strips)
+			if (tsc->getSCE(SC_STRIPWEAPON)) status_count++;
+			if (tsc->getSCE(SC_STRIPSHIELD)) status_count++;
+			if (tsc->getSCE(SC_STRIPARMOR)) status_count++;
+			if (tsc->getSCE(SC_STRIPHELM)) status_count++;
+
+			if (status_count > 0) {
+				// Límite dinámico: 10 estados (50%) si tiene la Soul de Saboteur, 5 estados (25%) por defecto
+				// NOTA: Reemplaza 'RG_NIGHTBLADE' por el Skill ID real de la Soul en tu database
+				int max_statuses = (pc_checkskill(sd, RG_NIGHTBLADE) > 0) ? 10 : 5;
+				
+				status_count = min(status_count, max_statuses);
+				
+				// Suma un 5% de daño final por cada estado alterado válido
+				ATK_ADDRATE(wd.damage, wd.damage2, status_count * 5);
+			}
+		}
+	}
+	// --- FIN CUSTOM: Opportunist Físico ---
 
 	//Apply DAMAGE_DIV_FIX and check for min damage
 	battle_apply_div_fix(&wd, skill_id);
@@ -6294,7 +6346,7 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 				  	+ 200 - 200 * tstatus->hp / tstatus->max_hp;
 #endif
 
-// --- INICIO CUSTOM: Exorcist Soul (+20% Turn Undead) ---
+				// --- INICIO CUSTOM: Exorcist Soul (+20% Turn Undead) ---
 				// Nos aseguramos de que SOLO afecte a Turn Undead y lo lance un jugador
 				if (skill_id == PR_TURNUNDEAD && src != nullptr && src->type == BL_PC) {
 					map_session_data* sd = BL_CAST(BL_PC, src);
@@ -6304,7 +6356,7 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 						i += 200; 
 					}
 				}
-// --- FIN CUSTOM ---
+				// --- FIN CUSTOM ---
 
 				// Límite oficial del 70% de éxito (actuará de tapón para la pasiva también)
 				if(i > 700)
@@ -6760,6 +6812,57 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 		}
 	}
 	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Buff de Graffiti (+5% MATK) ---
+	if (sc && sc->getSCE(SC_GRAFFITI)) {
+		MATK_ADDRATE(5); 
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Opportunist (RG_GANGSTER) Mágico ---
+	if (sd && pc_checkskill(sd, RG_GANGSTER) > 0) {
+		status_change* tsc = status_get_sc(target);
+		if (tsc) { // Eliminamos tsc->count > 0 porque ya no existe
+			int status_count = 0;
+
+			// Estados Clásicos
+			if (tsc->getSCE(SC_BLIND)) status_count++;
+			if (tsc->getSCE(SC_SILENCE)) status_count++;
+			if (tsc->getSCE(SC_BLEEDING)) status_count++;
+			if (tsc->getSCE(SC_CURSE)) status_count++;
+			if (tsc->getSCE(SC_POISON)) status_count++;
+			if (tsc->getSCE(SC_CONFUSION)) status_count++;
+			if (tsc->getSCE(SC_FREEZE)) status_count++;
+
+			// Estados Elementales Custom
+			if (tsc->getSCE(SC_BURNING)) status_count++;
+			if (tsc->getSCE(SC_ELECTROCUTE)) status_count++;
+			if (tsc->getSCE(SC_BURIED)) status_count++;
+			if (tsc->getSCE(SC_DROWN)) status_count++;
+
+			// Estados de Back Stab
+			if (tsc->getSCE(SC_LACERATION)) status_count++;
+			if (tsc->getSCE(SC_CONCUSSION)) status_count++;
+			if (tsc->getSCE(SC_MARKED)) status_count++;
+
+			// Estados Divest (Strips)
+			if (tsc->getSCE(SC_STRIPWEAPON)) status_count++;
+			if (tsc->getSCE(SC_STRIPSHIELD)) status_count++;
+			if (tsc->getSCE(SC_STRIPARMOR)) status_count++;
+			if (tsc->getSCE(SC_STRIPHELM)) status_count++;
+
+			if (status_count > 0) {
+				// Mismo límite dinámico para magia
+				int max_statuses = (pc_checkskill(sd, RG_NIGHTBLADE) > 0) ? 10 : 5;
+				
+				status_count = min(status_count, max_statuses);
+				
+				// Suma un 5% de daño mágico final por cada estado alterado válido
+				MATK_ADDRATE(status_count * 5);
+			}
+		}
+	}
+	// --- FIN CUSTOM: Opportunist Mágico ---
 	
 	// --- INICIO: Custom Taekwon: Fighting Chant (Kihop) MATK (3%) ---
 	if (sd && sd->status.party_id > 0 && (i = pc_checkskill(sd, TK_POWER)) > 0) {

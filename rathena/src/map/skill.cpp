@@ -2285,7 +2285,12 @@ bool skill_strip_equip(block_list *src, block_list *target, uint16 skill_id, uin
 		case RG_STRIPARMOR:
 		case RG_STRIPSHIELD:
 		case RG_STRIPHELM:
+			// 5% base por Skill Level (50/1000) + modificador de Dex original
+			rate = 50 * skill_lv + 2 * (sstatus->dex - tstatus->dex);
+			mod = 1000;
+			break;
 		case GC_WEAPONCRUSH:
+			// Se mantiene la fórmula original para Guillotine Cross
 			rate = 50 * (skill_lv + 1) + 2 * (sstatus->dex - tstatus->dex);
 			mod = 1000;
 			break;
@@ -4370,6 +4375,7 @@ int32 skill_shimiru_check_cell( block_list* target, va_list ap ){
 	return 1;
 }
 
+
 /*==========================================
  *
  *
@@ -4389,6 +4395,7 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 
 	if (bl->prev == nullptr)
 		return 1;
+	
 
 	sd = BL_CAST(BL_PC, src);
 
@@ -4594,6 +4601,7 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 		return 1;
 	if(status_isdead(*src))
 		return 1;
+
 
 	if( src != bl && status_isdead(*bl) ) {
 		switch( skill_id ) { // Skills that may be cast on dead targets
@@ -4904,22 +4912,16 @@ static int8 skill_castend_id_check(block_list *src, block_list *target, uint16 s
 			break;
 		case RG_BACKSTAP:
 			{
-#ifndef RENEWAL
-				uint8 dir = map_calc_dir(src,target->x,target->y), t_dir = unit_getdir(target);
-
-				if (map_check_dir(dir, t_dir))
-					return USESKILL_FAIL_MAX;
-#endif
-
+				// Comportamiento Renewal: Solo falla si atacante y objetivo están en la misma celda exacta.
 				if (check_distance_bl(src, target, 0))
 					return USESKILL_FAIL_MAX;
 			}
 			break;
-		case RG_STEALCOIN:
-			// Does not work on non-monsters, bosses and targets already mugged
-			if (target->type != BL_MOB || status_bl_has_mode(target, MD_STATUSIMMUNE) || ((TBL_MOB*)target)->state.steal_coin_flag)
-				return USESKILL_FAIL;
-			break;
+		// case RG_STEALCOIN:
+			// // Does not work on non-monsters, bosses and targets already mugged
+			// if (target->type != BL_MOB || status_bl_has_mode(target, MD_STATUSIMMUNE) || ((TBL_MOB*)target)->state.steal_coin_flag)
+				// return USESKILL_FAIL;
+			// break;
 		case PR_TURNUNDEAD:
 			{
 				status_data* tstatus = status_get_status_data(*target);
@@ -7222,6 +7224,17 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 		case UNT_GROUND_GRAVITATION:
 		case UNT_JACK_FROST_NOVA:
 			skill_attack( skill_get_type(sg->skill_id), ss, ss, bl, sg->skill_id, sg->skill_lv, tick, 0 );
+			break;
+			
+		// --- CUSTOM: Buff de Graffiti ---
+		case UNT_GRAFFITI:
+			// 'ss' es el creador del área, 'bl' es el objetivo que la pisa
+			if (battle_check_target(ss, bl, BCT_PARTY) > 0) {
+				// SC_GRAFFITI con un 100% de éxito, nivel de la skill, y 2000ms de duración.
+				// Como el área pulsa cada 1000ms, el buff se renueva constantemente 
+				// y se pierde 1 segundo después de salir del área.
+				sc_start(ss, bl, SC_GRAFFITI, 100, sg->skill_lv, 2000);
+			}
 			break;
 
 		case UNT_DUMMYSKILL:
@@ -10830,6 +10843,13 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 			}
 			// --- FIN CUSTOM ---
 			
+			// --- INICIO CUSTOM: Silence en MVPs (+25% Cast) ---
+			if (sc->getSCE(SC_SILENCE) && (status_get_mode(bl) & MD_BOSS)) {
+				// Restamos 25 a la tasa de reducción, resultando en un cast 25% más lento.
+				reduce_cast_rate -= 25;
+			}
+			// --- FIN CUSTOM ---
+			
 			if (sc->getSCE(SC_MEMORIZE)) {
 				if (!sd || pc_checkskill(sd, skill_id) > 0) {
 					if (!(flag & 2))
@@ -11462,8 +11482,8 @@ static int32 skill_sit_count(block_list *bl, va_list ap)
 	if (!pc_issit(sd))
 		return 0;
 
-	if (flag&1 && pc_checkskill(sd, RG_GANGSTER) > 0)
-		return 1;
+	// if (flag&1 && pc_checkskill(sd, RG_GANGSTER) > 0)
+		// return 1;
 
 	// if (flag&2 && (pc_checkskill(sd, TK_HPTIME) > 0 || pc_checkskill(sd, TK_SPTIME) > 0))
 		// return 1;
@@ -11485,8 +11505,8 @@ static int32 skill_sit_in(block_list *bl, va_list ap)
 	if (!pc_issit(sd))
 		return 0;
 
-	if (flag&1 && pc_checkskill(sd, RG_GANGSTER) > 0)
-		sd->state.gangsterparadise = 1;
+	// if (flag&1 && pc_checkskill(sd, RG_GANGSTER) > 0)
+		// sd->state.gangsterparadise = 1;
 
 	// if (flag&2 && (pc_checkskill(sd, TK_HPTIME) > 0 || pc_checkskill(sd, TK_SPTIME) > 0 )) {
 		// sd->state.rest = 1;
@@ -11511,8 +11531,8 @@ static int32 skill_sit_out(block_list *bl, va_list ap)
 	if (map_foreachinallrange(skill_sit_count, sd, range, BL_PC, flag) > 1)
 		return 0;
 
-	if (flag&1 && sd->state.gangsterparadise)
-		sd->state.gangsterparadise = 0;
+	// if (flag&1 && sd->state.gangsterparadise)
+		// sd->state.gangsterparadise = 0;
 	if (flag&2 && sd->state.rest) {
 		sd->state.rest = 0;
 		status_calc_regen(bl, &sd->battle_status, &sd->regen);
@@ -11534,10 +11554,10 @@ int32 skill_sit(map_session_data *sd, bool sitting)
 
 	nullpo_ret(sd);
 
-	if ((lv = pc_checkskill(sd, RG_GANGSTER)) > 0) {
-		flag |= 1;
-		range = skill_get_splash(RG_GANGSTER, lv);
-	}
+	// if ((lv = pc_checkskill(sd, RG_GANGSTER)) > 0) {
+		// flag |= 1;
+		// range = skill_get_splash(RG_GANGSTER, lv);
+	// }
 	// if ((lv = pc_checkskill(sd, TK_HPTIME)) > 0) {
 		// flag |= 2;
 		// range = skill_get_splash(TK_HPTIME, lv);

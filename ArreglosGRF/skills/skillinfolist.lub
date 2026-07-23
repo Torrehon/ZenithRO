@@ -1638,10 +1638,10 @@ SKILL_INFO_LIST = {
 	[SKID.RG_STEALCOIN] = {
 		"RG_STEALCOIN",
 		SkillName = "Steal Coin",
-		MaxLv = 10,
-		SpAmount = { 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 },
+		MaxLv = 5,
+		SpAmount = { 15, 15, 15, 15, 15 },
 		bSeperateLv = false,
-		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		AttackRange = { 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
 			{ SKID.RG_SNATCHER,4 }
 		}
@@ -1653,7 +1653,7 @@ SKILL_INFO_LIST = {
 		SpAmount = { 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 },
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.RG_STEALCOIN,4 }
+			{ SKID.RG_STEALCOIN,3 }
 		}
 	},
 	[SKID.RG_TUNNELDRIVE] = {
@@ -1678,45 +1678,45 @@ SKILL_INFO_LIST = {
 	[SKID.RG_STRIPWEAPON] = {
 		"RG_STRIPWEAPON",
 		SkillName = "Strip Weapon",
-		MaxLv = 5,
-		SpAmount = { 17, 19, 21, 23, 25 },
+		MaxLv = 3,
+		SpAmount = { 21, 23, 25 },
 		bSeperateLv = false,
-		AttackRange = { 1, 1, 1, 1, 1 },
+		AttackRange = { 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.RG_STRIPARMOR,5 }
+			{ SKID.RG_STRIPARMOR,1 }
 		}
 	},
 	[SKID.RG_STRIPSHIELD] = {
 		"RG_STRIPSHIELD",
 		SkillName = "Strip Shield",
-		MaxLv = 5,
-		SpAmount = { 12, 14, 16, 18, 20 },
+		MaxLv = 3,
+		SpAmount = { 16, 18, 20 },
 		bSeperateLv = false,
-		AttackRange = { 1, 1, 1, 1, 1 },
+		AttackRange = { 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.RG_STRIPHELM,5 }
+			{ SKID.RG_STRIPHELM,1 }
 		}
 	},
 	[SKID.RG_STRIPARMOR] = {
 		"RG_STRIPARMOR",
 		SkillName = "Strip Armor",
-		MaxLv = 5,
-		SpAmount = { 17, 19, 21, 23, 25 },
+		MaxLv = 3,
+		SpAmount = { 21, 23, 25 },
 		bSeperateLv = false,
-		AttackRange = { 1, 1, 1, 1, 1 },
+		AttackRange = { 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.RG_STRIPSHIELD,5 }
+			{ SKID.RG_STRIPSHIELD,1 }
 		}
 	},
 	[SKID.RG_STRIPHELM] = {
 		"RG_STRIPHELM",
 		SkillName = "Strip Helm",
-		MaxLv = 5,
-		SpAmount = { 12, 14, 16, 18, 20 },
+		MaxLv = 3,
+		SpAmount = { 16, 18, 20 },
 		bSeperateLv = false,
-		AttackRange = { 1, 1, 1, 1, 1 },
+		AttackRange = { 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.RG_STEALCOIN,2 }
+			{ SKID.RG_STEALCOIN,1 }
 		}
 	},
 	[SKID.RG_INTIMIDATE] = {
@@ -1738,7 +1738,7 @@ SKILL_INFO_LIST = {
 		bSeperateLv = false,
 		AttackRange = { 1 },
 		_NeedSkillList = {
-			{ SKID.RG_FLAGGRAFFITI,5 }
+			{ SKID.RG_GANGSTER,1 }
 		}
 	},
 	[SKID.RG_FLAGGRAFFITI] = {
@@ -1760,18 +1760,15 @@ SKILL_INFO_LIST = {
 		bSeperateLv = false,
 		AttackRange = { 1 },
 		_NeedSkillList = {
-			{ SKID.RG_GANGSTER,1 }
+			{ SKID.RG_GRAFFITI,1 }
 		}
 	},
 	[SKID.RG_GANGSTER] = {
 		"RG_GANGSTER",
-		SkillName = "Gangster's Paradise",
+		SkillName = "Opportunist",
 		MaxLv = 1,
-		AttackRange = { 1 },
-		_NeedSkillList = {
-			{ SKID.RG_STRIPSHIELD,3 }
-		}
-	},
+		AttackRange = { 1 }
+	},	
 	[SKID.RG_COMPULSION] = {
 		"RG_COMPULSION",
 		SkillName = "Compulsion Discount",

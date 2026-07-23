@@ -888,8 +888,10 @@ int32 unit_walktoxy( block_list *bl, int16 x, int16 y, unsigned char flag)
 	unit_stop_attack(bl); //Sets target to 0
 
 	status_change* sc = status_get_sc(bl);
-	if (sc && sc->getSCE(SC_CONFUSION)) // Randomize the target position
+	// --- INICIO CUSTOM: Confusion en MVPs (Sin movimiento aleatorio al caminar) ---
+	if (sc && sc->getSCE(SC_CONFUSION) && !(status_get_mode(bl) & MD_BOSS))
 		map_random_dir(bl, &ud->to_x, &ud->to_y);
+	// --- FIN CUSTOM ---
 
 	if(ud->walktimer != INVALID_TIMER) {
 		// When you come to the center of the grid because the change of destination while you're walking right now
@@ -982,8 +984,10 @@ int32 unit_walktobl(block_list *bl, block_list *tbl, int32 range, unsigned char 
 	unit_stop_attack(bl); //Sets target to 0
 
 	status_change *sc = status_get_sc(bl);
-	if (sc && sc->getSCE(SC_CONFUSION)) // Randomize the target position
+	// --- INICIO CUSTOM: Confusion en MVPs (Sin movimiento aleatorio al perseguir) ---
+	if (sc && sc->getSCE(SC_CONFUSION) && !(status_get_mode(bl) & MD_BOSS))
 		map_random_dir(bl, &ud->to_x, &ud->to_y);
+	// --- FIN CUSTOM ---
 
 	if(ud->walktimer != INVALID_TIMER) {
 		ud->state.change_walk_target = 1;

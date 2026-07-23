@@ -304,7 +304,6 @@ std::unique_ptr<const SkillImpl> SkillFactoryThief::create(const e_skill skill_i
 			return std::make_unique<SkillSteal>();
 		case TF_THROWSTONE:
 			return std::make_unique<SkillStoneFling>();
-
 		default:
 			return nullptr;
 	}

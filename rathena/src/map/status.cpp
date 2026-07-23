@@ -4782,13 +4782,13 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	if ((skill = pc_checkskill(sd, SU_SOULATTACK)) > 0)
 		base_status->rhw.range += skill_get_range2(sd, SU_SOULATTACK, skill, true);
 	
-// --- INICIO CUSTOM: Forgemaster (Smith Spear -> HIT) ---
+	// --- INICIO CUSTOM: Forgemaster (Smith Spear -> HIT) ---
 	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_SPEAR) > 0) {
 		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
 		base_status->hit += (3 * pc_checkskill(sd, BS_SPEAR)) * rank_mult;
 	}
 	// --- FIN CUSTOM ---
-// ----- FLEE CALCULATION -----
+	// ----- FLEE CALCULATION -----
 
 	// Absolute modifiers from passive skills
 	// --- Inicio Custom Skill: TF_MISS (Improve Dodge) ---
@@ -6326,6 +6326,15 @@ void status_calc_state( block_list& bl, status_change& sc, std::shared_ptr<s_sta
 		status_calc_state_sub( bl, sc, start, scdb, sc.cant.cast, SCS_NOCAST, SCS_NOCASTCOND, []( block_list& bl, status_change& sc, bool& restriction, const sc_type type, const status_change_entry& sce ) -> bool {
 			// Check the specific conditions
 			switch( type ){
+				// --- INICIO CUSTOM: Silence en MVPs ---
+				case SC_SILENCE:
+					if (status_get_mode(&bl) & MD_BOSS) {
+						restriction = false; // Es Jefe: Anulamos el bloqueo de casteo
+					} else {
+						restriction = true;  // Es normal: Aplicamos el bloqueo de casteo
+					}
+					return true; // Indicamos que hemos sobreescrito la regla del YAML
+				// --- FIN CUSTOM ---
 				case SC_WINKCHARM:
 					if (bl.type != BL_PC) {
 						restriction = true;
@@ -7830,8 +7839,14 @@ static uint16 status_calc_luk(block_list *bl, status_change *sc, int32 luk)
 		luk -= sc->getSCE(SC_HARMONIZE)->val2;
 		return (uint16)cap_value(luk,0,USHRT_MAX);
 	}
-	if(sc->getSCE(SC_CURSE))
-		return 0;
+	if (sc->getSCE(SC_CURSE)) {
+		// --- INICIO CUSTOM: Curse en MVPs (Mitad de Luk) ---
+		if (status_get_mode(bl) & MD_BOSS) {
+			return luk / 2; // Jefes: Reduce la Luk a la mitad
+		}
+		return 0; // Normal: Reduce la Luk a 0
+		// --- FIN CUSTOM ---
+	}
 	if(sc->getSCE(SC_INCALLSTATUS))
 		luk += sc->getSCE(SC_INCALLSTATUS)->val1;
 	if(sc->getSCE(SC_TRUESIGHT))
@@ -8361,8 +8376,15 @@ static int16 status_calc_hit(block_list *bl, status_change *sc, int32 hit)
 		hit += hit * sc->getSCE(SC_INCHITRATE)->val1/100;
 	if (sc->getSCE(SC_POWERUP))
 		hit += hit * sc->getSCE(SC_POWERUP)->val2 / 100;
-	if(sc->getSCE(SC_BLIND))
-		hit -= hit * 25/100;
+	if (sc->getSCE(SC_BLIND)) {
+		// --- INICIO CUSTOM: Blind en MVPs ---
+		if (status_get_mode(bl) & MD_BOSS) {
+			hit -= hit * 10 / 100; // Jefes: -10% Hit
+		} else {
+			hit -= hit * 25 / 100; // Normal: -25% Hit
+		}
+		// --- FIN CUSTOM ---
+	}
 	if(sc->getSCE(SC_HEAT_BARREL))
 		hit -= sc->getSCE(SC_HEAT_BARREL)->val4;
 	if(sc->getSCE(SC__GROOMY))
@@ -8481,7 +8503,14 @@ static int16 status_calc_flee(block_list *bl, status_change *sc, int32 flee)
 		}
 	}
 	// --- FIN CUSTOM ---
-
+	
+	// --- INICIO CUSTOM: Confusion en MVPs (-10% Flee) ---
+	// Si el objetivo está confundido Y es un Jefe
+	if (sc->getSCE(SC_CONFUSION) && (status_get_mode(bl) & MD_BOSS)) {
+		flee -= flee * 10 / 100;
+	}
+	// --- FIN CUSTOM ---
+	
 	// Rate value
 	if(sc->getSCE(SC_INCFLEERATE))
 		flee += flee * sc->getSCE(SC_INCFLEERATE)->val1/100;
@@ -8491,8 +8520,14 @@ static int16 status_calc_flee(block_list *bl, status_change *sc, int32 flee)
 		flee -= flee * 50/100;
 	if(sc->getSCE(SC_BERSERK))
 		flee -= flee * 50/100;
-	if(sc->getSCE(SC_BLIND))
-		flee -= flee * 25/100;
+	if(sc->getSCE(SC_BLIND)) {
+		// --- INICIO CUSTOM: Blind en MVPs ---
+		// Jefes no pierden Flee, los demás pierden el 25% original
+		if (!(status_get_mode(bl) & MD_BOSS)) {
+			flee -= flee * 25 / 100;
+		}
+		// --- FIN CUSTOM ---
+	}
 	if(sc->getSCE(SC_FEAR))
 		flee -= flee * 20 / 100;
 	if(sc->getSCE(SC_PARALYSE) && sc->getSCE(SC_PARALYSE)->val3 == 1)
@@ -8612,10 +8647,28 @@ static defType status_calc_def(block_list *bl, status_change *sc, int32 def)
 		def /= 2;
 	if(sc->getSCE(SC_ELECTROCUTE))
 		def -= 25 * def / 100;
-	if((sc->hasSCE(SC_POISON) || sc->hasSCE(SC_DPOISON)) && bl->type != BL_PC)
-		def = def * 75 / 100; //Should round down
+	if((sc->hasSCE(SC_POISON) || sc->hasSCE(SC_DPOISON)) && bl->type != BL_PC) {
+		// --- INICIO CUSTOM: Poison Def en MVPs (-10%) ---
+		if (status_get_mode(bl) & MD_BOSS) {
+			def = def * 90 / 100; 
+		} else {
+			def = def * 75 / 100; // Normal (-25%)
+		}
+		// --- FIN CUSTOM ---
+	}
 	if(sc->getSCE(SC_SIGNUMCRUCIS))
 		def -= def * sc->getSCE(SC_SIGNUMCRUCIS)->val2/100;
+	
+	// --- INICIO CUSTOM: Concussion ---
+	if (sc->getSCE(SC_CONCUSSION)) {
+		if (status_get_mode(bl) & MD_BOSS) {
+			def -= def * 15 / 100; // MVPs: -15% Def
+		} else {
+			def -= def * 30 / 100; // Normal: Ajusta este valor al % de tu skill base
+		}
+	}
+	// --- FIN CUSTOM ---
+	
 	if(sc->getSCE(SC_CONCENTRATION))
 		def -= def * sc->getSCE(SC_CONCENTRATION)->val4/100;
 	if(sc->getSCE(SC_SKE))
@@ -8770,8 +8823,15 @@ static int16 status_calc_def2(block_list *bl, status_change *sc, int32 def2)
 	}
 	// --- FIN CUSTOM ---
 	
-	if(sc->getSCE(SC_POISON) || sc->getSCE(SC_DPOISON))
-		def2 = def2 * 75 / 100; //Should round down
+	if(sc->getSCE(SC_POISON) || sc->getSCE(SC_DPOISON)) {
+		// --- INICIO CUSTOM: Poison Def2 en MVPs (-10%) ---
+		if (status_get_mode(bl) & MD_BOSS) {
+			def2 = def2 * 90 / 100;
+		} else {
+			def2 = def2 * 75 / 100; // Normal (-25%)
+		}
+		// --- FIN CUSTOM ---
+	}
 	if(sc->getSCE(SC_SKE))
 		def2 -= def2 * 50/100;
 	if(sc->getSCE(SC_PROVOKE))
@@ -9009,8 +9069,21 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 				val = max( val, 50 );
 			if( sc->getSCE(SC_DONTFORGETME) )
 				val = max( val, sc->getSCE(SC_DONTFORGETME)->val3 );
-			if( sc->getSCE(SC_CURSE) )
-				val = max( val, 300 );
+			
+			// --- INICIO CUSTOM: Curse en MVPs (Sin penalización de velocidad) ---
+			// Solo aplicamos la lentitud si NO es un Jefe
+			if (sc->getSCE(SC_CURSE) && !(status_get_mode(bl) & MD_BOSS)) {
+				val = max(val, 300);
+			}
+			// --- FIN CUSTOM ---
+			
+			// --- INICIO CUSTOM: Marked (Reducción de Velocidad) ---
+			// Si tiene la marca y NO es un Jefe, sufre un 25% de lentitud
+			if (sc->getSCE(SC_MARKED) && !(status_get_mode(bl) & MD_BOSS)) {
+				val = max(val, 25);
+			}
+			// --- FIN CUSTOM ---
+			
 			if( sc->getSCE(SC_CHASEWALK) )
 				val = max( val, sc->getSCE(SC_CHASEWALK)->val3 );
 			if( sc->getSCE(SC_WEDDING) )
@@ -9492,6 +9565,15 @@ static int16 status_calc_aspd_rate(block_list *bl, status_change *sc, int32 aspd
 		}
 	}
 	// --- FIN SUITON ---
+	// --- INICIO CUSTOM: Marked ---
+	if (sc->getSCE(SC_MARKED)) {
+		if (status_get_mode(bl) & MD_BOSS) {
+			aspd_rate += 100; // MVPs: -10% ASPD (+100 delay)
+		} else {
+			aspd_rate += 250; // Normal: Ajusta este valor (ej: +200 = -20% ASPD)
+		}
+	}
+	// --- FIN CUSTOM ---
 	if( sc->getSCE(SC_HALLUCINATIONWALK_POSTDELAY) )
 		aspd_rate += 500;
 	if( sc->getSCE(SC_PARALYSE) && sc->getSCE(SC_PARALYSE)->val3 == 1 )
@@ -10572,6 +10654,7 @@ static int32 status_get_sc_interval(enum sc_type type)
 		case SC_DROWN:
 		case SC_ELECTROCUTE:
         case SC_BURIED:
+        case SC_LACERATION:
 		    return 2000;
 		case SC_SAVAGERY:
 		    return 1020;
@@ -10823,6 +10906,10 @@ t_tick status_get_sc_def(const block_list* src, const block_list* bl, sc_type ty
 			break;
 		case SC_BURIED:
 			sc_def = status->str * 20 + status_get_lv(bl) * 20 + status->luk * 10;
+			tick_def2 = -2000;
+			break;
+		case SC_LACERATION:
+			sc_def = status->vit * 20 + status_get_lv(bl) * 20 + status->luk * 10;
 			tick_def2 = -2000;
 			break;
 		case SC_FREEZING:
@@ -11246,6 +11333,35 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 		if( !duration )
 			return false;
 	}
+
+	// --- INICIO CUSTOM: Límite de 20s para Jefes ---
+	if (status_get_mode(bl) & MD_BOSS) {
+		switch (type) {
+			case SC_BLIND:
+			case SC_SILENCE:
+			case SC_BLEEDING:
+			case SC_CURSE:
+			case SC_POISON:
+			case SC_CONFUSION:
+			case SC_BURNING:
+			case SC_DROWN:
+			case SC_ELECTROCUTE:
+			case SC_BURIED:
+			case SC_STRIPWEAPON:
+			case SC_STRIPSHIELD:
+			case SC_STRIPARMOR:
+			case SC_STRIPHELM:
+			case SC_LACERATION:
+			case SC_CONCUSSION:
+			case SC_MARKED:
+				// Si la duración calculada supera los 20 segundos (20000 ms), la limitamos.
+				if (duration > 20000) {
+					duration = 20000;
+				}
+				break;
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	int32 tick = (int32)duration;
 
@@ -12065,20 +12181,39 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			}
 			break;
 		case SC_STRIPWEAPON:
-			if (!sd) // Watk reduction
-				val2 = 25;
+			if (!sd) { // Si no es un jugador (es decir, es mob o Boss)
+				// --- INICIO CUSTOM: Strip Weapon en MVPs (-10% Atk) ---
+				if (status_get_mode(bl) & MD_BOSS) val2 = 10;
+				else val2 = 25; // Reducción normal
+				// --- FIN CUSTOM ---
+			}
 			break;
+			
 		case SC_STRIPSHIELD:
-			if (!sd) // Def reduction
-				val2 = 15;
+			if (!sd) { 
+				// --- INICIO CUSTOM: Strip Shield en MVPs (-5% Def) ---
+				if (status_get_mode(bl) & MD_BOSS) val2 = 5;
+				else val2 = 15;
+				// --- FIN CUSTOM ---
+			}
 			break;
+			
 		case SC_STRIPARMOR:
-			if (!sd) // Vit reduction
-				val2 = 40;
+			if (!sd) {
+				// --- INICIO CUSTOM: Strip Armor en MVPs (-20% Vit) ---
+				if (status_get_mode(bl) & MD_BOSS) val2 = 20;
+				else val2 = 40;
+				// --- FIN CUSTOM ---
+			}
 			break;
+			
 		case SC_STRIPHELM:
-			if (!sd) // Int reduction
-				val2 = 40;
+			if (!sd) { 
+				// --- INICIO CUSTOM: Strip Helm en MVPs (-20% Int) ---
+				if (status_get_mode(bl) & MD_BOSS) val2 = 20;
+				else val2 = 40;
+				// --- FIN CUSTOM ---
+			}
 			break;
 		case SC_AUTOSPELL:
 			// Val1 Skill LV of Autospell
@@ -12279,6 +12414,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_DROWN:
 		case SC_ELECTROCUTE:
         case SC_BURIED:
+        case SC_LACERATION:
 		case SC_KILLING_AURA:
 		case SC_WINKCHARM:
 		case SC_VOICEOFSIREN:
@@ -14185,6 +14321,7 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			case SC_DROWN:
 			case SC_ELECTROCUTE:
             case SC_BURIED:
+            case SC_LACERATION:
 			case SC_TOXIN:
 				tick_time = tick;
 				tick = tick_time + max(val4, 0);
@@ -15448,11 +15585,18 @@ TIMER_FUNC(status_change_timer){
 	case SC_POISON:
 	case SC_DPOISON:
 		if (sce->val4 >= 0) {
+			// --- INICIO CUSTOM: Poison en MVPs (Sin daño) ---
+			if (status_get_mode(bl) & MD_BOSS) {
+				break; // Salimos del bloque sin restar vida
+			}
+			// --- FIN CUSTOM ---
+
 			uint32 damage = 0;
 			if (sd)
 				damage = (type == SC_DPOISON) ? 2 + status->max_hp / 50 : 2 + status->max_hp * 3 / 200;
 			else
 				damage = (type == SC_DPOISON) ? 2 + status->max_hp / 100 : 2 + status->max_hp / 200;
+			
 			if (status->hp > umax(status->max_hp / 4, damage)) // Stop damaging after 25% HP left.
 				status_zap(bl, damage, 0);
 		}
@@ -15460,9 +15604,23 @@ TIMER_FUNC(status_change_timer){
 
 	case SC_BLEEDING:
 		if (sce->val4 >= 0) {
-			int64 damage = rnd() % 600 + 200;
+			int64 damage;
+			
+			// --- INICIO CUSTOM: Bleeding MVP (0.5% HP actual) ---
+			if (status_get_mode(bl) & MD_BOSS) {
+				// 0.5% = multiplicar por 5 y dividir entre 1000
+				damage = (int64)status->hp * 5 / 1000;
+				if (damage < 1) damage = 1; // Aseguramos un mínimo de 1 de daño
+			} else {
+				// Cálculo original para jugadores y monstruos normales
+				damage = rnd() % 600 + 200;
+			}
+			// --- FIN CUSTOM ---
+
+			// Evita que los monstruos mueran por el efecto del sangrado
 			if (!sd && damage >= status->hp)
-				damage = status->hp - 1; // No deadly damage for monsters
+				damage = status->hp - 1; 
+				
 			freeLock.lock();
 			status_zap(bl, damage, 0);
 		}
@@ -15494,9 +15652,8 @@ TIMER_FUNC(status_change_timer){
 
 			int64 percent_dmg = 0;
 			
-			// FIX 2: Usamos tu hallazgo (status->mode & MD_MVP)
-			if (status->mode & MD_MVP) {
-				// Para MVPs: 0.1% de su HP máximo
+			if (status->mode & MD_BOSS) {
+				// Para MVPs y Mini Bosses: 0.1% de su HP máximo
 				percent_dmg = (status->max_hp) / 1000;
 			} else {
 				// Para Monstruos normales y Jugadores: 0.5% de su HP máximo
@@ -15529,6 +15686,53 @@ TIMER_FUNC(status_change_timer){
 			else if (type == SC_BURNING) {
 				clif_specialeffect(bl, 2207, AREA);
 			}
+		}
+		break;
+		
+		case SC_LACERATION:
+		if (sce->val4 >= 0) {
+			int ele = ELE_NEUTRAL;
+
+			// 1. Recuperamos el ATK del caster 
+			// (Asegúrate de que al iniciar la skill guardas el ATK en val2, igual que hiciste con el MATK)
+			int64 caster_atk = (sce->val2 > 0) ? sce->val2 : 0; 
+
+			// 2. Reducción por Hard DEF (Defensa de equipamiento/armadura)
+			int hard_def = status->def;
+			if (hard_def > 100) hard_def = 100; 
+
+			int64 phys_dmg = caster_atk * (100 - hard_def) / 100;
+			
+			// 3. Reducción por Soft DEF (Defensa de vitalidad)
+			phys_dmg -= status->def2;
+			if (phys_dmg < 0) phys_dmg = 0;
+
+			// 4. Modificador elemental (Neutral contra el elemento/nivel del objetivo)
+			phys_dmg = battle_attr_fix(bl, bl, phys_dmg, ele, status->def_ele, status->ele_lv);
+
+			int64 percent_dmg = 0;
+			
+			// 5. Daño por porcentaje de vida máxima
+			if (status_get_mode(bl) & MD_BOSS) {
+				// Jefes y Mini-Jefes: 0.1% de su HP máximo
+				percent_dmg = (status->max_hp) / 1000;
+			} else {
+				// Monstruos normales y Jugadores: 0.5% de su HP máximo
+				percent_dmg = (5 * status->max_hp) / 1000;
+			}
+
+			int64 damage = phys_dmg + percent_dmg; 
+
+			if (damage < 1) damage = 1;
+
+			freeLock.lock();
+			// Mostramos el daño visualmente y lo aplicamos a la barra de vida
+			clif_damage(*bl, *bl, tick, 0, 1, damage, 1, DMG_NORMAL, 0, false);
+			status_fix_damage(bl, bl, damage, 1, 0);
+			
+			// Opcional: Efecto visual cada vez que hace tick. 
+			// (El 333 es el efecto genérico de chorro de sangre en rAthena, puedes cambiarlo).
+			clif_specialeffect(bl, 333, AREA); 
 		}
 		break;
 		

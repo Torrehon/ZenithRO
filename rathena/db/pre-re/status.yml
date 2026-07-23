@@ -170,7 +170,7 @@ Body:
       Poison: true
     Flags:
       SendOption: true
-      BossResist: true
+      BossResist: false
       StopAttacking: true
     Fail:
       Refresh: true
@@ -188,7 +188,7 @@ Body:
       Curse: true
     Flags:
       SendOption: true
-      BossResist: true
+      BossResist: false
     Fail:
       Refresh: true
       Inspiration: true
@@ -202,7 +202,7 @@ Body:
       Silence: true
     Flags:
       SendOption: true
-      BossResist: true
+      BossResist: false
       StopCasting: true
     Fail:
       Refresh: true
@@ -215,7 +215,7 @@ Body:
       Confusion: true
     Flags:
       SendOption: true
-      BossResist: true
+      BossResist: false
       StopWalking: true
     Fail:
       Refresh: true
@@ -231,7 +231,7 @@ Body:
       Blind: true
     Flags:
       SendOption: true
-      BossResist: true
+      BossResist: false
     Fail:
       Refresh: true
       Inspiration: true
@@ -247,7 +247,7 @@ Body:
       Bleeding: true
     Flags:
       SendOption: true
-      BossResist: true
+      BossResist: false
       NoSave: true
       NoClearance: true
       RemoveOnHermode: true
@@ -811,7 +811,7 @@ Body:
       Watk: true
     Flags:
       Debuff: true
-      BossResist: true
+      BossResist: false
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -824,7 +824,7 @@ Body:
       Def: true
     Flags:
       Debuff: true
-      BossResist: true
+      BossResist: false
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -837,7 +837,7 @@ Body:
       Vit: true
     Flags:
       Debuff: true
-      BossResist: true
+      BossResist: false
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -850,7 +850,7 @@ Body:
       Int: true
     Flags:
       Debuff: true
-      BossResist: true
+      BossResist: false
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -7041,5 +7041,28 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
-      
+  - Status: Graffiti
+    Icon: EFST_GRAFFITI
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Laceration
+    Icon: EFST_LACERATION
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Concussion
+    Icon: EFST_CONCUSSION
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Marked
+    Icon: EFST_MARKED
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
       

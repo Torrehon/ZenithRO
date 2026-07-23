@@ -1474,6 +1474,10 @@ enum sc_type : int16 {
 	SC_YPOT,
 	SC_BPOT,
 	SC_WPOT,
+	SC_GRAFFITI,
+	SC_LACERATION,
+	SC_CONCUSSION,
+	SC_MARKED,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
@@ -3004,6 +3008,10 @@ enum efst_type : int16{
 	EFST_YPOT = 1725,
 	EFST_BPOT = 1726,
 	EFST_WPOT = 1727,
+	EFST_GRAFFITI = 1728,
+	EFST_LACERATION = 1729,
+	EFST_CONCUSSION = 1730,
+	EFST_MARKED = 1731,
 	EFST_MAX,
 };
 

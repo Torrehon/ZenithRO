@@ -2040,6 +2040,10 @@
 	export_constant(SC_YPOT);
 	export_constant(SC_BPOT);
 	export_constant(SC_WPOT);
+	export_constant(SC_GRAFFITI);
+	export_constant(SC_LACERATION);
+	export_constant(SC_CONCUSSION);
+	export_constant(SC_MARKED);
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
 	export_constant(EFST_BLANK);
@@ -3542,6 +3546,10 @@
 	export_constant(EFST_YPOT);
 	export_constant(EFST_BPOT);
 	export_constant(EFST_WPOT);
+	export_constant(EFST_GRAFFITI);
+	export_constant(EFST_LACERATION);
+	export_constant(EFST_CONCUSSION);
+	export_constant(EFST_MARKED);
 	export_constant(EFST_MAX);
 	
 

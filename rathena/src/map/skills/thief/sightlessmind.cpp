@@ -15,7 +15,7 @@ void SkillSightlessMind::calculateSkillRatio(const Damage *wd, const block_list 
 #ifdef RENEWAL
 	base_skillratio += -100 + 50 + skill_lv * 150;
 #else
-	base_skillratio += 40 * skill_lv;
+	base_skillratio += 60 * skill_lv;
 #endif
 }
 
@@ -32,7 +32,6 @@ void SkillSightlessMind::castendNoDamageId(block_list *src, block_list *target, 
 void SkillSightlessMind::applyAdditionalEffects(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 	sc_start(src,target,SC_STUN,(10+3*skill_lv),skill_lv,skill_get_time(getSkillId(),skill_lv));
 	sc_start(src,target,SC_BLIND,(10+3*skill_lv),skill_lv,skill_get_time2(getSkillId(),skill_lv));
-#ifdef RENEWAL
 	sc_start(src, target, SC_RAID, 100, skill_lv, 10000); // Hardcoded to 10 seconds since Duration1 and Duration2 are used
-#endif
+
 }

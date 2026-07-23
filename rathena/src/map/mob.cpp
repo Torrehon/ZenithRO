@@ -1333,9 +1333,9 @@ static int32 mob_ai_sub_hard_activesearch(block_list *bl,va_list ap)
 	if(battle_check_target(md,bl,BCT_ENEMY)<=0)
 		return 0;
 
-	if (bl->type == BL_PC && BL_CAST(BL_PC, bl)->state.gangsterparadise &&
-		!status_has_mode(&md->status,MD_STATUSIMMUNE))
-		return 0; //Gangster paradise protection.
+	// if (bl->type == BL_PC && BL_CAST(BL_PC, bl)->state.gangsterparadise &&
+		// !status_has_mode(&md->status,MD_STATUSIMMUNE))
+		// return 0; //Gangster paradise protection.
 
 	if (battle_config.hom_setting&HOMSET_FIRST_TARGET &&
 		(*target) != nullptr && (*target)->type == BL_HOM && bl->type != BL_HOM)

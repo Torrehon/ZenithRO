@@ -5812,11 +5812,10 @@ Body:
   - Id: 211
     Name: RG_STEALCOIN
     Description: Mug
-    MaxLevel: 10
+    MaxLevel: 5
     Type: Weapon
     TargetType: Attack
-    DamageFlags:
-      NoDamage: true
+    Element: Weapon
     Range: 1
     Hit: Single
     HitCount: 1
@@ -5830,9 +5829,7 @@ Body:
     Type: Weapon
     TargetType: Attack
     DamageFlags:
-      IgnoreFlee: true
-    Flags:
-      AllowWhenHidden: true
+      Critical: true
     Range: -1
     Hit: Single
     HitCount: 1
@@ -5874,7 +5871,7 @@ Body:
   - Id: 215
     Name: RG_STRIPWEAPON
     Description: Divest Weapon
-    MaxLevel: 5
+    MaxLevel: 3
     Type: Weapon
     TargetType: Attack
     DamageFlags:
@@ -5886,33 +5883,25 @@ Body:
     AfterCastActDelay: 1000
     Duration1:
       - Level: 1
-        Time: 75000
-      - Level: 2
-        Time: 90000
-      - Level: 3
         Time: 105000
-      - Level: 4
+      - Level: 2
         Time: 120000
-      - Level: 5
+      - Level: 3
         Time: 135000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 17
-        - Level: 2
-          Amount: 19
-        - Level: 3
           Amount: 21
-        - Level: 4
+        - Level: 2
           Amount: 23
-        - Level: 5
+        - Level: 3
           Amount: 25
     Status: StripWeapon
     CastCancel: false
   - Id: 216
     Name: RG_STRIPSHIELD
     Description: Divest Shield
-    MaxLevel: 5
+    MaxLevel: 3
     Type: Weapon
     TargetType: Attack
     DamageFlags:
@@ -5924,33 +5913,25 @@ Body:
     AfterCastActDelay: 1000
     Duration1:
       - Level: 1
-        Time: 75000
-      - Level: 2
-        Time: 90000
-      - Level: 3
         Time: 105000
-      - Level: 4
+      - Level: 2
         Time: 120000
-      - Level: 5
+      - Level: 3
         Time: 135000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 12
-        - Level: 2
-          Amount: 14
-        - Level: 3
           Amount: 16
-        - Level: 4
+        - Level: 2
           Amount: 18
-        - Level: 5
+        - Level: 3
           Amount: 20
     Status: StripShield
     CastCancel: false
   - Id: 217
     Name: RG_STRIPARMOR
     Description: Divest Armor
-    MaxLevel: 5
+    MaxLevel: 3
     Type: Weapon
     TargetType: Attack
     DamageFlags:
@@ -5962,33 +5943,25 @@ Body:
     AfterCastActDelay: 1000
     Duration1:
       - Level: 1
-        Time: 75000
-      - Level: 2
-        Time: 90000
-      - Level: 3
         Time: 105000
-      - Level: 4
+      - Level: 2
         Time: 120000
-      - Level: 5
+      - Level: 3
         Time: 135000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 17
-        - Level: 2
-          Amount: 19
-        - Level: 3
           Amount: 21
-        - Level: 4
+        - Level: 2
           Amount: 23
-        - Level: 5
+        - Level: 3
           Amount: 25
     Status: StripArmor
     CastCancel: false
   - Id: 218
     Name: RG_STRIPHELM
     Description: Divest Helm
-    MaxLevel: 5
+    MaxLevel: 3
     Type: Weapon
     TargetType: Attack
     DamageFlags:
@@ -6000,26 +5973,18 @@ Body:
     AfterCastActDelay: 1000
     Duration1:
       - Level: 1
-        Time: 75000
-      - Level: 2
-        Time: 90000
-      - Level: 3
         Time: 105000
-      - Level: 4
+      - Level: 2
         Time: 120000
-      - Level: 5
+      - Level: 3
         Time: 135000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 12
-        - Level: 2
-          Amount: 14
-        - Level: 3
           Amount: 16
-        - Level: 4
+        - Level: 2
           Amount: 18
-        - Level: 5
+        - Level: 3
           Amount: 20
     Status: StripHelm
     CastCancel: false
@@ -6047,7 +6012,7 @@ Body:
           Amount: 25
   - Id: 220
     Name: RG_GRAFFITI
-    Description: Scribble
+    Description: Graffiti
     MaxLevel: 1
     TargetType: Ground
     DamageFlags:
@@ -6055,15 +6020,17 @@ Body:
     Range: 1
     Hit: Single
     HitCount: 1
-    Duration1: 180000
+    Duration1: 60000
+    Cooldown: 30000
     Requires:
       SpCost: 15
       ItemCost:
-        - Item: Red_Gemstone
+        - Item: Surface_Paint
           Amount: 1
     Unit:
       Id: Graffiti
-      Interval: -1
+      Interval: 1000
+      Target: Party
       Flag:
         NoReiteration: true
         RemovedByFireRain: true
@@ -6094,9 +6061,8 @@ Body:
       SpCost: 5
   - Id: 223
     Name: RG_GANGSTER
-    Description: Slyness
+    Description: Opportunist
     MaxLevel: 1
-    SplashArea: 1
   - Id: 224
     Name: RG_COMPULSION
     Description: Haggle
@@ -17460,6 +17426,21 @@ Body:
     Type: Weapon
   - Id: 1064
     Name: AM_BIOMANCER
+    Description: Soul of the Biomancer
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1065
+    Name: RG_NIGHTBLADE
+    Description: Soul of the Nightblade
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1066
+    Name: RG_MIMIC
+    Description: Soul of the Mimic
+    MaxLevel: 1
+    Type: Weapon
+  - Id: 1067
+    Name: RG_SUPPORT_PLAGIARISM
     Description: Soul of the Biomancer
     MaxLevel: 1
     Type: Weapon
