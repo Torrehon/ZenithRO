@@ -5,7 +5,16 @@
 
 #include "../skill_impl.hpp"
 
-class SkillPlagiarism : public SkillImpl {
+// Clase para el Plagiarism Clásico
+class SkillPlagiarismOffensive : public SkillImpl {
 public:
-	SkillPlagiarism();
+	SkillPlagiarismOffensive();
+	void castendNoDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const override; // <-- Cambiado a NoDamageId
+};
+
+// Clase para el Plagiarism de Soporte
+class SkillPlagiarismSupport : public SkillImpl {
+public:
+	SkillPlagiarismSupport();
+	void castendNoDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const override;
 };

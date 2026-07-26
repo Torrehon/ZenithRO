@@ -27810,3 +27810,23 @@ Defeat the Mermaid of the Depths inside the instance.#
 You have defeated the guardian of the deep. Return to the surface and report to Archeologist Dan to claim your rewards and conclude the expedition.#
 Talk to Archeologist Dan at the surface.#
 #
+
+90001#Soul Quest: The Dawn Awakening#SG_FEEL#QUE_NOIMAGE#
+The Scholar in Prontera Library recognized your Dawn Weapon. Gather magical energy from 4 ancient sanctuaries across Midgard: prt_fild07 (226, 112), pay_fild03 (162, 215), moc_fild11 (140, 242), pay_fild02 (104, 245).#
+Absorb magic energy at all 4 sanctuaries: prt_fild07 (226,112), pay_fild03 (162,215), moc_fild11 (140,242), pay_fild02 (104,245).#
+#
+
+90002#Soul Quest: Return to Scholar#SG_FEEL#QUE_NOIMAGE#
+Your Dawn Weapon is overflowing with ancient cosmic energy. Return to the Scholar in Prontera Library.#
+Report your findings to the Scholar in Prontera Library.#
+#
+
+90003#Soul Quest: The Celestial Call#SG_FEEL#QUE_NOIMAGE#
+Travel to the elevated peaks of Geffen Field (gef_fild07 182, 240) with your Dawn Weapon equipped to channel the celestial call.#
+Travel to gef_fild07 (182, 240) with your Dawn Weapon.#
+#
+
+90004#Soul Quest: Pantheon of Heroes#SG_FEEL#QUE_NOIMAGE#
+You have entered the Pantheon of Heroes. Speak with the Einherjar hero corresponding to your job class to claim your ancient Hero Soul.#
+Claim your Hero Soul from your job's Einherjar in 1@4tro.#
+#

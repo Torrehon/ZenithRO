@@ -5830,7 +5830,7 @@ Body:
     TargetType: Attack
     DamageFlags:
       Critical: true
-    Range: -1
+    Range: -4
     Hit: Single
     HitCount: 1
     Element: Weapon
@@ -6069,8 +6069,12 @@ Body:
     MaxLevel: 5
   - Id: 225
     Name: RG_PLAGIARISM
-    Description: Intimidate
+    Description: Offensive Plagiarism
     MaxLevel: 10
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    CastTime: 1000
   - Id: 226
     Name: AM_AXEMASTERY
     Description: Axe Mastery
@@ -6823,6 +6827,10 @@ Body:
     Requires:
       SpCost: 30
     Status: Providence
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
   - Id: 257
     Name: CR_DEFENDER
     Description: Defending Aura
@@ -8601,15 +8609,15 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 23
+          Amount: 18
         - Level: 2
-          Amount: 26
+          Amount: 21
         - Level: 3
-          Amount: 29
+          Amount: 24
         - Level: 4
-          Amount: 32
+          Amount: 27
         - Level: 5
-          Amount: 35
+          Amount: 30
       Weapon:
         Whip: true
     Unit:
@@ -16953,7 +16961,7 @@ Body:
       AllowOnWarg: true
       AllowOnMado: true
     Hit: Single
-    SplashArea: 2          # Mantiene el área de 5x5 alrededor del jugador
+    SplashArea: 2          # Mantiene el Ã¡rea de 5x5 alrededor del jugador
     AfterCastActDelay: 300 # Solo 0.3 segundos de retraso (puedes poner 0 si quieres)
     Requires:
       SpCost: 0            # Coste de SP eliminado
@@ -17314,71 +17322,99 @@ Body:
     Description: Soul of the Blader
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1042
     Name: KN_LANCERSOUL
     Description: Soul of the Lancer
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1043
     Name: WZ_MAGUSSOUL
     Description: Soul of the Magus
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1044
     Name: WZ_HEXERSOUL
     Description: Soul of the Hexer
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1045
     Name: HT_SHOOTERSOUL
     Description: Soul of the Sharpshooter
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1046
     Name: HT_TRAPPERSOUL
     Description: Soul of the Trapper
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1047
     Name: BS_JUGGERNAUTSOUL
     Description: Soul of the Juggernaut
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1048
     Name: BS_FORGEMASTERSOUL
     Description: Soul of the Forgemaster
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1049
     Name: PR_EXORCISTSOUL
     Description: Soul of the Exorcist
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1050
     Name: PR_SAINTSOUL
     Description: Soul of the Saint
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1051
     Name: AS_EXECSOUL
     Description: Soul of the Executioner
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1052
     Name: AS_VIPERSOUL
     Description: Soul of the Viper
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1053
     Name: CR_TEMPLARSOUL
     Description: Soul of the Templar
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1054
     Name: CR_GUARDIANSOUL
     Description: Soul of the Guardian
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1055
     Name: NJ_KENSEISOUL
     Description: Soul of the Kensei
@@ -17394,55 +17430,79 @@ Body:
     Description: Soul of the Arcanist
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1058
     Name: SA_LORESOUL
     Description: Soul of the Loremaster
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1059
     Name: BD_RESONANT
     Description: Soul of the Resonant
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1060
     Name: BD_DISSONANT
     Description: Soul of the Dissonant
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1061
     Name: MO_PUGILIST
     Description: Soul of the Pugilist
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1062
     Name: MO_ASCETIC
     Description: Soul of the Ascetic
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1063
     Name: AM_APOTHECARY
     Description: Soul of the Apothecary
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1064
     Name: AM_BIOMANCER
     Description: Soul of the Biomancer
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1065
     Name: RG_NIGHTBLADE
     Description: Soul of the Nightblade
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1066
     Name: RG_MIMIC
     Description: Soul of the Mimic
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1067
     Name: RG_SUPPORT_PLAGIARISM
-    Description: Soul of the Biomancer
-    MaxLevel: 1
+    Description: Support Plagiarism
+    MaxLevel: 10
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    CastTime: 1000
     Type: Weapon
   - Id: 2001
     Name: RK_ENCHANTBLADE

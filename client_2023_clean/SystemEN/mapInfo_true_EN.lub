@@ -1713,10 +1713,10 @@ mapTbl = {
 		backgroundBmp = "field2_s2"
 	},
 	["1@4tro.rsw"] = {
-		displayName = "Kvashir's Ship",
+		displayName = "Pantheon of Heroes",
 		notifyEnter = true,
 		signName = {
-			mainTitle = "Kvashir's Ship"
+			mainTitle = "Pantheon of Heroes"
 		},
 		backgroundBmp = "field2_s2"
 	},

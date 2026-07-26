@@ -1341,6 +1341,10 @@ void clif_poison_list( map_session_data& sd, uint16 skill_lv );
 
 void clif_autoshadowspell_list( map_session_data& sd );
 
+// --- INICIO CUSTOM: Plagiarism UI ---
+void clif_plagiarism_list(map_session_data* sd, bool is_support);
+// --- FIN CUSTOM ---
+
 int32 clif_skill_itemlistwindow( map_session_data *sd, uint16 skill_id, uint16 skill_lv );
 void clif_elemental_info( const map_session_data* sd );
 void clif_elemental_updatestatus( const map_session_data& sd, _sp type );

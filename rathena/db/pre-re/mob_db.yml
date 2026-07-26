@@ -58024,6 +58024,7 @@ Body:
     ElementLevel: 2
     WalkSpeed: 1000
     ClientAttackMotion: 0
+    Class: Boss
     Ai: 06
     Modes:
       TeleportBlock: true

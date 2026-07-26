@@ -1,0 +1,1168 @@
+// ==============================================================
+// SOUL QUESTS I - The Legend Search and Souls of Heroes
+// ==============================================================
+
+// --------------------------------------------------------------
+// Helper Function: Checks if player has a Dawn Weapon equipped
+// --------------------------------------------------------------
+function	script	F_HasDawnWeaponEquipped	{
+	.@r = getequipid(EQI_HAND_R);
+	.@l = getequipid(EQI_HAND_L);
+	if ((.@r >= 40000 && .@r <= 40011) || (.@l >= 40000 && .@l <= 40011))
+		return 1;
+	return 0;
+}
+
+// --------------------------------------------------------------
+// Helper Function: Checks if player is 2nd Job (Normal or Trans)
+// --------------------------------------------------------------
+function	script	F_Is2ndJob	{
+	switch (BaseJob) {
+		case Job_Knight:
+		case Job_Priest:
+		case Job_Wizard:
+		case Job_Blacksmith:
+		case Job_Hunter:
+		case Job_Assassin:
+		case Job_Crusader:
+		case Job_Monk:
+		case Job_Sage:
+		case Job_Rogue:
+		case Job_Alchemist:
+		case Job_Bard:
+		case Job_Dancer:
+			return 1;
+		default:
+			return 0;
+	}
+}
+
+// --------------------------------------------------------------
+// Helper Function: Checks if player already has a Soul skill learned
+// --------------------------------------------------------------
+function	script	F_HasSoulSkill	{
+	if (getskilllv(getarg(0)) > 0 || getskilllv(getarg(1)) > 0)
+		return 1;
+	return 0;
+}
+
+// ==============================================================
+// STEP 1 - Scholar NPC in Prontera Library (prt_in 160, 49)
+// ==============================================================
+prt_in,160,49,4	script	Scholar#soulq1	743,{
+	if (!F_Is2ndJob()) {
+		mes "[Scholar]";
+		mes "Ah, greetings traveler. Welcome to the Grand Library of Prontera.";
+		mes "I have spent decades poring over dusty tomes and faded manuscripts, searching for traces of the ancient heroes who once walked these lands.";
+		next;
+		mes "[Scholar]";
+		mes "Alas, your spirit is not yet tempered enough to comprehend the true weight of our history.";
+		mes "Return to me once you have earned your place among the ranks of a Second Job class.";
+		close;
+	}
+
+	if (SOUL_QUEST1_STEP == 0) {
+		mes "[Scholar]";
+		mes "Greetings, adventurer! Welcome to the Grand Library of Prontera.";
+		mes "I have spent my entire life researching the ancient founding heroes of Midgard and the age-old legends of our world.";
+		next;
+		mes "[Scholar]";
+		mes "Ancient scriptures recount that during the Age of Myths, the founding heroes wielded extraordinary weapons forged from cosmic light—the legendary ^0000FFDawn Weapons^000000.";
+		mes "They say these weapons fell from the heavens as divine gifts to mortal champions fighting against primordial darkness.";
+		next;
+
+		if (!F_HasDawnWeaponEquipped()) {
+			mes "[Scholar]";
+			mes "I believe some of these sacred arms still exist scattered throughout Midgard, awaiting a worthy wielder.";
+			mes "If you ever come across or equip one of these legendary ^0000FFDawn Weapons^000000, please return to me. I would be honored to examine its aura!";
+			close;
+		}
+
+		mes "[Scholar]";
+		mes "Wait... As I look at you... By the Allfather! That weapon you carry equipped!";
+		mes "The intricate runic engravings... the faint, pulsing warmth lingering around your grip... Can it truly be?!";
+		next;
+		mes "[Scholar]";
+		mes "May I inspect your weapon? Ah, magnificent! The weight, the balance, the latent cosmic frequency...";
+		mes "Without a doubt, you are wielding a genuine, legendary ^0000FFDawn Weapon^000000!";
+		next;
+		mes "[Scholar]";
+		mes "However, over centuries of dormancy, its divine essence has fallen asleep.";
+		mes "Ancient texts mention that Midgard's natural ley lines retain residual mana capable of re-igniting the core of a Dawn Weapon.";
+		next;
+		mes "[Scholar]";
+		mes "You must journey to 4 sacred sanctuaries across Midgard where ancient mana pools naturally:";
+		mes "1. ^FF0000Prontera Field^000000 (prt_fild07 226,112) - The Sacred Meadow";
+		mes "2. ^FF0000Alberta Field^000000 (pay_fild03 162,215) - The Maritime Leyline";
+		mes "3. ^FF0000Morocc Field^000000 (moc_fild11 140,242) - The Desert Mana Nexus";
+		mes "4. ^FF0000Payon Field^000000 (pay_fild02 104,245) - The Ancestral Grove";
+		next;
+		mes "[Scholar]";
+		mes "Interact with the mana node at each location with your weapon equipped to channel the dormant energy.";
+		mes "The order does not matter. Once your weapon has absorbed all 4 energies, return to me!";
+		SOUL_QUEST1_STEP = 1;
+		setquest 90001;
+		close;
+	}
+
+	if (SOUL_QUEST1_STEP == 1) {
+		if (SOUL_QUEST1_SPOTS < 15) {
+			mes "[Scholar]";
+			mes "Ah, welcome back! Let me sense the aura of your weapon...";
+			mes "Hmm, I can tell it has not yet absorbed all 4 sacred energies.";
+			next;
+			mes "[Scholar]";
+			mes "Remember to visit each of the 4 ancient sanctuaries:";
+			mes "- Prontera Field (prt_fild07 226,112) " + ((SOUL_QUEST1_SPOTS & 1) ? "^00FF00[Charged]^000000" : "^FF0000[Pending]^000000");
+			mes "- Alberta Field (pay_fild03 162,215) " + ((SOUL_QUEST1_SPOTS & 2) ? "^00FF00[Charged]^000000" : "^FF0000[Pending]^000000");
+			mes "- Morocc Field (moc_fild11 140,242) " + ((SOUL_QUEST1_SPOTS & 4) ? "^00FF00[Charged]^000000" : "^FF0000[Pending]^000000");
+			mes "- Payon Field (pay_fild02 104,245) " + ((SOUL_QUEST1_SPOTS & 8) ? "^00FF00[Charged]^000000" : "^FF0000[Pending]^000000");
+			close;
+		}
+
+		if (checkquest(90001) == 1) {
+			completequest 90001;
+			setquest 90002;
+		}
+
+		mes "[Scholar]";
+		mes "Astounding! Magnificent! The ambient mana around your weapon is practically singing!";
+		mes "The four elemental energies have harmonized perfectly inside the weapon's core.";
+		next;
+		mes "[Scholar]";
+		mes "According to the ancient texts of Geffen's arch-magi, when a Dawn Weapon reaches full resonance, it can open a bridge to higher realms.";
+		mes "You must travel to the elevated mountain ridge of ^0000FFGeffen Field (gef_fild07 182, 240)^000000.";
+		next;
+		mes "[Scholar]";
+		mes "Stand at the highest peak with your Dawn Weapon equipped. If the legends hold true, the firmament itself will answer your call!";
+		SOUL_QUEST1_STEP = 2;
+		if (checkquest(90002) == 1)
+			completequest 90002;
+		if (checkquest(90003) < 0)
+			setquest 90003;
+		close;
+	}
+
+	if (SOUL_QUEST1_STEP >= 2) {
+		mes "[Scholar]";
+		mes "Do not delay, brave adventurer!";
+		mes "Go to ^0000FFgef_fild07 (182, 240)^000000 with your Dawn Weapon equipped and listen for the call of the cosmos.";
+		close;
+	}
+}
+
+// ==============================================================
+// STEP 1 - Magical Energy Sanctuaries (Clickable Interactive NPCs with Sprite 10043)
+// ==============================================================
+
+// Helper Function for Energy Nodes
+function	script	F_ChannelEnergyNode	{
+	.@spot_mask = getarg(0);
+	.@spot_num  = getarg(1);
+	.@location$ = getarg(2);
+
+	if (SOUL_QUEST1_STEP < 1) {
+		mes "[Mana Sanctuary]";
+		mes "An ancient mana nexus. It radiates a faint primordial energy, but you currently have no reason to channel it.";
+		close;
+	}
+
+	if (!F_HasDawnWeaponEquipped()) {
+		mes "[Mana Sanctuary]";
+		mes "You feel the magical energy surging from the earth, but you do not have a ^0000FFDawn Weapon^000000 equipped to absorb it.";
+		close;
+	}
+
+	if (SOUL_QUEST1_SPOTS & .@spot_mask) {
+		mes "[Mana Sanctuary]";
+		mes "You have already absorbed the magical energy from this sanctuary into your Dawn Weapon.";
+		close;
+	}
+
+	mes "[Mana Sanctuary]";
+	mes "You touch the ancient mana sanctuary and begin channeling its " + .@location$ + " magic energy into your Dawn Weapon...";
+	close2;
+
+	progressbar "0x00FF00", 3;
+
+	SOUL_QUEST1_SPOTS |= .@spot_mask;
+	specialeffect2 EF_HOLYLIGHT;
+
+	// Calculate count of charged spots
+	.@count = 0;
+	if (SOUL_QUEST1_SPOTS & 1) .@count++;
+	if (SOUL_QUEST1_SPOTS & 2) .@count++;
+	if (SOUL_QUEST1_SPOTS & 4) .@count++;
+	if (SOUL_QUEST1_SPOTS & 8) .@count++;
+
+	dispbottom "Your Dawn weapon absorbs the " + .@location$ + " magic energy! (" + .@count + "/4)";
+
+	if (SOUL_QUEST1_SPOTS == 15) {
+		dispbottom "Your Dawn weapon is fully charged with magic energy! Return to the Scholar in Prontera library.";
+		if (checkquest(90001) == 1) {
+			completequest 90001;
+			setquest 90002;
+		}
+	}
+	end;
+}
+
+// Spot 1: Prontera (prt_fild07 226, 112)
+prt_fild07,226,112,4	script	Sacred Mana Source	10043,{
+	callfunc "F_ChannelEnergyNode", 1, 1, "sacred";
+}
+
+// Spot 2: Alberta (pay_fild03 162, 215)
+pay_fild03,162,215,4	script	Maritime Mana Source	10043,{
+	callfunc "F_ChannelEnergyNode", 2, 2, "maritime";
+}
+
+// Spot 3: Morocc (moc_fild11 140, 242)
+moc_fild11,140,242,4	script	Desert Mana Source	10043,{
+	callfunc "F_ChannelEnergyNode", 4, 3, "desert";
+}
+
+// Spot 4: Payon (pay_fild02 104, 245)
+pay_fild02,104,245,4	script	Ancestral Mana Source	10043,{
+	callfunc "F_ChannelEnergyNode", 8, 4, "ancestral";
+}
+
+// ==============================================================
+// STEP 1 - Summon Portal in Geffen (gef_fild07 182, 240)
+// ==============================================================
+gef_fild07,182,240,0	script	GeffenPortal#soulq1	-1,2,2,{
+	end;
+OnTouch:
+	if (SOUL_QUEST1_STEP >= 2 && F_HasDawnWeaponEquipped()) {
+		if (SOUL_QUEST1_STEP == 2)
+			SOUL_QUEST1_STEP = 3;
+		
+		if (checkquest(90003) == 1)
+			completequest 90003;
+		if (checkquest(90004) < 0)
+			setquest 90004;
+
+		mes "[Dawn Weapon]";
+		mes "^0000FFAn intense beam of light shoots up into the sky from your Dawn weapon! The clouds part above you...^000000";
+		next;
+		mes "^FF0000Heavenly Voice:^000000";
+		mes "''Mortal who wields the sacred weapon of first dawn... Thy deeds have echoed into Valhalla.''";
+		mes "''Step forward and join us in the Pantheon of the Heroes of Old!''";
+		close2;
+		warp "1@4tro",53,51;
+	}
+	end;
+}
+
+// ==============================================================
+// STEP 2 - Valkyrie and Pantheon of Heroes (1@4tro)
+// ==============================================================
+
+// Valkyrie (811) - Coordinates 53, 51 (Facing South = 4)
+1@4tro,53,51,4	script	Valkyrie#soulq1	811,{
+	mes "[Valkyrie]";
+	mes "Greetings, brave mortal. I am Valkyrie Kara, guardian of the sacred realm of the departed.";
+	mes "You stand within the ^0000FFPantheon of the Heroes of Old^000000, where the spirits of Midgard's greatest champions rest in eternal honor.";
+	next;
+	mes "[Valkyrie]";
+	mes "The Einherjars who dwell in this sanctuary were once masters of your very discipline.";
+	mes "Seek out the Einherjar of your profession, offer your tribute, and claim their ancient Hero Soul.";
+	next;
+	mes "[Valkyrie]";
+	mes "Would you like to return to the mortal realm of Midgard?";
+	next;
+	if (select("Remain here in the Pantheon:Return to Geffen Field (gef_fild07)") == 2) {
+		mes "[Valkyrie]";
+		mes "May the light of the gods watch over your path.";
+		close2;
+		warp "gef_fild07",173,246;
+		end;
+	}
+	mes "[Valkyrie]";
+	mes "Go forth and speak with the Einherjar of your class.";
+	close;
+}
+
+// 1. Knight Einherjar (4252) - Male, Golden Blonde Warrior (Sir Roland) [Skills: 1041, 1042]
+1@4tro,22,52,6	script	Knight Einherjar	4252,{
+	mes "[Knight Einherjar]";
+	mes "Greetings, traveler! I am Sir Roland of the Silver Order.";
+	mes "In life, I led the heavy cavalry through the Siege of Prontera, standing as an unyielding sword for the kingdom of Midgard.";
+	next;
+	if (BaseJob != Job_Knight) {
+		mes "[Knight Einherjar]";
+		mes "However, my martial oath belongs only to Knights of the realm. I cannot grant my ancestral soul to another path.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Knight Einherjar]";
+		mes "Your spirit shows promise, but your martial foundation is not yet forged in fire. Return when you reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1041, 1042)) {
+		mes "[Knight Einherjar]";
+		mes "You already carry the spirit of a legendary knight hero within your soul. Serve Midgard well!";
+		close;
+	}
+
+	mes "[Knight Einherjar]";
+	mes "To resonate with the heroic spirit of the Silver Order, your blade requires a symbol of sacred duty.";
+	mes "Offer 1 ^0000FFChivalry Emblem^000000 upon the altar of Valhalla to prove your unyielding knightly honor.";
+	next;
+	if (countitem(1004) < 1) {
+		mes "[Knight Einherjar]";
+		mes "Alas, your hands carry no ^0000FFChivalry Emblem^000000 (Item ID 1004). Seek this emblem of valor and present it when your honor is ready.";
+		close;
+	}
+
+	mes "[Knight Einherjar]";
+	mes "Choose the hero soul that shall empower your martial style:";
+	mes "- ^0000FFSoul of the Blader^000000: Sword specialist focusing on Critical hits, high ASPD, and single-target duels.";
+	mes "- ^0000FFSoul of the Lancer^000000: Spear specialist focusing on Crowd Control and heavy Area-of-Effect (AoE) damage.";
+	next;
+	switch(select("Soul of the Blader:Soul of the Lancer:Cancel")) {
+		case 1:
+			delitem 1004, 1;
+			skill 1041, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Knight Einherjar]";
+			mes "You have received the ^0000FFSoul of the Blader^000000. May your sword cleave through every obstacle!";
+			close;
+		case 2:
+			delitem 1004, 1;
+			skill 1042, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Knight Einherjar]";
+			mes "You have received the ^0000FFSoul of the Lancer^000000. May your spear pierce all darkness!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 5;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 1;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// 2. Crusader Einherjar (4258) - Female, Silver Ponytail Paladin (Grand Templar Gabriela) [Skills: 1053, 1054]
+1@4tro,26,65,5	script	Crusader Einherjar	4258,{
+	mes "[Crusader Einherjar]";
+	mes "Peace be with you, warrior. I am Grand Templar Gabriela.";
+	mes "In life, I stood as an impenetrable wall against demonic hordes, guarding the faithful with my holy shield.";
+	next;
+	if (BaseJob != Job_Crusader) {
+		mes "[Crusader Einherjar]";
+		mes "However, my divine blessing is reserved solely for Crusaders. May the light guide your own path.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Crusader Einherjar]";
+		mes "Your devotion is pure, but your physical vessel requires further discipline. Return when you reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1053, 1054)) {
+		mes "[Crusader Einherjar]";
+		mes "The holy protection of our ancestors already rests upon your shield.";
+		close;
+	}
+
+	mes "[Crusader Einherjar]";
+	mes "Our holy shield only answers to those whose faith is tested in the crucible of battle.";
+	mes "Present 1 ^0000FFChivalry Emblem^000000 to consecrate your shield with divine radiance.";
+	next;
+	if (countitem(1004) < 1) {
+		mes "[Crusader Einherjar]";
+		mes "You lack the ^0000FFChivalry Emblem^000000 (Item ID 1004) needed to seal our holy covenant. Return when you carry the mark of templar devotion.";
+		close;
+	}
+
+	mes "[Crusader Einherjar]";
+	mes "Choose the divine guardian spirit for your path:";
+	mes "- ^0000FFSoul of the Templar^000000: Holy magic specialist who wields divine light offensively and defensively.";
+	mes "- ^0000FFSoul of the Guardian^000000: Shield specialist who protects and supports party allies while standing as an iron wall.";
+	next;
+	switch(select("Soul of the Templar:Soul of the Guardian:Cancel")) {
+		case 1:
+			delitem 1004, 1;
+			skill 1053, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Crusader Einherjar]";
+			mes "You have received the ^0000FFSoul of the Templar^000000. Stand firm in holy faith!";
+			close;
+		case 2:
+			delitem 1004, 1;
+			skill 1054, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Crusader Einherjar]";
+			mes "You have received the ^0000FFSoul of the Guardian^000000. Protect the innocent with your life!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 7;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 6;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// 3. Priest Einherjar (4256) - Female, Soft Brunette Abbess (High Abbess Beatrice) [Skills: 1049, 1050]
+1@4tro,36,74,5	script	Priest Einherjar	4256,{
+	mes "[Priest Einherjar]";
+	mes "Blessings upon you, traveler. I am High Abbess Beatrice.";
+	mes "In life, I consecrated holy ground and healed thousands across Midgard during the ancient plague.";
+	next;
+	if (BaseJob != Job_Priest) {
+		mes "[Priest Einherjar]";
+		mes "However, my divine revelation belongs only to Priests of Odin. Go with grace.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Priest Einherjar]";
+		mes "Child of light, your spiritual vessel must grow stronger. Reach at least ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1049, 1050)) {
+		mes "[Priest Einherjar]";
+		mes "You already walk with the sacred soul of the holy priesthood.";
+		close;
+	}
+
+	mes "[Priest Einherjar]";
+	mes "To channel the sacred choir of Odinic light, we must tether your mortal vessel to the divine cosmos.";
+	mes "Place 1 ^0000FFHand of God^000000 upon our sanctum as a holy conduit.";
+	next;
+	if (countitem(1009) < 1) {
+		mes "[Priest Einherjar]";
+		mes "The sacred energy cannot form without 1 ^0000FFHand of God^000000 (Item ID 1009). Seek out this relic of divine grace and return to me.";
+		close;
+	}
+
+	mes "[Priest Einherjar]";
+	mes "Select the divine grace of your soul:";
+	mes "- ^0000FFSoul of the Saint^000000: Support specialist focusing on powerful healing and group buffs.";
+	mes "- ^0000FFSoul of the Exorcist^000000: Offensive Holy magic specialist who banishes demon and undead foes.";
+	next;
+	switch(select("Soul of the Exorcist:Soul of the Saint:Cancel")) {
+		case 1:
+			delitem 1009, 1;
+			skill 1049, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Priest Einherjar]";
+			mes "You have received the ^0000FFSoul of the Exorcist^000000. Banish all evil spirits!";
+			close;
+		case 2:
+			delitem 1009, 1;
+			skill 1050, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Priest Einherjar]";
+			mes "You have received the ^0000FFSoul of the Saint^000000. May divine healing flow through you!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 12;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 3;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// 4. Monk Einherjar (4262) - Male, Shaved Black Hair Martial Artist (Master Chen) [Skills: 1061, 1062]
+1@4tro,49,77,4	script	Monk Einherjar	4262,{
+	mes "[Monk Einherjar]";
+	mes "Focus your breath and listen well. I am Master Chen of St. Capitolina.";
+	mes "In life, I shattered mountains with my bare knuckles and mastered the flow of internal qi.";
+	next;
+	if (BaseJob != Job_Monk) {
+		mes "[Monk Einherjar]";
+		mes "However, my secret martial techniques belong strictly to Monks of the order. Train hard in your own discipline.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Monk Einherjar]";
+		mes "Your martial spirit is still unpolished. Train until you reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1061, 1062)) {
+		mes "[Monk Einherjar]";
+		mes "The spirit of the ancient masters already flows through your qi.";
+		close;
+	}
+
+	mes "[Monk Einherjar]";
+	mes "To ignite the dormant qi within your fists, you must offer a vessel of pure spiritual authority.";
+	mes "Present 1 ^0000FFHand of God^000000 so the ancestral masters may channel our martial essence into your strike.";
+	next;
+	if (countitem(1009) < 1) {
+		mes "[Monk Einherjar]";
+		mes "Your internal energy lacks a spiritual focus. Return with 1 ^0000FFHand of God^000000 (Item ID 1009) to kindle your martial soul.";
+		close;
+	}
+
+	mes "[Monk Einherjar]";
+	mes "Choose the discipline of your martial soul:";
+	mes "- ^0000FFSoul of the Pugilist^000000: Agile close-combat specialist utilizing rapid combos and physical tanking.";
+	mes "- ^0000FFSoul of the Ascetic^000000: Spiritual magic specialist wielding explosive burst damage and magic tanking.";
+	next;
+	switch(select("Soul of the Pugilist:Soul of the Enlightened:Cancel")) {
+		case 1:
+			delitem 1009, 1;
+			skill 1061, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Monk Einherjar]";
+			mes "You have received the ^0000FFSoul of the Pugilist^000000. Strike with absolute focus!";
+			close;
+		case 2:
+			delitem 1009, 1;
+			skill 1062, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Monk Einherjar]";
+			mes "You have received the ^0000FFSoul of the Enlightened^000000. Master mind and body!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 1;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 4;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 3;
+	end;
+}
+
+// 5. Wizard Einherjar (4255) - Male, Crimson Long-Haired Sorcerer (Archmage Ignis) [Skills: 1043, 1044]
+1@4tro,62,74,3	script	Wizard Einherjar	4255,{
+	mes "[Wizard Einherjar]";
+	mes "Beware the arcane currents around us! I am Archmage Ignis.";
+	mes "In life, I summoned elemental tempests that reshaped entire mountain ranges.";
+	next;
+	if (BaseJob != Job_Wizard) {
+		mes "[Wizard Einherjar]";
+		mes "However, only Wizards possess the mana matrix capable of wielding my spellcraft.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Wizard Einherjar]";
+		mes "Your mana capacity is insufficient to channel high sorcery. Reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1043, 1044)) {
+		mes "[Wizard Einherjar]";
+		mes "You already wield the high arcane soul of our order.";
+		close;
+	}
+
+	mes "[Wizard Einherjar]";
+	mes "High elemental magic requires a matrix capable of containing raw cosmic incantations.";
+	mes "Offer 1 ^0000FFOld Magicbook^000000 so we may transcribe the forbidden spells of the ancient arch-magi into your soul.";
+	next;
+	if (countitem(1006) < 1) {
+		mes "[Wizard Einherjar]";
+		mes "Without 1 ^0000FFOld Magicbook^000000 (Item ID 1006), the arcane spellcraft would tear your mind asunder. Bring the tome of ancient knowledge!";
+		close;
+	}
+
+	mes "[Wizard Einherjar]";
+	mes "Choose the arcane aspect of your soul:";
+	mes "- ^0000FFSoul of the Magus^000000: Arcane specialist wielding catastrophic, explosive magic damage.";
+	mes "- ^0000FFSoul of the Hexer^000000: Status ailment specialist who inflicts debilitating conditions and empowers their effects.";
+	next;
+	switch(select("Soul of the Magus:Soul of the Hexer:Cancel")) {
+		case 1:
+			delitem 1006, 1;
+			skill 1043, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Wizard Einherjar]";
+			mes "You have received the ^0000FFSoul of the Magus^000000. Command the elemental tempests!";
+			close;
+		case 2:
+			delitem 1006, 1;
+			skill 1044, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Wizard Einherjar]";
+			mes "You have received the ^0000FFSoul of the Hexer^000000. Weave powerful arcana!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 17;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 2;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// 6. Sage Einherjar (4261) - Female, Emerald Short Bob Scholar (High Scholar Valeria) [Skills: 1057, 1058]
+1@4tro,71,63,3	script	Sage Einherjar	4261,{
+	mes "[Sage Einherjar]";
+	mes "Knowledge is the ultimate key to reality. I am High Scholar Valeria of Yuno.";
+	mes "In life, I catalogued the elemental ley lines of Yggdrasil and unraveled ancient runes.";
+	next;
+	if (BaseJob != Job_Sage) {
+		mes "[Sage Einherjar]";
+		mes "However, my scholarly secrets belong exclusively to Sages of the academy.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Sage Einherjar]";
+		mes "Your intellect is keen, but your practical study requires ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1057, 1058)) {
+		mes "[Sage Einherjar]";
+		mes "The ancient wisdom of the scholars already guides your mind.";
+		close;
+	}
+
+	mes "[Sage Einherjar]";
+	mes "Unlocking Yggdrasil's elemental matrix demands a sacred record of ancient lore.";
+	mes "Entrust me with 1 ^0000FFOld Magicbook^000000 to harmonize the ley line frequencies with your mind.";
+	next;
+	if (countitem(1006) < 1) {
+		mes "[Sage Einherjar]";
+		mes "Your intellect is ready, but your research lacks the ^0000FFOld Magicbook^000000 (Item ID 1006). Return once you acquire this scholarly tome.";
+		close;
+	}
+
+	mes "[Sage Einherjar]";
+	mes "Select your scholarly enlightenment:";
+	mes "- ^0000FFSoul of the Arcanist^000000: Ranged offensive support specialist focusing on elemental buffs and long-range magic.";
+	mes "- ^0000FFSoul of the Loremaster^000000: Battlemage specialist who wields book combat and automatic magic spellcasting.";
+	next;
+	switch(select("Soul of the Arcanist:Soul of the Loremaster:Cancel")) {
+		case 1:
+			delitem 1006, 1;
+			skill 1057, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Sage Einherjar]";
+			mes "You have received the ^0000FFSoul of the Arcanist^000000.";
+			close;
+		case 2:
+			delitem 1006, 1;
+			skill 1058, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Sage Einherjar]";
+			mes "You have received the ^0000FFSoul of the Loremaster^000000.";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 14;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 7;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// 7. Hunter Einherjar (4257) - Male, Dark Green Wild Ranger (Master Tracker Orion) [Skills: 1045, 1046]
+1@4tro,74,51,2	script	Hunter Einherjar	4257,{
+	mes "[Hunter Einherjar]";
+	mes "Step lightly and listen to the woods. I am Master Tracker Orion.";
+	mes "In life, no beast in the deepest Payon forests ever escaped my bow and traps.";
+	next;
+	if (BaseJob != Job_Hunter) {
+		mes "[Hunter Einherjar]";
+		mes "However, my hunting spirit belongs only to Hunters of the wilderness.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Hunter Einherjar]";
+		mes "Your eagle eye needs more practice. Hone your skills until ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1045, 1046)) {
+		mes "[Hunter Einherjar]";
+		mes "You already possess the spirit of the ancient master hunter.";
+		close;
+	}
+
+	mes "[Hunter Einherjar]";
+	mes "A master marksman must possess not only a keen eye, but the deep ancestral wisdom of the wild.";
+	mes "Offer 1 ^0000FFNecklace of Wisdom^000000 so the spirits of ancient trackers may guide your arrows through the thickest canopy.";
+	next;
+	if (countitem(1007) < 1) {
+		mes "[Hunter Einherjar]";
+		mes "You do not carry 1 ^0000FFNecklace of Wisdom^000000 (Item ID 1007). Venture back into the world, retrieve this talisman, and return.";
+		close;
+	}
+
+	mes "[Hunter Einherjar]";
+	mes "Choose your hunting style:";
+	mes "- ^0000FFSoul of the Sharpshooter^000000: Bow specialist focusing on long-range precision and deadly Critical hits.";
+	mes "- ^0000FFSoul of the Trapper^000000: Wilderness specialist focusing on tactical traps and empowering Falcon attacks.";
+	next;
+	switch(select("Soul of the Sharpshooter:Soul of the Trapper:Cancel")) {
+		case 1:
+			delitem 1007, 1;
+			skill 1045, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Hunter Einherjar]";
+			mes "You have received the ^0000FFSoul of the Sharpshooter^000000. Never miss your mark!";
+			close;
+		case 2:
+			delitem 1007, 1;
+			skill 1046, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Hunter Einherjar]";
+			mes "You have received the ^0000FFSoul of the Trapper^000000. Outsmart every prey!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 8;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 5;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// 8. Bard Einherjar (4263) - Male, Wavy Lavender Minstrel (Minstrel Orpheus) [Skills: 1059, 1060]
+1@4tro,71,37,1	script	Bard Einherjar	4263,{
+	mes "[Bard Einherjar]";
+	mes "Ah, feel the celestial harmony! I am Minstrel Orpheus.";
+	mes "In life, my ballads inspired vast armies and brought peace to warring kingdoms.";
+	next;
+	if (BaseJob != Job_Bard) {
+		mes "[Bard Einherjar]";
+		mes "However, my ancestral song belongs solely to Bards of the stage.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Bard Einherjar]";
+		mes "Your rhythm is not yet fully in tune. Reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1059, 1060)) {
+		mes "[Bard Einherjar]";
+		mes "The celestial song of the ancient performers already echoes in your soul.";
+		close;
+	}
+
+	mes "[Bard Einherjar]";
+	mes "The songs of Valhalla's hall require a harmonious talisman to align mortal rhythm with celestial acoustics.";
+	mes "Offer 1 ^0000FFNecklace of Wisdom^000000 so our ballads may echo through your soul.";
+	next;
+	if (countitem(1007) < 1) {
+		mes "[Bard Einherjar]";
+		mes "Your instrument lacks the spiritual tuning of 1 ^0000FFNecklace of Wisdom^000000 (Item ID 1007). Seek this charm to complete our melody!";
+		close;
+	}
+
+	mes "[Bard Einherjar]";
+	mes "Select your mystical composition:";
+	mes "- ^0000FFSoul of the Resonant^000000: Support specialist using inspiring songs and ballads to empower party allies.";
+	mes "- ^0000FFSoul of the Dissonant^000000: Offensive musical specialist turning melodies into disruptive sonic damage.";
+	next;
+	switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
+		case 1:
+			delitem 1007, 1;
+			skill 1059, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Bard Einherjar]";
+			mes "You have received the ^0000FFSoul of the Resonant^000000. Let your music inspire all!";
+			close;
+		case 2:
+			delitem 1007, 1;
+			skill 1060, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Bard Einherjar]";
+			mes "You have received the ^0000FFSoul of the Dissonant^000000. Disrupt your foes with song!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 11;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 8;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// 9. Dancer Einherjar (4264) - Female, Flowing Ruby Dancer (Lady Lyra) [Skills: 1059, 1060]
+1@4tro,72,38,1	script	Dancer Einherjar	4264,{
+	mes "[Dancer Einherjar]";
+	mes "Step to the celestial rhythm! I am Lady Lyra.";
+	mes "In life, my dances mesmerized entire royal courts and turned the tide of battle.";
+	next;
+	if (BaseJob != Job_Dancer) {
+		mes "[Dancer Einherjar]";
+		mes "However, my mystical rhythm belongs exclusively to Dancers.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Dancer Einherjar]";
+		mes "Your steps need more grace. Reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1059, 1060)) {
+		mes "[Dancer Einherjar]";
+		mes "The celestial dance of ancient performers already echoes in your soul.";
+		close;
+	}
+
+	mes "[Dancer Einherjar]";
+	mes "To weave the mesmerising dance of ancient war-goddesses, your spirit must channel profound grace and insight.";
+	mes "Present 1 ^0000FFNecklace of Wisdom^000000 to harmonize your steps with the pulse of the stars.";
+	next;
+	if (countitem(1007) < 1) {
+		mes "[Dancer Einherjar]";
+		mes "Your rhythm needs the talisman of 1 ^0000FFNecklace of Wisdom^000000 (Item ID 1007). Obtain it and let us dance among the heroes!";
+		close;
+	}
+
+	mes "[Dancer Einherjar]";
+	mes "Select your mystical composition:";
+	mes "- ^0000FFSoul of the Resonant^000000: Support specialist using captivating dances to bolster and empower party allies.";
+	mes "- ^0000FFSoul of the Dissonant^000000: Offensive musical specialist using rhythm and performance for deadly combat damage.";
+	next;
+	switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
+		case 1:
+			delitem 1007, 1;
+			skill 1059, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Dancer Einherjar]";
+			mes "You have received the ^0000FFSoul of the Resonant^000000. Let your music inspire all!";
+			close;
+		case 2:
+			delitem 1007, 1;
+			skill 1060, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Dancer Einherjar]";
+			mes "You have received the ^0000FFSoul of the Dissonant^000000. Disrupt your foes with song!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 9;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 2;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// 10. Blacksmith Einherjar (4253) - Male, Charcoal Bearded Blacksmith (Forgefather Vulcan) [Skills: 1047, 1048]
+1@4tro,61,29,1	script	Blacksmith Einherjar	4253,{
+	mes "[Blacksmith Einherjar]";
+	mes "Clang! Feel the heat of Valhalla's forge! I am Forgefather Vulcan.";
+	mes "In life, I forged the royal armor of Prontera and mastered the anvil's spark.";
+	next;
+	if (BaseJob != Job_Blacksmith) {
+		mes "[Blacksmith Einherjar]";
+		mes "However, only Blacksmiths may channel the fire of my hammer.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Blacksmith Einherjar]";
+		mes "Your hammer arm needs more iron in it! Work hard until ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1047, 1048)) {
+		mes "[Blacksmith Einherjar]";
+		mes "The forge spirit of our master smiths already burns bright within you!";
+		close;
+	}
+
+	mes "[Blacksmith Einherjar]";
+	mes "Valhalla's anvil burns with celestial fire, but to forge an ancestral soul onto your weapon, we need a true tool of the craft.";
+	mes "Sacrifice 1 ^0000FFHammer of Blacksmith^000000 to ignite the eternal hearth.";
+	next;
+	if (countitem(1005) < 1) {
+		mes "[Blacksmith Einherjar]";
+		mes "I cannot strike the anvil without 1 ^0000FFHammer of Blacksmith^000000 (Item ID 1005)! Bring the tool of master smiths to spark our forge!";
+		close;
+	}
+
+	mes "[Blacksmith Einherjar]";
+	mes "Choose the legacy of the forge:";
+	mes "- ^0000FFSoul of the Juggernaut^000000: Melee horde specialist focusing on crowd control and clearing massive monster waves.";
+	mes "- ^0000FFSoul of the Forgemaster^000000: Crafting specialist whose combat power scales with their forging proficiency.";
+	next;
+	switch(select("Soul of the Juggernaut:Soul of the Forgemaster:Cancel")) {
+		case 1:
+			delitem 1005, 1;
+			skill 1047, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Blacksmith Einherjar]";
+			mes "You have received the ^0000FFSoul of the Juggernaut^000000. Crush all obstacles!";
+			close;
+		case 2:
+			delitem 1005, 1;
+			skill 1048, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Blacksmith Einherjar]";
+			mes "You have received the ^0000FFSoul of the Forgemaster^000000. Forge perfection!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 3;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 4;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 3;
+	end;
+}
+
+// 11. Alchemist Einherjar (4259) - Female, Golden Braided Chemist (Grand Alchemist Genevieve) [Skills: 1063, 1064]
+1@4tro,47,25,0	script	Alchemist Einherjar	4259,{
+	mes "[Alchemist Einherjar]";
+	mes "Mind the bubbling elixirs! I am Grand Alchemist Genevieve.";
+	mes "In life, I unlocked the living formulas of alchemy and artificial life.";
+	next;
+	if (BaseJob != Job_Alchemist) {
+		mes "[Alchemist Einherjar]";
+		mes "However, my chemical formulas belong solely to Alchemists.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Alchemist Einherjar]";
+		mes "Your chemical experiments require further study. Reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1063, 1064)) {
+		mes "[Alchemist Einherjar]";
+		mes "You have already assimilated the living formula of ancient alchemists.";
+		close;
+	}
+
+	mes "[Alchemist Einherjar]";
+	mes "Catalyzing living transmutations requires a precision mechanism to balance cosmic elements.";
+	mes "Present 1 ^0000FFFabricator's Cogwheel^000000 to drive our ancient alchemical apparatus.";
+	next;
+	if (countitem(7703) < 1) {
+		mes "[Alchemist Einherjar]";
+		mes "The transmutation process will fail without 1 ^0000FFFabricator's Cogwheel^000000 (Item ID 7703). Acquire this mechanical relic and return!";
+		close;
+	}
+
+	mes "[Alchemist Einherjar]";
+	mes "Choose your alchemy path:";
+	mes "- ^0000FFSoul of the Apothecary^000000: Chemical specialist focusing on bomb throw combat and potion support for allies.";
+	mes "- ^0000FFSoul of the Biomancer^000000: Biological specialist focusing on summoning pets, artificial life, and Homunculus power.";
+	next;
+	switch(select("Soul of the Apothecary:Soul of the Biomancer:Cancel")) {
+		case 1:
+			delitem 7703, 1;
+			skill 1063, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Alchemist Einherjar]";
+			mes "You have received the ^0000FFSoul of the Apothecary^000000. Master all elixirs!";
+			close;
+		case 2:
+			delitem 7703, 1;
+			skill 1064, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Alchemist Einherjar]";
+			mes "You have received the ^0000FFSoul of the Biomancer^000000. Control artificial life!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 18;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 1;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// 12. Assassin Einherjar (4254) - Male, Midnight Spiky Ninja (Shadowmaster Kael) [Skills: 1051, 1052]
+1@4tro,35,29,7	script	Assassin Einherjar	4254,{
+	mes "[Assassin Einherjar]";
+	mes "Watch the shadows... I am Shadowmaster Kael.";
+	mes "In life, I eliminated corrupt warlords without leaving a footprint or a sound.";
+	next;
+	if (BaseJob != Job_Assassin) {
+		mes "[Assassin Einherjar]";
+		mes "However, my deadly blades belong strictly to Assassins of the guild.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Assassin Einherjar]";
+		mes "Your footfalls are still too loud. Train your stealth until ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1051, 1052)) {
+		mes "[Assassin Einherjar]";
+		mes "The deadly shadow soul of our guild already flows in your veins.";
+		close;
+	}
+
+	mes "[Assassin Einherjar]";
+	mes "To walk among shadows without leaving a footprint or a whisper, you must offer a token of absolute silence.";
+	mes "Offer 1 ^0000FFNecklace of Oblivion^000000 to sever your mortal presence from the perception of mortal eyes.";
+	next;
+	if (countitem(1008) < 1) {
+		mes "[Assassin Einherjar]";
+		mes "Your steps are not yet silent. Bring 1 ^0000FFNecklace of Oblivion^000000 (Item ID 1008) to veil your existence in darkness.";
+		close;
+	}
+
+	mes "[Assassin Einherjar]";
+	mes "Select your shadow discipline:";
+	mes "- ^0000FFSoul of the Executioner^000000: Katar specialist focusing on deadly Critical strikes, high ASPD, and stealth speed.";
+	mes "- ^0000FFSoul of the Viper^000000: Venom specialist focusing on deadly poisons, crowd control, and explosive poison burst.";
+	next;
+	switch(select("Soul of the Executioner:Soul of the Viper:Cancel")) {
+		case 1:
+			delitem 1008, 1;
+			skill 1051, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Assassin Einherjar]";
+			mes "You have received the ^0000FFSoul of the Executioner^000000. Strike unseen!";
+			close;
+		case 2:
+			delitem 1008, 1;
+			skill 1052, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Assassin Einherjar]";
+			mes "You have received the ^0000FFSoul of the Viper^000000. Poison every strike!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 2;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 4;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// 13. Rogue Einherjar (4260) - Female, Copper Side-Ponytail Thief (Phantom Jacqueline) [Skills: 1065, 1066]
+1@4tro,25,39,7	script	Rogue Einherjar	4260,{
+	mes "[Rogue Einherjar]";
+	mes "Heh, keep a hand on your purse! I am Phantom Jacqueline.";
+	mes "In life, I stole the crown jewels from under tyrant kings' noses and outsmarted whole armies.";
+	next;
+	if (BaseJob != Job_Rogue) {
+		mes "[Rogue Einherjar]";
+		mes "However, my trickster cunning belongs exclusively to Rogues.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Rogue Einherjar]";
+		mes "Your tricks are a bit too predictable, novice. Come back at ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (F_HasSoulSkill(1065, 1066)) {
+		mes "[Rogue Einherjar]";
+		mes "You already carry the trickster soul of ancient rogues. Go outflank fate itself!";
+		close;
+	}
+
+	mes "[Rogue Einherjar]";
+	mes "Outwitting fate and tricking destiny requires a talisman steeped in stealth and cunning.";
+	mes "Deliver 1 ^0000FFNecklace of Oblivion^000000 to seal our ancient master ruse.";
+	next;
+	if (countitem(1008) < 1) {
+		mes "[Rogue Einherjar]";
+		mes "Heh, you're coming to a heist empty-handed! Bring 1 ^0000FFNecklace of Oblivion^000000 (Item ID 1008) so we can pull off this legend!";
+		close;
+	}
+
+	mes "[Rogue Einherjar]";
+	mes "Choose your ancestral ruse:";
+	mes "- ^0000FFSoul of the Nightblade^000000: Attrition combat specialist who inflicts multiple status ailments and wears down foes.";
+	mes "- ^0000FFSoul of the Mimic^000000: Trickster specialist who copies enemy skills and empowers them alongside other hero souls.";
+	next;
+	switch(select("Soul of the Nightblade:Soul of the Mimic:Cancel")) {
+		case 1:
+			delitem 1008, 1;
+			skill 1065, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Rogue Einherjar]";
+			mes "You have received the ^0000FFSoul of the Nightblade^000000. Ambush from the dark!";
+			close;
+		case 2:
+			delitem 1008, 1;
+			skill 1066, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Rogue Einherjar]";
+			mes "You have received the ^0000FFSoul of the Mimic^000000. Master every skill!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 0;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 15;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 5;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 3;
+	end;
+}

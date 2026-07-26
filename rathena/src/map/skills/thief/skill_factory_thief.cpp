@@ -97,6 +97,7 @@
 #include "venompressure.cpp"
 #include "venomsplasher.cpp"
 #include "weaponcrush.cpp"
+#include "plagiarism.cpp"
 
 std::unique_ptr<const SkillImpl> SkillFactoryThief::create(const e_skill skill_id) const {
 	switch (skill_id) {
@@ -304,6 +305,10 @@ std::unique_ptr<const SkillImpl> SkillFactoryThief::create(const e_skill skill_i
 			return std::make_unique<SkillSteal>();
 		case TF_THROWSTONE:
 			return std::make_unique<SkillStoneFling>();
+		case RG_PLAGIARISM:
+			return std::make_unique<SkillPlagiarismOffensive>();
+		case RG_SUPPORT_PLAGIARISM:
+			return std::make_unique<SkillPlagiarismSupport>();
 		default:
 			return nullptr;
 	}

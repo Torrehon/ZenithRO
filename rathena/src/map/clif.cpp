@@ -19886,6 +19886,57 @@ void clif_autoshadowspell_list( map_session_data& sd ){
 #endif
 }
 
+// --- INICIO CUSTOM: Plagiarism UI ---
+void clif_plagiarism_list(map_session_data* sd, bool is_support) {
+#if PACKETVER >= 20081210
+	if (!sd) return;
+	
+	// Si ya tiene el menú abierto, no hacemos nada
+	if (sd->menuskill_id == RG_PLAGIARISM || sd->menuskill_id == RG_SUPPORT_PLAGIARISM)
+		return; 
+
+	PACKET_ZC_SKILL_SELECT_REQUEST* p = reinterpret_cast<PACKET_ZC_SKILL_SELECT_REQUEST*>(packet_buffer);
+
+	p->packetType = HEADER_ZC_SKILL_SELECT_REQUEST;
+	p->packetLength = sizeof(*p);
+	p->flag = 1; // Usamos el flag 1 visual de Auto Shadow Spell para que el cliente dibuje la ventana
+
+	size_t count = 0;
+
+	if (is_support) {
+		for (int i = 0; i < sd->plagia_support_count && count < MAX_SKILL; i++) {
+			if (sd->plagia_support[i] > 0) {
+				p->skillIds[count] = sd->plagia_support[i];
+				p->packetLength += static_cast<decltype(p->packetLength)>(sizeof(p->skillIds[0]));
+				count++;
+			}
+		}
+		// Anotamos en el servidor que abrió el menú de SOPORTE
+		sd->menuskill_id = RG_SUPPORT_PLAGIARISM; 
+	} else {
+		for (int i = 0; i < sd->plagia_offensive_count && count < MAX_SKILL; i++) {
+			if (sd->plagia_offensive[i] > 0) {
+				p->skillIds[count] = sd->plagia_offensive[i];
+				p->packetLength += static_cast<decltype(p->packetLength)>(sizeof(p->skillIds[0]));
+				count++;
+			}
+		}
+		// Anotamos en el servidor que abrió el menú OFENSIVO
+		sd->menuskill_id = RG_PLAGIARISM;
+	}
+
+	if (count > 0) {
+		clif_send(p, p->packetLength, sd, SELF);
+		sd->menuskill_val = static_cast<decltype(sd->menuskill_val)>(count);
+	} else {
+		// Si por algún motivo se abre vacío, cancelamos
+		status_change_end(sd, SC_STOP);
+		clif_skill_fail(*sd, is_support ? RG_SUPPORT_PLAGIARISM : RG_PLAGIARISM, USESKILL_FAIL_LEVEL);
+	}
+#endif
+}
+// --- FIN CUSTOM ---
+
 /*===========================================
  * Skill list for Four Elemental Analysis
  * and Change Material skills.
@@ -19934,7 +19985,68 @@ void clif_parse_SkillSelectMenu(int32 fd, map_session_data *sd) {
 		}
 
 		skill_select_menu(*sd, p->selectedSkillId);
-	} else
+	} 
+	// --- INICIO CUSTOM: Respuesta de la UI de Plagiarism ---
+	else if (sd->menuskill_id == RG_PLAGIARISM || sd->menuskill_id == RG_SUPPORT_PLAGIARISM) {
+		uint16 skill_id = p->selectedSkillId;
+		bool is_support = (sd->menuskill_id == RG_SUPPORT_PLAGIARISM);
+		bool isValid = false;
+
+		// 1. Verificamos que la skill elegida esté realmente en su libreta (anti-hack)
+		if (is_support) {
+			for (int i = 0; i < sd->plagia_support_count; i++) {
+				if (sd->plagia_support[i] == skill_id) { isValid = true; break; }
+			}
+		} else {
+			for (int i = 0; i < sd->plagia_offensive_count; i++) {
+				if (sd->plagia_offensive[i] == skill_id) { isValid = true; break; }
+			}
+		}
+
+		if (isValid) {
+			uint16 idx = skill_get_index(skill_id);
+			if (idx > 0) {
+				if (is_support) {
+					// Borramos la skill de soporte anterior (slot 2)
+					pc_skill_plagiarism_reset(*sd, 2);
+					
+					// CORREGIDO: Escala con el nivel de tu skill de soporte, limitado al max de la skill copiada
+					int support_lv = pc_checkskill(sd, RG_SUPPORT_PLAGIARISM); // <-- Cambia RG_SUPPORT_PLAGIARISM si usas otra id custom
+					uint8 lv = (support_lv > 0) ? min(support_lv, skill_get_max(skill_id)) : 1;
+
+					sd->reproduceskill_idx = idx;
+					pc_setglobalreg(sd, add_str(SKILL_VAR_REPRODUCE), skill_id);
+					pc_setglobalreg(sd, add_str(SKILL_VAR_REPRODUCE_LV), lv);
+					
+					sd->status.skill[idx].id = skill_id;
+					sd->status.skill[idx].lv = lv;
+					sd->status.skill[idx].flag = SKILL_FLAG_PLAGIARIZED;
+				} else {
+					// Borramos la skill ofensiva anterior (slot 1)
+					pc_skill_plagiarism_reset(*sd, 1);
+					
+					int plag_lv = pc_checkskill(sd, RG_PLAGIARISM);
+					uint8 lv = (plag_lv > 0) ? min(plag_lv, skill_get_max(skill_id)) : skill_get_max(skill_id);
+					if (lv == 0) lv = 1;
+
+					sd->cloneskill_idx = idx;
+					pc_setglobalreg(sd, add_str(SKILL_VAR_PLAGIARISM), skill_id);
+					pc_setglobalreg(sd, add_str(SKILL_VAR_PLAGIARISM_LV), lv);
+					
+					sd->status.skill[idx].id = skill_id;
+					sd->status.skill[idx].lv = lv;
+					sd->status.skill[idx].flag = SKILL_FLAG_PLAGIARIZED;
+				}
+				
+				clif_addskill(*sd, skill_id);
+				clif_displaymessage(sd->fd, "Skill memorized successfully!");
+			}
+		} else {
+			clif_displaymessage(sd->fd, "[Error] Skill not found in your notebook.");
+		}
+	}
+	// --- FIN CUSTOM ---
+	else
 		return;
 
 	clif_menuskill_clear(sd);

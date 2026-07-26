@@ -537,6 +537,14 @@ public:
 		reproduceskill_idx; ///Stores index of copied skill by Reproduce
 	int32 menuskill_id, menuskill_val, menuskill_val2;
 
+	// --- INICIO CUSTOM: Plagiarism Observer Arrays ---
+	uint16 plagia_offensive[100] = {0};
+	int plagia_offensive_count = 0;
+
+	uint16 plagia_support[100] = {0};
+	int plagia_support_count = 0;
+	// --- FIN CUSTOM ---
+
 	int32 invincible_timer;
 	t_tick canlog_tick;
 	t_tick canuseitem_tick;	// [Skotlex]
@@ -1614,6 +1622,8 @@ void pc_regen( map_session_data& sd, t_tick diff_tick);
 
 bool pc_setstand( map_session_data* sd, bool force );
 bool pc_candrop( map_session_data* sd,struct item *item );
+
+void pc_record_plagiarism(map_session_data *sd, uint16 skill_id, bool is_support);
 
 uint64 pc_jobid2mapid( uint16 b_class );	// Skotlex
 int32 pc_mapid2jobid( uint64 class_, int32 sex );	// Skotlex

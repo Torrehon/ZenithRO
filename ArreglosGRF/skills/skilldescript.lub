@@ -2167,12 +2167,34 @@ SKILL_DESCRIPT = {
 		"[Level 5]:^777777 Discount Rate 25% ^000000"
 	},
 	[SKID.RG_PLAGIARISM] = {
-		"Plagiarism",
+		"Offensive Plagiarism",
 		"Max Level: 10",
 		"17^CC3399Requirement: Intimidate 5 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Enables the use of the last skill that was inflicted by an enemy.",
 		"This can only be used to remember character skills, and cannot enable the use of skills exclusive to monsters. Raising skill level will affect the level of skill that remembered. ^000000"
+	},
+	[SKID.RG_SUPPORT_PLAGIARISM] = {
+		"Support Plagiarism",
+		"Max Level: 10",
+		"17^CC3399Requirement: Soul of the Mimic 1 ^000000",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Enables the use of the last skill that was inflicted by an enemy.",
+		"This can only be used to remember character skills, and cannot enable the use of skills exclusive to monsters. Raising skill level will affect the level of skill that remembered. ^000000"
+	},
+    [SKID.RG_NIGHTBLADE] = {
+		"Soul of the Nightblade",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Specialist in attrition combat with multiple status ailments.^000000",
+		"^008800Nightblade Master^777777: Inflicts debilitating status ailments during combat, wearing down foes through continuous pressure.^000000"
+	},
+	[SKID.RG_MIMIC] = {
+		"Soul of the Mimic",
+		"Max Level: 1",
+		"Skill Form: ^6666CCPassive ^000000",
+		"Description: ^777777Specialist in copying enemy skills and empowering them.^000000",
+		"^008800Mimic Master^777777: Copies enemy skills and empowers them alongside other hero souls.^000000"
 	},
 	[SKID.AM_AXEMASTERY] = {
 		"Axe Mastery",

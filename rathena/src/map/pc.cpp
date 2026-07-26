@@ -2432,6 +2432,32 @@ void pc_reg_received(map_session_data *sd)
 			sd->status.skill[sd->reproduceskill_idx].flag = SKILL_FLAG_PLAGIARIZED;
 		}
 	}
+	
+	// --- INICIO CUSTOM: Cargar libretas completas de Plagiarism y restaurar estado ---
+	sd->plagia_offensive_count = (int)pc_readglobalreg(sd, add_str("PLAG_O_COUNT"));
+	for (int j = 0; j < sd->plagia_offensive_count && j < 100; j++) {
+		char buf[32]; sprintf(buf, "PLAG_O_%d", j);
+		sd->plagia_offensive[j] = (uint16)pc_readglobalreg(sd, add_str(buf));
+	}
+
+	sd->plagia_support_count = (int)pc_readglobalreg(sd, add_str("PLAG_S_COUNT"));
+	for (int j = 0; j < sd->plagia_support_count && j < 100; j++) {
+		char buf[32]; sprintf(buf, "PLAG_S_%d", j);
+		sd->plagia_support[j] = (uint16)pc_readglobalreg(sd, add_str(buf));
+	}
+
+	// Restaurar la skill de soporte activa en el árbol al hacer relog (Usa la variable oficial SKILL_VAR_REPRODUCE)
+	if ((i = pc_checkskill(sd,SC_REPRODUCE)) > 0 || pc_checkskill(sd,RG_MIMIC) > 0) {
+		uint16 skid_s = static_cast<uint16>(pc_readglobalreg(sd, add_str(SKILL_VAR_REPRODUCE)));
+		sd->reproduceskill_idx = skill_get_index(skid_s);
+		if (sd->reproduceskill_idx > 0) {
+			sd->status.skill[sd->reproduceskill_idx].id = skid_s;
+			sd->status.skill[sd->reproduceskill_idx].lv = static_cast<uint8>(pc_readglobalreg(sd, add_str(SKILL_VAR_REPRODUCE_LV)));
+			sd->status.skill[sd->reproduceskill_idx].flag = SKILL_FLAG_PLAGIARIZED;
+		}
+	}
+	// --- FIN CUSTOM ---
+	
 	//Weird... maybe registries were reloaded?
 	if (sd->state.active)
 		return;
@@ -5529,6 +5555,12 @@ bool pc_skill(map_session_data* sd, uint16 skill_id, int32 level, enum e_addskil
  */
 bool pc_skill_plagiarism(map_session_data &sd, uint16 skill_id, uint16 skill_lv)
 {
+// --- INICIO CUSTOM: Prueba de Consola ---
+	ShowWarning("\n========================================\n");
+	ShowWarning("¡EL CODIGO NUEVO DE PLAGIARISM SE ESTA LEYENDO!\n");
+	ShowWarning("========================================\n\n");
+	return false; 
+	// --- FIN CUSTOM ---
 	skill_id = skill_dummy2skill_id(skill_id);
 	uint16 idx = skill_get_index(skill_id);
 
@@ -16430,3 +16462,43 @@ void do_init_pc(void) {
 	ers_chunk_size(num_reg_ers, 300);
 	ers_chunk_size(str_reg_ers, 50);
 }
+
+// --- INICIO CUSTOM: Plagiarism Observer Logic ---
+void pc_record_plagiarism(map_session_data *sd, uint16 skill_id, bool is_support) {
+	if (!sd) return;
+
+	if (is_support) {
+		for (int i = 0; i < sd->plagia_support_count; i++) {
+			if (sd->plagia_support[i] == skill_id) return;
+		}
+		if (sd->plagia_support_count < 100) {
+			sd->plagia_support[sd->plagia_support_count] = skill_id;
+			sd->plagia_support_count++;
+			
+			// GUARDADO PERSISTENTE SOPORTE
+			char buf[32];
+			sprintf(buf, "PLAG_S_%d", sd->plagia_support_count - 1);
+			pc_setglobalreg(sd, add_str(buf), skill_id);
+			pc_setglobalreg(sd, add_str("PLAG_S_COUNT"), sd->plagia_support_count);
+			
+			clif_displaymessage(sd->fd, "Skill successfully plagiarized!");
+		}
+	} else {
+		for (int i = 0; i < sd->plagia_offensive_count; i++) {
+			if (sd->plagia_offensive[i] == skill_id) return;
+		}
+		if (sd->plagia_offensive_count < 100) {
+			sd->plagia_offensive[sd->plagia_offensive_count] = skill_id;
+			sd->plagia_offensive_count++;
+			
+			// GUARDADO PERSISTENTE OFENSIVO
+			char buf[32];
+			sprintf(buf, "PLAG_O_%d", sd->plagia_offensive_count - 1);
+			pc_setglobalreg(sd, add_str(buf), skill_id);
+			pc_setglobalreg(sd, add_str("PLAG_O_COUNT"), sd->plagia_offensive_count);
+			
+			clif_displaymessage(sd->fd, "Skill successfully plagiarized!");
+		}
+	}
+}
+// --- FIN CUSTOM ---

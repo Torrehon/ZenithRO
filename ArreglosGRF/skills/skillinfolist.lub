@@ -1780,12 +1780,35 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.RG_PLAGIARISM] = {
 		"RG_PLAGIARISM",
-		SkillName = "Plagiarism",
+		SkillName = "Offensive Plagiarism",
 		MaxLv = 10,
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
 			{ SKID.RG_INTIMIDATE,5 },
 		}
+	},
+	[SKID.RG_SUPPORT_PLAGIARISM] = {
+		"RG_SUPPORT_PLAGIARISM",
+		SkillName = "Support Plagiarism",
+		MaxLv = 10,
+		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		_NeedSkillList = {
+			{ SKID.RG_MIMIC,1 },
+		}
+	},
+	[SKID.RG_NIGHTBLADE] = {
+		"RG_NIGHTBLADE",
+		SkillName = "Soul of the Nightblade",
+		Type = "Quest",
+		MaxLv = 1,
+		AttackRange = { 1 }
+	},
+	[SKID.RG_MIMIC] = {
+		"RG_MIMIC",
+		Type = "Quest",
+		SkillName = "Soul of the Mimic",
+		MaxLv = 1,
+		AttackRange = { 1 }
 	},
 	[SKID.AM_AXEMASTERY] = {
 		"AM_AXEMASTERY",

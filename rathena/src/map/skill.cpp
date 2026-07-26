@@ -2728,6 +2728,10 @@ void skill_combo(block_list* src,block_list *dsrc, block_list *bl, uint16 skill_
  */
 static void skill_do_copy(block_list* src,block_list *bl, uint16 skill_id, uint16 skill_lv)
 {
+	// --- INICIO CUSTOM: Matar el auto-copiado de Plagiarism ---
+	return;
+	// --- FIN CUSTOM ---
+	
 	TBL_PC *tsd = BL_CAST(BL_PC, bl);
 
 	if (!tsd || (!pc_checkskill(tsd,RG_PLAGIARISM) && !pc_checkskill(tsd,SC_REPRODUCE)))
@@ -4380,6 +4384,66 @@ int32 skill_shimiru_check_cell( block_list* target, va_list ap ){
  *
  *
  *------------------------------------------*/
+ 
+// --- INICIO CUSTOM: Lista Blanca Manual de Skills Exclusivas para MIMIC ---
+static bool is_custom_whitelist_skill(uint16 skill_id, int is_support) {
+	if (is_support) {
+		// AQUÍ METES A MANO LAS SKILLS DE SOPORTE AVANZADAS (Renacidos / 3rd Jobs)
+		switch (skill_id) {
+			// Ejemplo: case 11000: (aquí irán tus IDs futuros)
+			return true;
+		}
+	} else {
+		// AQUÍ METES A MANO LAS SKILLS OFENSIVAS AVANZADAS SI LO NECESITAS
+		switch (skill_id) {
+			return true;
+		}
+	}
+	return false;
+}
+// --- FIN CUSTOM ---
+
+// --- INICIO CUSTOM: Callback para el Radar de Plagiarism ---
+static int build_plagiarism_list_sub(block_list* bl, va_list ap) {
+	if (!bl || bl->type != BL_PC) return 0;
+	
+	map_session_data* sd = (map_session_data*)bl;
+	
+	block_list* caster = va_arg(ap, block_list*);
+	uint16 skill_id = (uint16)va_arg(ap, int);
+	int is_support = va_arg(ap, int);
+
+	// 1. FILTRO: Ignorar si somos nosotros mismos lanzando la skill
+	if (bl->id == caster->id) return 0;
+
+	// 2. FILTRO: Comprobar requisitos de clase según la rama
+	if (is_support) {
+		if (pc_checkskill(sd, RG_SUPPORT_PLAGIARISM) == 0 && pc_checkskill(sd, RG_MIMIC) == 0) return 0;
+	} else {
+		if (pc_checkskill(sd, RG_PLAGIARISM) == 0) return 0;
+	}
+
+	// 3. FILTRO DE COPIA: DB oficial vs Lista Blanca exclusiva de MIMIC
+	std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id);
+	if (skill == nullptr) return 0;
+
+	bool allowed_by_db = is_support ? (skill->copyable.option & SKILL_COPY_REPRODUCE) : (skill->copyable.option & SKILL_COPY_PLAGIARISM);
+	
+	// REGLA DE ORO: La lista blanca manual SOLO se evalúa si el jugador tiene RG_MIMIC aprendido
+	bool allowed_by_hand = false;
+	if (is_support && pc_checkskill(sd, RG_MIMIC) > 0) {
+		allowed_by_hand = is_custom_whitelist_skill(skill_id, is_support);
+	}
+
+	// Si no está permitida ni por la base de datos oficial ni por la lista exclusiva de Mimic, se rechaza
+	if (!allowed_by_db && !allowed_by_hand) return 0;
+
+	pc_record_plagiarism(sd, skill_id, is_support != 0);
+
+	return 1;
+}
+// --- FIN CUSTOM ---
+
 int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id, uint16 skill_lv, t_tick tick, int32 flag)
 {
 	map_session_data *sd = nullptr;
@@ -4401,6 +4465,10 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 
 	if (status_isdead(*bl))
 		return 1;
+	
+	// --- INICIO CUSTOM: Activar Radar Ofensivo ---
+	map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, 0);
+	// --- FIN CUSTOM ---
 
 	if (skill_id && skill_id != AG_DEADLY_PROJECTION && skill_get_type(skill_id) == BF_MAGIC && status_isimmune(bl) == 100)
 	{	//GTB makes all targetted magic display miss with a single bolt.
@@ -4602,6 +4670,9 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 	if(status_isdead(*src))
 		return 1;
 
+	// --- INICIO CUSTOM: Activar Radar de Soporte ---
+	map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, 1);
+	// --- FIN CUSTOM ---
 
 	if( src != bl && status_isdead(*bl) ) {
 		switch( skill_id ) { // Skills that may be cast on dead targets

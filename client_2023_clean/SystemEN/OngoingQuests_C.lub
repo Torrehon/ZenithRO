@@ -170,4 +170,48 @@ QuestInfoList_C = {
 		Summary = "Talk to the Chief Archeologist",
 		NpcName = "Chief Archeologist",
 	},
+	[90001] = {
+		Title = "Soul Quest: The Dawn Awakening",
+		Description = {
+			"Scholar at Prontera Library recognized your Dawn Weapon.",
+			"He asked you to gather magical energy from 4 sanctuaries:",
+			"- Prontera Field (prt_fild07 226, 112)",
+			"- Alberta Field (pay_fild03 162, 215)",
+			"- Morocc Field (moc_fild11 140, 242)",
+			"- Payon Field (pay_fild02 104, 245)"
+		},
+		Summary = "Absorb magic energy at the 4 sanctuaries.",
+		NpcName = "Scholar",
+	},
+	[90002] = {
+		Title = "Soul Quest: Return to Scholar",
+		Description = {
+			"Your Dawn Weapon is fully charged with ancient magic.",
+			"Return to the Scholar in Prontera Library",
+			"to report your discovery."
+		},
+		Summary = "Report back to Scholar in Prontera Library.",
+		NpcName = "Scholar",
+	},
+	[90003] = {
+		Title = "Soul Quest: The Celestial Call",
+		Description = {
+			"Scholar instructed you to travel to the high territory",
+			"of Geffen Field (gef_fild07 182, 240).",
+			"Keep your Dawn Weapon equipped so the gathered magic",
+			"can react with the firmament."
+		},
+		Summary = "Travel to gef_fild07 (182, 240) with your Dawn Weapon.",
+		NpcName = "Scholar",
+	},
+	[90004] = {
+		Title = "Soul Quest: Pantheon of Heroes",
+		Description = {
+			"You have arrived at the Pantheon of Heroes (1@4tro).",
+			"Speak to the Einherjar hero corresponding to your job class",
+			"to claim your ancient Hero Soul."
+		},
+		Summary = "Claim your Hero Soul from the Einherjar.",
+		NpcName = "Einherjar",
+	},
 }
