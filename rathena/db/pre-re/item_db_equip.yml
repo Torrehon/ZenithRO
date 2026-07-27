@@ -103245,8 +103245,9 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true
   - Id: 60995
     AegisName: w_chem
     Name: Water Chemical Powder
@@ -103257,8 +103258,9 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true
   - Id: 60996
     AegisName: l_chem
     Name: Lightning Chemical Powder
@@ -103269,8 +103271,9 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true
   - Id: 60997
     AegisName: e_chem
     Name: Earth Chemical Powder
@@ -103281,8 +103284,9 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true
   - Id: 60998
     AegisName: p_chem
     Name: Poison Chemical Powder
@@ -103293,8 +103297,9 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true
   - Id: 60999
     AegisName: h_chem
     Name: Holy Chemical Powder
@@ -103305,8 +103310,9 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true
   - Id: 61000
     AegisName: s_chem
     Name: Shadow Chemical Powder
@@ -103317,5 +103323,6 @@ Body:
     Refineable: false
     Jobs:
       Alchemist: true
-      Creator: true
-      Genetic: true
+      Rogue: true
+    Classes:
+      All: true

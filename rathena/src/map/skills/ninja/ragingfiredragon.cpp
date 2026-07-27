@@ -30,15 +30,15 @@ void SkillRagingFireDragon::castendPos2(block_list* src, int32 x, int32 y, uint1
 	skill_unitsetting(src,getSkillId(),skill_lv,x,y,0);
 }
 
-// --- SOUL OF THE KUJI: 30% Burning al nivel 5 ---
+// --- SOUL OF THE KUJI / MIMIC SOUL: 30% Burning al nivel 10 ---
 void SkillRagingFireDragon::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 	int32 base_matk = status_get_matk_max(src);
 	
 	map_session_data* sd = BL_CAST(BL_PC, src);
 
-	if (sd != nullptr && pc_checkskill(sd, NJ_KUJISOUL) > 0) {
+	// Si tiene Soul of the Kuji O Mimic Soul
+	if (sd != nullptr && (pc_checkskill(sd, NJ_KUJISOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		if (skill_lv == 5) {
-
 			sc_start4(src, target, SC_BURNING, 30, skill_lv, base_matk, 0, 0, 10000);
 		}
 	}

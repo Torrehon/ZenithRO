@@ -1534,7 +1534,11 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 							skill_castend_damage_id(src, bl, WH_HAWKRUSH, skill, tick, 0);
 					}
 					// Gank
-					if(dstmd && sd->status.weapon != W_BOW &&
+					// --- INICIO CUSTOM: Mimic Soul (Snatch permitido con Arcos) ---
+					// Condición: Usar un arma que no sea arco, O tener la Mimic Soul aprendida.
+					bool can_snatch = (sd->status.weapon != W_BOW) || (pc_checkskill(sd, RG_MIMIC) > 0);
+
+					if(dstmd && can_snatch &&
 						(skill=pc_checkskill(sd,RG_SNATCHER)) > 0 &&
 						(skill*15 + 55) + pc_checkskill(sd,TF_STEAL)*10 > rnd()%1000) {
 						if(pc_steal_item(sd,bl,pc_checkskill(sd,TF_STEAL)))
@@ -1542,6 +1546,7 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 						else
 							clif_skill_fail( *sd, RG_SNATCHER );
 					}
+					// --- FIN CUSTOM ---
 				}
 
 				if (sc) {
@@ -1912,8 +1917,8 @@ int32 skill_counter_additional_effect (block_list* src, block_list *bl, uint16 s
 		status_heal(src, 0, status_get_lv(bl)*(95+15*rate)/100, 2);
 	}
 	
-	// --- REEMBOLSO ZENYNAGE (KENSEI SOUL) ---
-	if (sd && skill_id == NJ_ZENYNAGE && status_isdead(*bl) && pc_checkskill(sd, NJ_KENSEISOUL) > 0) {
+	// --- INICIO CUSTOM: REEMBOLSO ZENYNAGE (Kensei Soul / Mimic Soul) ---
+	if (sd && skill_id == NJ_ZENYNAGE && status_isdead(*bl) && (pc_checkskill(sd, NJ_KENSEISOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		int zeny_refund = 300 * skill_lv;
 		
 		sd->status.zeny += zeny_refund;
@@ -1927,20 +1932,27 @@ int32 skill_counter_additional_effect (block_list* src, block_list *bl, uint16 s
 		// Efecto visual opcional: Vuelve a mostrar la animación sobre el enemigo para indicar el robo de dinero
 		clif_skill_nodamage(src, *bl, NJ_ZENYNAGE, skill_lv);
 	}
-	// ----------------------------------------
+	// --- FIN CUSTOM ---
 	
-	// --- INICIO CUSTOM: Ascetic (Recupera 1 Esfera al matar con Ki Explosion) ---
-	if (sd && skill_id == MO_BALKYOUNG && status_isdead(*bl) && pc_checkskill(sd, MO_ASCETIC) > 0) {
+	// --- INICIO CUSTOM: Ascetic / Mimic Soul (Recupera 1 Esfera al matar con Ki Explosion) ---
+	if (sd && skill_id == MO_BALKYOUNG && status_isdead(*bl)) {
 		
-		int max_spheres = 10; // El Asceta tiene un límite base de 10 esferas
-		if (sd->sc.getSCE(SC_RAISINGDRAGON)) {
-			max_spheres += sd->sc.getSCE(SC_RAISINGDRAGON)->val1;
-		}
+		bool is_ascetic = (pc_checkskill(sd, MO_ASCETIC) > 0);
+		bool is_mimic   = (pc_checkskill(sd, RG_MIMIC) > 0);
 
-		// Comprobamos si tiene espacio para más esferas
-		if (sd->spiritball < max_spheres) {
-			// pc_addspiritball añade 1 esfera. El segundo parámetro es la duración en ms (10 mins).
-			pc_addspiritball(sd, 600000, max_spheres);
+		if (is_ascetic || is_mimic) {
+			// Asignamos el límite: 10 para el Monk, 5 para el Rogue
+			int max_spheres = is_ascetic ? 10 : 5; 
+			
+			if (sd->sc.getSCE(SC_RAISINGDRAGON)) {
+				max_spheres += sd->sc.getSCE(SC_RAISINGDRAGON)->val1;
+			}
+
+			// Comprobamos si tiene espacio para más esferas
+			if (sd->spiritball < max_spheres) {
+				// pc_addspiritball añade 1 esfera. El segundo parámetro es la duración en ms (10 mins).
+				pc_addspiritball(sd, 600000, max_spheres);
+			}
 		}
 	}
 	// --- FIN CUSTOM ---
@@ -2281,12 +2293,28 @@ bool skill_strip_equip(block_list *src, block_list *target, uint16 skill_id, uin
 	int32 rate, time, location, mod = 100;
 
 	switch (skill_id) { // Rate
-		case RG_STRIPWEAPON:
-		case RG_STRIPARMOR:
-		case RG_STRIPSHIELD:
-		case RG_STRIPHELM:
-			// 5% base por Skill Level (50/1000) + modificador de Dex original
-			rate = 50 * skill_lv + 2 * (sstatus->dex - tstatus->dex);
+	case RG_STRIPWEAPON:
+	case RG_STRIPARMOR:
+	case RG_STRIPSHIELD:
+	case RG_STRIPHELM:
+		// 5% base por Skill Level (50/1000) + modificador de Dex original
+		rate = 50 * skill_lv + 2 * (sstatus->dex - tstatus->dex);
+
+		// --- INICIO CUSTOM: Nightblade Soul (Close Confine +15% Divest Rate) ---
+		{ // Abrimos llaves de seguridad por estar dentro de un switch
+			map_session_data* sd = BL_CAST(BL_PC, src); // Definimos quién es 'sd'
+
+			// Comprobamos que el atacante sea jugador y tenga la Soul
+			if (sd && pc_checkskill(sd, RG_NIGHTBLADE) > 0) {
+				// Verificamos si el enemigo tiene Close Confine Y si el val2 coincide con tu ID
+				// (Usamos 'tsc' directamente, ya que se declaró al inicio de la función)
+				if (tsc && tsc->getSCE(SC_CLOSECONFINE) && tsc->getSCE(SC_CLOSECONFINE)->val2 == src->id) {
+					rate += 150; // +15% de probabilidad (sobre mod = 1000)
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
+			
 			mod = 1000;
 			break;
 		case GC_WEAPONCRUSH:
@@ -4391,11 +4419,13 @@ static bool is_custom_whitelist_skill(uint16 skill_id, int is_support) {
 		// AQUÍ METES A MANO LAS SKILLS DE SOPORTE AVANZADAS (Renacidos / 3rd Jobs)
 		switch (skill_id) {
 			// Ejemplo: case 11000: (aquí irán tus IDs futuros)
+			case 379:
 			return true;
 		}
 	} else {
 		// AQUÍ METES A MANO LAS SKILLS OFENSIVAS AVANZADAS SI LO NECESITAS
 		switch (skill_id) {
+			case 383:
 			return true;
 		}
 	}
@@ -4727,8 +4757,8 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 				return skill_castend_pos2(src,bl->x,bl->y,skill_id,skill_lv,tick,0);
 	}
 	
-	// --- INICIO CUSTOM: AoE Providence (Templar Soul) ---
-	if (skill_id == CR_PROVIDENCE && sd && pc_checkskill(sd, CR_TEMPLARSOUL) > 0 && sd->status.party_id > 0 && !(flag & 1)) {
+	// --- INICIO CUSTOM: AoE Providence (Templar Soul / Mimic Soul) ---
+	if (skill_id == CR_PROVIDENCE && sd && (pc_checkskill(sd, CR_TEMPLARSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) && sd->status.party_id > 0 && !(flag & 1)) {
 		if (dstsd != nullptr && sd->status.party_id == dstsd->status.party_id) {
 			// Radio 2 = Área de 5x5 celdas
 			party_foreachsamemap(skill_area_sub, dstsd, 2, src, skill_id, skill_lv, tick, flag | BCT_PARTY | 1, skill_castend_nodamage_id);
@@ -5129,7 +5159,6 @@ static int8 skill_castend_id_check(block_list *src, block_list *target, uint16 s
 
 	switch (skill_id) {
 		// Cannot be casted to Emperium
-		case WZ_ESTIMATION:
 		case SL_SKE:
 		case SL_SKA:
 		case RK_PHANTOMTHRUST:
@@ -6106,7 +6135,7 @@ std::shared_ptr<s_skill_unit_group> skill_unitsetting(block_list *src, uint16 sk
 		}
 
 		// Asignamos el molde puenteando la función defectuosa del núcleo
-		if (src && src->type == BL_PC && pc_checkskill(BL_CAST(BL_PC, src), AS_VIPERSOUL) > 0) {
+		if (src && src->type == BL_PC && (pc_checkskill(BL_CAST(BL_PC, src), AS_VIPERSOUL) > 0 || pc_checkskill(BL_CAST(BL_PC, src), RG_MIMIC) > 0)) {
 			layout = &viper_layout_5x5;
 			range = 1; // Rango extendido
 		} else {
@@ -6962,22 +6991,29 @@ static int32 skill_unit_onplace(skill_unit *unit, block_list *bl, t_tick tick)
 				map_flag_vs(bl->m) || battle_check_target(unit,bl,BCT_ENEMY)>0?1:0, 
 				0,0,sg->limit);
 
-			// --- 2. CUSTOM: Drown a nivel 10 con daño de MATK ---
-			// Aplica Drown a cualquier enemigo que pise el área si la habilidad es nivel 10
-			if (sg->skill_lv == 10 && battle_check_target(unit, bl, BCT_ENEMY) > 0) {
-				if (!sc || !sc->getSCE(SC_DROWN)) {
-					
-					// Obtenemos el MATK máximo del lanzador (Ninja o Monstruo)
-					int32 caster_matk = status_get_matk_max(ss);
-					
-					// Seguro anti-trampa: Si el lanzador tiene 0 de MATK, pasamos 1 
-					// para evitar que status.cpp asuma el valor por defecto de 1000.
-					if (caster_matk <= 0) {
-						caster_matk = 1;
-					}
+			// --- 2. CUSTOM: Drown a nivel 10 con daño de MATK (Kuji Soul / Mimic Soul) ---
+			if (ss && ss->type == BL_PC) {
+				map_session_data *sd_caster = BL_CAST(BL_PC, ss);
+				
+				// Comprobamos si tiene Kuji Soul o Mimic Soul
+				if (sd_caster && (pc_checkskill(sd_caster, NJ_KUJISOUL) > 0 || pc_checkskill(sd_caster, RG_MIMIC) > 0)) {
+					// Aplica Drown a cualquier enemigo que pise el área si la habilidad es nivel 10
+					if (sg->skill_lv == 10 && battle_check_target(unit, bl, BCT_ENEMY) > 0) {
+						if (!sc || !sc->getSCE(SC_DROWN)) {
+							
+							// Obtenemos el MATK máximo del lanzador
+							int32 caster_matk = status_get_matk_max(ss);
+							
+							// Seguro anti-trampa: Si el lanzador tiene 0 de MATK, pasamos 1 
+							// para evitar que status.cpp asuma el valor por defecto de 1000.
+							if (caster_matk <= 0) {
+								caster_matk = 1;
+							}
 
-					// sc_start4(origen, objetivo, Estado, Probabilidad, val1(lv), val2(MATK), val3, val4, Duración)
-					sc_start4(ss, bl, SC_DROWN, 10000, sg->skill_lv, caster_matk, 0, 0, sg->limit);
+							// sc_start4(origen, objetivo, Estado, Probabilidad, val1(lv), val2(MATK), val3, val4, Duración)
+							sc_start4(ss, bl, SC_DROWN, 10000, sg->skill_lv, caster_matk, 0, 0, sg->limit);
+						}
+					}
 				}
 			}
 			// ----------------------------------------------------
@@ -7540,7 +7576,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 			if (ss && ss->type == BL_PC) {
 				map_session_data *sd = BL_CAST(BL_PC, ss);
 				
-				if (pc_checkskill(sd, AS_VIPERSOUL) > 0) {
+				if (pc_checkskill(sd, AS_VIPERSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) {
 					// Disparamos el ataque. El motor irá a venomdust.cpp a ver el ratio (100%),
 					// y luego a skill_db.yml a ver si puede hacer crítico (no podrá).
 					skill_attack(BF_WEAPON,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
@@ -10951,11 +10987,16 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 	if (battle_config.cast_rate != 100)
 		time = time * battle_config.cast_rate / 100;
 	
-	// --- INICIO CUSTOM: REDUCCIÓN DE CASTEO ZANTETSUKEN READY ---
+	// --- INICIO CUSTOM: REDUCCIÓN DE CASTEO (Zantetsuken / Rogue Close Confine) ---
 	if (skill_id == NJ_ISSEN) {
-		status_change *sc = status_get_sc(bl);
-		if (sc && sc->getSCE(SC_ZANTETSU)) {
-			// Reduce el tiempo de casteo final en un 75% (lo multiplicamos por 0.25)
+		status_change* sc = status_get_sc(bl);
+		map_session_data* sd_caster = BL_CAST(BL_PC, bl); // Usamos sd_caster para evitar conflictos de nombres
+
+		bool is_zantsu = (sc && sc->getSCE(SC_ZANTETSU) != nullptr);
+
+		// Si tiene Zantetsuken O (es un jugador y tiene Close Confine)
+		if (is_zantsu || (sd_caster && sc && sc->getSCE(SC_CLOSECONFINE) != nullptr)) {
+			// Reduce el tiempo de casteo final en un 75%
 			time = time * 25 / 100;
 		}
 	}
@@ -11621,7 +11662,7 @@ static int32 skill_sit_out(block_list *bl, va_list ap)
  */
 int32 skill_sit(map_session_data *sd, bool sitting)
 {
-	int32 flag = 0, range = 0, lv;
+	int32 flag = 0, range = 0;
 
 	nullpo_ret(sd);
 

@@ -7065,4 +7065,10 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
-      
+  - Status: Raid
+    Icon: EFST_RAID
+    DurationLookup: RG_RAID
+    Flags:
+      NoDispell: true
+      NoBanishingBuster: true
+      NoClearance: true     

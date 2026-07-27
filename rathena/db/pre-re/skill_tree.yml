@@ -1263,10 +1263,7 @@ Body:
           - Name: RG_INTIMIDATE
             Level: 5
       - Name: RG_SUPPORT_PLAGIARISM
-        MaxLevel: 10
-        Requires:
-          - Name: RG_MIMIC
-            Level: 1  
+        MaxLevel: 1 
       - Name: RG_CLOSECONFINE
         MaxLevel: 1
       - Name: RG_NIGHTBLADE

@@ -19997,7 +19997,8 @@ void clif_parse_SkillSelectMenu(int32 fd, map_session_data *sd) {
 			for (int i = 0; i < sd->plagia_support_count; i++) {
 				if (sd->plagia_support[i] == skill_id) { isValid = true; break; }
 			}
-		} else {
+		}
+		else {
 			for (int i = 0; i < sd->plagia_offensive_count; i++) {
 				if (sd->plagia_offensive[i] == skill_id) { isValid = true; break; }
 			}
@@ -20009,22 +20010,27 @@ void clif_parse_SkillSelectMenu(int32 fd, map_session_data *sd) {
 				if (is_support) {
 					// Borramos la skill de soporte anterior (slot 2)
 					pc_skill_plagiarism_reset(*sd, 2);
-					
-					// CORREGIDO: Escala con el nivel de tu skill de soporte, limitado al max de la skill copiada
-					int support_lv = pc_checkskill(sd, RG_SUPPORT_PLAGIARISM); // <-- Cambia RG_SUPPORT_PLAGIARISM si usas otra id custom
-					uint8 lv = (support_lv > 0) ? min(support_lv, skill_get_max(skill_id)) : 1;
+
+					// --- INICIO CUSTOM: Escala de nivel con Plagiarism Original ---
+					// Leemos el nivel del Plagiarism clásico (rama ofensiva) para darle el mismo poder
+					int plagiarism_lv = pc_checkskill(sd, RG_PLAGIARISM);
+
+					// Asignamos ese nivel, limitándolo siempre al máximo que permita la skill copiada
+					uint8 lv = (plagiarism_lv > 0) ? min(plagiarism_lv, skill_get_max(skill_id)) : 1;
+					// --- FIN CUSTOM ---
 
 					sd->reproduceskill_idx = idx;
 					pc_setglobalreg(sd, add_str(SKILL_VAR_REPRODUCE), skill_id);
 					pc_setglobalreg(sd, add_str(SKILL_VAR_REPRODUCE_LV), lv);
-					
+
 					sd->status.skill[idx].id = skill_id;
 					sd->status.skill[idx].lv = lv;
 					sd->status.skill[idx].flag = SKILL_FLAG_PLAGIARIZED;
-				} else {
+				}
+				else {
 					// Borramos la skill ofensiva anterior (slot 1)
 					pc_skill_plagiarism_reset(*sd, 1);
-					
+
 					int plag_lv = pc_checkskill(sd, RG_PLAGIARISM);
 					uint8 lv = (plag_lv > 0) ? min(plag_lv, skill_get_max(skill_id)) : skill_get_max(skill_id);
 					if (lv == 0) lv = 1;
@@ -20032,16 +20038,17 @@ void clif_parse_SkillSelectMenu(int32 fd, map_session_data *sd) {
 					sd->cloneskill_idx = idx;
 					pc_setglobalreg(sd, add_str(SKILL_VAR_PLAGIARISM), skill_id);
 					pc_setglobalreg(sd, add_str(SKILL_VAR_PLAGIARISM_LV), lv);
-					
+
 					sd->status.skill[idx].id = skill_id;
 					sd->status.skill[idx].lv = lv;
 					sd->status.skill[idx].flag = SKILL_FLAG_PLAGIARIZED;
 				}
-				
+
 				clif_addskill(*sd, skill_id);
 				clif_displaymessage(sd->fd, "Skill memorized successfully!");
 			}
-		} else {
+		}
+		else {
 			clif_displaymessage(sd->fd, "[Error] Skill not found in your notebook.");
 		}
 	}

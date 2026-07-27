@@ -31,16 +31,15 @@ void SkillIceMeteor::castendPos2(block_list* src, int32 x, int32 y, uint16 skill
 	skill_unitsetting(src,getSkillId(),skill_lv,x,y,0);
 }
 
-// --- SOUL OF THE KUJI: 30% Freezing al nivel 5 ---
+// --- SOUL OF THE KUJI / MIMIC SOUL: 30% Freezing al nivel 5 ---
 void SkillIceMeteor::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
 	map_session_data* sd = BL_CAST(BL_PC, src);
 
-	// Comprobamos que el usuario tiene la pasiva aprendida
-	if (sd != nullptr && pc_checkskill(sd, NJ_KUJISOUL) > 0) {
+	// Comprobamos que el usuario tiene Kuji Soul O Mimic Soul aprendida/activa
+	if (sd != nullptr && (pc_checkskill(sd, NJ_KUJISOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		// Comprobamos el nivel de la habilidad
 		if (skill_lv == 5) {
 			// sc_start(origen, objetivo, Estado, Probabilidad 3000 = 30%, nivel, Duración en ms)
-			// (Duración arbitraria de 10 segundos, puedes ajustarla si necesitas más o menos)
 			sc_start(src, target, SC_FREEZING, 3000, skill_lv, 10000); 
 		}
 	}

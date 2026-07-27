@@ -19,8 +19,8 @@ void SkillIncreaseAgi::castendNoDamageId(block_list *src, block_list *bl, uint16
 	status_change *tsc = status_get_sc(bl);
 	enum sc_type type = skill_get_sc(getSkillId());
 
-// --- INICIO CUSTOM: AoE Inc Agi (Soul of the Saint) ---
-	if (sd && pc_checkskill(sd, PR_SAINTSOUL) > 0 && sd->status.party_id > 0 && !(flag & 1))
+// --- INICIO CUSTOM: AoE Inc Agi (Soul of the Saint / Mimic Soul) ---
+	if (sd && (pc_checkskill(sd, PR_SAINTSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) && sd->status.party_id > 0 && !(flag & 1))
 	{
 		if (dstsd != nullptr && sd->status.party_id == dstsd->status.party_id) {
 			party_foreachsamemap(skill_area_sub, dstsd, 4, src, getSkillId(), skill_lv, tick, flag|BCT_PARTY|1, skill_castend_nodamage_id);

@@ -16,8 +16,9 @@ void SkillShieldBoomerang::calculateSkillRatio(const Damage* wd, const block_lis
 
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	
-	// Condición del Guardian Soul: Añade daño por peso y refine del escudo
-	if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
+	// --- INICIO CUSTOM: Guardian Soul / Mimic Soul ---
+	// Condición: Añade daño por peso y refine del escudo
+	if (sd && (pc_checkskill(sd, CR_GUARDIANSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		int16 index = sd->equip_index[EQI_HAND_L];
 
 		if (index >= 0 && sd->inventory_data[index] != nullptr && sd->inventory_data[index]->type == IT_ARMOR) {
@@ -43,6 +44,7 @@ void SkillShieldBoomerang::calculateSkillRatio(const Damage* wd, const block_lis
 			base_skillratio += (shield_weight / divisor);
 		}
 	}
+	// --- FIN CUSTOM ---
 }
 
 // void SkillShieldBoomerang::modifyElement(const Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv, int32& element, int32 flag) const {

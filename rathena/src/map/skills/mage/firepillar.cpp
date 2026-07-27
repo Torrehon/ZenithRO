@@ -33,13 +33,15 @@ void SkillFirePillar::applyAdditionalEffects(block_list* src, block_list* target
 	int duration = 10000;
 
     map_session_data* sd = BL_CAST(BL_PC, src);
-	// Si es un jugador y tiene un nivel de WZ_HEXERSOUL mayor a 0...
-	if (sd != nullptr && pc_checkskill(sd, WZ_HEXERSOUL) > 0) {
+	
+	// --- INICIO CUSTOM: Hexer Soul / Mimic Soul ---
+	// Si es un jugador y tiene Hexer Soul O Mimic Soul...
+	if (sd != nullptr && (pc_checkskill(sd, WZ_HEXERSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		rate *= 2;               // Buf 1: Doble de probabilidad
 		final_matk *= 2;         // Buf 2: +100% de la porción de MATK (el doble)
 		duration += 10000;       // Buf 3: 10 segundos extra (pasa de 10000 a 20000 ms)
 	}
-
+	// --- FIN CUSTOM ---
 
 	// 4. Aplicamos SC_BURNING (10 segundos de duración)
 	// val2 lleva el MATK escalado para que el daño del tick sea coherente con el nivel

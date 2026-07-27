@@ -86,7 +86,7 @@ void SkillBackStab::applyAdditionalEffects(block_list *src, block_list *target, 
 	if (pc_checkskill(sd, RG_NIGHTBLADE) > 0) {
 		
 		int rate = 50; // 50% de probabilidad base
-		int duration = 0; // 0 = Usa el tiempo definido en el archivo status.yml de la base de datos
+		int duration = 10000; 
 		
 		// Usamos sd->weapontype1 para leer el tipo de arma principal equipada en la mano derecha
 		switch (sd->weapontype1) {

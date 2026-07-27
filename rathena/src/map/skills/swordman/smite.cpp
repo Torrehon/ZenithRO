@@ -14,8 +14,9 @@ void SkillSmite::calculateSkillRatio(const Damage* wd, const block_list* src, co
 
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	
-	// Condición del Guardian Soul: Añade daño por peso y refine del escudo
-	if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
+	// --- INICIO CUSTOM: Guardian Soul / Mimic Soul (Daño por escudo) ---
+	// Condición: Añade daño por peso y refine del escudo
+	if (sd && (pc_checkskill(sd, CR_GUARDIANSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		int16 index = sd->equip_index[EQI_HAND_L];
 
 		if (index >= 0 && sd->inventory_data[index] != nullptr && sd->inventory_data[index]->type == IT_ARMOR) {
@@ -41,6 +42,7 @@ void SkillSmite::calculateSkillRatio(const Damage* wd, const block_list* src, co
 			base_skillratio += (shield_weight / divisor);
 		}
 	}
+	// --- FIN CUSTOM ---
 }
 
 void SkillSmite::applyAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 attack_type, enum damage_lv dmg_lv) const {
@@ -48,16 +50,16 @@ void SkillSmite::applyAdditionalEffects(block_list* src, block_list* target, uin
 	sc_start(src, target, SC_STUN, (15 + skill_lv * 5), skill_lv, skill_get_time2(getSkillId(), skill_lv));
 }
 
-// --- INICIO CUSTOM: Smite en Área (Soul of the Guardian) ---
+// --- INICIO CUSTOM: Smite en Área (Guardian Soul / Mimic Soul) ---
 void SkillSmite::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32 &flag) const {
 	map_session_data *sd = BL_CAST(BL_PC, src);
 
 	// 1. Guardamos el ID del objetivo principal para no pegarle dos veces
 	skill_area_temp[1] = target->id;
 
-	// 2. ¡PRIMERO EL ÁREA! Si tiene la pasiva, creamos el área de efecto 3x3 (radio 1)
+	// 2. ¡PRIMERO EL ÁREA! Si tiene la pasiva correspondiente, creamos el área de efecto 3x3 (radio 1)
 	// Lo hacemos antes para que el objetivo principal sirva de "ancla" antes de salir volando.
-	if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
+	if (sd && (pc_checkskill(sd, CR_GUARDIANSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		map_foreachinallrange(skill_area_sub, target, 1, BL_CHAR, src, getSkillId(), skill_lv, tick, flag | BCT_ENEMY | 1, skill_castend_nodamage_id);
 	}
 

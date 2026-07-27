@@ -25,10 +25,10 @@ void SkillThrowSpiritSphere::castendDamageId(block_list* src, block_list* target
 	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
 	
 	if (battle_config.finger_offensive_type && sd) {
-		// --- INICIO CUSTOM: Golpes del Asceta ---
-		// El Asceta lanza tantos golpes como nivel de skill (ej: 5).
+		// --- INICIO CUSTOM: Golpes del Asceta / Mimic Soul ---
+		// El Asceta (o Rogue con Mimic) lanza tantos golpes como nivel de skill (ej: 5).
 		// El Monk normal lanza tantos golpes como esferas gastó.
-		int32 hits = (pc_checkskill(sd, MO_ASCETIC) > 0) ? skill_lv : sd->spiritball_old;
+		int32 hits = (pc_checkskill(sd, MO_ASCETIC) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) ? skill_lv : sd->spiritball_old;
 		
 		for (int32 i = 1; i < hits; i++)
 			skill_addtimerskill(src, tick + i * 200, target->id, 0, 0, getSkillId(), skill_lv, BF_WEAPON, flag);

@@ -1290,6 +1290,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 1000
     AfterCastActDelay: 1000
     Duration1:
@@ -1422,6 +1426,10 @@ Body:
       Splash: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Element: Holy
     SplashArea: 2
     CastTime: 0
@@ -1450,6 +1458,10 @@ Body:
       Splash: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     SplashArea: -1
     CastTime: 1000
     AfterCastActDelay: 1500
@@ -1490,6 +1502,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Duration1:
       - Level: 1
         Time: 60000
@@ -1653,6 +1669,10 @@ Body:
       Splash: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     SplashArea: 3
     Duration1:
       - Level: 1
@@ -2083,6 +2103,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Weapon
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Duration1:
       - Level: 1
         Time: 400
@@ -2190,6 +2214,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     AfterCastActDelay: 3000
     Duration1: 600000
     Requires:
@@ -2216,6 +2244,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
@@ -2391,6 +2423,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 3000
     Duration1:
       - Level: 1
@@ -2423,6 +2459,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     AfterCastActDelay: 2000
     Duration2: 30000
     Requires:
@@ -2439,6 +2479,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 2000
     AfterCastActDelay: 2000
     Duration1: 600000
@@ -2476,6 +2520,10 @@ Body:
       Splash: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     SplashArea: -1
     CastTime: 4000
     AfterCastActDelay: 2000
@@ -2504,6 +2552,10 @@ Body:
       Splash: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     SplashArea: -1
     AfterCastActDelay: 2000
     Duration1:
@@ -3256,6 +3308,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Element: Water
     Requires:
       SpCost: 20
@@ -3528,6 +3584,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Element: Earth
     ActiveInstance: 3
     AfterCastActDelay: 1000
@@ -3579,6 +3639,10 @@ Body:
     Description: Arcane Insight
     MaxLevel: 1
     Type: Magic
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     TargetType: Self
     DamageFlags:
       NoDamage: true
@@ -3694,6 +3758,10 @@ Body:
     Range: 1
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Element: Neutral
     SplashArea:
       - Level: 1
@@ -3727,6 +3795,7 @@ Body:
         1hAxe: true
         2hAxe: true
         Mace: true
+        Bow: true
     Status: Stun
   - Id: 111
     Name: BS_ADRENALINE
@@ -4735,6 +4804,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Poison
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Duration1:
       - Level: 1
         Time: 5000
@@ -6611,6 +6684,7 @@ Body:
         Plagiarism: true
         Reproduce: true
     Duration2: 5000
+    Cooldown: 3000
     Requires:
       SpCost: 10
       State: Shield
@@ -6923,6 +6997,10 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 1000
     Duration1: 600000
     Requires:
@@ -7453,6 +7531,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Fire
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 3000
     Duration1:
       - Level: 1
@@ -7483,6 +7565,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Water
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 3000
     Duration1:
       - Level: 1
@@ -7513,6 +7599,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Wind
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 3000
     Duration1:
       - Level: 1
@@ -7543,6 +7633,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Earth
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 3000
     Duration1:
       - Level: 1
@@ -7780,6 +7874,10 @@ Body:
     Range: 9
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 2000
     Requires:
       SpCost: 1
@@ -7796,6 +7894,10 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 5000
     Cooldown: 25000
     Requires:
@@ -13369,6 +13471,10 @@ Body:
     Hit: Multi_Hit
     HitCount: 3
     Element: Weapon
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     AfterCastActDelay: 1000
     CastTime: 1000
     Requires:
@@ -14148,6 +14254,10 @@ Body:
       - Level: 10
         Count: -7
     Element: Weapon
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime:
       - Level: 1
         Time: 500
@@ -14267,6 +14377,10 @@ Body:
     Hit: Multi_Hit
     HitCount: 3
     Element: Weapon
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     AfterCastActDelay: 1000
     Requires:
       SpCost:
@@ -14885,6 +14999,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Water
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 3000
     Duration1:
       - Level: 1
@@ -15234,6 +15352,10 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime:
       - Level: 1
         Time: 5000
@@ -15297,6 +15419,10 @@ Body:
         Time: 10000
     Type: Weapon
     TargetType: Attack
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     DamageFlags:
       IgnoreFlee: true
       IgnoreDefense: true
@@ -17022,6 +17148,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Weapon
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     SplashArea: 1
     Knockback: 5
     AfterCastActDelay: 2000
@@ -17493,17 +17623,19 @@ Body:
     Description: Soul of the Mimic
     MaxLevel: 1
     Type: Weapon
-    Flags:
-      IsQuest: true
+    # Flags:
+      # IsQuest: true
   - Id: 1067
     Name: RG_SUPPORT_PLAGIARISM
     Description: Support Plagiarism
-    MaxLevel: 10
+    MaxLevel: 1
     TargetType: Self
     DamageFlags:
       NoDamage: true
     CastTime: 1000
     Type: Weapon
+    # Flags:
+      # IsQuest: true
   - Id: 2001
     Name: RK_ENCHANTBLADE
     Description: Enchant Blade
@@ -26302,6 +26434,7 @@ Body:
     HitCount: 1
     CopyFlags:
       Skill:
+        Plagiarism: true
         Reproduce: true
     CastTime:
       - Level: 1

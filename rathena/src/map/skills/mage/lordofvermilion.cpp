@@ -62,12 +62,14 @@ void SkillLordOfVermilion::applyAdditionalEffects(block_list* src, block_list* t
 	// Aquí 'src' NO es const, así que el BL_CAST funciona directo y sin problemas
 	map_session_data* sd = BL_CAST(BL_PC, src);
 	
-	// Si es un jugador y tiene un nivel de WZ_HEXERSOUL mayor a 0...
-	if (sd != nullptr && pc_checkskill(sd, WZ_HEXERSOUL) > 0) {
+	// --- INICIO CUSTOM: Hexer Soul / Mimic Soul ---
+	// Si es un jugador y tiene Hexer Soul O Mimic Soul...
+	if (sd != nullptr && (pc_checkskill(sd, WZ_HEXERSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		rate *= 2;               // Buf 1: Doble de probabilidad
 		final_matk *= 2;         // Buf 2: +100% de la porción de MATK (el doble)
-		duration += 10000;       // Buf 3: 10 segundos extra
+		duration += 10000;       // Buf 3: 10 segundos extra (pasa de 10000 a 20000 ms)
 	}
+	// --- FIN CUSTOM ---
 
 	sc_start4(src, target, SC_ELECTROCUTE, rate, skill_lv, final_matk, 0, 0, duration);
 	sc_start(src,target,SC_BLIND,min(4*skill_lv,40),skill_lv,skill_get_time2(getSkillId(),skill_lv));

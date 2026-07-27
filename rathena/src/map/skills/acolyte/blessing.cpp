@@ -19,9 +19,9 @@ void SkillBlessing::castendNoDamageId(block_list *src, block_list *bl, uint16 sk
 	status_change *tsc = status_get_sc(bl);
 	sc_type type = skill_get_sc(getSkillId());
 
-// --- INICIO CUSTOM: AoE Blessing (Soul of the Saint) ---
-	// Si el Priest tiene la pasiva, está en party, y NO es un rebote de área (!(flag & 1))
-	if (sd && pc_checkskill(sd, PR_SAINTSOUL) > 0 && sd->status.party_id > 0 && !(flag & 1))
+// --- INICIO CUSTOM: AoE Blessing (Soul of the Saint / Mimic Soul) ---
+	// Si el Priest tiene la pasiva o el Rogue tiene Mimic, está en party, y NO es un rebote de área (!(flag & 1))
+	if (sd && (pc_checkskill(sd, PR_SAINTSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) && sd->status.party_id > 0 && !(flag & 1))
 	{
 		// Si el objetivo también es de nuestra party, desatamos el área de 9x9 (radio 4) desde él
 		if (dstsd != nullptr && sd->status.party_id == dstsd->status.party_id) {

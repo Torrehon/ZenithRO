@@ -1149,6 +1149,7 @@ OnInit:
 		case 2:
 			delitem 1008, 1;
 			skill 1066, 1, 0;
+			skill 1067, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;

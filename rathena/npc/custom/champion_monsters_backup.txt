@@ -311,210 +311,6 @@ OnInit:
 	setd ".ch_1769_1", 2911; // AGAV
 	setd ".ch_1716_2", 2912; // ACIDUS_
 	setd ".ch_1716_3", 2913; // ACIDUS_
-
-	// --- REGISTRO DE MAPAS Y MONSTRUOS BASE PERMITIDOS ---
-	setd ".map_mob_prt_fild08", 1002;
-	setd ".map_mob_prt_fild01", 1002;
-	setd ".map_mob_prt_fild05", 1002;
-	setd ".map_mob_moc_fild02", 1002;
-	setd ".map_mob_prt_fild06", 1174;
-	setd ".map_mob_prt_fild07", 1014;
-	setd ".map_mob_prt_fild09", 1167;
-	setd ".map_mob_prt_fild11", 1052;
-	setd ".map_mob_prt_fild02", 1010;
-	setd ".map_mob_prt_fild03", 1057;
-	setd ".map_mob_prt_fild04", 1018;
-	setd ".map_mob_prt_sewb1", 1051;
-	setd ".map_mob_prt_sewb2", 1051;
-	setd ".map_mob_prt_sewb3", 1175;
-	setd ".map_mob_prt_sewb4", 1005;
-	setd ".map_mob_prt_maze01", 1162;
-	setd ".map_mob_prt_maze02", 1390;
-	setd ".map_mob_prt_maze03", 1390;
-	setd ".map_mob_pay_fild01", 1024;
-	setd ".map_mob_pay_fild02", 1013;
-	setd ".map_mob_pay_fild03", 1031;
-	setd ".map_mob_pay_fild04", 1056;
-	setd ".map_mob_pay_fild05", 1077;
-	setd ".map_mob_pay_fild07", 1031;
-	setd ".map_mob_pay_fild08", 1025;
-	setd ".map_mob_pay_fild09", 1033;
-	setd ".map_mob_pay_fild10", 1277;
-	setd ".map_mob_pay_dun00", 1015;
-	setd ".map_mob_pay_dun01", 1028;
-	setd ".map_mob_pay_dun02", 1170;
-	setd ".map_mob_pay_dun03", 1290;
-	setd ".map_mob_pay_dun04", 1517;
-	setd ".map_mob_moc_fild01", 1559;
-	setd ".map_mob_moc_fild03", 1019;
-	setd ".map_mob_moc_fild07", 1138;
-	setd ".map_mob_moc_fild11", 1040;
-	setd ".map_mob_moc_fild12", 1050;
-	setd ".map_mob_moc_fild13", 1107;
-	setd ".map_mob_moc_fild14", 1058;
-	setd ".map_mob_moc_fild16", 1165;
-	setd ".map_mob_moc_fild17", 1107;
-	setd ".map_mob_moc_fild18", 1055;
-	setd ".map_mob_moc_fild19", 1918;
-	setd ".map_mob_moc_fild20", 1918;
-	setd ".map_mob_moc_pryd02", 1028;
-	setd ".map_mob_moc_pryd03", 1041;
-	setd ".map_mob_moc_pryd04", 1041;
-	setd ".map_mob_moc_pryd05", 1149;
-	setd ".map_mob_moc_pryd06", 1149;
-	setd ".map_mob_in_sphinx2", 1164;
-	setd ".map_mob_in_sphinx3", 1037;
-	setd ".map_mob_in_sphinx4", 1140;
-	setd ".map_mob_in_sphinx5", 1154;
-	setd ".map_mob_gef_fild00", 1020;
-	setd ".map_mob_gef_fild01", 1012;
-	setd ".map_mob_gef_fild02", 1031;
-	setd ".map_mob_gef_fild03", 1023;
-	setd ".map_mob_gef_fild04", 1007;
-	setd ".map_mob_gef_fild05", 1261;
-	setd ".map_mob_gef_fild06", 1155;
-	setd ".map_mob_gef_fild07", 1155;
-	setd ".map_mob_gef_fild08", 1037;
-	setd ".map_mob_gef_fild09", 1166;
-	setd ".map_mob_gef_fild10", 1166;
-	setd ".map_mob_gef_fild11", 1122;
-	setd ".map_mob_gef_fild12", 1122;
-	setd ".map_mob_gef_fild14", 1273;
-	setd ".map_mob_orcsdun01", 1153;
-	setd ".map_mob_orcsdun02", 1152;
-	setd ".map_mob_gef_dun00", 1143;
-	setd ".map_mob_gef_dun01", 1179;
-	setd ".map_mob_gef_dun02", 1390;
-	setd ".map_mob_mjolnir_03", 1099;
-	setd ".map_mob_mjolnir_04", 1303;
-	setd ".map_mob_mjolnir_09", 1004;
-	setd ".map_mob_mjolnir_11", 1128;
-	setd ".map_mob_mjolnir_12", 1139;
-	setd ".map_mob_mjo_dun01", 1051;
-	setd ".map_mob_mjo_dun02", 1042;
-	setd ".map_mob_mjo_dun03", 1469;
-	setd ".map_mob_iz_dun00", 1074;
-	setd ".map_mob_iz_dun01", 1161;
-	setd ".map_mob_iz_dun02", 1158;
-	setd ".map_mob_iz_dun03", 1067;
-	setd ".map_mob_iz_dun04", 1451;
-	setd ".map_mob_gl_cas01", 1163;
-	setd ".map_mob_gl_cas02", 1208;
-	setd ".map_mob_gl_church", 1291;
-	setd ".map_mob_gl_chyard", 1320;
-	setd ".map_mob_gl_dun01", 1191;
-	setd ".map_mob_gl_dun02", 1163;
-	setd ".map_mob_gl_kav01", 1208;
-	setd ".map_mob_gl_prison", 1197;
-	setd ".map_mob_gl_prison1", 1257;
-	setd ".map_mob_gl_sew01", 1207;
-	setd ".map_mob_gl_sew02", 1253;
-	setd ".map_mob_gl_sew03", 1206;
-	setd ".map_mob_gl_sew04", 1253;
-	setd ".map_mob_gl_step", 1263;
-	setd ".map_mob_c_tower1", 1195;
-	setd ".map_mob_c_tower2", 1269;
-	setd ".map_mob_c_tower3", 1193;
-	setd ".map_mob_c_tower4", 1191;
-	setd ".map_mob_alde_dun01", 1194;
-	setd ".map_mob_alde_dun02", 1213;
-	setd ".map_mob_alde_dun03", 1216;
-	setd ".map_mob_alde_dun04", 1102;
-	setd ".map_mob_cmd_fild01", 1254;
-	setd ".map_mob_cmd_fild02", 1034;
-	setd ".map_mob_cmd_fild03", 1323;
-	setd ".map_mob_cmd_fild04", 1215;
-	setd ".map_mob_cmd_fild07", 1316;
-	setd ".map_mob_cmd_fild08", 1271;
-	setd ".map_mob_cmd_fild09", 1687;
-	setd ".map_mob_beach_dun", 1148;
-	setd ".map_mob_beach_dun2", 1278;
-	setd ".map_mob_beach_dun3", 1321;
-	setd ".map_mob_yuno_fild01", 1317;
-	setd ".map_mob_yuno_fild02", 1376;
-	setd ".map_mob_yuno_fild03", 1369;
-	setd ".map_mob_yuno_fild04", 1369;
-	setd ".map_mob_yuno_fild05", 1371;
-	setd ".map_mob_yuno_fild06", 1386;
-	setd ".map_mob_yuno_fild07", 1368;
-	setd ".map_mob_yuno_fild08", 1376;
-	setd ".map_mob_yuno_fild09", 1380;
-	setd ".map_mob_yuno_fild11", 1386;
-	setd ".map_mob_yuno_fild12", 1372;
-	setd ".map_mob_mag_dun01", 1838;
-	setd ".map_mob_mag_dun02", 1833;
-	setd ".map_mob_ama_fild01", 1400;
-	setd ".map_mob_ama_dun01", 1404;
-	setd ".map_mob_ama_dun02", 1402;
-	setd ".map_mob_ama_dun03", 1560;
-	setd ".map_mob_gon_dun01", 1410;
-	setd ".map_mob_gon_dun02", 1416;
-	setd ".map_mob_lou_dun01", 1516;
-	setd ".map_mob_lou_dun02", 1290;
-	setd ".map_mob_lou_dun03", 1306;
-	setd ".map_mob_ayo_fild01", 1114;
-	setd ".map_mob_ayo_fild02", 1057;
-	setd ".map_mob_ayo_dun01", 1586;
-	setd ".map_mob_ayo_dun02", 1596;
-	setd ".map_mob_um_fild01", 1493;
-	setd ".map_mob_um_fild02", 1499;
-	setd ".map_mob_um_dun01", 1494;
-	setd ".map_mob_ein_fild04", 1628;
-	setd ".map_mob_ein_fild05", 1616;
-	setd ".map_mob_ein_fild07", 1613;
-	setd ".map_mob_ein_fild09", 1619;
-	setd ".map_mob_ein_dun01", 1614;
-	setd ".map_mob_ein_dun02", 1620;
-	setd ".map_mob_lhz_fild01", 1613;
-	setd ".map_mob_lhz_fild02", 1215;
-	setd ".map_mob_lhz_dun01", 1621;
-	setd ".map_mob_lhz_dun02", 1653;
-	setd ".map_mob_lhz_dun03", 1657;
-	setd ".map_mob_ra_fild01", 1782;
-	setd ".map_mob_ra_fild05", 1680;
-	setd ".map_mob_ra_fild08", 1680;
-	setd ".map_mob_ra_san01", 1771;
-	setd ".map_mob_ra_san02", 1770;
-	setd ".map_mob_ra_san03", 1773;
-	setd ".map_mob_ra_san04", 1752;
-	setd ".map_mob_ve_fild03", 1836;
-	setd ".map_mob_ve_fild07", 1784;
-	setd ".map_mob_ice_dun01", 1776;
-	setd ".map_mob_ice_dun02", 1319;
-	setd ".map_mob_ice_dun03", 1777;
-	setd ".map_mob_hu_fild01", 1692;
-	setd ".map_mob_hu_fild02", 1715;
-	setd ".map_mob_hu_fild04", 1692;
-	setd ".map_mob_hu_fild05", 1715;
-	setd ".map_mob_hu_fild07", 1715;
-	setd ".map_mob_abyss_01", 1717;
-	setd ".map_mob_abyss_02", 1716;
-	setd ".map_mob_abyss_03", 1716;
-	setd ".map_mob_tha_t01", 1698;
-	setd ".map_mob_tha_t02", 1698;
-	setd ".map_mob_tha_t03", 1979;
-	setd ".map_mob_tha_t04", 1693;
-	setd ".map_mob_tha_t05", 1701;
-	setd ".map_mob_tha_t06", 1702;
-	setd ".map_mob_tha_t07", 1703;
-	setd ".map_mob_tha_t08", 1702;
-	setd ".map_mob_tha_t09", 1702;
-	setd ".map_mob_tha_t10", 1700;
-	setd ".map_mob_abbey01", 1867;
-	setd ".map_mob_abbey02", 1864;
-	setd ".map_mob_abbey03", 1870;
-	setd ".map_mob_arug_dun01", 1974;
-	setd ".map_mob_spl_fild01", 1988;
-	setd ".map_mob_spl_fild02", 1995;
-	setd ".map_mob_spl_fild03", 2015;
-	setd ".map_mob_man_fild03", 1997;
-	setd ".map_mob_thor_v03", 1831;
-	setd ".map_mob_mosk_dun01", 1880;
-	setd ".map_mob_mosk_dun03", 1882;
-	setd ".map_mob_bra_fild01", 2063;
-	setd ".map_mob_juperos_01", 1676;
-	setd ".map_mob_niflheim", 1509;
-	setd ".map_mob_nif_fild01", 1505;
 	end;
 	
 OnNPCKillEvent:
@@ -524,72 +320,60 @@ OnNPCKillEvent:
 	set .@id, killedrid;
 	set .@map$, strcharinfo(3);
 
-	// 2. RESTRICCIÓN DE MAPA: Si el mapa tiene un monstruo asignado, sólo las bajas de ese monstruo suman contador.
-	set .@allowed_mob, getd(".map_mob_" + .@map$);
-	if (.@allowed_mob > 0 && .@id != .@allowed_mob) end;
+	// Filter: Only mobs with champions
+	if (getd(".ch_" + .@id + "_1") == 0) end;
 
-	// 3. RECOLECTAR CHAMPION IDS DEFINIDOS PARA ESTE MOB
-	deletearray .@ch_list[0];
-	for (set .@i, 1; .@i <= 5; set .@i, .@i + 1) {
-		set .@c, getd(".ch_" + .@id + "_" + .@i);
-		if (.@c > 0)
-			setarray .@ch_list[getarraysize(.@ch_list)], .@c;
-	}
-
-	// Filtro: Solo mobs con champions mapeados
-	if (getarraysize(.@ch_list) == 0) end;
-
-	// 4. REQUISITOS DINÁMICOS POR NIVEL
+	// 2. DYNAMIC REQUIREMENTS BY LEVEL
+	// We use MOB_LV constant for better compatibility
 	set .@lvl, getmonsterinfo(.@id, MOB_LV);
+	
+	// If it still returns 0, we try to get it via ID directly
 	if (.@lvl <= 0) set .@lvl, getmonsterinfo(killedrid, MOB_LV);
 
-	// LÓGICA DE NIVELES
-	if (.@lvl <= 25) { set .@req, 200; }
-	else if (.@lvl <= 50) { set .@req, 150; }
-	else if (.@lvl <= 75) { set .@req, 100; }
-	else { set .@req, 50; }
+	// --- DEBUG LINE (Uncomment if you want to see the detected level in chat) ---
+	// dispbottom "DEBUG: Mob Level detected: " + .@lvl;
+	// ----------------------------------------------------------------------------
 
-	// 5. LÓGICA DE CONTADOR
+	// LEVEL LOGIC
+	if (.@lvl <= 25) { set .@req, 300; }
+	else if (.@lvl <= 50) { set .@req, 200; }
+	else if (.@lvl <= 75) { set .@req, 150; }
+	else { set .@req, 75; }
+
+	// 3. COUNTER LOGIC
 	set .@var$, "$CK_" + .@map$ + "_" + .@id;
 	setd .@var$, getd(.@var$) + 1;
 	set .@curr, getd(.@var$);
 	
-	// 6. MOSTRAR PROGRESO POR HITOS (Cada 50 kills o en la recta final <= 25)
+	// 4. PROGRESS DISPLAY (145/150 Format)
 	set .@rem, .@req - .@curr;
-	if ((.@curr % 50 == 0) || (0 <= .@rem && .@rem <= 25)) {
-		dispbottom "Champion Progress [" + getmonsterinfo(.@id, MOB_NAME) + "]: " + .@curr + "/" + .@req;
+	if (.@rem >= 0 && .@rem <= 25) {
+		dispbottom "Champion Progress [ID: " + .@id + "]: " + .@curr + "/" + .@req;
 	}
 
-	// 7. SPAWN LOGIC (Random Map Spawn + Minimap Indicator)
+	// 5. SPAWN LOGIC
 	if (.@curr >= .@req) {
 		setd .@var$, 0; 
 
-		// Selecciona un Champion válido de la lista de forma totalmente aleatoria
-		set .@champ, .@ch_list[rand(getarraysize(.@ch_list))];
-
-		// Invoca al monstruo en una casilla aleatoria del mapa
-		monster .@map$, 0, 0, "--en--", .@champ, 1, "CHAMPION_SYSTEM::OnDeath";
-
-		if ($@mobid[0] > 0) {
-			// Obtiene la posición X e Y del Champion recién invocado
-			getunitdata $@mobid[0], .@u;
-			set .@cx, .@u[UMOB_X];
-			set .@cy, .@u[UMOB_Y];
-
-			// Marca la ubicación en el minimapa de todos los jugadores presentes en el mapa
-			if (.@cx > 0 && .@cy > 0)
-				viewpointmap .@map$, 1, .@cx, .@cy, 1, 0xFF0000;
-
-			mapannounce .@map$, "A Champion (" + getmonsterinfo(.@champ, MOB_NAME) + ") has appeared in a random location on the map!", bc_map, 0xFFFF00;
+		set .@v, 0;
+		for (set .@i, 1; .@i <= 5; set .@i, .@i + 1) {
+			if (getd(".ch_" + .@id + "_" + .@i) > 0) set .@v, .@v + 1;
 		}
+		set .@champ, getd(".ch_" + .@id + "_" + (rand(.@v) + 1));
+
+		getmapxy(.@map$, .@px, .@py);
+		if (.@px <= 0) { set .@px, 150; set .@py, 150; }
+
+		set .@x1, .@px - 10; set .@y1, .@py - 10;
+		set .@x2, .@px + 10; set .@y2, .@py + 10;
+
+		areamonster .@map$, .@x1, .@y1, .@x2, .@y2, "--en--", .@champ, 1, "CHAMPION_SYSTEM::OnDeath";
+		
+		mapannounce .@map$, "A Champion has appeared near " + strcharinfo(0) + "!", bc_map, 0xFFFF00;
 	}
 	end;
 
 OnDeath:
-	// Borra la marca del minimapa al ser derrotado
-	getmapxy(.@m$, .@x, .@y);
-	viewpointmap .@m$, 2, .@x, .@y, 1, 0xFF0000;
-
 	// Dynamic Drop (20-50%)
 	set .@lvl, getmonsterinfo(killedrid, MOB_LV);
 	set .@drop, 20 + (.@lvl * 30 / 100);
@@ -600,6 +384,6 @@ OnDeath:
 		dispbottom "Rare item obtained! (" + .@drop + "% chance).";
 	}
 	
-	announce "The Champion (" + getmonsterinfo(killedrid, MOB_NAME) + ") was defeated by " + strcharinfo(0) + "!", bc_map, 0x00FF00;
+	announce "The Champion was defeated by " + strcharinfo(0) + "!", bc_map, 0x00FF00;
 	end;
 }	

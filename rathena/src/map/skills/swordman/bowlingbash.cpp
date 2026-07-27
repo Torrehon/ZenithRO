@@ -20,12 +20,20 @@ void SkillBowlingBash::modifyDamageData(Damage& dmg, const block_list& src, cons
 	// Por defecto, Bowling Bash siempre da 2 hits.
 	dmg.div_ = 2;
 
-	// Solo si es un jugador, tiene una espada de 2 manos Y tiene la skill KN_BLADERSOUL aprendida (nivel > 0)
-	if (sd != nullptr && sd->status.weapon == W_2HSWORD && pc_checkskill(sd, KN_BLADERSOUL) > 0) {
-		if (dmg.miscflag >= 4)
-			dmg.div_ = 4; // 4 hits si hay 4 o más enemigos
-		else if (dmg.miscflag >= 2)
-			dmg.div_ = 3; // 3 hits si hay 2 o 3 enemigos
+	if (sd != nullptr) {
+		// --- INICIO CUSTOM: Knight Blader Soul (Espada a 2 Manos) ---
+		if (sd->status.weapon == W_2HSWORD && pc_checkskill(sd, KN_BLADERSOUL) > 0) {
+			if (dmg.miscflag >= 4)
+				dmg.div_ = 4; // 4 hits si hay 4 o más enemigos
+			else if (dmg.miscflag >= 3)
+				dmg.div_ = 3; // 3 hits si hay 3 enemigos
+		}
+		// --- INICIO CUSTOM: Rogue Mimic Soul (Espada a 1 Mano) ---
+		else if (sd->status.weapon == W_1HSWORD && pc_checkskill(sd, RG_MIMIC) > 0) {
+			if (dmg.miscflag >= 3)
+				dmg.div_ = 3; // Hasta 3 hits si hay 3 o más enemigos
+		}
+		// --- FIN CUSTOM ---
 	}
 }
 
@@ -35,11 +43,20 @@ void SkillBowlingBash::calculateSkillRatio(const Damage* wd, const block_list* s
 	// Calculamos el número de hits bajo la misma lógica que modifyDamageData
 	int hits = 2;
 
-	if (sd != nullptr && sd->status.weapon == W_2HSWORD && pc_checkskill(sd, KN_BLADERSOUL) > 0) {
-		if (mflag >= 4)
-			hits = 4;
-		else if (mflag >= 3)
-			hits = 3;
+	if (sd != nullptr) {
+		// --- INICIO CUSTOM: Knight Blader Soul (Espada a 2 Manos) ---
+		if (sd->status.weapon == W_2HSWORD && pc_checkskill(sd, KN_BLADERSOUL) > 0) {
+			if (mflag >= 4)
+				hits = 4;
+			else if (mflag >= 3)
+				hits = 3;
+		}
+		// --- INICIO CUSTOM: Rogue Mimic Soul (Espada a 1 Mano) ---
+		else if (sd->status.weapon == W_1HSWORD && pc_checkskill(sd, RG_MIMIC) > 0) {
+			if (mflag >= 3)
+				hits = 3;
+		}
+		// --- FIN CUSTOM ---
 	}
 
 	// Tu fórmula: 100% + (10% * nivel) por cada hit.

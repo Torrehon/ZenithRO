@@ -28,9 +28,10 @@ void SkillDoubleStrafe::castendDamageId(block_list* src, block_list* target, uin
 
 	// 2. Lógica de Momentum
 	map_session_data* sd = BL_CAST(BL_PC, src);
-	
-	if (sd && pc_checkskill(sd, AC_MOMENTUM) > 0) { 
-		
+
+	// 3. Comprobamos si tiene AC_MOMENTUM (Archer) O si tiene RG_MIMIC (Rogue con la Mimic Soul)
+	if (sd && (pc_checkskill(sd, AC_MOMENTUM) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
+
 		status_change* sc = status_get_sc(src);
 		int32 current_stacks = 0;
 
@@ -47,7 +48,8 @@ void SkillDoubleStrafe::castendDamageId(block_list* src, block_list* target, uin
 		if (pc_checkskill(sd, HT_SHOOTERSOUL) > 0) {
 			// Con Soul of the Sharpshooter
 			duration = (22 - new_stacks) * 1000;
-		} else {
+		}
+		else {
 			// Sin la pasiva
 			duration = (12 - new_stacks) * 1000;
 		}

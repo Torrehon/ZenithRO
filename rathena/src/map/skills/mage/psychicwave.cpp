@@ -14,11 +14,16 @@ SkillPsychicWave::SkillPsychicWave() : SkillImpl(SO_PSYCHIC_WAVE) {
 void SkillPsychicWave::modifyDamageData(Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv) const {
 	const map_session_data* sd = BL_CAST(BL_PC, &src);
 
-	// --- INICIO CUSTOM: Soul of the Arcanist (2 Hits) ---
-	if (sd != nullptr && pc_checkskill(sd, SA_ARCSOUL) > 0) {
-		// Si tiene la pasiva y lleva Bastón (de 1 o 2 manos) o Libro, golpea 2 veces
-		if (sd->weapontype1 == W_STAFF || sd->weapontype1 == W_2HSTAFF) {
-			dmg.div_ = 2;
+	// --- INICIO CUSTOM: Soul of the Arcanist / Mimic Soul (2 Hits) ---
+	if (sd != nullptr) {
+		// Sage (Soul of the Arcanist): Solo Bastón de 1 o 2 manos (limita el uso de libros/escudos)
+		bool is_arcanist = (pc_checkskill(sd, SA_ARCSOUL) > 0 && (sd->weapontype1 == W_STAFF || sd->weapontype1 == W_2HSTAFF));
+		
+		// Rogue (Mimic Soul): Requiere Daga obligatoriamente
+		bool is_mimic = (pc_checkskill(sd, RG_MIMIC) > 0 && sd->weapontype1 == W_DAGGER);
+
+		if (is_arcanist || is_mimic) {
+			dmg.div_ = 2; // Golpea 2 veces
 		}
 	}
 	// --- FIN CUSTOM ---
@@ -42,9 +47,10 @@ void SkillPsychicWave::modifyElement(const Damage& dmg, const block_list& src, c
 	const map_session_data* sd = BL_CAST(BL_PC, &src);
 	const status_change* sc = status_get_sc(&src);
 
-	// --- INICIO CUSTOM: Soul of the Arcanist (Elemento del Endow) ---
-	if (sd && pc_checkskill(sd, SA_ARCSOUL) > 0 && sc != nullptr && !sc->empty()) {
-		// Comprobamos qué Endow tiene activo el Sage para heredar su elemento
+	// --- INICIO CUSTOM: Soul of the Arcanist / Mimic Soul (Elemento del Endow) ---
+	// Si el jugador tiene Arcanist Soul O Mimic Soul, y tiene algún estado activo
+	if (sd && (pc_checkskill(sd, SA_ARCSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) && sc != nullptr && !sc->empty()) {
+		// Comprobamos qué Endow tiene activo para heredar su elemento
 		if (sc->hasSCE(SC_FIREWEAPON)) element = ELE_FIRE;
 		else if (sc->hasSCE(SC_WATERWEAPON)) element = ELE_WATER;
 		else if (sc->hasSCE(SC_WINDWEAPON)) element = ELE_WIND;

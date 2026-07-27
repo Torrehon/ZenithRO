@@ -4860,6 +4860,16 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Merchant Axe Mastery Custom CRIT ---
+	
+	// --- INICIO CUSTOM: Nightblade Dagger Mastery (+10 Crit) ---
+	// Comprobamos si tiene RG_NIGHTBLADE aprendido y lleva una daga equipada
+	if (sd && pc_checkskill(sd, RG_NIGHTBLADE) > 0) {
+		if (sd->status.weapon == W_DAGGER) {
+			// En rAthena, la variable cri se multiplica x10 (100 = 10% de crítico)
+			base_status->cri += 100; 
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	if ((skill = pc_checkskill(sd, SHC_SHADOW_SENSE)) > 0)
 	{
@@ -5405,10 +5415,10 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			sd->indexed_bonus.subele[ELE_HOLY] += sc->getSCE(SC_PROVIDENCE)->val2;
 			sd->indexed_bonus.subrace[RC_DEMON] += sc->getSCE(SC_PROVIDENCE)->val2;
 
-			// --- INICIO CUSTOM: Templar Soul (Providence Ofensivo) ---
-			if (pc_checkskill(sd, CR_TEMPLARSOUL) > 0) {
+			// --- INICIO CUSTOM: Providence Ofensivo (Templar Soul / Mimic Soul) ---
+			if (pc_checkskill(sd, CR_TEMPLARSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0) {
 				int32 prov_lv = sc->getSCE(SC_PROVIDENCE)->val1; // Nivel de la skill
-				int32 bonus_damage = 2 * prov_lv;               // 2% por nivel
+				int32 bonus_damage = 2 * prov_lv;                // 2% por nivel
 
 				// Daño Físico: Mano derecha
 				sd->right_weapon.addrace[RC_DEMON] += bonus_damage;
@@ -5968,8 +5978,8 @@ void status_calc_regen(block_list *bl, struct status_data *status, struct regen_
 		sregen = regen->ssregen;
 
 		val = 0;
-		if( (skill=pc_checkskill(sd,MO_SPIRITSRECOVERY)) > 0 )
-			val += skill*4 + skill*status->max_hp/500;
+		// if( (skill=pc_checkskill(sd,MO_SPIRITSRECOVERY)) > 0 )
+			// val += skill*4 + skill*status->max_hp/500;
 
 		// if( (skill=pc_checkskill(sd,TK_HPTIME)) > 0 && sd->state.rest )
 			// val += skill*30 + skill*status->max_hp/500;
@@ -5981,9 +5991,9 @@ void status_calc_regen(block_list *bl, struct status_data *status, struct regen_
 			// if ((skill=pc_checkskill(sd,SL_KAINA)) > 0) // Power up Enjoyable Rest
 				// val += (30+10*skill)*val/100;
 		//}
-		if( (skill=pc_checkskill(sd,MO_SPIRITSRECOVERY)) > 0 )
-			val += skill*2 + skill*status->max_sp/500;
-		sregen->sp = cap_value(val, 0, SHRT_MAX);
+		// if( (skill=pc_checkskill(sd,MO_SPIRITSRECOVERY)) > 0 )
+			// val += skill*2 + skill*status->max_sp/500;
+		// sregen->sp = cap_value(val, 0, SHRT_MAX);
 	}
 
 	if( bl->type == BL_HOM ) {
@@ -9030,6 +9040,12 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 		if( sd && sc->getSCE(SC_HIDING) ) {
 			if (pc_checkskill(sd, RG_TUNNELDRIVE) > 0) {
 				val = 120 - 6 * pc_checkskill(sd, RG_TUNNELDRIVE);
+			// --- INICIO CUSTOM: Mimic Soul (Mejora de Tunnel Drive) ---
+				// Restamos 25 a la penalización de movimiento si tiene la Soul de Mimic
+				if (pc_checkskill(sd, RG_MIMIC) > 0) {
+					val -= 25;
+				}
+				// --- FIN CUSTOM ---
 			} else if (pc_checkskill(sd, NJ_SHADOWPATH) > 0) {
 				// El Ninja también recupera velocidad según el nivel de su pasiva
 				val = 120 - 6 * pc_checkskill(sd, NJ_SHADOWPATH);

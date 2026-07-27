@@ -1993,24 +1993,53 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 			}
 		}
 
-    // --- INICIO CUSTOM: Savagery & Skin Tempering Leech ---
+	// --- INICIO CUSTOM: Savagery & Skin Tempering Leech / Mimic Soul ---
 	if (sc && damage > 0 && (flag & BF_WEAPON)) {
 		map_session_data* sd = BL_CAST(BL_PC, src);
 		
-		if (sd && pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0) {
-			int skin_lv = pc_checkskill(sd, BS_SKINTEMPER);
-			
-			if (skin_lv > 0 && sc->getSCE(SC_SAVAGERY)) {
-				int stacks = sc->getSCE(SC_SAVAGERY)->val1;
-				
-				// Fórmula exacta: 0.04% por nivel, por stack.
-				int64 heal_amount = (int64)damage * 4 * skin_lv * stacks / 10000;
-				
-				if (heal_amount > 0) {
-					// ¡LA MAGIA DEL TIPO 3! 
-					// Si la conf dice 'yes', usa 3 (muestra números). Si dice 'no', usa 1 (silencio).
-					status_heal(src, heal_amount, 0, battle_config.show_hp_sp_drain ? 3 : 1);
+		if (sd) {
+			bool is_jugger = (pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0);
+			bool is_mimic  = (pc_checkskill(sd, RG_MIMIC) > 0);
+
+			if (is_jugger || is_mimic) {
+				if (sc->getSCE(SC_SAVAGERY)) {
+					int stacks = sc->getSCE(SC_SAVAGERY)->val1;
+					int64 heal_amount = 0;
+
+					if (is_jugger) {
+						// Blacksmith: Utiliza el nivel de Skin Tempering
+						int skin_lv = pc_checkskill(sd, BS_SKINTEMPER);
+						if (skin_lv > 0) {
+							// Fórmula exacta: 0.04% por nivel, por stack.
+							heal_amount = (int64)damage * 4 * skin_lv * stacks / 10000;
+						}
+					} else if (is_mimic) {
+						// Rogue: Sin Skin Tempering, usamos un valor fijo equivalente (por ejemplo, asumiendo nivel 5 o un factor directo por stack)
+						// Si quieres ajustar el multiplicador base para el Rogue, puedes cambiar el '5' por el valor que prefieras.
+						int rogue_base_factor = 5; 
+						heal_amount = (int64)damage * 4 * rogue_base_factor * stacks / 10000;
+					}
+					
+					if (heal_amount > 0) {
+						// ¡LA MAGIA DEL TIPO 3! 
+						// Si la conf dice 'yes', usa 3 (muestra números). Si dice 'no', usa 1 (silencio).
+						status_heal(src, heal_amount, 0, battle_config.show_hp_sp_drain ? 3 : 1);
+					}
 				}
+			}
+		}
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Mug HP Leech (50%) with Nightblade Soul ---
+	if (damage > 0 && src && skill_id == RG_STEALCOIN) {
+		map_session_data* ssd = BL_CAST(BL_PC, src); // <--- Definimos al atacante explícitamente
+		
+		if (ssd && pc_checkskill(ssd, RG_NIGHTBLADE) > 0) {
+			int64 heal_amount = (int64)damage * 10 / 100; // 50% de leech
+			
+			if (heal_amount > 0) {
+				status_heal(src, heal_amount, 0, battle_config.show_hp_sp_drain ? 3 : 1);
 			}
 		}
 	}
@@ -4565,6 +4594,26 @@ static void battle_calc_multi_attack(struct Damage* wd, block_list *src,block_li
 		}
 		// --- FIN CUSTOM ---
 		
+		// --- INICIO CUSTOM: Nightblade Sword Mastery (Double Attack con 1H Swords) ---
+		if (wd->div_ == 1 && sd && pc_checkskill(sd, RG_NIGHTBLADE) > 0) {
+			
+			// Solo funciona si lleva una espada de una mano equipada
+			if (sd->weapontype1 == W_1HSWORD) {
+				int mastery_lv = pc_checkskill(sd, SM_SWORD); // O la maestría de espada que uses base
+				
+				if (mastery_lv > 0) {
+					// 5% por nivel (ajusta el multiplicador si prefieres otro porcentaje, ej: 5 * mastery_lv)
+					int da_rate = 5 * mastery_lv; 
+					
+					if (rnd() % 100 < da_rate) {
+						wd->div_ = 2; // Dos golpes
+						wd->type = DMG_MULTI_HIT;
+					}
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
+		
 	}
 }
 
@@ -5730,8 +5779,8 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		}
 		// --- FIN CUSTOM ---
 		
-		// --- INICIO CÓDIGO CUSTOM: Templar Soul (Holy Cross con MATK) ---
-		if (skill_id == CR_HOLYCROSS && sd && sd->status.weapon == W_1HSWORD && pc_checkskill(sd, CR_TEMPLARSOUL) > 0) {
+		// --- INICIO CÓDIGO CUSTOM: Templar Soul / Mimic Soul (Holy Cross con MATK) ---
+		if (skill_id == CR_HOLYCROSS && sd && sd->status.weapon == W_1HSWORD && (pc_checkskill(sd, CR_TEMPLARSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 			int32 base_matk = sstatus->matk_min;
 			if (sstatus->matk_max > sstatus->matk_min) {
 				base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
@@ -5743,33 +5792,42 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		// --- FIN CÓDIGO CUSTOM ---
 		
 
-		// --- INICIO CUSTOM: Ascetic Soul (MATK Híbrido Escalar) ---
-		if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
-			if (skill_id == MO_EXTREMITYFIST || 
-				skill_id == MO_FINGEROFFENSIVE || 
-				skill_id == MO_INVESTIGATE || 
-				skill_id == MO_BALKYOUNG) {
-				
-				// 1. Calculamos el MATK aleatorio entre el mínimo y el máximo
-				int32 base_matk = sstatus->matk_min;
-				if (sstatus->matk_max > sstatus->matk_min) {
-					base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+		// --- INICIO CUSTOM: Ascetic Soul / Mimic Soul (MATK Híbrido Escalar) ---
+		if (sd) {
+			// Definimos quién es quién
+			bool is_ascetic = (pc_checkskill(sd, MO_ASCETIC) > 0 && pc_checkskill(sd, MO_SPIRITSRECOVERY) > 0);
+			bool is_mimic   = (pc_checkskill(sd, RG_MIMIC) > 0);
+
+			if (is_ascetic || is_mimic) {
+				if (skill_id == MO_EXTREMITYFIST || 
+					skill_id == MO_FINGEROFFENSIVE || 
+					skill_id == MO_INVESTIGATE || 
+					skill_id == MO_BALKYOUNG) {
+					
+					// 1. Calculamos el MATK aleatorio entre el mínimo y el máximo
+					int32 base_matk = sstatus->matk_min;
+					if (sstatus->matk_max > sstatus->matk_min) {
+						base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+					}
+
+					int64 matk_portion = 0;
+
+					// 2. Asignamos el porcentaje según la habilidad y la clase
+					if (skill_id == MO_EXTREMITYFIST) {
+						// Asura Strike: 100% del MATK base SOLO para el Monk Asceta
+						if (is_ascetic) {
+							matk_portion = base_matk; 
+						}
+					} else {
+						// Finger Offensive, Investigate y Ki Explosion: 25% para AMBOS
+						matk_portion = (base_matk * 25) / 100;
+					}
+
+					// 3. Lo inyectamos de forma segura en las variables de daño base si hay bono
+					if (matk_portion > 0) {
+						ATK_ADD(wd.damage, wd.damage2, matk_portion);
+					}
 				}
-
-				int64 matk_portion = 0;
-
-				// 2. Asignamos el porcentaje según la habilidad
-				if (skill_id == MO_EXTREMITYFIST) {
-					// Asura Strike suma el 100% del MATK base
-					// Como esto ocurre antes del ATK_RATE, el multiplicador de SP lo elevará a las nubes
-					matk_portion = base_matk; 
-				} else {
-					// Finger Offensive, Investigate y Ki Explosion suman un 25% del MATK base
-					matk_portion = (base_matk * 25) / 100;
-				}
-
-				// 3. Lo inyectamos de forma segura en las variables de daño base
-				ATK_ADD(wd.damage, wd.damage2, matk_portion);
 			}
 		}
 		// --- FIN CUSTOM ---
@@ -6161,8 +6219,7 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 			if (tsc->getSCE(SC_STRIPHELM)) status_count++;
 
 			if (status_count > 0) {
-				// Límite dinámico: 10 estados (50%) si tiene la Soul de Saboteur, 5 estados (25%) por defecto
-				// NOTA: Reemplaza 'RG_NIGHTBLADE' por el Skill ID real de la Soul en tu database
+				// Límite dinámico: 10 estados (50%) si tiene la Soul de Nightblade, 5 estados (25%) por defecto
 				int max_statuses = (pc_checkskill(sd, RG_NIGHTBLADE) > 0) ? 10 : 5;
 				
 				status_count = min(status_count, max_statuses);
@@ -6261,13 +6318,14 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 	//Initialize variables that will be used afterwards
 	s_ele = battle_get_magic_element(ad, *src, *target, skill_id, skill_lv);
 	
-	// --- INICIO CUSTOM: Apothecary Elemental Override (Magic) ---
+// --- INICIO CUSTOM: Apothecary / Mimic Soul Elemental Override (Magic) ---
 	if (skill_id == AM_DEMONSTRATION || skill_id == AM_ACIDTERROR) {
 		// Comprobamos que el atacante es un jugador (incluso si el daño viene de una Unit)
 		if (src && src->type == BL_PC) {
 			map_session_data *sd_caster = BL_CAST(BL_PC, src);
 			
-			if (pc_checkskill(sd_caster, AM_APOTHECARY) > 0) {
+			// Si el Alchemist tiene Apothecary O el Rogue tiene Mimic Soul
+			if (pc_checkskill(sd_caster, AM_APOTHECARY) > 0 || pc_checkskill(sd_caster, RG_MIMIC) > 0) {
 				if (sd_caster->equip_index[EQI_SHADOW_SHOES] >= 0) {
 					int index = sd_caster->equip_index[EQI_SHADOW_SHOES];
 					
@@ -6351,8 +6409,8 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 				if (skill_id == PR_TURNUNDEAD && src != nullptr && src->type == BL_PC) {
 					map_session_data* sd = BL_CAST(BL_PC, src);
 					
-					// Si el Priest tiene la pasiva aprendida, sumamos el 20% plano antes del límite
-					if (sd && pc_checkskill(sd, PR_EXORCISTSOUL) > 0) {
+					// Si el Priest tiene la pasiva aprendida O el Rogue tiene la Mimic Soul, sumamos el 20% plano
+					if (sd && (pc_checkskill(sd, PR_EXORCISTSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 						i += 200; 
 					}
 				}
@@ -6987,13 +7045,15 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 			double base_trap_damage = skill_lv * (sstatus->int_ + 100.0) * (120.0 + sstatus->dex) / 100.0;
 			
 			// 2. Bono de Ataque Mágico condicionado a la pasiva
-			double matk_bonus = 0; // Por defecto es 0 para un Hunter normal
+			double matk_bonus = 0; // Por defecto es 0 para un Hunter o Rogue normal sin Soul
 			
-			// Si es un jugador y tiene aprendida Soul of the Trapper
-			if (sd && pc_checkskill(sd, HT_TRAPPERSOUL) > 0) {
+			// --- INICIO CUSTOM: Trapper Soul / Mimic Soul ---
+			// Si es un jugador y tiene aprendida Soul of the Trapper O la Mimic Soul
+			if (sd && (pc_checkskill(sd, HT_TRAPPERSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 				// Calculamos el 150% (1.5) del MATK máximo
 				matk_bonus = sstatus->matk_max * 1.5;
 			}
+			// --- FIN CUSTOM ---
 			
 			// 3. Sumamos la base invertida más el bono de MATK al daño final
 			md.damage = static_cast<decltype(md.damage)>(base_trap_damage + matk_bonus);
@@ -7853,12 +7913,12 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 			status_change_end(target, SC_AUTOCOUNTER);
 			skill_attack(BF_WEAPON,target,target,src,KN_AUTOCOUNTER,skill_lv,tick,0);
 
-			// --- INICIO CUSTOM: Estado DUELIST al bloquear con Blader Soul ---
+			// --- INICIO CUSTOM: Estado DUELIST al bloquear (Blader Soul / Mimic Soul) ---
 			if (target->type == BL_PC) {
 				map_session_data *tsd = BL_CAST(BL_PC, target);
 				
-				// Verificamos que el jugador exista y tenga la pasiva aprendida
-				if (tsd != nullptr && pc_checkskill(tsd, KN_BLADERSOUL) > 0) {
+				// Verificamos que el jugador exista y tenga la pasiva de Knight O la de Mimic
+				if (tsd != nullptr && (pc_checkskill(tsd, KN_BLADERSOUL) > 0 || pc_checkskill(tsd, RG_MIMIC) > 0)) {
 					// sc_start(origen, objetivo, ESTADO, 100% chance, Nivel, Duración ms)
 					sc_start(target, target, SC_DUELIST, 100, 1, 20000); 
 				}

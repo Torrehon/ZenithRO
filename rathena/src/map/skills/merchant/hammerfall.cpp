@@ -14,19 +14,23 @@ void SkillHammerFall::calculateSkillRatio(const Damage *wd, const block_list *sr
 	base_skillratio += 20 * skill_lv;
 	base_skillratio += status_get_vit(src);
 
-	// 2. Mejoras de la Soul of the Juggernaut
+	// 2. Mejoras de la Soul of the Juggernaut / Mimic Soul
 	const map_session_data* sd = BL_CAST(BL_PC, src);
-	if (sd && pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0) {
-		
-		// A. Aumento de daño por cargas de Savagery (+10% por carga)
-		const status_change* sc = status_get_sc(src);
-		if (sc && sc->getSCE(SC_SAVAGERY)) {
-			base_skillratio += sc->getSCE(SC_SAVAGERY)->val1 * 10;
-		}
+	if (sd) {
+		bool is_jugger = (pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0);
+		bool is_mimic  = (pc_checkskill(sd, RG_MIMIC) > 0);
 
-		// B. Doble golpe con Hacha de 2 manos
-		if (sd->status.weapon == W_2HAXE && wd != nullptr) {
-			const_cast<Damage*>(wd)->div_ = 2;
+		if (is_jugger || is_mimic) {
+			// A. Aumento de daño por cargas de Savagery (+10% por carga) para ambos
+			const status_change* sc = status_get_sc(src);
+			if (sc && sc->getSCE(SC_SAVAGERY)) {
+				base_skillratio += sc->getSCE(SC_SAVAGERY)->val1 * 10;
+			}
+
+			// B. Doble golpe con Hacha de 2 manos (EXCLUSIVO Blacksmith / Juggernaut)
+			if (is_jugger && sd->status.weapon == W_2HAXE && wd != nullptr) {
+				const_cast<Damage*>(wd)->div_ = 2;
+			}
 		}
 	}
 }
@@ -37,29 +41,32 @@ void SkillHammerFall::castendPos2(block_list* src, int32 x, int32 y, uint16 skil
 
 	// 2. Lógica de Savagery (1 carga por uso de la habilidad)
 	map_session_data* sd = BL_CAST(BL_PC, src);
-	if (sd && pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0 && pc_checkskill(sd, BS_HILTBINDING) > 0) {
-		
-		status_change* sc = status_get_sc(src);
-		int32 current_stacks = 0;
+	if (sd) {
+		bool is_jugger = (pc_checkskill(sd, BS_JUGGERNAUTSOUL) > 0 && pc_checkskill(sd, BS_HILTBINDING) > 0);
+		bool is_mimic  = (pc_checkskill(sd, RG_MIMIC) > 0); // El Rogue solo necesita la Mimic Soul, sin Hilt Binding
 
-		// Si ya tiene el buff activo, obtenemos cuántos stacks tiene
-		if (sc && sc->getSCE(SC_SAVAGERY)) {
-			current_stacks = sc->getSCE(SC_SAVAGERY)->val1;
-		}
-		
-		// Sumamos 1 stack, asegurándonos de que nunca pase de 10
-		int32 new_stacks = std::min(10, current_stacks + 1);
+		if (is_jugger || is_mimic) {
+			status_change* sc = status_get_sc(src);
+			int32 current_stacks = 0;
 
-		// Refrescamos o iniciamos el estado (100 = probabilidad 100%, 10 segundos)
-		sc_start(src, src, SC_SAVAGERY, 100, new_stacks, 10000);
-		
-		// --- INICIO CUSTOM: Efecto al llegar al máximo de cargas ---
-		// Si antes teníamos menos de 10, y ahora tenemos 10... ¡Boom!
-		if (current_stacks < 10 && new_stacks == 10) {
-			clif_specialeffect(src, 1996, AREA);
+			// Si ya tiene el buff activo, obtenemos cuántos stacks tiene
+			if (sc && sc->getSCE(SC_SAVAGERY)) {
+				current_stacks = sc->getSCE(SC_SAVAGERY)->val1;
+			}
+			
+			// Sumamos 1 stack, asegurándonos de que nunca pase de 10
+			int32 new_stacks = std::min(10, current_stacks + 1);
+
+			// Refrescamos o iniciamos el estado (100 = probabilidad 100%, 10 segundos)
+			sc_start(src, src, SC_SAVAGERY, 100, new_stacks, 10000);
+			
+			// --- INICIO CUSTOM: Efecto al llegar al máximo de cargas ---
+			// Si antes teníamos menos de 10, y ahora tenemos 10... ¡Boom!
+			if (current_stacks < 10 && new_stacks == 10) {
+				clif_specialeffect(src, 1996, AREA);
+			}
+			// --- FIN CUSTOM ---
 		}
-		// --- FIN CUSTOM ---
-		
 	}
 }
 
