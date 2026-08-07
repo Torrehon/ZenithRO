@@ -152,35 +152,3 @@ L_TriggerCycle:
 	}
 	end;
 }
-
-// ==========================================================
-// NPC CONTROL (PRONTERA 155, 180)
-// ==========================================================
-prontera,155,180,5	script	Mana Control	122,{
-	mes "[Environment & Mana Control]";
-	mes "Hello. (Testing Mode Active)";
-	mes "Global State: ^0000FF" + (($Global_EnvState == 2) ? "Star Shower" : (($Global_EnvState == 1) ? "Night" : "Day")) + "^000000";
-	mes "Next Shower Chance: ^FF0000" + $StarShowerChance + "%^000000";
-	mes "Mana Event: " + (($ManaEvent_Active) ? "^00FF00Active^000000" : "^FF0000Inactive^000000");
-	next;
-	
-	switch(select("Force Star Shower (6x-8x):Stop Event:Cancel")) {
-		case 1:
-			mes "[Mana Control]";
-			mes "Triggering global event and updating EXP rates...";
-			close2;
-			donpcevent "EnvCycleManager::OnManualStart";
-			end;
-		
-		case 2:
-			mes "[Mana Control]";
-			mes "Restoring rates to 5.00x and resetting environment...";
-			close2;
-			donpcevent "EnvCycleManager::OnManualStop";
-			end;
-
-		case 3:
-			close;
-			end;
-	}
-}

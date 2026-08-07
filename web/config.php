@@ -4,14 +4,13 @@
  */
 
 // Parámetros de la Base de Datos
-define('DB_HOST', 'localhost');     // En tu XAMPP local es 'localhost'
-define('DB_USER', 'root');          // Usuario por defecto en XAMPP es 'root'
-define('DB_PASS', '');              // Contraseña por defecto en XAMPP es vacía ''
+define('DB_HOST', 'localhost');     // En tu VPS/XAMPP local es 'localhost'
+define('DB_USER', 'root');          // Usuario por defecto en XAMPP/rAthena
+define('DB_PASS', '');              // Contraseña de tu MySQL
 define('DB_NAME', 'ragnarok');      // Nombre de la base de datos de rAthena
 
-// Cifrado de Contraseñas rAthena ('md5', 'sha256' o 'plaintext')
-// La mayoría de servidores rAthena usan 'md5' por defecto
-define('PASSWORD_HASH', 'md5');
+// Cifrado de Contraseñas rAthena ('plaintext' o 'md5')
+define('PASSWORD_HASH', 'plaintext');
 
 // Función de conexión PDO segura
 function getDBConnection() {

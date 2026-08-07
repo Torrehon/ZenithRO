@@ -36,7 +36,7 @@ void SkillSightlessMind::applyAdditionalEffects(block_list *src, block_list *tar
 	// --- EXCLUSIVO NIGHTBLADE: Provocar estados alterados según el arma ---
 	if (pc_checkskill(sd, RG_NIGHTBLADE) > 0) {
 		
-		int rate = 50; // 50% de probabilidad base
+		int rate = 25; // 50% de probabilidad base
 		int duration = 10000; 
 		
 		// Usamos sd->weapontype1 para leer el tipo de arma principal equipada en la mano derecha

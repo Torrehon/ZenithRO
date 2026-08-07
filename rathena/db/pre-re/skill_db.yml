@@ -6090,7 +6090,7 @@ Body:
     TargetType: Ground
     DamageFlags:
       NoDamage: true
-    Range: 1
+    Range: 9
     Hit: Single
     HitCount: 1
     Duration1: 60000
@@ -6102,6 +6102,7 @@ Body:
           Amount: 1
     Unit:
       Id: Graffiti
+      Layout: 10
       Interval: 1000
       Target: Party
       Flag:
@@ -6147,7 +6148,10 @@ Body:
     TargetType: Self
     DamageFlags:
       NoDamage: true
-    CastTime: 1000
+    CastTime: 3000
+    CastTimeFlags:
+      IgnoreDex: true
+      IgnoreStatus: true
   - Id: 226
     Name: AM_AXEMASTERY
     Description: Axe Mastery
@@ -17638,7 +17642,10 @@ Body:
     TargetType: Self
     DamageFlags:
       NoDamage: true
-    CastTime: 1000
+    CastTime: 3000
+    CastTimeFlags:
+      IgnoreDex: true
+      IgnoreStatus: true
     Type: Weapon
     Flags:
       IsQuest: true

@@ -24,13 +24,15 @@ alberta,118,160,3	script	Bullet Dealer Tony#alb::bdt	4_M_04,{
 		mes "the materials, and I'll make";
 		mes "you the bullets you need.";
 		next;
-		switch(select("Poison Sphere:Flare Sphere:Lighting Sphere:Blind Sphere:Freezing Sphere:Cancel")) {
-		case 1: callsub S_BulletTrade,937,10,13205;// <item required>, <amount req>, <bullet id>
+		switch(select("Poison Sphere:Flare Sphere:Lighting Sphere:Blind Sphere:Freezing Sphere:Tremor Sphere:Light Sphere:Cancel")) {
+		case 1: callsub S_BulletTrade,937,10,13205;
 		case 2: callsub S_BulletTrade,7097,2,13203;
 		case 3: callsub S_BulletTrade,7053,3,13204;
 		case 4: callsub S_BulletTrade,1024,5,13206;
 		case 5: callsub S_BulletTrade,7054,2,13207;
-		case 6:
+		case 6: callsub S_BulletTrade,7052,2,50021; // Tremor Sphere (Yellow Live x2)
+		case 7: callsub S_BulletTrade,525,1,50022;  // Light Sphere (Holy Water x1)
+		case 8:
 			mes "[Tony]";
 			mes "Changed your mind?";
 			mes "Well, if you ever need";

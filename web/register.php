@@ -55,7 +55,7 @@ if ($gender !== 'M' && $gender !== 'F') {
 try {
     $pdo = getDBConnection();
 
-    // 2. Comprobar si el usuario ya existe
+    // 2. Comprobar si el usuario ya existe (Único por cuenta)
     $stmt = $pdo->prepare("SELECT account_id FROM login WHERE userid = :userid LIMIT 1");
     $stmt->execute([':userid' => $username]);
     if ($stmt->fetch()) {
@@ -63,15 +63,9 @@ try {
         exit;
     }
 
-    // 3. Comprobar si el email ya existe
-    $stmt = $pdo->prepare("SELECT account_id FROM login WHERE email = :email LIMIT 1");
-    $stmt->execute([':email' => $email]);
-    if ($stmt->fetch()) {
-        echo json_encode(['success' => false, 'message' => 'Este correo electrónico ya está registrado.']);
-        exit;
-    }
+    // Nota: Se permite reutilizar el mismo correo electrónico en múltiples cuentas.
 
-    // 4. Cifrado de Contraseña según configuración
+    // 3. Procesar contraseña según configuración ('plaintext' o 'md5')
     $hashed_password = $password;
     if (PASSWORD_HASH === 'md5') {
         $hashed_password = md5($password);
@@ -79,7 +73,7 @@ try {
         $hashed_password = hash('sha256', $password);
     }
 
-    // 5. Insertar nueva cuenta en la tabla 'login' de rAthena
+    // 4. Insertar nueva cuenta en la tabla 'login' de rAthena
     $sql = "INSERT INTO login (userid, user_pass, sex, email, group_id, state) 
             VALUES (:userid, :user_pass, :sex, :email, 0, 0)";
     

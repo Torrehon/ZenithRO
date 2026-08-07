@@ -7370,7 +7370,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 				// SC_GRAFFITI con un 100% de éxito, nivel de la skill, y 2000ms de duración.
 				// Como el área pulsa cada 1000ms, el buff se renueva constantemente 
 				// y se pierde 1 segundo después de salir del área.
-				sc_start(ss, bl, SC_GRAFFITI, 100, sg->skill_lv, 2000);
+				sc_start(ss, bl, SC_GRAFFITI, 100, sg->skill_lv, 10000);
 			}
 			break;
 

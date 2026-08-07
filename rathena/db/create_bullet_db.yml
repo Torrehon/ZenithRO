@@ -143,6 +143,8 @@ Body:
         Amount: 500
   - Source: Yellow_Live
     Make:
+      - Item: t_sphere
+        Amount: 50
       - Item: Magical_Stone_Bullet
         Amount: 500
   - Source: Flame_Heart
@@ -165,8 +167,32 @@ Body:
         Amount: 1500
   - Source: Great_Nature
     Make:
+      - Item: t_sphere
+        Amount: 120
       - Item: Magical_Stone_Bullet
         Amount: 1500
+  - Source: Yellow_Gemstone
+    Make:
+      - Item: t_sphere
+        Amount: 1
+  - Source: Holy_Water
+    Make:
+      - Item: h_sphere
+        Amount: 30
+      - Item: Silver_Bullet
+        Amount: 100
+  - Source: Opal
+    Make:
+      - Item: h_sphere
+        Amount: 20
+  - Source: Pearl
+    Make:
+      - Item: h_sphere
+        Amount: 20
+  - Source: Silver_Ore
+    Make:
+      - Item: h_sphere
+        Amount: 15
   - Source: Iron
     Make:
       - Item: Bullet

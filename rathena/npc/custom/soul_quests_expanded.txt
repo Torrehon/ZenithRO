@@ -60,7 +60,7 @@
 }
 
 // Chunin Einherjar (1@exse 42, 65) - Sprite 4306 [Skills: 1055, 1056]
-1@exse,42,65,4	script	Chunin Einherjar	4306,{
+1@exse,42,65,4	script	Chunin Einherjar	4304,{
 	mes "[Chunin Einherjar]";
 	mes "Step from the shadows, traveler. I am Master Shadow-Blade Raizo of Amatsu.";
 	mes "In life, I mastered the secret arts of the Ninjutsu scrolls and the swift lethal edge of the Ninja Guild.";
@@ -122,12 +122,14 @@
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1056, 1, 0;
+			skill 1056, 1, 0; // NJ_KUJISOUL
+			skill 1032, 1, 0; // NJ_DUAL (Dual Wield)
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
 			mes "[Chunin Einherjar]";
-			mes "You have received the ^0000FFSoul of the Kuji^000000. Command the primordial Ninjutsu elements!";
+			mes "You have received the ^0000FFSoul of the Kuji^000000 and acquired ^0000FFDual Wield^000000!";
+			mes "Command the primordial Ninjutsu elements and wield dual daggers in the shadows!";
 			close;
 		default:
 			close;

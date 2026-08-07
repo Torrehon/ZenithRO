@@ -63,39 +63,4 @@ OnInit:
 	setbattleflag "job_exp_rate", 500;
 	debugmes "[MANA ENGINE] Initialized at 5x.";
 	end;
-}
-
-//--------------------------------------------------------------
-// NPC CONTROL (PRONTERA 155, 180)
-//--------------------------------------------------------------
-prontera,155,180,5	script	"Mana Control"	122,{
-	mes "[Mana Control]";
-	mes "Hello. (Testing Mode Active)";
-	mes "Current Status: " + (($ManaEvent_Active) ? "^00FF00Active^000000" : "^FF0000Inactive^000000");
-	next;
-	
-	switch(select("Force Event (5x-8x):Stop Event:Cancel")) {
-		case 1:
-			mes "[Mana Control]";
-			mes "Triggering global event and reloading database...";
-			close2;
-			donpcevent "MANA_ENGINE::OnManualTrigger";
-			break;
-		
-		case 2:
-			mes "[Mana Control]";
-			mes "Restoring rates to 5.00x and reloading database...";
-			set $ManaEvent_Active, 0;
-			set $ManaEvent_Reloaded, 0;
-			setbattleflag "base_exp_rate", 500;
-			setbattleflag "job_exp_rate", 500;
-			atcommand "@reloadmobdb";
-			announce "The mana event has been manually terminated. Rates are now 5.00x.", bc_all;
-			close;
-			break;
-
-		case 3:
-			close;
-			break;
-	}
-}
+}
