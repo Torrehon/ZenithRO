@@ -7,10 +7,17 @@ izlu2dun,114,88,4	script	Archeologist Dan	754,{
 	mes "[Archeologist Dan]";
 	
 	if (byalan_quest >= 4) {
-		mes "The archaeological expedition was a success! Thank you, adventurer.";
-		next;
-		mes "[Archeologist Dan]";
-		mes "Please keep that Trident of the Depths safe until we find a way to reach the deepest zones of the dungeon.";
+		if (#byalan_cooldown > gettimetick(2)) {
+			.@rest = #byalan_cooldown - gettimetick(2);
+			mes "[Archeologist Dan]";
+			mes "The archaeological expedition was a success! Thank you, adventurer.";
+			mes "The Mermaid of the Depths is sleeping. The ancient seal needs ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^000000 to stabilize.";
+		} else {
+			mes "[Archeologist Dan]";
+			mes "The archaeological expedition was a success! Thank you, adventurer.";
+			mes "However, I still hear strange song-like echoes coming from the 3rd floor...";
+			mes "If you wish to face the Mermaid of the Depths again, speak to the Chief Archeologist down at ^0000FFiz_dun03^000000.";
+		}
 		close;
 	}
 
@@ -78,6 +85,16 @@ izlu2dun,114,88,4	script	Archeologist Dan	754,{
 
 	// byalan_quest == 0
 	if (byalan_quest == 0) {
+		if (eaclass() & EAJL_2) {
+			mes "[Archeologist Dan]";
+			mes "Greetings! I see that you have already advanced to a 2nd Class profession.";
+			next;
+			mes "[Archeologist Dan]";
+			mes "This expedition is designed for 1st Class adventurers seeking field experience.";
+			mes "You are far too experienced for this quest!";
+			close;
+		}
+
 		if (BaseLevel < 50 || BaseLevel > 65) {
 			mes "This expedition is too dangerous for novices and too trivial for grandmasters.";
 			next;
@@ -275,8 +292,54 @@ iz_dun03,34,171,4	script	Chief Archeologist#bya	804,{
 		close;
 	}
 	
-	if (byalan_quest == 4) {
-		mes "The deep waters are quiet for now. Thank you again.";
+	// === MODO FFA BOSS REPETIBLE (Mundo Abierto) ===
+	if (byalan_quest >= 4) {
+		if (#byalan_cooldown > gettimetick(2)) {
+			.@rest = #byalan_cooldown - gettimetick(2);
+			mes "[Chief Archeologist]";
+			mes "^888888*The ancient seal is dormant and depleted.*^000000";
+			mes "^888888*It will accept offerings again in ^FF0000"+(.@rest/3600)+"h "+((.@rest%3600)/60)+"m^888888.*^000000";
+			close;
+		}
+
+		mes "[Chief Archeologist]";
+		mes "A mysterious, ancient song still echoes from the watery depths...";
+		mes "If you offer ocean tribute, we can break the seal and summon the Mermaid of the Depths again right here!";
+		next;
+		mes "[Chief Archeologist]";
+		mes "Requirements: ^FF000030 Fins^000000, ^FF000030 Sharp Scales^000000, and ^FF000030 Fish Tails^000000.";
+		next;
+		if (select("Make offering.:Cancel.") == 1) {
+			if (countitem(951) >= 30 && countitem(963) >= 30 && countitem(1023) >= 30) {
+				delitem 951, 30;
+				delitem 963, 30;
+				delitem 1023, 30;
+				
+				set #byalan_cooldown, gettimetick(2) + 10800; // 3 Hours Cooldown
+				
+				mes "^888888*You offer the ocean treasures into the waters...*^000000";
+				mes "^888888*An eerie, beautiful singing voice resonates through the dungeon!*^000000";
+				next;
+				mes "^888888*Suddenly, the waters begin to churn violently!*^000000";
+				
+				specialeffect2 563;
+				soundeffect "earth_quake.wav", 0;
+				
+				setnpctimer 0;
+				initnpctimer;
+				close;
+			} else {
+				mes "[Chief Archeologist]";
+				mes "You lack the necessary offerings to break the seal.";
+				close;
+			}
+		}
+		close;
+	}
+
+	// byalan_quest == 0
+	if (byalan_quest == 0) {
+		mes "We are preparing our analysis. Please speak to our colleague Dan at the surface.";
 		close;
 	}
 	
@@ -345,6 +408,20 @@ iz_dun03,34,171,4	script	Chief Archeologist#bya	804,{
 		end;
 	}
 	close;
+
+// Timer para el Boss FFA (Mundo abierto)
+OnTimer1000:
+	monster "iz_dun03", 41, 169, "Mermaid of the Depths", 20647, 1, "Chief Archeologist#bya::OnDummyKill";
+	
+	.@mob_gid = $@mobid[0];
+	if (.@mob_gid > 0) { setunitdata .@mob_gid, UMOB_SIZE, 8; }
+	
+	mapannounce "iz_dun03", "The Mermaid of the Depths has been summoned in the ruins of Byalan Dungeon!", bc_map, "0xFFFF00";
+	stopnpctimer;
+	end;
+
+OnDummyKill:
+	end;
 }
 
 

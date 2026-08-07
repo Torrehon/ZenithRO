@@ -658,12 +658,14 @@ SKILL_INFO_LIST = {
 		"KN_BLADERSOUL",
 		SkillName = "Soul of the Blader",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.KN_LANCERSOUL] = {
 		"KN_LANCERSOUL",
 		SkillName = "Soul of the Lancer",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.PR_MACEMASTERY] = {
@@ -825,12 +827,14 @@ SKILL_INFO_LIST = {
 		"pr_exorcistsoul",
 		SkillName = "Soul of the Exorcist",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.PR_SAINTSOUL] = {
 		"pr_saintsoul",
 		SkillName = "Soul of the Saint",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.WZ_FIREPILLAR] = {
@@ -991,12 +995,14 @@ SKILL_INFO_LIST = {
 		"wz_magussoul",
 		SkillName = "Soul of the Magus",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.WZ_HEXERSOUL] = {
 		"wz_hexersoul",
 		SkillName = "Soul of the Hexer",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.BS_IRON] = {
@@ -1146,6 +1152,7 @@ SKILL_INFO_LIST = {
 		"bs_decimation",
 		SkillName = "Cart Decimation",
 		MaxLv = 1,
+		Type = "Quest",
 		SpAmount = { 25, },
 		bSeperateLv = false,
 		AttackRange = { 1, }
@@ -1784,7 +1791,8 @@ SKILL_INFO_LIST = {
 		MaxLv = 10,
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		_NeedSkillList = {
-			{ SKID.RG_INTIMIDATE,5 },
+			{ SKID.RG_GANGSTER,1 },
+			{ SKID.RG_STEALCOIN,3 }
 		}
 	},
 	[SKID.RG_SUPPORT_PLAGIARISM] = {
@@ -1931,6 +1939,7 @@ SKILL_INFO_LIST = {
 		"AM_BIOETHICS",
 		SkillName = "Bioethics",
 		MaxLv = 1,
+		Type = "Quest",
 		AttackRange = { 1 }
 	},
 	[SKID.AM_BIOTECHNOLOGY] = {
@@ -4653,6 +4662,16 @@ SKILL_INFO_LIST = {
 		SpAmount = { 1 },
 		bSeperateLv = false,
 		AttackRange = { 1 }
+	},
+	[SKID.GS_PMAKER] = {
+		"GS_PMAKER",
+		SkillName = "Soul of the Peacemaker",
+		MaxLv = 1,
+	},
+	[SKID.GS_ENFORCER] = {
+		"GS_ENFORCER",
+		SkillName = "Soul of the Enforcer",
+		MaxLv = 1,
 	},
 	[SKID.NJ_TOBIDOUGU] = {
 		"NJ_TOBIDOUGU",

@@ -1,0 +1,28 @@
+{
+  "name": "zenith-ro-patcher",
+  "version": "1.0.0",
+  "description": "Launcher & Patcher Oficial para Zenith RO",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win nsis"
+  },
+  "keywords": ["ragnarok", "launcher", "patcher", "zenithro"],
+  "author": "Zenith RO Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.9.0"
+  },
+  "build": {
+    "appId": "com.zenithro.patcher",
+    "productName": "ZenithRO Patcher",
+    "win": {
+      "target": "portable",
+      "icon": "assets/icon.ico"
+    },
+    "directories": {
+      "output": "dist"
+    }
+  }
+}

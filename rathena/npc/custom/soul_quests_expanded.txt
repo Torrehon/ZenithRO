@@ -1,0 +1,259 @@
+// ==============================================================
+// SOUL QUESTS EXPANDED - Chunin (Ninja) and Gunslinger Heroes
+// ==============================================================
+
+// --------------------------------------------------------------
+// Mapflags: Disable Teleport, Memo, Warp, Save & Branching
+// --------------------------------------------------------------
+1@4tro	mapflag	nomemo
+1@4tro	mapflag	noteleport
+1@4tro	mapflag	noreturn
+1@4tro	mapflag	nosave	SavePoint
+1@4tro	mapflag	nobranch
+1@4tro	mapflag	nopenalty
+
+1@exse	mapflag	nomemo
+1@exse	mapflag	noteleport
+1@exse	mapflag	noreturn
+1@exse	mapflag	nosave	SavePoint
+1@exse	mapflag	nobranch
+1@exse	mapflag	nopenalty
+
+1@exnw	mapflag	nomemo
+1@exnw	mapflag	noteleport
+1@exnw	mapflag	noreturn
+1@exnw	mapflag	nosave	SavePoint
+1@exnw	mapflag	nobranch
+1@exnw	mapflag	nopenalty
+
+// ==============================================================
+// NINJA / CHUNIN SANCTUARY (1@exse)
+// ==============================================================
+
+// Valkyrie Kara in Chunin Sanctuary (1@exse 43, 23)
+1@exse,43,23,4	script	Valkyrie#exse	811,{
+	mes "[Valkyrie]";
+	mes "Greetings, shadow warrior. I am Valkyrie Kara, guardian of the sacred realm.";
+	mes "You stand within the ^0000FFChunin Sanctuary^000000, where the spirits of ancient Ninja champions rest in eternal honor.";
+	next;
+	mes "[Valkyrie]";
+	mes "Seek out the Chunin Einherjar of your order, offer your tribute, and claim their ancient Hero Soul.";
+	next;
+	mes "[Valkyrie]";
+	mes "How may I guide your path today?";
+	next;
+	switch(select("Re-align Twilight Weapon Options (Reroll):Return to Geffen Field (gef_fild07):Remain in Sanctuary")) {
+		case 1:
+			callfunc "F_ValkyrieReroll";
+			end;
+		case 2:
+			mes "[Valkyrie]";
+			mes "May the shadows protect your path.";
+			close2;
+			warp "gef_fild07",173,246;
+			end;
+		default:
+			mes "[Valkyrie]";
+			mes "Go forth and speak with the Chunin Einherjar.";
+			close;
+	}
+}
+
+// Chunin Einherjar (1@exse 42, 65) - Sprite 4306 [Skills: 1055, 1056]
+1@exse,42,65,4	script	Chunin Einherjar	4306,{
+	mes "[Chunin Einherjar]";
+	mes "Step from the shadows, traveler. I am Master Shadow-Blade Raizo of Amatsu.";
+	mes "In life, I mastered the secret arts of the Ninjutsu scrolls and the swift lethal edge of the Ninja Guild.";
+	next;
+	if (BaseJob != Job_Ninja) {
+		mes "[Chunin Einherjar]";
+		mes "However, my secret shadow scrolls belong only to Ninja and Chunin warriors. Walk your own path with honor.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Chunin Einherjar]";
+		mes "Your footfalls are still too loud and your Ninjutsu unpolished. Return when you reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Chunin Einherjar]";
+		mes "Greetings, shadow brother. You have already awakened the Star Fragment into your Twilight Weapon!";
+		mes "May the darkness protect your path.";
+		close;
+	}
+	if (F_HasSoulSkill(1055, 1056)) {
+		mes "[Chunin Einherjar]";
+		mes "Greetings, shadow brother. You carry the ancient shadow soul of our guild within your spirit.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
+		close;
+	}
+
+
+	mes "[Chunin Einherjar]";
+	mes "To resonate with the ancestral shadow soul of the Ninja Guild, your blade requires a vessel of raw heroic power.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 to ignite the ancient Ninjutsu scrolls.";
+	next;
+	if (countitem(50020) < 1) {
+		mes "[Chunin Einherjar]";
+		mes "Alas, you carry no ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Ancient fragments of hero souls lie scattered across Midgard. Wild beasts that absorbed these fragments became monsters far out of the ordinary.";
+		mes "Hunt down these unusual creatures across the lands to claim their Heroic Soul Essence!";
+		close;
+	}
+
+	mes "[Chunin Einherjar]";
+	mes "Choose the hero soul that shall empower your shadow discipline:";
+	mes "- ^0000FFSoul of the Kensei^000000: Sword and martial specialist focusing on deadly melee strikes and physical shadow arts.";
+	mes "- ^0000FFSoul of the Kuji^000000: Elemental Ninjutsu spell specialist focusing on catastrophic magic and elemental incantations.";
+	next;
+	switch(select("Soul of the Kensei:Soul of the Kuji:Cancel")) {
+		case 1:
+			delitem 50020, 1;
+			skill 1055, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Chunin Einherjar]";
+			mes "You have received the ^0000FFSoul of the Kensei^000000. May your blade strike unseen in the dark!";
+			close;
+		case 2:
+			delitem 50020, 1;
+			skill 1056, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Chunin Einherjar]";
+			mes "You have received the ^0000FFSoul of the Kuji^000000. Command the primordial Ninjutsu elements!";
+			close;
+		default:
+			close;
+	}
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 16;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 4;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 3;
+	end;
+}
+
+// ==============================================================
+// GUNSLINGER ENCLAVE (1@exnw)
+// ==============================================================
+
+// Valkyrie Kara in Gunslinger Enclave (1@exnw 111, 103)
+1@exnw,111,103,4	script	Valkyrie#exnw	811,{
+	mes "[Valkyrie]";
+	mes "Greetings, marksman. I am Valkyrie Kara, guardian of the sacred realm.";
+	mes "You stand within the ^0000FFGunslinger Enclave^000000, where the spirits of Midgard's legendary sharpshooters rest in eternal honor.";
+	next;
+	mes "[Valkyrie]";
+	mes "Seek out the Gunslinger Einherjar of your discipline, offer your tribute, and claim their ancient Hero Soul.";
+	next;
+	mes "[Valkyrie]";
+	mes "How may I guide your path today?";
+	next;
+	switch(select("Re-align Twilight Weapon Options (Reroll):Return to Geffen Field (gef_fild07):Remain in Enclave")) {
+		case 1:
+			callfunc "F_ValkyrieReroll";
+			end;
+		case 2:
+			mes "[Valkyrie]";
+			mes "May the light of Valhalla guide your aim.";
+			close2;
+			warp "gef_fild07",173,246;
+			end;
+		default:
+			mes "[Valkyrie]";
+			mes "Go forth and speak with the Gunslinger Einherjar.";
+			close;
+	}
+}
+
+// Gunslinger Einherjar (1@exnw 115, 130) - Sprite 4306 [Skills: 1068, 1069]
+1@exnw,115,130,4	script	Gunslinger Einherjar	4306,{
+	mes "[Gunslinger Einherjar]";
+	mes "Keep your gun cool and your aim steady. I am High Marshal Wyatt of Einbroch.";
+	mes "In life, I mastered every firearm from quick-draw pistols to heavy Gatling cannons and long-range rifles.";
+	next;
+	if (BaseJob != Job_Gunslinger) {
+		mes "[Gunslinger Einherjar]";
+		mes "However, my martial gunpowder secrets belong solely to Gunslingers. Walk your own path.";
+		close;
+	}
+	if (JobLevel < 25) {
+		mes "[Gunslinger Einherjar]";
+		mes "Your trigger finger needs more discipline and recoil control. Return when you reach ^0000FFJob Level 25^000000.";
+		close;
+	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Gunslinger Einherjar]";
+		mes "Greetings, master marksman. You have already awakened the Star Fragment into your Twilight Weapon!";
+		mes "Fire with absolute precision across Midgard.";
+		close;
+	}
+	if (F_HasSoulSkill(1068, 1069)) {
+		mes "[Gunslinger Einherjar]";
+		mes "Greetings, master marksman. You carry the ancient hero soul of master marksmen within your spirit.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
+		close;
+	}
+
+
+	mes "[Gunslinger Einherjar]";
+	mes "To channel the ancestral marksman soul into your weapons, your firearms require a vessel of raw heroic power.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 to ignite our ancient marksmanship legacy.";
+	next;
+	if (countitem(50020) < 1) {
+		mes "[Gunslinger Einherjar]";
+		mes "You carry no ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Ancient fragments of hero souls lie scattered across Midgard. Wild beasts that absorbed these fragments became monsters far out of the ordinary.";
+		mes "Hunt down these unusual creatures across the lands to claim their Heroic Soul Essence!";
+		close;
+	}
+
+	mes "[Gunslinger Einherjar]";
+	mes "Choose the hero soul that shall empower your firearms:";
+	mes "- ^0000FFSoul of the Peacekeeper^000000: Handgun, Shotgun, and precision specialist focusing on rapid fire, Critical hits, and agile tactical maneuvers.";
+	mes "- ^0000FFSoul of the Enforcer^000000: Rifle, Grenade, and Gatling specialist focusing on heavy firepower, long-range destruction, and massive AoE bursts.";
+	next;
+	switch(select("Soul of the Peacekeeper:Soul of the Enforcer:Cancel")) {
+		case 1:
+			delitem 50020, 1;
+			skill 1068, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Gunslinger Einherjar]";
+			mes "You have received the ^0000FFSoul of the Peacekeeper^000000. Never miss a single shot!";
+			close;
+		case 2:
+			delitem 50020, 1;
+			skill 1069, 1, 0;
+			SOUL_QUEST1_STEP = 4;
+			if (checkquest(90004) == 1) completequest 90004;
+			specialeffect2 EF_ANGEL;
+			mes "[Gunslinger Einherjar]";
+			mes "You have received the ^0000FFSoul of the Enforcer^000000. Unleash heavy firepower upon your enemies!";
+			close;
+		default:
+			close;
+	}
+
+OnInit:
+	.@gid = getnpcid(0);
+	setunitdata .@gid, UNPC_SEX, 1;
+	setunitdata .@gid, UNPC_HAIRSTYLE, 8;
+	setunitdata .@gid, UNPC_HAIRCOLOR, 2;
+	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
+	end;
+}
+

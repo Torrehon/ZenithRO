@@ -1,22 +1,19 @@
 //===== rAthena Script ======================================= 
 //= Priest Skills Quests
 //===== By: ================================================== 
-//= Lupus, Reddozen
+//= Lupus, Reddozen, Antigravity
 //===== Current Version: ===================================== 
-//= 1.5
+//= 2.0
 //===== Compatible With: ===================================== 
 //= rAthena Project
 //===== Description: ========================================= 
 //= [Official Conversion]
-//= Quests for skills: Redempito
-//===== Additional Comments: ================================= 
-//= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
-//= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
-//============================================================
+//= Quests for skills: Redemptio (PR_REDEMPTIO)
+//============================================================ 
 
 prt_church,111,112,1	script	Sister Linus	79,{
 	if (BaseJob == Job_Priest) {
-		if (PRIEST_SK == 100) {
+		if (getskilllv("PR_REDEMPTIO") > 0 || PRIEST_SK == 100) {
 			if (getskilllv("PR_REDEMPTIO") == 0) {
 				mes "[Sister Linus]";
 				mes "Hm? We've met before,";
@@ -60,18 +57,30 @@ prt_church,111,112,1	script	Sister Linus	79,{
 				close;
 			}
 		}
-		else if (PRIEST_SK == 0) {
+
+		if (getskilllv("PR_SAINTSOUL") > 0 || getskilllv(1050) > 0) {
+			mes "[Sister Linus]";
+			mes "...!";
+			mes "^333333*Sister Linus gazes at you in complete awe, sensing a radiant, divine holy aura around you.*^000000";
+			next;
+			mes "[Sister Linus]";
+			mes "Incredible... Such a pure, radiant holy presence!";
+			mes "Your spirit embodies the ultimate grace of sacrifice and divine mercy far beyond what any prayer practice could teach.";
+			next;
+			mes "[Sister Linus]";
+			mes "I don't need to ask you for repeated prayer trials. Take the knowledge of ^3131FFRedemptio^000000!";
+			next;
+			skill "PR_REDEMPTIO",1,SKILL_PERM;
+			set PRIEST_SK,100;
+			specialeffect2 EF_HEALSP;
+			specialeffect EF_LEVELUP;
+			mes "[Sister Linus]";
+			mes "May your noble sacrifice bring life and hope to your companions in their darkest hour!";
+			close;
+		}
+
+		if (PRIEST_SK == 0) {
 			set redemp,1014;
-			if (getskilllv("PR_REDEMPTIO")) {
-				mes "[Sister Linus]";
-				mes "I'll always be praying";
-				mes "for your safety. Be careful,";
-				mes "and I hope that you can bring";
-				mes "love and compassion to all";
-				mes "whom you meet in your travels.";
-				set PRIEST_SK,100;
-				close;
-			}
 			mes "[Sister Linus]";
 			mes "Please have mercy and";
 			mes "spread your light through";
@@ -236,20 +245,10 @@ prt_church,111,112,1	script	Sister Linus	79,{
 				mes "learn ^3131FFLevel 1 Resurrection^000000.";
 				next;
 				mes "[Sister Linus]";
-				mes "Ah, you must";
-				mes "also bring me";
-				mes "^3131FF30 Holy Waters and";
-				mes "20 Blue Gemstones^000000";
-				mes "so you can attempt";
-				mes "to learn the skill.";
+				mes "Ah, you must also bring me";
+				mes "^3131FF10 Holy Waters and 10 Blue Gemstones^000000.";
+				mes "If you fail an attempt, you'll lose 1 of each. Upon success, 10 of each will be used.";
 				set PRIEST_SK,2;
-				next;
-				mes "[Sister Linus]";
-				mes "Um, but if you fail to";
-				mes "learn Redemptio, you'll";
-				mes "lose 1 Holy Water and";
-				mes "1 Blue Gemstone and";
-				mes "you'll have to try it again...";
 				close;
 			}
 			mes "[Sister Linus]";
@@ -262,14 +261,11 @@ prt_church,111,112,1	script	Sister Linus	79,{
 		}
 		else if (PRIEST_SK == 2) {
 			if (getskilllv("ALL_RESURRECTION") > 0) {
-				if (countitem(523) > 29 && countitem(717) > 19) {
+				if (countitem(523) > 9 && countitem(717) > 9) {
 					mes "[Sister Linus]";
-					mes "Ooh, it seems like you've";
-					mes "brought everything that you";
-					mes "need to learn Redemptio.";
-					mes "Are you ready to try it? If you";
-					mes "fail, you'll lose 1 Holy Water";
-					mes "and 1 Blue Gemstone, okay?";
+					mes "Ready to attempt learning Redemptio?";
+					mes "If you fail, 1 Holy Water and 1 Blue Gemstone will be lost.";
+					mes "Upon success, 10 of each will be consumed.";
 					next;
 					mes "[Sister Linus]";
 					mes "Now, please";
@@ -285,8 +281,9 @@ prt_church,111,112,1	script	Sister Linus	79,{
 					mes "strength to walk the path of";
 					mes "love and sacrifice. Redemptio!^000000";
 					next;
-					set .@redem_s,JobLevel+getskilllv("ALL_RESURRECTION");
-					set .@red_suc,rand(1,100);
+					set .@redem_s, JobLevel + getskilllv("ALL_RESURRECTION");
+					set .@red_suc, rand(1,100);
+					set .@success, 0;
 					if( .@redem_s < 31 ) {
 						if( .@red_suc > 20 && .@red_suc < 41 )
 							set .@success,1;
@@ -300,6 +297,9 @@ prt_church,111,112,1	script	Sister Linus	79,{
 
 					if (.@success) {
 						specialeffect2 EF_HEALSP;
+						specialeffect EF_LEVELUP;
+						delitem 717,10; // Blue_Gemstone
+						delitem 523,10; // Holy_Water
 						mes "[Sister Linus]";
 						mes "Congratulations!";
 						mes "You successfully";
@@ -307,14 +307,14 @@ prt_church,111,112,1	script	Sister Linus	79,{
 						mes "Please remember to only";
 						mes "use this skill in the most";
 						mes "critical situations.";
-						delitem 717,20; //Blue_Gemstone
-						delitem 523,30; //Holy_Water
 						set PRIEST_SK,100;
 						skill "PR_REDEMPTIO",1,SKILL_PERM;
 						close;
 					}
 					else {
 						specialeffect2 EF_POISONHIT;
+						delitem 717,1; // Blue_Gemstone
+						delitem 523,1; // Holy_Water
 						mes "[Sister Linus]";
 						mes "Oh no! I'm sorry,";
 						mes "but you failed to";
@@ -322,8 +322,6 @@ prt_church,111,112,1	script	Sister Linus	79,{
 						mes "I'll be waiting right here,";
 						mes "so we can try again when";
 						mes "you're ready, okay?";
-						delitem 717,1; //Blue_Gemstone
-						delitem 523,1; //Holy_Water
 						close;
 					}
 
@@ -331,9 +329,9 @@ prt_church,111,112,1	script	Sister Linus	79,{
 				else {
 					mes "[Sister Linus]";
 					mes "If you want to try to learn";
-					mes "Redemptio, please bring";
-					mes "^3131FF20 Blue Gemstones^000000 and";
-					mes "^3131FF30 Holy Waters^000000. Ah, and";
+					mes "Redemptio, please bring me at least";
+					mes "^3131FF10 Blue Gemstones^000000 and";
+					mes "^3131FF10 Holy Waters^000000. Ah, and";
 					mes "you need to learn ^3131FFLevel 1";
 					mes "Resurrection^000000 beforehand.";
 					close;
@@ -342,9 +340,9 @@ prt_church,111,112,1	script	Sister Linus	79,{
 			else {
 				mes "[Sister Linus]";
 				mes "If you want to try to learn";
-				mes "Redemptio, please bring";
-				mes "^3131FF20 Blue Gemstones^000000 and";
-				mes "^3131FF30 Holy Waters^000000. Ah, and";
+				mes "Redemptio, please bring me at least";
+				mes "^3131FF10 Blue Gemstones^000000 and";
+				mes "^3131FF10 Holy Waters^000000. Ah, and";
 				mes "you need to learn ^3131FFLevel 1";
 				mes "Resurrection^000000 beforehand.";
 				close;
@@ -362,17 +360,3 @@ prt_church,111,112,1	script	Sister Linus	79,{
 		close;
 	}
 }
-
-//============================================================ 
-// Old changelog
-//============================================================ 
-//= 1.0 for fully working skills only [Lupus]
-//= 1.1 Added more new skill quests for more classes [Lupus]
-//= Somehow eA engine doesn't let you keep learn't skill V_V'
-//= 1.2 Added to correct locations, correct NPC's, fixed
-//= some of the items required and made them into real
-//= quests. [Reddozen] 
-//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
-//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
-//= 1.3b Splitted into different files [DracoRPG]
-//============================================================

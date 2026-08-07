@@ -59,7 +59,8 @@ moc_fild03,0,0	monster	Greatest General	1277,30
 moc_fild03,0,0	monster	Poporing	1031,20
 moc_fild03,0,0	monster	Eggyra	1116,10
 moc_fild03,0,0	monster	Willow	1010,20
-moc_fild03,0,0	monster	Vagabond Wolf	1092,1,1800000,1200000
+moc_fild03,0,0	monster	Vagabond Wolf	1092,1,3600000
+
 moc_fild03,77,311,5,5	monster	Green Plant	1080,2,180000,90000
 moc_fild03,108,199,5,5	monster	Green Plant	1080,2,180000,90000
 moc_fild03,96,65,5,5	monster	Green Plant	1080,2,180000,90000
@@ -107,7 +108,9 @@ moc_fild07,0,0	monster	Drops	1113,70
 moc_fild07,0,0	monster	Peco Peco Egg	1047,50
 moc_fild07,0,0	monster	Picky	1050,30
 moc_fild07,0,0	monster	Picky	1049,30
+moc_fild07,0,0	monster	Dragon Fly	1091,1,3600000
 moc_fild07,162,333,12,12	monster	Yellow Plant	1081,5,360000,180000
+
 
 //==================================================
 // moc_fild08 - Sograt Desert
@@ -276,7 +279,8 @@ moc_fild18,0,0	monster	Chonchon	1011,40
 moc_fild18,0,0	monster	Muka	1055,80
 moc_fild18,0,0	monster	Metaller	1058,10
 moc_fild18,0,0	monster	Ant Egg	1097,5
-moc_fild18,0,0	monster	Dragon Fly	1091,1,3600000,1800000
+moc_fild18,0,0	monster	Dragon Fly	1091,1,3600000
+
 moc_fild18,0,0	monster	Hunter Fly	1035,1,7200000,3600000
 moc_fild18,143,352	monster	Yellow Plant	1081,1,180000,90000
 moc_fild18,72,333	monster	Yellow Plant	1081,1,180000,90000

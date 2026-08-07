@@ -4077,12 +4077,12 @@ void pc_bonus(map_session_data *sd,int32 type,int32 val)
 				sd->left_weapon.ignore_def_class |= 1<<val;
 			break;
 		case SP_ATK_RATE:
-#ifdef RENEWAL
+// #ifdef RENEWAL
 			if (sd->state.lr_flag != LR_FLAG_ARROW)
 				sd->bonus.atk_rate += val;
-#else
-			ShowError( "pc_bonus: %s is not supported in Pre-Renewal mode.\n", QUOTE( SP_ATK_RATE ) );
-#endif
+// #else
+			// ShowError( "pc_bonus: %s is not supported in Pre-Renewal mode.\n", QUOTE( SP_ATK_RATE ) );
+// #endif
 			break;
 		case SP_MAGIC_ATK_DEF:
 			if (sd->state.lr_flag != LR_FLAG_ARROW)
@@ -15542,14 +15542,18 @@ int16 pc_maxaspd( const map_session_data* sd ) {
 	
 	// --- INICIO CUSTOM: Límite 193 ASPD para Katar + Soul of the Executioner ---
 	if (sd->weapontype1 == W_KATAR && pc_checkskill(sd, AS_EXECSOUL) > 0) {
-		return 193;
+		return battle_config.max_aspd;
 	}
 	// --- FIN CUSTOM ---
 
-	return (( sd->class_&JOBL_THIRD) ? battle_config.max_third_aspd : (
-			((sd->class_&MAPID_SECONDMASK) == MAPID_KAGEROUOBORO || (sd->class_&MAPID_SECONDMASK) == MAPID_REBELLION) ? battle_config.max_extended_aspd : (
-			(sd->class_&MAPID_FIRSTMASK) == MAPID_SUMMONER) ? battle_config.max_summoner_aspd : 
-			battle_config.max_aspd ));
+	// --- INICIO CUSTOM: Límite 193 ASPD para Soul of the Peacekeeper (Gatling) ---
+	if (pc_checkskill(sd, GS_PKEEPER) > 0 && sd->sc.getSCE(SC_GATLINGFEVER)) {
+		return battle_config.max_aspd;
+	}
+	// --- FIN CUSTOM ---
+
+	// Para el resto de armas/clases, el límite máximo es 190 ASPD
+	return (AMOTION_ZERO_ASPD - 190 * AMOTION_INTERVAL) * AMOTION_DIVIDER_PC;
 }
 
 /**

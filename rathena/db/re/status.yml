@@ -5925,9 +5925,9 @@ Body:
     Fail:
       P_Alter: true
       MadnessCancel: true
-  - Status: Magicalbullet
-    Icon: EFST_GS_MAGICAL_BULLET
-    DurationLookup: GS_MAGICALBULLET
+  # - Status: Magicalbullet
+    # Icon: EFST_GS_MAGICAL_BULLET
+    # DurationLookup: GS_MAGICALBULLET
   - Status: P_Alter
     Icon: EFST_P_ALTER
     DurationLookup: RL_P_ALTER

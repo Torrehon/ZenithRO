@@ -1,264 +1,94 @@
 //===== rAthena Script ======================================= 
-//= Wizard Job Quest (Combat Quest - Waves Edition - Job 50)
+//= Wizard Job Quest (Simplified - Job 50 + Proof of Valor)
 //===== Description: ========================================= 
-//= Simplified quest. Requires item 50008, Job Level 50, and 
-//= passing a 2-wave combat arena. Flavor NPCs included.
+//= Job Change quest for Wizard class.
 //============================================================ 
 
-//==========================================================
-// Quest Principal (Catherine)
-//==========================================================
 gef_tower,111,37,4	script	Wizard Guildsman#wiz	70,{
-	mes "[Catherine]";
-	
-	if (BaseJob == Job_Wizard) {
-		mes "Welcome back to the pinnacle of magic, Wizard!";
-		mes "I hope you are using your arcane powers responsibly. Or at least... spectacularly!";
+	mes "[Wizard Catherine]";
+	if (Upper == 1) {
+		mes "The arcane weave vibrates with incredible intensity around you! A Transcendent Archmage stands in our tower.";
+		next;
+		mes "[Wizard Catherine]";
+		mes "May the elemental currents ever obey your command.";
 		close;
 	}
-	
-	if (BaseJob != Job_Mage || JobLevel < 50) {
-		mes "Oh honey, no... We don't just hand out Wizard hats to anyone who can cast a simple Fire Bolt.";
-		mes "Master your Mage skills to Job Level 50 and then we can talk.";
-		close;
-	}
-
-	// Fase 0: Lore y Proof of Valor
-	if (WIZ_Q == 0) {
-		mes "Excuse me, but what is a Mage doing wandering around the high floors of the Geffen Tower?";
-		mes "The Wizard Guild is a highly exclusive society. We don't accept random apprentices without a proper sponsor or an undeniable reputation.";
-		next;
-		mes "[Catherine]";
-		mes "Unless you can present a ^236B8EProof of Valor^000000 recognized by the Kingdom, I must ask you to leave.";
-		next;
-		
-		if (countitem(50008) >= 1) { 
-			mes "[Catherine]";
-			mes "Wait... Is that...?!";
-			mes "Oh my goodness! You actually have a Proof of Valor! Please, forgive my rudeness, esteemed adventurer!";
-			next;
-			delitem 50008,1;
-			set WIZ_Q, 1;
-			mes "[Catherine]";
-			mes "Usually, I make candidates collect dozens of gemstones and take a mind-numbing written test.";
-			mes "But for someone of your caliber, we will skip straight to the practical magic exam.";
-			mes "Talk to me when you are ready to enter the combat arena.";
+	if (BaseJob != Job_Mage) {
+		if (BaseJob == Job_Wizard) {
+			mes "Greetings, fellow Wizard! May your spells freeze, incinerate, and electrify the enemies of Geffen!";
 			close;
-		} else {
-			mes "[Catherine]";
-			mes "I don't see any Proof of Valor on you. The exit is right behind you, honey. Bye-bye!";
+		}
+		else if (BaseClass == Job_Novice) {
+			mes "Welcome to the Magic Tower of Geffen! To master high sorcery, train first as a Mage here in Geffen.";
+			close;
+		}
+		else {
+			mes "Greetings, traveler. Feel free to study the ancient arcane tomes inside Geffen Tower.";
 			close;
 		}
 	}
 
-	// Fase 1: Entrada a la arena
-	if (WIZ_Q == 1) {
-		mes "Are you ready to face the magic combat arena?";
-		mes "You'll be sent into a closed chamber. Use your elements wisely, and don't panic!";
-		next;
-		if (select("Yes, I'm ready for the test.:I need to memorize more spells.") == 1) {
-			mes "[Catherine]";
-			mes "Excellent! May the mana flow through you!";
-			close2;
-			warp "job_wiz",50,165; 
-			end;
-		}
-		mes "[Catherine]";
-		mes "Take your time. A rushed spell is a failed spell!";
-		close;
-	}
-
-	// Fase 2: Prueba superada, cambio de Job
-	if (WIZ_Q == 2) {
-		mes "Incredible! You survived the arena with absolute finesse.";
-		next;
-		mes "[Catherine]";
-		mes "You truly have a deep understanding of the arcane arts.";
-		mes "By the power vested in me, I officially grant you the title of Wizard!";
-		next;
-		
-		jobchange Job_Wizard;
-		set WIZ_Q, 0; 
-		callfunc "F_ClearJobVar"; 
-		getitem 505,6; // Blue Potion
-		
-		mes "[Catherine]";
-		mes "Take these Blue Potions as a welcome gift.";
-		mes "Now go out there and show the world the true power of a Wizard!";
-		close;
-	}
-}
-
-//==========================================================
-// Controlador de la Sala de Espera (Arquitectura Segura)
-//==========================================================
-job_wiz,50,165,4	script	Wizard_Arena	700,{
-	mes "[Arena Assistant]";
-	mes "Welcome to the magical testing grounds.";
-	mes "Please enter the Chat Room to begin your examination.";
-	close;
-
-OnInit:
-	waitingroom "Magic Test",20,"Wizard_Arena::OnStartArena",1;
-	enablewaitingroomevent;
-	end;
-
-OnStartArena:
-	disablewaitingroomevent; 
-	warpwaitingpc "job_wiz",114,169; 
-	donpcevent "WizardCombat::OnEnable";
-	end;
-
-OnFinish:
-	enablewaitingroomevent; 
-	end;
-}
-
-//==========================================================
-// Lógica de la Arena (Oleadas y Tiempos Arreglados)
-//==========================================================
--	script	WizardCombat	-1,{
-OnInit:
-	disablenpc "WizardCombat";
-	end;
-
-OnEnable:
-	enablenpc "WizardCombat";
-	set .Wave, 0;
-	set .MyMobs, 0;
-	initnpctimer; 
-	end;
-
-OnDisable:
-	killmonster "job_wiz", "WizardCombat::OnMobDead";
-	disablenpc "WizardCombat";
-	end;
-// --- Detección de Muerte o Desconexión del Jugador ---
-OnPCDieEvent:
-	// Solo actuamos si el jugador muere DENTRO de la arena del Wizard
-	if (strcharinfo(3) == "job_wiz") {
-		stopnpctimer;
-		mapannounce "job_wiz", "The candidate has fallen! The arena is resetting.", bc_red|bc_map;
-		sleep2 3000; // Damos 3 segundos para que el jugador lea el mensaje
-		percentheal 100, 100; // Lo resucitamos automáticamente
-		warp "gef_tower", 110, 30; // Lo expulsamos a Geffen Tower
-		donpcevent "WizardCombat::OnDisable";
-		donpcevent "Wizard_Arena::OnFinish";
-	}
-	end;
-
-OnPCLogoutEvent:
-	// Si el jugador se desconecta, liberamos la sala instantáneamente
-	if (strcharinfo(3) == "job_wiz") {
-		stopnpctimer;
-		donpcevent "WizardCombat::OnDisable";
-		donpcevent "Wizard_Arena::OnFinish";
-	}
-	end;
-// --- Intro ---
-OnTimer1000:
-	mapannounce "job_wiz", "Welcome to the Combat Arena! Prepare your spells.", bc_map;
-	end;
-OnTimer5000:
-	mapannounce "job_wiz", "Monsters will be unleashed in 5 seconds...", bc_map;
-	end;
-OnTimer10000:
-	if (.Wave != 0) end; 
-	
-	set .Wave, 1;
-	set .MyMobs, 10; 
-	
-	// Oleada 1: 5 Kobolds (Axe) y 5 Kobolds (Hammer) agrupados en el centro
-	monster "job_wiz",112,167,"Kobold",1135,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",116,167,"Kobold",1135,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",112,171,"Kobold",1135,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",116,171,"Kobold",1135,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",114,169,"Kobold",1135,1,"WizardCombat::OnMobDead";
-	
-	monster "job_wiz",110,165,"Kobold",1134,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",118,165,"Kobold",1134,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",110,173,"Kobold",1134,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",118,173,"Kobold",1134,1,"WizardCombat::OnMobDead";
-	monster "job_wiz",114,165,"Kobold",1134,1,"WizardCombat::OnMobDead";
-	
-	mapannounce "job_wiz", "Wave 1: The Kobold ambush! Cast your magic!", bc_map;
-	end;
-
-// --- Control de Muerte de Monstruos ---
-OnMobDead:
-	set .MyMobs, .MyMobs - 1;
-	
-	if (.MyMobs <= 0) {
-		if (.Wave == 1) {
-			set .Wave, 2;
-			mapannounce "job_wiz", "Wave 1 cleared! Get ready for the final challenge...", bc_map;
-			
-			sleep2 4000; 
-			
-			set .MyMobs, 6; 
-			mapannounce "job_wiz", "Wave 2: Magical constructs detected! Watch your positioning!", bc_map;
-			
-			// Oleada 2: 4 Greatest Generals (Esquinas)
-			monster "job_wiz",106,163,"Greatest General",1277,1,"WizardCombat::OnMobDead"; 
-			monster "job_wiz",121,163,"Greatest General",1277,1,"WizardCombat::OnMobDead"; 
-			monster "job_wiz",121,176,"Greatest General",1277,1,"WizardCombat::OnMobDead"; 
-			monster "job_wiz",106,176,"Greatest General",1277,1,"WizardCombat::OnMobDead"; 
-			
-			// 2 Requiems (Centro)
-			monster "job_wiz",112,169,"Requiem",1164,1,"WizardCombat::OnMobDead";
-			monster "job_wiz",116,169,"Requiem",1164,1,"WizardCombat::OnMobDead";
-			
-		} else if (.Wave == 2) {
-			stopnpctimer; 
-			mapannounce "job_wiz", "Congratulations! You have cleared the trial!", bc_map;
-			mapannounce "job_wiz", "You have 10 seconds to collect your loot before teleporting.", bc_map;
-			set WIZ_Q, 2;
-			
-			sleep2 10000; 
-			
-			warp "gef_tower",110,30; 
-			donpcevent "WizardCombat::OnDisable";
-			donpcevent "Wizard_Arena::OnFinish";
-		}
-	}
-	end;
-
-// --- Tiempo Límite de la Arena (5 Minutos en total = 300,000 ms) ---
-OnTimer300000: 
-	stopnpctimer;
-	mapannounce "job_wiz", "Time is up! Your mana has failed you.", bc_map;
-	
-	mapwarp "job_wiz", "gef_tower", 110, 30; 
-	
-	donpcevent "WizardCombat::OnDisable";
-	donpcevent "Wizard_Arena::OnFinish";
-	end;
-}
-
-//==========================================================
-// Flavor NPCs (Instructores Originales)
-//==========================================================
-gef_tower,102,24,2	script	Gloomy Wizard	735,{
-	mes "[Raulel]";
-	mes "*Cough* *sneeze* ... Ugh, my head is killing me.";
-	mes "I used to be in charge of the written exam. I had 30 pages of incredibly boring trivia about the element of a Cornutus.";
+	mes "Welcome to the top floor of Geffen's Magic Tower!";
+	mes "For centuries, the Wizard Guild of Geffen has harnessed the destructive elemental forces of nature—fire, ice, lightning, and earth—to protect our realm.";
 	next;
-	mes "[Raulel]";
-	mes "But Catherine says nobody wants to read anymore... *cough*. So now I just sit here with this terrible cold.";
-	mes "Just don't stand too close, or I'll sneeze a Frost Diver on you.";
+	mes "[Wizard Catherine]";
+	mes "To earn the title of ^0000FFWizard^000000, a Mage must possess immense mana capacity, absolute elemental focus, and high arcane discipline.";
+	next;
+	mes "[Wizard Catherine]";
+	mes "Our council of archmagi requires two credentials for your induction:";
+	mes "1. Reach ^0000FFJob Level 50^000000 as a Mage.";
+	mes "2. Present a ^FF0000Proof of Valor^000000 (Item ID 50008), proving your prestige and magical prowess.";
+	next;
+
+	if (JobLevel < 50 || countitem(50008) < 1) {
+		mes "[Wizard Catherine]";
+		mes "Let me measure your mana reserves and credentials...";
+		next;
+		if (JobLevel < 50) {
+			mes "[Wizard Catherine]";
+			mes "Your Job Level is currently " + JobLevel + ". Continue your magic studies until you reach ^0000FFJob Level 50^000000.";
+		}
+		if (countitem(50008) < 1) {
+			mes "[Wizard Catherine]";
+			mes "You do not have a ^FF0000Proof of Valor^000000. Obtain this testament of merit from the realm's associations before ascending to high sorcery.";
+		}
+		close;
+	}
+
+	mes "[Wizard Catherine]";
+	mes "Marvelous! You have attained Job Level 50 and presented the authentic ^FF0000Proof of Valor^000000!";
+	next;
+	mes "[Wizard Catherine]";
+	mes "By the arcane flame of Geffen and the wisdom of the high tower, I proclaim you a Wizard!";
+	next;
+
+	delitem 50008, 1;
+	jobchange Job_Wizard;
+	specialeffect2 EF_ANGEL2;
+	specialeffect2 EF_CLASSCHANGE;
+
+	mes "[Wizard Catherine]";
+	mes "Arise as a ^0000FFWizard^000000!";
+	mes "Unleash devastating Storm Gusts, summon Meteors, and command the elements at your command!";
+	next;
+	mes "[Wizard Catherine]";
+	mes "Before you descend from our magic tower, an intriguing magical report reached us from the capital.";
+	mes "An erudite ^0000FFScholar^000000 has arrived in ^0000FFProntera^000000.";
+	next;
+	mes "[Wizard Catherine]";
+	mes "He is inquiring about accomplished adventurers who hold genuine proof of valor to aid him in a crucial endeavor.";
+	mes "He lingers near the library and sanctuary district of Prontera... Pay him a visit if you seek further knowledge!";
+	close;
+}
+
+gef_tower,102,24,2	script	Gloomy Wizard	735,{
+	mes "[Gloomy Wizard Raul]";
+	mes "High magic requires absolute control. A single misplaced rune in a Meteor Storm spell could incinerate an entire city block.";
 	close;
 }
 
 gef_tower,107,36,4	script	White Dog#wiz	81,{
-	cutin "job_wizard_maria01",2;
-	mes "[Maria]";
-	mes "*Bark!* Are you the new candidate? I used to help newbies find gemstones for the first test.";
-	mes "But since you showed that shiny Proof of Valor, Catherine skipped that part. *Woof!*";
-	next;
-	mes "[Maria]";
-	mes "By the way, yes, I am a talking dog. My boyfriend accidentally polymorphed me while studying for his finals.";
-	mes "He promised to fix it... eventually. *Grrr* I miss having thumbs.";
-	close2;
-	cutin "job_wizard_maria01",255;
-	end;
+	mes "[White Dog]";
+	mes "Woof! (The white dog gazes at you with unusually intelligent, magic-infused eyes...)";
+	close;
 }

@@ -16,7 +16,46 @@
 //============================================================
 
 comodo,204,172,5	script	Canell#qsk_dan01	724,{
-	if (BaseJob == Job_Dancer && JobLevel > 39) {
+	if (BaseJob == Job_Dancer && JobLevel > 24) {
+		if (DANCER_SK > 8 || getskilllv("DC_WINKCHARM") > 0) {
+			mes "[Canell]";
+			mes "Hm...?";
+			mes "Is there anything";
+			mes "more you wanted to";
+			mes "ask me? Ah, you must";
+			mes "be mesmerized by my";
+			mes "beauty, aren't you?";
+			emotion ET_HNG;
+			next;
+			mes "[Canell]";
+			mes "Oh, to be so beautiful";
+			mes "must be a sin! I should";
+			mes "work in Prontera Church,";
+			mes "just like my sister, to";
+			mes "pray for forgiveness~";
+			close;
+		}
+		if (getskilllv("BD_DISSONANT") > 0 || getskilllv(1060) > 0) {
+			mes "[Canell]";
+			mes "...!";
+			mes "^333333*Canell stops posing and looks at you in utter awe, gasping softly.*^000000";
+			next;
+			mes "[Canell]";
+			mes "Mon dieu... What irresistible magnetism!";
+			mes "The way you hold yourself... That breathtaking blend of rhythm, grace, and dangerous charm!";
+			next;
+			mes "[Canell]";
+			mes "I was going to make you fetch mirrors or train your expressions, but your natural allure is already unmatched.";
+			mes "You need no lessons in enticement. Take the ^0000FFCharming Wink^000000 skill!";
+			next;
+			set DANCER_SK,9;
+			specialeffect2 EF_ABSORBSPIRITS;
+			skill "DC_WINKCHARM",1,SKILL_PERM;
+			specialeffect EF_LEVELUP;
+			mes "[Canell]";
+			mes "Ho-ho~ Go forth and captivate Midgard! No one will be able to resist your gaze!";
+			close;
+		}
 		if (DANCER_SK == 0) {
 			mes "[Canell]";
 			mes "It's well known that we must";
@@ -364,13 +403,13 @@ comodo,204,172,5	script	Canell#qsk_dan01	724,{
 			close;
 		}
 	}
-	else if (BaseJob == Job_Dancer && JobLevel < 40) {
+	else if (BaseJob == Job_Dancer && JobLevel < 25) {
 		mes "[Canell]";
 		mes "Oh, you're such an";
 		mes "adorable little girl! Ah,";
 		mes "I'm sorry, but when you";
 		mes "become a lady at, oh, I don't";
-		mes "know, Job Level 40, then I'll";
+		mes "know, Job Level 25, then I'll";
 		mes "be able to teach you something~";
 		close;
 	}

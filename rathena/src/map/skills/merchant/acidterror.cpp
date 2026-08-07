@@ -94,7 +94,7 @@ void SkillAcidTerror::applyAdditionalEffects(block_list* src, block_list* target
 #ifdef RENEWAL
 	if (skill_break_equip(src,target, EQP_ARMOR, (1000 * skill_lv + 500) - 1000, BCT_ENEMY))
 #else
-	if (skill_break_equip(src,target, EQP_ARMOR, 100*skill_get_time(getSkillId(),skill_lv), BCT_ENEMY))
+	if (skill_break_equip(src,target, EQP_ARMOR, 50*skill_get_time(getSkillId(),skill_lv), BCT_ENEMY))
 #endif
 		clif_emotion( *target, ET_HUK );
 }

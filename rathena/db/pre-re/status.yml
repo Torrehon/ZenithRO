@@ -1883,7 +1883,6 @@ Body:
       Flee2: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Assncros
     Icon: EFST_ASSASSINCROSS
@@ -1892,7 +1891,6 @@ Body:
       Aspd: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       FailedMado: true
       NoClearance: true
     Fail:
@@ -1902,7 +1900,6 @@ Body:
     DurationLookup: BA_POEMBRAGI
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Appleidun
     Icon: EFST_APPLEIDUN
@@ -1911,7 +1908,6 @@ Body:
       MaxHp: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Modechange
     DurationLookup: NPC_EMOTION
@@ -1924,7 +1920,6 @@ Body:
       Hit: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Dontforgetme
     Icon: EFST_DONTFORGETME
@@ -1934,7 +1929,6 @@ Body:
       Aspd: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
     Fail:
       Speedup1: true
@@ -1954,7 +1948,6 @@ Body:
       All: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Service4u
     Icon: EFST_SERVICEFORYOU
@@ -1963,7 +1956,6 @@ Body:
       All: true
     Flags:
       NoSave: true
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Stop
     Icon: EFST_STOP
@@ -2385,9 +2377,8 @@ Body:
   - Status: Madnesscancel
     Icon: EFST_GS_MADNESSCANCEL
     DurationLookup: GS_MADNESSCANCEL
-    States:
-      NoMove: true
     CalcFlags:
+      Speed: true
       Batk: true
       Aspd: true
     Flags:
@@ -6933,6 +6924,24 @@ Body:
       RemoveOnRefresh: true
       RemoveOnLuxAnima: true
       Debuff: true
+  - Status: Decay
+    Icon: EFST_DECAY
+    CalcFlags:
+      All: true
+    Flags:
+      SendOption: true
+      RemoveOnRefresh: true
+      RemoveOnLuxAnima: true
+      Debuff: true
+  - Status: Penance
+    Icon: EFST_PENANCE
+    CalcFlags:
+      All: true
+    Flags:
+      SendOption: true
+      RemoveOnRefresh: true
+      RemoveOnLuxAnima: true
+      Debuff: true
   - Status: ArcInsight
     Icon: EFST_ARCINSIGHT
     CalcFlags:
@@ -7071,4 +7080,16 @@ Body:
     Flags:
       NoDispell: true
       NoBanishingBuster: true
-      NoClearance: true     
+      NoClearance: true 
+  - Status: MBullet
+    Icon: EFST_MBULLET
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false
+  - Status: Gatling_Stack
+    Icon: EFST_GATLING_STACK
+    CalcFlags:
+      All: true
+    Flags:
+      NoRemoveOnDead: false

@@ -1,0 +1,172 @@
+//===== rAthena Script ======================================= 
+//= Alberta International Affairs - Proof of Valor & Adventurer's Bag Quest
+//===== By: ================================================== 
+//= Antigravity
+//===== Description: ========================================= 
+//= Alternative quest in Alberta to acquire Proof of Valor (50008)
+//= and Adventurer's Bag (60004) for Base Level 50+ players.
+//============================================================ 
+
+alberta_in,16,66,4	script	Minister Marcus#alb	49,{
+	if (BaseLevel < 50) {
+		mes "[Minister Marcus]";
+		mes "Good day! I am Marcus, Minister of International Affairs and Overseas Trade here in Alberta.";
+		mes "Our ministry organizes shipments of native monster commodities to foreign kingdoms to strengthen diplomatic ties.";
+		next;
+		mes "[Minister Marcus]";
+		mes "However, the collection tasks require seasoned travelers.";
+		mes "Please return when you reach at least ^FF0000Base Level 50^000000, and I will gladly assign you a trade mission!";
+		close;
+	}
+
+	if (eaclass() & EAJL_2) {
+		mes "[Minister Marcus]";
+		mes "Good day! I am Marcus, Minister of International Affairs and Overseas Trade here in Alberta.";
+		mes "I see that you have already advanced to a 2nd Class profession!";
+		next;
+		mes "[Minister Marcus]";
+		mes "Our trade missions and collection tasks are intended for developing 1st Class adventurers.";
+		mes "You are far too experienced for this quest!";
+		close;
+	}
+
+	if (ALB_EXPORT_STATE == 0) {
+		mes "[Minister Marcus]";
+		mes "Greetings, adventurer! I am Marcus, Minister of International Affairs and Overseas Trade.";
+		mes "Alberta serves as the grand maritime gateway of Rune-Midgarts to foreign lands across the ocean.";
+		next;
+		mes "[Minister Marcus]";
+		mes "To foster goodwill with foreign envoys, we regularly supply them with native raw materials from our fields and forests.";
+		mes "Our next cargo vessel is preparing to weigh anchor, but we are short on shipment materials!";
+		next;
+		mes "[Minister Marcus]";
+		mes "If you can gather ^FF000050 units of 3 local items^000000 for our cargo manifest, I will reward you with a ^0000FFProof of Valor^000000 and an ^0000FFAdventurer's Bag^000000!";
+		next;
+		if (select("Accept Trade Mission:Maybe later") == 2) {
+			mes "[Minister Marcus]";
+			mes "Very well. If you change your mind, I will be right here.";
+			close;
+		}
+
+		// Pick 3 unique random items from the 8 items
+		setarray .@Pool[0], 920, 931, 924, 1055, 918, 925, 901, 1020;
+		set .@r1, rand(0, 7);
+		do {
+			set .@r2, rand(0, 7);
+		} while (.@r2 == .@r1);
+		do {
+			set .@r3, rand(0, 7);
+		} while (.@r3 == .@r1 || .@r3 == .@r2);
+
+		set ALB_EXPORT_ITEM1, .@Pool[.@r1];
+		set ALB_EXPORT_ITEM2, .@Pool[.@r2];
+		set ALB_EXPORT_ITEM3, .@Pool[.@r3];
+		set ALB_EXPORT_STATE, 1;
+
+		mes "[Minister Marcus]";
+		mes "Splendid! For this diplomatic cargo manifest, we require:";
+		next;
+		mes "[Minister Marcus]";
+		mes "^FF0000- 50x " + getitemname(ALB_EXPORT_ITEM1) + "^000000";
+		mes "^FF0000- 50x " + getitemname(ALB_EXPORT_ITEM2) + "^000000";
+		mes "^FF0000- 50x " + getitemname(ALB_EXPORT_ITEM3) + "^000000";
+		next;
+		mes "[Minister Marcus]";
+		mes "Please collect these items and deliver them to me when you are ready!";
+		close;
+	}
+	else if (ALB_EXPORT_STATE == 1) {
+		set .@c1, countitem(ALB_EXPORT_ITEM1);
+		set .@c2, countitem(ALB_EXPORT_ITEM2);
+		set .@c3, countitem(ALB_EXPORT_ITEM3);
+
+		mes "[Minister Marcus]";
+		mes "Welcome back! Let's check your progress for the diplomatic cargo manifest:";
+		next;
+		mes "[Minister Marcus]";
+		mes getitemname(ALB_EXPORT_ITEM1) + ": " + (.@c1 >= 50 ? "^00FF00" : "^FF0000") + .@c1 + "/50^000000";
+		mes getitemname(ALB_EXPORT_ITEM2) + ": " + (.@c2 >= 50 ? "^00FF00" : "^FF0000") + .@c2 + "/50^000000";
+		mes getitemname(ALB_EXPORT_ITEM3) + ": " + (.@c3 >= 50 ? "^00FF00" : "^FF0000") + .@c3 + "/50^000000";
+		next;
+
+		if (.@c1 >= 50 && .@c2 >= 50 && .@c3 >= 50) {
+			mes "[Minister Marcus]";
+			mes "Magnificent! You have brought all requested materials in full quantity.";
+			mes "Would you like to deliver them for shipment now?";
+			next;
+			if (select("Deliver materials (50x of each):Not yet") == 2) {
+				mes "[Minister Marcus]";
+				mes "Take your time. Return when you are ready to hand them over!";
+				close;
+			}
+
+			delitem ALB_EXPORT_ITEM1, 50;
+			delitem ALB_EXPORT_ITEM2, 50;
+			delitem ALB_EXPORT_ITEM3, 50;
+
+			// Check if first completion (gives Bag + Proof) or repeat (gives Proof)
+			if (ALB_EXPORT_BAG_GIVEN == 0) {
+				set ALB_EXPORT_BAG_GIVEN, 1;
+				getitem 60004, 1; // Adventurer's Bag
+			}
+
+			getitem 50008, 1; // Proof of Valor
+			set ALB_EXPORT_STATE, 2;
+
+			specialeffect EF_LEVELUP;
+			specialeffect2 EF_GLOW2;
+
+			mes "[Minister Marcus]";
+			mes "Outstanding work! These fine goods will surely strengthen our alliances abroad.";
+			mes "As promised, here is your ^0000FFProof of Valor^000000" + (ALB_EXPORT_BAG_GIVEN == 1 && countitem(60004) > 0 ? " and an ^0000FFAdventurer's Bag^000000" : "") + "!";
+			next;
+			mes "[Minister Marcus]";
+			mes "Thank you for your service to the Kingdom of Rune-Midgarts!";
+			close;
+		}
+		else {
+			mes "[Minister Marcus]";
+			mes "You still need a few more materials to complete the manifest.";
+			mes "Please return once you have collected 50 of each requested item!";
+			close;
+		}
+	}
+	else if (ALB_EXPORT_STATE == 2) {
+		mes "[Minister Marcus]";
+		mes "Ah, adventurer! Thanks to your efforts, our diplomatic vessel set sail on schedule.";
+		mes "If you ever require another ^0000FFProof of Valor^000000 for job advancement or trade, I can assign you a new cargo manifest.";
+		next;
+		if (select("Start a new shipment quest:Just visiting") == 2) {
+			mes "[Minister Marcus]";
+			mes "Fair winds and safe travels, adventurer!";
+			close;
+		}
+
+		// Pick 3 unique random items
+		setarray .@Pool[0], 920, 931, 924, 1055, 918, 925, 901, 1020;
+		set .@r1, rand(0, 7);
+		do {
+			set .@r2, rand(0, 7);
+		} while (.@r2 == .@r1);
+		do {
+			set .@r3, rand(0, 7);
+		} while (.@r3 == .@r1 || .@r3 == .@r2);
+
+		set ALB_EXPORT_ITEM1, .@Pool[.@r1];
+		set ALB_EXPORT_ITEM2, .@Pool[.@r2];
+		set ALB_EXPORT_ITEM3, .@Pool[.@r3];
+		set ALB_EXPORT_STATE, 1;
+
+		mes "[Minister Marcus]";
+		mes "Excellent! For this new shipment, foreign envoys require:";
+		next;
+		mes "[Minister Marcus]";
+		mes "^FF0000- 50x " + getitemname(ALB_EXPORT_ITEM1) + "^000000";
+		mes "^FF0000- 50x " + getitemname(ALB_EXPORT_ITEM2) + "^000000";
+		mes "^FF0000- 50x " + getitemname(ALB_EXPORT_ITEM3) + "^000000";
+		next;
+		mes "[Minister Marcus]";
+		mes "Please collect these items and return to me when ready!";
+		close;
+	}
+}

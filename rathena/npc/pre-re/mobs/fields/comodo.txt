@@ -18,6 +18,7 @@ cmd_fild01,0,0	monster	Alligator	1271,60
 cmd_fild01,0,0	monster	Savage	1166,30
 cmd_fild01,0,0	monster	Poporing	1031,30
 cmd_fild01,0,0	monster	Poison Spore	1077,20
+cmd_fild01,0,0	monster	Toad	1089,1,3600000
 cmd_fild01,313,213,10,10	monster	Shining Plant	1083,1,1800000,900000
 cmd_fild01,313,213,10,10	monster	Blue Plant	1079,1,1800000,900000
 cmd_fild01,171,339,10,10	monster	Blue Plant	1079,2,1800000,900000
@@ -50,7 +51,8 @@ cmd_fild03,0,0	monster	Mutant Dragonoid	1262,1
 cmd_fild03,0,0	monster	Pest	1256,30
 cmd_fild03,0,0	monster	Poporing	1031,10
 cmd_fild03,0,0	monster	Anolian	1206,90
-cmd_fild03,0,0	monster	Toad	1089,1,3600000,1800000
+cmd_fild03,0,0	monster	Toad	1089,1,3600000
+
 cmd_fild03,356,232,3,3	monster	Shining Plant	1083,1,1800000,900000
 cmd_fild03,262,289,3,3	monster	Shining Plant	1083,1,1800000,900000
 cmd_fild03,145,191,3,3	monster	Shining Plant	1083,1,1800000,900000
@@ -128,11 +130,14 @@ cmd_fild07,323,310,60,60	monster	Raggler	1254,1,60000
 cmd_fild07,0,0	monster	Drops	1113,20
 cmd_fild07,239,105,40,90	monster	Shellfish	1074,2,60000
 cmd_fild07,104,180,40,90	monster	Shellfish	1074,3,60000
+cmd_fild07,0,0	monster	C_Pouring	25001,1,3600000
 
 //==================================================
 // cmd_fild08 - Fortress Saint Darmain (East)
 //==================================================
+cmd_fild08,0,0	monster	Dragon Fly	1091,1,3600000
 cmd_fild08,127,279,30,50	monster	Kobold Archer	1282,5,60000
+
 cmd_fild08,130,192,110,150	monster	Kobold Archer	1282,5
 cmd_fild08,146,136,30,80	monster	Kobold Archer	1282,5
 cmd_fild08,73,132,40,100	monster	Kobold Archer	1282,5

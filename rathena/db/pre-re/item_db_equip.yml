@@ -24524,15 +24524,13 @@ Body:
       All: true
       Novice: false
       SuperNovice: false
-    Classes:
-      Upper: true
     Locations:
       Both_Accessory: true
     ArmorLevel: 1
     EquipLevelMin: 75
     Script: |
-      bonus2 bSubEle,Ele_Water,5;
-      bonus bMaxHP,80;
+      bonus2 bMagicAtkEle,Ele_Water,5;
+      bonus bMaxHP,150;
       bonus bMdef,2;
   - Id: 2788
     AegisName: Bradium_Earing
@@ -25627,6 +25625,7 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
+    EquipLevelMin: 40
     Slots: 1
     Refineable: true
     View: 116
@@ -34242,19 +34241,26 @@ Body:
     Name: Pisces Crown
     Type: Armor
     Buy: 20
-    Weight: 300
-    Defense: 6
+    Weight: 800
+    Defense: 4
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 1
+    EquipLevelMin: 50
     Refineable: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     View: 512
     Script: |
       bonus bStr,2;
       bonus bDef2,10;
       bonus2 bSubEle,Ele_Water, 5;
-      skill "SA_FROSTWEAPON",1;
+      skill "SA_LIGHTNINGLOADER",1;
   - Id: 5516
     AegisName: Hawk_Eyes01
     Name: hawk Eyes
@@ -35040,6 +35046,7 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
+    EquipLevelMin: 20
     Slots: 1
     Refineable: true
     View: 543
@@ -35381,19 +35388,26 @@ Body:
     Name: Cancer Diadem
     Type: Armor
     Buy: 20
-    Weight: 300
-    Defense: 3
+    Weight: 400
+    Defense: 2
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 60
+    EquipLevelMin: 50
     Refineable: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     View: 560
     Script: |
       bonus bInt,2;
       bonus bMdef,3;
       bonus2 bSubEle,Ele_Water, 5;
-      skill "WZ_WATERBALL",3;
+      skill "WZ_JUPITEL",3;
   - Id: 5582
     AegisName: Cancer_Crown
     Name: Cancer Crown
@@ -36355,6 +36369,7 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
+    EquipLevelMin: 30
     Slots: 1
     Refineable: true
     View: 167
@@ -101898,7 +101913,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -101942,7 +101956,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -101986,7 +101999,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102025,7 +102037,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102071,7 +102082,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102113,7 +102123,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102158,7 +102167,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102194,7 +102202,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102233,7 +102240,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102267,7 +102273,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102299,7 +102304,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102332,7 +102336,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102369,7 +102372,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102419,7 +102421,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102459,7 +102460,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102498,7 +102498,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102545,7 +102544,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102590,7 +102588,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102633,7 +102630,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102668,7 +102664,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102706,7 +102701,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102743,7 +102737,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102777,7 +102770,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102822,7 +102814,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102856,7 +102847,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102890,7 +102880,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102924,7 +102913,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102952,7 +102940,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -102985,7 +102972,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -103019,11 +103005,11 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
     Script: |
+      bonus bSplashRange,1;
       bonus bAtk, min(JobLevel, 50);
       if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_FULLBUSTER",15;
@@ -103052,12 +103038,12 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
     Script: |
       bonus bAtk, min(JobLevel, 50);
+      bonus bMatk, min(JobLevel, 50);
       if (Class == Job_Gunslinger) {
           bonus2 bSkillAtk,"GS_GROUNDDRIFT",15;
           bonus bDex,2;
@@ -103084,7 +103070,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -103116,7 +103101,6 @@ Body:
       NoDrop: true
       NoTrade: true
       NoSell: true
-      NoCart: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -103137,7 +103121,7 @@ Body:
     Slots: 1
     Locations:
       Both_Accessory: true
-    EquipLevelMin: 1
+    EquipLevelMin: 20
     Refineable: false
     Script: |
       bonus2 bAddRace,RC_Insect,10;
@@ -103153,7 +103137,7 @@ Body:
     Slots: 1
     Locations:
       Both_Accessory: true
-    EquipLevelMin: 1
+    EquipLevelMin: 30
     Refineable: false
     Script: |
       bonus2 bAddRace,RC_Undead,10;
@@ -103169,12 +103153,43 @@ Body:
     Slots: 1
     Locations:
       Both_Accessory: true
-    EquipLevelMin: 1
+    EquipLevelMin: 40
     Refineable: false
     Script: |
       bonus2 bAddRace,RC_Formless,10;
       bonus2 bMagicAddRace, RC_Formless,10;
       skill "WZ_HEAVENDRIVE",2;
+  - Id: 60003
+    AegisName: sea_sapphire
+    Name: Mermaid's Tear
+    Type: Armor
+    Buy: 20
+    Weight: 100
+    ArmorLevel: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    EquipLevelMin: 1
+    Refineable: false
+    Script: |
+      bonus2 bAddRace,RC_Fish,10;
+      bonus2 bMagicAddRace, RC_Fish,10;
+      skill "SA_VIOLENTGALE",3;
+  - Id: 60004
+    AegisName: adventurer_bag
+    Name: Adventurer's Bag
+    Type: Armor
+    Buy: 20
+    Weight: 100
+    ArmorLevel: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    EquipLevelMin: 1
+    Refineable: false
+    Script: |
+      bonus bVit,1;
+      bonus bAddMaxWeight,5000;
   - Id: 60991
     AegisName: Blue_Sand_Bag
     Name: Blue Sand Bag
@@ -103183,6 +103198,14 @@ Body:
       Shadow_Shoes: true
     EquipLevelMin: 1
     Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     Jobs:
       Thief: true
       Assassin: true
@@ -103195,6 +103218,14 @@ Body:
       Shadow_Shoes: true
     EquipLevelMin: 1
     Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     Jobs:
       Thief: true
       Assassin: true
@@ -103207,6 +103238,14 @@ Body:
       Shadow_Shoes: true
     EquipLevelMin: 1
     Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     Jobs:
       Thief: true
       Assassin: true
@@ -103219,6 +103258,14 @@ Body:
       Shadow_Shoes: true
     EquipLevelMin: 1
     Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true 
     Jobs:
       Thief: true
       Assassin: true
@@ -103231,6 +103278,14 @@ Body:
       Shadow_Shoes: true
     EquipLevelMin: 1
     Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     Jobs:
       Thief: true
       Assassin: true

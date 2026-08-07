@@ -9,7 +9,13 @@ SkillFullBuster::SkillFullBuster() : WeaponSkillImpl(GS_FULLBUSTER) {
 }
 
 void SkillFullBuster::applyCounterAdditionalEffects(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& attack_type) const {
+	status_change* tsc = status_get_sc(target);
+	
 	sc_start(src, src, SC_BLIND, 2 * skill_lv, skill_lv, skill_get_time2(getSkillId(), skill_lv));
+
+	if (tsc != nullptr && tsc->getSCE(SC_EXPOSED)) {
+		status_change_end(target, SC_EXPOSED, INVALID_TIMER);
+	}
 }
 
 void SkillFullBuster::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {

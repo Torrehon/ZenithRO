@@ -38963,14 +38963,14 @@ tbl = {
 		identifiedDisplayName = "Waterdrop Brooch",
 		identifiedResourceName = "¹°¹æ¿ïºê·ÎÄ¡",
 		identifiedDescriptionName = {
-			"A brooch made out of tear drops of the Aqua Elemental.",
-			"Increases resistance to Water element by 5%.",
-			"MaxHP +80, Mdef +2",
+			"A brooch made out of pure water essence.",
+			"Increases Water Magic Damage by 5%.",
+			"MaxHP +150, Mdef +2",
 			"Class:^6666CC Accessory^000000",
 			"Defense:^0000FF 0^000000",
 			"Weight:^009900 20^000000",
 			"Level Requirement:^009900 75^000000",
-			"Jobs:^6666CC All Transcendent classes except Novice Classes^000000"
+			"Jobs:^6666CC All classes except Novice Classes^000000"
 		},
 		slotCount = 1,
 		ClassNum = 0,
@@ -61406,8 +61406,8 @@ tbl = {
 			"Defense:^0000FF 4^000000",
 			"Position:^6666CC Upper^000000",
 			"Weight:^009900 150^000000",
-			"Level Requirement:^009900 1^000000",
-			"Jobs:^6666CC All except Novice^000000"
+			"Level Requirement:^009900 40^000000",
+			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 1,
 		ClassNum = 116,
@@ -72409,16 +72409,20 @@ tbl = {
 		identifiedResourceName = "½Ö¾î±Ã¿Õ°ü",
 		identifiedDescriptionName = {
 			"This crown honors Pisces, the 12th astrological sign in the zodiac calendar. Its power increases defense from Water attacks.",
-			"Int +2, Mdef +1,",
+			"Str +2, Vit Def +10,",
 			"Increases resistance to Water attacks by 5%.",
-			"If refined to 7 or higher,",
-			"MdefF +5, Matk +2%.",
-			"^FFFFFF_^000000",
+			"Enables the use of Lv 1 Lightning Loader",
+			"-------------------------",
+			"^0000CC[Combo with Mermaid's Tear]^000000",
+			"Gain 10% additional Experience when defeating ^FF0000Fish^000000 race monsters.",
+			"Restores 1 SP each time an ^FF0000Fish^000000 monster is killed.",
+			"Increases physical damage against Water enemies by 5%.",
+			"-------------------------",
 			"Class:^6666CC Headgear^000000",
-			"Defense:^0000FF 3^000000",
+			"Defense:^0000FF 4^000000",
 			"Position:^6666CC Upper^000000",
-			"Weight:^009900 30^000000",
-			"Level Requirement:^009900 70^000000",
+			"Weight:^009900 80^000000",
+			"Level Requirement:^009900 50^000000",
 			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 0,
@@ -73446,7 +73450,7 @@ tbl = {
 			"-------------------------",
 			"Class:^6666CC Top Headgear^000000",
 			"Weight:^009900 10^000000",
-			"Level Requirement:^009900 10^000000",
+			"Level Requirement:^009900 20^000000",
 			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 1,
@@ -73961,16 +73965,20 @@ tbl = {
 		identifiedResourceName = "°ÅÇØ±Ãº¸°ü",
 		identifiedDescriptionName = {
 			"A magnificent diadem created to pay tribute to the 4th sign of the zodiac, Cancer the Crab. Attached to the crown is a Ruby gemstone, the birthstone for those born under this sign.",
-			"Int +2,",
+			"Int +2, Mdef +3.",
 			"Increases Resistance to Water Element by 5%.",
-			"If refined to 7 or higher,",
-			"Mdef +1, Matk +2,",
-			"Increase effectiveness of Heal & recovery items by 3%.",
+			"Enables the use of Lv 3 Jupitel Thunder.",
+			"-------------------------",
+			"^0000CC[Combo with Mermaid's Tear]^000000",
+			"Gain 10% additional Experience when defeating ^FF0000Fish^000000 race monsters.",
+			"Restores 1 SP each time an ^FF0000Fish^000000 monster is killed.",
+			"Increases magic damage against Water enemies by 5%.",
+			"-------------------------",
 			"Class:^6666CC Headgear^000000",
-			"Defense:^0000FF 3^000000",
+			"Defense:^0000FF 2^000000",
 			"Position:^6666CC Upper^000000",
-			"Weight:^009900 30^000000",
-			"Level Requirement:^009900 70^000000",
+			"Weight:^009900 40^000000",
+			"Level Requirement:^009900 50^000000",
 			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 0,
@@ -78134,8 +78142,8 @@ tbl = {
 			"Defense:^009900 2^000000",
 			"Location:^6666CC Upper^000000",
 			"Weight:^009900 10^000000",
-			"Level Requirement:^009900 1^000000",
-			"Jobs:^6666CC All Jobs^000000"
+			"Level Requirement:^009900 30^000000",
+			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 1,
 		ClassNum = 125,
@@ -120836,12 +120844,12 @@ tbl = {
 		costume = false
 	},
 	[12114] = {
-		unidentifiedDisplayName = "Elemental Converter[Fire]",
+		unidentifiedDisplayName = "Lesser Elemental Converter[Fire]",
 		unidentifiedResourceName = "¿¤¸®¸àÅ»_È­",
 		unidentifiedDescriptionName = {
 			"..."
 		},
-		identifiedDisplayName = "Elemental Converter[Fire]",
+		identifiedDisplayName = "Lesser Elemental Converter[Fire]",
 		identifiedResourceName = "¿¤¸®¸àÅ»_È­",
 		identifiedDescriptionName = {
 			"Temporarily enchant",
@@ -120855,12 +120863,12 @@ tbl = {
 		costume = false
 	},
 	[12115] = {
-		unidentifiedDisplayName = "Elemental Converter[Water]",
+		unidentifiedDisplayName = "Lesser Elemental Converter[Water]",
 		unidentifiedResourceName = "¿¤¸®¸àÅ»_¼ö",
 		unidentifiedDescriptionName = {
 			"..."
 		},
-		identifiedDisplayName = "Elemental Converter[Water]",
+		identifiedDisplayName = "Lesser Elemental Converter[Water]",
 		identifiedResourceName = "¿¤¸®¸àÅ»_¼ö",
 		identifiedDescriptionName = {
 			"Temporarily enchant",
@@ -120874,12 +120882,12 @@ tbl = {
 		costume = false
 	},
 	[12116] = {
-		unidentifiedDisplayName = "Elemental Converter[Earth]",
+		unidentifiedDisplayName = "Lesser Elemental Converter[Earth]",
 		unidentifiedResourceName = "¿¤¸®¸àÅ»_Áö",
 		unidentifiedDescriptionName = {
 			"..."
 		},
-		identifiedDisplayName = "Elemental Converter[Earth]",
+		identifiedDisplayName = "Lesser Elemental Converter[Earth]",
 		identifiedResourceName = "¿¤¸®¸àÅ»_Áö",
 		identifiedDescriptionName = {
 			"Temporarily enchant",
@@ -120893,12 +120901,12 @@ tbl = {
 		costume = false
 	},
 	[12117] = {
-		unidentifiedDisplayName = "Elemental Converter[Wind]",
+		unidentifiedDisplayName = "Lesser Elemental Converter[Wind]",
 		unidentifiedResourceName = "¿¤¸®¸àÅ»_Ç³",
 		unidentifiedDescriptionName = {
 			"..."
 		},
-		identifiedDisplayName = "Elemental Converter[Wind]",
+		identifiedDisplayName = "Lesser Elemental Converter[Wind]",
 		identifiedResourceName = "¿¤¸®¸àÅ»_Ç³",
 		identifiedDescriptionName = {
 			"Temporarily enchant",
@@ -121414,7 +121422,7 @@ tbl = {
 		unidentifiedDescriptionName = {
 			"..."
 		},
-		identifiedDisplayName = "Blind Sphere Pack",
+		identifiedDisplayName = "Dark Sphere Pack",
 		identifiedResourceName = "½ºÇÇ¾îÆÑ_¾Ï",
 		identifiedDescriptionName = {
 			"A bullet cartridge",
@@ -138620,7 +138628,7 @@ tbl = {
 		unidentifiedDescriptionName = {
 			"..."
 		},
-		identifiedDisplayName = "Blind Sphere",
+		identifiedDisplayName = "Dark Blind Sphere",
 		identifiedResourceName = "ºí¶óÀÎµå½ºÇÇ¾î",
 		identifiedDescriptionName = {
 			"A grenade launcher",
@@ -259687,6 +259695,7 @@ tbl = {
 			"-------------------------",
 			"^777777Account Bound.^000000",
 			"ATK + 1 per Job Level (Max 50).",
+			"MATK + 1 per Job Level (Max 50).",
 			"-------------------------",
 			"^0000CC[Gunslinger Class]^000000",
 			"Increase damage of Ground Drift by 15%.",
@@ -260176,13 +260185,74 @@ tbl = {
 		ClassNum = 0,
 		costume = false
 	},
+	[50020] = {
+		unidentifiedDisplayName = "Bottle",
+		unidentifiedResourceName = "¿¥ºê¸®¿À",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Heroic Soul Essence",
+		identifiedResourceName = "h_essence",
+		identifiedDescriptionName = {
+			"Faint soul essence from what once was a true hero of the realm.",
+			"_________",
+			"^0000CCUsage:^000000",
+			"Einherjars seek these for unknown purposes...",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50021] = {
+		unidentifiedDisplayName = "Tremor Sphere",
+		unidentifiedResourceName = "ÇÃ·¹¾î½ºÇÇ¾î",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Tremor Sphere",
+		identifiedResourceName = "t_sphere",
+		identifiedDescriptionName = {
+			"A grenade launcher",
+			"bullet imbued with",
+			"the ^FF0000Earth^000000 elemental.",
+			"Class:^6666CC Bullet^000000",
+			"Attack:^CC0000 50^000000",
+			"Weight:^009900 0.5^000000",
+			"Element:^FF0000 Earth^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[50022] = {
+		unidentifiedDisplayName = "Light Sphere",
+		unidentifiedResourceName = "ÇÃ·¹¾î½ºÇÇ¾î",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Light Sphere",
+		identifiedResourceName = "h_sphere",
+		identifiedDescriptionName = {
+			"A grenade launcher",
+			"bullet imbued with",
+			"the ^FF0000Holy^000000 elemental.",
+			"Class:^6666CC Bullet^000000",
+			"Attack:^CC0000 50^000000",
+			"Weight:^009900 0.5^000000",
+			"Element:^FF0000 Holy^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
 	[51008] = {
-		unidentifiedDisplayName = "Elemental Converter[Shadow]",
+		unidentifiedDisplayName = "Lesser Elemental Converter[Shadow]",
 		unidentifiedResourceName = "¿°ÀÇÁÖ¹®¼­",
 		unidentifiedDescriptionName = {
 			"An unidentified scroll."
 		},
-		identifiedDisplayName = "Elemental Converter[Shadow]",
+		identifiedDisplayName = "Lesser Elemental Converter[Shadow]",
 		identifiedResourceName = "¿°ÀÇÁÖ¹®¼­",
 		identifiedDescriptionName = {
 			"Temporarily enchant",
@@ -260196,6 +260266,120 @@ tbl = {
 		costume = false
 	},
 	[51009] = {
+		unidentifiedDisplayName = "Lesser Elemental Converter[Holy]",
+		unidentifiedResourceName = "¿°ÀÇÁÖ¹®¼­",
+		unidentifiedDescriptionName = {
+			"An unidentified scroll."
+		},
+		identifiedDisplayName = "Lesser Elemental Converter[Holy]",
+		identifiedResourceName = "Elemental_Holy",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the users weapon with",
+			"the ^FF0000Holy^000000 element for 5 minutes.",
+			"^FFFFFF_^000000",
+			"Weight: ^0099001^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51010] = {
+		unidentifiedDisplayName = "Elemental Converter[Fire]",
+		unidentifiedResourceName = "¿¤¸®¸àÅ»_È­",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Elemental Converter[Fire]",
+		identifiedResourceName = "¿¤¸®¸àÅ»_È­",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the user's weapon with",
+			"the ^FF0000Fire^000000 element for 15 minutes.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51011] = {
+		unidentifiedDisplayName = "Elemental Converter[Water]",
+		unidentifiedResourceName = "¿¤¸®¸àÅ»_¼ö",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Elemental Converter[Water]",
+		identifiedResourceName = "¿¤¸®¸àÅ»_¼ö",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the user's weapon with",
+			"the ^0000BBWater^000000 element for 15 minutes.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51012] = {
+		unidentifiedDisplayName = "Elemental Converter[Earth]",
+		unidentifiedResourceName = "¿¤¸®¸àÅ»_Áö",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Elemental Converter[Earth]",
+		identifiedResourceName = "¿¤¸®¸àÅ»_Áö",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the user's weapon with",
+			"the ^A68064Earth^000000 element for 15 minutes.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51013] = {
+		unidentifiedDisplayName = "Elemental Converter[Wind]",
+		unidentifiedResourceName = "¿¤¸®¸àÅ»_Ç³",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Elemental Converter[Wind]",
+		identifiedResourceName = "¿¤¸®¸àÅ»_Ç³",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the user's weapon with",
+			"the ^33CC00Wind^000000 element for 15 minutes.",
+			"^FFFFFF_^000000",
+			"Weight:^009900 1^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51014] = {
+		unidentifiedDisplayName = "Elemental Converter[Shadow]",
+		unidentifiedResourceName = "¿°ÀÇÁÖ¹®¼­",
+		unidentifiedDescriptionName = {
+			"An unidentified scroll."
+		},
+		identifiedDisplayName = "Elemental Converter[Shadow]",
+		identifiedResourceName = "¿°ÀÇÁÖ¹®¼­",
+		identifiedDescriptionName = {
+			"Temporarily enchant",
+			"the users weapon with",
+			"the ^FF0000Shadow^000000 element for 15 minutes.",
+			"^FFFFFF_^000000",
+			"Weight: ^0099001^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = false
+	},
+	[51015] = {
 		unidentifiedDisplayName = "Elemental Converter[Holy]",
 		unidentifiedResourceName = "¿°ÀÇÁÖ¹®¼­",
 		unidentifiedDescriptionName = {
@@ -260206,7 +260390,7 @@ tbl = {
 		identifiedDescriptionName = {
 			"Temporarily enchant",
 			"the users weapon with",
-			"the ^FF0000Holy^000000 element for 5 minutes.",
+			"the ^FF0000Holy^000000 element for 15 minutes.",
 			"^FFFFFF_^000000",
 			"Weight: ^0099001^000000"
 		},
@@ -260276,7 +260460,53 @@ tbl = {
 			"-------------------------",
 			"Class:^6666CC Accessory^000000",
 			"Weight:^009900 10^000000",
-			"Level Requirement:^009900 1^000000",
+			"Level Requirement:^009900 40^000000",
+			"Jobs:^6666CC All Jobs^000000"
+		},
+		slotCount = 1,
+		ClassNum = 0,
+		costume = false
+	},
+	[60003] = {
+		unidentifiedDisplayName = "Sapphire",
+		unidentifiedResourceName = "Sapphire",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Mermaid's Tear",
+		identifiedResourceName = "sea_sapphire",
+		identifiedDescriptionName = {
+			"Beautiful jewel as blue as the ocean. If you hold it close to your ear, you will hear the melodies of the sea.",
+			"-------------------------",
+			"Increases physical and magical damage against ^FF0000Fish^000000 race monsters by 10%.",
+			"Enables Level 3 ^0000FF[Violent Gale]^000000.",
+			"-------------------------",
+			"Class:^6666CC Accessory^000000",
+			"Weight:^009900 10^000000",
+			"Level Requirement:^009900 50^000000",
+			"Jobs:^6666CC All Jobs^000000"
+		},
+		slotCount = 1,
+		ClassNum = 0,
+		costume = false
+	},
+	[60004] = {
+		unidentifiedDisplayName = "Bag",
+		unidentifiedResourceName = "Bag",
+		unidentifiedDescriptionName = {
+			"..."
+		},
+		identifiedDisplayName = "Adventurer's Bag",
+		identifiedResourceName = "adventurer_bag",
+		identifiedDescriptionName = {
+			"A sturdy, spacious bag designed for seasoned adventurers carrying goods across vast lands.",
+			"-------------------------",
+			"Increases Maximum Weight Capacity by 500.",
+			"VIT +1.",
+			"-------------------------",
+			"Class:^6666CC Accessory^000000",
+			"Weight:^009900 10^000000",
+			"Level Requirement:^0099001^000000",
 			"Jobs:^6666CC All Jobs^000000"
 		},
 		slotCount = 1,

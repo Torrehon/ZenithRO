@@ -133,6 +133,37 @@ OnTouch_:
 
 in_rogue,355,179,0	script	Haijara Greg#rogueguild	46,{
 	if (BaseJob == Job_Rogue) {
+		if (getskilllv("RG_CLOSECONFINE") > 0) {
+			mes "[Haijara Greg]";
+			mes "A master of the shadows, eh?";
+			mes "Make sure that you use your abilities to malign foes that deserve to be trapped.";
+			mes "Best of luck to you, adventurer.";
+			close;
+		}
+		if (getskilllv("RG_NIGHTBLADE") > 0 || getskilllv(1065) > 0) {
+			mes "[Haijara Greg]";
+			mes "...!";
+			mes "^333333*Haijara Greg narrows his eyes, suddenly tensing up before relaxing with a low whistle.*^000000";
+			next;
+			mes "[Haijara Greg]";
+			mes "Whoa... I can feel the shadows clinging to your very steps.";
+			mes "That instinct... That deadly, razor-sharp presence in close quarters...";
+			next;
+			mes "[Haijara Greg]";
+			mes "I don't need to test you or run you through errand loops.";
+			mes "You already command the shadow techniques far beyond ordinary Rogues.";
+			next;
+			mes "[Haijara Greg]";
+			mes "Here. Take the secrets of ^FF0000Close Confine^000000. It belongs in the hands of a master like you.";
+			next;
+			set ROG_SK,12;
+			skill "RG_CLOSECONFINE",1,SKILL_PERM;
+			specialeffect2 EF_LIGHTSPHERE;
+			specialeffect EF_LEVELUP;
+			mes "[Haijara Greg]";
+			mes "Use it well. Few out there will ever escape your grasp.";
+			close;
+		}
 		if (ROG_SK == 12 && Upper == 1) {
 			mes "[Haijara Greg]";
 			mes "Hm? Ah, amnesia as";

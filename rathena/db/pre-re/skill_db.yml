@@ -6571,8 +6571,8 @@ Body:
     Name: AM_BIOETHICS
     Description: Bioethics
     MaxLevel: 1
-    # Flags:
-      # IsQuest: true
+    Flags:
+      IsQuest: true
   - Id: 243
     Name: AM_CALLHOMUN
     Description: Call Homunculus
@@ -6583,9 +6583,6 @@ Body:
     SplashArea: 1
     Requires:
       SpCost: 10
-      # ItemCost:
-        # - Item: Germination_Breed
-          # Amount: 1
   - Id: 244
     Name: AM_REST
     Description: Vaporize
@@ -13589,8 +13586,9 @@ Body:
     Hit: Single
     HitCount: 1
     CastTime: 3000
-    AfterCastActDelay: 4000
-    Duration1: 15000
+    AfterCastActDelay: 2000
+    Cooldown: 45000
+    Duration1: 30000
     Requires:
       SpCost: 30
       SpiritSphereCost: 4
@@ -13633,25 +13631,27 @@ Body:
     Description: Magical Bullet
     MaxLevel: 1
     Type: Weapon
-    TargetType: Attack
-    Range: -9
+    TargetType: Self
+    Flags:
+      Toggleable: true
+    DamageFlags:
+      NoDamage: true
     Hit: Single
     HitCount: 1
-    Element: Ghost
     Requires:
-      SpCost: 7
-      SpiritSphereCost: 1
+      SpCost: 1
   - Id: 508
     Name: GS_CRACKER
     Description: Cracker
     MaxLevel: 1
     Type: Weapon
-    TargetType: Attack
+    TargetType: Self
     DamageFlags:
       NoDamage: true
-    Range: -9
+      Splash: true
     Hit: Single
     HitCount: 1
+    SplashArea: 2
     Element: Weapon
     AfterCastActDelay: 1000
     Duration2: 5000
@@ -13669,7 +13669,7 @@ Body:
         Throwweapon: true
       AmmoAmount: 1
       SpiritSphereCost: 1
-    Status: Stun
+    Status: Confusion
   - Id: 509
     Name: GS_SINGLEACTION
     Description: Single Action
@@ -13853,6 +13853,7 @@ Body:
     TargetType: Self
     DamageFlags:
       Splash: true
+    Range: 5
     Hit: Multi_Hit
     HitCount: 1
     Element: Weapon
@@ -13886,12 +13887,12 @@ Body:
         Revolver: true
       Ammo:
         Bullet: true
-      AmmoAmount: 10
-    Unit:
-      Id: Dummyskill
-      Layout: 3
-      Interval: 100
-      Target: Enemy
+      AmmoAmount: 6
+    # Unit:
+      # Id: Dummyskill
+      # Layout: 3
+      # Interval: 100
+      # Target: Enemy
   - Id: 517
     Name: GS_GATLINGFEVER
     Description: Gatling Fever
@@ -13957,13 +13958,15 @@ Body:
     MaxLevel: 10
     Type: Weapon
     TargetType: Attack
-    Range: 2
+    DamageFlags:
+      Splash: true
+    Range: -9
     Hit: Single
     HitCount: 1
     Element: Weapon
-    Knockback: 5
-    CastTime: 1000
-    AfterCastActDelay: 1000
+    SplashArea: 2
+    Knockback: 3
+    AfterCastActDelay: 2000
     Requires:
       SpCost:
         - Level: 1
@@ -14087,6 +14090,7 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Weapon
+    Cooldown: 2000
     SplashArea:
       - Level: 1
         Area: 1
@@ -14143,16 +14147,18 @@ Body:
     TargetType: Ground
     DamageFlags:
       Splash: true
-      IgnoreAtkCard: true
       IgnoreFlee: true
     Flags:
+      IsQuest: true
+      IgnoreAutoGuard: true
+      IgnoreCicada: true
       AlterRangeSnakeEye: true
     Range: -9
     Hit: Single
     HitCount: 1
     Element: Weapon
-    SplashArea: 1
-    Knockback: 3
+    SplashArea: 2
+    Knockback: 1
     CastTime: 2000
     Duration1:
       - Level: 1
@@ -17008,7 +17014,7 @@ Body:
     Requires:
       SpCost: 30
       ItemCost:
-        - Item: Elemental_Water
+        - Item: Elemental_Water2
           Amount: 1
     Status: ElementalChange
   - Id: 1009
@@ -17142,8 +17148,8 @@ Body:
     TargetType: Attack
     DamageFlags:
       Splash: true
-    # Flags:
-      # IsQuest: true
+    Flags:
+      IsQuest: true
     Range: 7
     Hit: Single
     HitCount: 1
@@ -17181,7 +17187,7 @@ Body:
     Requires:
       SpCost: 30
       ItemCost:
-        - Item: Elemental_Earth
+        - Item: Elemental_Earth2
           Amount: 1
     Status: ElementalChange
   - Id: 1018
@@ -17204,7 +17210,7 @@ Body:
     Requires:
       SpCost: 30
       ItemCost:
-        - Item: Elemental_Fire
+        - Item: Elemental_Fire2
           Amount: 1
     Status: ElementalChange
   - Id: 1019
@@ -17227,7 +17233,7 @@ Body:
     Requires:
       SpCost: 30
       ItemCost:
-        - Item: Elemental_Wind
+        - Item: Elemental_Wind2
           Amount: 1
     Status: ElementalChange
   - Id: 1020
@@ -17623,8 +17629,8 @@ Body:
     Description: Soul of the Mimic
     MaxLevel: 1
     Type: Weapon
-    # Flags:
-      # IsQuest: true
+    Flags:
+      IsQuest: true
   - Id: 1067
     Name: RG_SUPPORT_PLAGIARISM
     Description: Support Plagiarism
@@ -17633,6 +17639,20 @@ Body:
     DamageFlags:
       NoDamage: true
     CastTime: 1000
+    Type: Weapon
+    Flags:
+      IsQuest: true
+  - Id: 1068
+    Name: GS_PKEEPER
+    Description: Soul of the Peacekeeper
+    MaxLevel: 1
+    Type: Weapon
+    # Flags:
+      # IsQuest: true
+  - Id: 1069
+    Name: GS_ENFORCER
+    Description: Soul of the Enforcer
+    MaxLevel: 1
     Type: Weapon
     # Flags:
       # IsQuest: true

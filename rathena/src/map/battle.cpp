@@ -1854,8 +1854,24 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 #endif
 			damage -= damage * tsc->getSCE(SC_DEFENDER)->val2 / 100;
 
-		if(tsc->getSCE(SC_ADJUSTMENT) && (flag&(BF_LONG|BF_WEAPON)) == (BF_LONG|BF_WEAPON))
-			damage -= damage * 20 / 100;
+		// --- INICIO CUSTOM: Soul of the Enforcer (Adjustment) ---
+		if (tsc->getSCE(SC_ADJUSTMENT)) {
+			// 1. Resistencia original a daño de rango (BF_LONG)
+			if ((flag & (BF_LONG | BF_WEAPON)) == (BF_LONG | BF_WEAPON)) {
+				damage -= damage * 20 / 100;
+			}
+			// 2. Nueva resistencia a daño cuerpo a cuerpo (BF_SHORT)
+			else if ((flag & (BF_SHORT | BF_WEAPON)) == (BF_SHORT | BF_WEAPON)) {
+				// Usamos 'bl' porque es quien recibe la torta
+				map_session_data *tsd = BL_CAST(BL_PC, bl);
+				
+				// Comprobamos la skill correcta (GS_ENFORCER)
+				if (tsd && pc_checkskill(tsd, GS_ENFORCER) > 0) {
+					damage -= damage * 20 / 100;
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
 
 		if(tsc->getSCE(SC_FOGWALL) && skill_id != RK_DRAGONBREATH && skill_id != RK_DRAGONBREATH_WATER && skill_id != NPC_DRAGONBREATH) {
 			if(flag&BF_SKILL) //25% reduction
@@ -2044,7 +2060,19 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 		}
 	}
 	// --- FIN CUSTOM ---
-
+	
+	// --- INICIO CUSTOM: Magical Bullet + Enforcer (Daño +25%) ---
+		if (sc->getSCE(SC_MBULLET)) {
+			if (skill_id == GS_DUST || skill_id == GS_FULLBUSTER || 
+				skill_id == GS_SPREADATTACK || skill_id == GS_GROUNDDRIFT) {
+				
+				// 'tsd' representa al jugador que ataca (src)
+				if (tsd && pc_checkskill(tsd, GS_ENFORCER) > 0) {
+					damage += damage * 25 / 100;
+				}
+			}
+		}
+		// --- FIN CUSTOM ---
 
 		if ((sce = sc->getSCE(SC_BLOODLUST)) && flag & BF_WEAPON && damage > 0 && rnd_chance(sce->val3, 100))
 			status_heal(src, damage * sce->val4 / 100, 0, 1);
@@ -2749,8 +2777,12 @@ void battle_consume_ammo(map_session_data*sd, int32 skill, int32 lv)
 		if (skill == GS_RAPIDSHOWER) {
 			qty += (status_get_agi(sd) / 15);
 		}
+		// --- INICIO CUSTOM: Consumo dinámico de Desperado ---
+		if (skill == GS_DESPERADO) {
+			qty += (status_get_agi(sd) / 20)*3;
+		}
+		// --- FIN CUSTOM ---
 	}
-
 	if (sd->equip_index[EQI_AMMO] >= 0) //Qty check should have been done in skill_check_condition
 		pc_delitem(sd,sd->equip_index[EQI_AMMO],qty,0,1,LOG_TYPE_CONSUME);
 
@@ -3495,6 +3527,13 @@ static bool attack_ignores_def(Damage* wd, block_list *src, const block_list *ta
 
 	if( sd != nullptr ){
 		switch( skill_id ){
+			case GS_FULLBUSTER: {
+				const status_change *tsc = status_get_sc(target);
+				if (pc_checkskill(sd, GS_ENFORCER) > 0 && tsc != nullptr && tsc->getSCE(SC_EXPOSED)) {
+					return true;
+				}
+				break;
+			}
 			case RK_WINDCUTTER:
 				if( sd->status.weapon == W_2HSWORD ){
 					return true;
@@ -4405,6 +4444,50 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 						// Aumenta el daño físico base calculado hasta el momento en un 30%
 						ATK_ADDRATE(wd->damage, wd->damage2, 30);
 					}
+				}
+				// --- FIN CUSTOM ---
+				
+				// --- INICIO CUSTOM: Stacks de ASPD (Soul of the Peacekeeper) ---
+				if (skill_id == 0 && pc_checkskill(sd, GS_PKEEPER) > 0) {
+					status_change *sc_pkeeper = status_get_sc(src);
+					
+					// Si tiene ambos estados activos (Magical Bullet y Gatling Fever)
+					if (sc_pkeeper && sc_pkeeper->getSCE(SC_GATLINGFEVER) && sc_pkeeper->getSCE(SC_MBULLET)) {
+						int stacks = 1;
+						
+						// Leemos cuántos stacks tiene y le sumamos 1 sin límite
+						if (sc_pkeeper->getSCE(SC_GATLING_STACK)) {
+							stacks = sc_pkeeper->getSCE(SC_GATLING_STACK)->val1 + 2;
+						}
+						
+						// Iniciamos el estado con duración infinita (-1)
+						sc_start4(src, src, SC_GATLING_STACK, 100, stacks, 0, 0, 0, 10000);
+						
+					}
+				}
+				// --- FIN CUSTOM ---
+
+				// --- INICIO CUSTOM: Magical Bullet (Daño Escalonado solo en Ataques Normales) ---
+				if (skill_id == 0 && sc && sc->getSCE(SC_MBULLET) && sstatus && sstatus->max_sp > 0) {
+					int sp_percent = (sstatus->sp * 100) / sstatus->max_sp;
+					int bonus_damage = (sstatus->max_sp * 20) / 100;
+
+					if (sp_percent >= 80) {
+						// Tier 1: 100% (20% del Max SP)
+					} 
+					else if (sp_percent >= 60) {
+						bonus_damage = (bonus_damage * 75) / 100;
+					} 
+					else if (sp_percent >= 40) {
+						bonus_damage = (bonus_damage * 50) / 100;
+					} 
+					else {
+						bonus_damage = (bonus_damage * 25) / 100;
+					}
+
+					wd->damage += bonus_damage;
+					if (wd->damage2 > 0)
+						wd->damage2 += bonus_damage;
 				}
 				// --- FIN CUSTOM ---
 				
@@ -5849,6 +5932,18 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		}
 		// --- FIN CUSTOM ---
 
+		// --- INICIO CUSTOM: Ground Drift MATK ---
+		if (skill_id == GS_GROUNDDRIFT && sd && pc_checkskill(sd, GS_ENFORCER) > 0) {
+			int32 base_matk = sstatus->matk_min;
+			if (sstatus->matk_max > sstatus->matk_min) {
+				base_matk += rnd() % (sstatus->matk_max - sstatus->matk_min + 1);
+			}
+
+			// Sumamos el MATK resultante al daño base del ataque físico de forma segura
+			ATK_ADD(wd.damage, wd.damage2, base_matk*2);
+		}
+		// --- FIN CUSTOM ---
+
 
 
 		// Skill ratio
@@ -6206,6 +6301,8 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 			if (tsc->getSCE(SC_ELECTROCUTE)) status_count++;
 			if (tsc->getSCE(SC_BURIED)) status_count++;
 			if (tsc->getSCE(SC_DROWN)) status_count++;
+			if (tsc->getSCE(SC_DECAY)) status_count++;
+			if (tsc->getSCE(SC_PENANCE)) status_count++;
 
 			// Estados de Back Stab
 			if (tsc->getSCE(SC_LACERATION)) status_count++;
@@ -6897,6 +6994,8 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 			if (tsc->getSCE(SC_ELECTROCUTE)) status_count++;
 			if (tsc->getSCE(SC_BURIED)) status_count++;
 			if (tsc->getSCE(SC_DROWN)) status_count++;
+			if (tsc->getSCE(SC_DECAY)) status_count++;
+			if (tsc->getSCE(SC_PENANCE)) status_count++;
 
 			// Estados de Back Stab
 			if (tsc->getSCE(SC_LACERATION)) status_count++;
@@ -7892,6 +7991,24 @@ enum damage_lv battle_weapon_attack(block_list* src, block_list* target, t_tick 
 			}
 		}
 	}
+	
+	// --- INICIO CUSTOM: Magical Bullet (Consumo y Cancelación) ---
+	if (sd && sc && sc->getSCE(SC_MBULLET) && sstatus->max_sp > 0) {
+		int32 sp_cost = (sstatus->max_sp * 2) / 100; 
+		if (sp_cost < 1) sp_cost = 1; // Mínimo 1 de coste por seguridad
+
+		// Si el SP actual menos el coste cae por debajo del 20% del Max SP...
+		if ((sstatus->sp - sp_cost) < ((sstatus->max_sp * 20) / 100)) {
+			// Apagamos el estado y no consumimos el SP de este último tiro
+			status_change_end(src, SC_MBULLET, INVALID_TIMER);
+			clif_displaymessage(sd->fd, "Magical Bullet cancelled.");
+		} else {
+			// Si tiene SP suficiente, le cobramos el disparo
+			status_zap(src, 0, sp_cost);
+		}
+	}
+	// --- FIN CUSTOM ---
+	
 	if (sc != nullptr && !sc->empty()) {
 		if (sc->getSCE(SC_CLOAKING) && !(sc->getSCE(SC_CLOAKING)->val4 & 2))
 			status_change_end(src, SC_CLOAKING);

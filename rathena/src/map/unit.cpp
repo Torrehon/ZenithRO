@@ -2249,12 +2249,12 @@ int32 unit_skilluse_id2(block_list *src, int32 target_id, uint16 skill_id, uint1
 
 				sd->skill_id_old = skill_id;
 				break;
-			case BA_PANGVOICE:
-			case DC_WINKCHARM:
-				if (status_get_class_(target) == CLASS_BOSS) {
-					clif_skill_fail(*sd, skill_id, USESKILL_FAIL_TOTARGET);
-					return 0;
-				}
+			// case BA_PANGVOICE:
+			// case DC_WINKCHARM:
+				// if (status_get_class_(target) == CLASS_BOSS) {
+					// clif_skill_fail(*sd, skill_id, USESKILL_FAIL_TOTARGET);
+					// return 0;
+				// }
 				break;
 			case WL_WHITEIMPRISON:
 				if( battle_check_target(src,target,BCT_SELF|BCT_ENEMY) < 0 ) {

@@ -24,13 +24,14 @@ gef_fild00,95,128	monster	Blue Plant	1079,1,900000,450000
 gef_fild00,124,321	monster	Blue Plant	1079,1,900000,450000
 gef_fild00,54,212,5,5	monster	Green Plant	1080,3,360000,180000
 gef_fild00,54,186,5,5	monster	Green Plant	1080,3,360000,180000
+gef_fild00,0,0	monster	C_Pouring	25001,1,3600000
 
 //==================================================
 // gef_fild01 - Geffen Field
 //==================================================
 gef_fild01,0,0	monster	Roda Frog	1012,50
 gef_fild01,0,0	monster	Poporing	1031,20
-gef_fild01,0,0	monster	Toad	1089,1,3600000,1800000
+gef_fild01,0,0	monster	Toad	1089,1,3600000
 gef_fild01,215,225,10,10	monster	Green Plant	1080,5,360000,180000
 
 //==================================================
@@ -41,13 +42,8 @@ gef_fild02,0,0	monster	Orc Warrior	1023,60
 gef_fild02,0,0	monster	Coco	1104,10
 gef_fild02,0,0	monster	Smokie	1056,10
 gef_fild02,0,0	monster	Choco	1214,1
+gef_fild02,0,0	monster	Deviling	1582,1,3600000
 gef_fild02,0,0,0,0	boss_monster	Orc Hero	1087,1,86400000,600000,1
-gef_fild02,227,316,6,6	monster	Green Plant	1080,8,360000,180000
-gef_fild02,87,48,6,6	monster	Red Mushroom	1085,5,360000,180000
-gef_fild02,215,209,2,1	monster	Blue Plant	1079,2,360000,180000
-gef_fild02,207,214,1,1	monster	Blue Plant	1079,1,360000,180000
-gef_fild02,220,214,1,1	monster	Blue Plant	1079,1,360000,180000
-gef_fild02,164,194,1,1	monster	Shining Plant	1083,1,1800000,900000
 
 //==================================================
 // gef_fild03 - Geffen Field
@@ -86,6 +82,7 @@ gef_fild04,0,0	monster	Chonchon	1011,30
 gef_fild04,0,0	monster	Pupa	1008,60
 gef_fild04,0,0	monster	Fabre	1007,20
 gef_fild04,0,0	monster	Roda Frog	1012,20
+gef_fild04,0,0	monster	Eclipse	1093,1,3600000
 gef_fild04,224,82,5,2	monster	Green Plant	1080,3,360000,180000
 gef_fild04,152,82,5,2	monster	Green Plant	1080,3,360000,180000
 
@@ -96,6 +93,8 @@ gef_fild05,0,0	monster	Poring	1002,30
 gef_fild05,0,0	monster	Kobold Archer	1282,10
 gef_fild05,0,0	monster	Wild Rose	1261,50
 gef_fild05,0,0	monster	Dustiness	1114,30
+gef_fild05,0,0	monster	Dragon Fly	1091,1,3600000
+
 gef_fild05,235,322	monster	Red Plant	1078,1,180000,90000
 gef_fild05,238,326	monster	Red Plant	1078,1,180000,90000
 gef_fild05,170,337	monster	Red Plant	1078,1,180000,90000
@@ -130,6 +129,7 @@ gef_fild07,0,0	monster	Poring	1002,20
 gef_fild07,0,0	monster	Chonchon	1011,30
 gef_fild07,0,0	monster	Pupa	1008,10
 gef_fild07,0,0	monster	Fabre	1007,60
+gef_fild07,0,0	monster	Vocal	1088,1,3600000
 gef_fild07,122,221	monster	Green Plant	1080,3,360000,180000
 gef_fild07,185,247	monster	Shining Plant	1083,1,1800000,900000
 gef_fild07,269,289	monster	Blue Plant	1079,1,900000,450000
@@ -159,6 +159,8 @@ gef_fild08,162,247	monster	Blue Plant	1079,1,900000,450000
 gef_fild09,0,0	monster	Ambernite	1094,60
 gef_fild09,0,0	monster	Poporing	1031,10
 gef_fild09,0,0	monster	Poison Spore	1077,10
+gef_fild09,0,0	monster	C_Pouring	25001,1,3600000
+
 gef_fild09,51,43	monster	Red Mushroom	1085,1,180000,90000
 gef_fild09,125,53	monster	Red Mushroom	1085,1,180000,90000
 gef_fild09,148,74	monster	Red Mushroom	1085,1,180000,90000

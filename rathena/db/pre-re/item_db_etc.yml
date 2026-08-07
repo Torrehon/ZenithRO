@@ -2464,7 +2464,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bLuk,1;
-      bonus bCritical2,1;
+      bonus bCritical,2;
   - Id: 4002
     AegisName: Fabre_Card
     Name: Fabre Card
@@ -21460,7 +21460,7 @@ Body:
       BuyingStore: true
   - Id: 50010
     AegisName: tridephts
-    Name: Morocc Coin
+    Name: Trident of the Depths
     Type: Etc
     Trade:
       NoDrop: true
@@ -21534,6 +21534,47 @@ Body:
     Weight: 10
     Flags:
       UniqueId: true
+  - Id: 50020
+    AegisName: h_essence
+    Name: Heroic Soul Essence
+    Type: Etc
+    Buy: 10
+    Weight: 10
+  - Id: 50021
+    AegisName: t_sphere
+    Name: Tremor Sphere
+    Type: Ammo
+    SubType: Grenade
+    Buy: 80
+    Weight: 5
+    Attack: 50
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+      Rebellion: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Earth;
+  - Id: 50022
+    AegisName: h_sphere
+    Name: Light Sphere
+    Type: Ammo
+    SubType: Grenade
+    Buy: 80
+    Weight: 5
+    Attack: 50
+    Jobs:
+      Hiregun: true
+      Gunslinger: true
+      Rebellion: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Holy;
+      
 
 # This file is a part of rAthena.
 #   Copyright(C) 2021 rAthena Development Team

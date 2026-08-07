@@ -15,7 +15,7 @@
 
 prt_in,85,99,3	script	Knight#kabuto	734,{
 	if (BaseJob == Job_Knight) {
-		if (KNGT_SK == 10) {
+		if (getskilllv("KN_CHARGEATK") > 0 || KNGT_SK == 10) {
 			mes "[Essofeit]";
 			mes "Ah, it must be grand to";
 			mes "be an adventuring Knight";
@@ -30,6 +30,25 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 			mes "that you must be having.";
 			mes "Someday, you'll have to tell";
 			mes "me your own stories of bravery.";
+			close;
+		}
+		if (getskilllv("KN_LANCERSOUL") > 0 || getskilllv(1042) > 0) {
+			mes "[Essofeit]";
+			mes "...!";
+			mes "^333333*Essofeit looks at you in utter astonishment, sensing the piercing, unstoppable momentum in your stance.*^000000";
+			next;
+			mes "[Essofeit]";
+			mes "Incredible... The sharp, piercing aura of a master lancer surrounds you!";
+			mes "Your physical momentum and martial presence are already far beyond anything I could teach through basic drills.";
+			next;
+			mes "[Essofeit]";
+			mes "I don't need to put a warrior of your caliber through tests. Take the secrets of ^0000FFCharge Attack^000000!";
+			next;
+			skill "KN_CHARGEATK",1,SKILL_PERM;
+			set KNGT_SK,10;
+			specialeffect EF_LEVELUP;
+			mes "[Essofeit]";
+			mes "Unleash that unstoppable momentum on the battlefield! Bring honor to the Knighthood!";
 			close;
 		}
 		if (KNGT_SK == 9 && getskilllv("KN_CHARGEATK") == 0) {
@@ -123,7 +142,7 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 			mes "strength and courage!";
 			close;
 		}
-		if (KNGT_SK == 7 && countitem(530) > 4 && countitem(748) > 2) {
+		if (KNGT_SK == 7 && countitem(530) > 4 && countitem(748) > 0) {
 			mes "[Essofeit]";
 			mes "The concept of honor";
 			mes "seems to be lost on today's";
@@ -136,7 +155,7 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 			mes "Back in my day, Knights";
 			mes "were strong enough to get";
 			mes "at least 5 Candy Canes and";
-			mes "3 Witherless Roses through";
+			mes "1 Witherless Rose through";
 			mes "hunting alone! But Knights";
 			mes "these days have grown soft...";
 			next;
@@ -179,7 +198,7 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 				mes "don't you come back after I've";
 				mes "completed the preparations?";
 				delitem 530,5; //Candy_Striper
-				delitem 748,3; //Witherless_Rose
+				delitem 748,1; //Witherless_Rose
 				set KNGT_SK,8;
 				close;
 			}
@@ -486,7 +505,7 @@ prontera,66,358,5	script	Knight#gattack	733,{
 		mes "Gosh, I'm sick and tired of";
 		mes "him talking about Knighthood.";
 		mes "Essofeit insists that all Knights, even complete rookies, should be";
-		mes "able to obtain 5 Candy Canes and 3 Witherless Roses from hunting.";
+		mes "able to obtain 5 Candy Canes and 1 Witherless Rose from hunting.";
 		next;
 		mes "[Gatack]";
 		mes "Hell, I just hate to hear";

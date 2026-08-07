@@ -221,6 +221,114 @@ StateIconList[EFST_IDs.EFST_UNNERVED] = {
 		{ "Increases damage taken by Dissonance and Ugly Dance skills.", { 255, 255, 255 } }
 	}
 }
+StateIconList[EFST_IDs.EFST_LACERATION] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Laceration", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Receive Neutral physical damage every 2 seconds.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_CHEMBURN] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Chemical Burn", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Decreases Mdef. It can be stacked.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_RELENTLESS] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Relentless", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Aspd and Crit when attacking under Critical Explosion status.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_CONCUSSION] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Concussion", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Defense reduced.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_RPOT] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Aid Red Potion", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Max Hp.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_OPOT] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Aid Orange Potion", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Atk.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_YPOT] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Aid Yellow Potion", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Vit Def and Hp Recovery.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_BPOT] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Aid Blue Potion", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Matk and reduces Sp Consumption.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_MBULLET] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Magical Bullet", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases damage dealt with normal attacks by consuming Sp.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_MARKED] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Marked", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Decreases Movement Speed and Attack Speed.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_GRAFFITI] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Graffiti", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Atk and Matk.", { 255, 255, 255 } }
+	}
+}
+StateIconList[EFST_IDs.EFST_GATLING_STACK] = {
+	haveTimeLimit = 1,
+	posTimeLimitStr = 2,
+	descript = {
+		{ "Gatling Stacks", COLOR_TITLE_BUFF },
+		{ "%s", COLOR_TIME },
+		{ "Increases Aspd with every attack landed. It stacks infinitely.", { 255, 255, 255 } }
+	}
+}
 StateIconList[EFST_IDs.EFST_CONCENTRATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,

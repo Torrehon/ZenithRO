@@ -15107,16 +15107,15 @@ BUILDIN_FUNC(setitemoption)
 	if (sd->inventory.u.items_inventory[idx].nameid == 0) return SCRIPT_CMD_FAILURE;
 
 	// --- EL CHIVATO ---
-	ShowInfo("[Custom Enchanter] Actualizando Item (Idx: %d) | Slot: %d | Opcion ID: %d | Nuevo Valor: %d\n", 
-		idx, opt_idx, opt_id, opt_val);
+	// ShowInfo("[Custom Enchanter] Actualizando Item (Idx: %d) | Slot: %d | Opcion ID: %d | Nuevo Valor: %d\n", 
+	// 	idx, opt_idx, opt_id, opt_val);
 
 	// 1. Actualizamos el valor en la memoria del jugador
 	sd->inventory.u.items_inventory[idx].option[opt_idx].id = opt_id;
 	sd->inventory.u.items_inventory[idx].option[opt_idx].value = opt_val;
 
-	// 2. Refrescamos visualmente el item en el cliente
-	clif_delitem(*sd, idx, sd->inventory.u.items_inventory[idx].amount, 0);
-	clif_additem(sd, idx, sd->inventory.u.items_inventory[idx].amount, 0);
+	// 2. Refrescamos el inventario en el cliente de forma silenciosa (sin mensajes de "Obtenido" en el chat)
+	clif_inventorylist(sd);
 
 	return SCRIPT_CMD_SUCCESS;
 }

@@ -1616,3 +1616,19 @@ Body:
       bonus2 bSPGainRace,RC_Formless,1;
       bonus2 bExpAddRace,RC_Formless,10;
       bonus2 bMagicAtkEle,Ele_Earth,10;
+  - Combos:
+      - Combo:
+          - sea_sapphire
+          - Cancer_Diadem
+    Script: |
+      bonus2 bSPGainRace,RC_Fish,1;
+      bonus2 bExpAddRace,RC_Fish,10;
+      bonus2 bMagicAddEle,Ele_Water,5;
+  - Combos:
+      - Combo:
+          - sea_sapphire
+          - Pisces_Crown
+    Script: |
+      bonus2 bSPGainRace,RC_Fish,1;
+      bonus2 bExpAddRace,RC_Fish,10;
+      bonus2 bAddEle,Ele_Water,5; 

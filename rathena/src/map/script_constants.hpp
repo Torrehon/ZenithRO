@@ -2022,6 +2022,8 @@
 	export_constant(SC_DROWN);
     export_constant(SC_ELECTROCUTE);
 	export_constant(SC_BURIED);
+	export_constant(SC_DECAY);
+	export_constant(SC_PENANCE);
 	export_constant(SC_ARCINSIGHT);
 	export_constant(SC_PINNED);
 	export_constant(SC_SAVAGERY);
@@ -2044,6 +2046,8 @@
 	export_constant(SC_LACERATION);
 	export_constant(SC_CONCUSSION);
 	export_constant(SC_MARKED);
+	export_constant(SC_MBULLET);
+	export_constant(SC_GATLING_STACK);
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
 	export_constant(EFST_BLANK);
@@ -3550,6 +3554,10 @@
 	export_constant(EFST_LACERATION);
 	export_constant(EFST_CONCUSSION);
 	export_constant(EFST_MARKED);
+	export_constant(EFST_MBULLET);
+	export_constant(EFST_GATLING_STACK);
+	export_constant(EFST_DECAY);
+	export_constant(EFST_PENANCE);
 	export_constant(EFST_MAX);
 	
 

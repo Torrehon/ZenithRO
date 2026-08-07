@@ -4070,9 +4070,9 @@ Body:
     AegisName: VOCAL
     Name: Vocal
     Level: 27
-    Hp: 55316
-    BaseExp: 9431
-    JobExp: 7590
+    Hp: 75316
+    BaseExp: 13431
+    JobExp: 11590
     Attack: 216
     Attack2: 324
     Defense: 20
@@ -4081,8 +4081,8 @@ Body:
     Agi: 28
     Vit: 26
     Int: 30
-    Dex: 53
-    Luk: 40
+    Dex: 155
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4096,11 +4096,14 @@ Body:
     ClientAttackMotion: 600
     DamageMotion: 480
     Ai: 21
+    Class: Boss
     Modes:
       Detector: true
     Drops:
       - Item: Oldman's_Romance
         Rate: 50
+      - Item: h_essence
+        Rate: 100
       - Item: Grasshopper's_Leg
         Rate: 8000
       - Item: Grasshopper_Doll
@@ -4117,18 +4120,20 @@ Body:
   - Id: 1089
     AegisName: TOAD
     Name: Toad
-    Level: 27
-    Hp: 35065
+    Level: 47
+    Hp: 75065
     Sp: 1000
-    BaseExp: 10000
-    JobExp: 10000
+    BaseExp: 11236
+    JobExp: 13243
     Attack: 327
     Attack2: 386
+    Defense: 20
+    MagicDefense: 45
     Agi: 36
     Vit: 10
     Int: 77
     Dex: 65
-    Luk: 25
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4146,6 +4151,8 @@ Body:
     Drops:
       - Item: Big_Sis'_Ribbon
         Rate: 50
+      - Item: h_essence
+        Rate: 100
       - Item: Honey
         Rate: 2000
       - Item: Glass_Bead
@@ -4162,19 +4169,19 @@ Body:
   - Id: 1090
     AegisName: MASTERING
     Name: Mastering
-    Level: 20
-    Hp: 32150
-    BaseExp: 8200
-    JobExp: 7900
+    Level: 42
+    Hp: 82150
+    BaseExp: 12200
+    JobExp: 10900
     Attack: 280
     Attack2: 343
-    Defense: 25
-    MagicDefense: 25
+    Defense: 15
+    MagicDefense: 15
     Agi: 22
-    Vit: 2
+    Vit: 80
     Int: 0
-    Dex: 77
-    Luk: 60
+    Dex: 99
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4192,6 +4199,8 @@ Body:
     Drops:
       - Item: Snowy_Horn
         Rate: 200
+      - Item: h_essence
+        Rate: 100
       - Item: Unripe_Apple
         Rate: 50
       - Item: Angel's_Safeguard
@@ -4208,19 +4217,19 @@ Body:
   - Id: 1091
     AegisName: DRAGON_FLY
     Name: Dragon Fly
-    Level: 28
-    Hp: 18700
-    BaseExp: 7685
-    JobExp: 8233
+    Level: 48
+    Hp: 48700
+    BaseExp: 11685
+    JobExp: 13233
     Attack: 187
     Attack2: 224
     Defense: 40
     MagicDefense: 25
-    Agi: 140
+    Agi: 111
     Vit: 8
     Int: 15
     Dex: 87
-    Luk: 5
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4238,6 +4247,8 @@ Body:
     Drops:
       - Item: Sweet_Gents
         Rate: 200
+      - Item: h_essence
+        Rate: 100
       - Item: Red_Herb
         Rate: 8000
       - Item: Chonchon_Doll
@@ -4254,10 +4265,10 @@ Body:
   - Id: 1092
     AegisName: VAGABOND_WOLF
     Name: Vagabond Wolf
-    Level: 24
-    Hp: 32240
-    BaseExp: 7768
-    JobExp: 8583
+    Level: 44
+    Hp: 62240
+    BaseExp: 11768
+    JobExp: 10583
     Attack: 235
     Attack2: 259
     Defense: 50
@@ -4266,7 +4277,7 @@ Body:
     Vit: 48
     Int: 20
     Dex: 60
-    Luk: 65
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4284,6 +4295,8 @@ Body:
     Drops:
       - Item: Western_Grace
         Rate: 200
+      - Item: h_essence
+        Rate: 100
       - Item: Claw_Of_Wolves
         Rate: 8000
       - Item: Star_Dust_Blade
@@ -4301,19 +4314,19 @@ Body:
     AegisName: ECLIPSE
     Name: Eclipse
     Level: 45
-    Hp: 38115
+    Hp: 68115
     SP: 1000
-    BaseExp: 9200
-    JobExp: 8450
-    Attack: 397
-    Attack2: 524
+    BaseExp: 12200
+    JobExp: 10450
+    Attack: 297
+    Attack2: 324
     MagicDefense: 40
     Defense: 15
     Agi: 66
     Vit: 6
-    Int: 77
-    Dex: 51
-    Luk: 80
+    Int: 99
+    Dex: 91
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4331,6 +4344,8 @@ Body:
     Drops:
       - Item: Fillet
         Rate: 200
+      - Item: h_essence
+        Rate: 100
       - Item: Red_Herb
         Rate: 8000
       - Item: Glass_Bead
@@ -4443,19 +4458,19 @@ Body:
   - Id: 1096
     AegisName: ANGELING
     Name: Angeling
-    Level: 20
-    Hp: 55000
+    Level: 49
+    Hp: 75000
     Sp: 2000
     BaseExp: 11500
     JobExp: 12300
-    Attack: 350
-    Attack2: 510
+    Attack: 321
+    Attack2: 410
     MagicDefense: 70
     Agi: 50
     Vit: 20
-    Int: 75
+    Int: 95
     Dex: 68
-    Luk: 200
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -4473,6 +4488,8 @@ Body:
     Drops:
       - Item: Angelic_Chain
         Rate: 100
+      - Item: h_essence
+        Rate: 100 
       - Item: Scapulare_
         Rate: 60
       - Item: Leaf_Of_Yggdrasil
@@ -23762,9 +23779,8 @@ Body:
   - Id: 1582
     AegisName: DEVILING
     Name: Deviling
-    Level: 31
-    Hp: 64500
-    Sp: 2000
+    Level: 48
+    Hp: 74500
     BaseExp: 13333
     JobExp: 12780
     Attack: 356
@@ -23776,7 +23792,7 @@ Body:
     Vit: 20
     Int: 75
     Dex: 77
-    Luk: 200
+    Luk: 55
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -23794,6 +23810,8 @@ Body:
     Drops:
       - Item: Petite_DiablOfs_Wing
         Rate: 3000
+      - Item: h_essence
+        Rate: 100
       - Item: Zargon
         Rate: 4850
       - Item: Satanic_Chain
@@ -36157,7 +36175,7 @@ Body:
     AttackMotion: 672
     ClientAttackMotion: 288
     DamageMotion: 480
-    Ai: 20
+    Ai: 21
     Class: Boss
   - Id: 1895
     AegisName: EVENT_SEYREN
@@ -57866,6 +57884,7 @@ Body:
     ClientAttackMotion: 324
     DamageMotion: 576
     Ai: 13
+    Class: Boss    
     Modes:
       Detector: true
     Drops:
@@ -57941,6 +57960,7 @@ Body:
     ClientAttackMotion: 1536
     DamageMotion: 540
     Ai: 13
+    Class: Boss
     Drops:
       - Item: Gemstone
         Rate: 10000
@@ -57987,6 +58007,7 @@ Body:
     ClientAttackMotion: 324
     DamageMotion: 480
     Ai: 13
+    Class: Boss
     Drops:
       - Item: Heart_Of_Mermaid
         Rate: 5000
@@ -58002,6 +58023,8 @@ Body:
         Rate: 1000
       - Item: Light_Yellow_Pot_Box
         Rate: 10000
+      - Item: sea_sapphire
+        Rate: 500
         StealProtected: true
   - Id: 21077
     AegisName: S_DUMMY_100_NOTHING2
@@ -58028,3 +58051,46 @@ Body:
     Ai: 06
     Modes:
       TeleportBlock: true
+  - Id: 25001
+    AegisName: C_POURING
+    Name: Pouring
+    Level: 28
+    Hp: 58587
+    BaseExp: 8430
+    JobExp: 10534
+    Attack: 243
+    Attack2: 343
+    Defense: 20
+    MagicDefense: 50
+    Str: 45
+    Agi: 30
+    Vit: 36
+    Int: 76
+    Dex: 85
+    Luk: 30
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 300
+    AttackDelay: 725
+    AttackMotion: 672
+    ClientAttackMotion: 288
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Glass_Bead
+        Rate: 500
+      - Item: h_essence
+        Rate: 100
+      - Item: Cyfar
+        Rate: 7000
+      - Item: Large_Jellopy
+        Rate: 7000
+      - Item: Waterdrop_Brooch
+        Rate: 100
+        StealProtected: true

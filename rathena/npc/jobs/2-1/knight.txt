@@ -1,275 +1,121 @@
 //===== rAthena Script ======================================= 
-//= Knight Job Quest (Combat Quest - Waves Edition - Job 50)
+//= Knight Job Quest (Simplified - Job 50 + Proof of Valor)
 //===== Description: ========================================= 
-//= Simplified quest. Requires item 50008, Job Level 50, and 
-//= passing a 2-wave combat arena. Flavor NPCs included.
+//= Job Change quest for Knight class.
 //============================================================ 
 
-//==========================================================
-// Quest Principal (Capitán Herman)
-//==========================================================
 prt_in,88,101,4	script	Chivalry Captain#knt	56,{
 	mes "[Captain Herman]";
-	
-	if (BaseJob == Job_Knight) {
-		mes "Welcome to the Chivalry, brother.";
-		mes "I hope you continue to protect the weak with the honor that characterizes you.";
-		close;
-	}
-	
-	if (BaseJob != Job_Swordman || JobLevel < 50) {
-		mes "We only accept Swordmen who have mastered their skills and reached Job Level 50.";
-		mes "Return when you have reached your maximum potential.";
-		close;
-	}
-
-	// Fase 0: Lore y Proof of Valor
-	if (KNIGHT_Q == 0) {
-		mes "Halt right there, stranger!";
-		mes "The illustrious Prontera Chivalry is not a daycare for novice adventurers who barely know how to hold a sword.";
+	if (Upper == 1) {
+		mes "Greetings, noble hero. The radiant aura of a Transcendent warrior shines brightly from within you.";
 		next;
 		mes "[Captain Herman]";
-		mes "If you think you have what it takes, you must first prove that you are not a complete nobody.";
-		mes "Return when you have a ^236B8EProof of Valor^000000. Until then, do not waste my time.";
-		next;
-		
-		if (countitem(50008) >= 1) { 
-			mes "[Captain Herman]";
-			mes "Wait a moment... Is that a real Proof of Valor?";
-			mes "My apologies, " + strcharinfo(0) + ". I didn't realize we were in the presence of someone of your renown.";
-			next;
-			delitem 50008,1;
-			set KNIGHT_Q, 1;
-			mes "[Captain Herman]";
-			mes "Consider the doors of the Chivalry open to you.";
-			mes "However, our rules demand a martial test. Talk to me when you are ready to enter the combat arena.";
+		mes "May the divine grace of King Tristan III and the spirit of chivalry guide your blade forever.";
+		close;
+	}
+	if (BaseJob != Job_Swordman) {
+		if (BaseJob == Job_Knight) {
+			mes "Hail, brother in arms! As Knights of the Prontera Chivalry, we stand as the unbreakable shield of Rune-Midgard.";
+			mes "Keep your sword sharp and your honor untarnished!";
 			close;
-		} else {
-			mes "[Captain Herman]";
-			mes "As I said. No badge, no deal. Good day!";
+		}
+		else if (BaseClass == Job_Novice) {
+			mes "Welcome to the Prontera Chivalry!";
+			mes "If you aspire to walk the path of the Knight, you must first train as a proud Swordman in Izlude.";
+			close;
+		}
+		else {
+			mes "Greetings! The Prontera Chivalry welcomes all allies of the kingdom. Honor and strength be with you.";
 			close;
 		}
 	}
 
-	// Fase 1: Entrada a la arena
-	if (KNIGHT_Q == 1) {
-		mes "Are you ready for your combat test?";
-		mes "You will face formidable creatures. There will be no mercy.";
+	mes "Welcome to the headquarters of the Prontera Chivalry, warrior.";
+	mes "For generations, our order has stood as the supreme vanguard of the Kingdom of Rune-Midgard, protecting our land from darkness.";
+	next;
+	mes "[Captain Herman]";
+	mes "To earn the title of ^0000FFKnight^000000, a Swordman must prove complete mastery over combat and unwavering valor.";
+	next;
+	mes "[Captain Herman]";
+	mes "Our high council requires two conditions for your Knighthood induction:";
+	mes "1. Reach ^0000FFJob Level 50^000000 as a Swordman.";
+	mes "2. Present a ^FF0000Proof of Valor^000000 (Item ID 50008), the sacred mark granted by the realm's associations of prestige.";
+	next;
+
+	if (JobLevel < 50 || countitem(50008) < 1) {
+		mes "[Captain Herman]";
+		mes "Let us check your credentials...";
 		next;
-		if (select("Yes, take me to the arena.:I need to prepare more.") == 1) {
+		if (JobLevel < 50) {
 			mes "[Captain Herman]";
-			mes "May the gods guide your sword!";
-			close2;
-			warp "job_knt",89,101; 
-			end;
+			mes "Your current Job Level is " + JobLevel + ". You must train further until you reach ^0000FFJob Level 50^000000.";
 		}
-		mes "[Captain Herman]";
-		mes "Wise decision. Go sharpen your weapon.";
+		if (countitem(50008) < 1) {
+			mes "[Captain Herman]";
+			mes "You do not possess a ^FF0000Proof of Valor^000000. Obtain this testament of courage from the prestige associations of the realm and return to me.";
+		}
 		close;
 	}
 
-	// Fase 2: Prueba superada, cambio de Job
-	if (KNIGHT_Q == 2) {
-		mes "You did it! You survived the combat test and demonstrated unyielding strength.";
-		next;
-		mes "[Captain Herman]";
-		mes "I have no doubts about you.";
-		mes "I, Herman Phon Efesirsus, officially name you a Knight of Prontera.";
-		next;
-		
-		jobchange Job_Knight;
-		set KNIGHT_Q, 0; 
-		callfunc "F_ClearJobVar"; 
-		getitem 656,7; 
-		
-		mes "[Captain Herman]";
-		mes "Here are some potions for your future battles.";
-		mes "Fight with honor and never surrender!";
-		close;
-	}
-}
+	mes "[Captain Herman]";
+	mes "Incredible! You have reached Job Level 50 and brought forth the authentic ^FF0000Proof of Valor^000000!";
+	next;
+	mes "[Captain Herman]";
+	mes "By the power vested in me by the Prontera Chivalry and the Kingdom of Rune-Midgard, I accept your oath.";
+	next;
 
-//==========================================================
-// Controlador de la Sala de Espera
-//==========================================================
-job_knt,89,106,4	script	Arena_Controller#knt	733,{
-	mes "[Sir Windsor]";
-	mes "...";
-	mes "Enter the Chat Room to begin your combat.";
+	delitem 50008, 1;
+	jobchange Job_Knight;
+	specialeffect2 EF_ANGEL2;
+	specialeffect2 EF_CLASSCHANGE;
+
+	mes "[Captain Herman]";
+	mes "Arise, ^0000FFKnight of Rune-Midgard^000000!";
+	mes "May your courage never falter, your spear strike true, and your shield protect the innocent!";
+	next;
+	mes "[Captain Herman]";
+	mes "Before you depart to serve the kingdom, take heed of this news.";
+	mes "Word has reached the Chivalry that an intriguing ^0000FFScholar^000000 has arrived in ^0000FFProntera^000000.";
+	next;
+	mes "[Captain Herman]";
+	mes "He is seeking brave warriors of proven valor to assist in a matter of great spiritual importance.";
+	mes "He was last seen wandering near the quiet library and sanctuary district of Prontera... Seek him out if you are ready for a higher calling!";
 	close;
-
-OnInit:
-	waitingroom "Waiting Room",20,"Arena_Controller#knt::OnStartArena",1;
-	enablewaitingroomevent;
-	end;
-
-OnStartArena:
-	disablewaitingroomevent; 
-	warpwaitingpc "job_knt",43,146; 
-	donpcevent "KnightCombat::OnEnable";
-	end;
-
-OnFinish:
-	enablewaitingroomevent; 
-	end;
 }
 
-//==========================================================
-// Lógica de la Arena (Oleadas, Tiempos y Reseteo por Muerte)
-//==========================================================
--	script	KnightCombat	-1,{
-OnInit:
-	disablenpc "KnightCombat";
-	end;
-
-OnEnable:
-	enablenpc "KnightCombat";
-	set .Wave, 0;
-	set .MyMobs, 0;
-	initnpctimer; // Inicia el reloj (Única vez que se llama en toda la prueba)
-	end;
-
-OnDisable:
-	killmonster "job_knt", "KnightCombat::OnMobDead";
-	disablenpc "KnightCombat";
-	end;
-
-// --- Detección de Muerte o Desconexión del Jugador ---
-OnPCDieEvent:
-	// Solo actuamos si el jugador muere DENTRO de la arena del Knight
-	if (strcharinfo(3) == "job_knt") {
-		stopnpctimer;
-		mapannounce "job_knt", "The candidate has fallen! The arena is resetting.", bc_red|bc_map;
-		sleep2 3000; // Damos 3 segundos para que el jugador lea el mensaje
-		percentheal 100, 100; // Lo resucitamos automáticamente
-		warp "prt_in", 80, 100; // Lo expulsamos a Prontera Chivalry
-		donpcevent "KnightCombat::OnDisable";
-		donpcevent "Arena_Controller#knt::OnFinish";
-	}
-	end;
-
-OnPCLogoutEvent:
-	// Si el jugador se desconecta, liberamos la sala instantáneamente
-	if (strcharinfo(3) == "job_knt") {
-		stopnpctimer;
-		donpcevent "KnightCombat::OnDisable";
-		donpcevent "Arena_Controller#knt::OnFinish";
-	}
-	end;
-
-// --- Intro ---
-OnTimer1000:
-	mapannounce "job_knt", "Welcome to the Combat Arena! Prepare your gear.", bc_map;
-	end;
-OnTimer5000:
-	mapannounce "job_knt", "Monsters will be unleashed in 5 seconds...", bc_map;
-	end;
-OnTimer10000:
-	// Bloqueo de seguridad para que no invoque si la oleada ya avanzó
-	if (.Wave != 0) end; 
-	
-	set .Wave, 1;
-	set .MyMobs, 10; 
-	
-	monster "job_knt",40,140,"Orc Warrior",1023,1,"KnightCombat::OnMobDead";
-	monster "job_knt",46,140,"Orc Warrior",1023,1,"KnightCombat::OnMobDead";
-	monster "job_knt",43,146,"Orc Warrior",1023,1,"KnightCombat::OnMobDead";
-	monster "job_knt",38,148,"Orc Warrior",1023,1,"KnightCombat::OnMobDead";
-	monster "job_knt",48,148,"Orc Warrior",1023,1,"KnightCombat::OnMobDead";
-	
-	monster "job_knt",40,152,"Orc Lady",1273,1,"KnightCombat::OnMobDead";
-	monster "job_knt",46,152,"Orc Lady",1273,1,"KnightCombat::OnMobDead";
-	monster "job_knt",43,138,"Orc Lady",1273,1,"KnightCombat::OnMobDead";
-	monster "job_knt",38,142,"Orc Lady",1273,1,"KnightCombat::OnMobDead";
-	monster "job_knt",48,142,"Orc Lady",1273,1,"KnightCombat::OnMobDead";
-	
-	mapannounce "job_knt", "Wave 1: Defeat the Orc swarm!", bc_map;
-	end;
-
-// --- Control de Muerte de Monstruos ---
-OnMobDead:
-	set .MyMobs, .MyMobs - 1;
-	
-	if (.MyMobs <= 0) {
-		if (.Wave == 1) {
-			set .Wave, 2;
-			mapannounce "job_knt", "Wave 1 cleared! Get ready for the final challenge...", bc_map;
-			
-			// Usamos sleep2 para no perder el rastro del jugador
-			sleep2 4000; 
-			
-			set .MyMobs, 4; 
-			mapannounce "job_knt", "Wave 2: High Orcs and Orc Archers have spawned!", bc_map;
-			
-			monster "job_knt",36,147,"High Orc",1213,1,"KnightCombat::OnMobDead";
-			monster "job_knt",36,145,"High Orc",1213,1,"KnightCombat::OnMobDead";
-			monster "job_knt",50,147,"Orc Archer",1189,1,"KnightCombat::OnMobDead";
-			monster "job_knt",50,145,"Orc Archer",1189,1,"KnightCombat::OnMobDead";
-			
-		} else if (.Wave == 2) {
-			stopnpctimer; // Frenamos el temporizador general de la arena
-			mapannounce "job_knt", "Congratulations! You have cleared the trial!", bc_map;
-			mapannounce "job_knt", "You have 10 seconds to collect your loot before teleporting.", bc_map;
-			set KNIGHT_Q, 2;
-			
-			// Usamos sleep2 de nuevo para mantener al jugador anclado al script
-			sleep2 10000; 
-			
-			// Ahora el warp sí reconocerá a tu jugador
-			warp "prt_in",80,100; 
-			donpcevent "KnightCombat::OnDisable";
-			donpcevent "Arena_Controller#knt::OnFinish";
-		}
-	}
-	end;
-
-// --- Tiempo Límite de la Arena (5 Minutos en total = 300,000 ms) ---
-OnTimer300000: 
-	stopnpctimer;
-	mapannounce "job_knt", "Time is up! You have failed the test.", bc_map;
-	
-	// 'mapwarp' barre la sala entera y expulsa a todos. Ideal para OnTimer que no tiene un jugador anclado.
-	mapwarp "job_knt", "prt_in", 80, 100; 
-	
-	donpcevent "KnightCombat::OnDisable";
-	donpcevent "Arena_Controller#knt::OnFinish";
-	end;
-}
-
-//==========================================================
-// Flavor NPCs (Instructores Originales)
-//==========================================================
 prt_in,75,107,4	script	Sir Andrew#knt	65,{
 	mes "[Sir Andrew]";
-	mes "I used to make recruits collect silly items like Old Frying Pans and Snail Shells.";
-	mes "Good times... well, at least for me.";
+	mes "A true Knight does not fight out of hatred for what is in front of him, but out of love for what he guards behind him.";
+	mes "Mastery of the two-handed sword requires patience and a focused heart.";
 	close;
 }
 
 prt_in,71,91,0	script	Sir Siracuse#knt	65,{
 	mes "[Sir Siracuse]";
-	mes "I prepared a comprehensive 100-question quiz about two-handed sword mastery, but Captain Herman said it was 'too boring'.";
-	mes "Can you believe it? The audacity!";
+	mes "Speed and precision on the battlefield come from relentless discipline. Whether wielding a lance or a heavy claymore, posture is everything.";
+	close;
+}
+
+prt_in,79,94,4	script	Sir Windsor#knt	733,{
+	mes "[Sir Windsor]";
+	mes "The Chivalry inspects every candidate thoroughly. Only those with true battle experience and a Proof of Valor can wear our sacred crest.";
 	close;
 }
 
 prt_in,69,107,6	script	Lady Amy#knt	728,{
 	mes "[Lady Amy]";
-	mes "Awww, look at you! Are you heading to the combat arena?";
-	mes "Please don't get your face smashed by those Orcs, you're way too cute for that! Tee hee~";
+	mes "Honor is not given; it is forged through action. Wear your title with dignity, and always lend aid to those in need.";
 	close;
 }
 
 prt_in,70,99,6	script	Sir Edmond#knt	734,{
 	mes "[Sir Edmond]";
-	mes "A Knight must be like flowing water. Avoid obstacles, find your path...";
-	mes "Unless there is a High Orc blocking your way. In that case, hit it very hard with a sword.";
+	mes "Mounted combat atop a Peco Peco doubles a Knight's mobility and charging power. Always respect your mount as your trusted partner.";
 	close;
 }
 
 prt_in,87,92,4	script	Sir Gray#knt	119,{
 	mes "[Sir Gray]";
-	mes "I used to forge and sell Claymores right here in this room.";
-	mes "But the Rune-Midgarts economy is unpredictable. Now I just stand here looking majestic.";
+	mes "Welcome to the Chivalry hall! If you seek Captain Herman, he stands at the head table ready to evaluate worthy Swordmen.";
 	close;
 }

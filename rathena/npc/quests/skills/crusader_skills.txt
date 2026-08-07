@@ -15,6 +15,16 @@
 
 geffen,110,117,3	script	Ford#11	752,{
 	if (BaseJob == Job_Crusader) {
+		if (getskilllv("CR_SHRINK") > 0 || CRUS_SK == 10 || (CRUS_SK == 8 && getskilllv("CR_SHRINK") > 0)) {
+			mes "[Ford]";
+			mes "Hey, it's been a while~";
+			mes "You should come by more";
+			mes "often, and if you're really";
+			mes "interested, you can enlist in";
+			mes "my troops. We can really use";
+			mes "somebody with your expertise.";
+			close;
+		}
 		if (CRUS_SK == 8 && getskilllv("CR_SHRINK") == 0) {
 			mes "[Ford]";
 			mes "Hey, it's been a while~";
@@ -25,6 +35,27 @@ geffen,110,117,3	script	Ford#11	752,{
 			mes "it to you real quick... There!";
 			set CRUS_SK,10;
 			skill "CR_SHRINK",1,SKILL_PERM;
+			close;
+		}
+
+		if (getskilllv("CR_GUARDIANSOUL") > 0 || getskilllv(1054) > 0) {
+			mes "[Ford]";
+			mes "...!";
+			mes "^333333*Ford looks at you in utter amazement, sensing an impenetrable bastion of defense around you.*^000000";
+			next;
+			mes "[Ford]";
+			mes "By the gods...! What an unshakeable, impregnable defensive aura you possess!";
+			mes "Your shield stance and repelling techniques are already those of an absolute guardian master.";
+			next;
+			mes "[Ford]";
+			mes "I don't need to put a warrior of your caliber through errand duties. Take the secrets of ^0000FFShrink^000000!";
+			next;
+			skill "CR_SHRINK",1,SKILL_PERM;
+			set CRUS_SK,10;
+			specialeffect EF_SHIELDREFLECT;
+			specialeffect EF_LEVELUP;
+			mes "[Ford]";
+			mes "Stand firm as the unbreakable wall of our kingdom! May divine protection guide you!";
 			close;
 		}
 

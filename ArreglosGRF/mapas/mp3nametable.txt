@@ -285,12 +285,12 @@ clock_01.rsw#bgm\\61.mp3#
 
 // 4th Expanded Jobs
 1@exhn.rsw#bgm\\01.mp3#
-1@exds.rsw#bgm\\109.mp3#
-2@exds.rsw#bgm\\109.mp3#
-1@exse.rsw#bgm\\146.mp3#
-1@exnw.rsw#bgm\\86.mp3#
-1@exsr.rsw#bgm\\42.mp3#
-1@exsh.rsw#bgm\\20.mp3#
+1@exds.rsw#bgm\\01.mp3#
+2@exds.rsw#bgm\\01.mp3#
+1@exse.rsw#bgm\\01.mp3#
+1@exnw.rsw#bgm\\01.mp3#
+1@exsr.rsw#bgm\\01.mp3#
+1@exsh.rsw#bgm\\01.mp3#
 
 // Varmundt Artificial Eco-Environment Biosphere
 bl_grass.rsw#bgm\\31.mp3#
@@ -351,8 +351,8 @@ grademk.rsw#bgm\\143.mp3#
 1@4igd.rsw#bgm\\159.mp3#
 1@4drk.rsw#bgm\\100.mp3#
 1@4win.rsw#bgm\\65.mp3#
-1@4tro.rsw#bgm\\129.mp3#
-job4_tro.rsw#bgm\\129.mp3#
+1@4tro.rsw#bgm\\01.mp3#
+job4_tro.rsw#bgm\\01.mp3#
 1@4mag.rsw#bgm\\128.mp3#
 job4_mag.rsw#bgm\\128.mp3#
 job4_bio.rsw#bgm\\163.mp3#

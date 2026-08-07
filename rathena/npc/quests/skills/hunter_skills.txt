@@ -26,7 +26,7 @@
 
 pay_arche,109,169,3	script	Arpesto	712,{
 	if (BaseJob == Job_Hunter) {
-		if (qskill_hunter == 100) {
+		if (getskilllv("HT_PHANTASMIC") > 0 || qskill_hunter == 100) {
 			if (getskilllv("HT_PHANTASMIC")) {
 				mes "[Arpesto]";
 				mes "Hm, I'm sorry if I made";
@@ -88,6 +88,29 @@ pay_arche,109,169,3	script	Arpesto	712,{
 				skill "HT_PHANTASMIC",1,SKILL_PERM;
 				close;
 			}
+		}
+		if (getskilllv("HT_SHOOTERSOUL") > 0 || getskilllv(1045) > 0) {
+			mes "[Arpesto]";
+			mes "...!";
+			mes "^333333*Arpesto and Reidin Corse gasp as they feel an unmatched marksmanship aura emanating from you.*^000000";
+			next;
+			mes "[Arpesto]";
+			mes "Whoa...! Look at those eagle eyes and that incredible, natural archery presence!";
+			mes "Your marksmanship is already so far beyond ordinary Hunters that you don't need any training or tuition from an old master like me.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Yeah! This guy's bow technique is insane! Just give 'em the skill already, Arpesto!";
+			next;
+			mes "[Arpesto]";
+			mes "Alright, alright! Here, take the secrets of ^3131FFPhantasmic Arrow^000000!";
+			next;
+			skill "HT_PHANTASMIC",1,SKILL_PERM;
+			set qskill_hunter,100;
+			specialeffect2 EF_FLASHER;
+			specialeffect EF_LEVELUP;
+			mes "[Arpesto]";
+			mes "May your arrows always strike true! Farewell, master marksman!";
+			close;
 		}
 		else if (qskill_hunter == 1) {
 			if (countitem(724) > 4 && countitem(7115) > 4 && countitem(537) > 29) {
@@ -237,7 +260,7 @@ pay_arche,109,169,3	script	Arpesto	712,{
 				set qskill_hunter,100;
 				close;
 			}
-			if (BaseJob == Job_Hunter && JobLevel < 40) {
+			if (BaseJob == Job_Hunter && JobLevel < 25) {
 				mes "[Arpesto]";
 				mes "Did the master send you";
 				mes "to me? Hmm... You're still";
@@ -247,9 +270,8 @@ pay_arche,109,169,3	script	Arpesto	712,{
 				mes "[Arpesto]";
 				mes "Train a little more and get";
 				mes "some more experience in";
-				mes "your job. When you become";
-				mes "more adept at hunting, you'll";
-				mes "be able to grasp what I've been";
+				mes "your job. When you reach ^660000Job Level 25^000000,";
+				mes "you'll be able to grasp what I've been";
 				mes "teaching Hunters and Snipers.";
 				close;
 			} else {

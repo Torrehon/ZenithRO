@@ -378,7 +378,7 @@
 //-- Alcohol <-- AM_PHARMACY & Alcohol Creation Guide & 1 Empty Bottle, 5 Poison Spore, 5 Stem, 1 Empty Testtube
 139,970,22,228,1,7127,0,713,1,7033,5,905,5,1092,1
 //-- Embryo <-- AM_PHARMACY & Potion Creation Guide & 1 Seed of Life, 1 Morning Dew of Yggdrasil, 1 Glass Tube
-140,7142,22,228,1,7144,0,7140,1,7141,1,7143,1
+//140,7142,22,228,1,7144,0,7140,1,7141,1,7143,1
 //----------------------------------------------
 
 //==============================================
@@ -387,13 +387,13 @@
 //===== Elemental Converters === ItemLV=23 =====
 
 //-- Fire Elemental Converter <-- SA_CREATECON & 1 Blank Scroll, 3 Scorpion Tail
-141,12114,23,1007,1,7433,1,904,3
+141,51010,23,1007,1,7433,1,904,3
 //-- Water Elemental Converter <-- SA_CREATECON & 1 Blank Scroll, 3 Snail's Shell
-142,12115,23,1007,1,7433,1,946,3
+142,51011,23,1007,1,7433,1,946,3
 //-- Earth Elemental Converter <-- SA_CREATECON & 1 Blank Scroll, 3 Horn
-143,12116,23,1007,1,7433,1,947,3
+143,51012,23,1007,1,7433,1,947,3
 //-- Wind Elemental Converter <-- SA_CREATECON & 1 Blank Scroll, 3 Rainbow Shell
-144,12117,23,1007,1,7433,1,1013,3
+144,51013,23,1007,1,7433,1,1013,3
 
 //==============================================
 

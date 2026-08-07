@@ -4855,7 +4855,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			
 			int jlvl = sd->status.job_level;
 			
-			// Job 70: (70 * 30) / 14 = 150 (15.0% Crit)
+			// Job 70: (50 * 30) / 10 = 150 (15.0% Crit)
 			base_status->cri += (jlvl * 30) / 10;
 		}
 	}
@@ -4995,6 +4995,36 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		}
 	}
 	// --- FIN: Advanced Book Custom ASPD ---
+	
+	// --- INICIO: Musical Lessons Custom ASPD ---
+		if (sd->status.weapon == W_MUSICAL) {
+		if ((skill = pc_checkskill(sd, BA_MUSICALLESSON)) > 0) {
+			// Obtenemos el Job Level actual
+			int jlvl = sd->status.job_level;
+			
+			// Aplicamos tu fórmula: (sklv * 5) + (jlvl * 5 / 10)
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			
+			// En rAthena, RESTAR a aspd_rate AUMENTA la velocidad de ataque
+			base_status->aspd_rate -= aspd_bonus; 
+		}
+	}
+	// --- FIN: Musical Lessons Custom ASPD ---
+	
+	// --- INICIO: Dance Lessons Custom ASPD ---
+		if (sd->status.weapon == W_WHIP) {
+		if ((skill = pc_checkskill(sd, DC_DANCINGLESSON)) > 0) {
+			// Obtenemos el Job Level actual
+			int jlvl = sd->status.job_level;
+			
+			// Aplicamos tu fórmula: (sklv * 5) + (jlvl * 5 / 10)
+			int aspd_bonus = (skill * 5) + ((jlvl * 5) / 10);
+			
+			// En rAthena, RESTAR a aspd_rate AUMENTA la velocidad de ataque
+			base_status->aspd_rate -= aspd_bonus; 
+		}
+	}
+	// --- FIN: Dance Lessons Custom ASPD ---
 	
 	// --- INICIO: 1-Hand Sword Mastery Custom ASPD ---
 	if (sd->status.weapon == W_1HSWORD || sd->status.weapon == W_DAGGER) {
@@ -5592,6 +5622,23 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			sd->bonus.long_attack_atk_rate += i;
 		}
 	}
+	
+	
+	// --- INICIO CUSTOM: bAtkRate reflejado en ventana de Stats (Estilo Renewal) ---
+#ifndef RENEWAL
+	if (sd->bonus.atk_rate) {
+		// Multiplicamos el ATK Base (la parte izquierda del Alt+Q)
+		base_status->batk += base_status->batk * sd->bonus.atk_rate / 100;
+		
+		// Multiplicamos el ATK de las armas (la parte derecha del Alt+Q, mínimo y máximo)
+		base_status->rhw.atk += base_status->rhw.atk * sd->bonus.atk_rate / 100;
+		base_status->rhw.atk2 += base_status->rhw.atk2 * sd->bonus.atk_rate / 100;
+		base_status->lhw.atk += base_status->lhw.atk * sd->bonus.atk_rate / 100;
+		base_status->lhw.atk2 += base_status->lhw.atk2 * sd->bonus.atk_rate / 100;
+	}
+#endif
+	// --- FIN CUSTOM ---
+	
 	status_cpy(&sd->battle_status, base_status);
 
 // ----- CLIENT-SIDE REFRESH -----
@@ -5724,6 +5771,12 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 
 	amotion = (1000 - 4 * status->agi - status->dex) * hd->homunculusDB->baseASPD / 1000;
 #endif
+
+	// --- INICIO CUSTOM: Bono del 10% ASPD para Homúnculo bajo Adrenaline Rush ---
+	if (hd->sc.getSCE(SC_ADRENALINE) || (hd->master && hd->master->sc.getSCE(SC_ADRENALINE))) {
+		amotion = amotion * 90 / 100;
+	}
+	// --- FIN CUSTOM ---
 
 	status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
 	status->adelay = AMOTION_DIVIDER_NOPC * status->amotion; //It seems adelay = amotion for Homunculus.
@@ -7094,6 +7147,13 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 
 			amotion = status_calc_fix_aspd(&bl, sc, amotion);
 			
+			// --- INICIO CUSTOM: Bono del 10% ASPD para Homúnculo bajo Adrenaline Rush ---
+			homun_data* hd = reinterpret_cast<homun_data*>(&bl);
+			if (hd && ((sc && sc->getSCE(SC_ADRENALINE)) || (hd->master && hd->master->sc.getSCE(SC_ADRENALINE)))) {
+				amotion = amotion * 90 / 100;
+			}
+			// --- FIN CUSTOM ---
+
 			// --- INICIO DEL "MURO" DE ASPD ---
 			// Barrera en 185 ASPD (150 amotion)
 			int32 amotion_wall = 150; 
@@ -7143,6 +7203,16 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			amotion = b_status->amotion;
 			status->aspd_rate = status_calc_aspd_rate(&bl, sc, b_status->aspd_rate);
 			amotion = amotion*status->aspd_rate/1000;
+
+			// --- INICIO CUSTOM: Bono del 10% ASPD para Plantas/Invocaciones bajo Adrenaline Rush ---
+			mob_data* md = BL_CAST(BL_MOB, &bl);
+			if (md && md->master_id > 0) {
+				map_session_data* msd = map_id2sd(md->master_id);
+				if ((sc && sc->getSCE(SC_ADRENALINE)) || (msd && msd->sc.getSCE(SC_ADRENALINE))) {
+					amotion = amotion * 90 / 100;
+				}
+			}
+			// --- FIN CUSTOM ---
 
 			amotion = status_calc_fix_aspd(&bl, sc, amotion);
 			status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
@@ -8219,6 +8289,30 @@ uint16 status_calc_pseudobuff_matk( map_session_data* sd, status_change *sc, int
 		}
 	}
     // --- FIN: Advanced Book Custom ---
+	
+	// --- INICIO: Musical Lessons Custom ---
+	if (sd != nullptr) { 
+		if (sd->status.weapon == W_MUSICAL) {
+			// Añadimos 'uint16' para declarar la variable 'skill'
+			if (uint16 skill = pc_checkskill(sd, BA_MUSICALLESSON); skill > 0) {
+				int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+				matk += (skill * jlv) / 10;
+			}
+		}
+	}
+    // --- FIN: Musical Lessons Custom ---
+	
+	// --- INICIO: Dance Lessons Custom ---
+	if (sd != nullptr) { 
+		if (sd->status.weapon == W_WHIP) {
+			// Añadimos 'uint16' para declarar la variable 'skill'
+			if (uint16 skill = pc_checkskill(sd, DC_DANCINGLESSON); skill > 0) {
+				int32 jlv = (sd->status.job_level > 0) ? (sd->status.job_level - 1) : 0;
+				matk += (skill * jlv) / 10;
+			}
+		}
+	}
+    // --- FIN: Dance Lessons Custom ---
 	
 	if (sc == nullptr || sc->empty())
 		return static_cast<uint16>( cap_value(matk,0,USHRT_MAX) );
@@ -10670,6 +10764,8 @@ static int32 status_get_sc_interval(enum sc_type type)
 		case SC_DROWN:
 		case SC_ELECTROCUTE:
         case SC_BURIED:
+        case SC_DECAY:
+        case SC_PENANCE:
         case SC_LACERATION:
 		    return 2000;
 		case SC_SAVAGERY:
@@ -10922,6 +11018,11 @@ t_tick status_get_sc_def(const block_list* src, const block_list* bl, sc_type ty
 			break;
 		case SC_BURIED:
 			sc_def = status->str * 20 + status_get_lv(bl) * 20 + status->luk * 10;
+			tick_def2 = -2000;
+			break;
+		case SC_DECAY:
+		case SC_PENANCE:
+			sc_def = status->int_ * 20 + status_get_lv(bl) * 20 + status->luk * 10;
 			tick_def2 = -2000;
 			break;
 		case SC_LACERATION:
@@ -11363,6 +11464,8 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 			case SC_DROWN:
 			case SC_ELECTROCUTE:
 			case SC_BURIED:
+			case SC_DECAY:
+			case SC_PENANCE:
 			case SC_STRIPWEAPON:
 			case SC_STRIPSHIELD:
 			case SC_STRIPARMOR:
@@ -11426,6 +11529,9 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 		case SC_DROWN:
 		case SC_ELECTROCUTE:
 		case SC_BURIED:
+		case SC_LACERATION:
+		case SC_DECAY:
+		case SC_PENANCE:
 		
 		// 0. Prevenir el reseteo del temporizador por Spam
 			// Si el objetivo ya tiene EXACTAMENTE el mismo estado que intentamos aplicar, cancelamos para que el DoT siga haciendo daño.
@@ -11437,6 +11543,8 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 			if (type == SC_DROWN && status->def_ele == ELE_WATER && status->ele_lv >= 1) return false;
 			if (type == SC_ELECTROCUTE && status->def_ele == ELE_WIND && status->ele_lv >= 1) return false;
 			if (type == SC_BURIED && status->def_ele == ELE_EARTH && status->ele_lv >= 1) return false;
+			if (type == SC_DECAY && status->def_ele == ELE_DARK && status->ele_lv >= 1) return false;
+			if (type == SC_PENANCE && status->def_ele == ELE_HOLY && status->ele_lv >= 1) return false;
 
 			// 2. Sobrescritura de Estados (Exclusividad mutua)
 			// Usamos getSCE() en lugar de data[] para respetar el código privado de rAthena
@@ -11451,7 +11559,16 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 				
 			if (type != SC_BURIED && sc->getSCE(SC_BURIED) != nullptr) 
 				status_change_end(bl, SC_BURIED, -1);
+			
+			if (type != SC_LACERATION && sc->getSCE(SC_LACERATION) != nullptr) 
+				status_change_end(bl, SC_LACERATION, -1);
 				
+			if (type != SC_DECAY && sc->getSCE(SC_DECAY) != nullptr) 
+				status_change_end(bl, SC_DECAY, -1);
+
+			if (type != SC_PENANCE && sc->getSCE(SC_PENANCE) != nullptr) 
+				status_change_end(bl, SC_PENANCE, -1);
+
 			break;
 	}
 
@@ -12430,6 +12547,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_DROWN:
 		case SC_ELECTROCUTE:
         case SC_BURIED:
+        case SC_DECAY:
+        case SC_PENANCE:
         case SC_LACERATION:
 		case SC_KILLING_AURA:
 		case SC_WINKCHARM:
@@ -14337,6 +14456,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			case SC_DROWN:
 			case SC_ELECTROCUTE:
             case SC_BURIED:
+            case SC_DECAY:
+            case SC_PENANCE:
             case SC_LACERATION:
 			case SC_TOXIN:
 				tick_time = tick;
@@ -15646,13 +15767,17 @@ TIMER_FUNC(status_change_timer){
 	case SC_DROWN:
 	case SC_ELECTROCUTE:
 	case SC_BURIED:
+	case SC_DECAY:
+	case SC_PENANCE:
 		if (sce->val4 >= 0) {
 			// FIX 1: Usamos 'int' en lugar de 'enum element' para evitar el error de conversión estricta en C++
 			int ele;
 			if (type == SC_BURNING) ele = ELE_FIRE;
 			else if (type == SC_DROWN) ele = ELE_WATER;
 			else if (type == SC_ELECTROCUTE) ele = ELE_WIND;
-			else ele = ELE_EARTH; 
+			else if (type == SC_BURIED) ele = ELE_EARTH;
+			else if (type == SC_DECAY) ele = ELE_DARK;
+			else ele = ELE_HOLY;
 
 			int64 caster_matk = (sce->val2 > 0) ? sce->val2 : 0; 
 
@@ -15686,21 +15811,23 @@ TIMER_FUNC(status_change_timer){
 			
 			// --- NUEVO: EFECTOS VISUALES CADA VEZ QUE HACE TICK ---
 			if (type == SC_ELECTROCUTE) {
-				
 				clif_specialeffect(bl, 2223, AREA); 
 			} 
 			else if (type == SC_BURIED) {
-				
 				clif_specialeffect(bl, 2231, AREA); 
-				// clif_specialeffect(bl, 2267, AREA); 
 			}
 			else if (type == SC_DROWN) {
-				
 				clif_specialeffect(bl, 2215, AREA);
 				clif_specialeffect(bl, 109, AREA);
 			}
 			else if (type == SC_BURNING) {
 				clif_specialeffect(bl, 2207, AREA);
+			}
+			else if (type == SC_DECAY) {
+				clif_specialeffect(bl, 2147, AREA);
+			}
+			else if (type == SC_PENANCE) {
+				clif_specialeffect(bl, 1848, AREA);
 			}
 		}
 		break;

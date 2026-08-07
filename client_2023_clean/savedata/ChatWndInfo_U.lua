@@ -1,4 +1,4 @@
-CanDragWnd = 0
+CanDragWnd = 1
 
 ChatSubWnd_1 = {
 	XPos = 0,

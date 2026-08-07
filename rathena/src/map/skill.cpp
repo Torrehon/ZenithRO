@@ -1956,6 +1956,22 @@ int32 skill_counter_additional_effect (block_list* src, block_list *bl, uint16 s
 		}
 	}
 	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Soul of the Peacekeeper (Curación por Desperado) ---
+	if (sd && skill_id == GS_DESPERADO && status_isdead(*bl)) {
+		// Comprobamos si tiene la pasiva aprendida
+		if (pc_checkskill(sd, GS_PKEEPER) > 0) {
+			// Calculamos el 2% de su HP máximo actual
+			int hp_heal = (status_get_max_hp(src) * 2) / 100;
+			
+			// Seguridad mínima por si su HP máximo es excesivamente bajo
+			if (hp_heal < 1) hp_heal = 1; 
+
+			// status_heal(objetivo, cantidad_hp, cantidad_sp, tipo)
+			status_heal(src, hp_heal, 0, 0); 
+		}
+	}
+	// --- FIN CUSTOM ---
 
 	if( sd && status_isdead(*bl) ) {
 		int32 sp = 0, hp = 0;
@@ -4923,7 +4939,8 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 				skill_castend_nodamage_id);
 		}
 		break;
-// --- INICIO CUSTOM: Exorcist Soul (Lex Aeterna 2s) ---
+		
+	// --- INICIO CUSTOM: Exorcist Soul (Lex Aeterna 2s) ---
 	case PR_LEXAETERNA:
 	{
 		// 1. Leemos el tiempo base del YAML (los 1000ms que pusiste)
@@ -4941,7 +4958,16 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 		clif_skill_nodamage(src, *bl, skill_id, skill_lv, 1);
 		break;
 	}
-// --- FIN CUSTOM ---
+	// --- FIN CUSTOM ---
+	
+	// // --- INICIO CUSTOM: Magical Bullet (Toggle) ---
+	// case GS_MAGICALBULLET:
+		// // La db (Toggleable: true) ya se encarga de apagarlo. 
+		// // Aquí solo lo encendemos con duración infinita (-1).
+		// sc_start(src, bl, SC_MBULLET, 100, skill_lv, -1);
+		// clif_skill_nodamage(src, *bl, skill_id, skill_lv, 1);
+		// break;
+	// // --- FIN CUSTOM ---
 
 	default: {
 		std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id);
@@ -5776,6 +5802,10 @@ int32 skill_castend_pos2(block_list* src, int32 x, int32 y, uint16 skill_id, uin
 		return 0;
 
 	sd = BL_CAST(BL_PC, src);
+	
+	// --- INICIO CUSTOM: Activar Radar Ofensivo para magias de Suelo ---
+	map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, 0);
+	// --- FIN CUSTOM ---
 
 	sc = status_get_sc(src);
 	type = skill_get_sc(skill_id);
@@ -6711,18 +6741,18 @@ std::shared_ptr<s_skill_unit_group> skill_unitsetting(block_list *src, uint16 sk
 					// || (map_find_skill_unit_oncell(src, ux, uy, SA_DELUGE, nullptr, 1)) != nullptr || (map_find_skill_unit_oncell(src, ux, uy, NJ_SUITON, nullptr, 1)) != nullptr)
 					// break; //Turn water, deluge or suiton into waterball cell
 				// continue;
-			case GS_DESPERADO:
-				unit_val1 = abs(layout->dx[i]);
-				unit_val2 = abs(layout->dy[i]);
-				if (unit_val1 < 2 || unit_val2 < 2) { //Nearby cross, linear decrease with no diagonals
-					if (unit_val2 > unit_val1) unit_val1 = unit_val2;
-					if (unit_val1) unit_val1--;
-					unit_val1 = 36 -12*unit_val1;
-				} else //Diagonal edges
-					unit_val1 = 28 -4*unit_val1 -4*unit_val2;
-				if (unit_val1 < 1) unit_val1 = 1;
-				unit_val2 = 0;
-				break;
+			// case GS_DESPERADO:
+				// unit_val1 = abs(layout->dx[i]);
+				// unit_val2 = abs(layout->dy[i]);
+				// if (unit_val1 < 2 || unit_val2 < 2) { //Nearby cross, linear decrease with no diagonals
+					// if (unit_val2 > unit_val1) unit_val1 = unit_val2;
+					// if (unit_val1) unit_val1--;
+					// unit_val1 = 36 -12*unit_val1;
+				// } else //Diagonal edges
+					// unit_val1 = 28 -4*unit_val1 -4*unit_val2;
+				// if (unit_val1 < 1) unit_val1 = 1;
+				// unit_val2 = 0;
+				// break;
 			case NPC_REVERBERATION:
 				unit_val1 = 1 + skill_lv;
 				break;
@@ -7380,10 +7410,10 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 						// tsc->sg_counter=0; //Attack absorbed.
 					// break;
 #endif
-				case GS_DESPERADO:
-					if (rnd()%100 < unit->val1)
-						skill_attack(BF_WEAPON,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
-					break;
+				// case GS_DESPERADO:
+					// if (rnd()%100 < unit->val1)
+						// skill_attack(BF_WEAPON,ss,unit,bl,sg->skill_id,sg->skill_lv,tick,0);
+					// break;
 				case NPC_COMET:
 				case WL_COMET:
 					if (map_getcell(bl->m, bl->x, bl->y, CELL_CHKLANDPROTECTOR) == 0)// Nothing should happen if the target is on Land Protector
@@ -10288,7 +10318,9 @@ void skill_consume_requirement(map_session_data *sd, uint16 skill_id, uint16 ski
 				if (sd->skill_id_old == BD_ENCORE && skill_id == sd->skill_id_dance)
 					sd->skill_id_old = 0;
 			break;
-		}
+		}	
+			
+
 		if(require.hp || require.sp || require.ap)
 			skill_consume_hpspap(sd, skill_id, require.hp, require.sp, require.ap);
 
@@ -10482,6 +10514,18 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 			req.sp += req.sp * (skill_lv * 10) / 100;
 		if (sc->getSCE(SC_CRESCIVEBOLT))
 			req.sp += req.sp * (20 * sc->getSCE(SC_CRESCIVEBOLT)->val1) / 100;
+	
+		// --- INICIO CUSTOM: Magical Bullet + Enforcer (Consumo SP Real +50%) ---
+		if (sc->getSCE(SC_MBULLET) && pc_checkskill(sd, GS_ENFORCER) > 0) {
+			if (skill_id == GS_DUST || skill_id == GS_FULLBUSTER || 
+				skill_id == GS_SPREADATTACK || skill_id == GS_GROUNDDRIFT) {
+				
+				// Aumentamos el coste base de SP un 50%
+				req.sp += req.sp * 50 / 100; 
+			}
+		}
+		// --- FIN CUSTOM ---
+	
 	}
 
 	req.ap = skill->require.ap[skill_lv - 1];
@@ -10515,6 +10559,12 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 	if (skill_id == GS_RAPIDSHOWER) {
 		req.ammo_qty += (status_get_agi(sd) / 15);
 	}
+
+	// --- INICIO CUSTOM: Coste dinámico de Desperado ---
+	if (skill_id == GS_DESPERADO) {
+		req.ammo_qty += (status_get_agi(sd) / 20)*3;
+	}
+	// --- FIN CUSTOM ---
 
 	if (req.ammo_qty)
 		req.ammo = skill->require.ammo;
@@ -10998,6 +11048,36 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 		if (is_zantsu || (sd_caster && sc && sc->getSCE(SC_CLOSECONFINE) != nullptr)) {
 			// Reduce el tiempo de casteo final en un 75%
 			time = time * 25 / 100;
+		}
+	}
+	// --- FIN CUSTOM ---
+	
+	// --- INICIO CUSTOM: Soul of the Peacekeeper (Tracking) ---
+	if (skill_id == GS_TRACKING) {
+		map_session_data* sd = BL_CAST(BL_PC, bl);
+		
+		// 1. Comprobamos que sea un jugador y tenga la skill
+		if (sd && pc_checkskill(sd, GS_PKEEPER) > 0) {
+			
+			// 2. Extraemos los datos de unidad del caster
+			unit_data* ud = unit_bl2ud(bl); 
+			
+			// 3. Verificamos si tiene un objetivo asignado (skilltarget)
+			if (ud && ud->skilltarget) {
+				
+				// 4. Buscamos al objetivo en el mapa usando su ID
+				block_list* target = map_id2bl(ud->skilltarget); 
+				
+				if (target) {
+					// 5. Ahora sí, sacamos el status_change del target
+					status_change* tsc = status_get_sc(target);
+					
+					// 6. Y por fin comprobamos si tiene el debuff
+					if (tsc && tsc->getSCE(SC_EXPOSED)) {
+						time = time * 50 / 100;
+					}
+				}
+			}
 		}
 	}
 	// --- FIN CUSTOM ---

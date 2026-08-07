@@ -20,7 +20,36 @@
 
 yuno_in04,33,108,4	script	Pisruik#qsk_al	883,{
 	if (BaseJob == Job_Alchemist) {
-		if (JobLevel < 40) {
+		if (getskilllv("AM_APOTHECARY") > 0 || getskilllv(1063) > 0) {
+			if (ALCHE_SK == 11 || countitem(7434) > 0) {
+				mes "[Pisruik]";
+				mes "So, how have you been";
+				mes "using the potions that";
+				mes "I've taught you to make?";
+				mes "Hopefully, they'll come";
+				mes "in handy in your adventures.";
+				close;
+			}
+			mes "[Pisruik]";
+			mes "...!";
+			mes "^333333*Pisruik looks up from his notes, staring at your hands and equipment in awe.*^000000";
+			next;
+			mes "[Pisruik]";
+			mes "Remarkable... The subtle scent of perfected elixirs, the precise chemical balance in your posture!";
+			mes "Your mastery over elemental concoctions and potion brewing is far superior to my own research drafts!";
+			next;
+			mes "[Pisruik]";
+			mes "I would be wasting your time asking you for simple materials or help around the lab.";
+			mes "Here, take this ^0000FFElemental Potion Creation Manual^000000. An alchemist of your caliber deserves it.";
+			next;
+			set ALCHE_SK,11;
+			getitem 7434,1; //Elemental_Create_Book
+			specialeffect EF_LEVELUP;
+			mes "[Pisruik]";
+			mes "I am certain you will put these elemental formulas to magnificent use. Good luck on your journeys!";
+			close;
+		}
+		if (JobLevel < 25) {
 			mes "[Pisruik]";
 			mes "^333333*Cough cough*^000000";
 			mes "Damn, if only I had";
@@ -1157,6 +1186,30 @@ lhz_in01,224,140,3	script	Kellasus#qsk_al	57,{
 		mes "the feeling that";
 		mes "our future might";
 		mes "be depending on you...";
+		close;
+	}
+	if (BaseJob == Job_Alchemist && getskilllv("AM_BIOMANCER") > 0) {
+		mes "[Kellasus]";
+		mes "...!";
+		mes "^333333*Kellasus stops dead in his tracks and gazes deeply into your eyes, visibly astonished.*^000000";
+		next;
+		mes "[Kellasus]";
+		mes "Incredible... What is this aura?";
+		mes "I sense an innate, profound resonance with the very essence of life and creation within you.";
+		next;
+		mes "[Kellasus]";
+		mes "Your understanding of biological alchemy far surpasses anything I could ever teach through books or lectures.";
+		mes "It is as if the secrets of life itself were woven into your very spirit...";
+		next;
+		mes "[Kellasus]";
+		mes "I have no right to withhold this knowledge from someone of your caliber.";
+		mes "Take this. You are more than ready to master ^FF0000Bioethics^000000.";
+		next;
+		set bioeth,13;
+		skill "AM_BIOETHICS",1,SKILL_PERM;
+		specialeffect EF_LEVELUP;
+		mes "[Kellasus]";
+		mes "Use this mastery to nurture and protect life. I trust you will guide the future of Alchemy with wisdom.";
 		close;
 	}
 	if (BaseJob == Job_Alchemist && bioeth == 12) {

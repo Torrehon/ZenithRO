@@ -38271,31 +38271,40 @@ Body:
   - Id: 1894
     AegisName: POURING
     Name: Pouring
-    Level: 15
-    Hp: 15
-    Attack: 10
-    Attack2: 10
-    MagicDefense: 7
-    Dex: 999
+    Level: 28
+    Hp: 28587
+    BaseExp: 8430
+    JobExp: 10534
+    Attack: 243
+    Attack2: 343
+    Defense: 20
+    MagicDefense: 50
+    Str: 45
+    Agi: 30
+    Vit: 36
+    Int: 76
+    Dex: 85
+    Luk: 30
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
     Size: Small
     Race: Plant
     Element: Water
-    ElementLevel: 3
+    ElementLevel: 2
     WalkSpeed: 300
-    AttackDelay: 1672
+    AttackDelay: 725
     AttackMotion: 672
     ClientAttackMotion: 288
     DamageMotion: 480
-    Ai: 19
+    Ai: 05
     Modes:
-      IgnoreMagic: true
-      IgnoreMelee: true
-      IgnoreMisc: true
-      IgnoreRanged: true
-      TeleportBlock: true
+      CanMove: true
+      Aggressive: true
+      CanAttack: true
+      ChangeTargetMelee: true
+      ChangeTargetChase: true
+    Class: Boss
     Drops:
       - Item: Jellopy
         Rate: 1500

@@ -1260,8 +1260,10 @@ Body:
       - Name: RG_PLAGIARISM
         MaxLevel: 10
         Requires:
-          - Name: RG_INTIMIDATE
-            Level: 5
+          - Name: RG_STEALCOIN
+            Level: 3
+          - Name: RG_GANGSTER
+            Level: 1
       - Name: RG_SUPPORT_PLAGIARISM
         MaxLevel: 1 
       - Name: RG_CLOSECONFINE
@@ -1336,14 +1338,14 @@ Body:
             Level: 1
       - Name: AM_REST
         MaxLevel: 1
-        # Requires:
-          # - Name: AM_BIOETHICS
-            # Level: 1
+        Requires:
+          - Name: AM_BIOETHICS
+            Level: 1
       - Name: AM_RESURRECTHOMUN
         MaxLevel: 5
-        # Requires:
-          # - Name: AM_CALLHOMUN
-            # Level: 1
+        Requires:
+          - Name: AM_CALLHOMUN
+            Level: 1
       - Name: AM_BERSERKPITCHER
         MaxLevel: 1
       - Name: AM_TWILIGHT1
@@ -1816,6 +1818,10 @@ Body:
         Requires:
           - Name: GS_SPREADATTACK
             Level: 7
+      - Name: GS_PKEEPER     
+        MaxLevel: 1
+      - Name: GS_ENFORCER
+        MaxLevel: 1 
   - Job: Genin
     Inherit:
       Novice: true

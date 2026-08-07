@@ -14,16 +14,18 @@ OnNPCKillEvent:
 		case 1092: .@jewelID = 728; break; // Vagabond Wolf -> Topaz
 		case 1096: .@jewelID = 726; break; // Angeling -> Sapphire
 		case 1582: .@jewelID = 723; break; // Deviling -> Ruby
-		case 1894: .@jewelID = 720; break; // Pouring -> Aquamarine
+		case 25001: .@jewelID = 720; break; // Pouring -> Aquamarine
+
 		default: end; // Si no es uno de estos, ignorar
 	}
 
 	// Entrega de premios
-	getitem 12106, 1;   // La caja
-	getitem .@jewelID, 1; // La joya específica
+	getitem 12106, 1;   // La caja siempre
 
-	// Efecto y mensaje
-	specialeffect 154, AREA, playerattached();
-	dispbottom "¡Has obtenido un botín raro de " + getmonsterinfo(.@mobID, 0) + "!";
+	// Si cae la gema (25% de probabilidad)
+	if (rand(100) < 25) {
+		getitem .@jewelID, 1;
+		dispbottom getmonsterinfo(.@mobID, MOB_NAME) + " dropped a jewel!";
+	}
 	end;
 }

@@ -1,20 +1,48 @@
 //===== rAthena Script ======================================= 
 //= Monk Skills Quests
 //===== By: ================================================== 
-//= Lupus, Reddozen, Samuray22
+//= Lupus, Reddozen, Samuray22, Antigravity
 //===== Current Version: ===================================== 
-//= 1.5
+//= 2.0
 //===== Compatible With: ===================================== 
 //= rAthena Project
 //===== Description: ========================================= 
 //= [Official Conversion]
 //= Quests for skills: Spiritual Bestowment, Excruciating Palm
-//===== Additional Comments: ================================= 
-//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
-//============================================================
+//============================================================ 
 
 prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
 	if (BaseJob == Job_Monk) {
+		if (getskilllv("MO_KITRANSLATION") > 0) {
+			mes "[Monk]";
+			mes "To take the time to";
+			mes "comtemplate on your most";
+			mes "important goal, your highest";
+			mes "priority, is never a waste.";
+			mes "Never confuse your means";
+			mes "to the end you wish to achieve.";
+			close;
+		}
+		if (getskilllv("MO_ASCETIC") > 0 || getskilllv(1058) > 0) {
+			mes "[Monk]";
+			mes "...!";
+			mes "^333333*The Apprentice Monk bows deeply before you, sensing an aura of serene spiritual mastery.*^000000";
+			next;
+			mes "[Monk]";
+			mes "Incredible... Such absolute spiritual discipline and inner tranquility!";
+			mes "You embody the essence of selflessness and spiritual balance far beyond what any test of mine could measure.";
+			next;
+			mes "[Monk]";
+			mes "I have no need to put your heart to trial. Take the secrets of ^0000FFSpiritual Bestowment^000000.";
+			mes "Use it to guide, support, and protect your companions!";
+			next;
+			skill "MO_KITRANSLATION",1,SKILL_PERM;
+			set MONK_SK,3;
+			specialeffect EF_LEVELUP;
+			mes "[Monk]";
+			mes "May peace and harmony follow you in all your endeavors, my friend.";
+			close;
+		}
 		if (MONK_SK == 7) {
 			mes "[Monk]";
 			mes "To take the time to";
@@ -213,6 +241,35 @@ prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
 
 monk_test,316,69,5	script	Monk#qsk_mo	823,{
 	if (BaseJob == Job_Monk) {
+		if (getskilllv("MO_BALKYOUNG") > 0) {
+			mes "[Monk]";
+			mes "Power without justice will";
+			mes "not last. Justice without";
+			mes "power cannot be upheld.";
+			mes "Power does not equate to";
+			mes "justice, but true justice can";
+			mes "be the means to power.";
+			close;
+		}
+		if (getskilllv("MO_ASCETIC") > 0 || getskilllv(1058) > 0) {
+			mes "[Monk]";
+			mes "...!";
+			mes "^333333*The Monk looks upon you with immense respect, perceiving the flawless focus of your internal energy.*^000000";
+			next;
+			mes "[Monk]";
+			mes "Impeccable... The flow of spiritual and physical energy around you is in total, perfect harmony.";
+			mes "Your vessel is so refined that you can project inner strength outward without any risk of self-harm.";
+			next;
+			mes "[Monk]";
+			mes "You have no need for trials against monsters. Receive the secret technique of ^0000FFExcruciating Palm^000000!";
+			next;
+			skill "MO_BALKYOUNG",1,SKILL_PERM;
+			set MONK_SK,6;
+			specialeffect EF_LEVELUP;
+			mes "[Monk]";
+			mes "Use this formidable strength to champion justice and protect the innocent. Farewell!";
+			close;
+		}
 		if (MONK_SK == 6) {
 			mes "[Monk]";
 			mes "How did you convince";
@@ -432,19 +489,3 @@ monk_test,316,69,5	script	Monk#qsk_mo	823,{
 	mes "be the means to power.";
 	close;
 }
-
-//============================================================ 
-// Old changelog
-//============================================================ 
-//= 1.0 for fully working skills only [Lupus]
-//= 1.1 Added more new skill quests for more classes [Lupus]
-//= Somehow eA engine doesn't let you keep learn't skill V_V'
-//= 1.2 Added to correct locations, correct NPC's, fixed
-//= some of the items required and made them into real
-//= quests. [Reddozen] 
-//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
-//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
-//= 1.3b Splitted into different files [DracoRPG]
-//= 1.4 Updated to the official one. [Samuray22]
-//= 1.4a replaced item "names" with item id. [Lupus]
-//============================================================

@@ -287,111 +287,122 @@ in_moc_16,14,27,5	script	Assassin#realman	884,{
 }
 
 in_moc_16,23,27,5	script	Assassin#realgirl	885,{
-	if (BaseJob == Job_Assassin && ASSN_SK == 7) {
-		if (getskilllv("AS_SONICACCEL") == 0) {
+	if (BaseJob == Job_Assassin) {
+		if (getskilllv("AS_EXECSOUL") > 0 || getskilllv(1051) > 0) {
 			mes "[Esmille]";
-			mes "Mm? Ah, you've transcended";
-			mes "and become an Assassin Cross";
-			mes "as well. I understand the trouble that you must have gone through";
-			mes "to be reborn with new strength.";
+			mes "...!";
+			mes "^333333*Esmille gazes at you in complete awe, sensing a lethal, razor-sharp executioner presence.*^000000";
 			next;
 			mes "[Esmille]";
-			mes "You probably need to learn";
-			mes "the Sonic Acceleration skill";
-			mes "again after having lost some";
-			mes "of your memories. I truly";
-			mes "sympathize, and am willing";
-			mes "to teach it to you again.";
-			next;
-			if (getskilllv("AS_SONICBLOW") == 0) {
-				mes "[Esmille]";
-				mes "First, go and learn the";
-				mes "Sonic Blow skill. The skill";
-				mes "I will teach you is completely";
-				mes "useless unless you learn how";
-				mes "to perform a Sonic Blow. I shall be waiting right here till then.";
-				close;
-			}
-			mes "[Esmille]";
-			mes "Now, right before you";
-			mes "perform Sonic Blow, make";
-			mes "sure your feet are positioned";
-			mes "like this. Then, as smoothly";
-			mes "and quickly as possible, shift";
-			mes "your weight over to this side.";
-			specialeffect EF_SONICBLOW;
+			mes "My goodness... What a lethal, razor-sharp presence!";
+			mes "Your executioner instincts, stance alignment, and momentum control are already beyond perfection.";
 			next;
 			mes "[Esmille]";
-			mes "Watch carefully, this";
-			mes "is the most important";
-			mes "part. See where my hands";
-			mes "are and the angle of my";
-			mes "arms? This is the form that";
-			mes "you've got to memorize.";
-			specialeffect EF_SONICBLOW;
+			mes "I don't need to send you hunting for treasures or testing your form. Take the secrets of ^0000FFSonic Acceleration^000000!";
 			next;
-			mes "[Esmille]";
-			mes "Alright, that's all";
-			mes "you need to know. Now,";
-			mes "please try it so I can give";
-			mes "you feedback on your form.";
-			next;
-			specialeffect2 EF_SONICBLOW;
-			next;
-			mes "[Esmille]";
-			mes "Hmm, you're shifting";
-			mes "your weight kind of";
-			mes "unsteadily. It might";
-			mes "help if your center of";
-			mes "gravity was like this...";
-			next;
-			specialeffect2 EF_SONICBLOW;
-			next;
-			mes "[Esmille]";
-			mes "Ah, you're so very";
-			mes "close to perfection.";
-			mes "Focus more on smoothly";
-			mes "transitioning from your";
-			mes "stance to executed action.";
-			next;
-			mes "[Esmille]";
-			mes "Yes, that's it...!";
-			mes "Very well executed.";
-			mes "Good work, "+ strcharinfo(0) +".";
 			skill "AS_SONICACCEL",1,SKILL_PERM;
 			set ASSN_SK,7;
-			next;
+			specialeffect EF_SONICBLOW;
+			specialeffect EF_LEVELUP;
 			mes "[Esmille]";
-			mes "Do you understand now?";
-			mes "You should have no problem";
-			mes "remembering this skill now.";
-			mes "I can teach you nothing more,";
-			mes "so all I can do now is wish";
-			mes "you luck on your journeys.";
+			mes "Bring swift defeat to your foes for the honor of the Assassin Guild! Farewell!";
 			close;
 		}
-		else {
-			mes "[Esmille]";
-			mes "I trust that using";
-			mes "Sonic Acceleration in";
-			mes "battle has given you an";
-			mes "edge over the enemy. Bring";
-			mes "swift defeat to your foes for";
-			mes "the Assassin Guild's honor.";
-			close;
+		else if (getskilllv("AS_SONICACCEL") > 0 || ASSN_SK == 7) {
+			if (getskilllv("AS_SONICACCEL") == 0) {
+				mes "[Esmille]";
+				mes "Mm? Ah, you've transcended";
+				mes "and become an Assassin Cross";
+				mes "as well. I understand the trouble that you must have gone through";
+				mes "to be reborn with new strength.";
+				next;
+				mes "[Esmille]";
+				mes "You probably need to learn";
+				mes "the Sonic Acceleration skill";
+				mes "again after having lost some";
+				mes "of your memories. I truly";
+				mes "sympathize, and am willing";
+				mes "to teach it to you again.";
+				next;
+				if (getskilllv("AS_SONICBLOW") == 0) {
+					mes "[Esmille]";
+					mes "First, go and learn the";
+					mes "Sonic Blow skill. The skill";
+					mes "I will teach you is completely";
+					mes "useless unless you learn how";
+					mes "to perform a Sonic Blow. I shall be waiting right here till then.";
+					close;
+				}
+				mes "[Esmille]";
+				mes "Now, right before you";
+				mes "perform Sonic Blow, make";
+				mes "sure your feet are positioned";
+				mes "like this. Then, as smoothly";
+				mes "and quickly as possible, shift";
+				mes "your weight over to this side.";
+				specialeffect EF_SONICBLOW;
+				next;
+				mes "[Esmille]";
+				mes "Watch carefully, this";
+				mes "is the most important";
+				mes "part. See where my hands";
+				mes "are and the angle of my";
+				mes "arms? This is the form that";
+				mes "you've got to memorize.";
+				specialeffect EF_SONICBLOW;
+				next;
+				mes "[Esmille]";
+				mes "Alright, that's all";
+				mes "you need to know. Now,";
+				mes "please try it so I can give";
+				mes "you feedback on your form.";
+				next;
+				specialeffect2 EF_SONICBLOW;
+				next;
+				mes "[Esmille]";
+				mes "Hmm, you're shifting";
+				mes "your weight kind of";
+				mes "unsteadily. It might";
+				mes "help if your center of";
+				mes "gravity was like this...";
+				next;
+				specialeffect2 EF_SONICBLOW;
+				next;
+				mes "[Esmille]";
+				mes "Ah, you're so very";
+				mes "close to perfection.";
+				mes "Focus more on smoothly";
+				mes "transitioning from your";
+				mes "stance to executed action.";
+				next;
+				mes "[Esmille]";
+				mes "Yes, that's it...!";
+				mes "Very well executed.";
+				mes "Good work, "+ strcharinfo(0) +".";
+				skill "AS_SONICACCEL",1,SKILL_PERM;
+				set ASSN_SK,7;
+				next;
+				mes "[Esmille]";
+				mes "Do you understand now?";
+				mes "You should have no problem";
+				mes "remembering this skill now.";
+				mes "I can teach you nothing more,";
+				mes "so all I can do now is wish";
+				mes "you luck on your journeys.";
+				close;
+			}
+			else {
+				mes "[Esmille]";
+				mes "I trust that using";
+				mes "Sonic Acceleration in";
+				mes "battle has given you an";
+				mes "edge over the enemy. Bring";
+				mes "swift defeat to your foes for";
+				mes "the Assassin Guild's honor.";
+				close;
+			}
 		}
-	}
-	else if (ASSN_SK == 7) {
-		mes "[Esmille]";
-		mes "I trust that using";
-		mes "Sonic Acceleration in";
-		mes "battle has given you an";
-		mes "edge over the enemy. Bring";
-		mes "swift defeat to your foes for";
-		mes "the Assassin Guild's honor.";
-		close;
-	}
-	else if (ASSN_SK == 6) {
+		else if (ASSN_SK == 6) {
 		mes "[Esmille]";
 		mes "Please focus on the";
 		mes "training... If we continue to";
@@ -734,6 +745,7 @@ in_moc_16,23,27,5	script	Assassin#realgirl	885,{
 		mes "haven't already.";
 		close;
 	}
+}
 }
 
 in_sphinx2,259,213,0	script	Old Coffin#qsk_as	-1,7,8,{

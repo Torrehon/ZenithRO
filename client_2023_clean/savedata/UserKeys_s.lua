@@ -16,3 +16,7 @@ USERKEY_1 = {
 	[23] = { EXE = "Hotkey 3-6", KEY1 = 89 },
 }
 
+USERKEY_2 = {
+	[24] = { EXE = "Homunculus Info", KEY1 = 190, KEY2 = 18 },
+}
+

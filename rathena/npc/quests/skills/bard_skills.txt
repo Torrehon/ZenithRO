@@ -196,7 +196,7 @@ prontera,174,328,3	script	Young Man#bard_q1	89,3,3,{
 							mes "warn you not to look for that";
 							mes "strange Bard. I'm sure he's really some sort of demon or something...";
 							next;
-							if (JobLevel > 39) {
+							if (JobLevel > 24) {
 								mes "[Timid Young Man]";
 								mes "But... If you really";
 								mes "want to attain that sort";
@@ -212,7 +212,7 @@ prontera,174,328,3	script	Young Man#bard_q1	89,3,3,{
 								mes "Bard to get him to teach you";
 								mes "how he did that to me, I'm sure";
 								mes "he mentioned something about";
-								mes "being at least ^660000Job Level 40^000000 to";
+								mes "being at least ^660000Job Level 25^000000 to";
 								mes "be able to handle that power...";
 								delitem 12112,1; //Tropical_Sograt
 							}
@@ -290,7 +290,7 @@ prontera,174,328,3	script	Young Man#bard_q1	89,3,3,{
 							mes "warn you not to look for that";
 							mes "strange Bard. I'm sure he's really some sort of demon or something...";
 							next;
-							if (JobLevel > 39) {
+							if (JobLevel > 24) {
 								mes "[Timid Young Man]";
 								mes "But... If you really";
 								mes "want to attain that sort";
@@ -306,7 +306,7 @@ prontera,174,328,3	script	Young Man#bard_q1	89,3,3,{
 								mes "Bard to get him to teach you";
 								mes "how he did that to me, I'm sure";
 								mes "he mentioned something about";
-								mes "being at least ^660000Job Level 40^000000 to";
+								mes "being at least ^660000Job Level 25^000000 to";
 								mes "be able to handle that power...";
 								delitem 12112,1; //Tropical_Sograt
 							}
@@ -381,6 +381,42 @@ OnTouch:
 
 morocc_in,169,72,7	script	Spiteful-Looking Bard#bs	741,3,3,{
 	if (BaseJob == Job_Bard) {
+		if (getskilllv("BA_PANGVOICE") > 0 || qskill_bard > 8) {
+			mes "[Riott]";
+			mes "Geh heh heh~";
+			mes "Been making good use of";
+			mes "what I taught you? Just be";
+			mes "careful and don't use that skill recklessly. Otherwise, people";
+			mes "will hate you as they hate me.";
+			next;
+			mes "[Riott]";
+			mes "Your enemies, and the";
+			mes "occasional drunkard, on";
+			mes "the other hand, are different";
+			mes "matters entirely! Bwah hah hah!";
+			close;
+		}
+		if (getskilllv("BD_DISSONANT") > 0 || getskilllv(1060) > 0) {
+			mes "[Riott]";
+			mes "...!";
+			mes "^333333*Riott pauses, staring at you with wide eyes as if paralyzed by the overwhelming resonance in your voice.*^000000";
+			next;
+			mes "[Riott]";
+			mes "Bwah! What a powerful, disruptive aura...";
+			mes "The timbre of your voice carries an undeniable, chaotic rhythm that sends shivers down my spine!";
+			next;
+			mes "[Riott]";
+			mes "I was going to make you fetch rare items or run around for me, but clearly your vocal prowess needs no basic training.";
+			mes "Listen closely... Take this knowledge of ^0000FFPang Voice^000000. Your voice is already tailor-made for it!";
+			next;
+			skill "BA_PANGVOICE",1,SKILL_PERM;
+			set qskill_bard,9;
+			specialeffect2 EF_TALK_FROSTJOKE;
+			specialeffect EF_LEVELUP;
+			mes "[Riott]";
+			mes "Geh heh heh! Use it to shock and disorient your foes. A performer with your sonic power will be unstoppable!";
+			close;
+		}
 		if (Class == Job_Clown && qskill_bard == 9) {
 			if (getskilllv("BA_PANGVOICE") != 0) {
 				mes "[Riott]";

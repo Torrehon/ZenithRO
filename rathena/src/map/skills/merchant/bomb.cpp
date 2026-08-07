@@ -38,7 +38,7 @@ void SkillBomb::applyAdditionalEffects(block_list* src, block_list* target, uint
 #ifdef RENEWAL
 	skill_break_equip(src,target, EQP_WEAPON, 300 * skill_lv, BCT_ENEMY);
 #else
-	skill_break_equip(src,target, EQP_WEAPON, 100*skill_lv, BCT_ENEMY);
+	skill_break_equip(src,target, EQP_WEAPON, 50*skill_lv, BCT_ENEMY);
 #endif
 
 	// --- INICIO CUSTOM: Chemical Burn (Soul of the Apothecary) ---

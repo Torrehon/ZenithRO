@@ -22310,3 +22310,63 @@ Body:
       BuyingStore: true
     Script: |
       itemskill "ITEM_ENCHANTARMS",7;
+  - Id: 51010
+    AegisName: Elemental_Fire2
+    Name: Elemental Converter
+    Type: Delayconsume
+    Buy: 2
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      sc_start SC_ENCHANTARMS,900000,4;
+  - Id: 51011
+    AegisName: Elemental_Water2
+    Name: Elemental Converter
+    Type: Delayconsume
+    Buy: 2
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      sc_start SC_ENCHANTARMS,900000,2;
+  - Id: 51012
+    AegisName: Elemental_Earth2
+    Name: Elemental Converter
+    Type: Delayconsume
+    Buy: 2
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      sc_start SC_ENCHANTARMS,900000,3;
+  - Id: 51013
+    AegisName: Elemental_Wind2
+    Name: Elemental Converter
+    Type: Delayconsume
+    Buy: 2
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      sc_start SC_ENCHANTARMS,900000,5;
+  - Id: 51014
+    AegisName: scroll_shadow2
+    Name: Elemental Converter
+    Type: Delayconsume
+    Buy: 2
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      sc_start SC_ENCHANTARMS,900000,7;
+  - Id: 51015
+    AegisName: Elemental_Holy2
+    Name: Elemental Converter
+    Type: Delayconsume
+    Buy: 2
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      sc_start SC_ENCHANTARMS,900000,6;

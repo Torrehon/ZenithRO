@@ -56,6 +56,7 @@
 #include "wildfire.cpp"
 #include "wildshot.cpp"
 #include "ammocraft.cpp"
+#include "magicalbullet.cpp"
 
 std::unique_ptr<const SkillImpl> SkillFactoryGunslinger::create(const e_skill skill_id) const {
 	switch (skill_id) {
@@ -90,11 +91,7 @@ std::unique_ptr<const SkillImpl> SkillFactoryGunslinger::create(const e_skill sk
 		case GS_MADNESSCANCEL:
 			return std::make_unique<StatusSkillImpl>(skill_id);
 		case GS_MAGICALBULLET:
-#ifdef RENEWAL
-			return std::make_unique<StatusSkillImpl>(skill_id);
-#else
-			return std::make_unique<WeaponSkillImpl>(skill_id);
-#endif
+			return std::make_unique<SkillMagicalBullet>();
 		case GS_PIERCINGSHOT:
 			return std::make_unique<SkillPiercingShot>();
 		case GS_RAPIDSHOWER:

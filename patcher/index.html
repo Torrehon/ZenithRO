@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith RO - Launcher</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Rajdhani:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Fullscreen Vivid MP4 Video Background -->
+    <div class="video-container">
+        <video id="bgVideo" autoplay loop muted playsinline poster="assets/background_fallback.jpg">
+            <source src="assets/background.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Background BGM Audio -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="assets/music.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Launcher App Container -->
+    <div class="launcher-app">
+        <!-- Top Bar Header with Quick Controls -->
+        <header class="top-bar">
+            <div class="server-logo-mini">
+                <span class="logo-name">ZENITH <span>RO</span></span>
+            </div>
+
+            <div class="top-actions">
+                <!-- Volume Control Widget (Starts at 50%) -->
+                <div class="volume-control-widget">
+                    <button class="win-btn" id="btnToggleAudio" title="Música (Mute / Unmute)">
+                        <svg id="iconAudioOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        <svg id="iconAudioOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                    </button>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider" title="Volumen de Música (50%)">
+                </div>
+
+                <!-- Video Animation Pause/Play Toggle Button -->
+                <button class="win-btn" id="btnToggleVideo" title="Pausar / Reproducir animación de fondo">
+                    <svg id="iconVideoPause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                    <svg id="iconVideoPlay" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+
+                <!-- Settings Button -->
+                <button class="win-btn" id="btnSettings" title="Configuración de pantalla">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Larger Hero Logo Area Shifted Towards Center (Pure Opacity Fade-In after 1s) -->
+        <main class="launcher-hero">
+            <div class="hero-logo-container" id="heroLogo">
+                <!-- User Logo Image (assets/logo.png) -->
+                <img src="assets/logo.png" alt="Zenith RO Logo" class="hero-logo-img" onerror="this.style.display='none'; document.getElementById('heroLogoFallback').style.display='flex';">
+                
+                <!-- Fallback Logo Emblem if logo.png is not present -->
+                <div class="hero-logo-fallback" id="heroLogoFallback" style="display: none;">
+                    <div class="emblem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="emblem-text">
+                        <h1 class="emblem-title">ZENITH <span>RO</span></h1>
+                        <span class="emblem-subtitle">RAGNAROK ONLINE</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Fixed Patcher Bar -->
+        <footer class="bottom-patcher-bar">
+            <div class="patcher-info">
+                <div class="status-row">
+                    <span class="status-text" id="statusText">Verificando archivos...</span>
+                    <span class="progress-percent" id="progressPercent">0%</span>
+                </div>
+                
+                <!-- Main Progress Bar -->
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBarFill" style="width: 0%;">
+                        <div class="glow-effect"></div>
+                    </div>
+                </div>
+
+                <div class="details-row">
+                    <span class="details-text" id="downloadDetails">Comprobando datos...</span>
+                    <span class="speed-text" id="downloadSpeed">0.0 MB/s</span>
+                </div>
+            </div>
+
+            <!-- Big Play Button -->
+            <div class="play-action">
+                <button class="play-btn" id="btnPlay" disabled>
+                    <span class="play-text" id="playBtnText">CARGANDO</span>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="play-icon">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>CONFIGURACIÓN DE PANTALLA</h3>
+                <button class="close-btn" id="btnCloseSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="field-group">
+                    <label>Resolución</label>
+                    <select id="resSelect">
+                        <option value="1920x1080">1920 x 1080 (Full HD)</option>
+                        <option value="1600x900">1600 x 900</option>
+                        <option value="1366x768" selected>1366 x 768</option>
+                        <option value="1280x720">1280 x 720 (HD)</option>
+                    </select>
+                </div>
+                <div class="field-group checkbox">
+                    <label for="chkFullscreen">Pantalla Completa</label>
+                    <input type="checkbox" id="chkFullscreen">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-save" id="btnSaveSettings">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -67,7 +67,7 @@ prt_in,160,49,4	script	Scholar#soulq1	743,{
 		mes "I have spent my entire life researching the ancient founding heroes of Midgard and the age-old legends of our world.";
 		next;
 		mes "[Scholar]";
-		mes "Ancient scriptures recount that during the Age of Myths, the founding heroes wielded extraordinary weapons forged from cosmic light—the legendary ^0000FFDawn Weapons^000000.";
+		mes "Ancient scriptures recount that during the Age of Myths, the founding heroes wielded extraordinary weapons forged from cosmic light: the legendary ^0000FFDawn Weapons^000000.";
 		mes "They say these weapons fell from the heavens as divine gifts to mortal champions fighting against primordial darkness.";
 		next;
 
@@ -246,12 +246,27 @@ OnTouch:
 		mes "^0000FFAn intense beam of light shoots up into the sky from your Dawn weapon! The clouds part above you...^000000";
 		next;
 		mes "^FF0000Heavenly Voice:^000000";
-		mes "''Mortal who wields the sacred weapon of first dawn... Thy deeds have echoed into Valhalla.''";
-		mes "''Step forward and join us in the Pantheon of the Heroes of Old!''";
-		close2;
-		warp "1@4tro",53,51;
+		mes "''Mortal who wields the sacred weapon of first dawn... Select the sanctuary of your ancestral calling:''";
+		next;
+		switch(select("Pantheon of Heroes (2nd Jobs):Chunin Sanctuary (Ninja):Gunslinger Enclave (Gunslinger):Cancel")) {
+			case 1:
+				close2;
+				warp "1@4tro",53,51;
+				end;
+			case 2:
+				close2;
+				warp "1@exse",43,23;
+				end;
+			case 3:
+				close2;
+				warp "1@exnw",111,103;
+				end;
+			default:
+				close;
+		}
 	}
 	end;
+
 }
 
 // ==============================================================
@@ -269,18 +284,24 @@ OnTouch:
 	mes "Seek out the Einherjar of your profession, offer your tribute, and claim their ancient Hero Soul.";
 	next;
 	mes "[Valkyrie]";
-	mes "Would you like to return to the mortal realm of Midgard?";
+	mes "How may I guide your path today?";
 	next;
-	if (select("Remain here in the Pantheon:Return to Geffen Field (gef_fild07)") == 2) {
-		mes "[Valkyrie]";
-		mes "May the light of the gods watch over your path.";
-		close2;
-		warp "gef_fild07",173,246;
-		end;
+	switch(select("Re-align Twilight Weapon Options (Reroll):Return to Geffen Field (gef_fild07):Remain in Pantheon")) {
+		case 1:
+			callfunc "F_ValkyrieReroll";
+			end;
+		case 2:
+			mes "[Valkyrie]";
+			mes "May the light of the gods watch over your path.";
+			close2;
+			warp "gef_fild07",173,246;
+			end;
+		default:
+			mes "[Valkyrie]";
+			mes "Go forth and speak with the Einherjar of your class.";
+			close;
 	}
-	mes "[Valkyrie]";
-	mes "Go forth and speak with the Einherjar of your class.";
-	close;
+
 }
 
 // 1. Knight Einherjar (4252) - Male, Golden Blonde Warrior (Sir Roland) [Skills: 1041, 1042]
@@ -299,19 +320,31 @@ OnTouch:
 		mes "Your spirit shows promise, but your martial foundation is not yet forged in fire. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Knight Einherjar]";
+		mes "Greetings, true champion. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1041, 1042)) {
 		mes "[Knight Einherjar]";
-		mes "You already carry the spirit of a legendary knight hero within your soul. Serve Midgard well!";
+		mes "Greetings, true champion. You carry the spirit of a legendary knight hero within your soul.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Knight Einherjar]";
-	mes "To resonate with the heroic spirit of the Silver Order, your blade requires a symbol of sacred duty.";
-	mes "Offer 1 ^0000FFChivalry Emblem^000000 upon the altar of Valhalla to prove your unyielding knightly honor.";
+	mes "To resonate with the heroic spirit of the Silver Order, your blade requires a vessel of raw heroic power.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 upon the altar of Valhalla to channel our martial strength.";
 	next;
-	if (countitem(1004) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Knight Einherjar]";
-		mes "Alas, your hands carry no ^0000FFChivalry Emblem^000000 (Item ID 1004). Seek this emblem of valor and present it when your honor is ready.";
+		mes "Alas, you carry no ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Ancient fragments of hero souls lie scattered across Midgard. Wild beasts that absorbed these fragments became monsters far out of the ordinary.";
+		mes "Hunt down these unusual creatures across the lands to claim their Heroic Soul Essence!";
 		close;
 	}
 
@@ -322,7 +355,7 @@ OnTouch:
 	next;
 	switch(select("Soul of the Blader:Soul of the Lancer:Cancel")) {
 		case 1:
-			delitem 1004, 1;
+			delitem 50020, 1;
 			skill 1041, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -331,7 +364,7 @@ OnTouch:
 			mes "You have received the ^0000FFSoul of the Blader^000000. May your sword cleave through every obstacle!";
 			close;
 		case 2:
-			delitem 1004, 1;
+			delitem 50020, 1;
 			skill 1042, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -367,19 +400,32 @@ OnInit:
 		mes "Your devotion is pure, but your physical vessel requires further discipline. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Crusader Einherjar]";
+		mes "Greetings, holy guardian. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1053, 1054)) {
 		mes "[Crusader Einherjar]";
-		mes "The holy protection of our ancestors already rests upon your shield.";
+		mes "Greetings, holy guardian. The holy protection of our ancestors rests upon your shield.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Crusader Einherjar]";
-	mes "Our holy shield only answers to those whose faith is tested in the crucible of battle.";
-	mes "Present 1 ^0000FFChivalry Emblem^000000 to consecrate your shield with divine radiance.";
+	mes "Our holy shield only answers to those whose faith is anchored by a vessel of pure heroic light.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 to consecrate your shield with divine radiance.";
 	next;
-	if (countitem(1004) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Crusader Einherjar]";
-		mes "You lack the ^0000FFChivalry Emblem^000000 (Item ID 1004) needed to seal our holy covenant. Return when you carry the mark of templar devotion.";
+		mes "You lack a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Fragments of ancient champions' souls were absorbed by beasts of the wild, turning them into monsters far out of the ordinary.";
+		mes "Defeat these unusual creatures in Midgard to gather their Heroic Soul Essence!";
 		close;
 	}
 
@@ -390,7 +436,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Templar:Soul of the Guardian:Cancel")) {
 		case 1:
-			delitem 1004, 1;
+			delitem 50020, 1;
 			skill 1053, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -399,7 +445,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Templar^000000. Stand firm in holy faith!";
 			close;
 		case 2:
-			delitem 1004, 1;
+			delitem 50020, 1;
 			skill 1054, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -435,19 +481,32 @@ OnInit:
 		mes "Child of light, your spiritual vessel must grow stronger. Reach at least ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Priest Einherjar]";
+		mes "Blessings upon you, holy servant. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1049, 1050)) {
 		mes "[Priest Einherjar]";
-		mes "You already walk with the sacred soul of the holy priesthood.";
+		mes "Blessings upon you, holy servant. You walk with the sacred soul of the holy priesthood.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Priest Einherjar]";
-	mes "To channel the sacred choir of Odinic light, we must tether your mortal vessel to the divine cosmos.";
-	mes "Place 1 ^0000FFHand of God^000000 upon our sanctum as a holy conduit.";
+	mes "To channel the sacred choir of Odinic light, we must tether your mortal vessel to the divine cosmos using a crystallized soul fragment.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 upon our sanctum as a holy conduit.";
 	next;
-	if (countitem(1009) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Priest Einherjar]";
-		mes "The sacred energy cannot form without 1 ^0000FFHand of God^000000 (Item ID 1009). Seek out this relic of divine grace and return to me.";
+		mes "You do not have a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "These ancient soul fragments were swallowed by wilderness beasts, making them monsters far out of the ordinary.";
+		mes "Venture into the world, defeat these extraordinary creatures, and claim their Heroic Soul Essence.";
 		close;
 	}
 
@@ -458,7 +517,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Exorcist:Soul of the Saint:Cancel")) {
 		case 1:
-			delitem 1009, 1;
+			delitem 50020, 1;
 			skill 1049, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -467,7 +526,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Exorcist^000000. Banish all evil spirits!";
 			close;
 		case 2:
-			delitem 1009, 1;
+			delitem 50020, 1;
 			skill 1050, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -503,19 +562,32 @@ OnInit:
 		mes "Your martial spirit is still unpolished. Train until you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Monk Einherjar]";
+		mes "Greetings, martial master. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1061, 1062)) {
 		mes "[Monk Einherjar]";
-		mes "The spirit of the ancient masters already flows through your qi.";
+		mes "Greetings, martial master. The spirit of the ancient masters flows through your qi.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Monk Einherjar]";
-	mes "To ignite the dormant qi within your fists, you must offer a vessel of pure spiritual authority.";
-	mes "Present 1 ^0000FFHand of God^000000 so the ancestral masters may channel our martial essence into your strike.";
+	mes "To ignite the dormant qi within your fists, you must offer a vessel of pure ancestral spiritual energy.";
+	mes "Present 1 ^0000FFHeroic Soul Essence^000000 so the masters may channel our martial power into your strike.";
 	next;
-	if (countitem(1009) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Monk Einherjar]";
-		mes "Your internal energy lacks a spiritual focus. Return with 1 ^0000FFHand of God^000000 (Item ID 1009) to kindle your martial soul.";
+		mes "Your internal energy lacks a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "These ancient soul fragments lie trapped within monsters far out of the ordinary scattered across Midgard.";
+		mes "Test your martial fist against these unusual creatures and retrieve their Heroic Soul Essence!";
 		close;
 	}
 
@@ -526,7 +598,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Pugilist:Soul of the Enlightened:Cancel")) {
 		case 1:
-			delitem 1009, 1;
+			delitem 50020, 1;
 			skill 1061, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -535,7 +607,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Pugilist^000000. Strike with absolute focus!";
 			close;
 		case 2:
-			delitem 1009, 1;
+			delitem 50020, 1;
 			skill 1062, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -571,19 +643,32 @@ OnInit:
 		mes "Your mana capacity is insufficient to channel high sorcery. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Wizard Einherjar]";
+		mes "Greetings, master of arcana. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1043, 1044)) {
 		mes "[Wizard Einherjar]";
-		mes "You already wield the high arcane soul of our order.";
+		mes "Greetings, master of arcana. You wield the high arcane soul of our order.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Wizard Einherjar]";
-	mes "High elemental magic requires a matrix capable of containing raw cosmic incantations.";
-	mes "Offer 1 ^0000FFOld Magicbook^000000 so we may transcribe the forbidden spells of the ancient arch-magi into your soul.";
+	mes "High elemental magic requires a matrix of raw cosmic soul energy to contain our ancient incantations.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 so we may ignite the elemental tempests within your soul.";
 	next;
-	if (countitem(1006) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Wizard Einherjar]";
-		mes "Without 1 ^0000FFOld Magicbook^000000 (Item ID 1006), the arcane spellcraft would tear your mind asunder. Bring the tome of ancient knowledge!";
+		mes "You carry no ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Crystallized fragments of ancient heroes' mana were absorbed by wild beasts, turning them into monsters far out of the ordinary.";
+		mes "Subdue these extraordinary creatures throughout Midgard to extract their Heroic Soul Essence!";
 		close;
 	}
 
@@ -594,7 +679,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Magus:Soul of the Hexer:Cancel")) {
 		case 1:
-			delitem 1006, 1;
+			delitem 50020, 1;
 			skill 1043, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -603,7 +688,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Magus^000000. Command the elemental tempests!";
 			close;
 		case 2:
-			delitem 1006, 1;
+			delitem 50020, 1;
 			skill 1044, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -639,19 +724,32 @@ OnInit:
 		mes "Your intellect is keen, but your practical study requires ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Sage Einherjar]";
+		mes "Greetings, scholar. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1057, 1058)) {
 		mes "[Sage Einherjar]";
-		mes "The ancient wisdom of the scholars already guides your mind.";
+		mes "Greetings, scholar. The ancient wisdom of the scholars guides your mind.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Sage Einherjar]";
-	mes "Unlocking Yggdrasil's elemental matrix demands a sacred record of ancient lore.";
-	mes "Entrust me with 1 ^0000FFOld Magicbook^000000 to harmonize the ley line frequencies with your mind.";
+	mes "Unlocking Yggdrasil's elemental matrix demands a catalyst infused with residual hero mana.";
+	mes "Entrust me with 1 ^0000FFHeroic Soul Essence^000000 to harmonize the ley line frequencies with your mind.";
 	next;
-	if (countitem(1006) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Sage Einherjar]";
-		mes "Your intellect is ready, but your research lacks the ^0000FFOld Magicbook^000000 (Item ID 1006). Return once you acquire this scholarly tome.";
+		mes "You lack a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "My research indicates ancient soul fragments were ingested by wild beasts, making them monsters far out of the ordinary.";
+		mes "Locate and defeat these unusual creatures across the realm to obtain a Heroic Soul Essence!";
 		close;
 	}
 
@@ -662,7 +760,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Arcanist:Soul of the Loremaster:Cancel")) {
 		case 1:
-			delitem 1006, 1;
+			delitem 50020, 1;
 			skill 1057, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -671,7 +769,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Arcanist^000000.";
 			close;
 		case 2:
-			delitem 1006, 1;
+			delitem 50020, 1;
 			skill 1058, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -707,19 +805,32 @@ OnInit:
 		mes "Your eagle eye needs more practice. Hone your skills until ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Hunter Einherjar]";
+		mes "Greetings, master tracker. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1045, 1046)) {
 		mes "[Hunter Einherjar]";
-		mes "You already possess the spirit of the ancient master hunter.";
+		mes "Greetings, master tracker. You possess the spirit of the ancient master hunter.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Hunter Einherjar]";
-	mes "A master marksman must possess not only a keen eye, but the deep ancestral wisdom of the wild.";
-	mes "Offer 1 ^0000FFNecklace of Wisdom^000000 so the spirits of ancient trackers may guide your arrows through the thickest canopy.";
+	mes "A master marksman requires a soul catalyst infused with ancestral wilderness instinct.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 so the spirits of ancient trackers may guide your bow.";
 	next;
-	if (countitem(1007) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Hunter Einherjar]";
-		mes "You do not carry 1 ^0000FFNecklace of Wisdom^000000 (Item ID 1007). Venture back into the world, retrieve this talisman, and return.";
+		mes "You do not carry a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Trapped soul fragments have empowered wild beasts, making them monsters far out of the ordinary.";
+		mes "Track down these extraordinary creatures in the wild and claim their Heroic Soul Essence!";
 		close;
 	}
 
@@ -730,7 +841,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Sharpshooter:Soul of the Trapper:Cancel")) {
 		case 1:
-			delitem 1007, 1;
+			delitem 50020, 1;
 			skill 1045, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -739,7 +850,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Sharpshooter^000000. Never miss your mark!";
 			close;
 		case 2:
-			delitem 1007, 1;
+			delitem 50020, 1;
 			skill 1046, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -775,19 +886,32 @@ OnInit:
 		mes "Your rhythm is not yet fully in tune. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Bard Einherjar]";
+		mes "Greetings, minstrel. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1059, 1060)) {
 		mes "[Bard Einherjar]";
-		mes "The celestial song of the ancient performers already echoes in your soul.";
+		mes "Greetings, minstrel. The celestial song of ancient performers echoes in your soul.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Bard Einherjar]";
-	mes "The songs of Valhalla's hall require a harmonious talisman to align mortal rhythm with celestial acoustics.";
-	mes "Offer 1 ^0000FFNecklace of Wisdom^000000 so our ballads may echo through your soul.";
+	mes "The songs of Valhalla's hall require a soul resonance of ancient heroes to tune your melody.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 so our ballads may echo through your soul.";
 	next;
-	if (countitem(1007) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Bard Einherjar]";
-		mes "Your instrument lacks the spiritual tuning of 1 ^0000FFNecklace of Wisdom^000000 (Item ID 1007). Seek this charm to complete our melody!";
+		mes "Your instrument lacks a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Ancient hero soul fragments resonate within monsters far out of the ordinary.";
+		mes "Hunt these unusual creatures across Midgard to claim their Heroic Soul Essence!";
 		close;
 	}
 
@@ -798,7 +922,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
 		case 1:
-			delitem 1007, 1;
+			delitem 50020, 1;
 			skill 1059, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -807,7 +931,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Resonant^000000. Let your music inspire all!";
 			close;
 		case 2:
-			delitem 1007, 1;
+			delitem 50020, 1;
 			skill 1060, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -843,19 +967,32 @@ OnInit:
 		mes "Your steps need more grace. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Dancer Einherjar]";
+		mes "Greetings, dancer. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1059, 1060)) {
 		mes "[Dancer Einherjar]";
-		mes "The celestial dance of ancient performers already echoes in your soul.";
+		mes "Greetings, dancer. The celestial dance of ancient performers echoes in your soul.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Dancer Einherjar]";
-	mes "To weave the mesmerising dance of ancient war-goddesses, your spirit must channel profound grace and insight.";
-	mes "Present 1 ^0000FFNecklace of Wisdom^000000 to harmonize your steps with the pulse of the stars.";
+	mes "To weave the mesmerizing dance of ancient war-goddesses, your spirit must channel an ancestral soul spark.";
+	mes "Present 1 ^0000FFHeroic Soul Essence^000000 to harmonize your steps with the pulse of Valhalla.";
 	next;
-	if (countitem(1007) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Dancer Einherjar]";
-		mes "Your rhythm needs the talisman of 1 ^0000FFNecklace of Wisdom^000000 (Item ID 1007). Obtain it and let us dance among the heroes!";
+		mes "You lack a ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Ancient soul fragments scattered long ago were claimed by beasts, making them monsters far out of the ordinary.";
+		mes "Dance through battle against these extraordinary creatures and retrieve their Heroic Soul Essence!";
 		close;
 	}
 
@@ -866,7 +1003,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
 		case 1:
-			delitem 1007, 1;
+			delitem 50020, 1;
 			skill 1059, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -875,7 +1012,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Resonant^000000. Let your music inspire all!";
 			close;
 		case 2:
-			delitem 1007, 1;
+			delitem 50020, 1;
 			skill 1060, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -911,19 +1048,32 @@ OnInit:
 		mes "Your hammer arm needs more iron in it! Work hard until ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Blacksmith Einherjar]";
+		mes "Greetings, smith. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1047, 1048)) {
 		mes "[Blacksmith Einherjar]";
-		mes "The forge spirit of our master smiths already burns bright within you!";
+		mes "Greetings, smith. The forge spirit of our master smiths burns bright within you!";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Blacksmith Einherjar]";
-	mes "Valhalla's anvil burns with celestial fire, but to forge an ancestral soul onto your weapon, we need a true tool of the craft.";
-	mes "Sacrifice 1 ^0000FFHammer of Blacksmith^000000 to ignite the eternal hearth.";
+	mes "Valhalla's anvil burns with celestial fire, but to forge an ancestral soul into your weapon, we need a raw core of heroic energy.";
+	mes "Sacrifice 1 ^0000FFHeroic Soul Essence^000000 to ignite the forge's spark.";
 	next;
-	if (countitem(1005) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Blacksmith Einherjar]";
-		mes "I cannot strike the anvil without 1 ^0000FFHammer of Blacksmith^000000 (Item ID 1005)! Bring the tool of master smiths to spark our forge!";
+		mes "I cannot strike the anvil without 1 ^0000FFHeroic Soul Essence^000000 (Item ID 50020)!";
+		mes "Ancient hero soul fragments were swallowed by monsters in the wild, turning them into creatures far out of the ordinary.";
+		mes "Hammer down these extraordinary beasts and bring back their Heroic Soul Essence!";
 		close;
 	}
 
@@ -934,7 +1084,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Juggernaut:Soul of the Forgemaster:Cancel")) {
 		case 1:
-			delitem 1005, 1;
+			delitem 50020, 1;
 			skill 1047, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -943,7 +1093,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Juggernaut^000000. Crush all obstacles!";
 			close;
 		case 2:
-			delitem 1005, 1;
+			delitem 50020, 1;
 			skill 1048, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -979,19 +1129,32 @@ OnInit:
 		mes "Your chemical experiments require further study. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Alchemist Einherjar]";
+		mes "Greetings, alchemist. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1063, 1064)) {
 		mes "[Alchemist Einherjar]";
-		mes "You have already assimilated the living formula of ancient alchemists.";
+		mes "Greetings, alchemist. You have assimilated the living formula of ancient alchemists.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Alchemist Einherjar]";
-	mes "Catalyzing living transmutations requires a precision mechanism to balance cosmic elements.";
-	mes "Present 1 ^0000FFFabricator's Cogwheel^000000 to drive our ancient alchemical apparatus.";
+	mes "Catalyzing living transmutations requires a pure alchemical reagent of ancient hero soul energy.";
+	mes "Present 1 ^0000FFHeroic Soul Essence^000000 to catalyze our alchemical apparatus.";
 	next;
-	if (countitem(7703) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Alchemist Einherjar]";
-		mes "The transmutation process will fail without 1 ^0000FFFabricator's Cogwheel^000000 (Item ID 7703). Acquire this mechanical relic and return!";
+		mes "The transmutation will fail without 1 ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Crystallized soul fragments have empowered wild beasts into monsters far out of the ordinary.";
+		mes "Extract a Heroic Soul Essence by defeating these unusual creatures!";
 		close;
 	}
 
@@ -1002,7 +1165,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Apothecary:Soul of the Biomancer:Cancel")) {
 		case 1:
-			delitem 7703, 1;
+			delitem 50020, 1;
 			skill 1063, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -1011,7 +1174,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Apothecary^000000. Master all elixirs!";
 			close;
 		case 2:
-			delitem 7703, 1;
+			delitem 50020, 1;
 			skill 1064, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -1047,19 +1210,32 @@ OnInit:
 		mes "Your footfalls are still too loud. Train your stealth until ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Assassin Einherjar]";
+		mes "Greetings, shadow master. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1051, 1052)) {
 		mes "[Assassin Einherjar]";
-		mes "The deadly shadow soul of our guild already flows in your veins.";
+		mes "Greetings, shadow master. The deadly shadow soul of our guild flows in your veins.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Assassin Einherjar]";
-	mes "To walk among shadows without leaving a footprint or a whisper, you must offer a token of absolute silence.";
-	mes "Offer 1 ^0000FFNecklace of Oblivion^000000 to sever your mortal presence from the perception of mortal eyes.";
+	mes "To walk among shadows without leaving a footprint, your blades require an ancestral soul core of absolute stealth.";
+	mes "Offer 1 ^0000FFHeroic Soul Essence^000000 to bind our guild's shadow spirit to your vessel.";
 	next;
-	if (countitem(1008) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Assassin Einherjar]";
-		mes "Your steps are not yet silent. Bring 1 ^0000FFNecklace of Oblivion^000000 (Item ID 1008) to veil your existence in darkness.";
+		mes "Your shadow is incomplete without 1 ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Monsters across Midgard absorbed ancient hero soul fragments, becoming creatures far out of the ordinary.";
+		mes "Assassinate these unusual beasts in the dark to claim their Heroic Soul Essence.";
 		close;
 	}
 
@@ -1070,7 +1246,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Executioner:Soul of the Viper:Cancel")) {
 		case 1:
-			delitem 1008, 1;
+			delitem 50020, 1;
 			skill 1051, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -1079,7 +1255,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Executioner^000000. Strike unseen!";
 			close;
 		case 2:
-			delitem 1008, 1;
+			delitem 50020, 1;
 			skill 1052, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -1115,19 +1291,32 @@ OnInit:
 		mes "Your tricks are a bit too predictable, novice. Come back at ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if (SOUL_QUEST1_STEP >= 5) {
+		mes "[Rogue Einherjar]";
+		mes "Greetings, phantom rogue. You have already awakened the Star Fragment into your Twilight Weapon!";
+		close;
+	}
 	if (F_HasSoulSkill(1065, 1066)) {
 		mes "[Rogue Einherjar]";
-		mes "You already carry the trickster soul of ancient rogues. Go outflank fate itself!";
+		mes "Greetings, phantom rogue. You carry the trickster soul of ancient rogues.";
+		next;
+		if (select("Evolve Dawn Weapon:Leave") == 1) {
+
+			callfunc "F_EinherjarWeaponMenu";
+			end;
+		}
 		close;
 	}
 
 	mes "[Rogue Einherjar]";
-	mes "Outwitting fate and tricking destiny requires a talisman steeped in stealth and cunning.";
-	mes "Deliver 1 ^0000FFNecklace of Oblivion^000000 to seal our ancient master ruse.";
+	mes "Outwitting fate and tricking destiny requires a genuine spark of ancient trickster soul.";
+	mes "Deliver 1 ^0000FFHeroic Soul Essence^000000 to seal our master ruse.";
 	next;
-	if (countitem(1008) < 1) {
+	if (countitem(50020) < 1) {
 		mes "[Rogue Einherjar]";
-		mes "Heh, you're coming to a heist empty-handed! Bring 1 ^0000FFNecklace of Oblivion^000000 (Item ID 1008) so we can pull off this legend!";
+		mes "Heh, you're coming to a heist empty-handed! You need 1 ^0000FFHeroic Soul Essence^000000 (Item ID 50020).";
+		mes "Soul fragments were snatched by wild monsters, turning them into creatures far out of the ordinary.";
+		mes "Hunt down those unusual beasts and steal their Heroic Soul Essence!";
 		close;
 	}
 
@@ -1138,7 +1327,7 @@ OnInit:
 	next;
 	switch(select("Soul of the Nightblade:Soul of the Mimic:Cancel")) {
 		case 1:
-			delitem 1008, 1;
+			delitem 50020, 1;
 			skill 1065, 1, 0;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
@@ -1147,7 +1336,7 @@ OnInit:
 			mes "You have received the ^0000FFSoul of the Nightblade^000000. Ambush from the dark!";
 			close;
 		case 2:
-			delitem 1008, 1;
+			delitem 50020, 1;
 			skill 1066, 1, 0;
 			skill 1067, 1, 0;
 			SOUL_QUEST1_STEP = 4;

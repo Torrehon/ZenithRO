@@ -16,7 +16,7 @@
 
 gef_tower,115,36,4	script	Meow#q_wiz	876,{
 	if (BaseJob == Job_Wizard) {
-		if (WIZ_SK == 100) {
+		if (getskilllv("WZ_SIGHTBLASTER") > 0 || WIZ_SK == 100) {
 			if (getskilllv("WZ_SIGHTBLASTER") == 0) {
 				mes "[Meow]";
 				mes "What...?! You forgot the";
@@ -62,6 +62,26 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 				mes "I'm gonna... Gonna... Zzz...";
 				close;
 			}
+		}
+		if (getskilllv("WZ_MAGUSSOUL") > 0 || getskilllv(1043) > 0) {
+			mes "[Meow]";
+			mes "...!";
+			mes "^333333*Meow's fur stands on end as he gasps, sensing your immense arcane energy.*^000000";
+			next;
+			mes "[Meow]";
+			mes "Yikes...! What an intense, overwhelming spellcasting aura you've got!";
+			mes "Your mastery over raw elemental mana and barrier manipulation is already off the charts!";
+			next;
+			mes "[Meow]";
+			mes "I don't need to send you running around or fetching gemstones. Take the ^0000FFSight Blaster^000000 skill and let me get back to sleep!";
+			next;
+			skill "WZ_SIGHTBLASTER",1,SKILL_PERM;
+			set WIZ_SK,100;
+			specialeffect2 EF_ABSORBSPIRITS;
+			specialeffect EF_LEVELUP;
+			mes "[Meow]";
+			mes "Now go away and let a kitty rest... Zzz...";
+			close;
 		}
 		else if (WIZ_SK == 0) {
 			mes "[Meow]";
@@ -203,10 +223,10 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			next;
 			mes "[Meow]";
 			mes "Go and bring me";
-			mes "^FF000010 Crystal Blues^000000,";
-			mes "^FF000010 Green Lives^000000,";
-			mes "^FF000010 Red Bloods^000000 and";
-			mes "^FF000010 Winds of Verdure^000000.";
+			mes "^FF00003 Crystal Blues^000000,";
+			mes "^FF00003 Green Lives^000000,";
+			mes "^FF00003 Red Bloods^000000 and";
+			mes "^FF00003 Winds of Verdure^000000.";
 			next;
 			mes "[Meow]";
 			mes "It's not that much,";
@@ -218,7 +238,7 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			close;
 		}
 		else if (WIZ_SK == 3) {
-			if (countitem(991) < 10 || countitem(993) < 10 || countitem(990) < 10 || countitem(992) < 10) {
+			if (countitem(991) < 3 || countitem(993) < 3 || countitem(990) < 3 || countitem(992) < 3) {
 				mes "[Meow]";
 				mes "^333333*Yaaaaaawn~*^000000 Hm?";
 				mes "H-how dare you come";
@@ -229,10 +249,10 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 				next;
 				mes "[Meow]";
 				mes "I said to bring";
-				mes "^ff000010 Crystal Blues^000000,";
-				mes "^ff000010 Green Lives^000000,";
-				mes "^ff000010 Red Bloods^000000 and";
-				mes "^ff000010 Winds of Verdure^000000!";
+				mes "^ff00003 Crystal Blues^000000,";
+				mes "^ff00003 Green Lives^000000,";
+				mes "^ff00003 Red Bloods^000000 and";
+				mes "^ff00003 Winds of Verdure^000000!";
 				next;
 				mes "[Meow]";
 				mes "Don't forget this time!";
@@ -290,10 +310,10 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			mes "That took way too much effort,";
 			mes "but at least we're done here.";
 			specialeffect2 EF_ABSORBSPIRITS;
-			delitem 991,10; //Crystal_Blue
-			delitem 993,10; //Yellow_Live
-			delitem 990,10; //Boody_Red
-			delitem 992,10; //Wind_Of_Verdure
+			delitem 991,3; //Crystal_Blue
+			delitem 993,3; //Yellow_Live
+			delitem 990,3; //Boody_Red
+			delitem 992,3; //Wind_Of_Verdure
 			set WIZ_SK,100;
 			skill "WZ_SIGHTBLASTER",1,SKILL_PERM;
 			next;
