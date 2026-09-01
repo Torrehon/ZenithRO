@@ -11,13 +11,7 @@ OnTouch_:
 1@sewb2,16,26,4	script	Adventurer Alard#c	1,{
 	if (getcharid(1) > 0) .party_id = getcharid(1);
 
-	if (culvert_quest == 2) {
-		if (mobcount(instance_mapname("1@sewb2"), instance_npcname("Adventurer Alard#c")+"::OnBossKilled") == 0) {
-			set culvert_quest, 3;
-		}
-	}
-
-	if (culvert_quest == 4) {
+	if (culvert_quest >= 4) {
 		mes "[Adventurer Alard]";
 		mes "The sewers feel a bit lighter today. Thank you for your bravery, adventurer.";
 		close;
@@ -26,14 +20,36 @@ OnTouch_:
 	if (culvert_quest == 3) {
 		mes "[Adventurer Alard]";
 		mes "That was incredible! I've never seen a mutant that size fall so fast. Please, report back to the ^0000FFGuard at the surface^000000 immediately.";
+		if (checkquest(80001, HAVEQUEST) != -1) changequest 80001, 80003;
 		if (checkquest(80002, HAVEQUEST) != -1) changequest 80002, 80003;
 		close;
 	}
 
+	if (.boss_slain == 1) {
+		if (culvert_quest == 1 || culvert_quest == 2) {
+			set culvert_quest, 3;
+			if (checkquest(80001, HAVEQUEST) != -1) changequest 80001, 80003;
+			if (checkquest(80002, HAVEQUEST) != -1) changequest 80002, 80003;
+			mes "[Adventurer Alard]";
+			mes "The mutant bug has been slain! Please report back to the ^0000FFGuard at the surface^000000 immediately.";
+			close;
+		}
+	}
+
 	if (culvert_quest == 2) {
-		mes "[Adventurer Alard]";
-		mes "Eyes on the prize! Keep fighting until that thing stops moving!";
-		close;
+		if (mobcount(instance_mapname("1@sewb2"), instance_npcname("Adventurer Alard#c")+"::OnBossKilled") > 0) {
+			mes "[Adventurer Alard]";
+			mes "Eyes on the prize! Keep fighting until that thing stops moving!";
+			close;
+		} else {
+			mes "[Adventurer Alard]";
+			mes "The mutant bug is returning! Prepare for battle!";
+			close2;
+			specialeffect2 563;
+			soundeffect "earth_quake.wav",0;
+			monster instance_mapname("1@sewb2"), 20, 50, "Mutant Male Bug", 3501, 1, instance_npcname("Adventurer Alard#c")+"::OnBossKilled";
+			end;
+		}
 	}
 
 	if (culvert_quest == 1) {
@@ -55,22 +71,26 @@ OnTouch_:
 			.@origin_aid = getcharid(3);
 			.@my_party = getcharid(1);
 			set culvert_quest, 2;
-			if (checkquest(80001) != -1) changequest 80001, 80002;
+			if (checkquest(80001, HAVEQUEST) != -1) changequest 80001, 80002;
 
 			if (.@my_party > 0) {
 				getpartymember .@my_party, 2;
 				for (.@i = 0; .@i < $@partymembercount; .@i++) {
 					if ($@partymemberaid[.@i] == .@origin_aid) continue;
 					if (attachrid($@partymemberaid[.@i])) {
-						set culvert_quest, 2;
-						if (checkquest(80001) != -1) changequest 80001, 80002;
+						if (culvert_quest == 1) {
+							set culvert_quest, 2;
+							if (checkquest(80001, HAVEQUEST) != -1) changequest 80001, 80002;
+						}
 						detachrid;
 					}
 				}
 			}
 			attachrid(.@origin_aid);
 			close2; 
-			monster instance_mapname("1@sewb2"), 20, 50, "Mutant Male Bug", 3501, 1, instance_npcname("Adventurer Alard#c")+"::OnBossKilled";
+			if (mobcount(instance_mapname("1@sewb2"), instance_npcname("Adventurer Alard#c")+"::OnBossKilled") == 0) {
+				monster instance_mapname("1@sewb2"), 20, 50, "Mutant Male Bug", 3501, 1, instance_npcname("Adventurer Alard#c")+"::OnBossKilled";
+			}
 			end;
 		}
 		mes "[Adventurer Alard]";
@@ -82,14 +102,16 @@ OnTouch_:
 	close;
 
 OnBossKilled:
+	.boss_slain = 1;
 	.@inst_map$ = instance_mapname("1@sewb2");
-	.@my_party = (playerattached()) ? getcharid(1) : .party_id;
+	.@my_party = (playerattached() && getcharid(1) > 0) ? getcharid(1) : .@party_id;
 	if (.@my_party > 0) {
-		getpartymember .@my_party, 0;
+		getpartymember .@my_party, 2;
 		for (.@i = 0; .@i < $@partymembercount; .@i++) {
 			if (attachrid($@partymemberaid[.@i])) {
-				if (strcharinfo(3) == .@inst_map$ && culvert_quest == 2) {
+				if (strcharinfo(3) == .@inst_map$ && (culvert_quest == 1 || culvert_quest == 2)) {
 					set culvert_quest, 3;
+					if (checkquest(80001, HAVEQUEST) != -1) changequest 80001, 80003;
 					if (checkquest(80002, HAVEQUEST) != -1) changequest 80002, 80003;
 				}
 				detachrid; 
@@ -99,6 +121,7 @@ OnBossKilled:
 	end;
 
 OnInstanceInit:
+	.boss_slain = 0;
 	setmapflag instance_mapname("1@sewb2"), mf_noteleport;
 	setmapflag instance_mapname("1@sewb2"), mf_nomemo;
 	.GID = getnpcid(0);
@@ -214,11 +237,26 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 		mes "You returned! The novices told me of your heroism against that massive mutation.";
 		next;
 		mes "[Culvert Guardian]";
-		mes "Prontera owes you a great debt. Take this reward, and use this ^0000FFTraining Recommendation^000000 at your local Guild to further your studies.";
+		mes "Prontera owes you a great debt. Please select your armor piece reward:";
+		mes "- 1. " + mesitemlink(2306);
+		mes "- 2. " + mesitemlink(2307);
+		mes "- 3. " + mesitemlink(2303);
+		next;
+		.@choice = select("Adventurer's Suit:Mantle:Jacket");
+		if (.@choice == 1) .@eq_id = 2306;
+		else if (.@choice == 2) .@eq_id = 2307;
+		else .@eq_id = 2303;
+
+		mes "[Culvert Guardian]";
+		mes "Excellent choice! Take this armor, along with 6x " + mesitemlink(1011) + " to refine your weapon, your new hat, 10,000 Zeny, and a ^0000FFTraining Recommendation^000000 to further your studies!";
+		getitem .@eq_id, 1;
+		getitem 1011, 6;
 		getitem 50002, 1;
 		getitem 5559, 1;
 		getexp 3000, 3000;
-		set Zeny, Zeny + 2000;
+		set Zeny, Zeny + 10000;
+		if (checkquest(80001, HAVEQUEST) != -1) completequest 80001;
+		if (checkquest(80002, HAVEQUEST) != -1) completequest 80002;
 		if (checkquest(80003, HAVEQUEST) != -1) completequest 80003;
 		set culvert_quest, 4;
 		close;
@@ -254,7 +292,7 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 	if (BaseLevel < 15 || BaseLevel > 60) { 
 		next;
 		mes "[Culvert Guardian]";
-		mes "I cannot let you pass. This sector is designated for adventurers between ^0000FFLevel 15 and 35^000000.";
+		mes "I cannot let you pass. This sector is designated for adventurers between ^0000FFLevel 15 and 60^000000.";
 		close; 
 	}
 	

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenithRO News</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --border-color: #45a29e;
+            --accent-gold: #f4c430;
+            --accent-cyan: #66fcf1;
+            --text-main: #c5c6c7;
+            --text-muted: #8892b0;
+            --status-online: #45a29e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12px;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--accent-cyan);
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .news-item {
+            background: var(--card-bg);
+            border-left: 3px solid var(--accent-cyan);
+            border-radius: 3px;
+            padding: 8px 10px;
+        }
+
+        .news-item-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 3px;
+        }
+
+        .news-item-desc {
+            font-size: 11px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 1px 5px;
+            font-size: 9px;
+            font-weight: 700;
+            border-radius: 3px;
+            margin-right: 5px;
+            text-transform: uppercase;
+        }
+
+        .badge-update { background-color: #1f4068; color: #66fcf1; }
+        .badge-notice { background-color: #4a3f18; color: #f4c430; }
+
+        .footer {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="title">ZenithRO</div>
+        <div class="status">
+            <div class="dot"></div>
+            <span>Server Online</span>
+        </div>
+    </div>
+
+    <div class="news-list">
+        <div class="news-item">
+            <div class="news-item-title">
+                <span class="badge badge-update">Update</span>Twilight Weapons & Reroll System
+            </div>
+            <div class="news-item-desc">
+                Twilight Weapons, Valkyrie Kara reroll system, and refinement balance are live! Speak with Valkyrie Kara in Valhalla.
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-item-title">
+                <span class="badge badge-notice">Notice</span>Welcome to ZenithRO!
+            </div>
+            <div class="news-item-desc">
+                Make sure your patcher stays updated for the latest items, maps, and server features.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        ZenithRO &copy; 2026
+    </div>
+
+</body>
+</html>

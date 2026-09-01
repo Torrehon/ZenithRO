@@ -1414,6 +1414,9 @@ void pc_setinventorydata( map_session_data& sd );
 
 //GENERADOR RANDOMOPTIONS CUSTOM
 void pc_apply_random_option(struct item_data* id, struct item& it);
+// --- INICIO CUSTOM: Funcion para compactar durabilidad ---
+void pc_set_item_durability(struct item_data* id, struct item& it, int durability_val = -1);
+// --- FIN CUSTOM ---
 
 int32 pc_get_skillcooldown( const map_session_data* sd, uint16 skill_id, uint16 skill_lv );
 uint8 pc_checkskill( const map_session_data* sd,uint16 skill_id );

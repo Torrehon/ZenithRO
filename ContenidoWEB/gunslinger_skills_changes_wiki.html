@@ -1,0 +1,310 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Contenedor principal que agrupa todas las skills */
+  .skill-list-container {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 850px;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  /* Diseño de la fila de cada habilidad individual */
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 25px;
+    background-color: #f8fbfd;
+    border-bottom: 1px solid #e3f2fd;
+    transition: background-color 0.2s ease;
+  }
+
+  .skill-row:last-child {
+    border-bottom: none;
+  }
+
+  .skill-row:hover {
+    background-color: #e3f2fd;
+  }
+
+  /* Cajita del icono de la habilidad */
+  .skill-icon-box {
+    flex-shrink: 0;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+  }
+
+  /* Contenedor del texto */
+  .skill-content {
+    flex-grow: 1;
+  }
+
+  /* Título de la habilidad */
+  .skill-title {
+    margin: 0 0 8px 0;
+    color: #1565c0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Etiqueta del nivel máximo */
+  .skill-meta {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    background-color: #bbdefb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    letter-spacing: normal;
+  }
+
+  /* Descripción de la habilidad */
+  .skill-desc {
+    margin: 0;
+    color: #455a64;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 0.95em;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 600px) {
+    .skill-row { 
+      padding: 15px; 
+    }
+    .skill-icon-box { 
+      margin-right: 15px; 
+    }
+    .skill-title { 
+      font-size: 1.05em; 
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .skill-desc { 
+      font-size: 0.85em; 
+    }
+  }
+</style>
+
+<div class="skill-list-container">
+
+  <!-- 1. Magical Bullet -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/507.png" alt="Magical Bullet Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Magical Bullet
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 2% Max SP per activation <br><br>
+        Now functions as a toggle support skill. Adds bonus damage to normal attacks equal to 20% of your Max SP. This bonus damage decays as your remaining SP decreases. Automatically toggles off if remaining SP drops below 20%.<br><br>
+        <strong>Damage Bonus Scaling:</strong><br>
+        - 100% - 80% SP: Grants 100% bonus damage (20% Max SP as damage)<br>
+        - 79% - 60% SP: Grants 75% bonus damage (15% Max SP as damage)<br>
+        - 59% - 40% SP: Grants 50% bonus damage (10% Max SP as damage)<br>
+        - 39% - 20% SP: Grants 25% bonus damage (5% Max SP as damage)
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Cracker -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/508.png" alt="Cracker Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Cracker
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 10 <br><br>
+        Status effect changed from Stun to Confusion. Now deals AoE effect in a 5x5 area centered around the caster.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Tracking -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/512.png" alt="Tracking Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Tracking
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 / 55 / 60 <br><br>
+        Retains original mechanics, and can now deal Critical hits. If cast on an enemy under the "Exposed" status, increases final damage by +50%.
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Desperado -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/516.png" alt="Desperado Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Desperado
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 32 / 34 / 36 / 38 / 40 / 42 / 44 / 46 / 48 / 50 <br><br>
+        No longer hits a random number of times. Strikes 2 guaranteed hits dealing 100% + (10% * Skill Level) damage to all surrounding enemies in range (hits are no longer split among targets). Every 20 AGI increases hit count by +1. Consumes 6 Bullets base, and each bonus hit gained from AGI consumes 3 additional Bullets.
+      </p>
+    </div>
+  </div>
+
+  <!-- 5. Dust -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/518.png" alt="Dust Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Dust
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 3 + 3 * Skill Level <br><br>
+        Now attacks in an Area of Effect (AoE) and knocks targets back by 3 cells. Damage ratio adjusted to 100% + (20% * Skill Level). Has a 2-second global cooldown.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Spread Attack -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/520.png" alt="Spread Attack Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Spread Attack
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 15 + 5 * Skill Level <br><br>
+        Increases damage ratio to 100% + (20% * Skill Level).
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. Ground Drift -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/521.png" alt="Ground Drift Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Ground Drift
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 4 + 2 * Skill Level <br><br>
+        Damage is now influenced by weapon cards. Ignores Flee, Auto Guard, and Cicada Skin Shedding.
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. Madness Canceller -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/504.png" alt="Madness Canceller Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Madness Canceller
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 30 <br><br>
+        ASPD bonus reduced to +10%, and ATK bonus increased to +150. Duration increased to 30 seconds. Cooldown: 45 seconds. Global delay reduced to 2 seconds.
+      </p>
+    </div>
+  </div>
+
+  <!-- 9. Soul of the Peacekeeper (NEW) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Soul of the Peacekeeper Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Peacekeeper (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances Tracking, Desperado, Gatling Fever, and Madness Canceller:<br><br>
+        - Tracking: When cast on an enemy under the "Exposed" status, reduces Casting Time by 50%.<br><br>
+        - Desperado: Killing enemies with this skill restores 2% of your Max HP.<br><br>
+        - Gatling Fever: Increases ASPD cap to 193. While active alongside Magic Bullet, each attack continuously increases ASPD by +0.1%. Losing either status resets this bonus ASPD.<br><br>
+        - Madness Canceller: No longer prevents movement; instead, reduces Movement Speed by 50%. This penalty combines non-additively with Gatling Fever (-66% total penalty if both are active).
+      </p>
+    </div>
+  </div>
+
+  <!-- 10. Soul of the Enforcer (NEW) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1f6dVrl0RfPK8I1q3SV92UPzPS25lKXNr" alt="Soul of the Enforcer Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Enforcer (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances Adjustment, Magical Bullet, Dust, Full Buster, Spread Attack, and Ground Drift:<br><br>
+        - Adjustment: Also increases Melee Physical Resistance by +20%.<br><br>
+        - Magical Bullet: Increases damage dealt by Dust, Full Buster, Spread Attack, and Ground Drift by +25% in exchange for +50% increased SP consumption.<br><br>
+        - Dust: Has a 50% chance to inflict "PSlow" status (Wounding Shot effect) for 10 seconds.<br><br>
+        - Full Buster: If target is under the "Exposed" status, ignores target Defense.<br><br>
+        - Spread Attack: When cast while under "Adjustment", strikes 2 hits.<br><br>
+        - Ground Drift: Adds +200% MATK to damage calculation. When used together with Magical Bullet, grenades apply special status effects:<br>
+        &nbsp;&nbsp;• Flare Sphere: Burning (50% chance, 20s duration, 100% MATK)<br>
+        &nbsp;&nbsp;• Lightning Sphere: Electrocute (50% chance, 20s duration, 100% MATK)<br>
+        &nbsp;&nbsp;• Poison Sphere: Poison (50% chance, 20s duration). Attacking Poisoned targets with this skill increases final damage by +30%.<br>
+        &nbsp;&nbsp;• Freezing Sphere: Freezing (50% chance, 20s duration)<br>
+        &nbsp;&nbsp;• Tremor Sphere (NEW): Buried (50% chance, 20s duration, 100% MATK)<br>
+        &nbsp;&nbsp;• Dark Sphere (Blind Sphere): Decay (NEW Shadow DoT) (50% chance, 20s duration, 100% MATK)<br>
+        &nbsp;&nbsp;• Light Sphere (NEW): Radiance (NEW Holy DoT) (50% chance, 20s duration, 100% MATK)
+      </p>
+    </div>
+  </div>
+
+</div>

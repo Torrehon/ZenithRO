@@ -70,6 +70,7 @@ gef_dun03,0,0	monster	Wraith Dead	1291,2,60000,30000
 gef_dun03,0,0	monster	Wind Ghost	1263,3,60000,30000
 gef_dun03,0,0	monster	Shining Plant	1083,3,1800000,900000
 gef_dun03,0,0	monster	White Plant	1082,10,180000,90000
+gef_dun03,132,117	boss_monster	Geffenia's Shadow	25002,1,7200000,600000,1
 
 //==================================================
 // Old Event Spawn in case you want to use them

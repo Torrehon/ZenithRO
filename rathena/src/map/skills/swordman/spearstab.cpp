@@ -27,7 +27,7 @@ void SkillSpearStab::castendDamageId(block_list* src, block_list* target, uint16
 			// - Tiene la pasiva Lancer Soul
 			// - Tiene equipada una lanza a 2 manos (W_2HSPEAR)
 			map_session_data* sd = BL_CAST(BL_PC, src);
-			if (sd != nullptr && pc_checkskill(sd, KN_LANCERSOUL) > 0 && sd->status.weapon == W_2HSPEAR) {
+			if (sd != nullptr && pc_checkskill(sd, KN_LANCERSOUL) > 0 && (sd->status.weapon == W_1HSPEAR || sd->status.weapon == W_2HSPEAR)) {
 				sc_start(src, target, SC_STAGGER, 100, skill_lv, 5000); 
 			}
 		}

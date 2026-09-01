@@ -16,15 +16,19 @@ void SkillSense::castendNoDamageId(block_list* src, block_list* target, uint16 s
 	int magic_pen = 10; 
 
 	// --- INICIO CUSTOM: Magus Soul / Mimic Soul ---
-	// 2. Comprobamos si tiene la pasiva Soul of the Magus o la Mimic Soul para subirlo a 25%
+	// 2. Comprobamos pasivas: Soul of the Magus (40%) o Mimic Soul (20%)
 	map_session_data* sd = const_cast<map_session_data*>(BL_CAST(BL_PC, src));
-	if (sd != nullptr && (pc_checkskill(sd, WZ_MAGUSSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
-		magic_pen = 25; 
+	if (sd != nullptr) {
+		if (pc_checkskill(sd, WZ_MAGUSSOUL) > 0) {
+			magic_pen = 40;
+		} else if (pc_checkskill(sd, RG_MIMIC) > 0) {
+			magic_pen = 20;
+		}
 	}
 	// --- FIN CUSTOM ---
 
 	// 3. Aplicamos SC_ARCINSIGHT sobre 'src' (nosotros mismos)
-	// val1 = magic_pen (10 o 25)
+	// val1 = magic_pen (10, 20 o 40)
 	// Duración = 30000 ms (30 segundos)
 	sc_start4(src, src, SC_ARCINSIGHT, 10000, magic_pen, skill_lv, 0, 0, 30000);
 	

@@ -203,7 +203,11 @@ void mvptomb_create(mob_data *md, char *killer, time_t time)
 
 	safestrncpy(nd->name, msg_txt(nullptr,656), sizeof(nd->name));
 
-	nd->class_ = 565;
+  if (md->get_bosstype() == BOSSTYPE_MINIBOSS)
+	nd->class_ = 10442; // <--- Sprite diferenciado para Mini-Bosses
+  else
+	nd->class_ = 565; // <--- Tumba clásica de MVP
+  
 	nd->speed = DEFAULT_NPC_WALK_SPEED;
 	nd->subtype = NPCTYPE_TOMB;
 
@@ -1553,7 +1557,8 @@ static int32 mob_ai_sub_hard_slavemob(mob_data *md,t_tick tick)
 		// Slave is busy with a target.
 		if(md->target_id) {
 			// Player's slave should come back when master's too far, even if it is doing with a target.
-			if (bl->type == BL_PC && md->master_dist > 5) {
+			int max_dist = (md->special_state.ai == AI_FLORA) ? 12 : 5;
+			if (bl->type == BL_PC && md->master_dist > max_dist) {
 				mob_unlocktarget(md, tick);
 				unit_walktobl(md, bl, MOB_SLAVEDISTANCE, 1);
 				return 1;
@@ -3346,44 +3351,49 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 			
 			// --- INICIO CUSTOM FORCED DROPS ---
 			if (it->type == IT_WEAPON || it->type == IT_ARMOR) {
+				bool is_hat = (it->type == IT_ARMOR && (it->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
+				bool is_acc = (it->type == IT_ARMOR && (it->equip & EQP_ACC));
+
 				// 1. Caso para MVPs
 				if (md->get_bosstype() == BOSSTYPE_MVP) {
-					// Si el rate es menor a 35% (3500), lo subimos a 3500.
-					// Si es mayor (ej: 50%), se queda el original.
-					if (drop_rate < 3500) {
-						drop_rate = 3500;
+					if (is_hat || is_acc) {
+						if (drop_rate < 75) {
+							drop_rate = 75;  // Suelo 0.75% para hats/accesorios de MVPs
+						}
+					} else {
+						// Armas y Armaduras generales de MVP (Pecheras, escudos, botas, garments, armas)
+						if (drop_rate < 3500) {
+							drop_rate = 3500; // Suelo 35%
+						}
 					}
 				} 
 				// 2. Caso para Mobs Normales, MiniBosses, etc.
 				else {
-					// Comprobamos si es un Hat o Accesorios
-					bool is_hat = (it->type == IT_ARMOR && (it->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
-					bool is_acc = (it->type == IT_ARMOR && (it->equip & EQP_ACC));
-					
 					if (is_hat || is_acc) {
 						if (drop_rate < 75) {
 							drop_rate = 75;  // Sube al 0.75% solo si es inferior
 						}
 					}
-					// 3. NUEVO: Armaduras que NO son gorros ni accesorios (Pecheras, escudos, botas, garments)
-					// Como filtramos las armas arriba, esto solo afectará a IT_ARMOR
-					else if (it->type == IT_ARMOR) {
+					else {
+						// Armas y Armaduras generales (Pecheras, escudos, botas, garments)
 						if (drop_rate < 150) {
 							drop_rate = 150; // Sube al 1.5% solo si es inferior
 						}
 					}
 				}
 			} 
+			// --- INICIO CUSTOM: Drop Rate de Cartas Dinamico (1% -> 0.10%) ---
 			else if (it->type == IT_CARD) {
 				if (md->get_bosstype() == BOSSTYPE_MVP || md->get_bosstype() == BOSSTYPE_MINIBOSS) {
-					drop_rate = 1; // 0.01% fijo
+					drop_rate = 5; // 0.05% fijo para MVP y Miniboss
 				} else {
 					int32 mob_lvl = md->level;
 					if (mob_lvl < 1) mob_lvl = 1;
-					// Cartas normales: Fórmula dinámica (2% -> 0.10%)
-					drop_rate = (mob_lvl >= 50) ? 10 : (200 - ((mob_lvl - 1) * 190 / 49));
+					// Cartas normales: Formula dinamica (1.00% a Nivel 1 -> 0.10% a Nivel 50+)
+					drop_rate = (mob_lvl >= 50) ? 10 : (100 - ((mob_lvl - 1) * 90 / 49));
 				}
 			}
+			// --- FIN CUSTOM ---
 			else if (entry->nameid == 984 || entry->nameid == 985) { // Oridecon (984) y Elunium (985)
 				if (drop_rate < 750) {
 					drop_rate = 750;      // Sube a 7.5% si es menor
@@ -3558,7 +3568,7 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 
 				struct item item = {};
 				item.nameid=entry->nameid;
-				item.identify= itemdb_isidentified(item.nameid);
+				item.identify = 1;
 				clif_mvp_item(mvp_sd,item.nameid);
 				log_mvp_nameid = item.nameid;
 
@@ -3571,6 +3581,13 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 				}
 
 				mob_setdropitem_option( item, entry );
+
+				// --- INICIO CUSTOM RANDOM OPTIONS PARA MVP DROPS ---
+				struct item_data* option_id = itemdb_search(item.nameid);
+				if (option_id != nullptr) {
+					pc_apply_random_option(option_id, item);
+				}
+				// --- FIN CUSTOM RANDOM OPTIONS ---
 
 				if((temp = pc_additem(mvp_sd,&item,1,LOG_TYPE_PICKDROP_PLAYER)) != 0) {
 					clif_additem(mvp_sd,0,0,temp);
@@ -3714,9 +3731,9 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 		return ud->state.walk_script ? 3 : 5; // Note: Actually, it's 4. Oh well...
 	}
 
-	// MvP tomb [GreenBox]
-	if (battle_config.mvp_tomb_enabled && md->spawn->state.boss && map_getmapflag(md->m, MF_NOTOMB) != 1)
-		mvptomb_create(md, mvp_sd != nullptr ? mvp_sd->status.name : (first_sd != nullptr ? first_sd->status.name : nullptr), time(nullptr));
+// MvP & Mini-boss tomb (Solo spawns nativos de mapa)
+if (battle_config.mvp_tomb_enabled && (md->spawn->state.boss || md->get_bosstype() == BOSSTYPE_MINIBOSS) && map_getmapflag(md->m, MF_NOTOMB) != 1)
+	mvptomb_create(md, mvp_sd != nullptr ? mvp_sd->status.name : (first_sd != nullptr ? first_sd->status.name : nullptr), time(nullptr));
 
 	if( !rebirth )
 		mob_setdelayspawn(md); //Set respawning.

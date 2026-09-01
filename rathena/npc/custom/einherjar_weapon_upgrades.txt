@@ -3,37 +3,50 @@
 // ==============================================================
 
 // --------------------------------------------------------------
+// Helper Function: F_GetEquippedDawnWeapon
+// Returns the Item ID of any Dawn Weapon equipped by the player (40000-40011)
+// --------------------------------------------------------------
+function	script	F_GetEquippedDawnWeapon	{
+	.@wep_id = getequipid(EQI_HAND_R);
+	if (.@wep_id >= 40000 && .@wep_id <= 40011) return .@wep_id;
+	.@wep_id = getequipid(EQI_HAND_L);
+	if (.@wep_id >= 40000 && .@wep_id <= 40011) return .@wep_id;
+	return 0;
+}
+
+// --------------------------------------------------------------
 // Helper Function: F_CraftTwilightWeapon
 // Args:
-//   getarg(0): Dawn Weapon ID
-//   getarg(1): Twilight Weapon ID
-//   getarg(2): Gem 1 ID (0 if none)
-//   getarg(3): Gem 1 Amount
-//   getarg(4): Gem 2 ID (0 if none)
-//   getarg(5): Gem 2 Amount
-//   getarg(6): Gem 3 ID (0 if none)
-//   getarg(7): Gem 3 Amount
+//   getarg(0): Twilight Weapon ID
+//   getarg(1): Gem 1 ID (0 if none)
+//   getarg(2): Gem 1 Amount
+//   getarg(3): Gem 2 ID (0 if none)
+//   getarg(4): Gem 2 Amount
+//   getarg(5): Gem 3 ID (0 if none)
+//   getarg(6): Gem 3 Amount
 // --------------------------------------------------------------
 function	script	F_CraftTwilightWeapon	{
-	.@dawn_id     = getarg(0);
-	.@twilight_id = getarg(1);
-	.@gem1        = getarg(2, 0);
-	.@count1      = getarg(3, 0);
-	.@gem2        = getarg(4, 0);
-	.@count2      = getarg(5, 0);
-	.@gem3        = getarg(6, 0);
-	.@count3      = getarg(7, 0);
+	.@twilight_id = getarg(0);
+	.@gem1        = getarg(1, 0);
+	.@count1      = getarg(2, 0);
+	.@gem2        = getarg(3, 0);
+	.@count2      = getarg(4, 0);
+	.@gem3        = getarg(5, 0);
+	.@count3      = getarg(6, 0);
 
-	// 1. Check if the Dawn Weapon is equipped (Right hand or Left hand)
+	// 1. Detect any equipped Dawn Weapon (Living Star Fragment)
+	.@dawn_id = callfunc("F_GetEquippedDawnWeapon");
+	if (.@dawn_id == 0) {
+		mes "[Einherjar]";
+		mes "Please equip your ^0000FFDawn Weapon^000000!";
+		mes "I must analyze the equipped Star Fragment to safely extract any cards and handle its Random Options.";
+		close;
+	}
+
 	.@eq_slot = EQI_HAND_R;
 	if (getequipid(EQI_HAND_R) != .@dawn_id) {
 		if (getequipid(EQI_HAND_L) == .@dawn_id) {
 			.@eq_slot = EQI_HAND_L;
-		} else {
-			mes "[Einherjar]";
-			mes "Please equip your ^0000FF" + getitemname(.@dawn_id) + "^000000!";
-			mes "I must analyze the equipped Star Fragment to safely extract any cards and handle its Random Options.";
-			close;
 		}
 	}
 
@@ -45,15 +58,27 @@ function	script	F_CraftTwilightWeapon	{
 		close;
 	}
 
-	// 3. Display Requirements & Option Choice
+	// 3. Weapon Transformation Confirmation
 	mes "[Einherjar]";
-	mes "To evolve your Star Fragment into the ^0000FF" + getitemname(.@twilight_id) + "^000000, I require:";
-	mes "- 1x " + getitemname(.@dawn_id) + " (Equipped)";
-	mes "- 10x Oridecon";
-	mes "- 20x Steel";
-	if (.@gem1 > 0) mes "- " + .@count1 + "x " + getitemname(.@gem1);
-	if (.@gem2 > 0) mes "- " + .@count2 + "x " + getitemname(.@gem2);
-	if (.@gem3 > 0) mes "- " + .@count3 + "x " + getitemname(.@gem3);
+	mes "Are you certain you wish to awaken your equipped " + mesitemlink(.@dawn_id) + " into " + mesitemlink(.@twilight_id) + "?";
+	mes "^FF0000This will permanently transform the shape of your Star Fragment!^000000";
+	next;
+	if (select("Yes, forge " + getitemname(.@twilight_id) + "!:No, let me consider again") == 2) {
+		mes "[Einherjar]";
+		mes "Take your time, hero. Speak to me again when you are ready.";
+		close;
+	}
+
+	// 4. Display Requirements & Option Choice
+	mes "[Einherjar]";
+	mes "To evolve your equipped " + mesitemlink(.@dawn_id) + " into " + mesitemlink(.@twilight_id) + ", I require:";
+	mes "- 1x " + mesitemlink(.@dawn_id) + " (Equipped)";
+	mes "- 10x " + mesitemlink(984);
+	mes "- 20x " + mesitemlink(999);
+	if (.@gem1 > 0) mes "- " + .@count1 + "x " + mesitemlink(.@gem1);
+	if (.@gem2 > 0) mes "- " + .@count2 + "x " + mesitemlink(.@gem2);
+	if (.@gem3 > 0) mes "- " + .@count3 + "x " + mesitemlink(.@gem3);
+	mes "^888888(Tip: Click any item link above to inspect its details!)^000000";
 	next;
 
 	mes "[Einherjar]";
@@ -84,7 +109,7 @@ function	script	F_CraftTwilightWeapon	{
 		.@card_id = getequipcardid(.@eq_slot, .@c);
 		if (.@card_id > 0 && .@card_id < 40000) {
 			getitem .@card_id, 1;
-			mes "^0000FF[Card Extracted]^000000 " + getitemname(.@card_id) + " returned to your inventory.";
+			mes "^0000FF[Card Extracted]^000000 " + mesitemlink(.@card_id) + " returned to your inventory.";
 		}
 	}
 
@@ -135,7 +160,22 @@ function	script	F_CraftTwilightWeapon	{
 
 	mes "[Einherjar]";
 	mes "The Star Fragment blazes with celestial radiance!";
-	mes "Receive your new weapon: ^0000FF" + getitemname(.@twilight_id) + "^000000!";
+	mes "Receive your new weapon: " + mesitemlink(.@twilight_id) + "!";
+	next;
+	if (PRT_PRISON_QUEST == 0) {
+		mes "[Einherjar]";
+		mes "Champion, we the Einherjar have turned our gaze once more toward the mortal realm of Midgard...";
+		mes "The Dawn Weapons were not the only star fragments that descended from the firmament centuries ago.";
+		next;
+		mes "[Einherjar]";
+		mes "Other sentient star fragments fell across the world, but they harbored dark and malevolent intentions.";
+		mes "We have sensed the disturbing influence of one such corrupt relic stirring within the capital itself, Prontera.";
+		next;
+		mes "[Einherjar]";
+		mes "You must journey to the capital and investigate before the shadow spreads throughout the realm.";
+		mes "Speak with the Grand Library Scholar in Prontera. He will know if strange rumors have surfaced recently.";
+		PRT_PRISON_QUEST = 1;
+	}
 	close;
 }
 
@@ -145,10 +185,34 @@ function	script	F_CraftTwilightWeapon	{
 // Opened when a hero speaks with their Einherjar
 // --------------------------------------------------------------
 function	script	F_EinherjarWeaponMenu	{
-	if (SOUL_QUEST1_STEP >= 5) {
+	.@eq_r = getequipid(EQI_HAND_R);
+	.@eq_l = getequipid(EQI_HAND_L);
+	.@has_twilight = ((.@eq_r >= 40013 && .@eq_r <= 40024) || (.@eq_l >= 40013 && .@eq_l <= 40024));
+
+	if (SOUL_QUEST1_STEP >= 5 || .@has_twilight) {
+		if (PRT_PRISON_QUEST == 0) {
+			mes "[Einherjar]";
+			mes "Champion, we the Einherjar have turned our gaze once more toward the mortal realm of Midgard...";
+			mes "The Dawn Weapons were not the only star fragments that descended from the firmament centuries ago.";
+			next;
+			mes "[Einherjar]";
+			mes "Other sentient star fragments fell across the world, but they harbored dark and malevolent intentions.";
+			mes "We have sensed the disturbing influence of one such corrupt relic stirring within the capital itself, Prontera.";
+			next;
+			mes "[Einherjar]";
+			mes "You must journey to the capital and investigate before the shadow spreads throughout the realm.";
+			mes "Speak with the Grand Library Scholar in Prontera. He will know if strange rumors have surfaced recently.";
+			PRT_PRISON_QUEST = 1;
+			next;
+		}
+
 		mes "[Einherjar]";
-		mes "You have already awakened the Star Fragment into your Twilight Weapon!";
-		mes "May its celestial power guide your journey across Midgard.";
+		mes "You have successfully awakened the star fragment within your Twilight Weapon.";
+		mes "May its celestial radiance guide your blade in purging the corruption stirring beneath Prontera.";
+		next;
+		if (select("Thank you, Einherjar.:I lost/shattered my Twilight Weapon... (Re-forge)") == 2) {
+			callfunc "F_EinherjarReCraftMenu";
+		}
 		close;
 	}
 
@@ -167,118 +231,254 @@ function	script	F_EinherjarWeaponMenu	{
 
 	switch(BaseJob) {
 		case Job_Knight:
-		case Job_Crusader:
-		case Job_Swordman:
 			mes "[Einherjar]";
-			mes "As a martial warrior, choose the Twilight Weapon that suits your battle discipline:";
+			mes "As a Knight, inspect the Twilight Weapons for your battle discipline:";
+			mes "- " + mesitemlink(40018); // 2H Sword
+			mes "- " + mesitemlink(40019); // 2H Spear
+			mes "- " + mesitemlink(40020); // 1H Spear
+			mes "- " + mesitemlink(40013); // 1H Sword
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
 			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
 			switch(select("Twilight Slayer (2H Sword):Twilight Lance (2H Spear):Twilight Pike (1H Spear):Twilight Edge (1H Sword):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40006, 40018, 723, 2, 719, 1; break; // 2 Ruby, 1 Amethyst
-				case 2: callfunc "F_CraftTwilightWeapon", 40006, 40019, 723, 2, 721, 1; break; // 2 Ruby, 1 Emerald
-				case 3: callfunc "F_CraftTwilightWeapon", 40006, 40020, 723, 1, 721, 1, 728, 1; break; // 1 Ruby, 1 Emerald, 1 Topaz
-				case 4: callfunc "F_CraftTwilightWeapon", 40001, 40013, 726, 1, 723, 1, 728, 1; break; // 1 Sapphire, 1 Ruby, 1 Topaz
+				case 1: callfunc "F_CraftTwilightWeapon", 40018, 723, 2, 719, 1; break; // 2 Ruby, 1 Amethyst
+				case 2: callfunc "F_CraftTwilightWeapon", 40019, 723, 2, 721, 1; break; // 2 Ruby, 1 Emerald
+				case 3: callfunc "F_CraftTwilightWeapon", 40020, 723, 1, 721, 1, 728, 1; break; // 1 Ruby, 1 Emerald, 1 Topaz
+				case 4: callfunc "F_CraftTwilightWeapon", 40013, 726, 1, 723, 1, 728, 1; break; // 1 Sapphire, 1 Ruby, 1 Topaz
+				default: close;
+			}
+			break;
+
+		case Job_Crusader:
+			mes "[Einherjar]";
+			mes "As a Crusader, inspect the Twilight Weapons for your holy discipline:";
+			mes "- " + mesitemlink(40019); // 2H Spear
+			mes "- " + mesitemlink(40020); // 1H Spear
+			mes "- " + mesitemlink(40013); // 1H Sword
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Lance (2H Spear):Twilight Pike (1H Spear):Twilight Edge (1H Sword):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40019, 723, 2, 721, 1; break; // 2 Ruby, 1 Emerald
+				case 2: callfunc "F_CraftTwilightWeapon", 40020, 723, 1, 721, 1, 728, 1; break; // 1 Ruby, 1 Emerald, 1 Topaz
+				case 3: callfunc "F_CraftTwilightWeapon", 40013, 726, 1, 723, 1, 728, 1; break; // 1 Sapphire, 1 Ruby, 1 Topaz
 				default: close;
 			}
 			break;
 
 		case Job_Priest:
-		case Job_Monk:
-		case Job_Acolyte:
 			mes "[Einherjar]";
-			mes "As a holy servant, choose the Twilight Weapon that suits your sacred calling:";
+			mes "As a Priest, inspect the Twilight Weapons for your sacred calling:";
+			mes "- " + mesitemlink(40015); // Mace
+			mes "- " + mesitemlink(40022); // Book
+			mes "- " + mesitemlink(40016); // 2H Staff
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
 			next;
-			switch(select("Twilight Flail (Mace):Twilight Staff (2H Staff):Twilight Codex (Book):Twilight Claws (Knuckles):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40005, 40015, 723, 1, 722, 2; break; // 1 Ruby, 2 Pearl
-				case 2: callfunc "F_CraftTwilightWeapon", 40003, 40016, 726, 2, 720, 1; break; // 2 Sapphire, 1 Aquamarine
-				case 3: callfunc "F_CraftTwilightWeapon", 40003, 40022, 726, 2, 719, 1; break; // 2 Sapphire, 1 Amethyst
-				case 4: callfunc "F_CraftTwilightWeapon", 40005, 40023, 719, 2, 727, 1; break; // 2 Amethyst, 1 Opal
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Flail (Mace):Twilight Codex (Book):Twilight Staff (2H Staff):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40015, 723, 1, 722, 2; break; // 1 Ruby, 2 Pearl
+				case 2: callfunc "F_CraftTwilightWeapon", 40022, 726, 2, 719, 1; break; // 2 Sapphire, 1 Amethyst
+				case 3: callfunc "F_CraftTwilightWeapon", 40016, 726, 2, 720, 1; break; // 2 Sapphire, 1 Aquamarine
+				default: close;
+			}
+			break;
+
+		case Job_Monk:
+			mes "[Einherjar]";
+			mes "As a Monk, inspect the Twilight Weapons for your martial devotion:";
+			mes "- " + mesitemlink(40015); // Mace
+			mes "- " + mesitemlink(40023); // Knuckles
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Flail (Mace):Twilight Claws (Knuckles):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40015, 723, 1, 722, 2; break; // 1 Ruby, 2 Pearl
+				case 2: callfunc "F_CraftTwilightWeapon", 40023, 719, 2, 727, 1; break; // 2 Amethyst, 1 Opal
 				default: close;
 			}
 			break;
 
 		case Job_Wizard:
-		case Job_Sage:
-		case Job_Mage:
 			mes "[Einherjar]";
-			mes "As a master of arcana, choose the Twilight Weapon that channels your magic:";
+			mes "As a Wizard, inspect the Twilight Weapon for your arcane power:";
+			mes "- " + mesitemlink(40016); // 2H Staff
+			mes "^888888(Tip: Click the weapon link above to inspect its full stats & description!)^000000";
 			next;
+			mes "[Einherjar]";
+			mes "Reshape your Star Fragment into the Twilight Staff?";
+			switch(select("Twilight Staff (2H Staff):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40016, 726, 2, 720, 1; break; // 2 Sapphire, 1 Aquamarine
+				default: close;
+			}
+			break;
+
+		case Job_Sage:
+			mes "[Einherjar]";
+			mes "As a Sage, inspect the Twilight Weapons for your elemental knowledge:";
+			mes "- " + mesitemlink(40016); // 2H Staff
+			mes "- " + mesitemlink(40022); // Book
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
 			switch(select("Twilight Staff (2H Staff):Twilight Codex (Book):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40003, 40016, 726, 2, 720, 1; break; // 2 Sapphire, 1 Aquamarine
-				case 2: callfunc "F_CraftTwilightWeapon", 40003, 40022, 726, 2, 719, 1; break; // 2 Sapphire, 1 Amethyst
+				case 1: callfunc "F_CraftTwilightWeapon", 40016, 726, 2, 720, 1; break; // 2 Sapphire, 1 Aquamarine
+				case 2: callfunc "F_CraftTwilightWeapon", 40022, 726, 2, 719, 1; break; // 2 Sapphire, 1 Amethyst
 				default: close;
 			}
 			break;
 
 		case Job_Hunter:
-		case Job_Bard:
-		case Job_Dancer:
-		case Job_Archer:
 			mes "[Einherjar]";
-			mes "As a master of range and melody, choose your Twilight Weapon:";
+			mes "As a Hunter, inspect the Twilight Weapons for your tracking art:";
+			mes "- " + mesitemlink(40014); // Bow
+			mes "- " + mesitemlink(40012); // Dagger
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
 			next;
-			switch(select("Twilight Long Bow (Bow):Twilight Violin (Instrument):Twilight Whip (Whip):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40004, 40014, 727, 2, 719, 1; break; // 2 Opal, 1 Amethyst
-				case 2: callfunc "F_CraftTwilightWeapon", 40004, 40024, 723, 1, 726, 1, 722, 1; break; // 1 Ruby, 1 Sapphire, 1 Pearl
-				case 3: callfunc "F_CraftTwilightWeapon", 40004, 40025, 723, 1, 726, 1, 722, 1; break; // 1 Ruby, 1 Sapphire, 1 Pearl
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Long Bow (Bow):Twilight Kukri (Dagger):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40014, 727, 2, 719, 1; break; // 2 Opal, 1 Amethyst
+				case 2: callfunc "F_CraftTwilightWeapon", 40012, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
+				default: close;
+			}
+			break;
+
+		case Job_Bard:
+			mes "[Einherjar]";
+			mes "As a Bard, inspect the Twilight Instrument for your melodies:";
+			mes "- " + mesitemlink(40024); // Instrument
+			mes "^888888(Tip: Click the weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Reshape your Star Fragment into the Twilight Violin?";
+			switch(select("Twilight Violin (Instrument):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40024, 723, 1, 726, 1, 722, 1; break; // 1 Ruby, 1 Sapphire, 1 Pearl
+				default: close;
+			}
+			break;
+
+		case Job_Dancer:
+			mes "[Einherjar]";
+			mes "As a Dancer, inspect the Twilight Whip for your performance:";
+			mes "- " + mesitemlink(40025); // Whip
+			mes "^888888(Tip: Click the weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Reshape your Star Fragment into the Twilight Whip?";
+			switch(select("Twilight Whip (Whip):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40025, 723, 1, 726, 1, 722, 1; break; // 1 Ruby, 1 Sapphire, 1 Pearl
 				default: close;
 			}
 			break;
 
 		case Job_Blacksmith:
-		case Job_Alchemist:
-		case Job_Merchant:
 			mes "[Einherjar]";
-			mes "As a master of forge and alchemy, choose your Twilight Weapon:";
+			mes "As a Blacksmith, inspect the Twilight Weapon for your forge craft:";
+			mes "- " + mesitemlink(40017); // 2H Axe
+			mes "^888888(Tip: Click the weapon link above to inspect its full stats & description!)^000000";
 			next;
+			mes "[Einherjar]";
+			mes "Reshape your Star Fragment into the Twilight Cleaver?";
+			switch(select("Twilight Cleaver (2H Axe):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40017, 723, 2, 728, 1; break; // 2 Ruby, 1 Topaz
+				default: close;
+			}
+			break;
+
+		case Job_Alchemist:
+			mes "[Einherjar]";
+			mes "As an Alchemist, inspect the Twilight Weapons for your discipline:";
+			mes "- " + mesitemlink(40017); // 2H Axe
+			mes "- " + mesitemlink(40015); // Mace
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
 			switch(select("Twilight Cleaver (2H Axe):Twilight Flail (Mace):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40002, 40017, 723, 2, 728, 1; break; // 2 Ruby, 1 Topaz
-				case 2: callfunc "F_CraftTwilightWeapon", 40002, 40015, 723, 1, 722, 2; break; // 1 Ruby, 2 Pearl
+				case 1: callfunc "F_CraftTwilightWeapon", 40017, 723, 2, 728, 1; break; // 2 Ruby, 1 Topaz
+				case 2: callfunc "F_CraftTwilightWeapon", 40015, 723, 1, 722, 2; break; // 1 Ruby, 2 Pearl
 				default: close;
 			}
 			break;
 
 		case Job_Assassin:
-		case Job_Rogue:
-		case Job_Thief:
 			mes "[Einherjar]";
-			mes "As a shadow operative, choose your Twilight Weapon:";
+			mes "As an Assassin, inspect the Twilight Weapons for your shadow art:";
+			mes "- " + mesitemlink(40013); // 1H Sword
+			mes "- " + mesitemlink(40021); // Katar
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
 			next;
-			switch(select("Twilight Kukri (Dagger):Twilight Jamadhar (Katar):Twilight Edge (1H Sword):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40000, 40012, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
-				case 2: callfunc "F_CraftTwilightWeapon", 40000, 40021, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
-				case 3: callfunc "F_CraftTwilightWeapon", 40000, 40013, 726, 1, 723, 1, 728, 1; break; // 1 Sapphire, 1 Ruby, 1 Topaz
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Edge (1H Sword):Twilight Jamadhar (Katar):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40013, 726, 1, 723, 1, 728, 1; break; // 1 Sapphire, 1 Ruby, 1 Topaz
+				case 2: callfunc "F_CraftTwilightWeapon", 40021, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
+				default: close;
+			}
+			break;
+
+		case Job_Rogue:
+			mes "[Einherjar]";
+			mes "As a Rogue, inspect the Twilight Weapons for your covert craft:";
+			mes "- " + mesitemlink(40012); // Dagger
+			mes "- " + mesitemlink(40014); // Bow
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
+			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Kukri (Dagger):Twilight Long Bow (Bow):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40012, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
+				case 2: callfunc "F_CraftTwilightWeapon", 40014, 727, 2, 719, 1; break; // 2 Opal, 1 Amethyst
 				default: close;
 			}
 			break;
 
 		case Job_Ninja:
 			mes "[Einherjar]";
-			mes "As a shadow master of Amatsu, choose your Twilight Weapon:";
+			mes "As a Ninja, inspect the Twilight Weapons for your ninjutsu:";
+			mes "- " + mesitemlink(40012); // Dagger
+			mes "- " + mesitemlink(40027); // Huuma
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
 			next;
-			switch(select("Twilight Huuma Shuriken (Huuma):Twilight Kukri (Dagger):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40011, 40027, 723, 2, 727, 1; break; // 2 Ruby, 1 Opal
-				case 2: callfunc "F_CraftTwilightWeapon", 40010, 40012, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
+			mes "[Einherjar]";
+			mes "Choose the Twilight Weapon to reshape your Star Fragment into:";
+			switch(select("Twilight Kukri (Dagger):Twilight Huuma Shuriken (Huuma):Cancel")) {
+				case 1: callfunc "F_CraftTwilightWeapon", 40012, 723, 1, 719, 1, 726, 1; break; // 1 Ruby, 1 Amethyst, 1 Sapphire
+				case 2: callfunc "F_CraftTwilightWeapon", 40027, 723, 2, 727, 1; break; // 2 Ruby, 1 Opal
 				default: close;
 			}
 			break;
 
 		case Job_Gunslinger:
 			mes "[Einherjar]";
-			mes "As a master marksman, choose your Twilight Firearm:";
+			mes "As a Gunslinger, inspect the Twilight Firearms for your marksmanship:";
+			mes "- " + mesitemlink(40032); // Revolver
+			mes "- " + mesitemlink(40031); // Rifle
+			mes "- " + mesitemlink(40029); // Shotgun
+			mes "- " + mesitemlink(40028); // Gatling
+			mes "- " + mesitemlink(40030); // Launcher
+			mes "^888888(Tip: Click any weapon link above to inspect its full stats & description!)^000000";
 			next;
+			mes "[Einherjar]";
+			mes "Choose the Twilight Firearm to reshape your Star Fragment into:";
 			switch(select("Twilight Revolver (Revolver):Twilight Rifle (Rifle):Twilight Shotgun (Shotgun):Twilight Gatling Gun (Gatling):Twilight Grenade Launcher (Launcher):Cancel")) {
-				case 1: callfunc "F_CraftTwilightWeapon", 40008, 40032, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
-				case 2: callfunc "F_CraftTwilightWeapon", 40009, 40031, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
-				case 3: callfunc "F_CraftTwilightWeapon", 40008, 40029, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
-				case 4: callfunc "F_CraftTwilightWeapon", 40008, 40028, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
-				case 5: callfunc "F_CraftTwilightWeapon", 40009, 40030, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
+				case 1: callfunc "F_CraftTwilightWeapon", 40032, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
+				case 2: callfunc "F_CraftTwilightWeapon", 40031, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
+				case 3: callfunc "F_CraftTwilightWeapon", 40029, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
+				case 4: callfunc "F_CraftTwilightWeapon", 40028, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
+				case 5: callfunc "F_CraftTwilightWeapon", 40030, 727, 1, 719, 1, 728, 1; break; // 1 Opal, 1 Amethyst, 1 Topaz
 				default: close;
 			}
 			break;
 
 		default:
 			mes "[Einherjar]";
-			mes "Your path is unique in Midgard. May the Star Fragment guide your journey.";
+			mes "Only heroes who have advanced to their 2nd Job class (or Ninja / Gunslinger) can awaken the Star Fragment into a Twilight Weapon!";
 			close;
 	}
 }
@@ -310,22 +510,6 @@ function	script	F_ValkyrieReroll	{
 		mes "[Valkyrie Kara]";
 		mes "Mortal hero, you must equip your ^0000FFTwilight Weapon^000000!";
 		mes "I must analyze its Star Fragment directly to tune its cosmic alignment.";
-		close;
-	}
-
-	// Fetch inventory index of the equipped weapon
-	getinventorylist;
-	.@real_inv_idx = -1;
-	for (.@i = 0; .@i < @inventorylist_count; ++.@i) {
-		if (@inventorylist_id[.@i] == .@wep_id && @inventorylist_equip[.@i] > 0) {
-			.@real_inv_idx = @inventorylist_idx[.@i];
-			break;
-		}
-	}
-
-	if (.@real_inv_idx < 0) {
-		mes "[Valkyrie Kara]";
-		mes "Could not locate your equipped weapon in inventory!";
 		close;
 	}
 
@@ -385,14 +569,15 @@ function	script	F_ValkyrieReroll	{
 	}
 
 	mes "[Valkyrie Kara]";
-	mes "Mortal hero... I see you carry the ^0000FF" + getitemname(.@wep_id) + "^000000.";
+	mes "Mortal hero... I see you carry " + mesitemlink(.@wep_id) + ".";
 	mes "As a Valkyrie of Valhalla, I can commune with the cosmic constellations to re-align the living Star Fragment within your weapon.";
 	next;
 	mes "[Valkyrie Kara]";
 	mes "For this celestial alignment, the stars demand ^0000FF100,000 Zeny^000000 and its elemental birthstones:";
-	if (.@g1 > 0) mes "- " + .@c1 + "x " + getitemname(.@g1);
-	if (.@g2 > 0) mes "- " + .@c2 + "x " + getitemname(.@g2);
-	if (.@g3 > 0) mes "- " + .@c3 + "x " + getitemname(.@g3);
+	if (.@g1 > 0) mes "- " + .@c1 + "x " + mesitemlink(.@g1);
+	if (.@g2 > 0) mes "- " + .@c2 + "x " + mesitemlink(.@g2);
+	if (.@g3 > 0) mes "- " + .@c3 + "x " + mesitemlink(.@g3);
+	mes "^888888(Tip: Click any item link above to inspect details!)^000000";
 	next;
 
 	if (select("Perform Celestial Alignment:Cancel") == 2) {
@@ -425,33 +610,58 @@ function	script	F_ValkyrieReroll	{
 	if (.@g2 > 0) delitem .@g2, .@c2;
 	if (.@g3 > 0) delitem .@g3, .@c3;
 
-	// Unequip weapon temporarily to modify options on inventory index
+	// 1. Unequip weapon FIRST
 	unequip .@eq_slot;
 
-	// Generate and apply 3 high-tier random options tailored to weapon type
+	// 2. Fetch inventory index AFTER unequipped
+	getinventorylist;
+	.@real_inv_idx = -1;
+	for (.@i = 0; .@i < @inventorylist_count; ++.@i) {
+		if (@inventorylist_id[.@i] == .@wep_id && @inventorylist_equip[.@i] == 0) {
+			.@real_inv_idx = @inventorylist_idx[.@i];
+			break;
+		}
+	}
+
+	if (.@real_inv_idx < 0) {
+		mes "[Valkyrie Kara]";
+		mes "Could not locate your unequipped weapon in inventory!";
+		close;
+	}
+
+	// 3. Generate and apply Durability (Slot 0) + 2-3 High-Tier Random Options
 	callfunc("F_ApplyTwilightRandomOptions", .@wep_id, .@real_inv_idx);
 
-	// Re-equip the weapon with new options applied
+	// 4. Re-equip the weapon with new options applied
 	equip .@wep_id;
 
 	specialeffect2 EF_REPAIRWEAPON;
 
 	mes "[Valkyrie Kara]";
 	mes "The Star Fragment blazes with cosmic light!";
-	mes "Your ^0000FF" + getitemname(.@wep_id) + "^000000 has been re-aligned with new Random Options!";
+	mes "Your " + mesitemlink(.@wep_id) + " has been re-aligned with new Random Options & Durability!";
 	close;
 }
 
 
 // --------------------------------------------------------------
+// --------------------------------------------------------------
 // Helper Function: F_ApplyTwilightRandomOptions
-// Replicates server's exact C++ pc_apply_random_option engine for Twilight Weapons
+// Replicates server's exact C++ pc_apply_random_option engine (pc.cpp) for Twilight Weapons
+// Applies 1-3 custom random options + Durability (ID 243, value 100)
 // --------------------------------------------------------------
 function	script	F_ApplyTwilightRandomOptions	{
-	.@wep_id = getarg(0);
+	.@wep_id  = getarg(0);
 	.@inv_idx = getarg(1);
 
-	// 1. Resolve Group ID based on Weapon Subtype (matching pc_resolve_random_group)
+	if (.@inv_idx < 0) return;
+
+	// Reset all 5 option slots first
+	for (.@o = 0; .@o < 5; ++.@o) {
+		setitemoption .@inv_idx, .@o, 0, 0;
+	}
+
+	// 1. Resolve Group ID matching pc_resolve_random_group in C++ (pc.cpp)
 	.@group_id = 8; // Default: Physical Weapon (Group 8)
 	if (.@wep_id == 40016) { // Twilight Staff (2H Staff)
 		.@group_id = 9; // Magic (Group 9)
@@ -460,7 +670,7 @@ function	script	F_ApplyTwilightRandomOptions	{
 		.@group_id = 10; // Mixed (Group 10)
 	}
 
-	// 2. Determine number of slots to apply (1 to 3 slots)
+	// 2. Determine number of random option slots to apply (1 to 3 slots) matching C++ pc.cpp
 	.@slots_to_apply = 1;
 	if (rand(100) < 40) {
 		.@slots_to_apply = 2;
@@ -469,16 +679,18 @@ function	script	F_ApplyTwilightRandomOptions	{
 		}
 	}
 
-	// 3. Build Pool array based on group_id matching server's C++ pools
+	// 3. Build Pool array matching exact C++ pools in pc.cpp
 	deletearray .@pool[0], getarraysize(.@pool);
 	.@pool_size = 0;
 
-	if (.@group_id == 9) { // MÁGICAS (Group 9)
+	if (.@group_id == 9) { // MAGICAL (Group 9)
 		setarray .@s[0], 19, 151, 152, 155, 156, 168, 170, 171, 172;
 		for (.@i = 0; .@i < 9; ++.@i) { .@pool[.@pool_size] = .@s[.@i]; .@pool_size++; }
+		// Elemental Magic Dmg (57, 59, 61, 63, 65, 67, 69, 71, 73, 75)
 		for (.@i = 57; .@i <= 75; .@i += 2) { .@pool[.@pool_size] = .@i; .@pool_size++; }
+		// Magic Dmg vs Size (187, 188, 189)
 		for (.@i = 187; .@i <= 189; ++.@i) { .@pool[.@pool_size] = .@i; .@pool_size++; }
-	} else if (.@group_id == 10) { // MIXTAS (Group 10)
+	} else if (.@group_id == 10) { // MIXED (Group 10)
 		setarray .@s[0], 16, 17, 18, 19, 24, 147, 148, 151, 152, 153, 154, 155, 156, 164, 168, 170, 171, 172;
 		for (.@i = 0; .@i < 18; ++.@i) { .@pool[.@pool_size] = .@s[.@i]; .@pool_size++; }
 		for (.@i = 37; .@i <= 55; .@i += 2) { .@pool[.@pool_size] = .@i; .@pool_size++; }
@@ -486,20 +698,18 @@ function	script	F_ApplyTwilightRandomOptions	{
 		for (.@i = 97; .@i <= 106; ++.@i) { .@pool[.@pool_size] = .@i; .@pool_size++; }
 		for (.@i = 157; .@i <= 159; ++.@i) { .@pool[.@pool_size] = .@i; .@pool_size++; }
 		for (.@i = 187; .@i <= 189; ++.@i) { .@pool[.@pool_size] = .@i; .@pool_size++; }
-	} else { // FÍSICAS (Group 8)
+	} else { // PHYSICAL (Group 8)
 		setarray .@s[0], 16, 17, 18, 24, 147, 148, 153, 154, 164, 171, 172;
 		for (.@i = 0; .@i < 11; ++.@i) { .@pool[.@pool_size] = .@s[.@i]; .@pool_size++; }
+		// Elemental Phys Dmg (37, 39, 41, 43, 45, 47, 49, 51, 53, 55)
 		for (.@i = 37; .@i <= 55; .@i += 2) { .@pool[.@pool_size] = .@i; .@pool_size++; }
+		// Phys Dmg vs Race (97-106)
 		for (.@i = 97; .@i <= 106; ++.@i) { .@pool[.@pool_size] = .@i; .@pool_size++; }
+		// Phys Dmg vs Size (157-159)
 		for (.@i = 157; .@i <= 159; ++.@i) { .@pool[.@pool_size] = .@i; .@pool_size++; }
 	}
 
-	// 4. Reset all 5 option slots first
-	for (.@o = 0; .@o < 5; ++.@o) {
-		setitemoption .@inv_idx, .@o, 0, 0;
-	}
-
-	// 5. Select options and apply value caps (wlv = 4 for all Twilight weapons)
+	// 4. Semaphores (Conflict Checks matching C++ pc.cpp)
 	.@applied = 0;
 	.@has_phys_ele = 0; .@has_mag_ele = 0; .@has_race_dmg = 0;
 	.@has_size_phys = 0; .@has_size_mag = 0;
@@ -512,7 +722,7 @@ function	script	F_ApplyTwilightRandomOptions	{
 		.@pool[.@target_idx] = .@pool[.@pool_size - 1];
 		.@pool_size--;
 
-		// Conflict checks (semáforos) matching server's C++ code
+		// Conflict checks (semÃ¡foros)
 		.@conflict = 0;
 		if (.@id_opt >= 37 && .@id_opt <= 55) {
 			if (.@has_phys_ele) .@conflict = 1; else .@has_phys_ele = 1;
@@ -528,17 +738,18 @@ function	script	F_ApplyTwilightRandomOptions	{
 
 		if (.@conflict) continue;
 
-		// Calculate value based on wlv = 4 formulas matching server's C++ code
+		// Calculate exact values matching C++ pc.cpp formulas for Weapon Level 4
 		.@val = 1;
 		switch(.@id_opt) {
 			case 17: .@val = rand(1, 25); break; // ATK (cap 25 for wlv 4)
 			case 19: .@val = rand(1, 35); break; // MATK (cap 35 for wlv 4)
 			case 18: .@val = rand(1, 15); break; // HIT (cap 15)
 			case 16: case 24: case 170: case 171: .@val = rand(1, 10); break; // ASPD %, CRIT (cap 10 for wlv 4)
-			case 153: case 154: case 168: .@val = rand(1, 20); break; // cap 20 for wlv 4
-			case 155: case 156: .@val = rand(1, 15); break;
-			case 147: case 148: case 151: case 152: .@val = rand(1, 5); break;
-			case 187: case 188: case 189: .@val = rand(1, 10); break;
+			case 153: case 154: .@val = rand(1, 20); break; // Long/Short Range Dmg % (cap 20 for wlv 4)
+			case 155: case 156: .@val = rand(1, 15); break; // Cast time (cap 15)
+			case 168: .@val = rand(1, 20); break; // Magic Dmg % (cap 20 for wlv 4)
+			case 147: case 148: case 151: case 152: .@val = rand(1, 5); break; // Def/Mdef Ignore % (cap 5)
+			case 187: case 188: case 189: .@val = rand(1, 10); break; // Magic Dmg vs Size (cap 10 for wlv 4)
 			default:
 				if ((.@id_opt >= 37 && .@id_opt <= 55) || (.@id_opt >= 57 && .@id_opt <= 75) || (.@id_opt >= 97 && .@id_opt <= 106) || (.@id_opt >= 157 && .@id_opt <= 159) || .@id_opt == 164 || .@id_opt == 172) {
 					.@val = rand(1, 15); // cap 15 for wlv 4
@@ -552,6 +763,269 @@ function	script	F_ApplyTwilightRandomOptions	{
 		.@applied++;
 	}
 
+	// 5. Appending Durability Option (ID 243, Value 100) matching pc_set_item_durability
+	if (.@applied < 5) {
+		setitemoption .@inv_idx, .@applied, 243, 100;
+	}
+
 	return;
 }
 
+// --------------------------------------------------------------
+// Helper Function: F_HasAnyStarWeapon
+// Returns 1 if player possesses ANY Star Fragment weapon (40000-40032) in inventory or equipped
+// --------------------------------------------------------------
+function	script	F_HasAnyStarWeapon	{
+	for (.@i = 40000; .@i <= 40032; ++.@i) {
+		if (countitem(.@i) > 0) return 1;
+	}
+	return 0;
+}
+
+// --------------------------------------------------------------
+// Helper Function: F_ReCraftTwilightWeapon
+// Restores a broken/lost Twilight Weapon using 10x Star Crumbs (1000)
+// --------------------------------------------------------------
+function	script	F_ReCraftTwilightWeapon	{
+	.@twilight_id = getarg(0);
+	.@gem1        = getarg(1, 0);
+	.@count1      = getarg(2, 0);
+	.@gem2        = getarg(3, 0);
+	.@count2      = getarg(4, 0);
+	.@gem3        = getarg(5, 0);
+	.@count3      = getarg(6, 0);
+
+	if (callfunc("F_HasAnyStarWeapon")) {
+		mes "[Einherjar]";
+		mes "You already possess a Star Fragment weapon in your equipment or inventory!";
+		close;
+	}
+
+	if (!checkweight(.@twilight_id, 1)) {
+		mes "[Einherjar]";
+		mes "Your inventory is too heavy or full to receive this weapon!";
+		close;
+	}
+
+	mes "[Einherjar]";
+	mes "To perform a Celestial Re-forge for " + mesitemlink(.@twilight_id) + ", I require:";
+	mes "- 10x " + mesitemlink(1000) + " (Star Crumbs)";
+	mes "- 10x " + mesitemlink(984);
+	mes "- 20x " + mesitemlink(999);
+	if (.@gem1 > 0) mes "- " + .@count1 + "x " + mesitemlink(.@gem1);
+	if (.@gem2 > 0) mes "- " + .@count2 + "x " + mesitemlink(.@gem2);
+	if (.@gem3 > 0) mes "- " + .@count3 + "x " + mesitemlink(.@gem3);
+	mes "^888888(Tip: Click any item link above to inspect its details!)^000000";
+	next;
+	if (select("Yes, re-forge " + getitemname(.@twilight_id) + "!:Cancel") == 2) close;
+
+	if (countitem(1000) < 10 || countitem(984) < 10 || countitem(999) < 20) {
+		mes "[Einherjar]";
+		mes "Transaction aborted! You do not possess all required base materials in your inventory.";
+		close;
+	}
+	if (.@gem1 > 0 && (countitem(.@gem1) - isequippedcnt(.@gem1)) < .@count1) { mes "[Einherjar]"; mes "Transaction aborted! You do not possess the required unequipped birthstones."; close; }
+	if (.@gem2 > 0 && (countitem(.@gem2) - isequippedcnt(.@gem2)) < .@count2) { mes "[Einherjar]"; mes "Transaction aborted! You do not possess the required unequipped birthstones."; close; }
+	if (.@gem3 > 0 && (countitem(.@gem3) - isequippedcnt(.@gem3)) < .@count3) { mes "[Einherjar]"; mes "Transaction aborted! You do not possess the required unequipped birthstones."; close; }
+
+	delitem 1000, 10;
+	delitem 984, 10;
+	delitem 999, 20;
+	if (.@gem1 > 0) delitem .@gem1, .@count1;
+	if (.@gem2 > 0) delitem .@gem2, .@count2;
+	if (.@gem3 > 0) delitem .@gem3, .@count3;
+
+	getitem .@twilight_id, 1;
+	SOUL_QUEST1_STEP = 5;
+
+	getinventorylist;
+	.@new_inv_idx = -1;
+	for (.@i = 0; .@i < @inventorylist_count; ++.@i) {
+		if (@inventorylist_id[.@i] == .@twilight_id && @inventorylist_equip[.@i] == 0) {
+			.@new_inv_idx = @inventorylist_idx[.@i];
+			break;
+		}
+	}
+
+	if (.@new_inv_idx >= 0) {
+		callfunc("F_ApplyTwilightRandomOptions", .@twilight_id, .@new_inv_idx);
+	}
+	equip .@twilight_id;
+	specialeffect2 EF_REPAIRWEAPON;
+
+	mes "[Einherjar]";
+	mes "The Star Fragment ignites with celestial radiance!";
+	mes "Receive your restored weapon: " + mesitemlink(.@twilight_id) + "!";
+	close;
+}
+
+// --------------------------------------------------------------
+// Helper Function: F_ReForgeDawnWeapon
+// Re-forges a lost/broken Dawn Weapon for 10x Star Dust (ID 1001)
+// Args:
+//   getarg(0): Primary Dawn Weapon ID
+//   getarg(1): Secondary Dawn Weapon ID (optional, 0 if none)
+// --------------------------------------------------------------
+function	script	F_ReForgeDawnWeapon	{
+	.@wep1 = getarg(0);
+	.@wep2 = getarg(1, 0);
+
+	if (callfunc("F_HasAnyStarWeapon")) {
+		mes "You already possess a Star Fragment weapon in your equipment or inventory!";
+		close;
+	}
+
+	mes "Have you lost or broken your sacred Star Fragment weapon?";
+	mes "I can perform a Celestial Re-forge to restore your weapon, but I require ^0000FF10x " + mesitemlink(1001) + "^000000 as a cosmic catalyst.";
+	mes "- Option 1: " + mesitemlink(.@wep1);
+	if (.@wep2 > 0) {
+		mes "- Option 2: " + mesitemlink(.@wep2);
+	}
+	next;
+
+	if (.@wep2 > 0) {
+		.@choice = select(getitemname(.@wep1) + " (10x Star Dust):" + getitemname(.@wep2) + " (10x Star Dust):Cancel");
+		if (.@choice == 3) close;
+		if (.@choice == 2) .@wep1 = .@wep2;
+	} else {
+		if (select("Re-forge " + getitemname(.@wep1) + " (10x Star Dust):Cancel") == 2) close;
+	}
+
+	if (countitem(1001) < 10) {
+		mes "You do not possess 10x " + mesitemlink(1001) + " in your inventory!";
+		close;
+	}
+
+	delitem 1001, 10;
+	getitem .@wep1, 1;
+	specialeffect2 EF_REPAIRWEAPON;
+
+	mes "The Star Dust blazes with celestial light!";
+	mes "Receive your restored " + mesitemlink(.@wep1) + "!";
+	close;
+}
+
+// --------------------------------------------------------------
+// Helper Function: F_EinherjarReCraftMenu
+// Re-craft menu for Twilight Weapons
+// --------------------------------------------------------------
+function	script	F_EinherjarReCraftMenu	{
+	mes "[Einherjar]";
+	mes "I can perform a Celestial Restoration using ^0000FF10x " + mesitemlink(1000) + "^000000 to re-craft a Twilight Weapon for your class!";
+	next;
+
+	switch(BaseJob) {
+		case Job_Knight:
+			switch(select("Twilight Slayer (2H Sword):Twilight Lance (2H Spear):Twilight Pike (1H Spear):Twilight Edge (1H Sword):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40018, 723, 2, 719, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40019, 723, 2, 721, 1; break;
+				case 3: callfunc "F_ReCraftTwilightWeapon", 40020, 723, 1, 721, 1, 728, 1; break;
+				case 4: callfunc "F_ReCraftTwilightWeapon", 40013, 726, 1, 723, 1, 728, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Crusader:
+			switch(select("Twilight Lance (2H Spear):Twilight Pike (1H Spear):Twilight Edge (1H Sword):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40019, 723, 2, 721, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40020, 723, 1, 721, 1, 728, 1; break;
+				case 3: callfunc "F_ReCraftTwilightWeapon", 40013, 726, 1, 723, 1, 728, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Priest:
+			switch(select("Twilight Flail (Mace):Twilight Codex (Book):Twilight Staff (2H Staff):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40015, 723, 1, 722, 2; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40022, 726, 2, 719, 1; break;
+				case 3: callfunc "F_ReCraftTwilightWeapon", 40016, 726, 2, 720, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Monk:
+			switch(select("Twilight Flail (Mace):Twilight Claws (Knuckles):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40015, 723, 1, 722, 2; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40023, 719, 2, 727, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Wizard:
+			switch(select("Twilight Staff (2H Staff):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40016, 726, 2, 720, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Sage:
+			switch(select("Twilight Staff (2H Staff):Twilight Codex (Book):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40016, 726, 2, 720, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40022, 726, 2, 719, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Hunter:
+			switch(select("Twilight Long Bow (Bow):Twilight Kukri (Dagger):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40014, 727, 2, 719, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40012, 723, 1, 719, 1, 726, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Bard:
+			switch(select("Twilight Violin (Instrument):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40024, 723, 1, 726, 1, 722, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Dancer:
+			switch(select("Twilight Whip (Whip):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40025, 723, 1, 726, 1, 722, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Blacksmith:
+			switch(select("Twilight Cleaver (2H Axe):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40017, 723, 2, 728, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Alchemist:
+			switch(select("Twilight Cleaver (2H Axe):Twilight Flail (Mace):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40017, 723, 2, 728, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40015, 723, 1, 722, 2; break;
+				default: close;
+			}
+			break;
+		case Job_Assassin:
+			switch(select("Twilight Edge (1H Sword):Twilight Jamadhar (Katar):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40013, 726, 1, 723, 1, 728, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40021, 723, 1, 719, 1, 726, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Rogue:
+			switch(select("Twilight Kukri (Dagger):Twilight Long Bow (Bow):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40012, 723, 1, 719, 1, 726, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40014, 727, 2, 719, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Ninja:
+			switch(select("Twilight Kukri (Dagger):Twilight Huuma Shuriken (Huuma):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40012, 723, 1, 719, 1, 726, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40027, 723, 2, 727, 1; break;
+				default: close;
+			}
+			break;
+		case Job_Gunslinger:
+			switch(select("Twilight Revolver (Revolver):Twilight Rifle (Rifle):Twilight Shotgun (Shotgun):Twilight Gatling Gun (Gatling):Twilight Grenade Launcher (Launcher):Cancel")) {
+				case 1: callfunc "F_ReCraftTwilightWeapon", 40032, 727, 1, 719, 1, 728, 1; break;
+				case 2: callfunc "F_ReCraftTwilightWeapon", 40031, 727, 1, 719, 1, 728, 1; break;
+				case 3: callfunc "F_ReCraftTwilightWeapon", 40029, 727, 1, 719, 1, 728, 1; break;
+				case 4: callfunc "F_ReCraftTwilightWeapon", 40028, 727, 1, 719, 1, 728, 1; break;
+				case 5: callfunc "F_ReCraftTwilightWeapon", 40030, 727, 1, 719, 1, 728, 1; break;
+				default: close;
+			}
+			break;
+		default:
+			mes "[Einherjar]";
+			mes "Only 2nd Job heroes can re-craft Twilight Weapons!";
+			close;
+	}
+}

@@ -1909,7 +1909,7 @@ Body:
     Flags:
       NoSave: true
       NoClearance: true
-  - Status: Modechange
+  - Status: MODECHANGE
     DurationLookup: NPC_EMOTION
     CalcFlags:
       Mode: true
@@ -7093,3 +7093,6 @@ Body:
       All: true
     Flags:
       NoRemoveOnDead: false
+  - Status: Poison_Mist
+    Icon: EFST_POISON_MIST
+    DurationLookup: MH_POISON_MIST

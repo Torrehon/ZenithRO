@@ -332,11 +332,17 @@ int32 battle_damage(block_list *src, block_list *target, int64 damage, int16 div
 	if (src)
 		sd = BL_CAST(BL_PC, src);
 	FreeBlockLock freeLock;
+	// --- EXCLUSIVO MUG (RG_STEALCOIN): Ejecutar robo antes del daño fatal ---
+	if (skill_id == RG_STEALCOIN && attack_type && !status_isdead(*target) && additional_effects) {
+		skill_additional_effect(src, target, skill_id, skill_lv, attack_type, dmg_lv, tick);
+	}
+
 	if (sd && battle_check_coma(*sd, *target, (e_battle_flag)attack_type))
 		dmg_change = status_damage(src, target, damage, 0, delay, 16, skill_id); // Coma attack
 	else if (dmg_lv > ATK_BLOCK)
 		dmg_change = status_fix_damage(src, target, damage, delay, skill_id);
-	if (attack_type && !status_isdead(*target) && additional_effects)
+
+	if (skill_id != RG_STEALCOIN && attack_type && !status_isdead(*target) && additional_effects)
 		skill_additional_effect(src, target, skill_id, skill_lv, attack_type, dmg_lv, tick);
 	if (dmg_lv > ATK_BLOCK && attack_type && additional_effects)
 		skill_counter_additional_effect(src, target, skill_id, skill_lv, attack_type, tick);
@@ -5902,8 +5908,12 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 							matk_portion = base_matk; 
 						}
 					} else {
-						// Finger Offensive, Investigate y Ki Explosion: 25% para AMBOS
-						matk_portion = (base_matk * 25) / 100;
+						// Finger Offensive, Investigate y Ki Explosion: 50% para Asceta, 25% para Mimic Soul
+						if (is_ascetic) {
+							matk_portion = (base_matk * 50) / 100;
+						} else if (is_mimic) {
+							matk_portion = (base_matk * 25) / 100;
+						}
 					}
 
 					// 3. Lo inyectamos de forma segura en las variables de daño base si hay bono
@@ -8719,7 +8729,8 @@ static bool battle_get_exception_ai( const block_list &src) {
 		return false;
 
 	switch (md->special_state.ai) {
-		case AI_ABR:
+		case AI_FLORA:
+    case AI_ABR:
 		case AI_ATTACK:
 		case AI_BIONIC:
 		case AI_ZANZOU:

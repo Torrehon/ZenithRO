@@ -7163,3 +7163,450 @@ Body:
     Title: Soul Quest - The Celestial Call
   - Id: 90004
     Title: Soul Quest - Pantheon of Heroes
+
+  # Custom Hunting Quests System
+  - Id: 70001
+    Title: "Prontera Hunt: Poring"
+    Targets:
+      - Mob: PORING
+        Count: 25
+  - Id: 70002
+    Title: "Prontera Hunt: Lunatic"
+    Targets:
+      - Mob: LUNATIC
+        Count: 25
+  - Id: 70003
+    Title: "Prontera Hunt: Thief Bug"
+    Targets:
+      - Mob: THIEF_BUG
+        Count: 25
+  - Id: 70004
+    Title: "Prontera Hunt: Rocker"
+    Targets:
+      - Mob: ROCKER
+        Count: 25
+  - Id: 70005
+    Title: "Prontera Hunt: Tarou"
+    Targets:
+      - Mob: TAROU
+        Count: 25
+  - Id: 70006
+    Title: "Prontera Hunt: Poporing"
+    Targets:
+      - Mob: POPORING
+        Count: 25
+  - Id: 70007
+    Title: "Prontera Hunt: Mandragora"
+    Targets:
+      - Mob: MANDRAGORA
+        Count: 25
+  - Id: 70008
+    Title: "Prontera Hunt: Vadon"
+    Targets:
+      - Mob: VADON
+        Count: 20
+  - Id: 70009
+    Title: "Prontera Hunt: Yoyo"
+    Targets:
+      - Mob: YOYO
+        Count: 20
+  - Id: 70010
+    Title: "Prontera Hunt: Cornutus"
+    Targets:
+      - Mob: CORNUTUS
+        Count: 20
+  - Id: 70011
+    Title: "Prontera Hunt: Marc"
+    Targets:
+      - Mob: MARC
+        Count: 15
+  - Id: 70012
+    Title: "Prontera Hunt: Swordfish"
+    Targets:
+      - Mob: SWORD_FISH
+        Count: 15
+  - Id: 70013
+    Title: "Prontera Hunt: Merman"
+    Targets:
+      - Mob: MERMAN
+        Count: 15
+  - Id: 70014
+    Title: "Prontera Hunt: Strouf"
+    Targets:
+      - Mob: STROUF
+        Count: 15
+  - Id: 70015
+    Title: "Prontera Hunt: Deviace"
+    Targets:
+      - Mob: DEVIACE
+        Count: 15
+  - Id: 70016
+    Title: "Prontera Hunt: Lost Knight"
+    Targets:
+      - Mob: L_SEYREN
+        Count: 15
+  - Id: 70017
+    Title: "Prontera Hunt: Fallen Crusader"
+    Targets:
+      - Mob: G_L_YGNIZEM
+        Count: 15
+  - Id: 70018
+    Title: "Prontera Hunt: Zombie Guard"
+    Targets:
+      - Mob: ZOMBIE_GUARD
+        Count: 15
+  - Id: 70019
+    Title: "Prontera Hunt: Mastering"
+    Targets:
+      - Mob: Mastering
+        Count: 1
+  - Id: 70020
+    Title: "Prontera Hunt: Vocal"
+    Targets:
+      - Mob: VOCAL
+        Count: 1
+  - Id: 70021
+    Title: "Prontera Hunt: Eclipse"
+    Targets:
+      - Mob: ECLIPSE
+        Count: 1
+  - Id: 70101
+    Title: "Geffen Hunt: Fabre"
+    Targets:
+      - Mob: FABRE
+        Count: 25
+  - Id: 70102
+    Title: "Geffen Hunt: Roda Frog"
+    Targets:
+      - Mob: RODA_FROG
+        Count: 25
+  - Id: 70103
+    Title: "Geffen Hunt: Ambernite"
+    Targets:
+      - Mob: AMBERNITE
+        Count: 25
+  - Id: 70104
+    Title: "Geffen Hunt: Coco"
+    Targets:
+      - Mob: COCO
+        Count: 20
+  - Id: 70105
+    Title: "Geffen Hunt: Orc Warrior"
+    Targets:
+      - Mob: ORK_WARRIOR
+        Count: 20
+  - Id: 70106
+    Title: "Geffen Hunt: Orc Lady"
+    Targets:
+      - Mob: ORC_LADY
+        Count: 20
+  - Id: 70107
+    Title: "Geffen Hunt: Caramel"
+    Targets:
+      - Mob: CARAMEL
+        Count: 20
+  - Id: 70108
+    Title: "Geffen Hunt: Orc Skeleton"
+    Targets:
+      - Mob: ORC_SKELETON
+        Count: 20
+  - Id: 70109
+    Title: "Geffen Hunt: Zenorc"
+    Targets:
+      - Mob: ZENORC
+        Count: 20
+  - Id: 70110
+    Title: "Geffen Hunt: Skeleton Worker"
+    Targets:
+      - Mob: SKEL_WORKER
+        Count: 20
+  - Id: 70111
+    Title: "Geffen Hunt: Myst"
+    Targets:
+      - Mob: MYST
+        Count: 20
+  - Id: 70112
+    Title: "Geffen Hunt: Nightmare"
+    Targets:
+      - Mob: NIGHTMARE
+        Count: 15
+  - Id: 70113
+    Title: "Geffen Hunt: Jakk"
+    Targets:
+      - Mob: JAKK
+        Count: 15
+  - Id: 70114
+    Title: "Geffen Hunt: Deviruchi"
+    Targets:
+      - Mob: DEVIRUCHI
+        Count: 15
+  - Id: 70115
+    Title: "Geffen Hunt: High Orc"
+    Targets:
+      - Mob: HIGH_ORC
+        Count: 15
+  - Id: 70116
+    Title: "Geffen Hunt: Raydric"
+    Targets:
+      - Mob: RAYDRIC
+        Count: 15
+  - Id: 70117
+    Title: "Geffen Hunt: Evil Druid"
+    Targets:
+      - Mob: EVIL_DRUID
+        Count: 15
+  - Id: 70118
+    Title: "Geffen Hunt: Sting"
+    Targets:
+      - Mob: STING
+        Count: 15
+  - Id: 70119
+    Title: "Geffen Hunt: Abysmal Knight"
+    Targets:
+      - Mob: KNIGHT_OF_ABYSS
+        Count: 10
+  - Id: 70120
+    Title: "Geffen Hunt: Toad"
+    Targets:
+      - Mob: TOAD
+        Count: 1
+  - Id: 70121
+    Title: "Geffen Hunt: Pouring"
+    Targets:
+      - Mob: C_POURING
+        Count: 1
+  - Id: 70201
+    Title: "Morroc Hunt: Picky"
+    Targets:
+      - Mob: PICKY
+        Count: 25
+  - Id: 70202
+    Title: "Morroc Hunt: Baby Desert Wolf"
+    Targets:
+      - Mob: DESERT_WOLF_B
+        Count: 25
+  - Id: 70203
+    Title: "Morroc Hunt: Drops"
+    Targets:
+      - Mob: DROPS
+        Count: 25
+  - Id: 70204
+    Title: "Morroc Hunt: Muka"
+    Targets:
+      - Mob: MUKA
+        Count: 25
+  - Id: 70205
+    Title: "Morroc Hunt: Peco Peco"
+    Targets:
+      - Mob: PECOPECO
+        Count: 20
+  - Id: 70206
+    Title: "Morroc Hunt: Zerom"
+    Targets:
+      - Mob: ZEROM
+        Count: 20
+  - Id: 70207
+    Title: "Morroc Hunt: Requiem"
+    Targets:
+      - Mob: REQUIEM
+        Count: 20
+  - Id: 70208
+    Title: "Morroc Hunt: Hode"
+    Targets:
+      - Mob: HODE
+        Count: 20
+  - Id: 70209
+    Title: "Morroc Hunt: Frilldora"
+    Targets:
+      - Mob: FRILLDORA
+        Count: 20
+  - Id: 70210
+    Title: "Morroc Hunt: Mummy"
+    Targets:
+      - Mob: MUMMY
+        Count: 20
+  - Id: 70211
+    Title: "Morroc Hunt: Verit"
+    Targets:
+      - Mob: VERIT
+        Count: 20
+  - Id: 70212
+    Title: "Morroc Hunt: Marduk"
+    Targets:
+      - Mob: MARDUK
+        Count: 15
+  - Id: 70213
+    Title: "Morroc Hunt: Pasana"
+    Targets:
+      - Mob: PASANA
+        Count: 15
+  - Id: 70214
+    Title: "Morroc Hunt: Minorous"
+    Targets:
+      - Mob: MINOROUS
+        Count: 15
+  - Id: 70215
+    Title: "Morroc Hunt: Isis"
+    Targets:
+      - Mob: ISIS
+        Count: 15
+  - Id: 70216
+    Title: "Morroc Hunt: Anubis"
+    Targets:
+      - Mob: ANUBIS
+        Count: 10
+  - Id: 70217
+    Title: "Morroc Hunt: Ancient Mummy"
+    Targets:
+      - Mob: ANCIENT_MUMMY
+        Count: 10
+  - Id: 70218
+    Title: "Morroc Hunt: Dragon Fly"
+    Targets:
+      - Mob: DRAGON_FLY
+        Count: 1
+  - Id: 70301
+    Title: "Payon Hunt: Willow"
+    Targets:
+      - Mob: WILOW
+        Count: 25
+  - Id: 70302
+    Title: "Payon Hunt: Spore"
+    Targets:
+      - Mob: SPORE
+        Count: 25
+  - Id: 70303
+    Title: "Payon Hunt: Familiar"
+    Targets:
+      - Mob: FARMILIAR
+        Count: 25
+  - Id: 70304
+    Title: "Payon Hunt: Zombie"
+    Targets:
+      - Mob: ZOMBIE
+        Count: 25
+  - Id: 70305
+    Title: "Payon Hunt: Skeleton"
+    Targets:
+      - Mob: SKELETON
+        Count: 25
+  - Id: 70306
+    Title: "Payon Hunt: Wolf"
+    Targets:
+      - Mob: WOLF
+        Count: 20
+  - Id: 70307
+    Title: "Payon Hunt: Bigfoot"
+    Targets:
+      - Mob: BIGFOOT
+        Count: 20
+  - Id: 70308
+    Title: "Payon Hunt: Munak"
+    Targets:
+      - Mob: MUNAK
+        Count: 20
+  - Id: 70309
+    Title: "Payon Hunt: Bongun"
+    Targets:
+      - Mob: BON_GUN
+        Count: 20
+  - Id: 70310
+    Title: "Payon Hunt: Sohee"
+    Targets:
+      - Mob: SOHEE
+        Count: 20
+  - Id: 70311
+    Title: "Payon Hunt: Archer Skeleton"
+    Targets:
+      - Mob: ARCHER_SKELETON
+        Count: 20
+  - Id: 70312
+    Title: "Payon Hunt: Dokebi"
+    Targets:
+      - Mob: DOKEBI
+        Count: 20
+  - Id: 70313
+    Title: "Payon Hunt: Nine Tail"
+    Targets:
+      - Mob: NINE_TAIL
+        Count: 15
+  - Id: 70314
+    Title: "Payon Hunt: Dragon Tail"
+    Targets:
+      - Mob: DRAGON_TAIL
+        Count: 15
+  - Id: 70315
+    Title: "Payon Hunt: Skeleton General"
+    Targets:
+      - Mob: SKELETON_GENERAL
+        Count: 10
+  - Id: 70316
+    Title: "Payon Hunt: Vagabond Wolf"
+    Targets:
+      - Mob: VAGABOND_WOLF
+        Count: 1
+  - Id: 70401
+    Title: "Aldebaran Hunt: Thief Bug Female"
+    Targets:
+      - Mob: THIEF_BUG_
+        Count: 25
+  - Id: 70402
+    Title: "Aldebaran Hunt: Dustiness"
+    Targets:
+      - Mob: DUSTINESS
+        Count: 25
+  - Id: 70403
+    Title: "Aldebaran Hunt: Argos"
+    Targets:
+      - Mob: ARGOS
+        Count: 25
+  - Id: 70404
+    Title: "Aldebaran Hunt: Flora"
+    Targets:
+      - Mob: FLORA
+        Count: 25
+  - Id: 70405
+    Title: "Aldebaran Hunt: Stem Worm"
+    Targets:
+      - Mob: STEM_WORM
+        Count: 20
+  - Id: 70406
+    Title: "Aldebaran Hunt: Argiope"
+    Targets:
+      - Mob: ARGIOPE
+        Count: 20
+  - Id: 70407
+    Title: "Aldebaran Hunt: Earth Petite"
+    Targets:
+      - Mob: PETIT
+        Count: 20
+  - Id: 70408
+    Title: "Aldebaran Hunt: Bathory"
+    Targets:
+      - Mob: BATHORY
+        Count: 20
+  - Id: 70409
+    Title: "Aldebaran Hunt: Punk"
+    Targets:
+      - Mob: PUNK
+        Count: 20
+  - Id: 70410
+    Title: "Aldebaran Hunt: Grand Peco"
+    Targets:
+      - Mob: GRAND_PECO
+        Count: 15
+  - Id: 70411
+    Title: "Aldebaran Hunt: Rideword"
+    Targets:
+      - Mob: RIDEWORD
+        Count: 15
+  - Id: 70412
+    Title: "Aldebaran Hunt: Alarm"
+    Targets:
+      - Mob: ALARM
+        Count: 15
+  - Id: 70413
+    Title: "Aldebaran Hunt: Clock"
+    Targets:
+      - Mob: CLOCK
+        Count: 15

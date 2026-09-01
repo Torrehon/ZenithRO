@@ -1,278 +1,470 @@
 // ==============================================================
-// CUSTOM CHAMPION MONSTER MAP SPAWNS
+// CUSTOM CHAMPION MONSTER MAP SPAWNS (Grouped by Base Monster)
 // ==============================================================
-// Natural map spawns for Champion Monsters across Fields and Dungeons.
-// STRICT RULE: Exactly ONE Champion Monster per map (100% unique maps).
 // Respawn time: 1 hour (3600000 ms)
 // ==============================================================
 
-// --- PRONTERA FIELDS & SEWERS ---
-prt_fild08,0,0	monster	Poring Ringleader	2696,1,3600000
-prt_fild01,0,0	monster	Furious Poring	2697,1,3600000
-prt_fild05,0,0	monster	Elusive Poring	2698,1,3600000
-moc_fild02,0,0	monster	Swift Poring	2699,1,3600000
+// --- Acidus  ---
+abyss_03,0,0	monster	--en--	2913,1,3600000
+abyss_02,0,0	monster	--en--	2912,1,3600000
 
-prt_fild06,0,0	monster	Stainer Champion	2645,1,3600000
-prt_fild07,0,0	monster	Spore Champion	2646,1,3600000
-prt_fild09,0,0	monster	Savage Babe Champion	2671,1,3600000
-prt_fild11,0,0	monster	Rocker Champion	2680,1,3600000
-prt_fild02,0,0	monster	Willow Champion	2615,1,3600000
-prt_fild03,0,0	monster	Furious Yoyo	2608,1,3600000
-prt_fild04,0,0	monster	Creamy Champion	2863,1,3600000
+// --- Alarm ---
+c_tower3,0,0	monster	--en--	2910,1,3600000
 
-prt_sewb1,0,0	monster	Swift Thief Bug	2632,1,3600000
-prt_sewb2,0,0	monster	Solid Thief Bug	2633,1,3600000
-prt_sewb3,0,0	monster	Tarou Champion	2638,1,3600000
-prt_sewb4,0,0	monster	Familiar Champion	2833,1,3600000
+// --- Alligator ---
+cmd_fild01,0,0	monster	--en--	2907,1,3600000
+cmd_fild04,0,0	monster	--en--	2907,1,3600000
+cmd_fild05,0,0	monster	--en--	2907,1,3600000
 
-prt_maze01,0,0	monster	Rafflesia Champion	2695,1,3600000
-prt_maze02,0,0	monster	Swift Violy	2623,1,3600000
-prt_maze03,0,0	monster	Furious Violy	2621,1,3600000
+// --- Ambernite ---
+gef_fild09,0,0	monster	--en--	2905,1,3600000
 
+// --- Anacondaq ---
+moc_fild13,0,0	monster	--en--	2904,1,3600000
 
-// --- PAYON FIELDS & DUNGEONS ---
-pay_fild01,0,0	monster	Worm Tail Champion	2610,1,3600000
-pay_fild02,0,0	monster	Wolf Champion	2613,1,3600000
-pay_fild03,0,0	monster	Solid Poporing	2701,1,3600000
-pay_fild04,0,0	monster	Smokie Champion	2654,1,3600000
-pay_fild05,0,0	monster	Poison Spore Champion	2705,1,3600000
-pay_fild07,0,0	monster	Furious Poporing	2702,1,3600000
-pay_fild08,0,0	monster	Snake Champion	2653,1,3600000
-pay_fild09,0,0	monster	Swift Elder Willow	2840,1,3600000
-pay_fild10,0,0	monster	Greatest General Champion	2809,1,3600000
+// --- Arclouse ---
+moc_pryd06,0,0	monster	--en--	2893,1,3600000
+gl_dun01,0,0	monster	--en--	2893,1,3600000
+alde_dun01,0,0	monster	--en--	2893,1,3600000
 
-pay_dun00,0,0	monster	Zombie Champion	2606,1,3600000
-pay_dun01,0,0	monster	Furious Soldier Skeleton	2648,1,3600000
-pay_dun02,0,0	monster	Sohee Champion	2651,1,3600000
-pay_dun03,0,0	monster	Solid Skeleton General	2658,1,3600000
-pay_dun04,0,0	monster	Li Me Mang Ryang Champion	2778,1,3600000
+// --- Argiope ---
+mjolnir_05,0,0	monster	--en--	2891,1,3600000
 
+// --- Banshee ---
+abbey01,0,0	monster	--en--	2887,1,3600000
 
-// --- MOROCC FIELDS, PYRAMIDS & SPHINX ---
-moc_fild01,0,0	monster	Scorpion Champion	2670,1,3600000
-moc_fild03,0,0	monster	Pecopeco Champion	2718,1,3600000
-moc_fild07,0,0	monster	Magnolia Champion	2768,1,3600000
-moc_fild11,0,0	monster	Golem Champion	2812,1,3600000
-moc_fild12,0,0	monster	Picky Champion	2712,1,3600000
-moc_fild13,0,0	monster	Furious Desert Wolf Babe	2855,1,3600000
-moc_fild14,0,0	monster	Metaller Champion	2754,1,3600000
-moc_fild16,0,0	monster	Sand Man Champion	2674,1,3600000
-moc_fild17,0,0	monster	Solid Desert Wolf Babe	2856,1,3600000
-moc_fild18,0,0	monster	Muka Champion	2741,1,3600000
-moc_fild19,0,0	monster	Solid Morocc	2743,1,3600000
-moc_fild20,0,0	monster	Furious Morocc	2742,1,3600000
+// --- Banshee Master ---
+arug_dun01,0,0	monster	--en--	2886,1,3600000
 
-moc_pryd02,0,0	monster	Solid Soldier Skeleton	2649,1,3600000
-moc_pryd03,0,0	monster	Furious Mummy	2739,1,3600000
-moc_pryd04,0,0	monster	Solid Mummy	2740,1,3600000
-moc_pryd05,0,0	monster	Solid Minorous	2747,1,3600000
-moc_pryd06,0,0	monster	Furious Minorous	2748,1,3600000
+// --- Bathory ---
+alde_dun04,0,0	monster	--en--	2885,1,3600000
 
-in_sphinx2,0,0	monster	Requiem Champion	2687,1,3600000
-in_sphinx3,0,0	monster	Solid Side Winder	2663,1,3600000
-in_sphinx4,0,0	monster	Marduk Champion	2763,1,3600000
-in_sphinx5,0,0	monster	Pasana Champion	2719,1,3600000
+// --- Breeze ---
+hu_fild01,0,0	monster	--en--	2880,1,3600000
+hu_fild04,0,0	monster	--en--	2881,1,3600000
 
+// --- Carat ---
+gl_cas01,0,0	monster	--en--	2877,1,3600000
 
-// --- GEFFEN FIELDS, DUNGEONS & ORC VILLAGE ---
-gef_fild00,0,0	monster	Mandragora Champion	2765,1,3600000
-gef_fild01,0,0	monster	Swift Roda Frog	2679,1,3600000
-gef_fild02,0,0	monster	Swift Poporing	2703,1,3600000
-gef_fild03,0,0	monster	Orc Warrior Champion	2722,1,3600000
-gef_fild04,0,0	monster	Swift Fabre	2836,1,3600000
-gef_fild05,0,0	monster	Wild Rose Champion	2616,1,3600000
-gef_fild06,0,0	monster	Furious Petit	2714,1,3600000
-gef_fild07,0,0	monster	Swift Petit	2715,1,3600000
-gef_fild08,0,0	monster	Swift Side Winder	2662,1,3600000
-gef_fild09,0,0	monster	Furious Savage	2673,1,3600000
-gef_fild10,0,0	monster	Solid Savage	2672,1,3600000
-gef_fild11,0,0	monster	Furious Goblin	2813,1,3600000
-gef_fild12,0,0	monster	Solid Goblin	2814,1,3600000
-gef_fild14,0,0	monster	Orc Lady Champion	2725,1,3600000
+// --- Clock ---
+c_tower2,0,0	monster	--en--	2870,1,3600000
 
-orcsdun01,0,0	monster	Orc Zombie Champion	2723,1,3600000
-orcsdun02,0,0	monster	Orc Skeleton Champion	2724,1,3600000
+// --- Coco ---
+mjolnir_09,0,0	monster	--en--	2868,1,3600000
+ayo_fild01,0,0	monster	--en--	2868,1,3600000
 
-gef_dun00,0,0	monster	Marionette Champion	2761,1,3600000
-gef_dun01,0,0	monster	Whisper Champion	2618,1,3600000
-gef_dun02,0,0	monster	Solid Violy	2622,1,3600000
+// --- Cornutus ---
+iz_dun02,0,0	monster	--en--	2864,1,3600000
 
+// --- Creamy ---
+prt_fild04,0,0	monster	--en--	2863,1,3600000
 
-// --- MJOLNIR MOUNTAINS & COAL MINES ---
-mjolnir_03,0,0	monster	Furious Argiope	2891,1,3600000
-mjolnir_04,0,0	monster	Giant Hornet Champion	2821,1,3600000
-mjolnir_09,0,0	monster	Hornet Champion	2798,1,3600000
-mjolnir_11,0,0	monster	Horn Champion	2800,1,3600000
-mjolnir_12,0,0	monster	Mantis Champion	2764,1,3600000
+// --- Deathword ---
+tha_t02,0,0	monster	--en--	2859,1,3600000
+tha_t05,0,0	monster	--en--	2858,1,3600000
+tha_t06,0,0	monster	--en--	2858,1,3600000
 
-mjo_dun01,0,0	monster	Furious Thief Bug	2634,1,3600000
-mjo_dun02,0,0	monster	Steel Chonchon Champion	2642,1,3600000
-mjo_dun03,0,0	monster	Skel Worker Champion	2660,1,3600000
+// --- Desert Wolf B ---
+moc_fild13,0,0	monster	--en--	2855,1,3600000
 
+// --- Disguise ---
+nif_fild01,0,0	monster	--en--	2852,1,3600000
 
-// --- BYALAN ISLAND (IZLUD DUNGEON) ---
-iz_dun00,0,0	monster	Shellfish Champion	2666,1,3600000
-iz_dun01,0,0	monster	Plankton Champion	2707,1,3600000
-iz_dun02,0,0	monster	Phen Champion	2713,1,3600000
-iz_dun03,0,0	monster	Cornutus Champion	2864,1,3600000
-iz_dun04,0,0	monster	Merman Champion	2757,1,3600000
+// --- Dokebi ---
+pay_dun04,0,0	monster	--en--	2851,1,3600000
 
+// --- Drainliar ---
+gef_dun01,0,0	monster	--en--	2847,1,3600000
 
-// --- GLAST HEIM ---
-gl_cas01,0,0	monster	Solid Raydric	2690,1,3600000
-gl_cas02,0,0	monster	Wanderer Champion	2620,1,3600000
-gl_church,0,0	monster	Wraith Champion	2733,1,3600000
-gl_chyard,0,0	monster	Owl Duke Champion	2721,1,3600000
-gl_dun01,0,0	monster	Solid Mimic	2753,1,3600000
-gl_dun02,0,0	monster	Furious Raydric	2691,1,3600000
-gl_knt01,0,0	monster	Swift Wanderer	2734,1,3600000
-gl_prison,0,0	monster	Zombie Prisoner Champion	2604,1,3600000
-gl_prison1,0,0	monster	Injustice Champion	2792,1,3600000
-gl_sew01,0,0	monster	Sting Champion	2640,1,3600000
-gl_sew02,0,0	monster	Furious Gargoyle	2826,1,3600000
-gl_sew03,0,0	monster	Anolian Champion	2899,1,3600000
-gl_sew04,0,0	monster	Solid Gargoyle	2827,1,3600000
-gl_step,0,0	monster	Wind Ghost Champion	2614,1,3600000
+// --- Drops ---
+moc_fild07,0,0	monster	--en--	2845,1,3600000
 
+// --- Dryad ---
+um_fild01,0,0	monster	--en--	2843,1,3600000
 
-// --- ALDEBARAN & CLOCK TOWER ---
-c_tower1,0,0	monster	Solid Rideword	2681,1,3600000
-c_tower2,0,0	monster	Clock Ringleader	2870,1,3600000
-c_tower3,0,0	monster	Alarm Champion	2910,1,3600000
-c_tower4,0,0	monster	Furious Mimic	2752,1,3600000
+// --- Dustiness ---
+yuno_fild01,0,0	monster	--en--	2842,1,3600000
+yuno_fild12,0,0	monster	--en--	2842,1,3600000
 
-alde_dun01,0,0	monster	Furious Arclouse	2893,1,3600000
-alde_dun02,0,0	monster	High Orc Champion	2805,1,3600000
-alde_dun03,0,0	monster	Furious Penomena	2716,1,3600000
-alde_dun04,0,0	monster	Bathory Champion	2885,1,3600000
+// --- Echio ---
+ra_san04,0,0	monster	--en--	2841,1,3600000
 
+// --- Elder Wilow ---
+pay_fild07,0,0	monster	--en--	2839,1,3600000
 
-// --- COMODO & BEACH DUNGEONS ---
-cmd_fild01,0,0	monster	Raggler Champion	2694,1,3600000
-cmd_fild02,0,0	monster	Thara Frog Champion	2635,1,3600000
-cmd_fild03,0,0	monster	See Otter Champion	2668,1,3600000
-cmd_fild04,0,0	monster	Stem Worm Champion	2641,1,3600000
-cmd_fild07,0,0	monster	Solider Champion	2647,1,3600000
-cmd_fild08,0,0	monster	Alligator Champion	2907,1,3600000
-cmd_fild09,0,0	monster	Green Iguana Champion	2808,1,3600000
+// --- Evil Druid ---
+gl_church,0,0	monster	--en--	2838,1,3600000
 
-beach_dun,0,0	monster	Medusa Champion	2759,1,3600000
-beach_dun2,0,0	monster	Stalactic Golem Champion	2644,1,3600000
-beach_dun3,0,0	monster	Dragon Tail Champion	2848,1,3600000
+// --- Explosion ---
+mag_dun01,0,0	monster	--en--	2837,1,3600000
 
+// --- Fabre ---
+gef_fild04,0,0	monster	--en--	2836,1,3600000
 
-// --- YUNO FIELDS & MAGMA DUNGEON ---
-yuno_fild01,0,0	monster	Fur Seal Champion	2829,1,3600000
-yuno_fild02,0,0	monster	Furious Harpy	2806,1,3600000
-yuno_fild03,0,0	monster	Furious Grand Peco	2810,1,3600000
-yuno_fild04,0,0	monster	Solid Grand Peco	2811,1,3600000
-yuno_fild05,0,0	monster	Fake Angel Champion	2834,1,3600000
-yuno_fild06,0,0	monster	Furious Sleeper	2655,1,3600000
-yuno_fild07,0,0	monster	Solid Geographer	2825,1,3600000
-yuno_fild08,0,0	monster	Solid Harpy	2807,1,3600000
-yuno_fild09,0,0	monster	Driller Champion	2846,1,3600000
-yuno_fild11,0,0	monster	Solid Sleeper	2656,1,3600000
-yuno_fild12,0,0	monster	Furious Goat	2815,1,3600000
+// --- Farmiliar ---
+mjo_dun01,0,0	monster	--en--	2833,1,3600000
 
-mag_dun01,0,0	monster	Knocker Champion	2786,1,3600000
-mag_dun02,0,0	monster	Kasa Champion	2788,1,3600000
+// --- Ferus  ---
+abyss_01,0,0	monster	--en--	2832,1,3600000
 
+// --- Gargoyle ---
+gl_sew04,0,0	monster	--en--	2827,1,3600000
+gl_sew01,0,0	monster	--en--	2826,1,3600000
+gl_sew02,0,0	monster	--en--	2826,1,3600000
 
-// --- LOCALIZED & EXPANSION DUNGEONS (AMATSU, GONRYUN, LOUYANG, AYOTHAYA, UMBALA) ---
-ama_fild01,0,0	monster	Karakasa Champion	2789,1,3600000
-ama_dun01,0,0	monster	Miyabi Ningyo Champion	2746,1,3600000
-ama_dun02,0,0	monster	Poison Toad Champion	2704,1,3600000
-ama_dun03,0,0	monster	Shinobi Champion	2664,1,3600000
+// --- Geographer ---
+yuno_fild07,0,0	monster	--en--	2825,1,3600000
 
-gon_dun01,0,0	monster	Live Peach Tree Champion	2775,1,3600000
-gon_dun02,0,0	monster	Wicked Nymph Champion	2617,1,3600000
+// --- Ghoul ---
+gef_dun02,0,0	monster	--en--	2822,1,3600000
+gl_chyard,0,0	monster	--en--	2822,1,3600000
 
-lou_dun01,0,0	monster	Increase Soil Champion	2793,1,3600000
-lou_dun02,0,0	monster	Furious Skeleton General	2659,1,3600000
-lou_dun03,0,0	monster	Leib Olmai Champion	2780,1,3600000
+// --- Goblin 1 ---
+prt_fild11,0,0	monster	--en--	2813,1,3600000
+gef_fild11,0,0	monster	--en--	2813,1,3600000
 
-ayo_fild01,0,0	monster	Dustiness Champion	2842,1,3600000
-ayo_fild02,0,0	monster	Solid Yoyo	2609,1,3600000
-ayo_dun01,0,0	monster	Leaf Cat Champion	2781,1,3600000
-ayo_dun02,0,0	monster	Tamruan Champion	2639,1,3600000
+// --- Golem ---
+moc_fild11,0,0	monster	--en--	2812,1,3600000
 
-um_fild01,0,0	monster	Dryad Champion	2843,1,3600000
-um_fild02,0,0	monster	Wootan Fighter Champion	2611,1,3600000
-um_dun01,0,0	monster	Kind of Beetle Champion	2787,1,3600000
+// --- Greatest General ---
+pay_fild10,0,0	monster	--en--	2809,1,3600000
 
+// --- High Orc ---
+alde_dun02,0,0	monster	--en--	2805,1,3600000
 
-// --- EINBROCH & LIGHTHALZEN ---
-ein_fild04,0,0	monster	Holden Champion	2745,1,3600000
-ein_fild05,0,0	monster	Pitman Champion	2708,1,3600000
-ein_fild07,0,0	monster	Furious Metaling	2755,1,3600000
-ein_fild09,0,0	monster	Porcellio Champion	2700,1,3600000
+// --- Hill Wind 1 ---
+ra_fild05,0,0	monster	--en--	2803,1,3600000
 
-ein_dun01,0,0	monster	Mineral Champion	2750,1,3600000
-ein_dun02,0,0	monster	Noxious Champion	2727,1,3600000
+// --- Hode ---
+moc_fild17,0,0	monster	--en--	2802,1,3600000
 
-lhz_fild01,0,0	monster	Solid Metaling	2756,1,3600000
-lhz_fild02,0,0	monster	Stem Worm Champion	2641,1,3600000
+// --- Hodremlin ---
+ra_san03,0,0	monster	--en--	2801,1,3600000
 
-lhz_dun01,0,0	monster	Venomous Champion	2624,1,3600000
-lhz_dun02,0,0	monster	Wickebine Tres Champion	2782,1,3600000
-lhz_dun03,0,0	monster	Rawrel Champion	2692,1,3600000
+// --- Hunter Fly ---
+gef_dun00,0,0	monster	--en--	2797,1,3600000
 
+// --- Hyegun ---
+lou_dun02,0,0	monster	--en--	2796,1,3600000
+lou_dun03,0,0	monster	--en--	2796,1,3600000
 
-// --- RACHEL, VEINS & ICE DUNGEON ---
-ra_fild01,0,0	monster	Roween Champion	2677,1,3600000
-ra_fild05,0,0	monster	Furious Hill Wind	2803,1,3600000
-ra_fild08,0,0	monster	Solid Hill Wind	2804,1,3600000
+// --- Ice Titan ---
+ice_dun03,0,0	monster	--en--	2794,1,3600000
 
-ra_san01,0,0	monster	Vanberk Champion	2627,1,3600000
-ra_san02,0,0	monster	Echio Champion	2841,1,3600000
-ra_san03,0,0	monster	Hodremlin Champion	2801,1,3600000
-ra_san04,0,0	monster	Skogul Champion	2657,1,3600000
+// --- Increase Soil ---
+lou_dun01,0,0	monster	--en--	2793,1,3600000
 
-ve_fild03,0,0	monster	Magmaring Champion	2769,1,3600000
-ve_fild07,0,0	monster	Stapo Champion	2643,1,3600000
+// --- Injustice ---
+gl_prison1,0,0	monster	--en--	2792,1,3600000
 
-ice_dun01,0,0	monster	Siroma Champion	2661,1,3600000
-ice_dun02,0,0	monster	Furious Freezer	2830,1,3600000
-ice_dun03,0,0	monster	Ice Titan Champion	2794,1,3600000
+// --- Isilla ---
+ra_san02,0,0	monster	--en--	2791,1,3600000
 
+// --- Karakasa ---
+ama_fild01,0,0	monster	--en--	2789,1,3600000
 
-// --- HUGEL, ABYSS LAKES, THANATOS, ABBEY, SPLENDIDE, MANUK & THOR ---
-hu_fild01,0,0	monster	Furious Breeze	2880,1,3600000
-hu_fild02,0,0	monster	Elusive Novus	2731,1,3600000
-hu_fild04,0,0	monster	Solid Breeze	2881,1,3600000
-hu_fild05,0,0	monster	Furious Novus	2728,1,3600000
-hu_fild07,0,0	monster	Solid Novus	2729,1,3600000
+// --- Kind Of Beetle ---
+yuno_fild02,0,0	monster	--en--	2787,1,3600000
+yuno_fild09,0,0	monster	--en--	2787,1,3600000
 
-abyss_01,0,0	monster	Ferus Champion	2832,1,3600000
-abyss_02,0,0	monster	Solid Acidus	2912,1,3600000
-abyss_03,0,0	monster	Acidus Ringleader	2913,1,3600000
+// --- Kobold 1 ---
+gef_fild06,0,0	monster	--en--	2785,1,3600000
+gef_fild08,0,0	monster	--en--	2785,1,3600000
+gef_fild12,0,0	monster	--en--	2785,1,3600000
 
-tha_t01,0,0	monster	Furious Deathword	2858,1,3600000
-tha_t02,0,0	monster	Solid Deathword	2859,1,3600000
-tha_t03,0,0	monster	Zakudam Champion	2607,1,3600000
-tha_t04,0,0	monster	Plasma Y Champion	2706,1,3600000
-tha_t05,0,0	monster	Shelter Champion	2665,1,3600000
-tha_t06,0,0	monster	Furious Retribution	2684,1,3600000
-tha_t07,0,0	monster	Solace Champion	2650,1,3600000
-tha_t08,0,0	monster	Solid Retribution	2685,1,3600000
-tha_t09,0,0	monster	Swift Retribution	2686,1,3600000
-tha_t10,0,0	monster	Observation Champion	2726,1,3600000
+// --- Kobold Archer ---
+cmd_fild08,0,0	monster	--en--	2784,1,3600000
 
-abbey01,0,0	monster	Banshee Champion	2887,1,3600000
-abbey02,0,0	monster	Zombie Slaughter Champion	2603,1,3600000
-abbey03,0,0	monster	Necromancer Champion	2736,1,3600000
-arug_dun01,0,0	monster	Banshee Master Champion	2886,1,3600000
+// --- L Eremes ---
+lhz_dun03,0,0	monster	--en--	2783,1,3600000
 
-spl_fild01,0,0	monster	Nepenthes Champion	2735,1,3600000
-spl_fild02,0,0	monster	Pinguicula Champion	2711,1,3600000
-spl_fild03,0,0	monster	Pinguicula D Champion	2710,1,3600000
-man_fild03,0,0	monster	Tatacho Champion	2637,1,3600000
+// --- L Whikebain ---
+lhz_dun02,0,0	monster	--en--	2782,1,3600000
 
-thor_v03,0,0	monster	Salamander Champion	2675,1,3600000
-mosk_dun01,0,0	monster	Wood Goblin Champion	2612,1,3600000
-mosk_dun03,0,0	monster	Vavayaga Champion	2626,1,3600000
-bra_fild01,0,0	monster	Toucan Champion	2630,1,3600000
-juperos_01,0,0	monster	Venatu Champion	2625,1,3600000
+// --- Leaf Cat ---
+ayo_fild02,0,0	monster	--en--	2781,1,3600000
+ayo_dun01,0,0	monster	--en--	2781,1,3600000
 
-niflheim,0,0	monster	Lude Champion	2772,1,3600000
-nif_fild01,0,0	monster	Loli Ruri Champion	2774,1,3600000
+// --- Live Peach Tree ---
+gon_dun01,0,0	monster	--en--	2775,1,3600000
+gon_dun02,0,0	monster	--en--	2775,1,3600000
+
+// --- Luciola Vespa ---
+spl_fild03,0,0	monster	--en--	2773,1,3600000
+
+// --- Lude ---
+niflheim,0,0	monster	--en--	2772,1,3600000
+
+// --- Lunatic ---
+prt_fild06,0,0	monster	--en--	2770,1,3600000
+
+// --- Magmaring ---
+ve_fild03,0,0	monster	--en--	2769,1,3600000
+
+// --- Majoruros ---
+gl_dun02,0,0	monster	--en--	2767,1,3600000
+
+// --- Mandragora ---
+prt_fild02,0,0	monster	--en--	2765,1,3600000
+
+// --- Mantis ---
+mjolnir_03,0,0	monster	--en--	2764,1,3600000
+mjolnir_04,0,0	monster	--en--	2764,1,3600000
+
+// --- Martin ---
+mjo_dun02,0,0	monster	--en--	2760,1,3600000
+mjo_dun03,0,0	monster	--en--	2760,1,3600000
+
+// --- Medusa ---
+beach_dun,0,0	monster	--en--	2759,1,3600000
+
+// --- Metaling ---
+lhz_fild01,0,0	monster	--en--	2756,1,3600000
+ein_fild07,0,0	monster	--en--	2755,1,3600000
+lhz_fild02,0,0	monster	--en--	2755,1,3600000
+lhz_dun01,0,0	monster	--en--	2755,1,3600000
+
+// --- Mimic ---
+c_tower4,0,0	monster	--en--	2752,1,3600000
+
+// --- Mineral ---
+ein_fild05,0,0	monster	--en--	2750,1,3600000
+ein_dun02,0,0	monster	--en--	2750,1,3600000
+
+// --- Minorous ---
+moc_pryd05,0,0	monster	--en--	2747,1,3600000
+in_sphinx4,0,0	monster	--en--	2747,1,3600000
+
+// --- Miyabi Ningyo ---
+ama_dun01,0,0	monster	--en--	2746,1,3600000
+ama_dun03,0,0	monster	--en--	2746,1,3600000
+
+// --- Mole ---
+ein_fild04,0,0	monster	--en--	2745,1,3600000
+
+// --- Morocc 1 ---
+moc_fild20,0,0	monster	--en--	2742,1,3600000
+
+// --- Muka ---
+moc_fild18,0,0	monster	--en--	2741,1,3600000
+
+// --- Mummy ---
+moc_pryd04,0,0	monster	--en--	2740,1,3600000
+moc_pryd03,0,0	monster	--en--	2739,1,3600000
+
+// --- Muscipular ---
+ra_fild01,0,0	monster	--en--	2738,1,3600000
+
+// --- Necromancer ---
+abbey03,0,0	monster	--en--	2736,1,3600000
+
+// --- Nightmare Terror ---
+mag_dun02,0,0	monster	--en--	2732,1,3600000
+
+// --- Novus ---
+hu_fild05,0,0	monster	--en--	2728,1,3600000
+hu_fild02,0,0	monster	--en--	2731,1,3600000
+hu_fild07,0,0	monster	--en--	2729,1,3600000
+
+// --- Observation ---
+tha_t10,0,0	monster	--en--	2726,1,3600000
+
+// --- Orc Lady ---
+gef_fild14,0,0	monster	--en--	2725,1,3600000
+
+// --- Orc Skeleton ---
+orcsdun02,0,0	monster	--en--	2724,1,3600000
+
+// --- Orc Zombie ---
+orcsdun01,0,0	monster	--en--	2723,1,3600000
+
+// --- Ork Warrior ---
+gef_fild03,0,0	monster	--en--	2722,1,3600000
+gef_fild10,0,0	monster	--en--	2722,1,3600000
+
+// --- Pasana ---
+in_sphinx3,0,0	monster	--en--	2719,1,3600000
+in_sphinx5,0,0	monster	--en--	2719,1,3600000
+
+// --- Pecopeco ---
+moc_fild02,0,0	monster	--en--	2718,1,3600000
+
+// --- Penomena ---
+alde_dun03,0,0	monster	--en--	2716,1,3600000
+
+// --- Phen ---
+iz_dun03,0,0	monster	--en--	2713,1,3600000
+
+// --- Picky  ---
+moc_fild12,0,0	monster	--en--	2712,1,3600000
+
+// --- Pinguicula ---
+spl_fild01,0,0	monster	--en--	2711,1,3600000
+spl_fild02,0,0	monster	--en--	2711,1,3600000
+
+// --- Pitman ---
+ein_dun01,0,0	monster	--en--	2708,1,3600000
+
+// --- Plankton ---
+iz_dun00,0,0	monster	--en--	2707,1,3600000
+iz_dun01,0,0	monster	--en--	2707,1,3600000
+
+// --- Poison Spore ---
+pay_fild05,0,0	monster	--en--	2705,1,3600000
+
+// --- Poison Toad ---
+ama_dun02,0,0	monster	--en--	2704,1,3600000
+
+// --- Poporing ---
+pay_fild09,0,0	monster	--en--	2701,1,3600000
+cmd_fild03,0,0	monster	--en--	2701,1,3600000
+yuno_fild03,0,0	monster	--en--	2701,1,3600000
+
+// --- Porcellio ---
+ein_fild09,0,0	monster	--en--	2700,1,3600000
+
+// --- Poring ---
+prt_fild05,0,0	monster	--en--	2698,1,3600000
+prt_fild01,0,0	monster	--en--	2697,1,3600000
+prt_fild08,0,0	monster	--en--	2696,1,3600000
+prt_maze01,0,0	monster	--en--	2696,1,3600000
+pay_fild03,0,0	monster	--en--	2696,1,3600000
+pay_fild04,0,0	monster	--en--	2696,1,3600000
+pay_fild08,0,0	monster	--en--	2696,1,3600000
+gef_fild00,0,0	monster	--en--	2696,1,3600000
+gef_fild07,0,0	monster	--en--	2696,1,3600000
+yuno_fild04,0,0	monster	--en--	2696,1,3600000
+
+// --- Rafflesia ---
+yuno_fild05,0,0	monster	--en--	2695,1,3600000
+
+// --- Raggler ---
+cmd_fild07,0,0	monster	--en--	2694,1,3600000
+
+// --- Raydric ---
+gl_knt01,0,0	monster	--en--	2690,1,3600000
+
+// --- Requiem ---
+in_sphinx2,0,0	monster	--en--	2687,1,3600000
+
+// --- Retribution ---
+tha_t08,0,0	monster	--en--	2685,1,3600000
+tha_t09,0,0	monster	--en--	2686,1,3600000
+
+// --- Rideword ---
+c_tower1,0,0	monster	--en--	2681,1,3600000
+tha_t01,0,0	monster	--en--	2681,1,3600000
+tha_t03,0,0	monster	--en--	2681,1,3600000
+tha_t04,0,0	monster	--en--	2681,1,3600000
+
+// --- Rocker ---
+prt_fild07,0,0	monster	--en--	2680,1,3600000
+
+// --- Roda Frog ---
+gef_fild01,0,0	monster	--en--	2679,1,3600000
+
+// --- Salamander ---
+thor_v03,0,0	monster	--en--	2675,1,3600000
+
+// --- Sand Man ---
+moc_fild16,0,0	monster	--en--	2674,1,3600000
+
+// --- Savage Babe ---
+prt_fild09,0,0	monster	--en--	2671,1,3600000
+
+// --- Siroma ---
+ice_dun01,0,0	monster	--en--	2661,1,3600000
+
+// --- Sleeper ---
+yuno_fild06,0,0	monster	--en--	2655,1,3600000
+yuno_fild11,0,0	monster	--en--	2656,1,3600000
+
+// --- Snowier ---
+ice_dun02,0,0	monster	--en--	2652,1,3600000
+
+// --- Sohee ---
+pay_dun03,0,0	monster	--en--	2651,1,3600000
+
+// --- Solace ---
+tha_t07,0,0	monster	--en--	2650,1,3600000
+
+// --- Soldier Skeleton ---
+moc_pryd02,0,0	monster	--en--	2649,1,3600000
+pay_dun01,0,0	monster	--en--	2648,1,3600000
+pay_dun02,0,0	monster	--en--	2648,1,3600000
+
+// --- Stalactic Golem ---
+beach_dun2,0,0	monster	--en--	2644,1,3600000
+
+// --- Stapo ---
+ra_fild08,0,0	monster	--en--	2643,1,3600000
+ve_fild07,0,0	monster	--en--	2643,1,3600000
+
+// --- Steel Chonchon ---
+cmd_fild09,0,0	monster	--en--	2642,1,3600000
+
+// --- Stem Worm ---
+mjolnir_12,0,0	monster	--en--	2641,1,3600000
+
+// --- Sting ---
+gl_sew03,0,0	monster	--en--	2640,1,3600000
+
+// --- Tarou ---
+prt_sewb2,0,0	monster	--en--	2638,1,3600000
+
+// --- Thara Frog ---
+beach_dun3,0,0	monster	--en--	2635,1,3600000
+
+// --- Thief Bug ---
+prt_sewb1,0,0	monster	--en--	2632,1,3600000
+prt_sewb3,0,0	monster	--en--	2632,1,3600000
+prt_sewb2,0,0	monster	--en--	2633,1,3600000
+
+// --- Vanberk ---
+ra_san01,0,0	monster	--en--	2627,1,3600000
+
+// --- Vavayaga ---
+mosk_dun03,0,0	monster	--en--	2626,1,3600000
+
+// --- Venatu 1 ---
+juperos_01,0,0	monster	--en--	2625,1,3600000
+
+// --- Wander Man ---
+gl_cas02,0,0	monster	--en--	2620,1,3600000
+
+// --- Whisper ---
+ayo_dun02,0,0	monster	--en--	2618,1,3600000
+
+// --- Wild Rose ---
+gef_fild05,0,0	monster	--en--	2616,1,3600000
+yuno_fild08,0,0	monster	--en--	2616,1,3600000
+
+// --- Wilow ---
+pay_fild08,0,0	monster	--en--	2615,1,3600000
+
+// --- Wind Ghost ---
+gl_step,0,0	monster	--en--	2614,1,3600000
+
+// --- Wolf ---
+pay_fild02,0,0	monster	--en--	2613,1,3600000
+
+// --- Wood Goblin ---
+mosk_dun01,0,0	monster	--en--	2612,1,3600000
+
+// --- Wootan Fighter ---
+um_fild02,0,0	monster	--en--	2611,1,3600000
+um_dun01,0,0	monster	--en--	2611,1,3600000
+
+// --- Yoyo ---
+prt_fild03,0,0	monster	--en--	2608,1,3600000
+gef_fild02,0,0	monster	--en--	2608,1,3600000
+
+// --- Zombie ---
+pay_dun00,0,0	monster	--en--	2606,1,3600000
+
+// --- Zombie Prisoner ---
+gl_prison,0,0	monster	--en--	2604,1,3600000
+
+// --- Zombie Slaughter ---
+abbey02,0,0	monster	--en--	2603,1,3600000
+

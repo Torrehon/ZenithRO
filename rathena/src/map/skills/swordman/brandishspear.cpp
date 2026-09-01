@@ -23,15 +23,11 @@ void SkillBrandishSpear::castendDamageId(block_list* src, block_list* target, ui
 
 void SkillBrandishSpear::modifyDamageData(Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv) const {
 	const map_session_data* sd = BL_CAST(BL_PC, &src);
-
-	// Por defecto asume 2 hits
+	// Por defecto 2 hits. 3 hits si tiene pasiva KN_LANCERSOUL
 	int hits = 2;
-
-	// Solo pega 3 veces si el jugador tiene la pasiva KN_LANCERSOUL
 	if (sd != nullptr && pc_checkskill(sd, KN_LANCERSOUL) > 0) {
 		hits = 3;
 	}
-
 	dmg.div_ = hits;
 }
 
@@ -39,27 +35,39 @@ void SkillBrandishSpear::calculateSkillRatio(const Damage* wd, const block_list*
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	const status_data* sstatus = status_get_status_data(*src);
 
+	// 1. Determinar número de hits (2 por defecto, 3 con pasiva Lancer Soul)
 	int hits = 2;
 	if (sd != nullptr && pc_checkskill(sd, KN_LANCERSOUL) > 0) {
 		hits = 3;
 	}
 
-	// AJUSTE 1: Daño base. A nivel 10 = 100% por hit.
-	// 3 hits = 300% total.
-	int ratio_per_hit = 20 + (8 * skill_lv);
-	int total_ratio = ratio_per_hit * hits;
+	// 2. Ratio Base por golpe (A Nivel 10 = 150% por hit)
+	int ratio_per_hit = 50 + (10 * skill_lv); // Nivel 1 = 60%, Nivel 10 = 150%
 
-	// AJUSTE 2: Escalado de STR (1% extra por cada 2 puntos de STR pura)
+	// 3. Escalado de STR (+1% por cada 2 puntos de STR total a CADA hit)
 	if (sstatus != nullptr) {
-		total_ratio += (sstatus->str);
+		ratio_per_hit += (sstatus->str / 2); // Con 100 STR = +50% por hit -> 200% por hit
 	}
 
-	// AJUSTE 3: Sinergia de Stagger. (+50% plano)
+	// 4. Daño TOTAL acumulado antes de Stagger
+	int total_ratio = ratio_per_hit * hits; // Con 3 hits y 100 STR = 600% total
+
+	// 5. Sinergia de Stagger (+300% con Lanza a 2 Manos, +150% con Lanza a 1 Mano)
 	const status_change* tsc = status_get_sc(target);
 	if (tsc != nullptr && tsc->getSCE(SC_STAGGER)) {
-		total_ratio += 150;
+		if (sd != nullptr && sd->status.weapon == W_2HSPEAR) {
+			total_ratio += 300; // +300% al ratio TOTAL con Lanza a 2 Manos
+		} else {
+			total_ratio += 150; // +150% al ratio TOTAL con Lanza a 1 Mano
+		}
+
+		// Elimina/consume el estado Stagger del objetivo tras aprovechar el combo
+		status_change_end(const_cast<block_list*>(target), SC_STAGGER);
 	}
 
-	// Ajustamos el base_skillratio de rAthena (restamos el 100% que aplica por defecto)
-	base_skillratio += (total_ratio - 100);
+	// 6. Convertimos el ratio total al ratio por hit individual para rAthena
+	int final_ratio_per_hit = total_ratio / hits;
+
+	// Ajustamos el base_skillratio de rAthena
+	base_skillratio += (final_ratio_per_hit - 100);
 }

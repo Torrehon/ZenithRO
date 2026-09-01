@@ -1,8 +1,30 @@
 //===== rAthena Script ======================================= 
 //= Gunslinger Job Quest (Simplified - Job 50 + Proof of Valor)
 //===== Description: ========================================= 
-//= Job Change quest for Gunslinger class.
+//= Job Change quest for Gunslinger class from Hiregun (4502).
 //============================================================ 
+
+alberta,63,124,3	script	Gunslinger Agent#guns	899,{
+	mes "[Gunslinger Agent]";
+	if (Class != 4502 && Class != 24) {
+		mes "Greetings, traveler. The Gunslinger Enclave is reserved for Hireguns and Gunslingers of our guild.";
+		mes "Keep moving, partner.";
+		close;
+	}
+
+	mes "Greetings, sharp-shooter. Master Miller awaits inside the Gunslinger Enclave.";
+	next;
+	if (select("Warp to Gunslinger Enclave:Stay in Alberta") == 1) {
+		mes "[Gunslinger Agent]";
+		mes "Lock and load! Transporting you to the enclave...";
+		close2;
+		warp "que_ng",148,167;
+		end;
+	}
+	mes "[Gunslinger Agent]";
+	mes "Take care out there.";
+	close;
+}
 
 que_ng,152,167,3	script	Master Miller#guns	901,{
 	mes "[Master Miller]";
@@ -11,26 +33,27 @@ que_ng,152,167,3	script	Master Miller#guns	901,{
 		mes "Stay safe out there!";
 		close;
 	}
-	if (BaseJob != Job_Novice) {
-		if (BaseJob == Job_Gunslinger) {
-			mes "Greetings, sharp-shooter! Keep your gunpowder dry, your trigger finger steady, and your aim true!";
-			close;
-		}
-		else {
-			mes "Welcome to the Gunslinger Guild of Einbroch! We train elite marksmen who wield firearms and explosives.";
-			close;
-		}
+
+	// 24 = Gunslinger, 4502 = Hiregun
+	if (Class == 24) {
+		mes "Greetings, sharp-shooter! Keep your gunpowder dry, your trigger finger steady, and your aim true!";
+		close;
+	}
+
+	if (Class != 4502) {
+		mes "Welcome to the Gunslinger Guild! I only deal with Hireguns seeking real firepower. Walk with care.";
+		close;
 	}
 
 	mes "Welcome to the Gunslinger Guild!";
 	mes "While traditional archers use wood and string, Gunslingers command iron and gunpowder—mastering revolvers, rifles, shotguns, gatling guns, and grenade launchers to dominate the battlefield.";
 	next;
 	mes "[Master Miller]";
-	mes "To earn the mark of a ^0000FFGunslinger^000000, a Novice must demonstrate absolute aim, steady hands, and battle experience.";
+	mes "To earn the mark of a ^0000FFGunslinger^000000, a Hiregun must demonstrate absolute aim, steady hands, and battle experience.";
 	next;
 	mes "[Master Miller]";
 	mes "Our guild requires two credentials:";
-	mes "1. Reach ^0000FFJob Level 50^000000 as a Novice.";
+	mes "1. Reach ^0000FFJob Level 50^000000 as a Hiregun.";
 	mes "2. Present a ^FF0000Proof of Valor^000000 (Item ID 50008), proving your prestige across Rune-Midgard.";
 	next;
 
@@ -57,7 +80,7 @@ que_ng,152,167,3	script	Master Miller#guns	901,{
 	next;
 
 	delitem 50008, 1;
-	jobchange Job_Gunslinger;
+	jobchange 24;
 	specialeffect2 EF_ANGEL2;
 	specialeffect2 EF_CLASSCHANGE;
 

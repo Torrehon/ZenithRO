@@ -91,6 +91,16 @@ izlude_in,175,124,3	script	Envoy Hanzo	636,{ // DAWN GENIN QUEST
 	}
 
 	if (dawn_gn_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Envoy Hanzo]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Weapon, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Weapon (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40006, 40010; // Dawn Asura or Dawn Shuriken
+			}
+			close;
+		}
 		mes "[Envoy Hanzo]";
 		mes "Ah, there you are. Strike swiftly from the shadows, and leave no trace.";
 		close;

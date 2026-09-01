@@ -70,10 +70,38 @@
 		mes "However, my secret shadow scrolls belong only to Ninja and Chunin warriors. Walk your own path with honor.";
 		close;
 	}
+		if (getskilllv(1056) > 0 && getskilllv(1032) == 0) {
+		skill 1032, 1, SKILL_PERM_GRANT;
+		specialeffect2 EF_ANGEL;
+		mes "[Chunin Einherjar]";
+		mes "Ah! You possess the ^0000FFSoul of the Kuji^000000! I have granted you your ^0000FFDual Wield^000000 skill!";
+		close;
+	}
 	if (JobLevel < 25) {
 		mes "[Chunin Einherjar]";
 		mes "Your footfalls are still too loud and your Ninjutsu unpolished. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) >= 1 || checkquest(90005) >= 1) && !F_HasSoulSkill(1055, 1056)) {
+		mes "[Chunin Einherjar]";
+		mes "Greetings, shadow brother. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Kensei:Soul of the Kuji:Cancel")) {
+			case 1:
+				skill 1055, 1, SKILL_PERM_GRANT;
+				mes "[Chunin Einherjar]";
+				mes "Your ^0000FFSoul of the Kensei^000000 has been restored!";
+				close;
+			case 2:
+				skill 1056, 1, SKILL_PERM_GRANT;
+				skill 1032, 1, SKILL_PERM_GRANT;
+				mes "[Chunin Einherjar]";
+				mes "Your ^0000FFSoul of the Kuji^000000 and ^0000FFDual Wield^000000 have been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Chunin Einherjar]";
@@ -113,7 +141,7 @@
 	switch(select("Soul of the Kensei:Soul of the Kuji:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1055, 1, 0;
+			skill 1055, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -122,8 +150,8 @@
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1056, 1, 0; // NJ_KUJISOUL
-			skill 1032, 1, 0; // NJ_DUAL (Dual Wield)
+			skill 1056, 1, SKILL_PERM_GRANT; // NJ_KUJISOUL
+			skill 1032, 1, SKILL_PERM_GRANT; // NJ_DUAL (Dual Wield)
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -187,10 +215,37 @@ OnInit:
 		mes "However, my martial gunpowder secrets belong solely to Gunslingers. Walk your own path.";
 		close;
 	}
+		if (getskilllv(1056) > 0 && getskilllv(1032) == 0) {
+		skill 1032, 1, SKILL_PERM_GRANT;
+		specialeffect2 EF_ANGEL;
+		mes "[Chunin Einherjar]";
+		mes "Ah! You possess the ^0000FFSoul of the Kuji^000000! I have granted you your ^0000FFDual Wield^000000 skill!";
+		close;
+	}
 	if (JobLevel < 25) {
 		mes "[Gunslinger Einherjar]";
 		mes "Your trigger finger needs more discipline and recoil control. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) >= 1 || checkquest(90005) >= 1) && !F_HasSoulSkill(1068, 1069)) {
+		mes "[Gunslinger Einherjar]";
+		mes "Greetings, master marksman. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Peacekeeper:Soul of the Enforcer:Cancel")) {
+			case 1:
+				skill 1068, 1, SKILL_PERM_GRANT;
+				mes "[Gunslinger Einherjar]";
+				mes "Your ^0000FFSoul of the Peacekeeper^000000 has been restored!";
+				close;
+			case 2:
+				skill 1069, 1, SKILL_PERM_GRANT;
+				mes "[Gunslinger Einherjar]";
+				mes "Your ^0000FFSoul of the Enforcer^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Gunslinger Einherjar]";
@@ -230,7 +285,7 @@ OnInit:
 	switch(select("Soul of the Peacekeeper:Soul of the Enforcer:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1068, 1, 0;
+			skill 1068, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -239,7 +294,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1069, 1, 0;
+			skill 1069, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -258,4 +313,3 @@ OnInit:
 	setunitdata .@gid, UNPC_CLOTHCOLOR, 2;
 	end;
 }
-

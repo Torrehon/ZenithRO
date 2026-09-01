@@ -2557,7 +2557,7 @@ Body:
         Plagiarism: true
         Reproduce: true
     SplashArea: -1
-    AfterCastActDelay: 2000
+    AfterCastActDelay: 500
     Duration1:
       - Level: 1
         Time: 120000
@@ -2743,8 +2743,8 @@ Body:
         - Level: 10
           Amount: 58
       ItemCost:
-        - Item: Blue_Gemstone
-          Amount: 1
+        - Item: Holy_Water
+          Amount: 3
     Unit:
       Id: Magnus
       Layout: -1
@@ -3720,7 +3720,7 @@ Body:
   - Id: 107
     Name: BS_WEAPONRESEARCH
     Description: Weaponry Research
-    MaxLevel: 10
+    MaxLevel: 1
     Type: Weapon
   - Id: 108
     Name: BS_REPAIRWEAPON
@@ -4076,10 +4076,9 @@ Body:
     DamageFlags:
       NoDamage: true
     Flags:
-      IsTrap: true
       IgnoreHovering: true
       AllowOnWarg: true
-    Range: 3
+    Range: 5
     Hit: Single
     HitCount: 1
     Duration1:
@@ -5901,8 +5900,6 @@ Body:
     MaxLevel: 10
     Type: Weapon
     TargetType: Attack
-    DamageFlags:
-      Critical: true
     Range: -4
     Hit: Single
     HitCount: 1
@@ -5914,7 +5911,6 @@ Body:
     AfterCastActDelay: 500
     Requires:
       SpCost: 16
-    Status: Stun
   - Id: 213
     Name: RG_TUNNELDRIVE
     Description: Stalk
@@ -6714,7 +6710,7 @@ Body:
       Skill:
         Plagiarism: true
         Reproduce: true
-    AfterCastActDelay: 700
+    AfterCastActDelay: 1000
     Requires:
       SpCost: 12
       State: Shield
@@ -6815,7 +6811,7 @@ Body:
     CastTime: 3000
     AfterCastActDelay: 1500
     AfterCastWalkDelay: 1000
-    Duration1: 950
+    Duration1: 1000
     Duration2: 30000
     Requires:
       SpCost:
@@ -6843,7 +6839,7 @@ Body:
     Unit:
       Id: Dummyskill
       Layout: -1
-      Interval: 800
+      Interval: 400
       Target: Enemy
       Flag:
         PathCheck: true
@@ -7238,6 +7234,10 @@ Body:
     DamageFlags:
       NoDamage: true
     Hit: Single
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     CastTime: 1000
     Duration1: 300000
     Requires:
@@ -9091,9 +9091,34 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Dark
+    CastDefenseReduction: 33
+    CastTime: 3000
     AfterCastWalkDelay: 1000
     Duration1: 950
     Duration2: 30000
+    Requires:
+      SpCost:
+        - Level: 1
+          Amount: 37
+        - Level: 2
+          Amount: 44
+        - Level: 3
+          Amount: 51
+        - Level: 4
+          Amount: 58
+        - Level: 5
+          Amount: 65
+        - Level: 6
+          Amount: 72
+        - Level: 7
+          Amount: 79
+        - Level: 8
+          Amount: 86
+        - Level: 9
+          Amount: 93
+        - Level: 10
+          Amount: 100
+      HpRateCost: 20
     Unit:
       Id: Dummyskill
       Layout: -1
@@ -11116,14 +11141,12 @@ Body:
     Knockback: 4
     CastTime:
       - Level: 1
-        Time: 5000
-      - Level: 2
         Time: 4000
-      - Level: 3
+      - Level: 2
         Time: 3000
-      - Level: 4
+      - Level: 3
         Time: 2000
-      - Level: 5
+      - Level: 4
         Time: 1000
     Duration1: 1000
     Duration2: 300000
@@ -17452,11 +17475,15 @@ Body:
       - Level: 1
         Time: 2000
     CastCancel: false
+    Flags:
+      IsQuest: true
   - Id: 1032
     Name: NJ_DUAL
     Description: Dual Wield
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1041
     Name: KN_BLADERSOUL
     Description: Soul of the Blader
@@ -18327,23 +18354,24 @@ Body:
     Description: Jack Frost
     MaxLevel: 5
     Type: Magic
-    TargetType: Self
+    TargetType: Attack
     DamageFlags:
       Splash: true
+    Range: 11
     Hit: Multi_Hit
     HitCount: -5
     Element: Water
     SplashArea:
       - Level: 1
-        Area: 5
+        Area: 3
       - Level: 2
-        Area: 6
+        Area: 3
       - Level: 3
-        Area: 7
+        Area: 4
       - Level: 4
-        Area: 8
+        Area: 4
       - Level: 5
-        Area: 9
+        Area: 5
     CopyFlags:
       Skill:
         Reproduce: true
@@ -18358,18 +18386,20 @@ Body:
         Time: 3500
       - Level: 5
         Time: 4000
-    AfterCastActDelay: 1000
+    AfterCastActDelay: 500
     Duration1:
       - Level: 1
-        Time: 10000
+        Time: 12500
       - Level: 2
-        Time: 15000
+        Time: 17500
       - Level: 3
-        Time: 20000
+        Time: 22500
       - Level: 4
-        Time: 25000
+        Time: 27500
       - Level: 5
-        Time: 30000
+        Time: 32500
+    Cooldown: 4000
+    FixedCastTime: 1000
     Requires:
       SpCost:
         - Level: 1
@@ -22328,6 +22358,7 @@ Body:
           Amount: 70
         - Level: 5
           Amount: 80
+    Status: _ShadowForm
   - Id: 2288
     Name: SC_TRIANGLESHOT
     Description: Triangle Shot
@@ -31415,7 +31446,7 @@ Body:
     MaxLevel: 5
     Type: Weapon
     TargetType: Ground
-    Range: 5
+    Range: 12
     Hit: Single
     HitCount: 1
     Element: Poison

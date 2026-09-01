@@ -42,7 +42,7 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 				mes "Meow can administer another";
 				mes "vicious beating to you.";
 				specialeffect2 EF_ABSORBSPIRITS;
-				skill "WZ_SIGHTBLASTER",1,SKILL_PERM;
+				skill "WZ_SIGHTBLASTER",1,SKILL_PERM_GRANT;
 				next;
 				mes "[Meow]";
 				mes "Remember now?";
@@ -75,7 +75,7 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			mes "[Meow]";
 			mes "I don't need to send you running around or fetching gemstones. Take the ^0000FFSight Blaster^000000 skill and let me get back to sleep!";
 			next;
-			skill "WZ_SIGHTBLASTER",1,SKILL_PERM;
+			skill "WZ_SIGHTBLASTER",1,SKILL_PERM_GRANT;
 			set WIZ_SK,100;
 			specialeffect2 EF_ABSORBSPIRITS;
 			specialeffect EF_LEVELUP;
@@ -315,7 +315,7 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 			delitem 990,3; //Boody_Red
 			delitem 992,3; //Wind_Of_Verdure
 			set WIZ_SK,100;
-			skill "WZ_SIGHTBLASTER",1,SKILL_PERM;
+			skill "WZ_SIGHTBLASTER",1,SKILL_PERM_GRANT;
 			next;
 			mes "[Meow]";
 			mes "I'm so tired from all of";

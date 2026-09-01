@@ -1,13 +1,14 @@
 // ==========================================================
-// Sistema de Ciclo Ambiental Dinámico y Mana Engine
-// Estados Globales: Día (0), Noche (1), Lluvia de Estrellas (2)
+// Sistema de Ciclo Ambiental Dinamico y Mana Engine
+// Estados Globales: Dia (0), Noche (1), Lluvia de Estrellas (2)
+// Optimizado: Carga Dinamica de Clima (On-Demand / Zero-Lag)
 // ==========================================================
 
 -	script	EnvCycleManager	-1,{
 OnInit:
-	if ($StarShowerChance == 0) set $StarShowerChance, 20; 
+	if ($StarShowerChance == 0) set $StarShowerChance, 15; 
 	
-	// --- REGISTRO DE CIUDADES Y FIELDS PARA NOCHE Y CLIMA (LEAVES / DESTELLOS) ---
+	// --- REGISTRO DE CIUDADES Y FIELDS ---
 	deletearray .map_list$[0];
 	setarray .map_list$[0], "prontera","geffen","payon","morocc","alberta","izlude","aldebaran","comodo","yuno","amatsu","gonryun","louyang","ayothaya","umbala","einbroch","lighthalzen","rachel","veins","hugel","niflheim","jawaii","moscovia","brasilis","dewata","malangdo","malaya";
 
@@ -44,32 +45,43 @@ OnInit:
 	set .@n, getarraysize(.map_list$);
 	setarray .map_list$[.@n], "ama_fild01","gon_fild01","lou_fild01","ayo_fild01","ayo_fild02","um_fild01","um_fild02","spl_fild01","spl_fild02","spl_fild03","man_fild01","man_fild02","man_fild03","bra_fild01","dew_fild01","ma_fild01","ma_fild02";
 
-	// Habilitar el ciclo de noche en todos los mapas de la lista
+	// Habilitar ciclo de noche y evento de carga dinamica por mapa
 	for (set .@i, 0; .@i < getarraysize(.map_list$); set .@i, .@i + 1) {
 		setmapflag .map_list$[.@i], mf_nightenabled;
+		setmapflag .map_list$[.@i], mf_loadevent;
 	}
 
-	// Valores base por seguridad al arrancar
-	set $Global_EnvState, 0;
-	set $ManaEvent_Active, 0;
-	day;
-	callsub L_RemoveLeaves;
-	setbattleflag "base_exp_rate", 500, true;
-	setbattleflag "job_exp_rate", 500, true;
+	// Restaurar estado ambiental actual
+	if ($Global_EnvState == 1) {
+		night;
+	} else if ($Global_EnvState == 2) {
+		night;
+	} else {
+		set $Global_EnvState, 0;
+		day;
+	}
 	end;
 
 // ==========================================================
-// Subrutinas de Clima Global (mf_leaves)
+// Carga Dinamica de Clima On-Demand (Solo cuando entra un jugador)
 // ==========================================================
-L_ApplyLeaves:
-	for (set .@i, 0; .@i < getarraysize(.map_list$); set .@i, .@i + 1) {
-		setmapflag .map_list$[.@i], mf_leaves;
+OnPCLoadMapEvent:
+	if ($Global_EnvState == 2) {
+		set .@map$, strcharinfo(3);
+		if (!getmapflag(.@map$, mf_leaves)) {
+			setmapflag .@map$, mf_leaves;
+		}
 	}
-	return;
+	end;
 
+// ==========================================================
+// Subrutina de Limpieza Global
+// ==========================================================
 L_RemoveLeaves:
 	for (set .@i, 0; .@i < getarraysize(.map_list$); set .@i, .@i + 1) {
-		removemapflag .map_list$[.@i], mf_leaves;
+		if (getmapflag(.map_list$[.@i], mf_leaves)) {
+			removemapflag .map_list$[.@i], mf_leaves;
+		}
 	}
 	return;
 
@@ -84,42 +96,40 @@ OnManualStart:
 OnManualStop:
 	set $ManaEvent_Active, 0;
 	set $Global_EnvState, 0;
-	day;
 	callsub L_RemoveLeaves;
-	setbattleflag "base_exp_rate", 500, true;
-	setbattleflag "job_exp_rate", 500, true;
+	day;
+	setbattleflag "base_exp_rate", 500;
+	setbattleflag "job_exp_rate", 500;
 	
 	announce "The mana flow has been manually stabilized. EXP rates are back to 5.00x.", bc_all|bc_blue;
 	end;
 
 // ==========================================================
-// Gatillo Automático (Cada 3 horas)
+// Gatillo Automatico (Cada 1 hora, a en punto :00)
 // ==========================================================
-OnHour00:OnHour03:OnHour06:OnHour09:OnHour12:OnHour15:OnHour18:OnHour21:
+OnMinute00:
 L_TriggerCycle: 
 
 	set .@roll, rand(1, 100);
 
 	if (.@roll <= $StarShowerChance) {
 		// ==============================================
-		// ¡ÉXITO! LLUVIA DE ESTRELLAS (Estado 2)
+		// EXITO: LLUVIA DE ESTRELLAS / MANA BURST (Estado 2)
 		// ==============================================
 		set $Global_EnvState, 2;
-		set $StarShowerChance, 20; 
+		set $StarShowerChance, 15; // Se resetea al 15% tras ocurrir
 		
-		night;
-		callsub L_ApplyLeaves;
+		night; // Noche global limpia
 		
-		// MANA ENGINE: Cálculo Aleatorio 6.00x - 8.00x
+		// MANA ENGINE: Calculo Aleatorio 6.00x - 8.00x
 		set .@new_rate, rand(600, 800);
 		set .@int, .@new_rate / 100;
 		set .@dec, .@new_rate % 100;
 		if (.@dec < 10) set .@dec$, "0" + .@dec;
 		else set .@dec$, "" + .@dec;
 
-		// Aplicación directa y nativa de rates con recarga integrada (, true)
-		setbattleflag "base_exp_rate", .@new_rate, true;
-		setbattleflag "job_exp_rate", .@new_rate, true;
+		setbattleflag "base_exp_rate", .@new_rate;
+		setbattleflag "job_exp_rate", .@new_rate;
 
 		set $ManaEvent_Active, 1;
 
@@ -127,25 +137,27 @@ L_TriggerCycle:
 
 	} else {
 		// ==============================================
-		// FALLO: CICLO NORMAL (Día / Noche)
+		// FALLO: CICLO NORMAL (Dia / Noche)
 		// ==============================================
-		set $StarShowerChance, $StarShowerChance + 10;
+		if ($StarShowerChance < 40)
+			set $StarShowerChance, $StarShowerChance + 5;
 		
-		// Restablecemos clima de hojas y rates base si veníamos de una lluvia activa
-		callsub L_RemoveLeaves;
+		// Limpiamos hojas y restablecemos rates base si veniamos de una lluvia activa
 		if ($ManaEvent_Active == 1) {
 			set $ManaEvent_Active, 0;
-			setbattleflag "base_exp_rate", 500, true;
-			setbattleflag "job_exp_rate", 500, true;
+			callsub L_RemoveLeaves;
+			setbattleflag "base_exp_rate", 500;
+			setbattleflag "job_exp_rate", 500;
 		}
 
-		// Alternamos entre Día y Noche
+		// Alternamos entre Dia y Noche
 		if ($Global_EnvState == 0 || $Global_EnvState == 2) {
 			set $Global_EnvState, 1;
 			night;
 			announce "The moon takes over as a quiet night falls.", bc_all|bc_blue;
 		} else {
 			set $Global_EnvState, 0;
+			callsub L_RemoveLeaves;
 			day;
 			announce "The sun rises, bringing a warm new day.", bc_all|bc_yellow;
 		}

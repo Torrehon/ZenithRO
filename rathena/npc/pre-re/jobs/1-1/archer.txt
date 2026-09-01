@@ -111,6 +111,16 @@ payon_in02,69,72,4	script	Kael	732,{ //DAWN BOW QUEST
 	// === A PARTIR DE AQUÍ, ES 100% RAMA ARCHER ===
 
 	if (dawn_bow_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Kael]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Bow, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Bow (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40004; // Dawn Bow
+			}
+			close;
+		}
 		mes "[Kael]";
 		mes "Ah, the string of the Dawn Bow hums beautifully in your hands. I knew I wasn't wrong about you.";
 		mes "May the wind always be at your back!";

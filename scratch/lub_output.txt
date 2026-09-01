@@ -1,0 +1,764 @@
+﻿	-- Prontera Hunting Quests
+	[70001] = {
+		Title = "Prontera Hunt: Poring",
+		Description = {
+			"Hunt down 25 Porings to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Poring.",
+		Hunt1 = "Poring",
+		NpcName = "Hunting Board",
+	},
+	[70002] = {
+		Title = "Prontera Hunt: Lunatic",
+		Description = {
+			"Hunt down 25 Lunatics to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Lunatic.",
+		Hunt1 = "Lunatic",
+		NpcName = "Hunting Board",
+	},
+	[70003] = {
+		Title = "Prontera Hunt: Thief Bug",
+		Description = {
+			"Hunt down 25 Thief Bugs to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Thief Bug.",
+		Hunt1 = "Thief Bug",
+		NpcName = "Hunting Board",
+	},
+	[70004] = {
+		Title = "Prontera Hunt: Rocker",
+		Description = {
+			"Hunt down 25 Rockers to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Rocker.",
+		Hunt1 = "Rocker",
+		NpcName = "Hunting Board",
+	},
+	[70005] = {
+		Title = "Prontera Hunt: Tarou",
+		Description = {
+			"Hunt down 25 Tarous to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Tarou.",
+		Hunt1 = "Tarou",
+		NpcName = "Hunting Board",
+	},
+	[70006] = {
+		Title = "Prontera Hunt: Poporing",
+		Description = {
+			"Hunt down 25 Poporings to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Poporing.",
+		Hunt1 = "Poporing",
+		NpcName = "Hunting Board",
+	},
+	[70007] = {
+		Title = "Prontera Hunt: Mandragora",
+		Description = {
+			"Hunt down 25 Mandragoras to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Mandragora.",
+		Hunt1 = "Mandragora",
+		NpcName = "Hunting Board",
+	},
+	[70008] = {
+		Title = "Prontera Hunt: Vadon",
+		Description = {
+			"Hunt down 20 Vadons to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 20 Vadon.",
+		Hunt1 = "Vadon",
+		NpcName = "Hunting Board",
+	},
+	[70009] = {
+		Title = "Prontera Hunt: Yoyo",
+		Description = {
+			"Hunt down 20 Yoyos to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 20 Yoyo.",
+		Hunt1 = "Yoyo",
+		NpcName = "Hunting Board",
+	},
+	[70010] = {
+		Title = "Prontera Hunt: Cornutus",
+		Description = {
+			"Hunt down 20 Cornutuss to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 20 Cornutus.",
+		Hunt1 = "Cornutus",
+		NpcName = "Hunting Board",
+	},
+	[70011] = {
+		Title = "Prontera Hunt: Marc",
+		Description = {
+			"Hunt down 15 Marcs to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Marc.",
+		Hunt1 = "Marc",
+		NpcName = "Hunting Board",
+	},
+	[70012] = {
+		Title = "Prontera Hunt: Swordfish",
+		Description = {
+			"Hunt down 15 Swordfishs to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Swordfish.",
+		Hunt1 = "Swordfish",
+		NpcName = "Hunting Board",
+	},
+	[70013] = {
+		Title = "Prontera Hunt: Merman",
+		Description = {
+			"Hunt down 15 Mermans to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Merman.",
+		Hunt1 = "Merman",
+		NpcName = "Hunting Board",
+	},
+	[70014] = {
+		Title = "Prontera Hunt: Strouf",
+		Description = {
+			"Hunt down 15 Stroufs to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Strouf.",
+		Hunt1 = "Strouf",
+		NpcName = "Hunting Board",
+	},
+	[70015] = {
+		Title = "Prontera Hunt: Deviace",
+		Description = {
+			"Hunt down 15 Deviaces to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Deviace.",
+		Hunt1 = "Deviace",
+		NpcName = "Hunting Board",
+	},
+	[70016] = {
+		Title = "Prontera Hunt: Lost Knight",
+		Description = {
+			"Hunt down 15 Lost Knights to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Lost Knight.",
+		Hunt1 = "Lost Knight",
+		NpcName = "Hunting Board",
+	},
+	[70017] = {
+		Title = "Prontera Hunt: Fallen Crusader",
+		Description = {
+			"Hunt down 15 Fallen Crusaders to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Fallen Crusader.",
+		Hunt1 = "Fallen Crusader",
+		NpcName = "Hunting Board",
+	},
+	[70018] = {
+		Title = "Prontera Hunt: Zombie Guard",
+		Description = {
+			"Hunt down 15 Zombie Guards to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Zombie Guard.",
+		Hunt1 = "Zombie Guard",
+		NpcName = "Hunting Board",
+	},
+	[70019] = {
+		Title = "Prontera Hunt: Mastering",
+		Description = {
+			"Hunt down 1 Masterings to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 1 Mastering.",
+		Hunt1 = "Mastering",
+		NpcName = "Hunting Board",
+	},
+	[70020] = {
+		Title = "Prontera Hunt: Vocal",
+		Description = {
+			"Hunt down 1 Vocals to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 1 Vocal.",
+		Hunt1 = "Vocal",
+		NpcName = "Hunting Board",
+	},
+	[70021] = {
+		Title = "Prontera Hunt: Eclipse",
+		Description = {
+			"Hunt down 1 Eclipses to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 1 Eclipse.",
+		Hunt1 = "Eclipse",
+		NpcName = "Hunting Board",
+	},
+	-- Geffen Hunting Quests
+	[70101] = {
+		Title = "Geffen Hunt: Fabre",
+		Description = {
+			"Hunt down 25 Fabres to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 25 Fabre.",
+		Hunt1 = "Fabre",
+		NpcName = "Hunting Board",
+	},
+	[70102] = {
+		Title = "Geffen Hunt: Roda Frog",
+		Description = {
+			"Hunt down 25 Roda Frogs to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 25 Roda Frog.",
+		Hunt1 = "Roda Frog",
+		NpcName = "Hunting Board",
+	},
+	[70103] = {
+		Title = "Geffen Hunt: Ambernite",
+		Description = {
+			"Hunt down 25 Ambernites to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 25 Ambernite.",
+		Hunt1 = "Ambernite",
+		NpcName = "Hunting Board",
+	},
+	[70104] = {
+		Title = "Geffen Hunt: Coco",
+		Description = {
+			"Hunt down 20 Cocos to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Coco.",
+		Hunt1 = "Coco",
+		NpcName = "Hunting Board",
+	},
+	[70105] = {
+		Title = "Geffen Hunt: Orc Warrior",
+		Description = {
+			"Hunt down 20 Orc Warriors to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Orc Warrior.",
+		Hunt1 = "Orc Warrior",
+		NpcName = "Hunting Board",
+	},
+	[70106] = {
+		Title = "Geffen Hunt: Orc Lady",
+		Description = {
+			"Hunt down 20 Orc Ladys to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Orc Lady.",
+		Hunt1 = "Orc Lady",
+		NpcName = "Hunting Board",
+	},
+	[70107] = {
+		Title = "Geffen Hunt: Caramel",
+		Description = {
+			"Hunt down 20 Caramels to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Caramel.",
+		Hunt1 = "Caramel",
+		NpcName = "Hunting Board",
+	},
+	[70108] = {
+		Title = "Geffen Hunt: Orc Skeleton",
+		Description = {
+			"Hunt down 20 Orc Skeletons to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Orc Skeleton.",
+		Hunt1 = "Orc Skeleton",
+		NpcName = "Hunting Board",
+	},
+	[70109] = {
+		Title = "Geffen Hunt: Zenorc",
+		Description = {
+			"Hunt down 20 Zenorcs to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Zenorc.",
+		Hunt1 = "Zenorc",
+		NpcName = "Hunting Board",
+	},
+	[70110] = {
+		Title = "Geffen Hunt: Skeleton Worker",
+		Description = {
+			"Hunt down 20 Skeleton Workers to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Skeleton Worker.",
+		Hunt1 = "Skeleton Worker",
+		NpcName = "Hunting Board",
+	},
+	[70111] = {
+		Title = "Geffen Hunt: Myst",
+		Description = {
+			"Hunt down 20 Mysts to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 20 Myst.",
+		Hunt1 = "Myst",
+		NpcName = "Hunting Board",
+	},
+	[70112] = {
+		Title = "Geffen Hunt: Nightmare",
+		Description = {
+			"Hunt down 15 Nightmares to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Nightmare.",
+		Hunt1 = "Nightmare",
+		NpcName = "Hunting Board",
+	},
+	[70113] = {
+		Title = "Geffen Hunt: Jakk",
+		Description = {
+			"Hunt down 15 Jakks to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Jakk.",
+		Hunt1 = "Jakk",
+		NpcName = "Hunting Board",
+	},
+	[70114] = {
+		Title = "Geffen Hunt: Deviruchi",
+		Description = {
+			"Hunt down 15 Deviruchis to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Deviruchi.",
+		Hunt1 = "Deviruchi",
+		NpcName = "Hunting Board",
+	},
+	[70115] = {
+		Title = "Geffen Hunt: High Orc",
+		Description = {
+			"Hunt down 15 High Orcs to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 High Orc.",
+		Hunt1 = "High Orc",
+		NpcName = "Hunting Board",
+	},
+	[70116] = {
+		Title = "Geffen Hunt: Raydric",
+		Description = {
+			"Hunt down 15 Raydrics to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Raydric.",
+		Hunt1 = "Raydric",
+		NpcName = "Hunting Board",
+	},
+	[70117] = {
+		Title = "Geffen Hunt: Evil Druid",
+		Description = {
+			"Hunt down 15 Evil Druids to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Evil Druid.",
+		Hunt1 = "Evil Druid",
+		NpcName = "Hunting Board",
+	},
+	[70118] = {
+		Title = "Geffen Hunt: Sting",
+		Description = {
+			"Hunt down 15 Stings to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Sting.",
+		Hunt1 = "Sting",
+		NpcName = "Hunting Board",
+	},
+	[70119] = {
+		Title = "Geffen Hunt: Abysmal Knight",
+		Description = {
+			"Hunt down 10 Abysmal Knights to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 10 Abysmal Knight.",
+		Hunt1 = "Abysmal Knight",
+		NpcName = "Hunting Board",
+	},
+	[70120] = {
+		Title = "Geffen Hunt: Toad",
+		Description = {
+			"Hunt down 1 Toads to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 1 Toad.",
+		Hunt1 = "Toad",
+		NpcName = "Hunting Board",
+	},
+	[70121] = {
+		Title = "Geffen Hunt: Pouring",
+		Description = {
+			"Hunt down 1 Pourings to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 1 Pouring.",
+		Hunt1 = "Pouring",
+		NpcName = "Hunting Board",
+	},
+	-- Morroc Hunting Quests
+	[70201] = {
+		Title = "Morroc Hunt: Picky",
+		Description = {
+			"Hunt down 25 Pickys to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 25 Picky.",
+		Hunt1 = "Picky",
+		NpcName = "Hunting Board",
+	},
+	[70202] = {
+		Title = "Morroc Hunt: Baby Desert Wolf",
+		Description = {
+			"Hunt down 25 Baby Desert Wolfs to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 25 Baby Desert Wolf.",
+		Hunt1 = "Baby Desert Wolf",
+		NpcName = "Hunting Board",
+	},
+	[70203] = {
+		Title = "Morroc Hunt: Drops",
+		Description = {
+			"Hunt down 25 Dropss to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 25 Drops.",
+		Hunt1 = "Drops",
+		NpcName = "Hunting Board",
+	},
+	[70204] = {
+		Title = "Morroc Hunt: Muka",
+		Description = {
+			"Hunt down 25 Mukas to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 25 Muka.",
+		Hunt1 = "Muka",
+		NpcName = "Hunting Board",
+	},
+	[70205] = {
+		Title = "Morroc Hunt: Peco Peco",
+		Description = {
+			"Hunt down 20 Peco Pecos to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Peco Peco.",
+		Hunt1 = "Peco Peco",
+		NpcName = "Hunting Board",
+	},
+	[70206] = {
+		Title = "Morroc Hunt: Zerom",
+		Description = {
+			"Hunt down 20 Zeroms to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Zerom.",
+		Hunt1 = "Zerom",
+		NpcName = "Hunting Board",
+	},
+	[70207] = {
+		Title = "Morroc Hunt: Requiem",
+		Description = {
+			"Hunt down 20 Requiems to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Requiem.",
+		Hunt1 = "Requiem",
+		NpcName = "Hunting Board",
+	},
+	[70208] = {
+		Title = "Morroc Hunt: Hode",
+		Description = {
+			"Hunt down 20 Hodes to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Hode.",
+		Hunt1 = "Hode",
+		NpcName = "Hunting Board",
+	},
+	[70209] = {
+		Title = "Morroc Hunt: Frilldora",
+		Description = {
+			"Hunt down 20 Frilldoras to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Frilldora.",
+		Hunt1 = "Frilldora",
+		NpcName = "Hunting Board",
+	},
+	[70210] = {
+		Title = "Morroc Hunt: Mummy",
+		Description = {
+			"Hunt down 20 Mummys to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Mummy.",
+		Hunt1 = "Mummy",
+		NpcName = "Hunting Board",
+	},
+	[70211] = {
+		Title = "Morroc Hunt: Verit",
+		Description = {
+			"Hunt down 20 Verits to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 20 Verit.",
+		Hunt1 = "Verit",
+		NpcName = "Hunting Board",
+	},
+	[70212] = {
+		Title = "Morroc Hunt: Marduk",
+		Description = {
+			"Hunt down 15 Marduks to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 15 Marduk.",
+		Hunt1 = "Marduk",
+		NpcName = "Hunting Board",
+	},
+	[70213] = {
+		Title = "Morroc Hunt: Pasana",
+		Description = {
+			"Hunt down 15 Pasanas to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 15 Pasana.",
+		Hunt1 = "Pasana",
+		NpcName = "Hunting Board",
+	},
+	[70214] = {
+		Title = "Morroc Hunt: Minorous",
+		Description = {
+			"Hunt down 15 Minorouss to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 15 Minorous.",
+		Hunt1 = "Minorous",
+		NpcName = "Hunting Board",
+	},
+	[70215] = {
+		Title = "Morroc Hunt: Isis",
+		Description = {
+			"Hunt down 15 Isiss to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 15 Isis.",
+		Hunt1 = "Isis",
+		NpcName = "Hunting Board",
+	},
+	[70216] = {
+		Title = "Morroc Hunt: Anubis",
+		Description = {
+			"Hunt down 10 Anubiss to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 10 Anubis.",
+		Hunt1 = "Anubis",
+		NpcName = "Hunting Board",
+	},
+	[70217] = {
+		Title = "Morroc Hunt: Ancient Mummy",
+		Description = {
+			"Hunt down 10 Ancient Mummys to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 10 Ancient Mummy.",
+		Hunt1 = "Ancient Mummy",
+		NpcName = "Hunting Board",
+	},
+	[70218] = {
+		Title = "Morroc Hunt: Dragon Fly",
+		Description = {
+			"Hunt down 1 Dragon Flys to complete the contract",
+			"and claim your Morroc Coins."
+		},
+		Summary = "Hunt 1 Dragon Fly.",
+		Hunt1 = "Dragon Fly",
+		NpcName = "Hunting Board",
+	},
+	-- Payon Hunting Quests
+	[70301] = {
+		Title = "Payon Hunt: Willow",
+		Description = {
+			"Hunt down 25 Willows to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 25 Willow.",
+		Hunt1 = "Willow",
+		NpcName = "Hunting Board",
+	},
+	[70302] = {
+		Title = "Payon Hunt: Spore",
+		Description = {
+			"Hunt down 25 Spores to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 25 Spore.",
+		Hunt1 = "Spore",
+		NpcName = "Hunting Board",
+	},
+	[70303] = {
+		Title = "Payon Hunt: Familiar",
+		Description = {
+			"Hunt down 25 Familiars to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 25 Familiar.",
+		Hunt1 = "Familiar",
+		NpcName = "Hunting Board",
+	},
+	[70304] = {
+		Title = "Payon Hunt: Zombie",
+		Description = {
+			"Hunt down 25 Zombies to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 25 Zombie.",
+		Hunt1 = "Zombie",
+		NpcName = "Hunting Board",
+	},
+	[70305] = {
+		Title = "Payon Hunt: Skeleton",
+		Description = {
+			"Hunt down 25 Skeletons to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 25 Skeleton.",
+		Hunt1 = "Skeleton",
+		NpcName = "Hunting Board",
+	},
+	[70306] = {
+		Title = "Payon Hunt: Wolf",
+		Description = {
+			"Hunt down 20 Wolfs to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Wolf.",
+		Hunt1 = "Wolf",
+		NpcName = "Hunting Board",
+	},
+	[70307] = {
+		Title = "Payon Hunt: Bigfoot",
+		Description = {
+			"Hunt down 20 Bigfoots to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Bigfoot.",
+		Hunt1 = "Bigfoot",
+		NpcName = "Hunting Board",
+	},
+	[70308] = {
+		Title = "Payon Hunt: Munak",
+		Description = {
+			"Hunt down 20 Munaks to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Munak.",
+		Hunt1 = "Munak",
+		NpcName = "Hunting Board",
+	},
+	[70309] = {
+		Title = "Payon Hunt: Bongun",
+		Description = {
+			"Hunt down 20 Bonguns to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Bongun.",
+		Hunt1 = "Bongun",
+		NpcName = "Hunting Board",
+	},
+	[70310] = {
+		Title = "Payon Hunt: Sohee",
+		Description = {
+			"Hunt down 20 Sohees to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Sohee.",
+		Hunt1 = "Sohee",
+		NpcName = "Hunting Board",
+	},
+	[70311] = {
+		Title = "Payon Hunt: Archer Skeleton",
+		Description = {
+			"Hunt down 20 Archer Skeletons to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Archer Skeleton.",
+		Hunt1 = "Archer Skeleton",
+		NpcName = "Hunting Board",
+	},
+	[70312] = {
+		Title = "Payon Hunt: Dokebi",
+		Description = {
+			"Hunt down 20 Dokebis to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Dokebi.",
+		Hunt1 = "Dokebi",
+		NpcName = "Hunting Board",
+	},
+	[70313] = {
+		Title = "Payon Hunt: Nine Tail",
+		Description = {
+			"Hunt down 15 Nine Tails to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 15 Nine Tail.",
+		Hunt1 = "Nine Tail",
+		NpcName = "Hunting Board",
+	},
+	[70314] = {
+		Title = "Payon Hunt: Dragon Tail",
+		Description = {
+			"Hunt down 15 Dragon Tails to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 15 Dragon Tail.",
+		Hunt1 = "Dragon Tail",
+		NpcName = "Hunting Board",
+	},
+	[70315] = {
+		Title = "Payon Hunt: Skeleton General",
+		Description = {
+			"Hunt down 10 Skeleton Generals to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 10 Skeleton General.",
+		Hunt1 = "Skeleton General",
+		NpcName = "Hunting Board",
+	},
+	[70316] = {
+		Title = "Payon Hunt: Vagabond Wolf",
+		Description = {
+			"Hunt down 1 Vagabond Wolfs to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 1 Vagabond Wolf.",
+		Hunt1 = "Vagabond Wolf",
+		NpcName = "Hunting Board",
+	},

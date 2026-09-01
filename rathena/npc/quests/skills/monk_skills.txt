@@ -36,7 +36,7 @@ prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
 			mes "I have no need to put your heart to trial. Take the secrets of ^0000FFSpiritual Bestowment^000000.";
 			mes "Use it to guide, support, and protect your companions!";
 			next;
-			skill "MO_KITRANSLATION",1,SKILL_PERM;
+			skill "MO_KITRANSLATION",1,SKILL_PERM_GRANT;
 			set MONK_SK,3;
 			specialeffect EF_LEVELUP;
 			mes "[Monk]";
@@ -87,8 +87,8 @@ prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
 			mes "tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
 			mes "tap-tap-tap-tap-tap-tap* *POKE*^000000";
 			set MONK_SK,7;
-			skill "MO_KITRANSLATION",1,SKILL_PERM;
-			skill "MO_BALKYOUNG",1,SKILL_PERM;
+			skill "MO_KITRANSLATION",1,SKILL_PERM_GRANT;
+			skill "MO_BALKYOUNG",1,SKILL_PERM_GRANT;
 			next;
 			mes "[Monk]";
 			mes "It is done. Please";
@@ -175,7 +175,7 @@ prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
 				mes "times, but it is a means to an";
 				mes "end, and not an end in itself.";
 				set MONK_SK,3;
-				skill "MO_KITRANSLATION",1,SKILL_PERM;
+				skill "MO_KITRANSLATION",1,SKILL_PERM_GRANT;
 				next;
 				mes "[Monk]";
 				mes "Our skills should not be";
@@ -263,7 +263,7 @@ monk_test,316,69,5	script	Monk#qsk_mo	823,{
 			mes "[Monk]";
 			mes "You have no need for trials against monsters. Receive the secret technique of ^0000FFExcruciating Palm^000000!";
 			next;
-			skill "MO_BALKYOUNG",1,SKILL_PERM;
+			skill "MO_BALKYOUNG",1,SKILL_PERM_GRANT;
 			set MONK_SK,6;
 			specialeffect EF_LEVELUP;
 			mes "[Monk]";
@@ -309,7 +309,7 @@ monk_test,316,69,5	script	Monk#qsk_mo	823,{
 			mes "to do it since you've learned";
 			mes "Spiritual Endowment.";
 			set MONK_SK,6;
-			skill "MO_BALKYOUNG",1,SKILL_PERM;
+			skill "MO_BALKYOUNG",1,SKILL_PERM_GRANT;
 			next;
 			mes "[Monk]";
 			mes "Well, we've completed";

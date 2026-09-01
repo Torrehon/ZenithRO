@@ -1,0 +1,82 @@
+//===== rAthena Script ======================================= 
+//= Soul Molder NPC (Niflheim)
+//===== Description: ========================================= 
+//= Converts 5x Heroic Soul Fragments (50023) into 1x Heroic Soul Essence (50020).
+//= Requires player to have reached the Pantheon of Heroes (1@4tro).
+//============================================================ 
+
+nif_in,155,25,2	script	Soul Molder#nif	795,{
+	mes "[^8A2BE2Soul Molder^000000]";
+	mes "Ah... a living mortal wandering through the realm of the dead.";
+	mes "I am the shaper of ethereal echoes, one who binds the shattered fragments of departed heroes into unified essences of power.";
+	next;
+
+	if (SOUL_QUEST1_STEP < 2) {
+		mes "[^8A2BE2Soul Molder^000000]";
+		mes "However... I sense that your spirit is not yet attuned to the ^0000FFPantheon of Heroes^000000.";
+		mes "I can only mold fragments for those who have walked among the ancient Einherjar in Valhalla.";
+		next;
+		mes "[^8A2BE2Soul Molder^000000]";
+		mes "Return to me once you have unlocked the secrets of the Heroic Soul Quest and reached the Pantheon.";
+		close;
+	}
+
+	.@fragments = countitem(50023);
+
+	mes "[^8A2BE2Soul Molder^000000]";
+	mes "I can fuse ^0000FF5 Heroic Soul Fragments^000000 into ^00AA001 Heroic Soul Essence^000000.";
+	mes " ";
+	mes "You currently possess: ^00AA00" + .@fragments + "^000000 / 5 Fragments.";
+	next;
+
+	if (.@fragments < 5) {
+		mes "[^8A2BE2Soul Molder^000000]";
+		mes "You do not have enough fragments. Bring me at least 5 ^0000FFHeroic Soul Fragments^000000 when you are ready.";
+		close;
+	}
+
+	.@max_craft = .@fragments / 5;
+
+	mes "[^8A2BE2Soul Molder^000000]";
+	mes "Would you like me to mold your fragments now?";
+	next;
+
+	switch(select("Craft 1 Heroic Soul Essence (5 Fragments):Craft ALL possible Essences (" + .@max_craft + " Essences):Nevermind")) {
+		case 1:
+			.@amount_to_craft = 1;
+			break;
+		case 2:
+			.@amount_to_craft = .@max_craft;
+			break;
+		case 3:
+			mes "[^8A2BE2Soul Molder^000000]";
+			mes "Very well. The lost souls shall wait patiently until you return.";
+			close;
+	}
+
+	.@cost = .@amount_to_craft * 5;
+
+	if (countitem(50023) < .@cost) {
+		mes "[^8A2BE2Soul Molder^000000]";
+		mes "It seems your fragments have shifted. You no longer have enough.";
+		close;
+	}
+
+	delitem 50023, .@cost;
+	getitem 50020, .@amount_to_craft;
+	specialeffect2 EF_SOULCLOTH;
+
+	mes "[^8A2BE2Soul Molder^000000]";
+	mes "^0000FFThe shattered soul fragments swirl in a vortex of spectral light and condense into a glowing essence!^000000";
+	next;
+	mes "[^8A2BE2Soul Molder^000000]";
+	mes "Here is your ^00AA00" + .@amount_to_craft + " Heroic Soul Essence" + ((.@amount_to_craft > 1) ? "s" : "") + "^000000.";
+	mes "May the ancient strength of heroes guide your steps.";
+	close;
+}
+
+nif_in,155,27,2	script	Soul Cage	111,{
+	mes "An eerie light comes from this crystal prism.";
+	mes "You feel something calling you from its insides... Something alive?";
+	close;
+}

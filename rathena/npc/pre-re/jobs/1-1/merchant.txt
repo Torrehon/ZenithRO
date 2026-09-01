@@ -115,8 +115,17 @@ alberta_in,56,39,6	script	Garrick	731,{ //DAWN AXE QUEST
 
 	// === A PARTIR DE AQUÍ, ES 100% RAMA MERCHANT ===
 
-	// Si la quest ya está completada
 	if (dawn_axe_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Garrick]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Axe, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Axe (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40002; // Dawn Battle Axe
+			}
+			close;
+		}
 		mes "[Garrick]";
 		mes "How is the Dawn Axe? I told you it was more than just a piece of metal.";
 		mes "May it help you clear the path to your first million Zeny!";

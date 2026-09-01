@@ -31,7 +31,7 @@ hire_in,176,78,4	script	Quartermaster Vargas	900,{ // QUEST DE SKILL PLATINUM: A
 		}
 		mes "[Quartermaster Vargas]";
 		mes "Before I trust you with gunpowder, you need to prove you understand the materials.";
-		mes "Bring me ^3355FF10 Iron^000000, ^3355FF5 Coal^000000, and ^3355FF10 Shells^000000 so we can practice making casings and powder.";
+		mes "Bring me ^3355FF5 Iron^000000, ^3355FF1 Coal^000000, and ^3355FF10 Shells^000000 so we can practice making casings and powder.";
 		next;
 		if (select("I'll get them.:Maybe later.") == 1) {
 			set plat_ammocraft_active, 1;
@@ -63,7 +63,7 @@ hire_in,176,78,4	script	Quartermaster Vargas	900,{ // QUEST DE SKILL PLATINUM: A
 			mes "Good. Now pay attention. The secret is in the powder mixture and pressing the casing just right...";
 			next;
 			
-			skill "GS_AMMOCRAFT", 1, SKILL_PERM;
+			skill "GS_AMMOCRAFT", 1, SKILL_PERM_GRANT;
 			set plat_ammocraft_active, 0; // Reseteamos la variable, la skill ya está aprendida.
 			
 			mes "[Quartermaster Vargas]";

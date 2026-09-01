@@ -37,7 +37,7 @@ prt_church,111,112,1	script	Sister Linus	79,{
 				mes "with your light. Give us the";
 				mes "strength to walk the path of";
 				mes "love and sacrifice. Redemptio!^000000";
-				skill "PR_REDEMPTIO",1,SKILL_PERM;
+				skill "PR_REDEMPTIO",1,SKILL_PERM_GRANT;
 				next;
 				mes "[Sister Linus]";
 				mes "There...";
@@ -70,7 +70,7 @@ prt_church,111,112,1	script	Sister Linus	79,{
 			mes "[Sister Linus]";
 			mes "I don't need to ask you for repeated prayer trials. Take the knowledge of ^3131FFRedemptio^000000!";
 			next;
-			skill "PR_REDEMPTIO",1,SKILL_PERM;
+			skill "PR_REDEMPTIO",1,SKILL_PERM_GRANT;
 			set PRIEST_SK,100;
 			specialeffect2 EF_HEALSP;
 			specialeffect EF_LEVELUP;
@@ -308,7 +308,7 @@ prt_church,111,112,1	script	Sister Linus	79,{
 						mes "use this skill in the most";
 						mes "critical situations.";
 						set PRIEST_SK,100;
-						skill "PR_REDEMPTIO",1,SKILL_PERM;
+						skill "PR_REDEMPTIO",1,SKILL_PERM_GRANT;
 						close;
 					}
 					else {

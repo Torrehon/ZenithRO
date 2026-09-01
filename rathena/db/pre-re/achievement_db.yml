@@ -2755,3 +2755,121 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
       TitleId: 1024
     Score: 10
+  - Id: 260000
+    Group: Walk
+    Name: Pedometer I: First Steps
+    Targets:
+      - Id: 0
+        Count: 1000
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260001
+    Group: Walk
+    Name: Pedometer II: Rambler
+    Targets:
+      - Id: 0
+        Count: 5000
+    Dependents:
+      260000: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260002
+    Group: Walk
+    Name: Pedometer III: Wanderer
+    Targets:
+      - Id: 0
+        Count: 10000
+    Dependents:
+      260001: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260003
+    Group: Walk
+    Name: Pedometer IV: Hiker
+    Targets:
+      - Id: 0
+        Count: 25000
+    Dependents:
+      260002: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260004
+    Group: Walk
+    Name: Pedometer V: Traveler
+    Targets:
+      - Id: 0
+        Count: 50000
+    Dependents:
+      260003: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260005
+    Group: Walk
+    Name: Pedometer VI: Explorer
+    Targets:
+      - Id: 0
+        Count: 100000
+    Dependents:
+      260004: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260006
+    Group: Walk
+    Name: Pedometer VII: Pathfinder
+    Targets:
+      - Id: 0
+        Count: 250000
+    Dependents:
+      260005: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260007
+    Group: Walk
+    Name: Pedometer VIII: Globe Trotter
+    Targets:
+      - Id: 0
+        Count: 500000
+    Dependents:
+      260006: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260008
+    Group: Walk
+    Name: Pedometer IX: Marathoner
+    Targets:
+      - Id: 0
+        Count: 750000
+    Dependents:
+      260007: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10
+  - Id: 260009
+    Group: Walk
+    Name: Pedometer X: Master Walker
+    Targets:
+      - Id: 0
+        Count: 1000000
+    Dependents:
+      260008: true
+    Rewards:
+      Item: Max_Weight_Up_Scroll
+      Amount: 1
+    Score: 10

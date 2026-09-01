@@ -76,7 +76,7 @@ prt_church,173,23,4	script	Cleric	79,{
 		mes "You have cleansed the impurity... you have proven your zeal.";
 		next;
 		delitem 50002, 1;
-		skill "AL_ZEALOT", 1, SKILL_PERM;
+		skill "AL_ZEALOT", 1, SKILL_PERM_GRANT;
 		set plat_zealot_active, 0;
 		set plat_zombie_count, 0;
 		set plat_skeleton_count, 0;

@@ -1,0 +1,560 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Main Container for Quest Card */
+  .quest-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-left: 6px solid #d4af37;
+    margin-bottom: 25px;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Top Floor: Text + Image */
+  .quest-top {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Left Area: Text & Title */
+  .quest-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .quest-step-title {
+    font-family: 'Lato', sans-serif;
+    color: #1a2a44;
+    font-size: 1.3em;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-badge {
+    background-color: #1565c0;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+  }
+
+  .quest-desc {
+    color: #455a64;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1em;
+  }
+
+  .coord {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  /* Right Area: Image Container */
+  .quest-image-container {
+    padding: 20px;
+    background-color: #f8fbfd;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quest-image {
+    width: 300px;
+    height: 180px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    object-fit: cover; 
+    object-position: center; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .quest-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  /* BOTTOM FLOOR: REWARDS / EXTRAS */
+  .quest-bottom {
+    background-color: #f8fbfd;
+    border-top: 1px solid #e0e0e0;
+    padding: 20px 25px;
+  }
+
+  .rewards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .reward-item {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .reward-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: none;
+    image-rendering: pixelated;
+    background: #f1f8e9;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c5e1a5;
+    flex-shrink: 0;
+  }
+
+  .reward-text-content {
+    flex: 1;
+  }
+
+  .reward-title {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 1.05em;
+    margin: 0 0 5px 0;
+  }
+
+  .reward-desc {
+    font-size: 0.9em;
+    color: #455a64;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* =========================================
+     BOSS STATS DESIGN
+     ========================================= */
+  .boss-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .boss-profile {
+    display: flex;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .boss-sprite-box {
+    background: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    flex-shrink: 0; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-sprite {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .boss-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #bbdefb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    flex: 1; 
+  }
+
+  .boss-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .boss-stat-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: #1565c0;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .boss-stat-value {
+    font-size: 0.95em;
+    color: #1a2a44;
+    font-family: monospace; 
+    font-weight: bold;
+  }
+
+  /* Loot Box */
+  .boss-loot-box {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #bbdefb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-loot-title {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: #1565c0;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+  }
+
+  .boss-loot-items {
+    font-size: 0.95em;
+    color: #1a2a44;
+    line-height: 1.5;
+  }
+
+  /* Strategy Box */
+  .boss-strategy {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #ef5350; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-strategy h4 {
+    margin: 0 0 10px 0;
+    color: #c62828;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05em;
+  }
+
+  .boss-strategy p {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #455a64;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 650px) {
+    .quest-top {
+      flex-direction: column;
+    }
+    .quest-image-container {
+      border-left: none;
+      border-top: 1px solid #e0e0e0;
+      padding: 15px;
+    }
+    .quest-image {
+      width: 100%;
+      max-width: 350px;
+      height: 180px; 
+    }
+    .reward-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    /* Typography */
+    .quest-step-title { font-size: 1.0em !important; margin-bottom: 10px !important; }
+    .step-badge { font-size: 0.8em !important; padding: 3px 8px !important; }
+    .quest-desc { font-size: 0.8em !important; line-height: 1.3 !important; }
+    .reward-title { font-size: 0.8em !important; }
+    .reward-desc { font-size: 0.7em !important; line-height: 1.3 !important; }
+    
+    /* Boss profile mobile */
+    .boss-profile {
+      flex-direction: column; 
+      align-items: center;
+    }
+    .boss-sprite-box {
+      width: 100%;
+      max-width: 150px; 
+    }
+    .boss-stats-grid {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .boss-stat-value { font-size: 0.85em; }
+    .boss-loot-items { font-size: 0.85em; } 
+    .boss-strategy p { font-size: 0.8em; }
+  }
+</style>
+
+<!-- STEP 1 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">1</span>
+        Quest start
+      </h3>
+      <p class="quest-desc">
+        You will find <strong>Grandmother Kyung</strong> at Payon Archer Village (<span class="coord">pay_arche 48, 137</span>), right outside Payon Dungeon.
+        <br><br>
+        She will tell you the tragic story of her granddaughter Min-ji and ask for your help. To accept her task, you must be between <strong>Base Level 25 and 60</strong>. She will hand you <strong>3 Holy Waters</strong> to cleanse Min-ji's grave in the caves.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/16rJMx4yhVcZJrkMtZwCzTU8XvR9LzC8O" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/16rJMx4yhVcZJrkMtZwCzTU8XvR9LzC8O" alt="Grandmother Kyung">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">2</span>
+        Instance NPC
+      </h3>
+      <p class="quest-desc">
+        Once inside Payon Cave F1, head east until you find the <strong>Pulsing Gravestone</strong> (<span class="coord">pay_dun00 163, 142</span>).
+        <br><br>
+        This gravestone opens the gateway to the instance. You must be in a party and be the party leader. Make sure you carry Holy Water in your inventory, then initiate the gateway to be teleported inside.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1Mh0AEdmQKahpHYkAZdZw1B7DnoWCH8f_" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1Mh0AEdmQKahpHYkAZdZw1B7DnoWCH8f_" alt="Pulsing Gravestone">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">3</span>
+        The Tainted Gravestone
+      </h3>
+      <p class="quest-desc">
+        Once inside the instance (<span class="coord">1@pay00 163, 142</span>), interact with the <strong>Tainted Gravestone</strong>.
+        <br><br>
+        Pour the Holy Water on the stone to initiate the purification ritual and prepare your party for incoming enemies!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1iM97yZD-p4Nl07cmzW04g-fPhQM03pXF" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1iM97yZD-p4Nl07cmzW04g-fPhQM03pXF" alt="Tainted Gravestone">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">4</span>
+        The Restless Dead
+      </h3>
+      <p class="quest-desc">
+        After pouring the Holy Water, you will face two waves of enemies attracted by the dark energy before the real battle begins.
+        <br><br>
+        First, you will fight the <strong>Corrupted Guardian</strong> (Soldier Skeleton), followed 10 seconds later by <strong>10 Restless Corpses</strong> (Zombies). Defeat them to summon the spirit!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1DEdGPpoxcRtu6DpH1X3GwjDd0BG-odOz" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1DEdGPpoxcRtu6DpH1X3GwjDd0BG-odOz" alt="The Restless Dead">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">5</span>
+        The Boss fight
+      </h3>
+      <p class="quest-desc">
+        Right after defeating the Restless Dead, tremors will shake the cave and the <strong>Tormented Weaver</strong> will emerge near the gravestone. Prepare yourself for a fierce battle!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1UgDIFTo1CuTEhvJHVIT1cNsT3VfpStJT" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1UgDIFTo1CuTEhvJHVIT1cNsT3VfpStJT" alt="Tormented Weaver Boss">
+      </a>
+    </div>
+  </div>
+
+  <!-- BOTTOM FLOOR: BOSS INFO -->
+  <div class="quest-bottom">
+    <div class="boss-info-container">
+      
+      <!-- Flex Profile (Sprite + Grid) -->
+      <div class="boss-profile">
+        
+        <!-- Sprite Box -->
+        <div class="boss-sprite-box">
+          <img class="boss-sprite" src="https://lh3.googleusercontent.com/d/1d2d6BICYCcJuikOcVeldAOBOLBFhyT9z" alt="Tormented Weaver Sprite">
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="boss-stats-grid">
+          <div class="boss-stat">
+            <span class="boss-stat-label">Level</span>
+            <span class="boss-stat-value">40</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">HP</span>
+            <span class="boss-stat-value">26666</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Attack</span>
+            <span class="boss-stat-value">180 - 255</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Exp (Base/Job)</span>
+            <span class="boss-stat-value">2500 / 1500</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Race</span>
+            <span class="boss-stat-value">Undead</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Element</span>
+            <span class="boss-stat-value">Undead</span>
+          </div>
+        </div>
+        
+      </div> <!-- End boss-profile -->
+
+      <!-- Loot Box -->
+      <div class="boss-loot-box">
+        <h4 class="boss-loot-title">Main Loot</h4>
+        <div class="boss-loot-items">
+          Jewelry Box (50%), Gift Box (50%), Long Hair (100%), Dead Branch (50%), Light Orange Potion Box (100%), <strong>Incense of Longing (25%)</strong>
+        </div>
+
+        <!-- Special Item Card inside Loot -->
+        <div class="reward-item" style="margin-top: 15px;">
+          <img class="reward-icon" src="https://lh3.googleusercontent.com/d/13Uw8BGSIM_hE8AO69c6jjHE1pwgMa_oU" alt="Incense of Longing"> 
+          <div class="reward-text-content">
+            <h4 class="reward-title">Incense of Longing</h4>
+            <p class="reward-desc">  
+              <strong>Type:</strong> Accessory | <strong>Required Level:</strong> 1<br><br>
+              <em>The fragrance from this incense is the same Min-ji used to burn while working at her loom. Its scent seems to guide lost souls toward peace, weakening the resolve of the restless dead.</em> <br><br>
+              
+              Increases physical and magical damage against Undead race monsters by 10%.<br>
+              Allows the use of <strong>Signum Crucis Level 2.</strong><br>
+            </p>
+          </div>
+        </div>
+        <!-- End Special Item Card -->
+
+      </div>
+
+      <!-- Strategy and Skills -->
+      <div class="boss-strategy">
+        <h4>⚔️ Boss Skills & Strategy</h4>
+        <p>
+          <strong>Skills:</strong> She will mainly use Dark Strike and Curse Attack. As soon as the battle begins, she will cast Wide Curse, inflicting Curse on everyone. When low on HP, she will cast Wide Soul Drain, syphoning the party's SP.<br><br>
+          <strong>Strategy:</strong> Since it is an Undead-type monster, Holy element attacks (such as Heal, Holy Light, or Holy Smite) will deal massive damage. Keep your distance if you are a squishy class and let the tank hold aggro. Consider bringing extra Holy Water before challenging her.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">6</span>
+        Instance Rewards & Open World Boss
+      </h3>
+      <p class="quest-desc">
+        Once you've finished your task, head back to <strong>Grandmother Kyung</strong> (<span class="coord">pay_arche 48, 137</span>).
+        <br><br>
+        She will thank you, awarding <strong>12,000 Base EXP</strong>, <strong>10,000 Job EXP</strong>, <strong>5,000 Zeny</strong>, and Min-ji's last ribbon: <strong>Dreamer's Ribbon</strong>.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1-GzQRPFZwmyEfQCgokWI9eDzhRFS6QZi" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1-GzQRPFZwmyEfQCgokWI9eDzhRFS6QZi" alt="Kyung Reward">
+      </a>
+    </div>
+  </div>
+
+  <div class="quest-bottom">
+    <div class="rewards-container">
+      
+      <!-- Headgear Reward Card -->
+      <div class="reward-item">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/item/5801.png" alt="Dreamer's Ribbon">
+        <div class="reward-text-content">
+          <h4 class="reward-title">Dreamer's Ribbon</h4>
+          <p class="reward-desc">
+            <strong>Type:</strong> Headgear (Upper) | <strong>DEF:</strong> 2 | <strong>Required Level:</strong> 1<br><br>
+            Str +1<br>
+            Int +1<br>
+            Allows the use of <strong>Blessing Level 3</strong>
+            <br><br>
+            <strong>Incense of Longing Combo:</strong><br>
+            Gain 10% additional Experience when defeating Undead Race monsters.<br>
+            Restores 1 SP each time an Undead Race monster is killed.<br>
+            Increases Signum Crucis damage by 25%.
+          </p>
+        </div>
+      </div>
+
+      <!-- Repeatable FFA Mode Note -->
+      <div class="reward-item" style="border-color: #ffe0b2; background-color: #fff8e1;">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/item/932.png" alt="FFA Mode" style="background: #fff3e0; border-color: #ffe0b2;">
+        <div class="reward-text-content">
+          <h4 class="reward-title" style="color: #e65100;">🔁 Repeatable Open World Boss (FFA Mode)</h4>
+          <p class="reward-desc">
+            Once the main quest is completed for the first time, you can summon the <strong>Tormented Weaver</strong> again at the Pulsing Gravestone on Payon Cave F1 (<span class="coord">pay_dun00 163, 142</span>) every <strong>3 hours</strong>.
+            <br><br>
+            <strong>Required Offerings:</strong> 50 Skel-Bones, 50 Decayed Nails, and 1 Horrendous Mouth.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

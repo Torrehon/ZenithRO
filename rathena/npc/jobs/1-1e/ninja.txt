@@ -1,14 +1,20 @@
 //===== rAthena Script ======================================= 
-//= Ninja Job Quest (Simplified - Job 50 + Proof of Valor)
+//= Chunin Job Quest (Simplified - Job 50 + Proof of Valor)
 //===== Description: ========================================= 
-//= Job Change quest for Ninja class.
+//= Job Change quest for Chunin class from Genin (4501).
 //============================================================ 
 
-alberta,30,65,3	script	Akagi#nj	730,{
+izlude,210,116,3	script	Akagi#nj	730,{
 	mes "[Akagi]";
-	mes "Greetings, traveler. If you seek the secret shadows of the Ninja Guild in Amatsu, Kuuga Gai awaits inside the secret enclave.";
+	if (Class != 4501 && Class != 25) {
+		mes "Greetings, traveler. The secrets of the Chunin Enclave are reserved for Genin and Chunin of our clan.";
+		mes "Walk quietly and respect the shadows.";
+		close;
+	}
+
+	mes "Greetings, shadow brother. Kuuga Gai awaits inside the Chunin Enclave.";
 	next;
-	if (select("Warp to Ninja Enclave:Stay in Alberta") == 1) {
+	if (select("Warp to Chunin Enclave:Stay in Izlude") == 1) {
 		mes "[Akagi]";
 		mes "May the shadows conceal your footsteps...";
 		close2;
@@ -26,26 +32,27 @@ que_ng,30,65,3	script	Kuuga Gai#nq	730,{
 		mes "Incredible spirit! A Transcendent shadow warrior stands before me.";
 		close;
 	}
-	if (BaseJob != Job_Novice) {
-		if (BaseJob == Job_Ninja) {
-			mes "Greetings, shadow brother! Let your Huuma Shuriken spin and your Cicada Skin Shed protect you from every strike.";
-			close;
-		}
-		else {
-			mes "Welcome to the Ninja Enclave. Walk quietly and respect the shadow clan.";
-			close;
-		}
+
+	// 25 = Chunin, 4501 = Genin
+	if (Class == 25) {
+		mes "Greetings, shadow brother! Let your Huuma Shuriken spin and your Cicada Skin Shed protect you from every strike.";
+		close;
 	}
 
-	mes "Welcome to the secret sanctum of the Ninja Guild!";
+	if (Class != 4501) {
+		mes "Welcome to the Chunin Enclave. I only instruct Genin who have proven their discipline. Walk quietly and respect the shadow clan.";
+		close;
+	}
+
+	mes "Welcome to the secret sanctum of the Chunin Guild!";
 	mes "Hailing from the misty realm of Amatsu, our order combines martial ninjutsu, shadow mobility, lethal Huuma Shurikens, and elemental magic spells.";
 	next;
 	mes "[Kuuga Gai]";
-	mes "To earn the headband of a ^0000FFNinja^000000, a Novice must demonstrate complete patience, stealth, and battle experience.";
+	mes "To earn the headband of a ^0000FFChunin^000000, a Genin must demonstrate complete patience, stealth, and battle experience.";
 	next;
 	mes "[Kuuga Gai]";
 	mes "Our clan requires two credentials:";
-	mes "1. Reach ^0000FFJob Level 50^000000 as a Novice.";
+	mes "1. Reach ^0000FFJob Level 50^000000 as a Genin.";
 	mes "2. Present a ^FF0000Proof of Valor^000000 (Item ID 50008), proving your prestige across Rune-Midgard.";
 	next;
 
@@ -68,16 +75,16 @@ que_ng,30,65,3	script	Kuuga Gai#nq	730,{
 	mes "Exemplary! You have achieved Job Level 50 and presented the authentic ^FF0000Proof of Valor^000000!";
 	next;
 	mes "[Kuuga Gai]";
-	mes "By the shadow clan of Amatsu, I welcome you as a true Ninja!";
+	mes "By the shadow clan of Amatsu, I welcome you as a true Chunin!";
 	next;
 
 	delitem 50008, 1;
-	jobchange Job_Ninja;
+	jobchange 25;
 	specialeffect2 EF_ANGEL2;
 	specialeffect2 EF_CLASSCHANGE;
 
 	mes "[Kuuga Gai]";
-	mes "Arise as a ^0000FFNinja^000000!";
+	mes "Arise as a ^0000FFChunin^000000!";
 	mes "Throw Huuma Shurikens, execute Shadow Jump, cast Cicada Skin Shed, and command Ninjutsu magic!";
 	next;
 	mes "[Kuuga Gai]";
@@ -92,6 +99,6 @@ que_ng,30,65,3	script	Kuuga Gai#nq	730,{
 
 einbroch,184,194,3	script	Suspicious Man#nq	881,{
 	mes "[Suspicious Man]";
-	mes "Patience and stealth are a Ninja's greatest weapons. Never strike until your opponent reveals his weakness!";
+	mes "Patience and stealth are a Chunin's greatest weapons. Never strike until your opponent reveals his weakness!";
 	close;
 }

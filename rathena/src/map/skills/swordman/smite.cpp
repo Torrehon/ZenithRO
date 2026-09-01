@@ -14,8 +14,7 @@ void SkillSmite::calculateSkillRatio(const Damage* wd, const block_list* src, co
 
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	
-	// --- INICIO CUSTOM: Guardian Soul / Mimic Soul (Daño por escudo) ---
-	// Condición: Añade daño por peso y refine del escudo
+	// --- INICIO CUSTOM: Guardian Soul / Mimic Soul (Daño por peso de escudo) ---
 	if (sd && (pc_checkskill(sd, CR_GUARDIANSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		int16 index = sd->equip_index[EQI_HAND_L];
 
@@ -36,11 +35,20 @@ void SkillSmite::calculateSkillRatio(const Damage* wd, const block_list* src, co
 				}
 			}
 
-			int divisor = 28 - (refine_rate * 2);
-			if (divisor <= 0) divisor = 1;
+			// En rAthena C++, shield_weight viene multiplicado por 10 (ej: Escudo de peso 140 -> 1400 en C++)
+			// Fórmula limpia usando shield_weight directamente:
+			// +0  refino -> (1400 * 10) / 100 = +140% ratio
+			// +5  refino -> (1400 * 20) / 100 = +280% ratio
+			// +10 refino -> (1400 * 30) / 100 = +420% ratio
+			int weight_ratio = (shield_weight * (10 + refine_rate)) / 100;
 
-			base_skillratio += (shield_weight / divisor);
+			base_skillratio += weight_ratio;
 		}
+	}
+
+	// --- INICIO CUSTOM: Guardian Soul (Daño por VIT) ---
+	if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
+		base_skillratio += status_get_vit(src)*2;
 	}
 	// --- FIN CUSTOM ---
 }

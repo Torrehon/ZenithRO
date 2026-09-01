@@ -2996,23 +2996,42 @@ int32 status_calc_mob_(mob_data* md, uint8 opt)
 						
 						// Verificamos si tiene la pasiva aprendida
 						if (sd && pc_checkskill(sd, AM_BIOMANCER) > 0) {
-							
-							// ==========================================
-							// CONFIGURACIÓN DE BALANCEO
-							// ==========================================
-							int hp_rate = 100;
-							int stats_rate = 25; // Hereda un 25% de los stats básicos
-							// ==========================================
+							// 1. Herencia de MaxHP (50% de la vida máxima del Alchemist)
+							status->max_hp += sd->battle_status.max_hp * 50 / 100;
 
-							// Accedemos directamente a sd->battle_status
-							status->max_hp += sd->battle_status.max_hp * hp_rate / 100;
-							
-							status->str += sd->battle_status.str * stats_rate / 100;
-							status->agi += sd->battle_status.agi * stats_rate / 100;
-							status->vit += sd->battle_status.vit * stats_rate / 100;
-							status->int_ += sd->battle_status.int_ * stats_rate / 100;
-							status->dex += sd->battle_status.dex * stats_rate / 100;
-							status->luk += sd->battle_status.luk * stats_rate / 100;
+							// 2. Herencia de ATK y MATK Reales (30% del daño del Alchemist)
+							int extra_atk = (sd->battle_status.batk + sd->battle_status.rhw.atk) * 30 / 100;
+							status->rhw.atk  += extra_atk;
+							status->rhw.atk2 += extra_atk;
+
+							int extra_matk = sd->battle_status.matk_max * 30 / 100;
+							status->matk_min += extra_matk;
+							status->matk_max += extra_matk;
+
+							// 3. Herencia de DEF y MDEF (30% de la defensa del Alchemist)
+							status->def  += sd->battle_status.def * 30 / 100;
+							status->mdef += sd->battle_status.mdef * 30 / 100;
+
+							// 4. Herencia de HIT y FLEE (30% de puntería y esquiva del Alchemist)
+							status->hit  += sd->battle_status.hit * 30 / 100;
+							status->flee += sd->battle_status.flee * 30 / 100;
+
+							// 5. Herencia de ASPD (Reducción del tiempo entre ataques / amotion basado en AGI)
+							int amotion_reduction = (sd->battle_status.agi * 3); // 3ms de aceleración por punto de AGI
+							if (amotion_reduction > status->amotion * 40 / 100)
+								amotion_reduction = status->amotion * 40 / 100; // Cap máximo del 40% de velocidad extra
+							status->amotion = max(300, status->amotion - amotion_reduction);
+              
+              // 6. Herencia de Velocidad de Movimiento (speed igual al Alchemist)
+							status->speed = sd->battle_status.speed;
+
+							// Stats primarios
+							status->str  += sd->battle_status.str * 25 / 100;
+							status->agi  += sd->battle_status.agi * 25 / 100;
+							status->vit  += sd->battle_status.vit * 25 / 100;
+							status->int_ += sd->battle_status.int_ * 25 / 100;
+							status->dex  += sd->battle_status.dex * 25 / 100;
+							status->luk  += sd->battle_status.luk * 25 / 100;
 						}
 					}
 					// --- FIN CUSTOM ---
@@ -3239,6 +3258,13 @@ static int32 status_get_hpbonus(block_list *bl, enum e_status_bonus type) {
 				bonus += 350 * skill_lv + (skill_lv > 4 ? 250 : 0);
 			if ((skill_lv = pc_checkskill(sd, NV_TRANSCENDENCE)) > 0)
 				bonus += 350 * skill_lv + (skill_lv > 4 ? 250 : 0);
+
+			// --- INICIO CUSTOM: Forgemaster (Smith Spear -> HP Bonus) ---
+			if ((skill_lv = pc_checkskill(sd, BS_SPEAR)) > 0 && pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
+				int32 rank_mult = (pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) > 0) ? 2 : 1;
+				bonus += (150 * skill_lv) * rank_mult;
+			}
+			// --- FIN CUSTOM ---
 		}
 
 		//Bonus by SC
@@ -4782,12 +4808,7 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	if ((skill = pc_checkskill(sd, SU_SOULATTACK)) > 0)
 		base_status->rhw.range += skill_get_range2(sd, SU_SOULATTACK, skill, true);
 	
-	// --- INICIO CUSTOM: Forgemaster (Smith Spear -> HIT) ---
-	if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0 && pc_checkskill(sd, BS_SPEAR) > 0) {
-		int rank_mult = pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) ? 2 : 1;
-		base_status->hit += (3 * pc_checkskill(sd, BS_SPEAR)) * rank_mult;
-	}
-	// --- FIN CUSTOM ---
+
 	// ----- FLEE CALCULATION -----
 
 	// Absolute modifiers from passive skills
@@ -4942,6 +4963,13 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	if(pc_ismadogear(sd) && pc_checkskill(sd, NC_MAINFRAME) > 0)
 		base_status->def += 20 + (pc_checkskill(sd, NC_MAINFRAME) * 20);
 
+	// --- INICIO CUSTOM: Forgemaster (Smith Spear -> Hard DEF) ---
+	if ((skill = pc_checkskill(sd, BS_SPEAR)) > 0 && pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
+		int32 rank_mult = (pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) > 0) ? 2 : 1;
+		base_status->def += skill * rank_mult;
+	}
+	// --- FIN CUSTOM ---
+
 #ifndef RENEWAL
 	if (!battle_config.weapon_defense_type && base_status->def > battle_config.max_def) {
 		base_status->def2 += battle_config.over_def_bonus*(base_status->def -battle_config.max_def);
@@ -4958,6 +4986,13 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		i =  base_status->mdef * sd->mdef_rate/100;
 		base_status->mdef = cap_value(i, DEFTYPE_MIN, DEFTYPE_MAX);
 	}
+
+	// --- INICIO CUSTOM: Forgemaster (Smith Spear -> Hard MDEF) ---
+	if ((skill = pc_checkskill(sd, BS_SPEAR)) > 0 && pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
+		int32 rank_mult = (pc_famerank(sd->status.char_id, MAPID_BLACKSMITH) > 0) ? 2 : 1;
+		base_status->mdef += skill * rank_mult;
+	}
+	// --- FIN CUSTOM ---
 
 #ifndef RENEWAL
 	if (!battle_config.magic_defense_type && base_status->mdef > battle_config.max_def) {
@@ -9159,11 +9194,15 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 #endif
 		else
 			if( sd && sc->getSCE(SC_DANCING) ) {
-				// --- INICIO CUSTOM: BD_RESONANT remueve penalización (Efecto Soul Link eliminado) ---
-				if (pc_checkskill(sd, BD_RESONANT) > 0) {
+				// --- INICIO CUSTOM: BD_RESONANT (todas las canciones) y BD_DISSONANT (Dissonance / Ugly Dance) ---
+				uint16 active_song = static_cast<uint16>(sc->getSCE(SC_DANCING)->val1 & 0xFFFF);
+				bool has_resonant = (pc_checkskill(sd, BD_RESONANT) > 0);
+				bool has_dissonant_combo = (pc_checkskill(sd, BD_DISSONANT) > 0 && (active_song == BA_DISSONANCE || active_song == DC_UGLYDANCE));
+
+				if (has_resonant || has_dissonant_combo) {
 					val = max(val, 0); // 0 penalización = Velocidad normal
 				} else {
-					// Cálculo base sin el bono de Soul Linker (500 - 40 * Nivel de la pasiva)
+					// Cálculo base con penalización normal
 					val = max(val, 500 - 40 * pc_checkskill(sd, (sd->status.sex ? BA_MUSICALLESSON : DC_DANCINGLESSON)));
 				}
 				// --- FIN CUSTOM ---
@@ -9174,7 +9213,10 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 				val = max( val, 25 );
 			if( sc->getSCE(SC_PSLOW) )
 				// Multiplicamos el nivel de la skill (guardado en val1) por 10
-				val = max( val, sc->getSCE(SC_PSLOW)->val1 * 10 );	
+				val = max( val, sc->getSCE(SC_PSLOW)->val1 * 10 );
+			if( sc->getSCE(SC_PINNED) )
+				// Multiplicamos el nivel de la skill (guardado en val1) por 10
+				val = max( val, sc->getSCE(SC_PINNED)->val1 * 10 );		
 			if( sc->getSCE(SC_QUAGMIRE) || sc->getSCE(SC_HALLUCINATIONWALK_POSTDELAY) || (sc->getSCE(SC_GLOOMYDAY) && sc->getSCE(SC_GLOOMYDAY)->val4) )
 				val = max( val, 50 );
 			if( sc->getSCE(SC_DONTFORGETME) )
@@ -12204,9 +12246,9 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
         case SC_SIGNUMCRUCIS:
 			// Comprobamos si es Demonio o No-Muerto
 			if (undead_flag || status->race == RC_DEMON) {
-				val2 = 35; // <--- 50% de reducción de DEF para los oscuros
+				val2 = 35; // <--- 35% de reducción de DEF para los oscuros
 			} else {
-				val2 = 15; // <--- 25% de reducción de DEF para los normales
+				val2 = 15; // <--- 15% de reducción de DEF para los normales
 			}
 			
 			tick = 10000;

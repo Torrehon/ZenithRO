@@ -618,17 +618,20 @@ SKILL_DESCRIPT = {
 		"Mammonite",
 		"Max Level: 10",
 		"Skill Form: ^FF0000Physical attack ^000000",
-		"Description: ^777777Uses a certain amount of Zeny to deal high damage to target. ^000000",
-		"[Lv 1]:^777777 150% damage, Cost 100 Zeny ^000000",
-		"[Lv 2]:^777777 200% damage, Cost 200 Zeny ^000000",
-		"[Lv 3]:^777777 250% damage, Cost 300 Zeny ^000000",
-		"[Lv 4]:^777777 300% damage, Cost 400 Zeny ^000000",
-		"[Lv 5]:^777777 350% damage, Cost 500 Zeny ^000000",
-		"[Lv 6]:^777777 400% damage, Cost 600 Zeny ^000000",
-		"[Lv 7]:^777777 450% damage, Cost 700 Zeny ^000000",
-		"[Lv 8]:^777777 500% damage, Cost 800 Zeny ^000000",
-		"[Lv 9]:^777777 550% damage, Cost 900 Zeny ^000000",
-		"[Lv 10]:^777777 600% damage, Cost 1000 Zeny ^000000"
+		"Description: ^777777Uses Zeny to deal damage",
+		"to target. Zeny cost increases by",
+		"(1 * Skill Level) * Base Level.^000000",
+		"[Lv 1]:^777777 120% damage^000000",
+		"[Lv 2]:^777777 140% damage^000000",
+		"[Lv 3]:^777777 160% damage^000000",
+		"[Lv 4]:^777777 180% damage^000000",
+		"[Lv 5]:^777777 200% damage^000000",
+		"[Lv 6]:^777777 220% damage^000000",
+		"[Lv 7]:^777777 240% damage^000000",
+		"[Lv 8]:^777777 260% damage^000000",
+		"[Lv 9]:^777777 280% damage^000000",
+		"[Lv 10]:^777777 300% damage^000000",
+		"^777777Damage increases by (5 * Base Level)%.^000000"
 	},
 	[SKID.AC_OWL] = {
 		"Owl's Eye",
@@ -903,7 +906,8 @@ SKILL_DESCRIPT = {
 		"Description: ^777777Temporarily increases",
 		"attack speed with swords. If you",
 		"unequip the sword, this effect will",
-		"dissapear. ^000000",
+		"dissapear. Aspd increase is 20% for 1",
+		"Hand Swords and 30% for 2 Hand Swords.^000000",
 		"[Lv 1]:^777777 30 sec duration ^000000",
 		"[Lv 2]:^777777 60 sec duration ^000000",
 		"[Lv 3]:^777777 90 sec duration ^000000",
@@ -953,6 +957,7 @@ SKILL_DESCRIPT = {
     [SKID.KN_BLADERSOUL] = {
 		"Soul of the Blader",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of swords.^000000",
 		"^777777[Bowling Bash]:^000000 ^777777With a 2H Sword, hits 3 times if there are 3 enemies, or 4 times for 4 or more enemies.^000000",
@@ -962,6 +967,7 @@ SKILL_DESCRIPT = {
 	[SKID.KN_LANCERSOUL] = {
 		"Soul of the Lancer",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of spears.^000000",
 		"^777777[Pierce]:^000000 ^777777Grants a base Critical rate of 50 to the skill.^000000",
@@ -1143,11 +1149,12 @@ SKILL_DESCRIPT = {
 		"ground. Deals 70% * Skill Level Matk damage,",
 		"increased to 100% if the targets are Demon",
 		"or Undead",
-		"Each cast requires 1 ^008800Blue Gemstone^777777. ^000000"
+		"Each cast requires 3 ^008800Holy Waters^777777. ^000000"
 	},
     [SKID.PR_EXORCISTSOUL] = {
 		"Soul of the Exorcist",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Channels divine wrath to purge the wicked and smite the impure.^000000",
 		"^777777[Righteous Mastery]:^000000 ^777777Grants a 2% chance per skill level to autocast Holy Smite (with Maces) or Holy Light (with Books) when attacking.^000000",
@@ -1158,6 +1165,7 @@ SKILL_DESCRIPT = {
 	[SKID.PR_SAINTSOUL] = {
 		"Soul of the Saint",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Channels divine grace to mend the broken and shield the innocent.^000000",
 		"^777777[Heal]:^000000 ^777777Overhealing grants a shield absorbing damage equal to 50% of the healed amount (Max 10% of target's Max HP). Lasts 1 min. Kyrie Eleison will overwrite this shield.^000000",
@@ -1282,6 +1290,7 @@ SKILL_DESCRIPT = {
     [SKID.WZ_MAGUSSOUL] = {
 		"Soul of the Magus",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the Wizard's magic",
 		"dominance.^000000",
@@ -1293,6 +1302,7 @@ SKILL_DESCRIPT = {
     [SKID.WZ_HEXERSOUL] = {
 		"Soul of the Hexer",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the Wizard's mastery over elemental enfeeblements.^000000",
 		"^777777DoT statuses have double the chance to occur.^000000",
@@ -1394,10 +1404,12 @@ SKILL_DESCRIPT = {
 		"Max Level: 3",
 		"10^CC3399Requirement: Smith Dagger 2 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
-		"Description: ^777777Enables forging of Spear class",
-		"weapons. If Soul of the Forgemaster is learned,",
-		"increases Hit by 3 * Skill Level, doubled if",
-		"you are in the Blacksmith Forge Rank top 10.^000000"
+		"Description: ^777777Enables forging of Spear",
+		"class weapons. If Soul of the",
+		"Forgemaster is learned, increases Def",
+		"and Mdef by 1 and Max Hp by 150 * Skill",
+		"Level, doubled if you are in the",
+		"Blacksmith Forge Rank top 10.^000000"
 	},
 	[SKID.BS_HILTBINDING] = {
 		"Hilt Binding",
@@ -1415,7 +1427,7 @@ SKILL_DESCRIPT = {
 	},
 	[SKID.BS_WEAPONRESEARCH] = {
 		"Weaponry Research",
-		"Max Level: 10",
+		"Max Level: 1",
 		"10^CC3399Requirement: Hilt Binding 1 ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Improves weapon knowledge in order to create arms of higher quality. ^000000"
@@ -1481,7 +1493,7 @@ SKILL_DESCRIPT = {
 	[SKID.BS_WEAPONPERFECT] = {
 		"Weapon Perfection",
 		"Max Level: 5",
-		"10^CC3399Requirement: Adrenaline Rush 2, Weaponry Research 2 ^000000",
+		"10^CC3399Requirement: Adrenaline Rush 2, Weaponry Research 1 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Nullifies any reduction in damage",
 		"resulting from monster size for 60 seconds per",
@@ -1512,6 +1524,7 @@ SKILL_DESCRIPT = {
     [SKID.BS_JUGGERNAUTSOUL] = {
 		"Soul of the Juggernaut",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the Blacksmith's absolute brute force.^000000",
 		"^008800Hilt Binding^777777: Hammer Fall grants ^990000Savagery^777777 stacks (Max 10). Each stack adds ^990000+10%^777777 damage ratio to this skill.^000000",
@@ -1522,6 +1535,7 @@ SKILL_DESCRIPT = {
     [SKID.BS_FORGEMASTERSOUL] = {
 		"Soul of the Forgemaster",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Grants stats based on your Smithing skill levels.^000000",
 		"^008800Weaponry Research^777777: ^990000+10%^777777 flat Forge Success.^000000",
@@ -1718,6 +1732,7 @@ SKILL_DESCRIPT = {
     [SKID.HT_SHOOTERSOUL] = {
 		"Soul of the Sharpshooter",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens your absolute mastery over archery.^000000",
 		"^008800Momentum^777777: +10 sec base duration (12s at max stacks).^000000",
@@ -1727,6 +1742,7 @@ SKILL_DESCRIPT = {
 	[SKID.HT_TRAPPERSOUL] = {
 		"Soul of the Trapper",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of traps and your Falcon.^000000",
 		"^008800Traps^777777: Gain ^990000+150% MATK^777777 damage and inflict ^990000Pinned^777777 (-25% Move Speed) for 10s.^000000",
@@ -1847,6 +1863,7 @@ SKILL_DESCRIPT = {
     [SKID.AS_EXECSOUL] = {
 		"Soul of the Executioner",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens your assassination instincts.^000000",
 		"^008800Katar Mastery^777777: Dealing critical hits",
@@ -1863,6 +1880,7 @@ SKILL_DESCRIPT = {
 	[SKID.AS_VIPERSOUL] = {
 		"Soul of the Viper",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of",
 		"your poisonous tools.^000000",
@@ -2072,7 +2090,7 @@ SKILL_DESCRIPT = {
 		"17^CC3399Requirement: Steal Coin 4 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Description: ^777777Jump to the target's back,",
-		"dealing 200% + 30% * Skill Level damage",
+		"dealing 200% + 20% * Skill Level damage",
 		"and hitting twice if used with a dagger",
 		"type weapon.^000000"
 	},
@@ -2255,6 +2273,7 @@ SKILL_DESCRIPT = {
     [SKID.RG_NIGHTBLADE] = {
 		"Soul of the Nightblade",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true predatory",
 		"instincts of Rogues.^000000",
@@ -2283,6 +2302,7 @@ SKILL_DESCRIPT = {
 	[SKID.RG_MIMIC] = {
 		"Soul of the Mimic",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true mimic",
 		"nature of Rogues.^000000",
@@ -2336,7 +2356,8 @@ SKILL_DESCRIPT = {
 		"^000099Potion Creation Guide^777777 is needed for the",
 		"manufacture of specific potions.",
 		"Success depends exclusively of user's",
-		"Job Level and Learning Potion Level.",
+		"Job Level, Learning Potion Level,",
+		"and 15% of user's Int.",
 		"Consumes 1 ^008800Medicine Bowl^777777. ^000000"
 	},
 	[SKID.AM_DEMONSTRATION] = {
@@ -2580,6 +2601,7 @@ SKILL_DESCRIPT = {
     [SKID.AM_APOTHECARY] = {
 		"Soul of the Apothecary",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true knowledge",
 		"of Potions and Chemicals.^000000",
@@ -2607,6 +2629,7 @@ SKILL_DESCRIPT = {
 	[SKID.AM_BIOMANCER] = {
 		"Soul of the Biomancer",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of",
 		"biologic research.^000000",
@@ -2756,6 +2779,7 @@ SKILL_DESCRIPT = {
 	[SKID.CR_TEMPLARSOUL] = {
 		"Soul of the Templar",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential",
 		"of holy magic and devotions.^000000",
@@ -2776,15 +2800,16 @@ SKILL_DESCRIPT = {
 	[SKID.CR_GUARDIANSOUL] = {
 		"Soul of the Guardian",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential",
 		"of shields and spears.^000000",
 		"^777777[Smite]:^000000 ^777777Deals damage in a 3x3 area.",
-		"Shield weight (including cards) and",
-		"refine rate increase the damage ratio.^000000",
+		"Shield weight (including cards), refine",
+		"and Vit increase the damage ratio.^000000",
 		"^777777[Shield Boomerang]:^000000 ^777777Shield weight",
-		"(including custom cards) and refine",
-		"rate increase the damage ratio.^000000",
+		"(including custom cards), refine and",
+		"Vit increase the damage ratio.^000000",
 		"^777777[Defender]:^000000 ^777777No longer reduces movement",
 		"speed.^000000",
 		"^777777[Spear Quicken]:^000000 ^777777With a 2H Spear, adds",
@@ -2995,6 +3020,7 @@ SKILL_DESCRIPT = {
 	[SKID.MO_PUGILIST] = {
 		"Soul of the Pugilist",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential",
 		"Combos and Fists.^000000",
@@ -3027,6 +3053,7 @@ SKILL_DESCRIPT = {
 	[SKID.MO_ASCETIC] = {
 		"Soul of the Ascetic",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential",
 		"Spirit skills.^000000",
@@ -3296,6 +3323,7 @@ SKILL_DESCRIPT = {
 	[SKID.SA_ARCSOUL] = {
 		"Soul of the Arcanist",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential",
 		"of arcane enhancements.^000000",
@@ -3315,6 +3343,7 @@ SKILL_DESCRIPT = {
 	[SKID.SA_LORESOUL] = {
 		"Soul of the Loremaster",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential",
 		"Books and battle casting.^000000",
@@ -3480,6 +3509,7 @@ SKILL_DESCRIPT = {
 	[SKID.BD_RESONANT] = {
 		"Soul of the Resonant",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of",
 		"supportive songs and dances.^000000",
@@ -3496,6 +3526,7 @@ SKILL_DESCRIPT = {
 	[SKID.BD_DISSONANT] = {
 		"Soul of the Dissonant",
 		"Max Level: 1",
+		"1^CC3399Requirement: Finish quest ^000000",
 		"Skill Form: ^6666CCPassive ^000000",
 		"Description: ^777777Awakens the true potential of",
 		"offensive songs and dances.^000000",
@@ -5390,7 +5421,7 @@ SKILL_DESCRIPT = {
 		"24^CC3399Requirement: Flip the Coin 2, Snake's Eye 10 ^000000",
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Adds +20 HIT, +4 DEX, and +4 AGI for 1 minute duration.",
-		"^008800Consumes 5 coins. ^000000"
+		"^008800Consumes 1 coin. ^000000"
 	},
 	[SKID.GS_MAGICALBULLET] = {
 		"Magical Bullet",
@@ -5658,7 +5689,7 @@ SKILL_DESCRIPT = {
 		"Skill Form: ^339900Active ^000000",
 		"Description: ^777777Creates bullets from an item. Different items give different amounts and types of bullets. Cannot be used if above 50% weight. ^000000"
 	},
-    [SKID.GS_PMAKER] = {
+    [SKID.GS_PKEEPER] = {
 		"Soul of the Peacekeeper",
 		"Max Level: 1",
 		"Skill Form: ^6666CCPassive ^000000",
@@ -5766,7 +5797,7 @@ SKILL_DESCRIPT = {
 		"3 hits of ranged physical damage.",
 		"The attack takes the elemental property",
 		"of the equipped Kunai.",
-		"Every 10 points of STR increases the",
+		"Every 10 points of DEX increases the",
 		"total damage ratio.",
 		"Has a 1 second cooldown.",
 		"[Lv 1] : 3 Hits / 60% ATK Base",
@@ -5778,7 +5809,7 @@ SKILL_DESCRIPT = {
 	[SKID.NJ_HUUMA] = {
 		"Throw Huuma Shuriken",
 		"Max Level: 5",
-		"25^CC3399Requirement: Throwing Mastery 5, Throw Kunai 5 ^000000",
+		"25^CC3399Requirement: Bugei 5, Throw Kunai 5 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Description: ^777777Throws Huuma Shuriken that",
 		"will damage its target and any nearby",
@@ -5794,7 +5825,7 @@ SKILL_DESCRIPT = {
 	[SKID.NJ_ZENYNAGE] = {
 		"Throw Zeny",
 		"Max Level: 10",
-		"25^CC3399Requirement: Throwing Mastery 10, Throw Huuma Shuriken 5 ^000000",
+		"25^CC3399Requirement: Bugei 10, Throw Huuma Shuriken 5 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Description: ^777777Throws coins at a target",
 		"to inflict an amount of Defense",
@@ -6123,7 +6154,7 @@ SKILL_DESCRIPT = {
 	[SKID.NJ_ISSEN] = {
 		"Zantetsuken",
 		"Max Level: 10",
- 		"25^CC3399Requirement: Throwing Mastery 7, Shadow Slash 5, Ninja Aura 1 ^000000",
+ 		"25^CC3399Requirement: Bugei 7, Shadow Slash 5, Ninja Aura 1 ^000000",
 		"Skill Form: ^FF0000Physical attack ^000000",
 		"Description: ^777777Deals 500% + 50% * Skill",
 		"Level damage to an enemy.",
@@ -6324,6 +6355,8 @@ SKILL_DESCRIPT = {
 	[SKID.NPC_WIDESTUN] = {},
 	[SKID.NPC_VAMPIRE_GIFT] = {},
 	[SKID.NPC_WIDESOULDRAIN] = {},
+	[SKID.NPC_GRANDDARKNESS] = {},
+	[SKID.NPC_DARKTHUNDER] = {},
 	[SKID.ALL_INCCARRY] = {
 		"Enlarge Weight Limit R",
 		"Max Level: 10",

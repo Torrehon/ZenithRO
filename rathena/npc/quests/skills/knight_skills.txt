@@ -44,7 +44,7 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 			mes "[Essofeit]";
 			mes "I don't need to put a warrior of your caliber through tests. Take the secrets of ^0000FFCharge Attack^000000!";
 			next;
-			skill "KN_CHARGEATK",1,SKILL_PERM;
+			skill "KN_CHARGEATK",1,SKILL_PERM_GRANT;
 			set KNGT_SK,10;
 			specialeffect EF_LEVELUP;
 			mes "[Essofeit]";
@@ -81,7 +81,7 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 			mes "is greater risk to yourself.";
 			mes "For now, it would be best to practice this skill on your own.";
 			set KNGT_SK,10;
-			skill "KN_CHARGEATK",1,SKILL_PERM;
+			skill "KN_CHARGEATK",1,SKILL_PERM_GRANT;
 			next;
 			mes "[Essofeit]";
 			mes "Good luck on your";
@@ -131,7 +131,7 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 			mes "is greater risk to yourself.";
 			mes "For now, it would be best to practice this skill on your own.";
 			set KNGT_SK,9;
-			skill "KN_CHARGEATK",1,SKILL_PERM;
+			skill "KN_CHARGEATK",1,SKILL_PERM_GRANT;
 			next;
 			mes "[Essofeit]";
 			mes "I hope you make good";

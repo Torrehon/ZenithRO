@@ -791,7 +791,7 @@ Body:
     Script: |
       bonus bUseSPrate,-20;
       bonus bMaxHP,300;
-      if (Class == Job_Genin) {
+      if (Class == 4501 || Class == Job_Ninja) {
          bonus bLongAtkRate,5;
          bonus bMatkRate,5;
         }
@@ -1632,3 +1632,196 @@ Body:
       bonus2 bSPGainRace,RC_Fish,1;
       bonus2 bExpAddRace,RC_Fish,10;
       bonus2 bAddEle,Ele_Water,5; 
+  - Combos:
+      - Combo:
+          - 12th_Crown # Crown of the deceiver
+          - Para_Team_Manteau100 # Manteau of the Fallen
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Neutral,15;
+      bonus2 bMagicAtkEle,Ele_Ghost,15;
+      bonus4 bAddEff,Eff_Blind,500,ATF_MAGIC,10000;
+  - Combos:
+      - Combo:
+          - Hardwood_Slipper
+          - Wooden_Mail
+      - Combo:
+          - Hardwood_Slipper
+          - Wooden_Mail_
+    Script: |
+      bonus bHPRegenRate,20;
+      bonus bSPrecovRate,20;
+      bonus2 bAddEle,Ele_Earth,10; 
+  - Combos:
+      - Combo:
+          - Prison_Uniform
+          - Cuffs
+      - Combo:
+          - Prison_Uniform
+          - Thief_Handcuff
+    Script: |
+      bonus bAtk,getequiprefinerycnt(EQI_ARMOR);
+  - Combos:
+      - Combo:
+          - Forest_Shoes
+          - Forest_Orb
+          - Forest_Robe
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Earth,10;
+      bonus2 bSubEle,Ele_Earth,10;
+  - Combos:
+      - Combo:
+          - Golden_Rod_Shoes
+          - Golden_Rod_Orb
+          - Golden_Rod_Robe
+    Script: |
+      bonus2 bMagicAtkEle,Ele_Wind,10;
+      bonus2 bSubEle,Ele_Wind,10;
+  - Combos:
+      - Combo:
+          - Wolf_Armguard
+          - Ninja_Scale_Armor
+    Script: |
+      bonus bStr,1;
+      bonus bAtkRate,5;
+  - Combos:
+      - Combo:
+          - Wondering_Wolf_Helm
+          - Angry_Mouth
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r >= 7) {
+         bonus bCritical,10;
+         if (.@r >= 9) {
+            bonus bCritAtkRate,15;
+         }
+      }
+  - Combos:
+      - Combo:
+          - Lunatic_Hat
+          - Moonlight_Ring
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r >= 7) {
+         bonus bMatkRate,2;
+         if (.@r >= 9) {
+            bonus bMatkRate,3;
+            bonus bNoCastCancel;
+         }
+      }
+  - Combos:
+      - Combo:
+          - Classical_Fhat
+          - Dex_Glove
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r >= 7) {
+         bonus bLongAtkRate,2;
+      }
+      if (.@r >= 9) {
+            bonus bLongAtkRate,3;
+            bonus bCritical,10;
+      }
+  - Combos:
+      - Combo:
+          - PoringBeret_TW
+          - Poring_B_Shield
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r >= 7) {
+         bonus2 bSubEle,Ele_All,5;
+         bonus2 bSubEle,Ele_Neutral,-5;
+      }
+         if (.@r >= 9) {
+            bonus2 bSubEle,Ele_All,10;
+            bonus2 bSubEle,Ele_Neutral,-10;
+      }
+  - Combos:
+      - Combo:
+          - Hunting_Cap
+          - Camouflage_Backpack
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      bonus3 bAddEffOnSkill,"HT_CLAYMORETRAP",SC_BURNING,200*.@r;
+      bonus3 bAddEffOnSkill,"HT_LANDMINE",SC_BURIED,200*.@r;
+      bonus3 bAddEffOnSkill,"HT_BLASTMINE",SC_ELECTROCUTE,200*.@r;
+      bonus3 bAddEffOnSkill,"HT_FREEZINGTRAP",SC_FREEZING,200*.@r;
+  - Combos:
+      - Combo:
+          - Chic_Peony
+          - Pendant_Of_Chaos
+    Script: |
+      bonus bAtkEle,Ele_Dark;
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r>=9) {
+         bonus3 bAutoSpell,"NPC_DARKCROSS",7,50;
+      }
+      else if (.@r>=7) {
+         bonus3 bAutoSpell,"NPC_DARKCROSS",5,30;
+      }   
+      else {
+         bonus3 bAutoSpell,"NPC_DARKCROSS",3,20;
+      }   
+  - Combos:
+      - Combo:
+          - Love_Guard
+          - gcross_ring
+    Script: |
+      bonus2 bSubEle,Ele_Neutral,5;
+      bonus2 bSubEle,Ele_Dark,5;
+      bonus2 bSubEle,Ele_Holy,5;
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r >= 7) {
+         bonus bMaxHP,3;
+         bonus bMaxSP,3;
+      }
+      if (.@r >= 9) {
+         bonus bMaxHP,5;
+         bonus bMaxSP,5;
+      }
+  - Combos:
+      - Combo:
+          - C_Leaf_Umbrella
+          - Cute_Frog_Raincoat
+    Script: |
+      bonus2 bAddEle,Ele_Water,5;
+      bonus2 bMagicAtkEle,Ele_Water,5;
+      skill "WZ_WATERBALL",1;
+      .@r = getequiprefinerycnt(EQI_ARMOR);
+      if (.@r>=9) {
+         skill "WZ_WATERBALL",5;
+         bonus2 bAddEle,Ele_Water,15;
+         bonus2 bMagicAtkEle,Ele_Water,15;
+      }
+      else if (.@r>=7){
+         skill "WZ_WATERBALL",3;
+         bonus2 bAddEle,Ele_Water,5;
+         bonus2 bMagicAtkEle,Ele_Water,5;
+      }
+  - Combos:
+      - Combo:
+          - Geffenia_Magictool_Ice
+          - Ice_Wing_Ear
+    Script: |
+      bonus2 bAddEle,Ele_Water,5;
+      bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",5,30;
+  - Combos:
+      - Combo:
+          - Egir_Armor_K    # 15138
+          - Egir_Helm_K    # 19026
+          - Egir_Manteau_K    # 20756
+          - Egir_Shoes_K    # 22059
+    Script: |
+      bonus bMaxHP,1000;
+      bonus bMaxSP,50;
+      bonus2 bAddRace,RC_Fish,10;
+      bonus2 bMagicAddRace,RC_Fish,10;
+      bonus2 bSubEle,Ele_Water,10;
+  - Combos:
+      - Combo:
+          - La'cryma_Stick    # 1646
+          - Geffenia_Book_Water    # 2161
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HAND_L);
+      bonus bMaxHP,(.@r)*50;
+      bonus2 bCastrate,"WZ_STORMGUST",-.@r;
+      bonus2 bCastrate,"WZ_FROSTNOVA",-.@r;

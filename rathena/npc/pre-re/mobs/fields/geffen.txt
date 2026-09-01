@@ -19,7 +19,7 @@
 gef_fild00,0,0	monster	Poring	1002,50
 gef_fild00,0,0	monster	Fabre	1007,50
 gef_fild00,0,0	monster	Pupa	1008,20
-gef_fild00,0,0	monster	Poporing	1031,10
+gef_fild00,0,0	boss_monster	Poporing	1031,10
 gef_fild00,95,128	monster	Blue Plant	1079,1,900000,450000
 gef_fild00,124,321	monster	Blue Plant	1079,1,900000,450000
 gef_fild00,54,212,5,5	monster	Green Plant	1080,3,360000,180000

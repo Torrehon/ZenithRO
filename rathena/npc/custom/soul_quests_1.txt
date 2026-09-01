@@ -143,10 +143,46 @@ prt_in,160,49,4	script	Scholar#soulq1	743,{
 		close;
 	}
 
-	if (SOUL_QUEST1_STEP >= 2) {
+	if (PRT_PRISON_QUEST == 1) {
 		mes "[Scholar]";
-		mes "Do not delay, brave adventurer!";
-		mes "Go to ^0000FFgef_fild07 (182, 240)^000000 with your Dawn Weapon equipped and listen for the call of the cosmos.";
+		mes "Ah, champion! You return with the celestial aura of a true Twilight Weapon!";
+		mes "I am glad you came... Dark and disturbing rumors have reached the Grand Library.";
+		next;
+		mes "[Scholar]";
+		mes "Court mages in the royal castle have detected surges of corrupt energy emanating from deep beneath Prontera Castle.";
+		mes "An ancient, forbidden dungeon — the ^0000FFProntera Underground Prison^000000 — has unsealed itself!";
+		next;
+		mes "[Scholar]";
+		mes "The Royal Guard is assembling an expeditionary force in the castle as we speak.";
+		mes "You must report immediately to the ^0000FFOperation Commander^000000 in Prontera Castle (^0000FFprt_castle 118, 66^000000).";
+		mes "He has been granted authority to clear brave adventurers into the subterranean depths.";
+		PRT_PRISON_QUEST = 2;
+		next;
+	}
+
+	if (SOUL_QUEST1_STEP >= 2 || checkquest(90003) >= 1 || checkquest(90004) == 2 || checkquest(90005) >= 1) {
+		mes "[Scholar]";
+		mes "Greetings, adventurer! The celestial path to the ancestral sanctuaries is open to you.";
+		mes "Would you like me to open a direct portal to one of the sanctuaries?";
+		next;
+		if (select("Teleport to Sanctuary:Leave") == 1) {
+			switch(select("Pantheon of Heroes (2nd Jobs):Chunin Sanctuary (Ninja):Gunslinger Enclave (Gunslinger):Cancel")) {
+				case 1:
+					close2;
+					warp "1@4tro",53,51;
+					end;
+				case 2:
+					close2;
+					warp "1@exse",43,23;
+					end;
+				case 3:
+					close2;
+					warp "1@exnw",111,103;
+					end;
+				default:
+					close;
+			}
+		}
 		close;
 	}
 }
@@ -233,7 +269,7 @@ pay_fild02,104,245,4	script	Ancestral Mana Source	10043,{
 gef_fild07,182,240,0	script	GeffenPortal#soulq1	-1,2,2,{
 	end;
 OnTouch:
-	if (SOUL_QUEST1_STEP >= 2 && F_HasDawnWeaponEquipped()) {
+	if (SOUL_QUEST1_STEP >= 2 || checkquest(90003) >= 1 || checkquest(90004) == 2 || checkquest(90005) >= 1 || F_HasDawnWeaponEquipped()) {
 		if (SOUL_QUEST1_STEP == 2)
 			SOUL_QUEST1_STEP = 3;
 		
@@ -320,6 +356,26 @@ OnTouch:
 		mes "Your spirit shows promise, but your martial foundation is not yet forged in fire. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1041, 1042)) {
+		mes "[Knight Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Blader:Soul of the Lancer:Cancel")) {
+			case 1:
+				skill 1041, 1, SKILL_PERM_GRANT;
+				mes "[Knight Einherjar]";
+				mes "Your ^0000FFSoul of the Blader^000000 has been restored!";
+				close;
+			case 2:
+				skill 1042, 1, SKILL_PERM_GRANT;
+				mes "[Knight Einherjar]";
+				mes "Your ^0000FFSoul of the Lancer^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
+	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Knight Einherjar]";
 		mes "Greetings, true champion. You have already awakened the Star Fragment into your Twilight Weapon!";
@@ -356,7 +412,7 @@ OnTouch:
 	switch(select("Soul of the Blader:Soul of the Lancer:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1041, 1, 0;
+			skill 1041, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -365,7 +421,7 @@ OnTouch:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1042, 1, 0;
+			skill 1042, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -399,6 +455,26 @@ OnInit:
 		mes "[Crusader Einherjar]";
 		mes "Your devotion is pure, but your physical vessel requires further discipline. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1053, 1054)) {
+		mes "[Crusader Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Templar:Soul of the Guardian:Cancel")) {
+			case 1:
+				skill 1053, 1, SKILL_PERM_GRANT;
+				mes "[Crusader Einherjar]";
+				mes "Your ^0000FFSoul of the Templar^000000 has been restored!";
+				close;
+			case 2:
+				skill 1054, 1, SKILL_PERM_GRANT;
+				mes "[Crusader Einherjar]";
+				mes "Your ^0000FFSoul of the Guardian^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Crusader Einherjar]";
@@ -437,7 +513,7 @@ OnInit:
 	switch(select("Soul of the Templar:Soul of the Guardian:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1053, 1, 0;
+			skill 1053, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -446,7 +522,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1054, 1, 0;
+			skill 1054, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -480,6 +556,26 @@ OnInit:
 		mes "[Priest Einherjar]";
 		mes "Child of light, your spiritual vessel must grow stronger. Reach at least ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1049, 1050)) {
+		mes "[Priest Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Exorcist:Soul of the Saint:Cancel")) {
+			case 1:
+				skill 1049, 1, SKILL_PERM_GRANT;
+				mes "[Priest Einherjar]";
+				mes "Your ^0000FFSoul of the Exorcist^000000 has been restored!";
+				close;
+			case 2:
+				skill 1050, 1, SKILL_PERM_GRANT;
+				mes "[Priest Einherjar]";
+				mes "Your ^0000FFSoul of the Saint^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Priest Einherjar]";
@@ -518,7 +614,7 @@ OnInit:
 	switch(select("Soul of the Exorcist:Soul of the Saint:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1049, 1, 0;
+			skill 1049, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -527,7 +623,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1050, 1, 0;
+			skill 1050, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -561,6 +657,26 @@ OnInit:
 		mes "[Monk Einherjar]";
 		mes "Your martial spirit is still unpolished. Train until you reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1061, 1062)) {
+		mes "[Monk Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Pugilist:Soul of the Enlightened:Cancel")) {
+			case 1:
+				skill 1061, 1, SKILL_PERM_GRANT;
+				mes "[Monk Einherjar]";
+				mes "Your ^0000FFSoul of the Pugilist^000000 has been restored!";
+				close;
+			case 2:
+				skill 1062, 1, SKILL_PERM_GRANT;
+				mes "[Monk Einherjar]";
+				mes "Your ^0000FFSoul of the Enlightened^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Monk Einherjar]";
@@ -599,7 +715,7 @@ OnInit:
 	switch(select("Soul of the Pugilist:Soul of the Enlightened:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1061, 1, 0;
+			skill 1061, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -608,7 +724,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1062, 1, 0;
+			skill 1062, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -642,6 +758,26 @@ OnInit:
 		mes "[Wizard Einherjar]";
 		mes "Your mana capacity is insufficient to channel high sorcery. Reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1043, 1044)) {
+		mes "[Wizard Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Magus:Soul of the Hexer:Cancel")) {
+			case 1:
+				skill 1043, 1, SKILL_PERM_GRANT;
+				mes "[Wizard Einherjar]";
+				mes "Your ^0000FFSoul of the Magus^000000 has been restored!";
+				close;
+			case 2:
+				skill 1044, 1, SKILL_PERM_GRANT;
+				mes "[Wizard Einherjar]";
+				mes "Your ^0000FFSoul of the Hexer^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Wizard Einherjar]";
@@ -680,7 +816,7 @@ OnInit:
 	switch(select("Soul of the Magus:Soul of the Hexer:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1043, 1, 0;
+			skill 1043, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -689,7 +825,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1044, 1, 0;
+			skill 1044, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -723,6 +859,26 @@ OnInit:
 		mes "[Sage Einherjar]";
 		mes "Your intellect is keen, but your practical study requires ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1057, 1058)) {
+		mes "[Sage Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Arcanist:Soul of the Loremaster:Cancel")) {
+			case 1:
+				skill 1057, 1, SKILL_PERM_GRANT;
+				mes "[Sage Einherjar]";
+				mes "Your ^0000FFSoul of the Arcanist^000000 has been restored!";
+				close;
+			case 2:
+				skill 1058, 1, SKILL_PERM_GRANT;
+				mes "[Sage Einherjar]";
+				mes "Your ^0000FFSoul of the Loremaster^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Sage Einherjar]";
@@ -761,7 +917,7 @@ OnInit:
 	switch(select("Soul of the Arcanist:Soul of the Loremaster:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1057, 1, 0;
+			skill 1057, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -770,7 +926,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1058, 1, 0;
+			skill 1058, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -804,6 +960,26 @@ OnInit:
 		mes "[Hunter Einherjar]";
 		mes "Your eagle eye needs more practice. Hone your skills until ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1045, 1046)) {
+		mes "[Hunter Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Sharpshooter:Soul of the Trapper:Cancel")) {
+			case 1:
+				skill 1045, 1, SKILL_PERM_GRANT;
+				mes "[Hunter Einherjar]";
+				mes "Your ^0000FFSoul of the Sharpshooter^000000 has been restored!";
+				close;
+			case 2:
+				skill 1046, 1, SKILL_PERM_GRANT;
+				mes "[Hunter Einherjar]";
+				mes "Your ^0000FFSoul of the Trapper^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Hunter Einherjar]";
@@ -842,7 +1018,7 @@ OnInit:
 	switch(select("Soul of the Sharpshooter:Soul of the Trapper:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1045, 1, 0;
+			skill 1045, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -851,7 +1027,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1046, 1, 0;
+			skill 1046, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -885,6 +1061,26 @@ OnInit:
 		mes "[Bard Einherjar]";
 		mes "Your rhythm is not yet fully in tune. Reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1059, 1060)) {
+		mes "[Bard Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
+			case 1:
+				skill 1059, 1, SKILL_PERM_GRANT;
+				mes "[Bard Einherjar]";
+				mes "Your ^0000FFSoul of the Resonant^000000 has been restored!";
+				close;
+			case 2:
+				skill 1060, 1, SKILL_PERM_GRANT;
+				mes "[Bard Einherjar]";
+				mes "Your ^0000FFSoul of the Dissonant^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Bard Einherjar]";
@@ -923,7 +1119,7 @@ OnInit:
 	switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1059, 1, 0;
+			skill 1059, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -932,7 +1128,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1060, 1, 0;
+			skill 1060, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -966,6 +1162,26 @@ OnInit:
 		mes "[Dancer Einherjar]";
 		mes "Your steps need more grace. Reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1059, 1060)) {
+		mes "[Dancer Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
+			case 1:
+				skill 1059, 1, SKILL_PERM_GRANT;
+				mes "[Dancer Einherjar]";
+				mes "Your ^0000FFSoul of the Resonant^000000 has been restored!";
+				close;
+			case 2:
+				skill 1060, 1, SKILL_PERM_GRANT;
+				mes "[Dancer Einherjar]";
+				mes "Your ^0000FFSoul of the Dissonant^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Dancer Einherjar]";
@@ -1004,7 +1220,7 @@ OnInit:
 	switch(select("Soul of the Resonant:Soul of the Dissonant:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1059, 1, 0;
+			skill 1059, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1013,7 +1229,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1060, 1, 0;
+			skill 1060, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1047,6 +1263,26 @@ OnInit:
 		mes "[Blacksmith Einherjar]";
 		mes "Your hammer arm needs more iron in it! Work hard until ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1047, 1048)) {
+		mes "[Blacksmith Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Juggernaut:Soul of the Forgemaster:Cancel")) {
+			case 1:
+				skill 1047, 1, SKILL_PERM_GRANT;
+				mes "[Blacksmith Einherjar]";
+				mes "Your ^0000FFSoul of the Juggernaut^000000 has been restored!";
+				close;
+			case 2:
+				skill 1048, 1, SKILL_PERM_GRANT;
+				mes "[Blacksmith Einherjar]";
+				mes "Your ^0000FFSoul of the Forgemaster^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Blacksmith Einherjar]";
@@ -1085,7 +1321,7 @@ OnInit:
 	switch(select("Soul of the Juggernaut:Soul of the Forgemaster:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1047, 1, 0;
+			skill 1047, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1094,7 +1330,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1048, 1, 0;
+			skill 1048, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1128,6 +1364,26 @@ OnInit:
 		mes "[Alchemist Einherjar]";
 		mes "Your chemical experiments require further study. Reach ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1063, 1064)) {
+		mes "[Alchemist Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Apothecary:Soul of the Biomancer:Cancel")) {
+			case 1:
+				skill 1063, 1, SKILL_PERM_GRANT;
+				mes "[Alchemist Einherjar]";
+				mes "Your ^0000FFSoul of the Apothecary^000000 has been restored!";
+				close;
+			case 2:
+				skill 1064, 1, SKILL_PERM_GRANT;
+				mes "[Alchemist Einherjar]";
+				mes "Your ^0000FFSoul of the Biomancer^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Alchemist Einherjar]";
@@ -1166,7 +1422,7 @@ OnInit:
 	switch(select("Soul of the Apothecary:Soul of the Biomancer:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1063, 1, 0;
+			skill 1063, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1175,7 +1431,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1064, 1, 0;
+			skill 1064, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1209,6 +1465,26 @@ OnInit:
 		mes "[Assassin Einherjar]";
 		mes "Your footfalls are still too loud. Train your stealth until ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1051, 1052)) {
+		mes "[Assassin Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Executioner:Soul of the Viper:Cancel")) {
+			case 1:
+				skill 1051, 1, SKILL_PERM_GRANT;
+				mes "[Assassin Einherjar]";
+				mes "Your ^0000FFSoul of the Executioner^000000 has been restored!";
+				close;
+			case 2:
+				skill 1052, 1, SKILL_PERM_GRANT;
+				mes "[Assassin Einherjar]";
+				mes "Your ^0000FFSoul of the Viper^000000 has been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Assassin Einherjar]";
@@ -1247,7 +1523,7 @@ OnInit:
 	switch(select("Soul of the Executioner:Soul of the Viper:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1051, 1, 0;
+			skill 1051, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1256,7 +1532,7 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1052, 1, 0;
+			skill 1052, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1281,6 +1557,13 @@ OnInit:
 	mes "Heh, keep a hand on your purse! I am Phantom Jacqueline.";
 	mes "In life, I stole the crown jewels from under tyrant kings' noses and outsmarted whole armies.";
 	next;
+		if (getskilllv(1066) > 0 && getskilllv(1067) == 0) {
+		skill 1067, 1, SKILL_PERM_GRANT;
+		specialeffect2 EF_ANGEL;
+		mes "[Rogue Einherjar]";
+		mes "Ah! You possess the ^0000FFSoul of the Mimic^000000! I have granted you your ^0000FFSupport Plagiarism^000000 skill!";
+		close;
+	}
 	if (BaseJob != Job_Rogue) {
 		mes "[Rogue Einherjar]";
 		mes "However, my trickster cunning belongs exclusively to Rogues.";
@@ -1290,6 +1573,27 @@ OnInit:
 		mes "[Rogue Einherjar]";
 		mes "Your tricks are a bit too predictable, novice. Come back at ^0000FFJob Level 25^000000.";
 		close;
+	}
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1065, 1066)) {
+		mes "[Rogue Einherjar]";
+		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
+		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
+		next;
+		switch(select("Soul of the Nightblade:Soul of the Mimic:Cancel")) {
+			case 1:
+				skill 1065, 1, SKILL_PERM_GRANT;
+				mes "[Rogue Einherjar]";
+				mes "Your ^0000FFSoul of the Nightblade^000000 has been restored!";
+				close;
+			case 2:
+				skill 1066, 1, SKILL_PERM_GRANT;
+				skill 1067, 1, SKILL_PERM_GRANT;
+				mes "[Rogue Einherjar]";
+				mes "Your ^0000FFSoul of the Mimic^000000 and ^0000FFSupport Plagiarism^000000 have been restored!";
+				close;
+			default:
+				close;
+		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
 		mes "[Rogue Einherjar]";
@@ -1328,7 +1632,7 @@ OnInit:
 	switch(select("Soul of the Nightblade:Soul of the Mimic:Cancel")) {
 		case 1:
 			delitem 50020, 1;
-			skill 1065, 1, 0;
+			skill 1065, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;
@@ -1337,8 +1641,8 @@ OnInit:
 			close;
 		case 2:
 			delitem 50020, 1;
-			skill 1066, 1, 0;
-			skill 1067, 1, 0;
+			skill 1066, 1, SKILL_PERM_GRANT;
+			skill 1067, 1, SKILL_PERM_GRANT;
 			SOUL_QUEST1_STEP = 4;
 			if (checkquest(90004) == 1) completequest 90004;
 			specialeffect2 EF_ANGEL;

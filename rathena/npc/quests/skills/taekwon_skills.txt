@@ -67,7 +67,7 @@ payon,156,136,6	script	Instructor Chul	841,{ // QUEST DE SKILL PLATINUM: SHATTER
 		next;
 		
 		delitem 50002, 1; // Se elimina el ticket
-		skill "TK_SHATTER", 1, SKILL_PERM; // Otorga la skill
+		skill "TK_SHATTER", 1, SKILL_PERM_GRANT; // Otorga la skill
 		set plat_tkshatter_active, 0; // Reseteamos variables
 		set plat_golem_count, 0;
 		

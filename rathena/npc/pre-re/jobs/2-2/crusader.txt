@@ -13,7 +13,7 @@ prt_castle,45,169,5	duplicate(Senior Crusader_)	Senior Crusader	4_M_CRU_OLD
 
 // Suffering Man: 2nd Endurance Test
 //============================================================
-prt_castle,164,32,1	duplicate(Man in Anguish_)	Man in Anguish	4_M_JOB_KNIGHT1
+//prt_castle,164,32,1	duplicate(Man in Anguish_)	Man in Anguish	4_M_JOB_KNIGHT1
 
 // Crusader: 4th Purification Test
 //============================================================

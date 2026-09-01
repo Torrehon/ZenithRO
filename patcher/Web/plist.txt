@@ -1,0 +1,4 @@
+// ZenithRO Patch List File
+// Format: <Patch_ID> <Patch_Filename.thor>
+// Example:
+// 1 custom_bgm.thor

@@ -1,0 +1,82 @@
+$path = "d:\SERVER_RO\LevitationRO\rathena\db\pre-re\quest_db.yml"
+$text = [System.IO.File]::ReadAllText($path)
+$text = $text -replace "`r`n", "`n"
+
+$addYaml = @"
+  - Id: 70401
+    Title: "Aldebaran Hunt: Thief Bug Female"
+    Targets:
+      - Mob: THIEF_BUG_
+        Count: 25
+  - Id: 70402
+    Title: "Aldebaran Hunt: Dustiness"
+    Targets:
+      - Mob: DUSTINESS
+        Count: 25
+  - Id: 70403
+    Title: "Aldebaran Hunt: Argos"
+    Targets:
+      - Mob: ARGOS
+        Count: 25
+  - Id: 70404
+    Title: "Aldebaran Hunt: Flora"
+    Targets:
+      - Mob: FLORA
+        Count: 25
+  - Id: 70405
+    Title: "Aldebaran Hunt: Stem Worm"
+    Targets:
+      - Mob: STEM_WORM
+        Count: 20
+  - Id: 70406
+    Title: "Aldebaran Hunt: Argiope"
+    Targets:
+      - Mob: ARGIOPE
+        Count: 20
+  - Id: 70407
+    Title: "Aldebaran Hunt: Earth Petite"
+    Targets:
+      - Mob: PETIT
+        Count: 20
+  - Id: 70408
+    Title: "Aldebaran Hunt: Bathory"
+    Targets:
+      - Mob: BATHORY
+        Count: 20
+  - Id: 70409
+    Title: "Aldebaran Hunt: Punk"
+    Targets:
+      - Mob: PUNK
+        Count: 20
+  - Id: 70410
+    Title: "Aldebaran Hunt: Grand Peco"
+    Targets:
+      - Mob: GRAND_PECO
+        Count: 15
+  - Id: 70411
+    Title: "Aldebaran Hunt: Rideword"
+    Targets:
+      - Mob: RIDEWORD
+        Count: 15
+  - Id: 70412
+    Title: "Aldebaran Hunt: Alarm"
+    Targets:
+      - Mob: ALARM
+        Count: 15
+  - Id: 70413
+    Title: "Aldebaran Hunt: Clock"
+    Targets:
+      - Mob: CLOCK
+        Count: 15
+"@
+
+$addYaml = $addYaml -replace "`r`n", "`n"
+
+if (-not ($text -match "Id: 70401")) {
+    $text = $text.TrimEnd() + "`n" + $addYaml + "`n"
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($path, $text, $utf8NoBom)
+    Write-Host "quest_db.yml updated with Aldebaran quests cleanly!"
+} else {
+    Write-Host "70401 already exists in quest_db.yml!"
+}

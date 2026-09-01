@@ -472,7 +472,7 @@ PCNames_F =
 	-- 2nd Classes --
 	-----------------
 	[PCIds.PRIEST]   = "Priestess",
-	[PCIds.WIZARD]   = "Enchantress",
+	[PCIds.WIZARD]   = "Wizard",
 	[PCIds.HUNTER]   = "Huntress",
 
 	[PCIds.DANCER]   = "Dancer",
@@ -481,7 +481,7 @@ PCNames_F =
 	-- Baby 2nd Classes --
 	----------------------
 	[PCIds.PRIEST_B] = "Baby Priestess",
-	[PCIds.WIZARD_B] = "Baby Enchantress",
+	[PCIds.WIZARD_B] = "Baby Wizard",
 	[PCIds.HUNTER_B] = "Baby Huntress",
 
 	[PCIds.DANCER_B] = "Baby Dancer",
@@ -490,7 +490,7 @@ PCNames_F =
 	-- Transcendent 2nd Classes --
 	------------------------------
 	[PCIds.HIGH_PRIEST] = "High Priestess",
-	[PCIds.HIGH_WIZARD] = "High Enchantress",
+	[PCIds.HIGH_WIZARD] = "High Wizard",
 
 	[PCIds.GYPSY]       = "Gypsy",
 

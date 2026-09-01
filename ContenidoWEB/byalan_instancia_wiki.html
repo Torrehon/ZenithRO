@@ -1,0 +1,583 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Main Container for Quest Card */
+  .quest-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-left: 6px solid #d4af37;
+    margin-bottom: 25px;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Top Floor: Text + Image */
+  .quest-top {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Left Area: Text & Title */
+  .quest-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .quest-step-title {
+    font-family: 'Lato', sans-serif;
+    color: #1a2a44;
+    font-size: 1.3em;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-badge {
+    background-color: #1565c0;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+  }
+
+  .quest-desc {
+    color: #455a64;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1em;
+  }
+
+  .coord {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  /* Right Area: Image Container */
+  .quest-image-container {
+    padding: 20px;
+    background-color: #f8fbfd;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quest-image {
+    width: 300px;
+    height: 180px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    object-fit: cover; 
+    object-position: center; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .quest-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  /* BOTTOM FLOOR: REWARDS / EXTRAS */
+  .quest-bottom {
+    background-color: #f8fbfd;
+    border-top: 1px solid #e0e0e0;
+    padding: 20px 25px;
+  }
+
+  .rewards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .reward-item {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .reward-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    background: #f1f8e9;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c5e1a5;
+    flex-shrink: 0;
+  }
+
+  .reward-text-content {
+    flex: 1;
+  }
+
+  .reward-title {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 1.05em;
+    margin: 0 0 5px 0;
+  }
+
+  .reward-desc {
+    font-size: 0.9em;
+    color: #455a64;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* =========================================
+     BOSS STATS DESIGN
+     ========================================= */
+  .boss-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .boss-profile {
+    display: flex;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .boss-sprite-box {
+    background: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    flex-shrink: 0; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-sprite {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .boss-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #bbdefb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    flex: 1; 
+  }
+
+  .boss-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .boss-stat-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: #1565c0;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .boss-stat-value {
+    font-size: 0.95em;
+    color: #1a2a44;
+    font-family: monospace; 
+    font-weight: bold;
+  }
+
+  /* Loot Box */
+  .boss-loot-box {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #bbdefb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-loot-title {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: #1565c0;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+  }
+
+  .boss-loot-items {
+    font-size: 0.95em;
+    color: #1a2a44;
+    line-height: 1.5;
+  }
+
+  /* Strategy Box */
+  .boss-strategy {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #ef5350; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-strategy h4 {
+    margin: 0 0 10px 0;
+    color: #c62828;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05em;
+  }
+
+  .boss-strategy p {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #455a64;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 650px) {
+    .quest-top {
+      flex-direction: column;
+    }
+    .quest-image-container {
+      border-left: none;
+      border-top: 1px solid #e0e0e0;
+      padding: 15px;
+    }
+    .quest-image {
+      width: 100%;
+      max-width: 350px;
+      height: 180px; 
+    }
+    .reward-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    /* Typography */
+    .quest-step-title { font-size: 1.0em !important; margin-bottom: 10px !important; }
+    .step-badge { font-size: 0.8em !important; padding: 3px 8px !important; }
+    .quest-desc { font-size: 0.8em !important; line-height: 1.3 !important; }
+    .reward-title { font-size: 0.8em !important; }
+    .reward-desc { font-size: 0.7em !important; line-height: 1.3 !important; }
+    
+    /* Boss profile mobile */
+    .boss-profile {
+      flex-direction: column; 
+      align-items: center;
+    }
+    .boss-sprite-box {
+      width: 100%;
+      max-width: 150px; 
+    }
+    .boss-stats-grid {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .boss-stat-value { font-size: 0.85em; }
+    .boss-loot-items { font-size: 0.85em; } 
+    .boss-strategy p { font-size: 0.8em; }
+  }
+</style>
+
+<!-- STEP 1 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">1</span>
+        Quest start
+      </h3>
+      <p class="quest-desc">
+        Speak to <strong>Archeologist Dan</strong> near the entrance of Byalan Dungeon on Izlude Island (<span class="coord">izlu2dun 114, 88</span>).
+        <br><br>
+        He will explain that the archaeological team of Izlude is preparing to explore the deep underwater ruins. To allow you to proceed, he requires you to be between <strong>Base Level 50 and 65</strong> (1st Class / High Novice only). Your first task is to venture down into Byalan Dungeon and exterminate <strong>10 Marcs</strong>, <strong>10 Swordfish</strong>, and <strong>10 Phens</strong> to secure the excavation perimeter.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Archeologist Dan">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">2</span>
+        Adventurer Alard
+      </h3>
+      <p class="quest-desc">
+        Descend to the 3rd floor of Byalan Dungeon and speak with <strong>Adventurer Alard</strong> (<span class="coord">iz_dun03 34, 167</span>).
+        <br><br>
+        Alard will challenge you to a material collection contest. Bring sea materials (Gills: 1 pt, Sharp Scales: 2 pts, Fish Tails: 2 pts, Ancient Lips: 20 pts) to compare scores with him. If you beat his score, he will reward you with a <strong>Potion Box</strong>.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1f6dVrl0RfPK8I1q3SV92UPzPS25lKXNr" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1f6dVrl0RfPK8I1q3SV92UPzPS25lKXNr" alt="Adventurer Alard">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">3</span>
+        Trident of the Depths
+      </h3>
+      <p class="quest-desc">
+        Speak with the <strong>Chief Archeologist</strong> (<span class="coord">iz_dun03 34, 171</span>). He will inform you that breaching the ancient seal requires a key artifact called the <strong>Trident of the Depths</strong>.
+        <br><br>
+        Search the 5 <strong>Seaweed</strong> patches swaying around the 3rd floor until you find the Trident. <strong>Note: You must be in a party</strong>. Once obtained, the party leader speaks to the Chief Archeologist to open the gateway and enter the instance.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1iYHpb8eE8mJ9Ucdrg00yjRVVCRRE-FLZ" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1iYHpb8eE8mJ9Ucdrg00yjRVVCRRE-FLZ" alt="Chief Archeologist & Gateway">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">4</span>
+        The Inner Cavern Waves
+      </h3>
+      <p class="quest-desc">
+        Upon entering the underwater ruins (<span class="coord">1@iz_dun03</span>), the Chief Archeologist will warn you that breaking the seal has agitated the ocean depths.
+        <br><br>
+        Defeat 2 aggressive waves of sea creatures (Vadon, Obeaune, Marse, Marc, and Swordfish) to secure the camp before the main guardian appears!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1Ny95ouk0_8lUL48yJ3C4jEWaShuVNBSz" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1Ny95ouk0_8lUL48yJ3C4jEWaShuVNBSz" alt="Inner Cavern Waves">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">5</span>
+        The Boss fight
+      </h3>
+      <p class="quest-desc">
+        The <strong>Mermaid of the Depths</strong> has emerged from the abyss! Her hypnotic singing voice and water magic resonate through the watery ruins. Defeat her to secure the excavation site!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1qOI33mBAucAQMauTBrDshMq-PJdvKTC-" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1qOI33mBAucAQMauTBrDshMq-PJdvKTC-" alt="Mermaid of the Depths Boss">
+      </a>
+    </div>
+  </div>
+
+  <!-- BOTTOM FLOOR: BOSS INFO -->
+  <div class="quest-bottom">
+    <div class="boss-info-container">
+      
+      <!-- Flex Profile (Sprite + Grid) -->
+      <div class="boss-profile">
+        
+        <!-- Sprite Box -->
+        <div class="boss-sprite-box">
+          <img class="boss-sprite" src="https://static.divine-pride.net/images/mobs/png/20647.png" alt="Mermaid of the Depths Sprite">
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="boss-stats-grid">
+          <div class="boss-stat">
+            <span class="boss-stat-label">Level</span>
+            <span class="boss-stat-value">60</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">HP</span>
+            <span class="boss-stat-value">93560</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Attack</span>
+            <span class="boss-stat-value">290 - 368</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Exp (Base/Job)</span>
+            <span class="boss-stat-value">24650 / 28970</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Race</span>
+            <span class="boss-stat-value">Fish</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Element</span>
+            <span class="boss-stat-value">Water (Lv 2)</span>
+          </div>
+        </div>
+        
+      </div> <!-- End boss-profile -->
+
+      <!-- Loot Box -->
+      <div class="boss-loot-box">
+        <h4 class="boss-loot-title">Main Loot</h4>
+        <div class="boss-loot-items">
+          Heart of Mermaid (50%), Fin (50%), Sharp Scale (12%), Light Yellow Potion Box (100%), Accessory Box (10%), Gift Box (10%), Dead Branch (10%), <strong>Mermaid's Tear (5%)</strong>
+        </div>
+
+        <!-- Special Item Card inside Loot -->
+        <div class="reward-item" style="margin-top: 15px;">
+          <img class="reward-icon" src="https://static.divine-pride.net/images/items/png/60003.png" alt="Mermaid's Tear"> 
+          <div class="reward-text-content">
+            <h4 class="reward-title">Mermaid's Tear</h4>
+            <p class="reward-desc">  
+              <strong>Type:</strong> Accessory | <strong>Required Level:</strong> 1 | <strong>Slots:</strong> 1<br><br>
+              <em>A radiant blue gem formed from the sorrowful tears of the Mermaid of the Depths. It resonates with oceanic winds.</em> <br><br>
+              
+              Increases physical and magical damage against Fish race monsters by 10%.<br>
+              Allows the use of <strong>Violent Gale Level 3.</strong><br>
+            </p>
+          </div>
+        </div>
+        <!-- End Special Item Card -->
+
+      </div>
+
+      <!-- Strategy and Skills -->
+      <div class="boss-strategy">
+        <h4>⚔️ Boss Skills & Strategy</h4>
+        <p>
+          <strong>Skills:</strong> Uses Water Element attacks, Water Ball, and Cold Bolt.<br><br>
+          <strong>Strategy:</strong> As a Fish race and Water 2 element monster, Wind Element physical and magical attacks deal massive damage. Equip Water-resistant armor or potions to survive her heavy water spell damage.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">6</span>
+        Instance Rewards & Open World Boss
+      </h3>
+      <p class="quest-desc">
+        After defeating the Mermaid of the Depths, report to <strong>Archeologist Dan</strong> at the dungeon entrance (<span class="coord">izlu2dun 114, 88</span>).
+        <br><br>
+        Completing the expedition rewards you with <strong>175,000 Base EXP</strong>, <strong>210,000 Job EXP</strong>, a <strong>Proof of Valor</strong>, and your choice of 1 ancient headgear: <strong>Pisces Crown</strong> or <strong>Cancer Diadem</strong>.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Archeologist Dan Reward">
+      </a>
+    </div>
+  </div>
+
+  <div class="quest-bottom">
+    <div class="rewards-container">
+      
+      <!-- Headgear Reward Card 1 -->
+      <div class="reward-item">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/png/5515.png" alt="Pisces Crown">
+        <div class="reward-text-content">
+          <h4 class="reward-title">Pisces Crown (Physical Stats)</h4>
+          <p class="reward-desc">
+            <strong>Type:</strong> Headgear (Upper) | <strong>DEF:</strong> 4 | <strong>Weight:</strong> 80 | <strong>Required Level:</strong> 50<br><br>
+            Str +2<br>
+            Soft DEF +10<br>
+            Water Element Damage Resistance +5%<br>
+            Allows the use of <strong>Lightning Loader Level 1</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- Headgear Reward Card 2 -->
+      <div class="reward-item">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/png/5581.png" alt="Cancer Diadem">
+        <div class="reward-text-content">
+          <h4 class="reward-title">Cancer Diadem (Magical Stats)</h4>
+          <p class="reward-desc">
+            <strong>Type:</strong> Headgear (Upper) | <strong>DEF:</strong> 2 | <strong>Weight:</strong> 40 | <strong>Required Level:</strong> 50<br><br>
+            Int +2<br>
+            MDEF +3<br>
+            Water Element Damage Resistance +5%<br>
+            Allows the use of <strong>Jupitel Thunder Level 3</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- Common Reward Card -->
+      <div class="reward-item">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/png/50008.png" alt="Proof of Valor">
+        <div class="reward-text-content">
+          <h4 class="reward-title">Proof of Valor & EXP</h4>
+          <p class="reward-desc">
+            <strong>Item:</strong> Proof of Valor (Item 50008) - Used at Job Level 50 to change class at your Guild.<br>
+            <strong>Experience:</strong> 175,000 Base EXP / 210,000 Job EXP.
+          </p>
+        </div>
+      </div>
+
+      <!-- Repeatable FFA Mode Note -->
+      <div class="reward-item" style="border-color: #ffe0b2; background-color: #fff8e1;">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/item/7318.png" alt="FFA Mode" style="background: #fff3e0; border-color: #ffe0b2;">
+        <div class="reward-text-content">
+          <h4 class="reward-title" style="color: #e65100;">🔁 Repeatable Open World Boss (FFA Mode)</h4>
+          <p class="reward-desc">
+            Once the main quest is completed for the first time, you can summon the <strong>Mermaid of the Depths</strong> again in the open public map of Byalan Dungeon F3 (<span class="coord">iz_dun03 34, 171</span>) every <strong>3 hours</strong>.
+            <br><br>
+            <strong>Required Offerings:</strong> 30 Fins, 30 Sharp Scales, and 30 Fish Tails.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

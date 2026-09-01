@@ -102,6 +102,16 @@ prt_church,180,41,4	script	Sister Lyra	696,{ // DAWN MACE QUEST
 	// === A PARTIR DE AQUÍ, ES 100% RAMA ACOLYTE ===
 
 	if (dawn_mace_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Sister Lyra]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Mace, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Mace (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40005; // Dawn Mace
+			}
+			close;
+		}
 		mes "[Sister Lyra]";
 		mes "The Dawn Mace looks radiant in your hands. May it be a beacon of hope for your allies and a hammer of justice against the dark.";
 		close;

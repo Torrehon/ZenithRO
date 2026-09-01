@@ -55,7 +55,7 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 		mes "I was going to ask you to gather materials, but someone with your brute force has already mastered cart combat beyond anything I could teach.";
 		mes "Here, take the knowledge of ^0000FFCart Decimation^000000. It belongs in the hands of a true juggernaut like you!";
 		next;
-		skill "BS_DECIMATION",1,SKILL_PERM;
+		skill "BS_DECIMATION",1,SKILL_PERM_GRANT;
 		set BLACK_SK,2;
 		specialeffect EF_LEVELUP;
 		mes "[Akkie]";
@@ -124,7 +124,7 @@ geffen,178,72,3	script	Akkie#qsk_bs	726,{
 		delitem 971,1;  // Detrimindexta
 		Zeny -= 500;
 		set BLACK_SK,2;
-		skill "BS_DECIMATION",1,SKILL_PERM;
+		skill "BS_DECIMATION",1,SKILL_PERM_GRANT;
 		specialeffect EF_LEVELUP;
 		mes "[Akkie]";
 		mes "There you go! You have mastered ^0000FFCart Decimation^000000!";

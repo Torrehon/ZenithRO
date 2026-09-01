@@ -118,10 +118,10 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
             set .@zeny_req, 20000;
         } else {
             // ARMAS (Escala por Weapon Level)
-            if (.@wlv <= 1)      { set .@joya_qty, 1; set .@zeny_req, 20000; }
-            else if (.@wlv == 2) { set .@joya_qty, 2; set .@zeny_req, 40000; }
-            else if (.@wlv == 3) { set .@joya_qty, 3; set .@zeny_req, 60000; }
-            else                 { set .@joya_qty, 4; set .@zeny_req, 80000; }
+            if (.@wlv <= 1)      { set .@joya_qty, 1; set .@zeny_req, 10000; }
+            else if (.@wlv == 2) { set .@joya_qty, 2; set .@zeny_req, 20000; }
+            else if (.@wlv == 3) { set .@joya_qty, 3; set .@zeny_req, 30000; }
+            else                 { set .@joya_qty, 4; set .@zeny_req, 40000; }
         }
     }
     

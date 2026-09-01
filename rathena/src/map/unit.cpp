@@ -744,7 +744,14 @@ static TIMER_FUNC(unit_walktoxy_timer)
 		}
 	}
 
-	ud->walkpath.path_pos++;
+		ud->walkpath.path_pos++;
+
+	if (bl->type == BL_PC) {
+		map_session_data *sd = BL_CAST(BL_PC, bl);
+		if (sd) {
+			achievement_update_objective(sd, AG_WALK, 1, 1);
+		}
+	}
 
 	if(unit_walktoxy_nextcell(*bl, false, tick)) {
 		// Nothing else needs to be done
@@ -3667,8 +3674,9 @@ int32 unit_remove_map_(block_list *bl, clr_type clrtype, const char* file, int32
 			if(sd->guild_alliance > 0)
 				guild_reply_reqalliance(sd,sd->guild_alliance_account,0);
 
+			// C�digo Nuevo:
 			if(sd->menuskill_id)
-				sd->menuskill_id = sd->menuskill_val = 0;
+				clif_menuskill_clear(sd); // <--- ENV�A PAQUETE DE LIMPIEZA AL CLIENTE AL CAMBIAR DE MAPA
 
 			if( !sd->npc_ontouch_.empty() )
 				npc_touchnext_areanpc(sd,true);

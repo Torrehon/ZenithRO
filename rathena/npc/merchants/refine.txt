@@ -1131,42 +1131,79 @@ function	script	orimain	{
 	next;
 	switch(select("Make Oridecon:Make Elunium:Ask about Enchanted Stones")) {
 	case 1:
-		if (countitem(756) > 4) {
-			delitem 756,5;  //Oridecon_Stone
-			getitem 984,1; // Oridecon
-			mes "["+ .@npc_name$ +"]";
-			mes "Here's your Oridecon.";
-			mes "You're welcome to come";
-			mes "back whenever you want.";
-			close;
-		}
-		else {
+		.@count = countitem(756);
+		if (.@count < 5) {
 			mes "["+ .@npc_name$ +"]";
 			mes "You're kidding me, right?";
 			mes "I just told you that I need 5 Rough Oridecons to make a pure Oridecon.";
 			close;
 		}
-	case 2:
-		if (countitem(757) > 4) {
-			delitem 757,5;  //Elunium_Stone
-			getitem 985,1; // Elunium
-			mes "["+ .@npc_name$ +"]";
-			mes "Here's your Elunium.";
-			mes "You're welcome to come";
-			mes "back whenever you want.";
+		.@sets = .@count / 5;
+		mes "["+ .@npc_name$ +"]";
+		mes "You have " + .@count + " Rough Oridecons.";
+		mes "I can refine up to " + .@sets + " Oridecons.";
+		next;
+		switch(select("Make 1 Oridecon (5 Rough):Make ALL (" + .@sets + " Oridecons):Cancel")) {
+		case 1:
+			.@make = 1;
+			break;
+		case 2:
+			.@make = .@sets;
+			break;
+		case 3:
 			close;
 		}
-		else {
+		if (countitem(756) < (.@make * 5)) {
+			mes "["+ .@npc_name$ +"]";
+			mes "You don't have enough Rough Oridecons.";
+			close;
+		}
+		delitem 756, .@make * 5;
+		getitem 984, .@make;
+		mes "["+ .@npc_name$ +"]";
+		mes "Here is your Oridecon x" + .@make + ".";
+		mes "You're welcome to come back whenever you want.";
+		close;
+
+	case 2:
+		.@count = countitem(757);
+		if (.@count < 5) {
 			mes "["+ .@npc_name$ +"]";
 			mes "You're kidding me, right?";
 			mes "I just told you that I need 5 Rough Eluniums to make a pure Elunium.";
 			close;
 		}
+		.@sets = .@count / 5;
+		mes "["+ .@npc_name$ +"]";
+		mes "You have " + .@count + " Rough Eluniums.";
+		mes "I can refine up to " + .@sets + " Eluniums.";
+		next;
+		switch(select("Make 1 Elunium (5 Rough):Make ALL (" + .@sets + " Eluniums):Cancel")) {
+		case 1:
+			.@make = 1;
+			break;
+		case 2:
+			.@make = .@sets;
+			break;
+		case 3:
+			close;
+		}
+		if (countitem(757) < (.@make * 5)) {
+			mes "["+ .@npc_name$ +"]";
+			mes "You don't have enough Rough Eluniums.";
+			close;
+		}
+		delitem 757, .@make * 5;
+		getitem 985, .@make;
+		mes "["+ .@npc_name$ +"]";
+		mes "Here is your Elunium x" + .@make + ".";
+		mes "You're welcome to come back whenever you want.";
+		close;
+
 	case 3:
 		mes "["+ .@npc_name$ +"]";
 		mes "Enchanted Stones...?";
-		mes "I've been a stonesmith for 20 years, so I've heard a lot about them. Supposedly, there are";
-		mes "four different kinds.";
+		mes "I've been a stonesmith for 20 years, so I've heard a lot about them. Supposedly, there are four different kinds.";
 		next;
 		mes "["+ .@npc_name$ +"]";
 		mes "Each Enchanted Stone possesses one of the following elemental properties: Earth, Wind, Water and Fire.";

@@ -30,19 +30,9 @@ void SkillBackStab::modifyDamageData(Damage& dmg, const block_list& src, const b
 
 void SkillBackStab::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
 	// Ratio de daño unificado original para cualquier arma: 200 + 30 * Skill Level
-	base_skillratio += 200 + (30 * skill_lv);
+	base_skillratio += 100 + (20 * skill_lv);
 
-	// --- EXCLUSIVO NIGHTBLADE: +25% Daño contra objetivos mermados ---
-	const map_session_data* sd = BL_CAST(BL_PC, src);
-	if (sd != nullptr && pc_checkskill(sd, RG_NIGHTBLADE) > 0) {
-		
-		const status_change *tsc = status_get_sc(target);
-		// Si el enemigo sufre alguno de los 3 estados alterados provocados por la pasiva
-		if (tsc && (tsc->getSCE(SC_LACERATION) || tsc->getSCE(SC_CONCUSSION) || tsc->getSCE(SC_MARKED))) {
-			// Multiplicar el ratio base por 125/100 otorga exactamente un +25% de daño final a la skill
-			base_skillratio = base_skillratio * 125 / 100;
-		}
-	}
+
 }
 
 void SkillBackStab::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {

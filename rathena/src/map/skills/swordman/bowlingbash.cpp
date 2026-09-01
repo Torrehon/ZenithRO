@@ -28,43 +28,22 @@ void SkillBowlingBash::modifyDamageData(Damage& dmg, const block_list& src, cons
 			else if (dmg.miscflag >= 3)
 				dmg.div_ = 3; // 3 hits si hay 3 enemigos
 		}
-		// --- INICIO CUSTOM: Rogue Mimic Soul (Espada a 1 Mano) ---
-		else if (sd->status.weapon == W_1HSWORD && pc_checkskill(sd, RG_MIMIC) > 0) {
+		// --- INICIO CUSTOM: Rogue Mimic Soul (Cualquier Arma) ---
+		else if (pc_checkskill(sd, RG_MIMIC) > 0) {
 			if (dmg.miscflag >= 3)
-				dmg.div_ = 3; // Hasta 3 hits si hay 3 o más enemigos
+				dmg.div_ = 3; // 3 hits si hay 3 o más enemigos con cualquier arma
 		}
 		// --- FIN CUSTOM ---
 	}
 }
 
 void SkillBowlingBash::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
-	const map_session_data* sd = BL_CAST(BL_PC, src);
-	
-	// Calculamos el número de hits bajo la misma lógica que modifyDamageData
-	int hits = 2;
+	// Ratio base por golpe individual (A nivel 10 = 250% por hit)
+	int ratio_per_hit = 100 + (15 * skill_lv);
 
-	if (sd != nullptr) {
-		// --- INICIO CUSTOM: Knight Blader Soul (Espada a 2 Manos) ---
-		if (sd->status.weapon == W_2HSWORD && pc_checkskill(sd, KN_BLADERSOUL) > 0) {
-			if (mflag >= 4)
-				hits = 4;
-			else if (mflag >= 3)
-				hits = 3;
-		}
-		// --- INICIO CUSTOM: Rogue Mimic Soul (Espada a 1 Mano) ---
-		else if (sd->status.weapon == W_1HSWORD && pc_checkskill(sd, RG_MIMIC) > 0) {
-			if (mflag >= 3)
-				hits = 3;
-		}
-		// --- FIN CUSTOM ---
-	}
-
-	// Tu fórmula: 100% + (10% * nivel) por cada hit.
-	int ratio_per_hit = 100 + (10 * skill_lv);
-	int total_ratio = ratio_per_hit * hits;
-
-	// Ajuste para el ratio de rAthena (restamos el 100% base)
-	base_skillratio += (total_ratio - 100);
+	// Le pasamos a rAthena el ratio exacto de UN golpe.
+	// rAthena se encargará de multiplicarlo por dmg.div_ (2, 3 o 4 hits).
+	base_skillratio += (ratio_per_hit - 100);
 }
 
 void SkillBowlingBash::castendDamageId(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& flag) const {

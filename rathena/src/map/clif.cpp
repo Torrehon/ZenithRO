@@ -893,31 +893,31 @@ void clif_dropflooritem( const flooritem_data* fitem, bool canShowEffect ){
 			p.showdropeffect = 1;
 			p.dropeffectmode = dropEffect - 1;
 		}else if (battle_config.rndopt_drop_pillar != 0){
-			uint8 optionCount = 0;
+			uint8 customOptionCount = 0;
 			struct item_data* id = itemdb_search(fitem->item.nameid);
 
-			// Contamos cuántas opciones tiene el ítem que acaba de caer
+			// Contamos cuántas opciones custom (excluyendo Durabilidad ID 243) tiene el ítem que acaba de caer
 			for (uint8 i = 0; i < MAX_ITEM_RDM_OPT; i++) {
-				if (fitem->item.option[i].id != 0) {
-					optionCount++;
+				if (fitem->item.option[i].id != 0 && fitem->item.option[i].id != 243) {
+					customOptionCount++;
 				}
 			}
 
-			// Asignamos colores según tipo y cantidad de opciones
+			// Asignamos colores según tipo y cantidad de opciones custom
 			if (id != nullptr) {
 				if (id->type == IT_CARD) {
 					p.showdropeffect = 1;
 					p.dropeffectmode = DROPEFFECT_RED_PILLAR - 1; // Cartas = Rojo
 				} else if (id->type == IT_WEAPON || id->type == IT_ARMOR) {
 					p.showdropeffect = 1;
-					if (optionCount >= 3)
-						p.dropeffectmode = DROPEFFECT_PURPLE_PILLAR - 1; // 3 Opciones = Morado
-					else if (optionCount == 2)
-						p.dropeffectmode = DROPEFFECT_BLUE_PILLAR - 1;   // 2 Opciones = Azul
-					else if (optionCount == 1)
-						p.dropeffectmode = DROPEFFECT_GREEN_PILLAR - 1; // 1 Opción = Amarillo
+					if (customOptionCount >= 3)
+						p.dropeffectmode = DROPEFFECT_PURPLE_PILLAR - 1; // 3 Opciones Custom = Morado
+					else if (customOptionCount == 2)
+						p.dropeffectmode = DROPEFFECT_BLUE_PILLAR - 1;   // 2 Opciones Custom = Azul
+					else if (customOptionCount == 1)
+						p.dropeffectmode = DROPEFFECT_GREEN_PILLAR - 1;  // 1 Opción Custom = Verde
 					else
-						p.dropeffectmode = DROPEFFECT_WHITE_PILLAR - 1;  // 0 Opciones = Blanco
+						p.dropeffectmode = DROPEFFECT_WHITE_PILLAR - 1;  // 0 Opciones Custom = Blanco
 				} else {
 					p.showdropeffect = 0;
 					p.dropeffectmode = DROPEFFECT_NONE;
@@ -22832,6 +22832,8 @@ void clif_parse_refineui_add( int32 fd, map_session_data* sd ){
 #endif
 }
 
+static void clif_item_preview( map_session_data *sd, int16 index );
+
 /**
  * Client requests to try to refine an item.
  * 0aa3 <index>.W <material>.W <catalyst>.B
@@ -22975,19 +22977,67 @@ void clif_parse_refineui_refine( int32 fd, map_session_data* sd ){
 		if( blacksmith_amount > 0 ){
 			clif_refine( *sd, index, ITEMREFINING_FAILURE2 );
 			clif_refineui_info( sd, index );
-		// Delete the item if it is breakable
-		}else if( cost->breaking_rate > 0 && ( rnd() % 10000 ) < cost->breaking_rate ){
-			clif_refine( *sd, index, ITEMREFINING_FAILURE );
-			pc_delitem( sd, index, 1, 0, 2, LOG_TYPE_CONSUME );
-		// Downgrade the item if necessary
-		}else if( cost->downgrade_amount > 0 ){
-			item->refine = cap_value( item->refine - cost->downgrade_amount, 0, MAX_REFINE );
-			clif_refine( *sd, index, ITEMREFINING_DOWNGRADE );
-			clif_refineui_info(sd, index);
-		// Only show failure, but dont do anything
 		}else{
-			clif_refine( *sd, index, ITEMREFINING_FAILURE2 );
-			clif_refineui_info( sd, index );
+			// --- INICIO CUSTOM: Sistema de Durabilidad en Refinado ---
+			int cur_durability = 100;
+			for (int i = 0; i < MAX_ITEM_RDM_OPT; i++) {
+				if (item->option[i].id == 243) {
+					cur_durability = item->option[i].value;
+					break;
+				}
+			}
+
+			int target_lvl = item->refine + 1;
+			int loss = 10;
+
+			if (id->type == IT_WEAPON) {
+				int wlv = id->weapon_level;
+				if (wlv == 1) {
+					if (target_lvl <= 8) loss = 15;
+					else if (target_lvl == 9) loss = 25;
+					else loss = 35;
+				} else if (wlv == 2) {
+					if (target_lvl <= 7) loss = 15;
+					else if (target_lvl == 8) loss = 20;
+					else if (target_lvl == 9) loss = 30;
+					else loss = 40;
+				} else if (wlv == 3) {
+					if (target_lvl <= 6) loss = 10;
+					else if (target_lvl == 7) loss = 15;
+					else if (target_lvl == 8) loss = 20;
+					else if (target_lvl == 9) loss = 30;
+					else loss = 45;
+				} else { // Level 4 Weapons
+					if (target_lvl <= 5) loss = 10;
+					else if (target_lvl == 6) loss = 15;
+					else if (target_lvl == 7) loss = 20;
+					else if (target_lvl == 8) loss = 25;
+					else if (target_lvl == 9) loss = 35;
+					else loss = 50;
+				}
+			} else { // Armors, Helmets, Shields, Garments, Shoes
+				if (target_lvl <= 5) loss = 10;
+				else if (target_lvl == 6) loss = 15;
+				else if (target_lvl == 7) loss = 20;
+				else if (target_lvl == 8) loss = 25;
+				else if (target_lvl == 9) loss = 35;
+				else loss = 50;
+			}
+
+			cur_durability -= loss;
+
+			if (cur_durability <= 0) {
+				// Durability depleted -> BREAK ITEM DEFINITELY!
+				clif_refine( *sd, index, ITEMREFINING_FAILURE );
+				pc_delitem( sd, index, 1, 0, 2, LOG_TYPE_CONSUME );
+			} else {
+				// Survived failure -> Reduce durability, refine level remains intact!
+				pc_set_item_durability(id, *item, cur_durability);
+				clif_refine( *sd, index, ITEMREFINING_FAILURE2 );
+				clif_refineui_info( sd, index );
+				clif_item_preview( sd, index );
+			}
+			// --- FIN CUSTOM ---
 		}
 
 		clif_misceffect( *sd, NOTIFYEFFECT_REFINE_FAILURE );

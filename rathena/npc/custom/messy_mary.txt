@@ -6,7 +6,7 @@ new_1-3,85,33,3	script	Messy Mary	729,{
     
     if (Has_Pickup_Skill == 1) {
         if (getskilllv(1013) == 0) { 
-            skill 1013,1,0;
+            skill 1013,1,SKILL_PERM_GRANT;
         }
         mes "Hey there, partner!";
         mes "My inventory is still a bit of a mess, but at least now we know how to clear the floor in a blink!";
@@ -73,7 +73,7 @@ new_1-3,85,33,3	script	Messy Mary	729,{
     delitem 902, 5;
     
     set Has_Pickup_Skill, 1;
-    skill 1013,1,0; 
+    skill 1013,1,SKILL_PERM_GRANT; 
 
     mes "^FF0000[Messy Mary]^000000";
     mes "We did it! We mastered the ^0000FFPickup^000000 skill together!";
@@ -91,7 +91,7 @@ prt_in,179,12,3	script	Not-So-Messy Mary	729,{
     
     if (Has_Pickup_Skill == 1 || getskilllv(1013) > 0) {
         if (getskilllv(1013) == 0) { 
-            skill 1013,1,0;
+            skill 1013,1,SKILL_PERM_GRANT;
         }
         mes "What's up, rookie? Here to admire my style?";
         mes "I see you already know how to sweep the floor like a pro with the ^0000FFPickup^000000 technique.";
@@ -156,7 +156,7 @@ prt_in,179,12,3	script	Not-So-Messy Mary	729,{
     delitem 925, 10;
     
     set Has_Pickup_Skill, 1;
-    skill 1013,1,0; 
+    skill 1013,1,SKILL_PERM_GRANT; 
 
     mes "^FF0000[Not-So-Messy Mary]^000000";
     mes "Congratulations! You've learned the ^0000FFPickup^000000 skill.";

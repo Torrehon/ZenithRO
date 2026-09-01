@@ -157,7 +157,7 @@ in_rogue,355,179,0	script	Haijara Greg#rogueguild	46,{
 			mes "Here. Take the secrets of ^FF0000Close Confine^000000. It belongs in the hands of a master like you.";
 			next;
 			set ROG_SK,12;
-			skill "RG_CLOSECONFINE",1,SKILL_PERM;
+			skill "RG_CLOSECONFINE",1,SKILL_PERM_GRANT;
 			specialeffect2 EF_LIGHTSPHERE;
 			specialeffect EF_LEVELUP;
 			mes "[Haijara Greg]";
@@ -171,7 +171,7 @@ in_rogue,355,179,0	script	Haijara Greg#rogueguild	46,{
 			mes "eh? Then I will teach you the";
 			mes "Close Confine skill once again.";
 			specialeffect2 EF_LIGHTSPHERE;
-			skill "RG_CLOSECONFINE",1,SKILL_PERM;
+			skill "RG_CLOSECONFINE",1,SKILL_PERM_GRANT;
 			set ROG_SK,13;
 			close;
 		}
@@ -524,7 +524,7 @@ in_rogue,355,179,0	script	Haijara Greg#rogueguild	46,{
 					mes "more about this skill through";
 					mes "practice, and that you become as great a legend as Chae Takbae.";
 					set ROG_SK,12;
-					skill "RG_CLOSECONFINE",1,SKILL_PERM;
+					skill "RG_CLOSECONFINE",1,SKILL_PERM_GRANT;
 					specialeffect2 EF_LIGHTSPHERE;
 					close;
 				}
@@ -536,7 +536,7 @@ in_rogue,355,179,0	script	Haijara Greg#rogueguild	46,{
 				mes "practice. Good luck, and";
 				mes "thanks again for your help.";
 				set ROG_SK,12;
-				skill "RG_CLOSECONFINE",1,SKILL_PERM;
+				skill "RG_CLOSECONFINE",1,SKILL_PERM_GRANT;
 				specialeffect2 EF_LIGHTSPHERE;
 				close;
 			}

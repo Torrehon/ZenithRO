@@ -68,7 +68,7 @@ izlude_in,177,120,4	script	Voice in the Dark#gn_plat	844,{ // QUEST DE SKILL PLA
 		next;
 		
 		delitem 50002, 1; // Se elimina el ticket
-		skill "KO_YAMIKUMO", 1, SKILL_PERM; // Otorga la skill
+		skill "KO_YAMIKUMO", 1, SKILL_PERM_GRANT; // Otorga la skill
 		set plat_gnhiding_active, 0; // Reseteamos variables
 		set plat_smokie_count, 0;
 		

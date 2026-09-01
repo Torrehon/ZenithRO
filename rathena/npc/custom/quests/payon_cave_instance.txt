@@ -21,13 +21,28 @@ pay_arche,48,137,4	script	Grandmother Kyung	78,{
 
 	// Estado 3: Entregar Quest y Recompensa
 	if (payon_quest == 3) {
+		mes "[Grandmother Kyung]";
 		mes "Min-ji is finally free! I saw her in my dreams, smiling without that terrible ribbon...";
 		next;
-		mes "She left this for you. She said it was her only true 'perfect' work.";
+		mes "[Grandmother Kyung]";
+		mes "As a reward for your bravery, please select one of our family's gear sets:";
+		mes "- Set 1: " + mesitemlink(2502) + " + " + mesitemlink(2402);
+		mes "- Set 2: " + mesitemlink(2404) + " + " + mesitemlink(2102);
 		next;
+		.@choice = select("Hood + Sandals Set:Shoes + Guard Set");
+		
+		mes "[Grandmother Kyung]";
+		mes "She left these for you, along with her 'perfect' ribbon, 20,000 Zeny, and our family's deepest gratitude.";
+		if (.@choice == 1) {
+			getitem 2502, 1; // Hood
+			getitem 2402, 1; // Sandals
+		} else {
+			getitem 2404, 1; // Shoes
+			getitem 2102, 1; // Guard
+		}
 		getitem 5801, 1; // Reward: Red Tailed Ribbon
 		getexp 12000, 10000;
-		set Zeny, Zeny + 5000;
+		set Zeny, Zeny + 20000;
 		set payon_quest, 4;
 		if (checkquest(80020) == 0 || checkquest(80020) == 1) { completequest 80020; }
 		mes "You've brought peace to our family. No more shadows... no more silk.";
@@ -187,17 +202,18 @@ OnDummyKill:
 	
 	if (getcharid(1) > 0) .party_id = getcharid(1);
 
-	if (payon_quest == 3) {
+	// Si el ritual ya comenzó o se completó en esta instancia:
+	if ('ritual_started || payon_quest >= 3) {
+		if (mobcount(instance_mapname("1@pay00"), "all") > 0) {
+			mes "The ritual is currently in progress! Defeat the dark entities!";
+			close;
+		}
+
 		mes "The dark energy has fully dissipated. The gravestone is purified.";
 		next;
 		if (select("Leave Instance.:Stay here.") == 1) {
 			warp "pay_arche", 39, 131;
 		}
-		close;
-	}
-
-	if (.ritual_active) {
-		mes "The ritual is currently in progress! Defeat the intruders!";
 		close;
 	}
 
@@ -213,7 +229,7 @@ OnDummyKill:
 	if (select("Pour it.:Wait a moment.") == 2) close;
 
 	delitem 523, 1;
-	.ritual_active = 1;
+	'ritual_started = 1;
 	.MyMobs = 11; // 1 Skeleton + 10 Zombies
 	
 	.@origin_aid = getcharid(3);
@@ -236,7 +252,7 @@ OnDummyKill:
 OnInstanceInit:
 	setmapflag instance_mapname("1@pay00"), mf_noteleport;
 	setmapflag instance_mapname("1@pay00"), mf_nomemo;
-	.ritual_active = 0;
+	'ritual_started = 0;
 	.MyMobs = 0;
 	end;
 
@@ -288,7 +304,6 @@ OnBossPhase:
 	end;
 
 OnBossDead:
-	.ritual_active = 0;
 	mapannounce instance_mapname("1@pay00"), "The corruption has been purged! Speak to the Gravestone to leave.", bc_map, "0x00FF00";
 	
 	getpartymember .party_id, 2;

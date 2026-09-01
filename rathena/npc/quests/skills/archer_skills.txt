@@ -49,9 +49,9 @@ payon_in02,60,74,4	script	Fletcher Roberto	88,{
 			next;
 			mes "[Fletcher Roberto]";
 			mes "Bring me these specific discarded woods:";
-			mes "3 ^3355FFFine Grained Trunks^000000";
+			mes "5 ^3355FFFine Grained Trunks^000000";
 			mes "5 ^3355FFSolid Trunks^000000";
-			mes "5 ^3355FFBarren Trunks^000000";
+			mes "3 ^3355FFBarren Trunks^000000";
 			mes "1 ^3355FFTrunk^000000";
 			next;
 
@@ -63,7 +63,7 @@ payon_in02,60,74,4	script	Fletcher Roberto	88,{
 
 			if (countitem(1068) >= 3 && countitem(1066) >= 5 && countitem(1067) >= 5 && countitem(1019) >= 1) {
 				delitem 1068, 3; delitem 1066, 5; delitem 1067, 5; delitem 1019, 1;
-				skill "AC_MAKINGARROW", 1, SKILL_PERM;
+				skill "AC_MAKINGARROW", 1, SKILL_PERM_GRANT;
 				mes "[Fletcher Roberto]";
 				mes "Excellent. Watch carefully how I carve the shaft...";
 				close;
@@ -102,7 +102,7 @@ payon_in02,60,74,4	script	Fletcher Roberto	88,{
 			if (plat_familiar_active == 2) {
 				mes "I heard the echoes of your bowstring. Flawless precision.";
 				next;
-				skill "AC_CHARGEARROW", 1, SKILL_PERM;
+				skill "AC_CHARGEARROW", 1, SKILL_PERM_GRANT;
 				set plat_familiar_count, 0; set plat_familiar_active, 0;
 				mes "[Fletcher Roberto]";
 				mes "Your ^3355FFCharge Arrow^000000 will now knock your enemies back!";
@@ -156,7 +156,7 @@ payon_in02,60,74,4	script	Fletcher Roberto	88,{
 				mes "That is ^3355FFMomentum^000000. The faster you strike, the more powerful you become, but the harder it is to stay in control.";
 				
 				delitem 50002, 1;
-				skill "AC_MOMENTUM", 1, SKILL_PERM;
+				skill "AC_MOMENTUM", 1, SKILL_PERM_GRANT;
 				set plat_general_active, 0;
 				next;
 				mes "[Fletcher Roberto]";

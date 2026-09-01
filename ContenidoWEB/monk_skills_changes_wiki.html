@@ -1,0 +1,346 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Contenedor principal que agrupa todas las skills */
+  .skill-list-container {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 850px;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  /* Diseño de la fila de cada habilidad individual */
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 25px;
+    background-color: #f8fbfd;
+    border-bottom: 1px solid #e3f2fd;
+    transition: background-color 0.2s ease;
+  }
+
+  .skill-row:last-child {
+    border-bottom: none;
+  }
+
+  .skill-row:hover {
+    background-color: #e3f2fd;
+  }
+
+  /* Cajita del icono de la habilidad */
+  .skill-icon-box {
+    flex-shrink: 0;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+  }
+
+  /* Contenedor del texto */
+  .skill-content {
+    flex-grow: 1;
+  }
+
+  /* Título de la habilidad */
+  .skill-title {
+    margin: 0 0 8px 0;
+    color: #1565c0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Etiqueta del nivel máximo */
+  .skill-meta {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    background-color: #bbdefb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    letter-spacing: normal;
+  }
+
+  /* Descripción de la habilidad */
+  .skill-desc {
+    margin: 0;
+    color: #455a64;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 0.95em;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 600px) {
+    .skill-row { 
+      padding: 15px; 
+    }
+    .skill-icon-box { 
+      margin-right: 15px; 
+    }
+    .skill-title { 
+      font-size: 1.05em; 
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .skill-desc { 
+      font-size: 0.85em; 
+    }
+  }
+</style>
+
+<div class="skill-list-container">
+
+  <!-- 1. Iron Fists -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/259.png" alt="Iron Fists Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Iron Fists
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> <br><br>
+        Increases Mastery Attack by 5 * Skill Level when equipped with Knuckles and Fists. Increases ATK and ASPD in the same manner as other weapon masteries.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Spirit Mastery -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/260.png" alt="Spirit Mastery Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Spirit Mastery (Spirits Recovery)
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> <br><br>
+        Reduces Variable Casting Time by (1% * Skill Level) + (Job Level / 10). All other original effects have been removed.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Dodge -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/265.png" alt="Dodge Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Dodge
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> <br><br>
+        Increases Flee by 2 * Skill Level.
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Triple Attack -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/263.png" alt="Triple Attack Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Triple Attack
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Auto-proc / Passive</em> <br><br>
+        Fixed combo timing window and animation lock (removed animation lock and increased the time window to follow up with other combos). Can deal Critical hits. Now always has a fixed 30% activation chance.
+      </p>
+    </div>
+  </div>
+
+  <!-- 5. Chain Combo -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/272.png" alt="Chain Combo Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Chain Combo
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 10 + 1 * Skill Level
+        <br><br>
+        Can now deal Critical hits. Fixed the combo timing window.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Combo Finish -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/273.png" alt="Combo Finish Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Combo Finish
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 10 + 1 * Skill Level
+        <br><br>
+        Can now deal Critical hits. Fixed the combo timing window.
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. Critical Explosion -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/270.png" alt="Critical Explosion Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Critical Explosion
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 50
+        <br><br>
+        Duration increased to 300 seconds. Has a 1-second Casting Time. SP Recovery is now halved instead of completely disabled.
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. Steel Body -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/268.png" alt="Steel Body Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Steel Body
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 50
+        <br><br>
+        No longer grants fixed 90 DEF and MDEF. Now scales as follows:<br><br>
+        - <strong>Hard DEF Bonus</strong> = (Skill Level * 2) + (VIT / 3).<br><br>
+        - <strong>Hard MDEF Bonus</strong> = (Skill Level * 2) + (INT / 3).<br><br>
+        Duration: 60 seconds * Skill Level. Casting Time reduced to 1 second.
+      </p>
+    </div>
+  </div>
+
+  <!-- 9. Ki Explosion -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/1016.png" alt="Ki Explosion Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Ki Explosion
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 20
+        <br><br>
+        Area attack (3x3) with a range of 7 cells that deals 400% physical damage to all enemies. No longer ignores weapon cards and inherits the weapon's element. 1-second Casting Time.
+      </p>
+    </div>
+  </div>
+
+  <!-- 10. Asura Strike -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/271.png" alt="Asura Strike Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Asura Strike
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 50% of current SP
+        <br><br>
+        Now consumes only 50% of current SP and no longer disables natural SP recovery.<br><br>
+        Damage Ratio: 100% + (140% * Skill Level) + (Consumed SP * Base Level) / 5.
+      </p>
+    </div>
+  </div>
+
+  <!-- 11. Soul of the Pugilist (NEW) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/1061.png" alt="Soul of the Pugilist Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Pugilist (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Halves SP cost for all combo skills. Enhances Iron Fists, Dodge, Critical Explosion, Steel Body, Combo Finish, Chain Combo, and Asura Strike:<br><br>
+        - <strong>Iron Fists:</strong> Grants a (1% * Skill Level) chance to gain a Spirit Sphere when attacking.<br><br>
+        - <strong>Dodge:</strong> Increases Flee gained by (1 * Skill Level).<br><br>
+        - <strong>Critical Explosion:</strong> While active, performing combos (Chain Combo, Combo Finish) grants stacks of "Relentless" (up to a max of 10). Each stack gives +2 CRIT and +1% ASPD.<br><br>
+        - <strong>Steel Body:</strong> Now allows using combo skills. While active, all combo skills gain increased damage ratio equal to (VIT * 2%).<br><br>
+        - <strong>Combo Finish:</strong> Now deals area-of-effect (AoE) damage. At 10 Relentless stacks, strikes 2 hits.<br><br>
+        - <strong>Chain Combo:</strong> Now deals area-of-effect (AoE) damage.<br><br>
+        - <strong>Asura Strike:</strong> SP component damage ratio changed to (Consumed SP * Base Level) / 8, but adds +(VIT * Stacks * 10)% to the ratio. Has a 30-second cooldown.
+      </p>
+    </div>
+  </div>
+
+  <!-- 12. Soul of the Ascetic (NEW) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/1062.png" alt="Soul of the Ascetic Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Ascetic (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances Spirit Mastery, Finger Offensive, Investigate, Critical Explosion, Steel Body, Asura Strike, and Ki Explosion:<br><br>
+        - <strong>Spirit Mastery:</strong> Increases max Spirit Spheres to 10. Adds 25% of your MATK to damage formula for Finger Offensive, Investigate, and Ki Explosion.<br><br>
+        - <strong>Finger Offensive:</strong> Consumes only 1 Spirit Sphere per cast regardless of skill level.<br><br>
+        - <strong>Investigate:</strong> If cast while under Blade Stop, hits 2 times.<br><br>
+        - <strong>Critical Explosion:</strong> Increases ATK by (6 * Skill Level) and reduces Casting Time by (2% * Skill Level).<br><br>
+        - <strong>Steel Body:</strong> Allows casting Finger Offensive, Investigate, and Ki Explosion. Adds INT to the damage ratio of these skills.<br><br>
+        - <strong>Asura Strike:</strong> Base attack formula becomes hybrid (Total ATK + Total MATK). SP component damage ratio changed to (Consumed SP * Base Level) / 10, but adds +(INT * Spheres * 20)% to the ratio.<br><br>
+        - <strong>Ki Explosion:</strong> Killing monsters with this skill grants 1 Spirit Sphere.
+      </p>
+    </div>
+  </div>
+
+</div>

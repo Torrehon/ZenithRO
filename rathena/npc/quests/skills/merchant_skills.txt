@@ -72,7 +72,7 @@ alberta_in,56,48,4	script	Senior Merchant Kass	86,{
 				mes "Good! Now, take a deep breath... AND SHOUT!";
 				next;
 				mes "PUKAKAKAKAKAKAKAKAKAKA!!!";
-				skill "MC_LOUD", 1, SKILL_PERM;
+				skill "MC_LOUD", 1, SKILL_PERM_GRANT;
 				mes "Yes! That's it! You have learned ^FF0000Crazy Uproar^000000!";
 				close;
 			}
@@ -96,7 +96,7 @@ alberta_in,56,48,4	script	Senior Merchant Kass	86,{
 				mes "[Senior Merchant Kass]";
 				mes "Excellent quality wood. Let me show you how to fashion different styles.";
 				next;
-				skill "MC_CHANGECART", 1, SKILL_PERM;
+				skill "MC_CHANGECART", 1, SKILL_PERM_GRANT;
 				mes "[Senior Merchant Kass]";
 				mes "Congratulations. You can now choose a cart according to your taste.";
 				close;

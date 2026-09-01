@@ -20,9 +20,9 @@ new_1-3,95,30,4	script	Academy Therapist	57,{
 	specialeffect2 31; // Heal effect
 	percentheal 100,100;
 	skilleffect "AL_BLESSING",1;
-	sc_start SC_BLESSING,600000,1;
+	sc_start SC_BLESSING,600000,10;
 	skilleffect "AL_INCAGI",1;
-	sc_start SC_INCREASEAGI,600000,1;
+	sc_start SC_INCREASEAGI,600000,10;
 	
 	mes "[Therapist]";
 	mes "There you go! You feel much better now, right?";

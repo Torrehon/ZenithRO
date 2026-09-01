@@ -83,6 +83,13 @@ payon_in01,132,62,5	script	Inn Employee#Ahee	53,{
 	warp "payon_in01",132,11; end;
 }
 
+//======================== Izlude ====================================
+izlude_in,174,134,2	script	Inn Employee#iz	53,{
+
+	callfunc "F_InnMaid","[Employee Izlude]","Izlude Inn","izlude_in",174,134;
+	warp "izlude_in",172,165; end;
+}
+
 //======================== Morocc ====================================
 // North East --------------------------
 /*
@@ -122,7 +129,7 @@ lhz_in02,230,284,4	script	Hotel Employee#01	86,{
 	mes "finest accomodations";
 	mes "and the best service.";
 	next;
-	switch(select("Save Point:Rest - 10,000 zeny (Free < Lv60):Cancel")) {
+	switch(select("Save Point:Rest - 5,000 zeny (Free < Lv70):Cancel")) {
 	case 1:
 		savepoint "lhz_in02",209,275,1,1;
 		mes "[Hotel Employee]";
@@ -132,7 +139,7 @@ lhz_in02,230,284,4	script	Hotel Employee#01	86,{
 		mes "the Royal Dragon.";
 		close;
 	case 2:
-		.@price = (BaseLevel < 60) ? 0 : 10000;
+		.@price = (BaseLevel < 70) ? 0 : 5000;
 		if(Zeny < .@price) {
 			mes "[Hotel Employee]";
 			mes "I'm sorry, but";
@@ -150,9 +157,9 @@ lhz_in02,230,284,4	script	Hotel Employee#01	86,{
 		warp "lhz_in02",219,150;
 		percentheal 100,100;
 		specialeffect2 EF_BLESSING;
-		sc_start SC_BLESSING,600000,10;
+		sc_start SC_BLESSING,1800000,10;
 		specialeffect2 EF_INCREASEAGI;
-		sc_start SC_INCREASEAGI,600000,10;
+		sc_start SC_INCREASEAGI,1800000,10;
 		end;
 	case 3:
 		mes "[Hotel Employee]";
@@ -177,7 +184,7 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 	mes "most comfortable";
 	mes "inn here in Veins~";
 	next;
-	switch(select("Save:Take a Rest - 10,000 zeny (Free < Lv60):Quit")) {
+	switch(select("Save:Take a Rest - 5,000 zeny (Free < Lv70):Quit")) {
 	case 1:
 		mes "[Inn Master]";
 		mes "Your Respawn Point";
@@ -185,7 +192,7 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 		mes "Enjoy your stay in town~";
 		savepoint "ve_in",157,209,1,1;
 		close;
-		.@price = (BaseLevel < 60) ? 0 : 10000;
+		.@price = (BaseLevel < 70) ? 0 : 5000;
 		if(Zeny < .@price){
 			mes "I'm sorry, but I don't";
 			mes "think you have enough";
@@ -198,9 +205,9 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 		set Zeny,Zeny - .@price;
 		percentheal 100,100;
 		specialeffect2 EF_BLESSING;
-		sc_start SC_BLESSING,600000,10;
+		sc_start SC_BLESSING,1800000,10;
 		specialeffect2 EF_INCREASEAGI;
-		sc_start SC_INCREASEAGI,600000,10;
+		sc_start SC_INCREASEAGI,1800000,10;
 		warp "ve_in",184,228;
 		end;
 	case 3:
@@ -215,7 +222,7 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 	mes "[Hotel Keeper]";
 	mes "Welcome to the beautiful Brasilis Hotel.";
 	next;
-	switch(select("Save:Rest - 10,000 zeny (Free < Lv60):Cancel")) {
+	switch(select("Save:Rest - 5,000 zeny (Free < Lv70):Cancel")) {
 	case 1:
 		mes "[Hotel Keeper]";
 		mes "Do you want to save here at the Brasilis Hotel?";
@@ -233,7 +240,7 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 		}
 		end;
 	case 2:
-		.@price = (BaseLevel < 60) ? 0 : 10000;
+		.@price = (BaseLevel < 70) ? 0 : 5000;
 		if (Zeny >= .@price) {
 			mes "[Hotel Keeper]";
 			mes "I will show you a great room.";
@@ -241,9 +248,9 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 			Zeny -= .@price;
 			percentheal 100,100;
 			specialeffect2 EF_BLESSING;
-			sc_start SC_BLESSING,600000,10;
+			sc_start SC_BLESSING,1800000,10;
 			specialeffect2 EF_INCREASEAGI;
-			sc_start SC_INCREASEAGI,600000,10;
+			sc_start SC_INCREASEAGI,1800000,10;
 			warp "bra_in01",144,69;
 			end;
 		}
@@ -280,7 +287,7 @@ ein_in01,206,224,3	script	Hotel Employee#ein	855,{
 		next;
 	}
 	else {
-		switch(select("Save:Take Rest - 10,000 zeny (Free < Lv60):Cancel")) {
+		switch(select("Save:Take Rest - 5,000 zeny (Free < Lv70):Cancel")) {
 		case 1:
 			mes "[Hotel Employee]";
 			mes "Your Respawn Point";
@@ -292,7 +299,7 @@ ein_in01,206,224,3	script	Hotel Employee#ein	855,{
 			savepoint "ein_in01",200,224,1,1;
 			end;
 		case 2:
-			.@price = (BaseLevel < 60) ? 0 : 10000;
+			.@price = (BaseLevel < 70) ? 0 : 5000;
 			if (Zeny >= .@price) {
 				mes "[Hotel Employee]";
 				mes "Thank you.";
@@ -338,7 +345,7 @@ function	script	F_InnMaid	{
 	mes getarg(1) + ".";
 	mes "How may I help you?";
 	next;
-	switch(select("Save:Take a Rest - 10,000 zeny (Free < Lv60):Cancel")) {
+	switch(select("Save:Take a Rest - 5,000 zeny (Free < Lv70):Cancel")) {
 	case 1:
 		mes .@npc_name$;
 		mes "Your respawn point";
@@ -349,9 +356,9 @@ function	script	F_InnMaid	{
 		close;
 	case 2:
 		mes .@npc_name$;
-		.@price = (BaseLevel < 60) ? 0 : 10000;
+		.@price = (BaseLevel < 70) ? 0 : 5000;
 		if (.@price == 0) {
-			mes "Since you are an aspiring adventurer under Level 60, your stay today is ^0000FFcompletely free^000000!";
+			mes "Since you are an aspiring adventurer under Level 70, your stay today is ^0000FFcompletely free^000000!";
 		}
 		if(Zeny < .@price){
 			mes "I'm sorry, but the service charge is "+.@price+" zeny. Please make sure for next time, okay?";

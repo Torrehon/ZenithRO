@@ -8151,16 +8151,17 @@ ACMD_FUNC(mobinfo)
 		clif_displaymessage(fd, msg_txt(sd,1245)); //  Drops:
 		strcpy(atcmd_output, " ");
 
+		int32 drop_modifier = 100;
+#ifdef RENEWAL_DROP
+		if( battle_config.atcommand_mobinfo_type ){
+			drop_modifier = pc_level_penalty_mod( sd, PENALTY_DROP, mob );
+		}
+#endif
+
 		if( mob->dropitem.empty() ){
 			clif_displaymessage(fd, msg_txt(sd,1246)); // This monster has no drops.
 		}else{
 			uint32 j = 0;
-			int32 drop_modifier = 100;
-#ifdef RENEWAL_DROP
-			if( battle_config.atcommand_mobinfo_type ){
-				drop_modifier = pc_level_penalty_mod( sd, PENALTY_DROP, mob );
-			}
-#endif
 
 			for( const std::shared_ptr<s_mob_drop>& entry : mob->dropitem ){
 				if (entry->nameid == 0 || entry->rate < 1)
@@ -8175,40 +8176,43 @@ ACMD_FUNC(mobinfo)
 
 				// --- INICIO DICTADURA ABSOLUTA (@mi) ---
 				if (id->type == IT_WEAPON || id->type == IT_ARMOR) {
-					if (mob->get_bosstype() == BOSSTYPE_MVP) {
-						// Para MVPs usamos el cálculo oficial del server pero con suelo del 35%
-						droprate = mob_getdroprate(sd, mob, entry->rate, drop_modifier);
-						if (droprate < 3500) droprate = 3500;
-                    } else {
-						// Mobs normales: Calculamos Rate Base x 5 manualmente para ignorar el drops.conf
-						droprate = entry->rate * 5; 
+					droprate = mob_getdroprate(sd, mob, entry->rate, drop_modifier);
 
-						// Comprobamos si es un Hat o Accesorios
-						bool is_hat = (id->type == IT_ARMOR && (id->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
-						bool is_acc = (id->type == IT_ARMOR && (id->equip & EQP_ACC));
-						
+					bool is_hat = (id->type == IT_ARMOR && (id->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
+					bool is_acc = (id->type == IT_ARMOR && (id->equip & EQP_ACC));
+
+					if (mob->get_bosstype() == BOSSTYPE_MVP) {
+						if (is_hat || is_acc) {
+							if (droprate < 75) droprate = 75; // Suelo 0.75% para hats/accesorios de MVP
+						} else {
+							if (droprate < 3500) droprate = 3500; // Suelo 35% para armas/armaduras de MVP
+						}
+					} else {
 						if (is_hat || is_acc) {
 							if (droprate < 75) {
 								droprate = 75; // Suelo 0.75%
 							}
 						}
-						// Armaduras que NO son gorros ni accesorios (Pecheras, escudos, botas, garments)
-						else if (id->type == IT_ARMOR) {
+						else {
+							// Armas y Armaduras generales (Pecheras, escudos, botas, garments)
 							if (droprate < 150) {
 								droprate = 150; // Suelo 1.5%
 							}
 						}
 					}
 				} 
+				// --- INICIO CUSTOM: Drop Rate de Cartas Dinamico (@mi) ---
 				else if (id->type == IT_CARD) {
 					if (mob->get_bosstype() == BOSSTYPE_MVP || mob->get_bosstype() == BOSSTYPE_MINIBOSS) {
-						droprate = 1; // 0.01% fijo
+						droprate = 5; // 0.05% fijo
 					} else {
 						int32 mob_lvl = mob->lv;
 						if (mob_lvl < 1) mob_lvl = 1;
-						droprate = (mob_lvl >= 50) ? 10 : (200 - ((mob_lvl - 1) * 190 / 49));
+						droprate = (mob_lvl >= 50) ? 10 : (100 - ((mob_lvl - 1) * 90 / 49));
 					}
-				} else {
+				}
+				// --- FIN CUSTOM ---
+				else {
 					// Objetos que no son equipo ni cartas (Etc, Pociones) usan el cálculo normal del server
 					droprate = mob_getdroprate(sd, mob, entry->rate, drop_modifier);
 				    
@@ -8226,9 +8230,12 @@ ACMD_FUNC(mobinfo)
 						} else if (droprate >= 1250 && droprate < 2500) {
 							droprate = 2500;
 						}
-					}
 				}
 				// --- FIN DICTADURA ABSOLUTA ---
+        }
+				if (droprate > 10000) {
+					droprate = 10000; // Cap visual a 100.00% máximo
+				}
 
 				sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), (float)droprate / 100);
 				strcat(atcmd_output, atcmd_output2);
@@ -8265,13 +8272,38 @@ ACMD_FUNC(mobinfo)
 					if (id == nullptr)
 						continue;
 
-					//Because if there are 3 MVP drops at 50%, the first has a chance of 50%, the second 25% and the third 12.5%
-					float mvppercent = (float)entry->rate * mvpremain / 10000.0f;
-					if(battle_config.item_drop_mvp_mode == 0) {
-						mvpremain -= mvppercent;
+					int32 droprate = mob_getdroprate(sd, mob, entry->rate, drop_modifier);
+
+					// --- INICIO DICTADURA ABSOLUTA (MVP Drops @mi) ---
+					if (id->type == IT_WEAPON || id->type == IT_ARMOR) {
+						bool is_hat = (id->type == IT_ARMOR && (id->equip & (EQP_HEAD_TOP | EQP_HEAD_MID | EQP_HEAD_LOW)));
+						bool is_acc = (id->type == IT_ARMOR && (id->equip & EQP_ACC));
+
+						if (is_hat || is_acc) {
+							if (droprate < 75) droprate = 75; // Suelo 0.75% para hats/accesorios de MVP
+						} else {
+							if (droprate < 3500) droprate = 3500; // Suelo 35% para armas/armaduras de MVP
+						}
+					} 
+					else if (id->type == IT_CARD) {
+						droprate = 1; // 0.01%
+					} 
+					else {
+						if (id->nameid == 984 || id->nameid == 985) { // Oridecon / Elunium
+							if (droprate < 750) droprate = 750;
+							else if (droprate >= 750 && droprate < 1500) droprate = 1500;
+						}
+						else if (id->nameid == 756 || id->nameid == 757) { // Rough
+							if (droprate < 1250) droprate = 1250;
+							else if (droprate >= 1250 && droprate < 2500) droprate = 2500;
+						}
 					}
-					if (mvppercent > 0) {
-						sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), mvppercent);
+					// --- FIN DICTADURA ABSOLUTA ---
+
+					if (droprate > 10000) droprate = 10000;
+
+					if (droprate > 0) {
+						sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), (float)droprate / 100);
 						strcat(atcmd_output, atcmd_output2);
 						if (++j % 3 == 0) {
 							clif_displaymessage(fd, atcmd_output);

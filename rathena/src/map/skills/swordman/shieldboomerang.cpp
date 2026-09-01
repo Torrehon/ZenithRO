@@ -6,6 +6,7 @@
 #include <config/core.hpp>
 #include "map/pc.hpp"    // Necesario para pc_checkskill
 #include "map/skill.hpp" // Necesario para las constantes de las skills
+#include "map/status.hpp" // Necesario para status_get_status_data
 
 SkillShieldBoomerang::SkillShieldBoomerang() : WeaponSkillImpl(CR_SHIELDBOOMERANG) {
 }
@@ -16,8 +17,7 @@ void SkillShieldBoomerang::calculateSkillRatio(const Damage* wd, const block_lis
 
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	
-	// --- INICIO CUSTOM: Guardian Soul / Mimic Soul ---
-	// Condición: Añade daño por peso y refine del escudo
+	// --- INICIO CUSTOM: Guardian Soul / Mimic Soul (Daño por peso de escudo) ---
 	if (sd && (pc_checkskill(sd, CR_GUARDIANSOUL) > 0 || pc_checkskill(sd, RG_MIMIC) > 0)) {
 		int16 index = sd->equip_index[EQI_HAND_L];
 
@@ -38,11 +38,15 @@ void SkillShieldBoomerang::calculateSkillRatio(const Damage* wd, const block_lis
 				}
 			}
 
-			int divisor = 25 - (refine_rate * 2);
-			if (divisor <= 0) divisor = 1;
+			int weight_ratio = (shield_weight * (10 + refine_rate*2)) / 100;
 
-			base_skillratio += (shield_weight / divisor);
+			base_skillratio += weight_ratio;
 		}
+	}
+
+	// --- INICIO CUSTOM: Templar Soul (Daño por VIT) ---
+	if (sd && pc_checkskill(sd, CR_GUARDIANSOUL) > 0) {
+		base_skillratio += status_get_vit(src);
 	}
 	// --- FIN CUSTOM ---
 }

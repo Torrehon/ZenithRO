@@ -1,0 +1,62 @@
+// =============================================
+// Byalan 6 (iz_dun05) Sealed Entrance & Access
+// =============================================
+
+// --- 1. Sealed Entrance NPC (iz_dun04) ---
+iz_dun04,129,235,0	script	Sealed Entrance	111,{
+	if (countitem(50010) < 1) {
+		mes "[Sealed Entrance]";
+		mes "The ancient seal glows with a mysterious underwater energy.";
+		mes "It seems to require the ^FF0000Trident of the Depths^000000 to be unsealed.";
+		next;
+		mes "[Sealed Entrance]";
+		mes "Please bring the ^FF0000Trident of the Depths^000000 to unlock this portal.";
+		close;
+	}
+
+	mes "[Sealed Entrance]";
+	mes "The Trident of the Depths resonates with the ancient seal!";
+	mes "Do you wish to unseal the entrance to the abyssal depths?";
+	next;
+	if (select("Open the portal:Leave") == 2) close;
+
+	mes "[Sealed Entrance]";
+	mes "The seal breaks! A portal to the deepest waters has opened!";
+	close2;
+	enablenpc "Sealed Portal#byalan6";
+	initnpctimer "Sealed Portal#byalan6";
+	end;
+}
+
+// --- 2. Entrance Portal in iz_dun04 (129, 233 -> iz_dun05 141, 184) ---
+iz_dun04,129,233,0	script	Sealed Portal#byalan6	45,1,1,{
+	end;
+
+OnTouch:
+	warp "iz_dun05", 141, 184;
+	end;
+
+OnInit:
+	disablenpc "Sealed Portal#byalan6";
+	end;
+
+OnTimer30000:
+	disablenpc "Sealed Portal#byalan6";
+	stopnpctimer;
+	end;
+}
+
+// --- 3. Return Warp in iz_dun05 (141, 190 -> iz_dun04 129, 225) ---
+iz_dun05,141,190,0	warp	Byalan 5 Return#byalan6	2,2,iz_dun04,129,225
+
+
+
+// =============================================
+// Monster Spawns for iz_dun05
+// =============================================
+iz_dun05,0,0	monster	Sropho	2201,30,5000
+iz_dun05,0,0	monster	Pot Dofle	2203,20,5000
+iz_dun05,0,0	monster	Sedora	2204,40,5000
+iz_dun05,0,0	monster	King Dramoh	2198,20,5000
+iz_dun05,0,0,0,0	monster	Tacnu	2205,1,1800000,900000,0
+iz_dun05,0,0,0,0	boss_monster	Kraken	2202,1,7200000,3600000,0

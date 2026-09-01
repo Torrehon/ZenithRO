@@ -1,0 +1,150 @@
+//==============================================================
+// ZenithRO Custom NPC - Alchemist Elemental Chemical Craftsman
+// Map: alde_alche (32, 186) | Sprite: 750
+//==============================================================
+
+alde_alche,32,186,4	script	Elemental Chemist#alche	750,{
+	mes "[Elemental Chemist]";
+	mes "Greetings, fellow researcher!";
+	mes "I specialize in synthesizing ^0055FFElemental Chemical Powders^000000.";
+	mes "When equipped in your Shadow Gear, these powders imbue your offensive Alchemist mixtures with elemental power!";
+	next;
+
+	mes "[Elemental Chemist]";
+	mes "Which Elemental Chemical Powder would you like to craft today?";
+	next;
+
+	switch(select("Fire Chemical Powder (Fire):Water Chemical Powder (Water):Lightning Chemical Powder (Wind):Earth Chemical Powder (Earth):Poison Chemical Powder (Poison):Shadow Chemical Powder (Shadow):Holy Chemical Powder (Holy):Information / Guide:Cancel")) {
+	case 1: // Fire
+		set .@reward_id, 60994;
+		setarray .@mat_ids[0], 994, 970; // Flame Heart, Alcohol
+		setarray .@mat_qty[0], 1, 1;
+		set .@mat_count, 2;
+		break;
+	case 2: // Water
+		set .@reward_id, 60995;
+		setarray .@mat_ids[0], 995, 970; // Mystic Frozen, Alcohol
+		setarray .@mat_qty[0], 1, 1;
+		set .@mat_count, 2;
+		break;
+	case 3: // Wind
+		set .@reward_id, 60996;
+		setarray .@mat_ids[0], 996, 970; // Rough Wind, Alcohol
+		setarray .@mat_qty[0], 1, 1;
+		set .@mat_count, 2;
+		break;
+	case 4: // Earth
+		set .@reward_id, 60997;
+		setarray .@mat_ids[0], 997, 970; // Great Nature, Alcohol
+		setarray .@mat_qty[0], 1, 1;
+		set .@mat_count, 2;
+		break;
+	case 5: // Poison
+		set .@reward_id, 60998;
+		setarray .@mat_ids[0], 7154, 7565, 7322; // Poisonous Powder, Sticky Poison, Toxic Gas
+		setarray .@mat_qty[0], 10, 10, 10;
+		set .@mat_count, 3;
+		break;
+	case 6: // Shadow
+		set .@reward_id, 61000;
+		setarray .@mat_ids[0], 1038, 1039; // Little Evil Horn, Little Evil Wing
+		setarray .@mat_qty[0], 20, 3;
+		set .@mat_count, 2;
+		break;
+	case 7: // Holy
+		set .@reward_id, 60999;
+		setarray .@mat_ids[0], 1000, 7009; // Star Crumb, Glitter Shell
+		setarray .@mat_qty[0], 10, 20;
+		set .@mat_count, 2;
+		break;
+	case 8: // Guide
+		mes "[Elemental Chemist]";
+		mes "^0055FFElemental Chemical Powders^000000 are equipped in your Shadow Shoes slot.";
+		mes "They alter the damage element of ^FF0000Acid Terror^000000 and ^FF0000Demonstration^000000 to match the powder's element.";
+		next;
+		mes "[Elemental Chemist]";
+		mes "Required Materials:";
+		mes "- ^FF0000Fire:^000000 1x Flame Heart, 1x Alcohol";
+		mes "- ^0055FFWater:^000000 1x Mystic Frozen, 1x Alcohol";
+		mes "- ^009900Wind:^000000 1x Rough Wind, 1x Alcohol";
+		mes "- ^795548Earth:^000000 1x Great Nature, 1x Alcohol";
+		mes "- ^9C27B0Poison:^000000 10x Poisonous Powder, 10x Sticky Poison, 10x Toxic Gas";
+		mes "- ^333333Shadow:^000000 20x Little Evil Horn, 3x Little Evil Wing";
+		mes "- ^FFD700Holy:^000000 10x Star Crumb, 20x Glitter Shell";
+		close;
+	case 9: // Cancel
+		mes "[Elemental Chemist]";
+		mes "Come back whenever you need to craft elemental chemicals!";
+		close;
+	}
+
+	// Show formula details
+	mes "[Elemental Chemist]";
+	mes "To craft ^0055FF" + getitemname(.@reward_id) + "^000000, you need:";
+	for (set .@i, 0; .@i < .@mat_count; set .@i, .@i + 1) {
+		mes "- " + .@mat_qty[.@i] + "x " + getitemname(.@mat_ids[.@i]);
+	}
+	next;
+
+	mes "[Elemental Chemist]";
+	mes "How many would you like to craft?";
+	next;
+	switch(select("Craft 1:Craft 5:Craft 10:Enter amount...:Cancel")) {
+	case 1: set .@amount, 1; break;
+	case 2: set .@amount, 5; break;
+	case 3: set .@amount, 10; break;
+	case 4:
+		mes "[Elemental Chemist]";
+		mes "Please enter the amount you wish to craft (1 - 100):";
+		next;
+		input .@amount;
+		if (.@amount < 1 || .@amount > 100) {
+			mes "[Elemental Chemist]";
+			mes "Invalid quantity entered. Crafting canceled.";
+			close;
+		}
+		break;
+	case 5:
+		mes "[Elemental Chemist]";
+		mes "Crafting canceled.";
+		close;
+	}
+
+	// Check if player has all materials in inventory
+	set .@has_all, 1;
+	for (set .@i, 0; .@i < .@mat_count; set .@i, .@i + 1) {
+		set .@req, .@mat_qty[.@i] * .@amount;
+		if (countitem(.@mat_ids[.@i]) < .@req) {
+			set .@has_all, 0;
+			break;
+		}
+	}
+
+	if (!.@has_all) {
+		mes "[Elemental Chemist]";
+		mes "You do not have enough materials to craft " + .@amount + "x ^0055FF" + getitemname(.@reward_id) + "^000000.";
+		mes "Please check your inventory and try again.";
+		close;
+	}
+
+	// Check weight and space
+	if (!checkweight2(.@reward_id, .@amount)) {
+		mes "[Elemental Chemist]";
+		mes "You cannot carry " + .@amount + "x ^0055FF" + getitemname(.@reward_id) + "^000000 because your inventory is full or overweight.";
+		close;
+	}
+
+	// Consume materials
+	for (set .@i, 0; .@i < .@mat_count; set .@i, .@i + 1) {
+		delitem .@mat_ids[.@i], .@mat_qty[.@i] * .@amount;
+	}
+
+	// Grant reward
+	getitem .@reward_id, .@amount;
+
+	specialeffect2 EF_POTION_SUCCESS;
+	mes "[Elemental Chemist]";
+	mes "Success! Here is your ^0055FF" + .@amount + "x " + getitemname(.@reward_id) + "^000000.";
+	mes "Use them wisely in your chemical alchemy!";
+	close;
+}

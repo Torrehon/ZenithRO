@@ -1,0 +1,364 @@
+//===== rAthena Script =======================================
+//= Prontera Underground Prison Access Quest & Castle NPCs
+//============================================================
+
+// --------------------------------------------------------------
+// Operation Commander (prt_castle 118, 66) - Sprite 654
+// --------------------------------------------------------------
+prt_castle,118,66,4	script	Operation Commander#prt_prison	654,{
+	if (PRT_PRISON_QUEST < 2) {
+		mes "[Operation Commander]";
+		mes "Halt, adventurer. This section of the castle is temporarily restricted for high-security Royal Guard operations.";
+		mes "Please keep your distance.";
+		close;
+	}
+
+	if (PRT_PRISON_QUEST == 2) {
+		mes "[Operation Commander]";
+		mes "Greetings. You say the Library Scholar sent you to investigate the recent anomalies?";
+		mes "Very well... if you are here, you must be a seasoned warrior. I will brief you on the situation.";
+		next;
+		mes "[Operation Commander]";
+		mes "Beneath our castle lies the ancient Prontera Underground Prison (^0000FFprt_prison^000000), sealed and dormant for decades.";
+		mes "However, several weeks ago, court mages detected violent surges of dark energy emanating from its deepest chambers.";
+		next;
+		mes "[Operation Commander]";
+		mes "The old prison was unsealed to investigate the source of this corruption.";
+		mes "We dispatched multiple squads of our finest Knights and Crusaders to explore the lower levels...";
+		mes "Yet few have returned, and those who survived recount horrific tales of abominations and fallen brethren.";
+		next;
+		mes "[Operation Commander]";
+		mes "We need someone of your strength. Descend into the Underground Prison, assist any survivors you find, and purge the corruption spreading from within.";
+		mes "I have notified the Guard at the passage gate (^0000FFprt_castle 116, 30^000000). Speak with him, and he will grant you clearance to enter.";
+		PRT_PRISON_QUEST = 3;
+		close;
+	}
+
+	mes "[Operation Commander]";
+	mes "I have already authorized your access.";
+	mes "Speak with the Guard standing at the passage gate (^0000FFprt_castle 116, 30^000000). He will let you through to the prison entrance.";
+	close;
+}
+
+// --------------------------------------------------------------
+// Knight-Lieutenant Raines (prt_castle 123, 65) - Sprite 470
+// --------------------------------------------------------------
+prt_castle,123,65,2	script	Raines#prt_prison	470,{
+	mes "[Knight-Lieutenant Raines]";
+	mes "Salute, adventurer!";
+	mes "Centuries ago, these deep dungeons were sealed to contain an ancient, dark corruption.";
+	mes "Now that the seals have ruptured and the darkness reawakens, our vanguard fought bravely to hold the line.";
+	next;
+	mes "[Knight-Lieutenant Raines]";
+	mes "By recovering the seals of our vanguard Knights who fell in this new crisis, you honor their immediate sacrifice.";
+	mes "The Royal Guard grants you access to our specialized armory in exchange for ^0000FFKnight's Seals^000000.";
+	mes " ";
+	mes "You currently hold: ^00AA00" + countitem(50024) + " Knight's Seals^000000.";
+	next;
+	callshop "raines_prison_shop", 1;
+	npcshopattach "raines_prison_shop";
+	end;
+
+OnBuyItem:
+	.@size = getarraysize(@bought_nameid);
+	.@total_cost = 0;
+
+	for (.@i = 0; .@i < .@size; .@i++) {
+		.@item_idx = inarray(.Shop_Data, @bought_nameid[.@i]);
+		if (.@item_idx == -1) {
+			dispbottom "System Error: Item not found in the supply line.";
+			end;
+		}
+		.@total_cost += (.Shop_Data[.@item_idx + 1] * @bought_quantity[.@i]);
+	}
+
+	if (.@total_cost > countitem(50024)) {
+		mes "[Knight-Lieutenant Raines]";
+		mes "I am afraid you lack the necessary Knight's Seals for these supplies, my friend.";
+		mes "Total cost: ^FF0000" + .@total_cost + "^000000 Seals.";
+		close;
+	}
+
+	delitem 50024, .@total_cost;
+
+	for (.@i = 0; .@i < .@size; .@i++) {
+		getitem @bought_nameid[.@i], @bought_quantity[.@i];
+	}
+
+	mes "[Knight-Lieutenant Raines]";
+	mes "Thank you for your service. May these relics serve you well in the depths below.";
+	specialeffect2 EF_MONEY;
+	close;
+
+OnInit:
+	setarray .Shop_Data[0],
+		2875, 100,
+		2886, 100,
+		2799, 100;
+
+	npcshopdelitem "raines_prison_shop", 502;
+	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {
+		npcshopadditem "raines_prison_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
+	}
+	end;
+}
+
+-	shop	raines_prison_shop	-1,502:-1
+
+// --------------------------------------------------------------
+// Crusader-Lieutenant Brienne (prt_castle 123, 61) - Sprite 415
+// --------------------------------------------------------------
+prt_castle,123,61,2	script	Brienne#prt_prison	415,{
+	mes "[Crusader-Lieutenant Brienne]";
+	mes "Greetings, champion.";
+	mes "For centuries, the evil slumbering beneath our castle remained sealed away.";
+	mes "With the sudden surge of dark energy, our Crusaders entered the abyss to prevent the corruption from spreading.";
+	next;
+	mes "[Crusader-Lieutenant Brienne]";
+	mes "Many of our holy brethren paid the ultimate price to buy us time.";
+	mes "Bring me the ^0000FFCrusader's Seals^000000 you recover from the depths, and I shall bestow upon you our sanctified equipment.";
+	mes " ";
+	mes "You currently hold: ^00AA00" + countitem(50025) + " Crusader's Seals^000000.";
+	next;
+	callshop "brienne_prison_shop", 1;
+	npcshopattach "brienne_prison_shop";
+	end;
+
+OnBuyItem:
+	.@size = getarraysize(@bought_nameid);
+	.@total_cost = 0;
+
+	for (.@i = 0; .@i < .@size; .@i++) {
+		.@item_idx = inarray(.Shop_Data, @bought_nameid[.@i]);
+		if (.@item_idx == -1) {
+			dispbottom "System Error: Item not found in the supply line.";
+			end;
+		}
+		.@total_cost += (.Shop_Data[.@item_idx + 1] * @bought_quantity[.@i]);
+	}
+
+	if (.@total_cost > countitem(50025)) {
+		mes "[Crusader-Lieutenant Brienne]";
+		mes "I am afraid you lack the necessary Crusader's Seals for these supplies, my friend.";
+		mes "Total cost: ^FF0000" + .@total_cost + "^000000 Seals.";
+		close;
+	}
+
+	delitem 50025, .@total_cost;
+
+	for (.@i = 0; .@i < .@size; .@i++) {
+		getitem @bought_nameid[.@i], @bought_quantity[.@i];
+	}
+
+	mes "[Crusader-Lieutenant Brienne]";
+	mes "Thank you for your noble service. May the divine light protect you on your journey.";
+	specialeffect2 EF_MONEY;
+	close;
+
+OnInit:
+	setarray .Shop_Data[0],
+		2832, 100,
+		2777, 100,
+		32263, 100;
+
+	npcshopdelitem "brienne_prison_shop", 502;
+	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {
+		npcshopadditem "brienne_prison_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
+	}
+	end;
+}
+
+-	shop	brienne_prison_shop	-1,502:-1
+
+// --------------------------------------------------------------
+// Guard (prt_castle 116, 30) - Sprite 105
+// --------------------------------------------------------------
+prt_castle,116,30,2	script	Guard#prt_prison_gate	105,{
+	if (PRT_PRISON_QUEST < 3) {
+		mes "[Guard]";
+		mes "Halt! Beyond this passage lies the restricted stairway to the lower quarters of the castle.";
+		mes "Only adventurers who have been granted clearance by the Operation Commander may pass.";
+		close;
+	}
+
+	mes "[Guard]";
+	mes "Greetings, champion. You have clearance from the Operation Commander to access the lower quarters.";
+	mes "Proceed ahead.";
+	close2;
+	warp "prt_castle", 148, 29;
+	end;
+}
+
+// ==============================================================
+// Flavour NPCs - Knights & Crusaders (prt_castle)
+// ==============================================================
+
+// --------------------------------------------------------------
+// Knight Alard (prt_castle 159, 27) - Sprite 7
+// --------------------------------------------------------------
+prt_castle,159,27,2	script	Knight Alard#prt_prison	7,{
+	mes "[Knight Alard]";
+	mes "Hey! Look at me, I finally passed the Knight trials!";
+	mes "Linnea and Berin didn't make the cut this time, poor guys... so we've had to split up for now.";
+	next;
+	mes "[Knight Alard]";
+	mes "I can't just sit around waiting, though. I need to prove myself in a real, dangerous mission!";
+	mes "This Underground Prison operation is my chance to show everyone what a real Knight can do!";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 2;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 1;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// --------------------------------------------------------------
+// Anxious Knight (prt_castle 162, 27) - Sprite 7
+// --------------------------------------------------------------
+prt_castle,162,27,2	script	Anxious Knight#prt_prison	7,{
+	mes "[Anxious Knight]";
+	mes "M-my hands won't stop trembling...";
+	mes "You haven't heard the sounds echoing from below, have you? It doesn't sound like any normal monster...";
+	next;
+	mes "[Anxious Knight]";
+	mes "Half of the squad we sent in yesterday hasn't returned yet. May Odin protect us all down there.";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 6;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 3;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// --------------------------------------------------------------
+// Bold Knight (prt_castle 165, 27) - Sprite 7
+// --------------------------------------------------------------
+prt_castle,165,27,2	script	Bold Knight#prt_prison	7,{
+	mes "[Bold Knight]";
+	mes "Fear? Ha! A true Knight of Prontera knows no fear!";
+	mes "Whatever demonic presence is lurking in that old prison, my blade will cut it down just the same!";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 12;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 5;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 4;
+	end;
+}
+
+// --------------------------------------------------------------
+// Devout Crusader (prt_castle 159, 24) - Sprite 14
+// --------------------------------------------------------------
+prt_castle,159,24,2	script	Devout Crusader#prt_prison	14,{
+	mes "[Devout Crusader]";
+	mes "*The Crusader is quietly reciting a holy prayer while clutching a sacred cross medallion.*";
+	next;
+	mes "[Devout Crusader]";
+	mes "May the divine light of the Almighty guide our shields through the deepest darkness beneath this castle...";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 4;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 2;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 3;
+	end;
+}
+
+// --------------------------------------------------------------
+// Stalwart Crusader (prt_castle 162, 24) - Sprite 14
+// --------------------------------------------------------------
+prt_castle,162,24,2	script	Stalwart Crusader#prt_prison	14,{
+	mes "[Stalwart Crusader]";
+	mes "Shield inspected, holy water rationed, spear polished.";
+	mes "We hold the line here so the evil below never reaches the streets of Prontera.";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 8;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 7;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 1;
+	end;
+}
+
+// --------------------------------------------------------------
+// Veteran Crusader (prt_castle 165, 24) - Sprite 14
+// --------------------------------------------------------------
+prt_castle,165,24,2	script	Veteran Crusader#prt_prison	14,{
+	mes "[Veteran Crusader]";
+	mes "Be on your guard if you are heading downstairs, warrior.";
+	mes "The corruption down there doesn't just attack your body... it whispers into your mind, trying to turn brother against brother.";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 10;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 4;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// --------------------------------------------------------------
+// Royal Chaplain (prt_castle 149, 34) - Sprite 8
+// --------------------------------------------------------------
+prt_castle,149,34,4	script	Chaplain#prt_prison	8,{
+	mes "[Royal Chaplain]";
+	mes "Blessings upon you, brave warrior. I am the Royal Chaplain assigned to offer sanctuary to those entering the prison depths.";
+	mes "If you offer ^0000FF1 Knight's Seal^000000 and ^0000FF1 Crusader's Seal^000000, I will channel divine light to restore your strength and grant 30-minute sacred blessings.";
+	next;
+	if (select("Receive Divine Blessing (1 Knight & 1 Crusader Seal):Leave") == 2) {
+		mes "[Royal Chaplain]";
+		mes "May the holy light watch over you.";
+		close;
+	}
+
+	if (countitem(50024) < 1 || countitem(50025) < 1) {
+		mes "[Royal Chaplain]";
+		mes "You do not have the required offerings.";
+		mes "Please bring ^0000FF1 Knight's Seal^000000 and ^0000FF1 Crusader's Seal^000000 to receive divine grace.";
+		close;
+	}
+
+	delitem 50024, 1;
+	delitem 50025, 1;
+
+	specialeffect2 EF_HEAL2;
+	percentheal 100, 100;
+
+	specialeffect2 EF_INCAGILITY;
+	sc_start SC_INCREASEAGI, 1800000, 10;
+
+	specialeffect2 EF_BLESSING;
+	sc_start SC_BLESSING, 1800000, 10;
+
+	mes "[Royal Chaplain]";
+	mes "May the divine light shield your body and cleanse your spirit down in the dark depths!";
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 5;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 6;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 2;
+	end;
+}
+
+// --------------------------------------------------------------
+// Squad Captain (prt_castle 156, 26) - Sprite 752
+// --------------------------------------------------------------
+prt_castle,156,26,2	script	Squad Captain#prt_prison	752,{
+	mes "[Squad Captain]";
+	mes "LISTEN UP, RECRUITS! KEEP YOUR SHIELDS RAISED, YOUR BLADES SHARP, AND YOUR HEARTS UNYIELDING!";
+	mes "YOU ARE THE PRIDE OF PRONTERA! STAND TALL AND PURGE THE CORRUPTION BELOW!";
+	next;
+	mes "[Squad Captain]";
+	mes "(...Gods above... look at their faces, so young and full of hope...)";
+	mes "(...I fear most of them won't make it back alive from that cursed pit...)";
+	close;
+}

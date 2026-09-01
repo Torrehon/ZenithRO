@@ -51,9 +51,9 @@ moc_prydb1,154,128,4	script	Alcouskou	118,{
 				mes "I cannot teach you this dark trick unless you show me a proper ^3355FFTraining Recommendation 1^000000.";
 				close;
 			}
-			if (countitem(7041) < 5) {
+			if (countitem(7041) < 1) {
 				mes "Blinding your enemy can save your life.";
-				mes "I can teach you how to throw sand effectively, but I need you to bring me ^0000FF5 Fine Grit^000000 to demonstrate.";
+				mes "I can teach you how to throw sand effectively, but I need you to bring me ^0000FF1 Fine Grit^000000 to demonstrate.";
 				close;
 			}
 			mes "Ah, you brought the items requested. Watch closely...";
@@ -62,9 +62,9 @@ moc_prydb1,154,128,4	script	Alcouskou	118,{
 			next;
 			mes "[Alcouskou]";
 			mes "See? It's all in the wrist. You are a natural!";
-			delitem 7041, 5;
+			delitem 7041, 1;
 			delitem 50002, 1;
-			skill "TF_SPRINKLESAND", 1, SKILL_PERM;
+			skill "TF_SPRINKLESAND", 1, SKILL_PERM_GRANT;
 			next;
 			mes "[Alcouskou]";
 			mes "By the way, there is a merchant named ^0000FFRuRumuni in Payon^000000. He can help you with elemental bags.";
@@ -95,7 +95,7 @@ moc_prydb1,154,128,4	script	Alcouskou	118,{
 				next;
 				mes "[Alcouskou]";
 				mes "Perfect! Now you can slip out of danger in a blink of an eye.";
-				skill "TF_BACKSLIDING", 1, SKILL_PERM;
+				skill "TF_BACKSLIDING", 1, SKILL_PERM_GRANT;
 				set thief_backslide_q, 0; 
 				set thief_rocker_kills, 0;
 				close;
@@ -112,8 +112,8 @@ moc_prydb1,154,128,4	script	Alcouskou	118,{
 			next;
 			mes "[Alcouskou]";
 			mes "Here, just take the skills and don't tell anyone we had this conversation.";
-			skill "TF_PICKSTONE", 1, SKILL_PERM;
-			skill "TF_THROWSTONE", 1, SKILL_PERM;
+			skill "TF_PICKSTONE", 1, SKILL_PERM_GRANT;
+			skill "TF_THROWSTONE", 1, SKILL_PERM_GRANT;
 			close;
 
 		case 4: // Salir
@@ -138,23 +138,35 @@ OnNPCKillEvent:
 
 // NPC RuRumuni se mantiene igual (mismas coordenadas)
 payon,91,77,3	script	RuRumuni	99,{
-    // ... (Tu código de RuRumuni es correcto, no necesita cambios de lógica) ...
 	mes "[RuRumuni]";
-	mes "Welcome to my humble shop. I specialize in leatherworking.";
-    // ... el resto del script de RuRumuni ...
-    next;
-    switch(select("Red Sand Bag (Fire):Blue Sand Bag (Water):Yellow Sand Bag (Wind):Green Sand Bag (Earth):Nevermind")) {
-        case 1: set .@elem_item, 990; set .@bag_id, 60990; set .@bag_name$, "Red Sand Bag"; break;
-        case 2: set .@elem_item, 991; set .@bag_id, 60991; set .@bag_name$, "Blue Sand Bag"; break;
-        case 3: set .@elem_item, 992; set .@bag_id, 60992; set .@bag_name$, "Yellow Sand Bag"; break;
-        case 4: set .@elem_item, 993; set .@bag_id, 60993; set .@bag_name$, "Green Sand Bag"; break;
-        case 5: close;
-    }
-    if (countitem(952) >= 5 && countitem(919) >= 5 && countitem(914) >= 10 && countitem(.@elem_item) >= 1) {
-        delitem 952, 5; delitem 919, 5; delitem 914, 10; delitem .@elem_item, 1;
-        getitem .@bag_id, 1;
-        mes "[RuRumuni]"; mes "All done! Use it well."; close;
-    } else {
-        mes "[RuRumuni]"; mes "You are missing materials."; close;
-    }
+	mes "Welcome to my humble shop! I specialize in tailoring elemental sand bags.";
+	mes "To craft any elemental bag, I will need:";
+	mes "^0000FF- 10 Fluff^000000";
+	mes "^0000FF- 5 Animal Skin^000000";
+	mes "^0000FF- 5 Cactus Needle^000000";
+	mes "^0000FF- 1 Elemental Stone^000000 (Red Blood, Crystal Blue, Wind of Verdure, or Green Live)";
+	next;
+	switch(select("Red Sand Bag (Fire):Blue Sand Bag (Water):Yellow Sand Bag (Wind):Green Sand Bag (Earth):Nevermind")) {
+		case 1: set .@elem_item, 990; set .@bag_id, 60990; set .@bag_name$, "Red Sand Bag"; set .@elem_name$, "Red Blood"; break;
+		case 2: set .@elem_item, 991; set .@bag_id, 60991; set .@bag_name$, "Blue Sand Bag"; set .@elem_name$, "Crystal Blue"; break;
+		case 3: set .@elem_item, 992; set .@bag_id, 60992; set .@bag_name$, "Yellow Sand Bag"; set .@elem_name$, "Wind of Verdure"; break;
+		case 4: set .@elem_item, 993; set .@bag_id, 60993; set .@bag_name$, "Green Sand Bag"; set .@elem_name$, "Green Live"; break;
+		case 5: close;
+	}
+	if (countitem(952) >= 5 && countitem(919) >= 5 && countitem(914) >= 10 && countitem(.@elem_item) >= 1) {
+		delitem 952, 5; delitem 919, 5; delitem 914, 10; delitem .@elem_item, 1;
+		getitem .@bag_id, 1;
+		mes "[RuRumuni]";
+		mes "All done! Here is your ^0000FF" + .@bag_name$ + "^000000. Use it well.";
+		close;
+	} else {
+		mes "[RuRumuni]";
+		mes "You are missing materials to craft a ^0000FF" + .@bag_name$ + "^000000.";
+		mes "Please bring me:";
+		mes "- 10 Fluff";
+		mes "- 5 Animal Skin";
+		mes "- 5 Cactus Needle";
+		mes "- 1 " + .@elem_name$;
+		close;
+	}
 }

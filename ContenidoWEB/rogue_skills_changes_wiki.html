@@ -1,0 +1,356 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Contenedor principal que agrupa todas las skills */
+  .skill-list-container {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 850px;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  /* Diseño de la fila de cada habilidad individual */
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 25px;
+    background-color: #f8fbfd;
+    border-bottom: 1px solid #e3f2fd;
+    transition: background-color 0.2s ease;
+  }
+
+  .skill-row:last-child {
+    border-bottom: none;
+  }
+
+  .skill-row:hover {
+    background-color: #e3f2fd;
+  }
+
+  /* Cajita del icono de la habilidad */
+  .skill-icon-box {
+    flex-shrink: 0;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+  }
+
+  /* Contenedor del texto */
+  .skill-content {
+    flex-grow: 1;
+  }
+
+  /* Título de la habilidad */
+  .skill-title {
+    margin: 0 0 8px 0;
+    color: #1565c0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Etiqueta del nivel máximo */
+  .skill-meta {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    background-color: #bbdefb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    letter-spacing: normal;
+  }
+
+  /* Descripción de la habilidad */
+  .skill-desc {
+    margin: 0;
+    color: #455a64;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 0.95em;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 600px) {
+    .skill-row { 
+      padding: 15px; 
+    }
+    .skill-icon-box { 
+      margin-right: 15px; 
+    }
+    .skill-title { 
+      font-size: 1.05em; 
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .skill-desc { 
+      font-size: 0.85em; 
+    }
+  }
+</style>
+
+<div class="skill-list-container">
+
+  <!-- 1. Mug -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/210.png" alt="Mug Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Mug
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 15 <br><br>
+        Melee physical attack that inflicts (100% * Skill Level) damage with a (2% * Skill Level) chance to steal Zeny. DEX increases success chance by +1% for every 2 DEX points, while LUK increases stolen Zeny amount by +1% per LUK point. Attack element depends on equipped weapon.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Back Stab -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/211.png" alt="Back Stab Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Back Stab
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 16 <br><br>
+        Acquires the Renewal mechanic of teleporting behind the target. Cannot be cast while in Hiding, and can miss. Damage ratio is 200% + (30% * Skill Level). Strikes 2 hits when equipped with Daggers, and 1 hit when equipped with Bows. Can deal Critical hits.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Raid -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/212.png" alt="Raid Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Raid
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 20 <br><br>
+        Acquires Renewal mechanics, inflicting the SC_RAID status which increases damage taken by targets hit by Raid (+20% damage taken for normal monsters, +10% for MVP bosses). Damage ratio is 100% + (60% * Skill Level).
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Strip Skills (Divest Skills) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/216.png" alt="Strip Weapon">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/217.png" alt="Strip Shield">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/218.png" alt="Strip Armor">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/219.png" alt="Strip Helm">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Strip Skills (Divest Skills)
+        <span class="skill-meta">Max Level: 3</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 15 / 20 / 25 <br><br>
+        Forces target to unequip the corresponding equipment piece with a (5% * Skill Level) base success chance. Retains DEX difference success modifier (Caster DEX vs Target DEX).
+      </p>
+    </div>
+  </div>
+
+  <!-- 5. Intimidate -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/213.png" alt="Intimidate Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Intimidate (Snatch)
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 13 / 16 / 19 / 22 / 25 <br><br>
+        Increases damage ratio to 100% + (60% * Skill Level).
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Graffiti -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/222.png" alt="Graffiti Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Graffiti
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 15 <br><br>
+        Retains original effect, but now party members standing inside the area of effect gain +5% ATK and +5% MATK.<br><br>
+        Duration: 60 seconds. Requires 1 Surface Paint per cast. Cooldown: 30 seconds.
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. Cleaner -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/223.png" alt="Cleaner Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Cleaner
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 5 <br><br>
+        Cleans a graffiti off the ground, reducing Graffiti skill Cooldown by 30 seconds.
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. Opportunist (Gangster's Paradise) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/214.png" alt="Opportunist Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Opportunist (Gangster's Paradise)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> <br><br>
+        No longer requires sitting next to other Rogues. Instead, grants +5% Physical and Magical Damage per status debuff present on the target enemy (up to a maximum of +25% bonus damage).<br><br>
+        <strong>Supported Debuffs:</strong> Blind, Silence, Bleeding, Curse, Poison, Confusion, Burning, Freezing, Electrocute, Buried, Drown, Laceration, Concussion, Marked, and all Divest/Strip statuses.<br><br>
+        <em>MVP Boss Status Adjustments (Max Duration: 20 seconds):</em><br>
+        - <strong>Blind:</strong> Reduces HIT by 10%.<br>
+        - <strong>Silence:</strong> Increases Casting Time by 25%.<br>
+        - <strong>Bleeding:</strong> Inflicts DoT equal to 0.5% current HP.<br>
+        - <strong>Curse:</strong> Halves LUK (no other penalty).<br>
+        - <strong>Poison:</strong> Reduces DEF by 10%.<br>
+        - <strong>Confusion:</strong> Reduces FLEE by 10%.<br>
+        - <strong>Divest Weapon:</strong> Reduces ATK by 10%.<br>
+        - <strong>Divest Shield:</strong> Reduces DEF by 5%.<br>
+        - <strong>Divest Armor:</strong> Reduces VIT by 20%.<br>
+        - <strong>Divest Helm:</strong> Reduces INT by 20%.<br>
+        - <strong>Concussion:</strong> Reduces DEF by 15%.<br>
+        - <strong>Marked:</strong> Reduces ASPD by 10%.
+      </p>
+    </div>
+  </div>
+
+  <!-- 9. Plagiarism -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/225.png" alt="Plagiarism Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Plagiarism
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 0 <br><br>
+        Now functions as an Active skill menu! While learned, the Rogue passively observes skills used on screen. Upon activating Plagiarism, a selection menu opens allowing you to choose 1 observed skill to copy at the learned level of Plagiarism.
+      </p>
+    </div>
+  </div>
+
+  <!-- 10. Soul of the Nightblade (NEW) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Soul of the Nightblade Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Nightblade (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances Sword Mastery, Mug, Back Stab, Raid, Close Confine, and Opportunist:<br><br>
+        - <strong>Sword Mastery:</strong> Allows using Double Attack with 1-Handed Swords at a (5% * Skill Level) proc chance. When equipped with Daggers, grants +10 CRIT.<br><br>
+        - <strong>Mug:</strong> Can now deal Critical hits. Grants 50% HP Lifesteal on hit.<br><br>
+        - <strong>Back Stab:</strong> With Daggers, has a 50% chance to inflict <em>Laceration</em> (a Neutral DoT physical status based on ATK). With Swords, has a 50% chance to inflict <em>Concussion</em> (-30% target DEF). With Bows, has a 50% chance to inflict <em>Marked</em> (-25% target Movement Speed and ASPD). Always strikes 2 hits regardless of weapon. Deals +25% bonus damage against targets with Laceration, Concussion, or Marked.<br><br>
+        - <strong>Raid:</strong> Has a 25% chance to inflict the same status effects as Back Stab based on equipped weapon.<br><br>
+        - <strong>Close Confine:</strong> Increases Divest / Strip success rate by +15%.<br><br>
+        - <strong>Opportunist:</strong> Increases maximum damage bonus cap from +25% to +50%.
+      </p>
+    </div>
+  </div>
+
+  <!-- 11. Soul of the Mimic (NEW) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1f6dVrl0RfPK8I1q3SV92UPzPS25lKXNr" alt="Soul of the Mimic Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Mimic (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances Snatch, Double Strafe, Tunnel Drive, and Plagiarism:<br><br>
+        - <strong>Snatch (Intimidate):</strong> Can now be triggered while attacking with Bows.<br><br>
+        - <strong>Double Strafe:</strong> Acquires the Archer Momentum passive mechanic.<br><br>
+        - <strong>Tunnel Drive:</strong> Reduces movement speed penalty while underground by an additional 25%.<br><br>
+        - <strong>Plagiarism:</strong> Unlocks <em>Support Plagiarism</em>, allowing you to learn a 2nd support skill (e.g., Heal, Blessing, Attention Concentrate). Also permits copying 2nd / Transcendent Job skills (such as Soul Breaker).<br><br>
+        <strong>Soul Link Synergy Bonuses:</strong> Inherits Soul Link effects when using copied skills from other classes:<br>
+        • <em>Bowling Bash:</em> Strikes up to 3 hits with 1-Handed Swords.<br>
+        • <em>Auto Counter:</em> Applies Duelist status.<br>
+        • <em>Arcane Insight:</em> Applies +25% Magic Defense Penetration.<br>
+        • <em>DoT Skills:</em> Gains Soul of the Hexer DoT damage boost.<br>
+        • <em>Power Strafe:</em> Consumes Momentum stacks for +5% damage per stack.<br>
+        • <em>Traps:</em> Adds +150% MATK to trap damage.<br>
+        • <em>Turn Undead:</em> Increases success chance by +20% (up to 70% cap).<br>
+        • <em>Blessing & Increase Agi:</em> Applies buffs to whole party AoE.<br>
+        • <em>Venom Dust:</em> Expands AoE to 5x5 and ticks every 2s.<br>
+        • <em>Hammer Fall:</em> Applies Savagery stacks.<br>
+        • <em>Holy Cross:</em> Adds MATK to total damage.<br>
+        • <em>Providence:</em> Becomes 5x5 Party AoE buff (+2% ATK/MATK vs Demon/Undead per level).<br>
+        • <em>Shield Charge / Shield Boomerang:</em> Damage increases with Shield weight and refine level.<br>
+        • <em>Psychic Wave:</em> Inherits current endow element. Deals 2 hits per wave with Daggers.<br>
+        • <em>Demonstration:</em> Applies Chemical Burn and inherits chemical element.<br>
+        • <em>Acid Terror:</em> Inherits chemical element.<br>
+        • <em>Finger Offensive:</em> Consumes only 1 sphere and adds +25% MATK.<br>
+        • <em>Investigate:</em> Adds +25% MATK.<br>
+        • <em>Ki Explosion:</em> Adds +25% MATK. Restores 1 sphere on kill.<br>
+        • <em>Zenynage:</em> +300% damage ratio; refunds spent Zeny if target dies.<br>
+        • <em>Zantetsuken:</em> Base damage 500% + (50% * Level). If cast during Close Confine, +50% final damage and -75% cast time.<br>
+        • <em>Ninja Elemental Skills:</em> Applies status effects (Burning, Drown, Freezing, Electrocute) at 30% chance at Level 10.
+      </p>
+    </div>
+  </div>
+
+</div>

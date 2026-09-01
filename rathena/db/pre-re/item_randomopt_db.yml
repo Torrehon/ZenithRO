@@ -982,9 +982,9 @@ Body:
     Script: |
       bonus2 bExpAddRace,RC_All,getrandomoptinfo(ROA_VALUE);
   - Id: 243
-    Option: VAR_POWAMOUNT
+    Option: VAR_DURABILITY
     Script: |
-      bonus bPow,getrandomoptinfo(ROA_VALUE);
+      // Durability marker for equipment
   - Id: 244
     Option: VAR_SPLAMOUNT
     Script: |
@@ -1029,3 +1029,4 @@ Body:
     Option: VAR_CRITICAL_RATE
     Script: |
       bonus bCRate,getrandomoptinfo(ROA_VALUE);
+

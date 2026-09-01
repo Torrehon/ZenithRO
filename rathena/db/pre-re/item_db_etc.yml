@@ -4947,7 +4947,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAutoSpellWhenHit,"AL_HEAL",3,50;
+      .@r = getequiprefinerycnt(EQI_ARMOR);
+      bonus3 bAutoSpellWhenHit,"AL_HEAL",2,20*.@r;
   - Id: 4192
     AegisName: Rotar_Zairo_Card
     Name: Rotar Zairo Card
@@ -6052,7 +6053,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      skill "WZ_WATERBALL",2;
+      bonus2 bCastrate,"WZ_WATERBALL",-5;
   - Id: 4274
     AegisName: Zombie_Master_Card
     Name: Zombie Master Card
@@ -7098,7 +7099,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus4 bAutoSpellWhenHit,"AL_PNEUMA",1,50,0;
-      bonus bLuk,1;
+      bonus bInt,1;
       if (BaseClass == Job_Acolyte) {
          bonus bHealPower,5;
          bonus bAtk,15;
@@ -7201,7 +7202,7 @@ Body:
          bonus bMatk,25;
       }
       if (BaseClass == Job_Acolyte) {
-         bonus bLuk,1;
+         bonus bDex,1;
          bonus bHealPower,10;
       }
       if (BaseClass == Job_Archer) {
@@ -7675,8 +7676,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-        bonus bMaxHPrate, 6;
-        bonus bDef2, 25;
+        bonus bMaxHPrate,6;
+        bonus bDef2,25;
   - Id: 4386
     AegisName: Detale_Card
     Name: Detardeurus Card
@@ -7827,8 +7828,9 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bLongAtkRate,3;
+      bonus bLongAtkRate,5;
       bonus bAspdRate,3;
+      bonus bCritical,10;
   - Id: 4397
     AegisName: Tha_Despero_Card
     Name: Despero of Thanatos Card
@@ -8019,8 +8021,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus bBaseAtk,25;
-      if (BaseClass == Job_Swordman)
-         bonus bMaxHPrate,5;
+      bonus bMaxHPrate,5;
   - Id: 4411
     AegisName: Vanberk_Card
     Name: Vanberk Card
@@ -8619,6 +8620,97 @@ Body:
       BuyingStore: true
     Script: |
       bonus bBaseAtk,25;
+  - Id: 4521
+    AegisName: Sedora_Card
+    Name: Sedora Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Right_Hand: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bCritAtkRate,15;
+  - Id: 4522
+    AegisName: Sropho_Card
+    Name: Sropho Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Right_Hand: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus4 bAddEff,Eff_Freezing,500,ATF_WEAPON,10000;
+  - Id: 4523
+    AegisName: Pot_Dofle_Card
+    Name: Pot Dofle Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Armor: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bDefEle,Ele_Water;
+      bonus2 bSubRace,RC_Fish,10;
+  - Id: 4524
+    AegisName: King_Dramoh_Card
+    Name: King Dramoh Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bStr,1;
+      bonus bVit,1;
+      if (BaseClass == Job_Swordman)
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      if (.@r >= 7) {
+         bonus bStr,1;
+         bonus bVit,1;
+      }
+      if (.@r >= 9) {
+         bonus bStr,3;
+         bonus bVit,3;
+      }
+  - Id: 4525
+    AegisName: Kraken_Card
+    Name: Kraken Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Garment: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bFlee,10;
+      skill "TF_HIDING",1;
+      skill "RG_RAID",1;
+      bonus5 bAutoSpellOnSkill,"RG_RAID","NPC_WIDEBLEEDING",1,250,1;
+    UnEquipScript: |
+      sc_end SC_HIDING;
+  - Id: 4641
+    AegisName: Zombie_Guard_Card
+    Name: Zombie Guard Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Armor: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2 bSPDrainRate,10,1;
   - Id: 4700
     AegisName: Strength1
     Name: STR+1
@@ -21574,8 +21666,130 @@ Body:
     EquipLevelMin: 1
     Script: |
       bonus bAtkEle,Ele_Holy;
-      
-
+  - Id: 50023
+    AegisName: h_fragment
+    Name: Heroic Soul Fragment
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Buy: 10
+    Weight: 10
+  - Id: 50024
+    AegisName: Egrade_Coin
+    Name: Knight's Seal
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Buy: 10
+    Weight: 0
+  - Id: 50025
+    AegisName: Egrade_Coin2
+    Name: Crusader's Seal
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Buy: 10
+    Weight: 0 
+  - Id: 50026
+    AegisName: alde_coin
+    Name: Aldebaran Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 70000
+    AegisName: LKnight_Card
+    Name: Lost Knight Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Armor: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bAtk,10;
+      bonus bAgi,1;
+      if (Class == Job_Knight) {
+         bonus2 bSkillAtk,"KN_BOWLINGBASH",10;
+         .@r = getequiprefinerycnt(EQI_ARMOR);
+         bonus bHPGainValue,(.@r)*10;
+      }
+  - Id: 70001
+    AegisName: FCrusader_Card
+    Name: Fallen Crusader Card
+    Type: Card
+    Buy: 20
+    Weight: 1000
+    Locations:
+      Left_Hand: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bDef,3;
+      bonus bVit,1;
+      if (Class == Job_Crusader) {
+         bonus2 bSkillAtk,"CR_SHIELDCHARGE",25;
+         .@r = getequiprefinerycnt(EQI_HAND_L);
+         bonus2 bSkillCooldown,"CR_SHIELDCHARGE",-(.@r)*150;
+      }
+  - Id: 70002
+    AegisName: BaleIllusion_Card
+    Name: Baleful Illusion Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Garment: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bInt,3;
+      bonus2 bMagicAtkEle,Ele_Neutral,50;
+      bonus2 bMagicAtkEle,Ele_Ghost,50;
+      bonus4 bAddEff,Eff_Curse,1000,ATF_MAGIC,10000;
+  - Id: 70003
+    AegisName: Abom_Of_Souls_Card
+    Name: Abomination of Souls Card
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      skill "AS_VIPERSOUL",1;
+      skill "AS_VENOMDUST",5;
+      bonus4 bAddEffWhenHit,Eff_Poison,2000,ATF_MAGIC,10000;
+      bonus4 bAddEffWhenHit,Eff_Poison,2000,ATF_WEAPON,10000;
 # This file is a part of rAthena.
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena

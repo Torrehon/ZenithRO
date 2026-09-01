@@ -1,0 +1,561 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Main Container for Quest Card */
+  .quest-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-left: 6px solid #d4af37;
+    margin-bottom: 25px;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Top Floor: Text + Image */
+  .quest-top {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Left Area: Text & Title */
+  .quest-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .quest-step-title {
+    font-family: 'Lato', sans-serif;
+    color: #1a2a44;
+    font-size: 1.3em;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-badge {
+    background-color: #1565c0;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+  }
+
+  .quest-desc {
+    color: #455a64;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1em;
+  }
+
+  .coord {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  /* Right Area: Image Container */
+  .quest-image-container {
+    padding: 20px;
+    background-color: #f8fbfd;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quest-image {
+    width: 300px;
+    height: 180px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    object-fit: cover; 
+    object-position: center; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .quest-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  /* BOTTOM FLOOR: REWARDS / EXTRAS */
+  .quest-bottom {
+    background-color: #f8fbfd;
+    border-top: 1px solid #e0e0e0;
+    padding: 20px 25px;
+  }
+
+  .rewards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .reward-item {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .reward-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: none;
+    image-rendering: pixelated;
+    background: #f1f8e9;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c5e1a5;
+    flex-shrink: 0;
+  }
+
+  .reward-text-content {
+    flex: 1;
+  }
+
+  .reward-title {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 1.05em;
+    margin: 0 0 5px 0;
+  }
+
+  .reward-desc {
+    font-size: 0.9em;
+    color: #455a64;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* =========================================
+     BOSS STATS DESIGN
+     ========================================= */
+  .boss-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .boss-profile {
+    display: flex;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .boss-sprite-box {
+    background: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    flex-shrink: 0; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-sprite {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .boss-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #bbdefb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    flex: 1; 
+  }
+
+  .boss-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .boss-stat-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: #1565c0;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .boss-stat-value {
+    font-size: 0.95em;
+    color: #1a2a44;
+    font-family: monospace; 
+    font-weight: bold;
+  }
+
+  /* Loot Box */
+  .boss-loot-box {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #bbdefb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-loot-title {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: #1565c0;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+  }
+
+  .boss-loot-items {
+    font-size: 0.95em;
+    color: #1a2a44;
+    line-height: 1.5;
+  }
+
+  /* Strategy Box */
+  .boss-strategy {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #ef5350; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .boss-strategy h4 {
+    margin: 0 0 10px 0;
+    color: #c62828;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05em;
+  }
+
+  .boss-strategy p {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #455a64;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 650px) {
+    .quest-top {
+      flex-direction: column;
+    }
+    .quest-image-container {
+      border-left: none;
+      border-top: 1px solid #e0e0e0;
+      padding: 15px;
+    }
+    .quest-image {
+      width: 100%;
+      max-width: 350px;
+      height: 180px; 
+    }
+    .reward-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    /* Typography */
+    .quest-step-title { font-size: 1.0em !important; margin-bottom: 10px !important; }
+    .step-badge { font-size: 0.8em !important; padding: 3px 8px !important; }
+    .quest-desc { font-size: 0.8em !important; line-height: 1.3 !important; }
+    .reward-title { font-size: 0.8em !important; }
+    .reward-desc { font-size: 0.7em !important; line-height: 1.3 !important; }
+    
+    /* Boss profile mobile */
+    .boss-profile {
+      flex-direction: column; 
+      align-items: center;
+    }
+    .boss-sprite-box {
+      width: 100%;
+      max-width: 150px; 
+    }
+    .boss-stats-grid {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .boss-stat-value { font-size: 0.85em; }
+    .boss-loot-items { font-size: 0.85em; } 
+    .boss-strategy p { font-size: 0.8em; }
+  }
+</style>
+
+<!-- STEP 1 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">1</span>
+        Quest start
+      </h3>
+      <p class="quest-desc">
+        Speak to <strong>Garrick the Surveyor</strong> at the entrance of Coal Mines (<span class="coord">mjo_dun01 52, 37</span>).
+        <br><br>
+        He will tell you about a legendary <strong>Orichalcum</strong> vein hidden in the depths. To allow you to proceed, he requires you to be between <strong>Base Level 35 and 60</strong>. Your first task is to venture down to the 3rd floor (<span class="coord">mjo_dun03</span>) and exterminate <strong>20 Skeleton Workers</strong> and <strong>15 Mysts</strong> to secure the perimeter.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1Prcj2ERHaIN7Q4HDVbEcjt1wJFxXjI2T" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1Prcj2ERHaIN7Q4HDVbEcjt1wJFxXjI2T" alt="Garrick the Surveyor">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">2</span>
+        Miner Scout
+      </h3>
+      <p class="quest-desc">
+        Once you have completed the hunt on the 3rd floor, speak with the <strong>Miner Scout</strong> (<span class="coord">mjo_dun03 300, 258</span>).
+        <br><br>
+        The scout will confirm the area is cleared and explain that the Orichalcum vein is embedded in the northwestern walls. He will ask you to bring an <strong>Old Pick</strong> to extract a sample for Garrick.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1kdeoUrygfHwIEYUzyf-KL9RdTSTusQTW" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1kdeoUrygfHwIEYUzyf-KL9RdTSTusQTW" alt="Miner Scout">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">3</span>
+        Orichalcum Vein
+      </h3>
+      <p class="quest-desc">
+        Head to the northwestern corner of the floor and interact with the <strong>Orichalcum Vein</strong> (<span class="coord">mjo_dun03 39, 255</span>).
+        <br><br>
+        Use an <strong>Old Pick</strong> to strike the wall. You have a 30% chance to mine a pristine chunk of Orichalcum and crack open a deep passage. <strong>Note: You must be in a party</strong>. Once the wall is broken, the party leader opens the gateway to enter the instance.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1hmFOnxY5-ozIvF6tlZm3hb4Z2Iw3hR87" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1hmFOnxY5-ozIvF6tlZm3hb4Z2Iw3hR87" alt="Orichalcum Vein">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">4</span>
+        The Inner Cavern
+      </h3>
+      <p class="quest-desc">
+        Upon entering the inner cavern (<span class="coord">1@mjo</span>), you will feel the cavern walls shake violently.
+        <br><br>
+        A few seconds after entering, the mineral guardian will awaken from the Orichalcum vein to defend its territory. Prepare your party for the final battle!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1xjtD65npvKx4uhb36rHw6hYsZK4U5LY_" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1xjtD65npvKx4uhb36rHw6hYsZK4U5LY_" alt="Inner Cavern">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">5</span>
+        The Boss fight
+      </h3>
+      <p class="quest-desc">
+        The <strong>Mine Spirit</strong> has emerged from the Orichalcum vein! This powerful boss will defend the cave with ferocious earth magic and devastating tremors.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1TKUzJ6EQmGR3BjQwfA2kW6qdie_23mrS" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1TKUzJ6EQmGR3BjQwfA2kW6qdie_23mrS" alt="Mine Spirit Boss">
+      </a>
+    </div>
+  </div>
+
+  <!-- BOTTOM FLOOR: BOSS INFO -->
+  <div class="quest-bottom">
+    <div class="boss-info-container">
+      
+      <!-- Flex Profile (Sprite + Grid) -->
+      <div class="boss-profile">
+        
+        <!-- Sprite Box -->
+        <div class="boss-sprite-box">
+          <img class="boss-sprite" src="https://static.divine-pride.net/images/mobs/png/20600.png" alt="Mine Spirit Sprite">
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="boss-stats-grid">
+          <div class="boss-stat">
+            <span class="boss-stat-label">Level</span>
+            <span class="boss-stat-value">50</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">HP</span>
+            <span class="boss-stat-value">57500</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Attack</span>
+            <span class="boss-stat-value">215 - 299</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Exp (Base/Job)</span>
+            <span class="boss-stat-value">15500 / 17500</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Race</span>
+            <span class="boss-stat-value">Formless</span>
+          </div>
+          <div class="boss-stat">
+            <span class="boss-stat-label">Element</span>
+            <span class="boss-stat-value">Earth (Lv 2)</span>
+          </div>
+        </div>
+        
+      </div> <!-- End boss-profile -->
+
+      <!-- Loot Box -->
+      <div class="boss-loot-box">
+        <h4 class="boss-loot-title">Main Loot</h4>
+        <div class="boss-loot-items">
+          Light Yellow Potion Box (100%), Gemstone (100%), Accessory Box (10%), Gift Box (10%), Dead Branch (10%), Gold (1%), <strong>Gem of Quakes (5%)</strong>
+        </div>
+
+        <!-- Special Item Card inside Loot -->
+        <div class="reward-item" style="margin-top: 15px;">
+          <img class="reward-icon" src="https://lh3.googleusercontent.com/d/1QUehjiC9VOtuicNvY7pWCB0VrGLxdur3" alt="Gem of Quakes"> 
+          <div class="reward-text-content">
+            <h4 class="reward-title">Gem of Quakes</h4>
+            <p class="reward-desc">  
+              <strong>Type:</strong> Accessory | <strong>Required Level:</strong> 40 | <strong>Slots:</strong> 1<br><br>
+              <em>A gem imbued with the essence of mine quakes and tremors. It resonates with the primal magic of the earth.</em> <br><br>
+              
+              Increases physical and magical damage against Formless race monsters by 10%.<br>
+              Allows the use of <strong>Heaven's Drive Level 2.</strong><br>
+            </p>
+          </div>
+        </div>
+        <!-- End Special Item Card -->
+
+      </div>
+
+      <!-- Strategy and Skills -->
+      <div class="boss-strategy">
+        <h4>⚔️ Boss Skills & Strategy</h4>
+        <p>
+          <strong>Skills:</strong> Uses Auto Guard (Lv 3), Earth Spike (Lv 2), and Heaven's Drive (Lv 1). When low on HP (&lt;25%), it will cast a devastating <strong>Earthquake Level 5</strong>.<br><br>
+          <strong>Strategy:</strong> As a Formless race and Earth 2 element monster, Fire and Wind element attacks deal high damage. Be extremely cautious when its HP drops below 25% due to its Earthquake cast. Maintain distance or ensure your tank has high HP/DEF to survive the blast.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <h3 class="quest-step-title">
+        <span class="step-badge">6</span>
+        Instance Rewards & Open World Boss
+      </h3>
+      <p class="quest-desc">
+        After defeating the Mine Spirit, return to <strong>Garrick the Surveyor</strong> at the mine entrance (<span class="coord">mjo_dun01 52, 37</span>).
+        <br><br>
+        Handing over the raw Orichalcum sample will reward you with <strong>110,000 Base EXP</strong>, <strong>140,000 Job EXP</strong>, and the exclusive <strong>Mine Hat</strong> headgear.
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/12RqRm-NW5iZpfXDdiIy4YDJi8yjLLb9u" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/12RqRm-NW5iZpfXDdiIy4YDJi8yjLLb9u" alt="Garrick Reward">
+      </a>
+    </div>
+  </div>
+
+  <div class="quest-bottom">
+    <div class="rewards-container">
+      
+      <!-- Headgear Reward Card -->
+      <div class="reward-item">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/item/5031.png" alt="Mine Hat">
+        <div class="reward-text-content">
+          <h4 class="reward-title">Mine Hat</h4>
+          <p class="reward-desc">
+            <strong>Type:</strong> Headgear (Upper) | <strong>DEF:</strong> 4 | <strong>Slots:</strong> 1 | <strong>Required Level:</strong> 40<br><br>
+            Str +1<br>
+            Vit +1<br>
+            Dex +1<br>
+            Allows the use of <strong>Earth Spike Level 3</strong>
+            <br><br>
+            <strong>Gem of Quakes Combo:</strong><br>
+            Gain 10% additional Experience when defeating Formless Race monsters.<br>
+            Restores 1 SP each time a Formless Race monster is killed.<br>
+            Increases Earth Element Magic Damage by 10%.
+          </p>
+        </div>
+      </div>
+
+      <!-- Repeatable FFA Mode Note -->
+      <div class="reward-item" style="border-color: #ffe0b2; background-color: #fff8e1;">
+        <img class="reward-icon" src="https://static.divine-pride.net/images/items/item/7318.png" alt="FFA Mode" style="background: #fff3e0; border-color: #ffe0b2;">
+        <div class="reward-text-content">
+          <h4 class="reward-title" style="color: #e65100;">🔁 Repeatable Open World Boss (FFA Mode)</h4>
+          <p class="reward-desc">
+            Once the main quest is completed for the first time, you can summon the <strong>Mine Spirit</strong> again in the open public map of Coal Mines F3 (<span class="coord">mjo_dun03 39, 255</span>) every <strong>3 hours</strong>.
+            <br><br>
+            <strong>Required Offerings:</strong> 10 Iron Ores, 50 Lanterns, and 5 Irons.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -41,6 +41,7 @@ enum e_achievement_group {
 	AG_ENCHANT_SUCCESS,
 	AG_SPEND_ZENY,
 	AG_TAMING,
+	AG_WALK,
 	AG_MAX
 };
 

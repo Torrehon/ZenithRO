@@ -12,31 +12,24 @@ SkillPierce::SkillPierce() : WeaponSkillImpl(KN_PIERCE) {
 void SkillPierce::modifyDamageData(Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv) const {
 	const status_data* tstatus = status_get_status_data(target);
 
-	// rAthena lee los tamaños así: 0 (Small), 1 (Medium), 2 (Large).
-	// Si el tamaño es 2, da 3 hits. Si es cualquier otro, da 2 hits.
-	int hits = (tstatus->size == 2) ? 3 : 2;
+	// rAthena lee los tamaños así: 0 (Small = 1 hit), 1 (Medium = 2 hits), 2 (Large = 3 hits).
+	int hits = (tstatus != nullptr) ? (tstatus->size + 1) : 1;
+	hits = cap_value(hits, 1, 3);
 
-	dmg.div_= (dmg.div_ > 0 ? hits : -hits);
+	dmg.div_ = (dmg.div_ > 0 ? hits : -hits);
 }
 
 void SkillPierce::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
 	const status_change* sc = status_get_sc(src);
-	const status_data* tstatus = status_get_status_data(*target);
 
-	// 1. Identificamos cuántos golpes vamos a dar 
-	int hits = (tstatus != nullptr && tstatus->size == 2) ? 3 : 2;
-
-
-	// 2. Da 180% por hit a nivel 10.
+	// 1. Ratio Base por golpe individual (A Nivel 10 = 180% por hit)
 	int ratio_per_hit = 100 + (8 * skill_lv);
 
-	// 3. Multiplicamos el daño por la cantidad de golpes
-	int total_ratio = ratio_per_hit * hits;
+	// 2. Ajustamos el ratio base de rAthena por golpe individual.
+	// rAthena se encarga automáticamente de multiplicarlo por dmg.div_ (1, 2 o 3 hits según tamaño).
+	base_skillratio += (ratio_per_hit - 100);
 
-	// 4. Ajustamos el ratio base de rAthena
-	base_skillratio += (total_ratio - 100);
-
-	// Mantenemos Charging Pierce
+	// 3. Mantenemos el multiplicador de Charging Pierce (x2)
 	if (sc && sc->getSCE(SC_CHARGINGPIERCE_COUNT) && sc->getSCE(SC_CHARGINGPIERCE_COUNT)->val1 >= 10)
 		base_skillratio *= 2;
 }

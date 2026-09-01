@@ -1,0 +1,263 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; 
+  }
+
+  /* Barrita de desplazamiento elegante estilo Zenith RO */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4af37; 
+    border-radius: 4px;
+  }
+
+  /* Contenedor principal de la tarjeta */
+  .instance-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    font-family: 'Roboto', sans-serif;
+    max-width: 900px;
+    margin: 0 auto 30px auto; 
+    border: 1px solid #e3f2fd;
+  }
+
+  /* Imagen de Banner (Cabecera) */
+  .instance-banner {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 4px solid #d4af37;
+    transition: filter 0.3s ease;
+  }
+
+  /* Enlace envolvente para el banner */
+  .instance-banner-link {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .instance-banner-link:hover .instance-banner {
+    filter: brightness(1.15);
+  }
+
+  /* Cuerpo de la tarjeta */
+  .instance-content {
+    padding: 25px;
+  }
+
+  /* Título de la Instancia */
+  .instance-title {
+    font-family: 'Lato', sans-serif;
+    color: #1565c0;
+    font-size: 1.8em;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Etiquetas de información rápida */
+  .instance-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .badge {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 1px solid #bbdefb;
+  }
+
+  /* Texto de descripción */
+  .instance-desc {
+    color: #455a64;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1em;
+  }
+
+  /* Sección del Boss / Recompensas */
+  .instance-drops {
+    background: #f8fbfd;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #e0e0e0;
+  }
+
+  /* Imagen pequeña (Jefe o Item) */
+  .boss-img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 2px solid #d4af37;
+    object-fit: contain;
+    background-color: #ffffff;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+  }
+  
+  /* =========================================
+     Ajustes para móviles 
+     ========================================= */
+  @media (max-width: 500px) {
+    .instance-banner { height: 150px; }
+    .instance-title { font-size: 1.3em; } 
+    .instance-content { padding: 15px; }
+
+    .instance-badges {
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .badge {
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      font-size: 0.75em; 
+    }
+
+    .instance-desc {
+      font-size: 0.85em;
+      line-height: 1.4;
+    }
+
+    .instance-drops h4 {
+      font-size: 0.95em !important;
+    }
+    .instance-drops p {
+      font-size: 0.8em !important;
+    }
+  }
+</style>
+
+<!-- INSTANCIA 1: PRONTERA CULVERT -->
+<div class="instance-card">
+  <a href="https://sites.google.com/view/zenith-ro-wiki/index/custom-instances/prontera-culvert" target="_blank" class="instance-banner-link" title="Click to view details">
+    <img class="instance-banner" src="https://lh3.googleusercontent.com/d/1dMTwma5ZMgYa5WBIRZO23mjkUMvE5jDt" alt="Prontera Culvert Banner">
+  </a>
+  <div class="instance-content">
+    <h2 class="instance-title">Prontera Culvert</h2>
+    <div class="instance-badges">
+      <span class="badge">🛡️ Level range: 15 - 60</span>
+      <span class="badge">👥 Party: 1+ Players</span>      
+      <span class="badge">🔄 Repeatable?: Yes</span>      
+      <span class="badge">⏱️ Cooldown: 3 Hours</span>
+    </div>
+    <p class="instance-desc">
+      A group of newbies have entered the dungeon seeking fame and glory, only to find a challenge bigger than their ambitions. Help them and defeat any threat that might appear!
+    </p>
+    <div class="instance-drops">
+      <img class="boss-img" src="https://lh3.googleusercontent.com/d/1GlJXvrJT36yN_kc80BgCBx36jZGZLqPK" alt="Boss Icon">
+      <div>
+        <h4 style="margin: 0 0 5px 0; color: #1a2a44; font-family: 'Lato', sans-serif; font-size: 1.1em;">Boss: Mutant Thief Bug</h4>
+        <p style="margin: 0; font-size: 0.9em; color: #555; line-height: 1.4;">
+          <strong>Rewards:</strong> Cleaner's Cloth, Training Recommendation I, Ora Ora 3000
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTANCIA 2: PAYON DUNGEON -->
+<div class="instance-card">
+  <a href="https://sites.google.com/view/zenith-ro-wiki/index/custom-instances/payon-dungeon" target="_blank" class="instance-banner-link" title="Click to view details">
+    <img class="instance-banner" src="https://lh3.googleusercontent.com/d/1UDv2YDxEQrffGN5utxNKAyDOZEsc-qDc" style="object-position: top;" alt="Payon Dungeon Banner">
+  </a>
+  <div class="instance-content">
+    <h2 class="instance-title">Payon Dungeon</h2>
+    <div class="instance-badges">
+      <span class="badge">🛡️ Level range: 25 - 60</span>
+      <span class="badge">👥 Party: 1+ Players</span>      
+      <span class="badge">🔄 Repeatable?: Yes</span>      
+      <span class="badge">⏱️ Cooldown: 3 Hours</span>
+    </div>
+    <p class="instance-desc">
+      Grandmother Kyung is mourning her granddaughter Minji, who once was a famed weaver from Payon city. Listen to her story and discover the dark forces beneath these caves!
+    </p>
+    <div class="instance-drops">
+      <img class="boss-img" src="https://lh3.googleusercontent.com/d/1d2d6BICYCcJuikOcVeldAOBOLBFhyT9z" alt="Boss Icon">
+      <div>
+        <h4 style="margin: 0 0 5px 0; color: #1a2a44; font-family: 'Lato', sans-serif; font-size: 1.1em;">Boss: Tormented Weaver</h4>
+        <p style="margin: 0; font-size: 0.9em; color: #555; line-height: 1.4;">
+          <strong>Rewards:</strong> Dreamer's Ribbon, Incense of Longing
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTANCIA 3: COAL MINES -->
+<div class="instance-card">
+  <a href="https://sites.google.com/view/zenith-ro-wiki/index/custom-instances/coal-mines" target="_blank" class="instance-banner-link" title="Click to view details">
+    <img class="instance-banner" src="https://lh3.googleusercontent.com/d/1Prcj2ERHaIN7Q4HDVbEcjt1wJFxXjI2T" alt="Coal Mines Banner">
+  </a>
+  <div class="instance-content">
+    <h2 class="instance-title">Coal Mines</h2>
+    <div class="instance-badges">
+      <span class="badge">🛡️ Level range: 35 - 60</span>
+      <span class="badge">👥 Party: 1+ Players</span>      
+      <span class="badge">🔄 Repeatable?: Yes</span>      
+      <span class="badge">⏱️ Cooldown: 3 Hours</span>
+    </div>
+    <p class="instance-desc">
+      Garrick the Surveyor is searching for a legendary vein of Orichalcum in the depths of Mjoalir. Help his team clear the area, mine the vein, and appease the furious spirit guarding the cavern!
+    </p>
+    <div class="instance-drops">
+      <img class="boss-img" src="https://static.divine-pride.net/images/mobs/png/20600.png" alt="Boss Icon">
+      <div>
+        <h4 style="margin: 0 0 5px 0; color: #1a2a44; font-family: 'Lato', sans-serif; font-size: 1.1em;">Boss: Mine Spirit</h4>
+        <p style="margin: 0; font-size: 0.9em; color: #555; line-height: 1.4;">
+          <strong>Rewards:</strong> Mine Hat, Gem of Quakes
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTANCIA 4: BYALAN DUNGEON -->
+<div class="instance-card">
+  <a href="https://sites.google.com/view/zenith-ro-wiki/index/custom-instances/byalan-dungeon" target="_blank" class="instance-banner-link" title="Click to view details">
+    <img class="instance-banner" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Byalan Dungeon Banner">
+  </a>
+  <div class="instance-content">
+    <h2 class="instance-title">Byalan Dungeon</h2>
+    <div class="instance-badges">
+      <span class="badge">🛡️ Level range: 50 - 65</span>
+      <span class="badge">👥 Party: 1+ Players</span>      
+      <span class="badge">🔄 Repeatable?: Yes</span>      
+      <span class="badge">⏱️ Cooldown: 3 Hours</span>
+    </div>
+    <p class="instance-desc">
+      The archaeological team of Izlude is exploring the deep underwater ruins of Byalan Dungeon. Assist Archeologist Dan and the expedition team to unseal the ancient cavern and defeat the Mermaid of the Depths!
+    </p>
+    <div class="instance-drops">
+      <img class="boss-img" src="https://static.divine-pride.net/images/mobs/png/20647.png" alt="Boss Icon">
+      <div>
+        <h4 style="margin: 0 0 5px 0; color: #1a2a44; font-family: 'Lato', sans-serif; font-size: 1.1em;">Boss: Mermaid of the Depths</h4>
+        <p style="margin: 0; font-size: 0.9em; color: #555; line-height: 1.4;">
+          <strong>Rewards:</strong> Pisces Crown / Cancer Diadem, Proof of Valor
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

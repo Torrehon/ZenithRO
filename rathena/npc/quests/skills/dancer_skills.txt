@@ -50,7 +50,7 @@ comodo,204,172,5	script	Canell#qsk_dan01	724,{
 			next;
 			set DANCER_SK,9;
 			specialeffect2 EF_ABSORBSPIRITS;
-			skill "DC_WINKCHARM",1,SKILL_PERM;
+			skill "DC_WINKCHARM",1,SKILL_PERM_GRANT;
 			specialeffect EF_LEVELUP;
 			mes "[Canell]";
 			mes "Ho-ho~ Go forth and captivate Midgard! No one will be able to resist your gaze!";
@@ -356,7 +356,7 @@ comodo,204,172,5	script	Canell#qsk_dan01	724,{
 				mes "the Charming Wink skill.^000000";
 				set DANCER_SK,9;
 				specialeffect2 EF_ABSORBSPIRITS;
-				skill "DC_WINKCHARM",1,SKILL_PERM;
+				skill "DC_WINKCHARM",1,SKILL_PERM_GRANT;
 				close;
 			}
 		}
@@ -399,7 +399,7 @@ comodo,204,172,5	script	Canell#qsk_dan01	724,{
 			mes "^3355FFYou have learned the";
 			mes "Charming Wink skill.^000000";
 			specialeffect2 EF_ABSORBSPIRITS;
-			skill "DC_WINKCHARM",1,SKILL_PERM;
+			skill "DC_WINKCHARM",1,SKILL_PERM_GRANT;
 			close;
 		}
 	}

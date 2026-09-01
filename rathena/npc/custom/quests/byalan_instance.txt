@@ -26,10 +26,16 @@ izlu2dun,114,88,4	script	Archeologist Dan	754,{
 		mes "Welcome back, hero! The Chief Archeologist sent word that you defeated the Mermaid of the Depths and secured the ruins!";
 		next;
 		mes "[Archeologist Dan]";
-		mes "Izlude owes you a great debt. During our excavation, we discovered two ancient headgears imbued with the power of the depths.";
+		mes "Izlude owes you a great debt. Please select your armor piece reward:";
+		mes "- 1. " + mesitemlink(2504);
+		mes "- 2. " + mesitemlink(2103);
 		next;
+		.@eq_choice = select("Muffler:Buckler");
+		if (.@eq_choice == 1) .@eq_id = 2504;
+		else .@eq_id = 2103;
+
 		mes "[Archeologist Dan]";
-		mes "They will be much safer and more useful in the hands of experienced adventurers like you. Please choose one as your reward:";
+		mes "During our excavation, we also discovered two ancient headgears. Please choose one as your crown:";
 		next;
 		switch(select("Pisces Crown (Physical Stats):Cancer Diadem (Magical Stats)")) {
 			case 1:
@@ -41,8 +47,12 @@ izlu2dun,114,88,4	script	Archeologist Dan	754,{
 		}
 		
 		// Recompensas comunes
+		getitem .@eq_id, 1;
+		getitem 12997, 1; // 1x Elunium Box
 		getitem 50008, 1; // Proof of Valor
+		getitem 50010, 1; // Trident of the Depths
 		getexp 175000, 210000;
+		set Zeny, Zeny + 80000;
 		
 		if (checkquest(80043) == 0 || checkquest(80043) == 1) { completequest 80043; }
 		set byalan_quest, 4;
@@ -51,7 +61,7 @@ izlu2dun,114,88,4	script	Archeologist Dan	754,{
 		mes "Use the Proof of Valor when you reach Job Level 50 to change your class at your Guild.";
 		next;
 		mes "[Archeologist Dan]";
-		mes "Also, we should keep that Trident of the Depths safe until we find a way to reach the deepest zones of the dungeon. Safe travels!";
+		mes "We decided that the Trident of the Depths will be safest in the hands of a capable adventurer like you. Take good care of it! Safe travels!";
 		close;
 	}
 
@@ -358,7 +368,7 @@ iz_dun03,34,171,4	script	Chief Archeologist#bya	804,{
 		close;
 	}
 	
-	if (countitem(50010) < 1) {
+	if (byalan_trident_found == 0) {
 		mes "Ah, adventurer! The deposits here are ancient.";
 		mes "I've discovered a hidden mechanism, but it requires a key artifact called the ^FF0000Trident of the Depths^000000.";
 		next;
@@ -367,9 +377,18 @@ iz_dun03,34,171,4	script	Chief Archeologist#bya	804,{
 		close;
 	}
 
-	// Player has Trident of the Depths (50010)
+	if (byalan_trident_found == 1) {
+		mes "[Chief Archeologist]";
+		mes "You found the Trident of the Depths wedged in the seaweed? Incredible!";
+		mes "Let me take it... Yes, this ancient artifact will allow us to break the seal of the ruins.";
+		set byalan_trident_found, 2;
+		next;
+	}
+
+	// Player has delivered the Trident of the Depths
 	if (getcharid(1) == 0) {
-		mes "You have found the Trident! Excellent!";
+		mes "[Chief Archeologist]";
+		mes "We have the Trident! Excellent!";
 		mes "However, we need a party to breach the seal and secure the area.";
 		close;
 	}
@@ -394,7 +413,7 @@ iz_dun03,34,171,4	script	Chief Archeologist#bya	804,{
 		close;
 	}
 
-	mes "You have the Trident of the Depths! Are you ready to open the gateway and face the guardian?";
+	mes "The Trident of the Depths is ready! Are you ready to open the gateway and face the guardian?";
 	next;
 	if (select("Open Gateway.:Wait.") == 1) {
 		if (instance_id(IM_PARTY) <= 0) {
@@ -427,13 +446,14 @@ OnDummyKill:
 
 // --- 2.5. ALGAS MARINAS (iz_dun03) ---
 iz_dun03,47,179,0	script	Seaweed#bya1	2191,{
-	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+	if (byalan_quest == 2 && byalan_alard_won == 1 && byalan_trident_found == 0) {
 		progressbar "0x00FF00", 3;
 		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
 		if (byalan_trident_spot == 1) {
 			mes "^00FF00*You found something wedged between the rocks...*^000000";
 			mes "^00FF00*It's the Trident of the Depths!*^000000";
-			getitem 50010, 1;
+			mes "^00FF00*You retrieve it carefully to hand it over to the Chief Archeologist.*^000000";
+			set byalan_trident_found, 1;
 			specialeffect2 154;
 		} else {
 			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
@@ -445,13 +465,14 @@ iz_dun03,47,179,0	script	Seaweed#bya1	2191,{
 }
 
 iz_dun03,45,151,0	script	Seaweed#bya2	2191,{
-	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+	if (byalan_quest == 2 && byalan_alard_won == 1 && byalan_trident_found == 0) {
 		progressbar "0x00FF00", 3;
 		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
 		if (byalan_trident_spot == 2) {
 			mes "^00FF00*You found something wedged between the rocks...*^000000";
 			mes "^00FF00*It's the Trident of the Depths!*^000000";
-			getitem 50010, 1;
+			mes "^00FF00*You retrieve it carefully to hand it over to the Chief Archeologist.*^000000";
+			set byalan_trident_found, 1;
 			specialeffect2 154;
 		} else {
 			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
@@ -463,13 +484,14 @@ iz_dun03,45,151,0	script	Seaweed#bya2	2191,{
 }
 
 iz_dun03,30,136,0	script	Seaweed#bya3	2191,{
-	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+	if (byalan_quest == 2 && byalan_alard_won == 1 && byalan_trident_found == 0) {
 		progressbar "0x00FF00", 3;
 		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
 		if (byalan_trident_spot == 3) {
 			mes "^00FF00*You found something wedged between the rocks...*^000000";
 			mes "^00FF00*It's the Trident of the Depths!*^000000";
-			getitem 50010, 1;
+			mes "^00FF00*You retrieve it carefully to hand it over to the Chief Archeologist.*^000000";
+			set byalan_trident_found, 1;
 			specialeffect2 154;
 		} else {
 			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
@@ -481,13 +503,14 @@ iz_dun03,30,136,0	script	Seaweed#bya3	2191,{
 }
 
 iz_dun03,86,158,0	script	Seaweed#bya4	2191,{
-	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+	if (byalan_quest == 2 && byalan_alard_won == 1 && byalan_trident_found == 0) {
 		progressbar "0x00FF00", 3;
 		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
 		if (byalan_trident_spot == 4) {
 			mes "^00FF00*You found something wedged between the rocks...*^000000";
 			mes "^00FF00*It's the Trident of the Depths!*^000000";
-			getitem 50010, 1;
+			mes "^00FF00*You retrieve it carefully to hand it over to the Chief Archeologist.*^000000";
+			set byalan_trident_found, 1;
 			specialeffect2 154;
 		} else {
 			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
@@ -499,13 +522,14 @@ iz_dun03,86,158,0	script	Seaweed#bya4	2191,{
 }
 
 iz_dun03,109,175,0	script	Seaweed#bya5	2191,{
-	if (byalan_quest == 2 && byalan_alard_won == 1 && countitem(50010) == 0) {
+	if (byalan_quest == 2 && byalan_alard_won == 1 && byalan_trident_found == 0) {
 		progressbar "0x00FF00", 3;
 		if (byalan_trident_spot == 0) { set byalan_trident_spot, rand(1, 5); }
 		if (byalan_trident_spot == 5) {
 			mes "^00FF00*You found something wedged between the rocks...*^000000";
 			mes "^00FF00*It's the Trident of the Depths!*^000000";
-			getitem 50010, 1;
+			mes "^00FF00*You retrieve it carefully to hand it over to the Chief Archeologist.*^000000";
+			set byalan_trident_found, 1;
 			specialeffect2 154;
 		} else {
 			mes "^888888*You search the seaweed thoroughly but find nothing.*^000000";
@@ -635,14 +659,20 @@ OnBossKilled:
 	mapannounce instance_mapname("1@iz_dun03"), "The Mermaid of the Depths has been defeated! The area is safe.", bc_map, "0x00FF00";
 	
 	// Sincronizar quest
-	if (getcharid(1) > 0) .party_id = getcharid(1);
+	.@party_id = (getcharid(1) > 0) ? getcharid(1) : .party_id;
 	.@origin_aid = getcharid(3);
-	getpartymember .party_id, 2;
-	for (.@i = 0; .@i < $@partymembercount; .@i++) {
-		if (attachrid($@partymemberaid[.@i])) {
-			if (byalan_quest == 2) { set byalan_quest, 3; }
-			if (checkquest(80042) == 0 || checkquest(80042) == 1) { completequest 80042; }
-			detachrid;
+	.@inst_map$ = instance_mapname("1@iz_dun03");
+	
+	if (.@party_id > 0) {
+		getpartymember .@party_id, 2;
+		for (.@i = 0; .@i < $@partymembercount; .@i++) {
+			if (attachrid($@partymemberaid[.@i])) {
+				if (strcharinfo(3) == .@inst_map$) {
+					if (byalan_quest == 2) { set byalan_quest, 3; }
+					if (checkquest(80042) == 0 || checkquest(80042) == 1) { completequest 80042; }
+				}
+				detachrid;
+			}
 		}
 	}
 	attachrid(.@origin_aid);

@@ -1180,6 +1180,21 @@ yuno_in04,33,106,4	script	Pile of Books#qsk_al	111,{
 // Start Bioethics quest
 lhz_in01,224,140,3	script	Kellasus#qsk_al	57,{
 	if (BaseJob == Job_Alchemist && bioeth == 13) {
+		if (getskilllv("AM_BIOETHICS") < 1) {
+			skill "AM_BIOETHICS", 1, SKILL_PERM_GRANT;
+			specialeffect EF_LEVELUP;
+			mes "[Kellasus]";
+			mes "Ah, welcome back! I see your understanding of Bioethics remains engraved in your mind.";
+			mes "Let me restore your ^FF0000Bioethics^000000 mastery.";
+			close;
+		}
+		if (countitem(7419) < 1) {
+			mes "[Kellasus]";
+			mes "Ah, I see you carry no Embryo Creation Guide with you.";
+			mes "Take this handbook to assist you in creating your Homunculi.";
+			getitem 7419,1;
+			close;
+		}
 		mes "[Kellasus]";
 		mes "Keep up the";
 		mes "good work. I get";
@@ -1188,29 +1203,32 @@ lhz_in01,224,140,3	script	Kellasus#qsk_al	57,{
 		mes "be depending on you...";
 		close;
 	}
-	if (BaseJob == Job_Alchemist && getskilllv("AM_BIOMANCER") > 0) {
-		mes "[Kellasus]";
-		mes "...!";
-		mes "^333333*Kellasus stops dead in his tracks and gazes deeply into your eyes, visibly astonished.*^000000";
-		next;
-		mes "[Kellasus]";
-		mes "Incredible... What is this aura?";
-		mes "I sense an innate, profound resonance with the very essence of life and creation within you.";
-		next;
-		mes "[Kellasus]";
-		mes "Your understanding of biological alchemy far surpasses anything I could ever teach through books or lectures.";
-		mes "It is as if the secrets of life itself were woven into your very spirit...";
-		next;
-		mes "[Kellasus]";
-		mes "I have no right to withhold this knowledge from someone of your caliber.";
-		mes "Take this. You are more than ready to master ^FF0000Bioethics^000000.";
-		next;
-		set bioeth,13;
-		skill "AM_BIOETHICS",1,SKILL_PERM;
-		specialeffect EF_LEVELUP;
-		mes "[Kellasus]";
-		mes "Use this mastery to nurture and protect life. I trust you will guide the future of Alchemy with wisdom.";
-		close;
+	if (BaseJob == Job_Alchemist && (getskilllv(1064) > 0 || getskilllv("AM_BIOMANCER") > 0)) {
+		if (getskilllv("AM_BIOETHICS") < 1 || bioeth < 13) {
+			mes "[Kellasus]";
+			mes "...!";
+			mes "^333333*Kellasus stops dead in his tracks and gazes deeply into your eyes, visibly astonished.*^000000";
+			next;
+			mes "[Kellasus]";
+			mes "Incredible... What is this aura?";
+			mes "I sense an innate, profound resonance with the very essence of life and creation within you.";
+			next;
+			mes "[Kellasus]";
+			mes "Your understanding of biological alchemy far surpasses anything I could ever teach through books or lectures.";
+			mes "It is as if the secrets of life itself were woven into your very spirit...";
+			next;
+			mes "[Kellasus]";
+			mes "I have no right to withhold this knowledge from someone of your caliber.";
+			mes "Take this. You are more than ready to master ^FF0000Bioethics^000000.";
+			next;
+			set bioeth,13;
+			skill "AM_BIOETHICS",1,SKILL_PERM_GRANT;
+			if (countitem(7419) < 1) getitem 7419,1;
+			specialeffect EF_LEVELUP;
+			mes "[Kellasus]";
+			mes "Use this mastery to nurture and protect life. I trust you will guide the future of Alchemy with wisdom.";
+			close;
+		}
 	}
 	if (BaseJob == Job_Alchemist && bioeth == 12) {
 		mes "[Kellasus]";
@@ -1258,7 +1276,8 @@ lhz_in01,224,140,3	script	Kellasus#qsk_al	57,{
 		mes "" + strcharinfo(0) + ".";
 		next;
 		set bioeth,13;
-		skill "AM_BIOETHICS",1,SKILL_PERM;
+		skill "AM_BIOETHICS",1,SKILL_PERM_GRANT;
+		getitem 7419,1;
 		mes "[Kellasus]";
 		mes "Ah...";
 		mes "" + strcharinfo(0) + ".";

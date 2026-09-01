@@ -1,0 +1,235 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Container for Normal Quest Cards (Emerald Green Accent Palette) */
+  .quest-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-left: 6px solid #10b981; /* Emerald Green Accent */
+    margin-bottom: 25px;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Top Floor: Text + Image */
+  .quest-top {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Left Area: Text & Title */
+  .quest-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .quest-header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #059669;
+    margin-bottom: 6px;
+  }
+
+  .quest-step-title {
+    font-family: 'Lato', sans-serif;
+    color: #064e3b;
+    font-size: 1.3em;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-badge {
+    background-color: #059669;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+  }
+
+  .quest-desc {
+    color: #374151;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1em;
+  }
+
+  .coord {
+    background-color: #ecfdf5;
+    color: #047857;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  /* Right Area: Image Container */
+  .quest-image-container {
+    padding: 20px;
+    background-color: #f0fdf4;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quest-image {
+    width: 300px;
+    height: 180px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    object-fit: cover; 
+    object-position: center; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .quest-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  /* Material List Checklist Box */
+  .mat-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .mat-item {
+    background: #f0fdf4;
+    border: 1px solid #a7f3d0;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #064e3b;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 650px) {
+    .quest-top {
+      flex-direction: column;
+    }
+    .quest-image-container {
+      border-left: none;
+      border-top: 1px solid #e0e0e0;
+      padding: 15px;
+    }
+    .quest-image {
+      width: 100%;
+      max-width: 350px;
+      height: 180px; 
+    }
+    .quest-step-title { font-size: 1.0em !important; margin-bottom: 10px !important; }
+    .step-badge { font-size: 0.8em !important; padding: 3px 8px !important; }
+    .quest-desc { font-size: 0.8em !important; line-height: 1.3 !important; }
+  }
+</style>
+
+<!-- CARD 1: NOVICE GROUNDS - MESSY MARY -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <div class="quest-header-tag">🔰 Novice Grounds Quest</div>
+      <h3 class="quest-step-title">
+        <span class="step-badge">1</span>
+        Messy Mary (Novice Grounds)
+      </h3>
+      <p class="quest-desc">
+        Meet <strong>Messy Mary</strong> at the Novice Grounds (<span class="coord">new_1-3 85, 33</span>).
+        <br><br>
+        She is struggling to keep her inventory organized and drops loot everywhere. After reading an ancient book about a special technique called <strong>Pickup</strong>, she asks for your help to gather practice materials so you can both learn the skill together!
+      </p>
+      
+      <div class="mat-checklist">
+        <div class="mat-item">🪶 2x Feather of Birds</div>
+        <div class="mat-item">🟢 10x Jellopy</div>
+        <div class="mat-item">🍀 5x Clover</div>
+        <div class="mat-item">🪵 5x Tree Root</div>
+      </div>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1fLoZwvuHAnslO7oI3qeiyaxSPSLgXCra" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1fLoZwvuHAnslO7oI3qeiyaxSPSLgXCra" alt="Messy Mary Novice Grounds">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 2: PRONTERA PUB - NOT-SO-MESSY MARY (BACKUP TEACHER) -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <div class="quest-header-tag">🍻 Prontera Backup Teacher</div>
+      <h3 class="quest-step-title">
+        <span class="step-badge">2</span>
+        Not-So-Messy Mary (Prontera Pub)
+      </h3>
+      <p class="quest-desc">
+        If you graduated from Novice Grounds without learning the skill, don't worry! You can find <strong>Not-So-Messy Mary</strong> inside the Prontera Pub (<span class="coord">prt_in 179, 12</span> — pub entrance at <span class="coord">prontera 205, 157</span>).
+        <br><br>
+        Now stylish and organized, she offers a second chance to teach you the <strong>Pickup</strong> skill, though her material request is a bit tougher for main world adventurers:
+      </p>
+      
+      <div class="mat-checklist">
+        <div class="mat-item">📜 10x Animal Skin</div>
+        <div class="mat-item">🦗 10x Grasshopper Leg</div>
+        <div class="mat-item">🪶 10x Bill of Birds</div>
+      </div>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1P0427KWmqakhoom_n6mLY1SYewh0Sgcg" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1P0427KWmqakhoom_n6mLY1SYewh0Sgcg" alt="Not-So-Messy Mary Prontera Pub">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 3: SKILL REWARD - PICKUP -->
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <div class="quest-header-tag">✨ Skill Unlock</div>
+      <h3 class="quest-step-title">
+        <span class="step-badge">3</span>
+        Reward: Pickup Skill
+      </h3>
+      <p class="quest-desc">
+        Upon turning in the required materials to Mary (in Novice Grounds or Prontera Pub), your character will instantly master the <strong>Pickup</strong> skill!
+        <br><br>
+        <strong>Skill Functionality:</strong>
+        <br>
+        A special utility skill that allows your character to swipe and instantly collect all dropped items and loot around your surrounding area in a single movement. Never leave valuable loot behind again!
+      </p>
+    </div>
+    <div class="quest-image-container">
+      <a href="https://lh3.googleusercontent.com/d/1plJqiqM_f7YtLLV0QOGYnQVbBoC0tGxE" target="_blank" title="Click to expand">
+        <img class="quest-image" src="https://lh3.googleusercontent.com/d/1plJqiqM_f7YtLLV0QOGYnQVbBoC0tGxE" alt="Pickup Skill Tree & Description">
+      </a>
+    </div>
+  </div>
+</div>

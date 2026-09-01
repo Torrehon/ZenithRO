@@ -346,7 +346,7 @@ Body:
     AegisName: Fruit_Of_Mastela
     Name: Mastela Fruit
     Type: Healing
-    Buy: 8500
+    Buy: 5000
     Weight: 30
     Flags:
       BuyingStore: true
@@ -381,7 +381,7 @@ Body:
     AegisName: Royal_Jelly
     Name: Royal Jelly
     Type: Healing
-    Buy: 7000
+    Buy: 4000
     Weight: 150
     Flags:
       BuyingStore: true
@@ -5698,34 +5698,18 @@ Body:
     AegisName: Mre_A
     Name: Military Ration A
     Type: Healing
-    Buy: 2
+    Buy: 200
     Weight: 70
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoStorage: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
-      percentheal 5,0;
+      percentheal 8,0;
   - Id: 12272
     AegisName: Mre_B
     Name: Military Ration B
     Type: Usable
-    Buy: 2
+    Buy: 200
     Weight: 70
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoStorage: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
-      sc_start SC_HITFOOD,600000,33;
+      percentheal 0,5;
   - Id: 12273
     AegisName: Mre_C
     Name: Military Ration C
@@ -22258,38 +22242,7 @@ Body:
       Third: true
       Third_Upper: true
       Third_Baby: true
-    EquipLevelMin: 1
-  - Id: 50000
-    AegisName: wayf_map
-    Name: Wayfarer's Map
-    Type: Delayconsume
-    Buy: 0
-    Weight: 0
-    NoUse:
-      Sitting: true
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
-    Flags:
-      NoConsume: true
-    Delay:
-      Duration: 3000
-    Script: |
-      if (countitem(50001) > 0) {
-        // 1. Lanzamos la habilidad
-        itemskill "AL_WARP", 4;
-        
-        // 2. Consumimos el catalizador
-        delitem 50001, 1;
-        
-      } else {
-        dispbottom "You need a Wayfarer Stone to power this map.";
-      }      
+    EquipLevelMin: 1    
   - Id: 51008
     AegisName: scroll_shadow
     Name: Elemental Converter
@@ -22370,3 +22323,29 @@ Body:
       BuyingStore: true
     Script: |
       sc_start SC_ENCHANTARMS,900000,6;
+  - Id: 51018
+    AegisName: alche_box1
+    Name: Alchemist Supplies I
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 905,25;
+      getitem 7033,25;
+  - Id: 51019
+    AegisName: alche_box2
+    Name: Alchemist Supplies II
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 1059,5;
+      getitem 929,5;
+  - Id: 51020
+    AegisName: ebottle_box
+    Name: Empty Bottle Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 713,25;

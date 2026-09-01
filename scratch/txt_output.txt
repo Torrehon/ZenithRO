@@ -1,0 +1,308 @@
+﻿// Prontera Hunting Quests
+70001#Prontera Hunt: Poring#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Porings to complete the contract.#
+#
+
+70002#Prontera Hunt: Lunatic#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Lunatics to complete the contract.#
+#
+
+70003#Prontera Hunt: Thief Bug#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Thief Bugs to complete the contract.#
+#
+
+70004#Prontera Hunt: Rocker#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Rockers to complete the contract.#
+#
+
+70005#Prontera Hunt: Tarou#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Tarous to complete the contract.#
+#
+
+70006#Prontera Hunt: Poporing#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Poporings to complete the contract.#
+#
+
+70007#Prontera Hunt: Mandragora#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Mandragoras to complete the contract.#
+#
+
+70008#Prontera Hunt: Vadon#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Vadons to complete the contract.#
+#
+
+70009#Prontera Hunt: Yoyo#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Yoyos to complete the contract.#
+#
+
+70010#Prontera Hunt: Cornutus#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Cornutuss to complete the contract.#
+#
+
+70011#Prontera Hunt: Marc#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Marcs to complete the contract.#
+#
+
+70012#Prontera Hunt: Swordfish#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Swordfishs to complete the contract.#
+#
+
+70013#Prontera Hunt: Merman#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Mermans to complete the contract.#
+#
+
+70014#Prontera Hunt: Strouf#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Stroufs to complete the contract.#
+#
+
+70015#Prontera Hunt: Deviace#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Deviaces to complete the contract.#
+#
+
+70016#Prontera Hunt: Lost Knight#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Lost Knights to complete the contract.#
+#
+
+70017#Prontera Hunt: Fallen Crusader#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Fallen Crusaders to complete the contract.#
+#
+
+70018#Prontera Hunt: Zombie Guard#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Zombie Guards to complete the contract.#
+#
+
+70019#Prontera Hunt: Mastering#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Masterings to complete the contract.#
+#
+
+70020#Prontera Hunt: Vocal#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Vocals to complete the contract.#
+#
+
+70021#Prontera Hunt: Eclipse#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Eclipses to complete the contract.#
+#
+
+// Geffen Hunting Quests
+70101#Geffen Hunt: Fabre#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Fabres to complete the contract.#
+#
+
+70102#Geffen Hunt: Roda Frog#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Roda Frogs to complete the contract.#
+#
+
+70103#Geffen Hunt: Ambernite#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Ambernites to complete the contract.#
+#
+
+70104#Geffen Hunt: Coco#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Cocos to complete the contract.#
+#
+
+70105#Geffen Hunt: Orc Warrior#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Orc Warriors to complete the contract.#
+#
+
+70106#Geffen Hunt: Orc Lady#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Orc Ladys to complete the contract.#
+#
+
+70107#Geffen Hunt: Caramel#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Caramels to complete the contract.#
+#
+
+70108#Geffen Hunt: Orc Skeleton#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Orc Skeletons to complete the contract.#
+#
+
+70109#Geffen Hunt: Zenorc#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Zenorcs to complete the contract.#
+#
+
+70110#Geffen Hunt: Skeleton Worker#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Skeleton Workers to complete the contract.#
+#
+
+70111#Geffen Hunt: Myst#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Mysts to complete the contract.#
+#
+
+70112#Geffen Hunt: Nightmare#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Nightmares to complete the contract.#
+#
+
+70113#Geffen Hunt: Jakk#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Jakks to complete the contract.#
+#
+
+70114#Geffen Hunt: Deviruchi#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Deviruchis to complete the contract.#
+#
+
+70115#Geffen Hunt: High Orc#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 High Orcs to complete the contract.#
+#
+
+70116#Geffen Hunt: Raydric#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Raydrics to complete the contract.#
+#
+
+70117#Geffen Hunt: Evil Druid#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Evil Druids to complete the contract.#
+#
+
+70118#Geffen Hunt: Sting#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Stings to complete the contract.#
+#
+
+70119#Geffen Hunt: Abysmal Knight#SG_FEEL#QUE_NOIMAGE#
+Hunt down 10 Abysmal Knights to complete the contract.#
+#
+
+70120#Geffen Hunt: Toad#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Toads to complete the contract.#
+#
+
+70121#Geffen Hunt: Pouring#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Pourings to complete the contract.#
+#
+
+// Morroc Hunting Quests
+70201#Morroc Hunt: Picky#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Pickys to complete the contract.#
+#
+
+70202#Morroc Hunt: Baby Desert Wolf#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Baby Desert Wolfs to complete the contract.#
+#
+
+70203#Morroc Hunt: Drops#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Dropss to complete the contract.#
+#
+
+70204#Morroc Hunt: Muka#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Mukas to complete the contract.#
+#
+
+70205#Morroc Hunt: Peco Peco#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Peco Pecos to complete the contract.#
+#
+
+70206#Morroc Hunt: Zerom#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Zeroms to complete the contract.#
+#
+
+70207#Morroc Hunt: Requiem#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Requiems to complete the contract.#
+#
+
+70208#Morroc Hunt: Hode#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Hodes to complete the contract.#
+#
+
+70209#Morroc Hunt: Frilldora#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Frilldoras to complete the contract.#
+#
+
+70210#Morroc Hunt: Mummy#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Mummys to complete the contract.#
+#
+
+70211#Morroc Hunt: Verit#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Verits to complete the contract.#
+#
+
+70212#Morroc Hunt: Marduk#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Marduks to complete the contract.#
+#
+
+70213#Morroc Hunt: Pasana#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Pasanas to complete the contract.#
+#
+
+70214#Morroc Hunt: Minorous#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Minorouss to complete the contract.#
+#
+
+70215#Morroc Hunt: Isis#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Isiss to complete the contract.#
+#
+
+70216#Morroc Hunt: Anubis#SG_FEEL#QUE_NOIMAGE#
+Hunt down 10 Anubiss to complete the contract.#
+#
+
+70217#Morroc Hunt: Ancient Mummy#SG_FEEL#QUE_NOIMAGE#
+Hunt down 10 Ancient Mummys to complete the contract.#
+#
+
+70218#Morroc Hunt: Dragon Fly#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Dragon Flys to complete the contract.#
+#
+
+// Payon Hunting Quests
+70301#Payon Hunt: Willow#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Willows to complete the contract.#
+#
+
+70302#Payon Hunt: Spore#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Spores to complete the contract.#
+#
+
+70303#Payon Hunt: Familiar#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Familiars to complete the contract.#
+#
+
+70304#Payon Hunt: Zombie#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Zombies to complete the contract.#
+#
+
+70305#Payon Hunt: Skeleton#SG_FEEL#QUE_NOIMAGE#
+Hunt down 25 Skeletons to complete the contract.#
+#
+
+70306#Payon Hunt: Wolf#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Wolfs to complete the contract.#
+#
+
+70307#Payon Hunt: Bigfoot#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Bigfoots to complete the contract.#
+#
+
+70308#Payon Hunt: Munak#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Munaks to complete the contract.#
+#
+
+70309#Payon Hunt: Bongun#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Bonguns to complete the contract.#
+#
+
+70310#Payon Hunt: Sohee#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Sohees to complete the contract.#
+#
+
+70311#Payon Hunt: Archer Skeleton#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Archer Skeletons to complete the contract.#
+#
+
+70312#Payon Hunt: Dokebi#SG_FEEL#QUE_NOIMAGE#
+Hunt down 20 Dokebis to complete the contract.#
+#
+
+70313#Payon Hunt: Nine Tail#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Nine Tails to complete the contract.#
+#
+
+70314#Payon Hunt: Dragon Tail#SG_FEEL#QUE_NOIMAGE#
+Hunt down 15 Dragon Tails to complete the contract.#
+#
+
+70315#Payon Hunt: Skeleton General#SG_FEEL#QUE_NOIMAGE#
+Hunt down 10 Skeleton Generals to complete the contract.#
+#
+
+70316#Payon Hunt: Vagabond Wolf#SG_FEEL#QUE_NOIMAGE#
+Hunt down 1 Vagabond Wolfs to complete the contract.#
+#
+

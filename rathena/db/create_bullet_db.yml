@@ -181,11 +181,11 @@ Body:
         Amount: 30
       - Item: Silver_Bullet
         Amount: 100
-  - Source: Opal
+  - Source: White_Jewel
     Make:
       - Item: h_sphere
         Amount: 20
-  - Source: Pearl
+  - Source: Scarlet_Jewel
     Make:
       - Item: h_sphere
         Amount: 20

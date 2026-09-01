@@ -101,8 +101,17 @@ moc_prydb1,42,133,2	script	Brad	118,{ // DAWN WEAPON QUEST
 
 	// === LÓGICA PARA THIEFS ===
 
-	// Si la quest ya está completada
 	if (dawn_dagger_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Brad]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Dagger, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Dagger (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40000; // Dawn Stiletto
+			}
+			close;
+		}
 		mes "[Brad]";
 		mes "How's the Dawn Dagger treating you? I knew you'd be the one to finally make that blade sing.";
 		close;

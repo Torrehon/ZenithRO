@@ -2940,6 +2940,8 @@ void skill_attack_blow(block_list *src, block_list *dsrc, block_list *target, ui
  * 
  *        flag&0x1000000 - Return 0 if damage was reflected
  *-------------------------------------------------------------------------*/
+static int build_plagiarism_list_sub(block_list* bl, va_list ap);
+
 int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_list *bl, uint16 skill_id, uint16 skill_lv, t_tick tick, int32 flag)
 {
 	struct Damage dmg;
@@ -2971,6 +2973,13 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 		if (!status_check_skilluse(src, bl, skill_id, 2))
 			return 0;
 	}
+
+	// --- INICIO CUSTOM: Activar Radar de Plagiarism para todo ataque (MO_TRIPLEATTACK va a Soporte) ---
+	if (src != nullptr && skill_id > 0) {
+		int is_supp_flag = (skill_id == MO_TRIPLEATTACK) ? 1 : 0;
+		map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, is_supp_flag);
+	}
+	// --- FIN CUSTOM ---
 
 	sd = BL_CAST(BL_PC, src);
 	tsd = BL_CAST(BL_PC, bl);
@@ -4434,7 +4443,7 @@ static bool is_custom_whitelist_skill(uint16 skill_id, int is_support) {
 	if (is_support) {
 		// AQUÍ METES A MANO LAS SKILLS DE SOPORTE AVANZADAS (Renacidos / 3rd Jobs)
 		switch (skill_id) {
-			// Ejemplo: case 11000: (aquí irán tus IDs futuros)
+			case MO_TRIPLEATTACK:
 			case 379:
 			return true;
 		}
@@ -4465,6 +4474,21 @@ static int build_plagiarism_list_sub(block_list* bl, va_list ap) {
 	// 2. FILTRO: Comprobar requisitos de clase según la rama
 	if (is_support) {
 		if (pc_checkskill(sd, RG_SUPPORT_PLAGIARISM) == 0 && pc_checkskill(sd, RG_MIMIC) == 0) return 0;
+		
+		// Excluir ÚNICAMENTE habilidades que causan daño directo o de trampa (excepto Triple Attack que va a Soporte)
+		switch (skill_id) {
+			case CR_GRANDCROSS:
+			case PR_MAGNUS:
+			case PR_TURNUNDEAD:
+			case WZ_FIREPILLAR:
+			case WZ_SIGHTRASHER:
+			case AS_VENOMDUST:
+			case HT_CLAYMORETRAP:
+			case HT_BLASTMINE:
+			case HT_LANDMINE:
+			case HT_FREEZINGTRAP:
+				return 0;
+		}
 	} else {
 		if (pc_checkskill(sd, RG_PLAGIARISM) == 0) return 0;
 	}
@@ -4512,8 +4536,9 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 	if (status_isdead(*bl))
 		return 1;
 	
-	// --- INICIO CUSTOM: Activar Radar Ofensivo ---
-	map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, 0);
+	// --- INICIO CUSTOM: Activar Radar de Plagiarism (MO_TRIPLEATTACK va a Soporte) ---
+	int is_supp_flag = (skill_id == MO_TRIPLEATTACK) ? 1 : 0;
+	map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, is_supp_flag);
 	// --- FIN CUSTOM ---
 
 	if (skill_id && skill_id != AG_DEADLY_PROJECTION && skill_get_type(skill_id) == BF_MAGIC && status_isimmune(bl) == 100)
@@ -9362,6 +9387,23 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
 				clif_skill_fail( sd, skill_id );
 				return false;
 			}
+			if (pc_inventoryblank(&sd) == 0) {
+				clif_skill_fail( sd, skill_id, USESKILL_FAIL_WEIGHTOVER );
+				return false;
+			}
+			if (sd.hd) {
+				t_itemid embryo_id = 50016;
+				switch (hom_class2mapid(sd.hd->homunculus.class_)) {
+					case MAPID_LIF: case MAPID_LIF_E: embryo_id = 50018; break;
+					case MAPID_AMISTR: case MAPID_AMISTR_E: embryo_id = 50019; break;
+					case MAPID_FILIR: case MAPID_FILIR_E: embryo_id = 50017; break;
+					case MAPID_VANILMIRTH: case MAPID_VANILMIRTH_E: embryo_id = 50016; break;
+				}
+				if (sd.weight + itemdb_weight(embryo_id) > sd.max_weight) {
+					clif_skill_fail( sd, skill_id, USESKILL_FAIL_WEIGHTOVER );
+					return false;
+				}
+			}
 			break;
 		case AB_ANCILLA: {
 				int32 count = 0;
@@ -9975,24 +10017,40 @@ bool skill_check_condition_castbegin( map_session_data& sd, uint16 skill_id, uin
  * @param skill_lv Level of used skill
  * @return true: All condition passed, false: Failed
  */
- static int skill_count_flora_points_sub(struct block_list *bl, va_list ap) {
+struct s_flora_sacrifice_info {
+	struct mob_data *md;
+	int cost;
+	uint32 id;
+};
+
+static int skill_collect_flora_mobs_sub(struct block_list *bl, va_list ap) {
 	struct mob_data *md = (struct mob_data *)bl;
 	int master_id = va_arg(ap, int);
 	int *points = va_arg(ap, int *);
+	std::vector<s_flora_sacrifice_info> *flora_list = va_arg(ap, std::vector<s_flora_sacrifice_info> *);
 
 	if (md->master_id != master_id)
 		return 0;
 
 	int cost = 0;
 	switch (md->mob_id) {
-		case MOBID_G_MANDRAGORA: cost = 2; break;
-		case MOBID_G_RAFFLESIA:  cost = 3; break;
-		case MOBID_G_PARASITE:   cost = 4; break;
-		case MOBID_G_GEOGRAPHER: cost = 5; break;
+		case MOBID_G_MANDRAGORA:   cost = 2; break;
+		case MOBID_G_RAFFLESIA:    cost = 3; break;
+		case MOBID_G_PARASITE:     cost = 4; break;
+		case MOBID_G_GEOGRAPHER:   cost = 5; break;
 		case MOBID_G_WOODEN_GOLEM: cost = 6; break;
+		default: return 0;
 	}
 
 	*points += cost;
+
+	if (flora_list) {
+		s_flora_sacrifice_info info;
+		info.md = md;
+		info.cost = cost;
+		info.id = md->id;
+		flora_list->push_back(info);
+	}
 	return 1;
 }
  
@@ -10056,6 +10114,7 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 		case PR_BENEDICTIO:
 			skill_check_pc_partner(&sd, skill_id, &skill_lv, 1, 1);
 			break;
+		
 		case AM_CANNIBALIZE:
 		case AM_SPHEREMINE: {
 			if (skill_id == AM_SPHEREMINE) {
@@ -10083,11 +10142,38 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 				}
 
 				if(battle_config.land_skill_limit && (battle_config.land_skill_limit & BL_PC)) {
-					map_foreachinmap(skill_count_flora_points_sub, sd.m, BL_MOB, sd.id, &current_points);
+					std::vector<s_flora_sacrifice_info> flora_list;
+					map_foreachinmap(skill_collect_flora_mobs_sub, sd.m, BL_MOB, sd.id, &current_points, &flora_list);
 					
 					if(current_points + spawn_cost > max_points) {
-						clif_skill_fail( sd, skill_id );
-						return false;
+						// Verificar ítems requeridos ANTES de sacrificar ninguna planta
+						struct s_skill_condition req = skill_get_requirement(&sd, skill_id, skill_lv);
+						for (int k = 0; k < MAX_SKILL_ITEM_REQUIRE; ++k) {
+							if (!req.itemid[k]) continue;
+							int idx_item = pc_search_inventory(&sd, req.itemid[k]);
+							if (idx_item < 0 || sd.inventory.u.items_inventory[idx_item].amount < req.amount[k]) {
+								clif_skill_fail( sd, skill_id, USESKILL_FAIL_NEED_ITEM, req.amount[k], req.itemid[k] );
+								return false;
+							}
+						}
+
+						// Ordenar por ID ascendente (el ID menor es la planta invocada primero / más antigua)
+						std::sort(flora_list.begin(), flora_list.end(), [](const s_flora_sacrifice_info &a, const s_flora_sacrifice_info &b) {
+							return a.id < b.id;
+						});
+
+						size_t idx = 0;
+						while (current_points + spawn_cost > max_points && idx < flora_list.size()) {
+							current_points -= flora_list[idx].cost;
+							status_kill(flora_list[idx].md);
+							idx++;
+						}
+
+						// Si aún no caben los puntos (ej. límite < coste de invocar), falla la habilidad
+						if (current_points + spawn_cost > max_points) {
+							clif_skill_fail( sd, skill_id );
+							return false;
+						}
 					}
 				}
 			}
@@ -10536,6 +10622,11 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 		req.ap += (status->max_ap * (-ap_rate)) / 100;
 
 	req.zeny = skill->require.zeny[skill_lv-1];
+  
+	// --- COSTE DINÁMICO DE MAMMONITE: (1 Zeny * Skill Level) * Base Level ---
+	if (skill_id == MC_MAMMONITE && sd) {
+		req.zeny = (1 * skill_lv) * sd->status.base_level;
+	}
 
 	if( sc && sc->getSCE(SC__UNLUCKY) ) {
 		if(sc->getSCE(SC__UNLUCKY)->val1 < 3)
@@ -10768,9 +10859,15 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 			// --- FIN CUSTOM ---
 			break;
 		case MO_FINGEROFFENSIVE:
-			// --- INICIO CUSTOM: Finger Offensive Asceta (Coste 1 Esfera) ---
+			// --- INICIO CUSTOM: Finger Offensive Asceta vs Monk Normal / Rogue Mimic ---
 			if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
 				req.spiritball = 1;
+				sd->spiritball_old = (int8)skill_lv;
+			} else if (sd) {
+				if (sd->spiritball > 0 && sd->spiritball < req.spiritball) {
+					req.spiritball = sd->spiritball;
+				}
+				sd->spiritball_old = (int8)req.spiritball;
 			}
 			// --- FIN CUSTOM ---
 			break;
@@ -10853,7 +10950,7 @@ struct s_skill_condition skill_get_requirement(map_session_data* sd, uint16 skil
 			req.status.clear();
 			req.status.shrink_to_fit();
 		}
-		if (req_opt & SKILL_REQ_SPIRITSPHERECOST)
+		if ((req_opt & SKILL_REQ_SPIRITSPHERECOST) && skill_id != MO_FINGEROFFENSIVE)
 			req.spiritball = 0;
 		if (req_opt & SKILL_REQ_ITEMCOST) {
 			memset(req.itemid, 0, sizeof(req.itemid));
@@ -11473,6 +11570,10 @@ void skill_identify(map_session_data *sd, int32 idx)
 		if(sd->inventory.u.items_inventory[idx].nameid > 0 && sd->inventory.u.items_inventory[idx].identify == 0 ){
 			failure = false;
 			sd->inventory.u.items_inventory[idx].identify = 1;
+			struct item_data* option_id = itemdb_search(sd->inventory.u.items_inventory[idx].nameid);
+			if (option_id != nullptr) {
+				pc_apply_random_option(option_id, sd->inventory.u.items_inventory[idx]);
+			}
 		}
 	}
 	clif_item_identified( *sd, idx, failure );
@@ -12055,6 +12156,8 @@ int32 skill_detonator(block_list *bl, va_list ap)
 		case UNT_BLASTMINE:
 		case UNT_SANDMAN:
 		case UNT_CLAYMORETRAP:
+		case UNT_FREEZINGTRAP:
+		case UNT_LANDMINE:
 		case UNT_TALKIEBOX:
 		case UNT_CLUSTERBOMB:
 		case UNT_FIRINGTRAP:
@@ -13895,6 +13998,9 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 						break;
 					case ITEMID_FIRE_BOTTLE:
 					case ITEMID_ACID_BOTTLE:
+						qty = 3;
+						make_per += (1+rnd()%100)*10;
+						break;
 					case ITEMID_MAN_EATER_BOTTLE:
 					case ITEMID_MINI_BOTTLE:
 						make_per += (1+rnd()%100)*10;
@@ -14111,8 +14217,8 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 		}
 	} else { // Weapon Forging
 		// --- INICIO CUSTOM: Forja por Job Level (Sin DEX/LUK) ---
-		// A Job 50 otorga 3000 (30%). Compensa la pérdida de DEX y LUK.
-		make_per = sd->status.job_level * 60; 
+		// A Job 50 otorga 3500 (35%). Compensa la pérdida de DEX y LUK.
+		make_per = sd->status.job_level * 70; 
 		
 		// Conservamos un pequeño factor de suerte aleatorio del juego original (+0.1% a +10%)
 		make_per += rnd_value(1, 100) * 10; 
@@ -14122,8 +14228,8 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			make_per += (4 / wlv) * 1000; //+40/+20/+10
 		}
 		make_per += pc_checkskill(sd,skill_id)*500; // Smithing skills bonus: +5/+10/+15
-		// Weaponry Research bonus: +1/+2/+3/+4/+5/+6/+7/+8/+9/+10
-		make_per += pc_checkskill(sd,BS_WEAPONRESEARCH)*100;
+		// Weaponry Research bonus: +10%
+		make_per += pc_checkskill(sd,BS_WEAPONRESEARCH)*1000;
         // --- INICIO CUSTOM: Soul of the Forgemaster (Éxito) ---
 		if (pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
 			make_per += 1000; // +10% de éxito plano (1000 = 10%)
@@ -14140,10 +14246,10 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 		// Star Crumb: -15% each
 		make_per -= sc * 1500;
 
-		if      (pc_search_inventory(sd,ITEMID_EMPERIUM_ANVIL) > -1) make_per+= 1000; // Emperium Anvil: +10
-		else if (pc_search_inventory(sd,ITEMID_GOLDEN_ANVIL) > -1)   make_per+= 500; // Golden Anvil: +5
-		else if (pc_search_inventory(sd,ITEMID_ORIDECON_ANVIL) > -1) make_per+= 250; // Oridecon Anvil: +2.5
-		else if (pc_search_inventory(sd,ITEMID_ANVIL) > -1)          make_per+= 0; // Anvil: +0
+		if      (pc_search_inventory(sd,ITEMID_EMPERIUM_ANVIL) > -1) make_per+= 1500; // Emperium Anvil: +15
+		else if (pc_search_inventory(sd,ITEMID_GOLDEN_ANVIL) > -1)   make_per+= 1000; // Golden Anvil: +10
+		else if (pc_search_inventory(sd,ITEMID_ORIDECON_ANVIL) > -1) make_per+= 750; // Oridecon Anvil: +7.5
+		else if (pc_search_inventory(sd,ITEMID_ANVIL) > -1)          make_per+= 500; // Anvil: +5
 		if (battle_config.wp_rate != 100)
 			make_per = make_per * battle_config.wp_rate / 100;
 		// Baby classes receive a 30% penalty when the target item is a weapon
@@ -14166,7 +14272,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			int star_damage = sc * 5; // Daño base oficial (5/10/15)
 			
 			if (sc > 0 && pc_checkskill(sd, BS_FORGEMASTERSOUL) > 0) {
-				star_damage = sc * 40; // 30 por cada Star Crumb (30/60/90)
+				star_damage = sc * 40; // 40 por cada Star Crumb (40/80/120)
 				
 				// Si está en el Top 10 del ranking, recibe un bono extra de 30
 				if (pc_famerank(sd->status.char_id, JOB_BLACKSMITH) <= 10 && 
@@ -14180,6 +14286,13 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			
 			tmp_item.card[2] = GetWord(sd->status.char_id,0); // CharId original
 			tmp_item.card[3] = GetWord(sd->status.char_id,1);
+
+			// --- INICIO CUSTOM: Opciones Aleatorias en Armas Forjadas por Blacksmith ---
+			struct item_data* forged_id = itemdb_search(tmp_item.nameid);
+			if (forged_id != nullptr && forged_id->type == IT_WEAPON) {
+				pc_apply_random_option(forged_id, tmp_item);
+			}
+			// --- FIN CUSTOM ---
 		} else {
 			//Flag is only used on the end, so it can be used here. [Skotlex]
 			switch (skill_id) {

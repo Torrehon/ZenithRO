@@ -22,16 +22,31 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 
 	// Estado 4: Entrega de Quest y Recompensa
 	if (coalmines_quest == 4) {
+		mes "[Garrick]";
 		mes "By the gods... Is that truly a piece of raw Orichalcum?!";
 		next;
+		mes "[Garrick]";
 		mes "Look at that sheen... The legends didn't lie. This quality is superb!";
 		next;
-		mes "You have done an amazing job, adventurer. Here is your reward as promised.";
+		mes "[Garrick]";
+		mes "As promised, please select your armor piece reward:";
+		mes "- 1. " + mesitemlink(2309);
+		mes "- 2. " + mesitemlink(2311);
+		mes "- 3. " + mesitemlink(2312);
 		next;
-		
+		.@choice = select("Coat:Mink Coat:Padded Armor");
+		if (.@choice == 1) .@eq_id = 2309;
+		else if (.@choice == 2) .@eq_id = 2311;
+		else .@eq_id = 2312;
+
+		mes "[Garrick]";
+		mes "Great selection! Take this armor, 1x " + mesitemlink(12997) + ", your Mining Helmet, 45,000 Zeny, and a well-earned EXP bonus!";
 		if (checkquest(80033) == 0 || checkquest(80033) == 1) { completequest 80033; }
-		getexp 110000, 140000; 
-		getitem 5031, 1; // Recompensa (Helmet)
+		getitem .@eq_id, 1;
+		getitem 12997, 1; // 1x Elunium Box
+		getitem 5031, 1; // Mine Helmet
+		getexp 110000, 140000;
+		set Zeny, Zeny + 45000;
 		
 		set coalmines_quest, 5;
 		mes "If I manage to forge something out of this, I'll let you know!";
@@ -354,21 +369,25 @@ OnBossDead:
 	'boss_dead = 1; 
 	mapannounce instance_mapname("1@mjo"), "The Mine Spirit dissolves into dust! The path back is secure.", bc_map, "0x00FF00";
 	
-	if (getcharid(1) > 0) .party_id = getcharid(1);
+	.@party_id = (getcharid(1) > 0) ? getcharid(1) : .party_id;
 	.@origin_aid = getcharid(3);
-	getpartymember .party_id, 2;
+	.@inst_map$ = instance_mapname("1@mjo");
 	
-	for (.@i = 0; .@i < $@partymembercount; .@i++) {
-		if (attachrid($@partymemberaid[.@i])) {
-			
-			if (coalmines_quest == 3) {
-				if (checkquest(80031) == 0 || checkquest(80031) == 1) { completequest 80031; } 
-				if (checkquest(80032) == 0 || checkquest(80032) == 1) { completequest 80032; }
-				if (checkquest(80033) == -1) { setquest 80033; }
-				set coalmines_quest, 4; 
+	if (.@party_id > 0) {
+		getpartymember .@party_id, 2;
+		
+		for (.@i = 0; .@i < $@partymembercount; .@i++) {
+			if (attachrid($@partymemberaid[.@i])) {
+				if (strcharinfo(3) == .@inst_map$) {
+					if (coalmines_quest == 3) {
+						if (checkquest(80031) == 0 || checkquest(80031) == 1) { completequest 80031; } 
+						if (checkquest(80032) == 0 || checkquest(80032) == 1) { completequest 80032; }
+						if (checkquest(80033) == -1) { setquest 80033; }
+						set coalmines_quest, 4; 
+					}
+				}
+				detachrid;
 			}
-			
-			detachrid;
 		}
 	}
 	attachrid(.@origin_aid);

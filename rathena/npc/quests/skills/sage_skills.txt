@@ -48,7 +48,7 @@ yuno_in03,176,24,3	script	Mischna	755,{
 		mes "[Mishuna]";
 		mes "I don't need to ask you for converter crafting materials. Take the secrets of ^0000FFElemental Converter Creation^000000!";
 		next;
-		skill "SA_CREATECON",1,SKILL_PERM;
+		skill "SA_CREATECON",1,SKILL_PERM_GRANT;
 		specialeffect2 EF_RUWACH;
 		specialeffect EF_LEVELUP;
 		mes "[Mishuna]";
@@ -99,7 +99,7 @@ yuno_in03,176,24,3	script	Mischna	755,{
 			delitem 1013,12; // Rainbow_Shell
 			delitem 946,10; // Snail's_Shell
 			delitem 7433,4; // Blank_Scroll
-			skill "SA_CREATECON",1,SKILL_PERM;
+			skill "SA_CREATECON",1,SKILL_PERM_GRANT;
 			mes "[Mishuna]";
 			mes "Congratulations! You have successfully mastered ^0000FFElemental Converter Creation^000000!";
 			close;
@@ -167,7 +167,7 @@ yuno_in03,176,24,3	script	Mischna	755,{
 				specialeffect2 EF_BRANDISHSPEAR;
 				specialeffect EF_LEVELUP;
 				delitem .@ReqItem[.@i], 40;
-				skill .@Skill[.@i], 1, SKILL_PERM;
+				skill .@Skill[.@i], 1, SKILL_PERM_GRANT;
 				mes "[Mishuna]";
 				mes "Congratulations! You have learned ^0000FF" + .@Skill$[.@i] + " Elemental Change^000000!";
 				next;

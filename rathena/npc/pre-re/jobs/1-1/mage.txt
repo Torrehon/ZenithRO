@@ -106,6 +106,16 @@ geffen_in,158,124,4	script	Yuria	69,{ //DAWN STAFF QUEST
 	// === A PARTIR DE AQUÍ, ES 100% RAMA MAGE ===
 
 	if (dawn_staff_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Yuria]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Staff, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Staff (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40003; // Dawn Wand
+			}
+			close;
+		}
 		mes "[Yuria]";
 		mes "The mana flows beautifully through that staff. I knew you were the right choice.";
 		mes "May your spells always find their mark and your mind remain as clear as crystal.";

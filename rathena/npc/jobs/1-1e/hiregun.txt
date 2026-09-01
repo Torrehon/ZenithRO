@@ -95,6 +95,16 @@ hire_in,182,96,4	script	Veteran Flint	632,{ // DAWN HIREGUN QUEST
 	}
 
 	if (dawn_hg_q == 2) {
+		if (!callfunc("F_HasAnyStarWeapon")) {
+			mes "[Veteran Flint]";
+			mes "I sense that you do not carry a Star Fragment weapon in your equipment or inventory.";
+			mes "If you have lost or broken your Dawn Weapon, I can perform a Celestial Re-forge for you.";
+			next;
+			if (select("Re-forge Dawn Weapon (10x Star Dust):Cancel") == 1) {
+				callfunc "F_ReForgeDawnWeapon", 40008, 40009; // Dawn Six-Shooter or Dawn Repeater
+			}
+			close;
+		}
 		mes "[Veteran Flint]";
 		mes "There's our rising star! Keep that Dawn weapon clean and it will never jam on you.";
 		close;

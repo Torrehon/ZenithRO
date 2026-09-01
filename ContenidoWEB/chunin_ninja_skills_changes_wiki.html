@@ -1,0 +1,375 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Contenedor principal que agrupa todas las skills */
+  .skill-list-container {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 850px;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  /* Diseño de la fila de cada habilidad individual */
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 25px;
+    background-color: #f8fbfd;
+    border-bottom: 1px solid #e3f2fd;
+    transition: background-color 0.2s ease;
+  }
+
+  .skill-row:last-child {
+    border-bottom: none;
+  }
+
+  .skill-row:hover {
+    background-color: #e3f2fd;
+  }
+
+  /* Cajita del icono de la habilidad */
+  .skill-icon-box {
+    flex-shrink: 0;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+  }
+
+  /* Contenedor del texto */
+  .skill-content {
+    flex-grow: 1;
+  }
+
+  /* Título de la habilidad */
+  .skill-title {
+    margin: 0 0 8px 0;
+    color: #1565c0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Etiqueta del nivel máximo */
+  .skill-meta {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    background-color: #bbdefb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    letter-spacing: normal;
+  }
+
+  /* Descripción de la habilidad */
+  .skill-desc {
+    margin: 0;
+    color: #455a64;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 0.95em;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 600px) {
+    .skill-row { 
+      padding: 15px; 
+    }
+    .skill-icon-box { 
+      margin-right: 15px; 
+    }
+    .skill-title { 
+      font-size: 1.05em; 
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .skill-desc { 
+      font-size: 0.85em; 
+    }
+  }
+</style>
+
+<div class="skill-list-container">
+
+  <!-- 1. Throw Huuma Shuriken -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/525.png" alt="Throw Huuma Shuriken Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Throw Huuma Shuriken
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 20 / 25 / 30 / 35 / 40 <br><br>
+        No longer splits damage among targets.<br><br>
+        Casting Time: 2 seconds.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Zenynage -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/526.png" alt="Zenynage Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Zenynage
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 25 <br><br>
+        Damage is no longer halved against MVP Bosses. Strikes the target 5 times, dealing 300% + (70% * Skill Level) physical damage. Consumes between 300 and 3,000 Zeny depending on skill level.<br><br>
+        Casting Time: 1 second.<br><br>
+        Cooldown: 2 seconds.<br><br>
+        After Cast Delay: 1 second.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Shadow Slash -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/528.png" alt="Shadow Slash Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Shadow Slash
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 20 + 2 * Skill Level <br><br>
+        Range: Melee.<br><br>
+        Deals (100% * Skill Level) physical damage (500% max) with +50% bonus CRIT. When cast while under the "Shadow Slash Ready" stance, maximum damage increases to 700% and bonus CRIT increases to +75%. Every point of STR grants a +2% final damage ratio multiplier.
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Zantetsuken (Final Strike) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/544.png" alt="Zantetsuken Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Zantetsuken (Final Strike)
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 50 <br><br>
+        Range: Melee.<br><br>
+        No longer consumes user's HP upon cast. Slashes an enemy for 500% + (50% * Skill Level) physical damage.<br><br>
+        Casting Time: 1s * Skill Level (Uninterrupted).<br><br>
+        <em>Visual Effects:</em> Sakura blossom cast effect (HAT_EF_BLOSSOM_FLUTTERING) and flower leaf hit effect (ID 699).
+      </p>
+    </div>
+  </div>
+
+  <!-- 5. Illusionary Shadow -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/532.png" alt="Illusionary Shadow Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Illusionary Shadow
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 30 / 32 / 34 / 36 / 38 <br><br>
+        Blocks up to (Skill Level) physical attacks. At level 5, consumes 1 Shadow Orb to block 2 additional attacks (total 7 blocks).<br><br>
+        Casting Time: 4 / 4 / 3 / 3 / 1 seconds.<br><br>
+        Duration: 60 to 300 seconds.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Crimson Fire Formation -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/535.png" alt="Crimson Fire Formation Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Crimson Fire Formation
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 25 <br><br>
+        Creates a ring of fire around the caster. At level 10, consumes 1 Flame Stone and knocks enemies back by 2 cells.
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. Dragon Fire Formation -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/536.png" alt="Dragon Fire Formation Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Dragon Fire Formation
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 20 / 25 / 30 / 35 / 40 <br><br>
+        Strikes a target with Fire magic dealing AoE damage in a 3x3 area around it. At level 5, consumes 1 Flame Stone and increases AoE size to 5x5.
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. Water Escape Technique -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/538.png" alt="Water Escape Technique Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Water Escape Technique
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 15 + 3 * Skill Level <br><br>
+        Creates a pool of water, reducing enemy Movement Speed and AGI. At level 10, consumes 1 Ice Stone to reduce enemy ASPD by 10%.
+      </p>
+    </div>
+  </div>
+
+  <!-- 9. Ice Meteor -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/539.png" alt="Ice Meteor Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Ice Meteor
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 40 / 45 / 50 / 55 / 60 <br><br>
+        Summons an icy meteor onto the target, dealing Water magic damage in a 3x3 AoE area. At level 5, consumes 1 Ice Stone and expands AoE size to 5x5. No longer freezes targets. Damage ratio: 100% + (80% * Skill Level).
+      </p>
+    </div>
+  </div>
+
+  <!-- 10. Lightning Crash -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/541.png" alt="Lightning Crash Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Lightning Crash
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 16 / 20 / 24 / 28 / 32 <br><br>
+        Summons a thunderbolt onto the target, dealing Wind magic damage in a 3x3 AoE area. At level 5, consumes 1 Wind Stone and expands AoE size to 5x5. Damage ratio: 100% + (80% * Skill Level).
+      </p>
+    </div>
+  </div>
+
+  <!-- 11. Kamaitachi -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/542.png" alt="Kamaitachi Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Kamaitachi
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        Sp Cost: 24 / 28 / 32 / 36 / 40 <br><br>
+        Retains original functionality with a damage ratio of (70% * Skill Level). Knocks enemies back 4 cells. Consumes 1 Wind Stone at level 5.
+      </p>
+    </div>
+  </div>
+
+  <!-- 12. Dual Wield (PLATINUM) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Dual Wield Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Dual Wield (PLATINUM)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Grants the Ninja class the ability to dual-wield two 1-Handed weapons.
+      </p>
+    </div>
+  </div>
+
+  <!-- 13. Soul of the Kensei (PLATINUM) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1f6dVrl0RfPK8I1q3SV92UPzPS25lKXNr" alt="Soul of the Kensei Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Kensei (PLATINUM)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances physical Ninja skills: Throw Shurikens, Throw Huuma Shuriken, Zenynage, and Shadow Slash:<br><br>
+        - <strong>Throw Shurikens:</strong> Inflicts the "Hakai" status, increasing damage of the next Throw Huuma Shuriken against target(s) by +300%.<br><br>
+        - <strong>Throw Huuma Shuriken:</strong> Increases final damage by +1% per point of STR and DEX.<br><br>
+        - <strong>Zenynage:</strong> Increases final damage by +300%. Refunds all spent Zeny if the target dies.<br><br>
+        - <strong>Shadow Slash:</strong> When cast under "Shadow Slash Ready" stance, triggers "Zantetsuken Ready" status, which doubles Zantetsuken damage at Level 10 (or increases final damage ratio by +200% for levels 1-9) and reduces Zantetsuken casting time by -75%.
+      </p>
+    </div>
+  </div>
+
+  <!-- 14. Soul of the Kuji (PLATINUM) -->
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1iYHpb8eE8mJ9Ucdrg00yjRVVCRRE-FLZ" alt="Soul of the Kuji Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Kuji (PLATINUM)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> / <strong>Platinum</strong> <br><br>
+        Enhances magical Ninja skills: Crimson Fire Formation, Dragon Fire Formation, Water Escape Technique, Ice Meteor, Lightning Crash, and Kamaitachi:<br><br>
+        - <strong>Crimson Fire Formation & Dragon Fire Formation:</strong> Has a 30% chance to inflict "Burning" status at maximum skill level.<br><br>
+        - <strong>Water Escape Technique:</strong> At Level 10, inflicts "Drown" status while enemies remain inside the AoE pool.<br><br>
+        - <strong>Ice Meteor:</strong> At Level 5, has a 30% chance to inflict "Freezing" status.<br><br>
+        - <strong>Lightning Crash:</strong> At Level 5, has a 30% chance to inflict "Electrocute" status.<br><br>
+        - <strong>Kamaitachi:</strong> At Level 5, consumes 1 Wind Stone to strike 2 hits.
+      </p>
+    </div>
+  </div>
+
+</div>

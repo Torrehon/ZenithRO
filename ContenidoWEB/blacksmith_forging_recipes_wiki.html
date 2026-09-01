@@ -1,0 +1,548 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;500;700&display=swap');
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 10px;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #b89628; }
+
+  /* Main Container */
+  .forging-container {
+    max-width: 920px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+  }
+
+  /* Header Banner */
+  .forging-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 22px 26px;
+    border-bottom: 4px solid #d4af37;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .header-title-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .header-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-icon img {
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated;
+  }
+
+  .header-title-box h2 {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.45em;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #f8fafc;
+  }
+
+  .header-title-box p {
+    margin: 3px 0 0 0;
+    font-size: 0.85em;
+    color: #94a3b8;
+  }
+
+  .search-box {
+    position: relative;
+    min-width: 240px;
+    flex-grow: 1;
+    max-width: 300px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 10px 14px 10px 36px;
+    border-radius: 20px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: #ffffff;
+    font-size: 0.88em;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  .search-input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.35);
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  /* Filters Bar */
+  .filters-bar {
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.8em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+  }
+
+  .tab-btn:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+    border-color: #94a3b8;
+  }
+
+  .tab-btn.active {
+    background: #1e293b;
+    color: #d4af37;
+    border-color: #1e293b;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+  }
+
+  .level-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82em;
+    color: #64748b;
+    font-weight: 700;
+  }
+
+  .lvl-badge-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+  }
+  .lvl-badge-btn:hover { background: #e2e8f0; }
+  .lvl-badge-btn.active {
+    background: #d4af37;
+    color: #ffffff;
+    border-color: #d4af37;
+  }
+
+  /* Grid Layout */
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    max-height: 650px;
+    overflow-y: auto;
+    background: #ffffff;
+  }
+
+  /* Recipe Card */
+  .recipe-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+  }
+  .recipe-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    border-color: #cbd5e1;
+  }
+
+  .recipe-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .weapon-sprite-box {
+    width: 48px;
+    height: 48px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .weapon-sprite-box img {
+    max-width: 32px;
+    max-height: 32px;
+    image-rendering: pixelated;
+  }
+
+  .weapon-title-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .weapon-name {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05em;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .weapon-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .badge-item-id {
+    font-size: 0.72em;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .badge-lvl {
+    font-size: 0.72em;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .badge-lvl-1 { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+  .badge-lvl-2 { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+  .badge-lvl-3 { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+
+  /* Materials Section */
+  .materials-container {
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .materials-title {
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  .material-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85em;
+    color: #334155;
+  }
+
+  .material-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+  }
+
+  .material-name {
+    flex: 1;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .material-qty {
+    background: #e2e8f0;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.82em;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+
+  /* Empty State */
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #64748b;
+    font-size: 0.95em;
+  }
+</style>
+
+<div class="forging-container">
+  <!-- Header Banner -->
+  <div class="forging-header">
+    <div class="header-title-box">
+      <div class="header-icon">
+        <img src="https://static.divine-pride.net/images/items/item/raw/984.png" alt="Oridecon Icon" onerror="this.src='https://static.divine-pride.net/images/items/item/984.png'">
+      </div>
+      <div>
+        <h2>Blacksmith Weapon Forging</h2>
+        <p>Recetas de Creación de Armas (Item Lv 1 ~ 3)</p>
+      </div>
+    </div>
+    
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar arma o ingrediente..." oninput="filterRecipes()">
+    </div>
+  </div>
+
+  <!-- Category & Level Filters Bar -->
+  <div class="filters-bar">
+    <div class="category-tabs">
+      <button class="tab-btn active" data-type="all" onclick="selectCategory('all', this)">Todas</button>
+      <button class="tab-btn" data-type="1hsword" onclick="selectCategory('1hsword', this)">⚔️ 1H Swords</button>
+      <button class="tab-btn" data-type="dagger" onclick="selectCategory('dagger', this)">🗡️ Daggers</button>
+      <button class="tab-btn" data-type="2hsword" onclick="selectCategory('2hsword', this)">🗡️ 2H Swords</button>
+      <button class="tab-btn" data-type="axe" onclick="selectCategory('axe', this)">🪓 Axes</button>
+      <button class="tab-btn" data-type="mace" onclick="selectCategory('mace', this)">🔨 Maces</button>
+      <button class="tab-btn" data-type="knuckle" onclick="selectCategory('knuckle', this)">🥊 Knuckles</button>
+      <button class="tab-btn" data-type="spear" onclick="selectCategory('spear', this)">🔱 Spears</button>
+    </div>
+
+    <div class="level-filters">
+      <span>Filtrar Nivel:</span>
+      <button class="lvl-badge-btn active" data-lvl="0" onclick="selectLevel(0, this)">Todos</button>
+      <button class="lvl-badge-btn" data-lvl="1" onclick="selectLevel(1, this)">Lv 1</button>
+      <button class="lvl-badge-btn" data-lvl="2" onclick="selectLevel(2, this)">Lv 2</button>
+      <button class="lvl-badge-btn" data-lvl="3" onclick="selectLevel(3, this)">Lv 3</button>
+    </div>
+  </div>
+
+  <!-- Cards Grid Container -->
+  <div class="recipe-grid" id="recipeGrid">
+    <!-- Rendered dynamically by JavaScript -->
+  </div>
+</div>
+
+<script>
+  const weaponsData = [
+    // --- 1H Swords ---
+    { id: 1101, name: "Sword", lvl: 1, type: "1hsword", mats: [{ id: 998, name: "Iron", qty: 2 }] },
+    { id: 1104, name: "Falchion", lvl: 1, type: "1hsword", mats: [{ id: 998, name: "Iron", qty: 5 }] },
+    { id: 1107, name: "Blade", lvl: 1, type: "1hsword", mats: [{ id: 998, name: "Iron", qty: 8 }, { id: 913, name: "Tooth of Bat", qty: 3 }] },
+    { id: 1110, name: "Rapier", lvl: 2, type: "1hsword", mats: [{ id: 999, name: "Steel", qty: 4 }] },
+    { id: 1113, name: "Scimitar", lvl: 2, type: "1hsword", mats: [{ id: 999, name: "Steel", qty: 8 }] },
+    { id: 1122, name: "Ring Pommel Saber", lvl: 2, type: "1hsword", mats: [{ id: 999, name: "Steel", qty: 10 }, { id: 920, name: "Wolf Claw", qty: 10 }] },
+    { id: 1126, name: "Saber", lvl: 3, type: "1hsword", mats: [{ id: 999, name: "Steel", qty: 5 }, { id: 984, name: "Oridecon", qty: 3 }, { id: 730, name: "1Carat Diamond", qty: 1 }] },
+    { id: 1123, name: "Haedongum", lvl: 3, type: "1hsword", mats: [{ id: 984, name: "Oridecon", qty: 8 }, { id: 999, name: "Steel", qty: 10 }, { id: 731, name: "2Carat Diamond", qty: 1 }] },
+    { id: 1119, name: "Tsurugi", lvl: 3, type: "1hsword", mats: [{ id: 984, name: "Oridecon", qty: 8 }, { id: 999, name: "Steel", qty: 15 }, { id: 731, name: "2Carat Diamond", qty: 1 }] },
+    { id: 1129, name: "Flamberge", lvl: 3, type: "1hsword", mats: [{ id: 984, name: "Oridecon", qty: 12 }, { id: 724, name: "Cursed Ruby", qty: 1 }] },
+
+    // --- Daggers ---
+    { id: 1201, name: "Knife", lvl: 1, type: "dagger", mats: [{ id: 998, name: "Iron", qty: 1 }, { id: 909, name: "Jellopy", qty: 1 }] },
+    { id: 1204, name: "Cutter", lvl: 1, type: "dagger", mats: [{ id: 998, name: "Iron", qty: 2 }] },
+    { id: 1207, name: "Main Gauche", lvl: 1, type: "dagger", mats: [{ id: 998, name: "Iron", qty: 5 }] },
+    { id: 1210, name: "Dirk", lvl: 2, type: "dagger", mats: [{ id: 999, name: "Steel", qty: 2 }] },
+    { id: 1213, name: "Dagger", lvl: 2, type: "dagger", mats: [{ id: 999, name: "Steel", qty: 5 }] },
+    { id: 1216, name: "Stiletto", lvl: 2, type: "dagger", mats: [{ id: 999, name: "Steel", qty: 7 }] },
+    { id: 1219, name: "Gladius", lvl: 3, type: "dagger", mats: [{ id: 984, name: "Oridecon", qty: 4 }, { id: 999, name: "Steel", qty: 10 }, { id: 730, name: "1Carat Diamond", qty: 1 }] },
+    { id: 1222, name: "Damascus", lvl: 3, type: "dagger", mats: [{ id: 984, name: "Oridecon", qty: 6 }, { id: 999, name: "Steel", qty: 15 }, { id: 731, name: "2Carat Diamond", qty: 1 }] },
+
+    // --- 2H Swords ---
+    { id: 1116, name: "Katana", lvl: 1, type: "2hsword", mats: [{ id: 998, name: "Iron", qty: 3 }, { id: 958, name: "Horrendous Mouth", qty: 5 }] },
+    { id: 1151, name: "Slayer", lvl: 2, type: "2hsword", mats: [{ id: 999, name: "Steel", qty: 5 }, { id: 957, name: "Decayed Nail", qty: 10 }] },
+    { id: 1154, name: "Bastard Sword", lvl: 2, type: "2hsword", mats: [{ id: 999, name: "Steel", qty: 5 }] },
+    { id: 1157, name: "Two-Handed Sword", lvl: 3, type: "2hsword", mats: [{ id: 984, name: "Oridecon", qty: 4 }, { id: 999, name: "Steel", qty: 7 }] },
+    { id: 1160, name: "Broad Sword", lvl: 3, type: "2hsword", mats: [{ id: 984, name: "Oridecon", qty: 6 }, { id: 999, name: "Steel", qty: 10 }] },
+    { id: 1163, name: "Claymore", lvl: 3, type: "2hsword", mats: [{ id: 984, name: "Oridecon", qty: 10 }, { id: 999, name: "Steel", qty: 15 }, { id: 733, name: "Cracked Diamond", qty: 1 }] },
+
+    // --- Axes ---
+    { id: 1301, name: "Axe", lvl: 1, type: "axe", mats: [{ id: 998, name: "Iron", qty: 2 }] },
+    { id: 1351, name: "Battle Axe", lvl: 1, type: "axe", mats: [{ id: 998, name: "Iron", qty: 6 }] },
+    { id: 1354, name: "Hammer", lvl: 2, type: "axe", mats: [{ id: 999, name: "Steel", qty: 3 }] },
+    { id: 1357, name: "Buster", lvl: 3, type: "axe", mats: [{ id: 984, name: "Oridecon", qty: 4 }, { id: 999, name: "Steel", qty: 7 }, { id: 922, name: "Orcish Fang", qty: 10 }] },
+    { id: 1360, name: "Two-Handed Axe", lvl: 3, type: "axe", mats: [{ id: 984, name: "Oridecon", qty: 8 }, { id: 999, name: "Steel", qty: 10 }, { id: 731, name: "2Carat Diamond", qty: 1 }] },
+
+    // --- Maces ---
+    { id: 1501, name: "Club", lvl: 1, type: "mace", mats: [{ id: 998, name: "Iron", qty: 1 }] },
+    { id: 1504, name: "Mace", lvl: 1, type: "mace", mats: [{ id: 998, name: "Iron", qty: 3 }] },
+    { id: 1507, name: "Smasher", lvl: 2, type: "mace", mats: [{ id: 999, name: "Steel", qty: 2 }] },
+    { id: 1510, name: "Flail", lvl: 2, type: "mace", mats: [{ id: 999, name: "Steel", qty: 4 }] },
+    { id: 1519, name: "Chain", lvl: 2, type: "mace", mats: [{ id: 999, name: "Steel", qty: 8 }] },
+    { id: 1513, name: "Morning Star", lvl: 3, type: "mace", mats: [{ id: 999, name: "Steel", qty: 10 }, { id: 730, name: "1Carat Diamond", qty: 1 }] },
+    { id: 1516, name: "Sword Mace", lvl: 3, type: "mace", mats: [{ id: 999, name: "Steel", qty: 15 }, { id: 963, name: "Sharp Scale", qty: 20 }] },
+    { id: 1522, name: "Stunner", lvl: 3, type: "mace", mats: [{ id: 984, name: "Oridecon", qty: 8 }, { id: 999, name: "Steel", qty: 15 }, { id: 731, name: "2Carat Diamond", qty: 1 }] },
+
+    // --- Knuckles ---
+    { id: 1801, name: "Waghnakh", lvl: 1, type: "knuckle", mats: [{ id: 998, name: "Iron", qty: 4 }] },
+    { id: 1803, name: "Knuckle Duster", lvl: 2, type: "knuckle", mats: [{ id: 999, name: "Steel", qty: 3 }] },
+    { id: 1805, name: "Hora", lvl: 2, type: "knuckle", mats: [{ id: 999, name: "Steel", qty: 6 }] },
+    { id: 1807, name: "Fist", lvl: 3, type: "knuckle", mats: [{ id: 984, name: "Oridecon", qty: 8 }, { id: 999, name: "Steel", qty: 15 }, { id: 730, name: "1Carat Diamond", qty: 1 }] },
+    { id: 1809, name: "Claw", lvl: 3, type: "knuckle", mats: [{ id: 984, name: "Oridecon", qty: 6 }, { id: 999, name: "Steel", qty: 10 }] },
+    { id: 1811, name: "Finger", lvl: 3, type: "knuckle", mats: [{ id: 984, name: "Oridecon", qty: 3 }, { id: 999, name: "Steel", qty: 10 }] },
+
+    // --- Spears ---
+    { id: 1401, name: "Javelin", lvl: 1, type: "spear", mats: [{ id: 998, name: "Iron", qty: 3 }] },
+    { id: 1404, name: "Spear", lvl: 1, type: "spear", mats: [{ id: 998, name: "Iron", qty: 5 }] },
+    { id: 1407, name: "Pike", lvl: 1, type: "spear", mats: [{ id: 998, name: "Iron", qty: 7 }] },
+    { id: 1451, name: "Guisarme", lvl: 2, type: "spear", mats: [{ id: 999, name: "Steel", qty: 4 }] },
+    { id: 1454, name: "Glaive", lvl: 2, type: "spear", mats: [{ id: 999, name: "Steel", qty: 7 }] },
+    { id: 1457, name: "Partizan", lvl: 2, type: "spear", mats: [{ id: 999, name: "Steel", qty: 10 }] },
+    { id: 1460, name: "Trident", lvl: 3, type: "spear", mats: [{ id: 984, name: "Oridecon", qty: 4 }, { id: 999, name: "Steel", qty: 8 }, { id: 730, name: "1Carat Diamond", qty: 1 }] },
+    { id: 1463, name: "Halberd", lvl: 3, type: "spear", mats: [{ id: 984, name: "Oridecon", qty: 6 }, { id: 999, name: "Steel", qty: 10 }, { id: 730, name: "1Carat Diamond", qty: 1 }] },
+    { id: 1410, name: "Lance", lvl: 3, type: "spear", mats: [{ id: 984, name: "Oridecon", qty: 8 }, { id: 923, name: "Evil Horn", qty: 1 }, { id: 730, name: "1Carat Diamond", qty: 1 }] }
+  ];
+
+  let currentCategory = 'all';
+  let currentLevel = 0;
+
+  function getItemSpriteUrl(itemId) {
+    return `https://static.divine-pride.net/images/items/item/raw/${itemId}.png`;
+  }
+
+  function renderRecipes() {
+    const grid = document.getElementById('recipeGrid');
+    const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+
+    const filtered = weaponsData.filter(item => {
+      // Filter by Category
+      if (currentCategory !== 'all' && item.type !== currentCategory) return false;
+      
+      // Filter by Level
+      if (currentLevel !== 0 && item.lvl !== currentLevel) return false;
+
+      // Filter by Search Query (Name, ID, or Material Name)
+      if (searchVal) {
+        const matchesName = item.name.toLowerCase().includes(searchVal);
+        const matchesId = item.id.toString().includes(searchVal);
+        const matchesMat = item.mats.some(m => m.name.toLowerCase().includes(searchVal) || m.id.toString().includes(searchVal));
+        if (!matchesName && !matchesId && !matchesMat) return false;
+      }
+
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="no-results">🔍 No se encontraron recetas de forja que coincidan con la búsqueda.</div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(item => {
+      const matsHtml = item.mats.map(m => `
+        <div class="material-row">
+          <img class="material-icon" src="${getItemSpriteUrl(m.id)}" onerror="this.onerror=null; this.src='https://static.divine-pride.net/images/items/item/${m.id}.png';" alt="${m.name}">
+          <span class="material-name">${m.name}</span>
+          <span class="material-qty">x${m.qty}</span>
+        </div>
+      `).join('');
+
+      return `
+        <div class="recipe-card">
+          <div class="recipe-card-header">
+            <div class="weapon-sprite-box">
+              <img src="${getItemSpriteUrl(item.id)}" onerror="this.onerror=null; this.src='https://static.divine-pride.net/images/items/item/${item.id}.png';" alt="${item.name}">
+            </div>
+            <div class="weapon-title-info">
+              <div class="weapon-name" title="${item.name}">${item.name}</div>
+              <div class="weapon-meta">
+                <span class="badge-item-id">#${item.id}</span>
+                <span class="badge-lvl badge-lvl-${item.lvl}">Lv ${item.lvl}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="materials-container">
+            <div class="materials-title">Materiales Requeridos</div>
+            ${matsHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function selectCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRecipes();
+  }
+
+  function selectLevel(lvl, btn) {
+    currentLevel = lvl;
+    document.querySelectorAll('.lvl-badge-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRecipes();
+  }
+
+  function filterRecipes() {
+    renderRecipes();
+  }
+
+  // Initial Render
+  document.addEventListener('DOMContentLoaded', () => {
+    renderRecipes();
+  });
+</script>

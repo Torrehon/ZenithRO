@@ -1,0 +1,26 @@
+﻿Tipo de Equipo;Intento de Refino;Probabilidad Normal (Elunium/Oridecon);Probabilidad Enriquecida;Resultado si Falla;Coste en Zeny
+Armaduras / Armas Lv 4;+1 a +4;100%;100%;Seguro (Sin cambio);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+Armaduras / Armas Lv 4;+5;55%;80%;Baja a +4 (-1);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+Armaduras / Armas Lv 4;+6;45%;70%;Baja a +5 (-1);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+Armaduras / Armas Lv 4;+7;35%;55%;Baja a +6 (-1);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+Armaduras / Armas Lv 4;+8;25%;40%;Baja a +7 (-1);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+Armaduras / Armas Lv 4;+9;15%;25%;Baja a +6 (-2);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+Armaduras / Armas Lv 4;+10;7%;15%;Baja a +6 (-3);10.000 Zeny (Armas Lv 4) / 2.000 Zeny (Armadura)
+;;;;;
+Armas Nivel 1;+1 a +7;100%;100%;Seguro (Sin cambio);50 Zeny
+Armas Nivel 1;+8;50%;75%;Baja a +7 (-1);50 Zeny
+Armas Nivel 1;+9;35%;55%;Baja a +6 (-2);50 Zeny
+Armas Nivel 1;+10;15%;25%;Baja a +6 (-3);50 Zeny
+;;;;;
+Armas Nivel 2;+1 a +6;100%;100%;Seguro (Sin cambio);200 Zeny
+Armas Nivel 2;+7;50%;75%;Baja a +6 (-1);200 Zeny
+Armas Nivel 2;+8;35%;55%;Baja a +7 (-1);200 Zeny
+Armas Nivel 2;+9;15%;25%;Baja a +6 (-2);200 Zeny
+Armas Nivel 2;+10;10%;20%;Baja a +6 (-3);200 Zeny
+;;;;;
+Armas Nivel 3;+1 a +5;100%;100%;Seguro (Sin cambio);5.000 Zeny
+Armas Nivel 3;+6;55%;80%;Baja a +5 (-1);5.000 Zeny
+Armas Nivel 3;+7;45%;70%;Baja a +6 (-1);5.000 Zeny
+Armas Nivel 3;+8;35%;55%;Baja a +7 (-1);5.000 Zeny
+Armas Nivel 3;+9;25%;40%;Baja a +6 (-2);5.000 Zeny
+Armas Nivel 3;+10;15%;25%;Baja a +6 (-3);5.000 Zeny

@@ -1,0 +1,599 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Main Card Container */
+  .quest-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-left: 6px solid #8b5cf6; /* Púrpura para sistemas de durabilidad y refinamiento */
+    margin-bottom: 25px;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quest-top {
+    display: flex;
+    width: 100%;
+  }
+
+  .quest-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .quest-header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #7c3aed;
+    margin-bottom: 6px;
+  }
+
+  .quest-step-title {
+    font-family: 'Lato', sans-serif;
+    color: #4c1d95;
+    font-size: 1.3em;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-badge {
+    background-color: #8b5cf6;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    font-weight: 700;
+  }
+
+  /* NPC Info Box */
+  .npc-info-box {
+    display: flex;
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    overflow: hidden;
+  }
+
+  .npc-highlight-panel {
+    background-color: #f3e8ff;
+    border-right: 2px solid #8b5cf6;
+    color: #4c1d95;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .npc-sprite-container {
+    background: #ffffff;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #d8b4fe;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px; 
+    width: 75px;
+  }
+
+  .npc-sprite-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .npc-name {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95em;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .npc-location-panel {
+    padding: 15px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .req-title {
+    font-size: 0.85em;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+  }
+
+  .location-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    width: fit-content;
+  }
+
+  .coord {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.95em;
+  }
+
+  /* Content Formatting */
+  .quest-content h3 {
+    font-family: 'Lato', sans-serif;
+    color: #1e293b;
+    font-size: 1.1em;
+    margin: 20px 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
+  }
+
+  .quest-content h3:first-of-type {
+    margin-top: 0;
+  }
+
+  .mechanics-list {
+    background: #ffffff;
+    border-left: 4px solid #8b5cf6;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+
+  .mechanics-list ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #374151;
+  }
+
+  .mechanics-list li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    font-size: 0.95em;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  th, td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.95em;
+    color: #334155;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  th {
+    background-color: #f8fafc;
+    font-weight: 700;
+    color: #0f172a;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+  }
+
+  /* Status Badges */
+  .badge-safe {
+    background-color: #dcfce7;
+    color: #15803d;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+
+  .badge-drop {
+    background-color: #fef3c7;
+    color: #b45309;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+
+  .badge-penalty {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+
+  .highlight {
+    font-weight: bold;
+    color: #7c3aed;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 650px) {
+    .quest-top { flex-direction: column; }
+    .npc-info-box { flex-direction: row; }
+    .npc-highlight-panel { min-width: 110px; padding: 10px; }
+    .quest-step-title { font-size: 1.1em !important; }
+    th, td { padding: 8px 10px; font-size: 0.85em; }
+  }
+</style>
+
+<div class="quest-card">
+  <div class="quest-top">
+    <div class="quest-content">
+      <div class="quest-header-tag">🛡️ System Guide</div>
+      <h3 class="quest-step-title">
+        <span class="step-badge">SYSTEM</span>
+        Equipment Durability Refinement System
+      </h3>
+
+      <!-- System Header Box -->
+      <div class="npc-info-box">
+        <div class="npc-highlight-panel">
+          <div class="npc-sprite-container">
+            <img src="https://www.divine-pride.net/img/items/item/iRO/1005" alt="Anvil (1005)">
+          </div>
+          <span class="npc-name">Refining Workshop</span>
+        </div>
+        <div class="npc-location-panel">
+          <h5 class="req-title">Locations</h5>
+          <div class="location-item">
+            <span style="font-weight: 600; color: #334155;">📍 Major Cities</span>
+            <span class="coord">Prontera, Geffen, Morroc, Payon, Alberta</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mechanics -->
+      <h3>How does it work?</h3>
+      <div class="mechanics-list">
+        <ul>
+          <li><b>Durability Index (100/100):</b> All refinable equipment (Headgear Top, Armor, Shield, Weapon, Garment, Footgear) comes with <span class="highlight">100 Durability</span>.</li>
+          <li><b>No Level Downgrade:</b> Failing a refine attempt <b>never decreases your refine level</b> (a +8 weapon stays +8 on failure!).</li>
+          <li><b>Durability Reduction on Failure:</b> When a refine attempt fails, the equipment loses Durability based on its weapon level and target refine level.</li>
+          <li><b>Breakage at 0 Durability:</b> If an item's Durability drops to <span class="highlight">0</span>, the equipment breaks and is destroyed permanently.</li>
+          <li><b>Safe Refine Levels:</b> Upgrading gear up to its safe limit is 100% guaranteed (Armors & Lv4 Weapons: +4, Lv3 Weapons: +5, Lv2 Weapons: +6, Lv1 Weapons: +7).</li>
+          <li><b>Weapon Level 4 Cost Discount:</b> Refining Level 4 Weapons costs <b>10,000 Zeny</b> per attempt (reduced from 20,000 Zeny).</li>
+        </ul>
+      </div>
+
+      <!-- SECTION 1: WEAPONS -->
+      <h2 style="font-family: 'Lato', sans-serif; color: #6d28d9; font-size: 1.25em; border-bottom: 2px solid #8b5cf6; padding-bottom: 6px; margin-top: 10px; text-transform: uppercase;">⚔️ Weapons Refinement</h2>
+
+      <!-- Table 1: Weapon Level 1 -->
+      <h3>Level 1 Weapons (Safe Limit: +7)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Refine Attempt</th>
+            <th>Normal Ore Rate</th>
+            <th>Enriched Ore Rate</th>
+            <th>Failure Penalty</th>
+            <th>Zeny Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>+1 to +7</b></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">Safe (No Loss)</span></td>
+            <td>50 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+8</b></td>
+            <td>50%</td>
+            <td>75%</td>
+            <td><span class="badge-drop">-15 Durability</span></td>
+            <td>50 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+9</b></td>
+            <td>35%</td>
+            <td>55%</td>
+            <td><span class="badge-penalty">-25 Durability</span></td>
+            <td>50 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+10</b></td>
+            <td>15%</td>
+            <td>25%</td>
+            <td><span class="badge-penalty">-35 Durability</span></td>
+            <td>50 Zeny</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Table 2: Weapon Level 2 -->
+      <h3>Level 2 Weapons (Safe Limit: +6)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Refine Attempt</th>
+            <th>Normal Ore Rate</th>
+            <th>Enriched Ore Rate</th>
+            <th>Failure Penalty</th>
+            <th>Zeny Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>+1 to +6</b></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">Safe (No Loss)</span></td>
+            <td>200 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+7</b></td>
+            <td>50%</td>
+            <td>75%</td>
+            <td><span class="badge-drop">-15 Durability</span></td>
+            <td>200 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+8</b></td>
+            <td>35%</td>
+            <td>55%</td>
+            <td><span class="badge-drop">-20 Durability</span></td>
+            <td>200 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+9</b></td>
+            <td>15%</td>
+            <td>25%</td>
+            <td><span class="badge-penalty">-30 Durability</span></td>
+            <td>200 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+10</b></td>
+            <td>10%</td>
+            <td>20%</td>
+            <td><span class="badge-penalty">-40 Durability</span></td>
+            <td>200 Zeny</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Table 3: Weapon Level 3 -->
+      <h3>Level 3 Weapons (Safe Limit: +5)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Refine Attempt</th>
+            <th>Normal Ore Rate</th>
+            <th>Enriched Ore Rate</th>
+            <th>Failure Penalty</th>
+            <th>Zeny Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>+1 to +5</b></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">Safe (No Loss)</span></td>
+            <td>5,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+6</b></td>
+            <td>55%</td>
+            <td>80%</td>
+            <td><span class="badge-drop">-10 Durability</span></td>
+            <td>5,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+7</b></td>
+            <td>45%</td>
+            <td>70%</td>
+            <td><span class="badge-drop">-15 Durability</span></td>
+            <td>5,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+8</b></td>
+            <td>35%</td>
+            <td>55%</td>
+            <td><span class="badge-drop">-20 Durability</span></td>
+            <td>5,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+9</b></td>
+            <td>25%</td>
+            <td>40%</td>
+            <td><span class="badge-penalty">-30 Durability</span></td>
+            <td>5,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+10</b></td>
+            <td>15%</td>
+            <td>25%</td>
+            <td><span class="badge-penalty">-45 Durability</span></td>
+            <td>5,000 Zeny</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Table 4: Weapon Level 4 -->
+      <h3>Level 4 Weapons (Safe Limit: +4)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Refine Attempt</th>
+            <th>Normal Ore Rate</th>
+            <th>Enriched Ore Rate</th>
+            <th>Failure Penalty</th>
+            <th>Zeny Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>+1 to +4</b></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">Safe (No Loss)</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+5</b></td>
+            <td>55%</td>
+            <td>80%</td>
+            <td><span class="badge-drop">-10 Durability</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+6</b></td>
+            <td>45%</td>
+            <td>70%</td>
+            <td><span class="badge-drop">-15 Durability</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+7</b></td>
+            <td>35%</td>
+            <td>55%</td>
+            <td><span class="badge-drop">-20 Durability</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+8</b></td>
+            <td>25%</td>
+            <td>40%</td>
+            <td><span class="badge-drop">-25 Durability</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+9</b></td>
+            <td>15%</td>
+            <td>25%</td>
+            <td><span class="badge-penalty">-35 Durability</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+10</b></td>
+            <td>7%</td>
+            <td>15%</td>
+            <td><span class="badge-penalty">-50 Durability</span></td>
+            <td>10,000 Zeny</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 2: ARMORS & GEARS -->
+      <h2 style="font-family: 'Lato', sans-serif; color: #6d28d9; font-size: 1.25em; border-bottom: 2px solid #8b5cf6; padding-bottom: 6px; margin-top: 30px; text-transform: uppercase;">🛡️ Armors & Gears Refinement</h2>
+
+      <!-- Table 5: Armors, Helmets, Shields, Garments, Shoes -->
+      <h3>Armors, Helmets, Shields, Garments & Shoes (Safe Limit: +4)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Refine Attempt</th>
+            <th>Normal Ore Rate</th>
+            <th>Enriched Ore Rate</th>
+            <th>Failure Penalty</th>
+            <th>Zeny Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>+1 to +4</b></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">100%</span></td>
+            <td><span class="badge-safe">Safe (No Loss)</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+5</b></td>
+            <td>55%</td>
+            <td>80%</td>
+            <td><span class="badge-drop">-10 Durability</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+6</b></td>
+            <td>45%</td>
+            <td>70%</td>
+            <td><span class="badge-drop">-15 Durability</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+7</b></td>
+            <td>35%</td>
+            <td>55%</td>
+            <td><span class="badge-drop">-20 Durability</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+8</b></td>
+            <td>25%</td>
+            <td>40%</td>
+            <td><span class="badge-drop">-25 Durability</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+9</b></td>
+            <td>15%</td>
+            <td>25%</td>
+            <td><span class="badge-penalty">-35 Durability</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+          <tr>
+            <td><b>+10</b></td>
+            <td>7%</td>
+            <td>15%</td>
+            <td><span class="badge-penalty">-50 Durability</span></td>
+            <td>2,000 Zeny</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+</div>

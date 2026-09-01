@@ -1,0 +1,334 @@
+// =====================================================
+// Custom Hunting System - Morroc
+// Description: Hunting Board & Veteran Hunter Shop
+// Currency: Morroc Coin (ID 50007)
+// =====================================================
+
+// -----------------------------------------------------
+// 1. Hunting Board - Morroc (Sprite 857)
+// -----------------------------------------------------
+morocc,169,107,4	script	Hunting Board#moc	857,{
+	.@today = gettime(DT_YYYYMMDD);
+
+	while (1) {
+		mes "[^0055FFHunting Board - Morroc^000000]";
+		mes "Welcome, traveler. Select a contract tier to inspect today's missions in Sograt Desert, Pyramids, and Sphinx.";
+		mes "You may accept multiple contracts at once.";
+		next;
+
+		setarray .@Tiers$[1], "^00AA00Tier D (1-25)^000000", "^0055FFTier C (25-50)^000000", "^FF8800Tier B (50-75)^000000", "^FF0000Tier A (75-99)^000000", "^AA00AATier S (Minibosses)^000000";
+
+		set .@selTier, select(.@Tiers$[1], .@Tiers$[2], .@Tiers$[3], .@Tiers$[4], .@Tiers$[5], "^FF0000Manage Active Contracts^000000", "Close");
+		if (.@selTier == 7) close;
+
+		if (.@selTier == 6) {
+			deletearray .@active_qids[0];
+			.@active_count = 0;
+			for (.@i = 1; .@i <= .TotalMobs; .@i++) {
+				if (isbegin_quest(.Mob_QID[.@i]) == 1) {
+					.@active_qids[.@active_count] = .@i;
+					.@active_count++;
+				}
+			}
+
+			if (.@active_count == 0) {
+				mes "[^0055FFHunting Board - Morroc^000000]";
+				mes "You currently have no active hunting contracts from this board.";
+				next;
+				continue;
+			}
+
+			mes "[^0055FFHunting Board - Morroc^000000]";
+			mes "Select an active contract to inspect or abandon:";
+			next;
+
+			.@ab_menu$ = "";
+			for (.@i = 0; .@i < .@active_count; .@i++) {
+				.@m = .@active_qids[.@i];
+				if (checkquest(.Mob_QID[.@m], HUNTING) == 2) {
+					.@ab_menu$ = .@ab_menu$ + "^00AA00[Ready to Report] " + .Mob_Name$[.@m] + "^000000:";
+				} else {
+					.@ab_menu$ = .@ab_menu$ + "^FF0000[Abandon] " + .Mob_Name$[.@m] + "^000000:";
+				}
+			}
+			.@ab_menu$ = .@ab_menu$ + "^FF0000Abandon ALL Active Contracts^000000:Back to Main Menu";
+
+			.@ab_sel = select(.@ab_menu$);
+			if (.@ab_sel == .@active_count + 2) continue;
+
+			if (.@ab_sel == .@active_count + 1) {
+				for (.@i = 0; .@i < .@active_count; .@i++) {
+					.@m = .@active_qids[.@i];
+					erasequest .Mob_QID[.@m];
+				}
+				mes "[^0055FFHunting Board - Morroc^000000]";
+				mes "All active contracts have been abandoned.";
+				next;
+				continue;
+			}
+
+			.@m = .@active_qids[.@ab_sel - 1];
+			erasequest .Mob_QID[.@m];
+			mes "[^0055FFHunting Board - Morroc^000000]";
+			mes "Contract for ^FF0000" + .Mob_Name$[.@m] + "^000000 abandoned.";
+			next;
+			continue;
+		}
+
+		while (1) {
+			mes "[^0055FFHunting Board - Morroc^000000]";
+			mes "Select a contract from " + .@Tiers$[.@selTier] + ":";
+			next;
+
+			deletearray .@mob_idx[0];
+			.@count = 0;
+			for (.@i = 1; .@i <= .TotalMobs; .@i++) {
+				if (.Mob_Tier[.@i] == .@selTier) {
+					.@mob_idx[.@count] = .@i;
+					.@count++;
+				}
+			}
+
+			if (.@count == 0) {
+				mes "[^0055FFHunting Board - Morroc^000000]";
+				mes "Coming soon...";
+				next;
+				break;
+			}
+
+			// Build menu dynamically based on quest_db state
+			.@menu$ = "";
+			for (.@i = 0; .@i < .@count; .@i++) {
+				.@m = .@mob_idx[.@i];
+				.@qid = .Mob_QID[.@m];
+				.@cd = getd("Hunt_CD_" + .Mob_ID[.@m]);
+				.@st = isbegin_quest(.@qid);
+				.@hunt = checkquest(.@qid, HUNTING);
+
+				if (.@cd == .@today) {
+					.@menu$ = .@menu$ + "^777777[Done] " + .Mob_Name$[.@m] + " (" + .Mob_Req[.@m] + ")^000000:";
+				} else if (.@st == 1 && .@hunt == 2) {
+					.@menu$ = .@menu$ + "^00AA00[Report] " + .Mob_Name$[.@m] + " (" + .Mob_Req[.@m] + ")^000000:";
+				} else if (.@st == 1) {
+					.@menu$ = .@menu$ + "^0055FF[In Progress] " + .Mob_Name$[.@m] + " (" + .Mob_Req[.@m] + ")^000000:";
+				} else {
+					.@menu$ = .@menu$ + "[Accept] " + .Mob_Name$[.@m] + " (" + .Mob_Req[.@m] + "):";
+				}
+			}
+			.@menu$ = .@menu$ + "Back to Tiers";
+
+			.@choice = select(.@menu$);
+			if (.@choice > .@count) {
+				break;
+			}
+
+			.@m = .@mob_idx[.@choice - 1];
+			.@qid = .Mob_QID[.@m];
+			.@cd = getd("Hunt_CD_" + .Mob_ID[.@m]);
+			.@st = isbegin_quest(.@qid);
+			.@hunt = checkquest(.@qid, HUNTING);
+
+			mes "[^0055FFHunting Board - Morroc^000000]";
+
+			if (.@cd == .@today) {
+				mes "You have already completed this contract today.";
+				next;
+				continue;
+			}
+
+			if (.@st == 1 && .@hunt == 2) {
+				// Turn in completed contract
+				if (.Mob_Tier[.@m] == 5) {
+					.@base = (getmonsterinfo(.Mob_ID[.@m], MOB_BASEEXP) * 150 / 100);
+					.@job  = (getmonsterinfo(.Mob_ID[.@m], MOB_JOBEXP) * 150 / 100);
+				} else {
+					.@base = ((getmonsterinfo(.Mob_ID[.@m], MOB_BASEEXP) * .Mob_Req[.@m]) * 75 / 100);
+					.@job  = ((getmonsterinfo(.Mob_ID[.@m], MOB_JOBEXP) * .Mob_Req[.@m]) * 75 / 100);
+				}
+
+				getexp .@base, .@job;
+				getitem 50007, .Mob_Coins[.@m];
+				erasequest .@qid;
+				setd "Hunt_CD_" + .Mob_ID[.@m], .@today;
+
+				mes "Excellent work! Contract completed.";
+				mes "^00AA00You receive " + .Mob_Coins[.@m] + "x Morroc Coins and extra Experience.^000000";
+				specialeffect2 EF_MONEY;
+				next;
+				continue;
+			} else if (.@st == 1) {
+				mes "Contract: ^0055FF" + .Mob_Name$[.@m] + "^000000";
+				mes "Status: ^0055FFActive in Quest Log (Alt + U)^000000";
+				next;
+				if (select("Keep hunting:Abandon contract") == 2) {
+					erasequest .@qid;
+					mes "Contract abandoned.";
+					next;
+				}
+				continue;
+			}
+
+			// Confirmation Window with quest details
+			mes "=== ^0055FFContract Details^000000 ===";
+			mes "Target Monster: ^FF0000" + .Mob_Name$[.@m] + "^000000";
+			mes "Required Kills: ^00AA00" + .Mob_Req[.@m] + "^000000";
+			mes "Reward Coins: ^00AA00" + .Mob_Coins[.@m] + "x Morroc Coin^000000";
+			if (.Mob_Tier[.@m] == 5) {
+				mes "Bonus Experience: ^00AA00150% of Miniboss EXP^000000";
+			} else {
+				mes "Bonus Experience: ^00AA0075% of total hunting EXP^000000";
+			}
+			mes " ";
+			mes "Do you wish to accept this hunting contract?";
+			next;
+
+			if (select("Accept Contract:Decline") == 2) {
+				mes "[^0055FFHunting Board - Morroc^000000]";
+				mes "Contract declined.";
+				next;
+				continue;
+			}
+
+			setquest .@qid;
+			mes "[^0055FFHunting Board - Morroc^000000]";
+			mes "Contract signed! Good luck hunting ^FF0000" + .Mob_Name$[.@m] + "^000000.";
+			mes "You can view progress in your Quest Log (^0055FFAlt + U^000000).";
+			next;
+			continue;
+		}
+	}
+
+OnInit:
+	// Mob Data Structure
+	setarray .Mob_Name$[1], 
+		"Picky", "Baby Desert Wolf", "Drops", "Muka",
+		"Peco Peco", "Zerom", "Requiem", "Hode", "Frilldora", "Mummy", "Verit",
+		"Marduk", "Pasana", "Minorous", "Isis",
+		"Anubis", "Ancient Mummy",
+		"Dragon Fly";
+
+	setarray .Mob_ID[1],
+		1049, 1107, 1113, 1055,
+		1019, 1178, 1164, 1127, 1119, 1041, 1032,
+		1140, 1154, 1149, 1029,
+		1098, 1297,
+		1091;
+
+	setarray .Mob_QID[1],
+		70201, 70202, 70203, 70204,
+		70205, 70206, 70207, 70208, 70209, 70210, 70211,
+		70212, 70213, 70214, 70215,
+		70216, 70217,
+		70218;
+
+	setarray .Mob_Req[1],
+		25, 25, 25, 25,
+		20, 20, 20, 20, 20, 20, 20,
+		15, 15, 15, 15,
+		10, 10,
+		1;
+
+	setarray .Mob_Tier[1],
+		1, 1, 1, 1,
+		2, 2, 2, 2, 2, 2, 2,
+		3, 3, 3, 3,
+		4, 4,
+		5;
+
+	setarray .Mob_Coins[1],
+		3, 3, 3, 3,
+		5, 5, 5, 5, 5, 5, 5,
+		7, 7, 7, 7,
+		10, 10,
+		25;
+
+	.TotalMobs = getarraysize(.Mob_Name$) - 1;
+	end;
+}
+
+// -----------------------------------------------------
+// 3. Veteran Hunter Shop (Assassin/Morroc Flavor)
+// -----------------------------------------------------
+morocc,167,107,4	script	Veteran Hunter#moc	725,{
+	mes "[^0055FFVeteran Hunter^000000]";
+	mes "Greetings, traveler of the sands. The desert holds many dangers, but also great rewards for those with a sharp blade.";
+	mes "Do you wish to exchange your hard-earned Morroc Coins for provisions and ancient scrolls?";
+	mes " ";
+	mes "You currently hold: ^00AA00" + countitem(50007) + " Morroc Coins^000000.";
+	next;
+
+	if (select("Show me your wares:I must continue my journey") == 2) {
+		mes "[^0055FFVeteran Hunter^000000]";
+		mes "May the desert winds guide your path.";
+		close;
+	}
+
+	callshop "morroc_hunter_shop",1;
+	npcshopattach "morroc_hunter_shop";
+	end;
+
+OnBuyItem:
+	.@size = getarraysize(@bought_nameid);
+	for (.@i = 0; .@i < .@size; .@i++) {
+		.@item_idx = inarray(.Shop_Data, @bought_nameid[.@i]);
+		if (.@item_idx == -1) {
+			dispbottom "System Error: Item not found in the supply line.";
+			end;
+		}
+		.@total_cost += (.Shop_Data[.@item_idx + 1] * @bought_quantity[.@i]);
+	}
+
+	if (.@total_cost > countitem(50007)) {
+		mes "[^0055FFVeteran Hunter^000000]";
+		mes "I am afraid you lack the necessary Morroc Coins for these supplies.";
+		mes "Total cost: " + .@total_cost + " Coins.";
+		close;
+	}
+	
+	delitem 50007, .@total_cost;
+	
+	for (.@i = 0; .@i < .@size; .@i++) {
+		getitem @bought_nameid[.@i], @bought_quantity[.@i];
+	}
+	
+	mes "[^0055FFVeteran Hunter^000000]";
+	mes "A wise choice. May these provisions keep you safe in the burning sands and ancient tombs.";
+	mes "Stay alert!";
+	specialeffect2 EF_MONEY;
+	close;
+
+OnInit:
+	setarray .Shop_Data[0], 
+		13531, 3,    // Light Red Potion Box
+		13532, 5,    // Light Orange Potion Box
+		13533, 7,    // Light Yellow Potion Box
+		13534, 10,   // Light White Potion Box
+		12114, 2,    // Fire Converter Scroll
+		12115, 2,    // Water Converter Scroll
+		12116, 2,    // Earth Converter Scroll
+		12117, 2,    // Wind Converter Scroll
+		51008, 3,    // Shadow Converter Scroll
+		51009, 3,    // Holy Converter Scroll
+		51018, 2,
+		51019, 2,
+		51020, 1,
+		19844, 50,   // Costume Turban
+		19843, 50,   // Costume Kitty Band
+		19829, 50,   // Costume Straw Hat
+		19808, 200,  // Costume Sun
+		19816, 200,  // Costume Peco Hat
+		19877, 200,  // Costume Eyes of Darkness
+		19605, 500,  // Costume Gangster Scarf
+		19616, 500;  // Costume Wickebine Ears
+
+	npcshopdelitem "morroc_hunter_shop", 502; 
+	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {
+		npcshopadditem "morroc_hunter_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
+	}
+	end;
+}
+
+// -----------------------------------------------------
+// 4. Shop Definition (Hidden)
+// -----------------------------------------------------
+-	shop	morroc_hunter_shop	-1,502:-1

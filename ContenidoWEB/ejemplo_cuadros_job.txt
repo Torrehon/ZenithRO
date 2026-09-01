@@ -1,0 +1,306 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;700&display=swap');
+
+  /* Contenedor principal que agrupa todas las skills */
+  .skill-list-container {
+    background-color: #ffffff;
+    border: 1px solid #bbdefb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 850px;
+    margin: auto;
+    overflow: hidden; /* Evita que las esquinas de las filas sobresalgan */
+  }
+
+  /* Diseño de la fila de cada habilidad individual */
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 25px;
+    background-color: #f8fbfd;
+    border-bottom: 1px solid #e3f2fd; /* Línea separadora entre skills */
+    transition: background-color 0.2s ease;
+  }
+
+  /* Quita la línea separadora a la última habilidad de la lista */
+  .skill-row:last-child {
+    border-bottom: none;
+  }
+
+  /* Efecto iluminado al pasar el ratón */
+  .skill-row:hover {
+    background-color: #e3f2fd;
+  }
+
+  /* Cajita del icono de la habilidad */
+  .skill-icon-box {
+    flex-shrink: 0;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column; /* (NUEVO) Obliga a los iconos a apilarse en vertical */
+    gap: 8px; /* (NUEVO) Añade una separación limpia entre icono e icono */
+    align-items: center;
+    justify-content: center;
+    height: auto; /* (NUEVO) Permite que la caja crezca a lo alto si hay más de un icono */
+  }
+
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+  }
+
+  /* Contenedor del texto */
+  .skill-content {
+    flex-grow: 1;
+  }
+
+  /* Título de la habilidad */
+  .skill-title {
+    margin: 0 0 8px 0;
+    color: #1565c0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Etiqueta del nivel máximo */
+  .skill-meta {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #1565c0;
+    background-color: #bbdefb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    letter-spacing: normal;
+  }
+
+  /* Descripción de la habilidad */
+  .skill-desc {
+    margin: 0;
+    color: #455a64;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 0.95em;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 600px) {
+    .skill-row { 
+      padding: 15px; 
+    }
+    .skill-icon-box { 
+      margin-right: 15px; 
+    }
+    .skill-title { 
+      font-size: 1.05em; 
+      flex-direction: column; /* Pone la etiqueta de nivel debajo del título si no cabe */
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .skill-desc { 
+      font-size: 0.85em; 
+    }
+  }
+</style>
+
+<div class="skill-list-container">
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/274.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Advanced Book
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> <br><br>
+        Increases Mastery Attack by 5 * Skill Level when using Books. Gives the following bonuses:<br><br>
+
+        - Bonus bMatk, (sklv * JobLevel) / 10 <br><br>
+        - Bonus bAspdRate, (sklv * 5) + (JobLevel * / 10) <br><br>
+
+Max bonuses are 50 Attack, and 10% Aspd.
+
+      </p>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+<img class="skill-icon" src="https://static.divine-pride.net/images/skill/280.png" alt="Icon">
+<img class="skill-icon" src="https://static.divine-pride.net/images/skill/281.png" alt="Icon">
+<img class="skill-icon" src="https://static.divine-pride.net/images/skill/282.png" alt="Icon">
+<img class="skill-icon" src="https://static.divine-pride.net/images/skill/283.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Endow Skills
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+
+Sp Cost: 40
+<br><br>
+      They now consume 1 Scarlet Point, 1 Indigo Point, 1 Yellow Wish Point and 1 Lime Green Point respectively (sold on every Tool Dealer). They no longer have a chance to break the target's weapon and increases the damage inflicted with the chosen element by 1% * Skill Level. Usable on non-party targets.
+      </p>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/284.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Bestiary (Dragonology)
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+        <em>Passive</em> <br><br>
+        Increases damage and resistance against every race (excluding demihuman and players) by 1% * Skill Level. Also increases user's Int by 1 * Skill Level.
+
+      </p>
+    </div>
+  </div>
+
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/279.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Auto Spell
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+
+Sp Cost: 35
+<br><br>
+      Thunder Storm added. Every AoE skill (Fire Ball, Frost Diver, Thunder Storm and Heaven's Drive) has now the same behaviour, being able to be auto casted from level 1 up to level 3.
+      </p>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/285.png" alt="Icon">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/286.png" alt="Icon">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/287.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Elemental Areas
+        <span class="skill-meta">Max Level: 5</span>
+      </h3>
+      <p class="skill-desc">
+
+Sp Cost: 50 Sp - 2 * Skill Level
+<br><br>
+      They now consume 3 Scarlet Points, 3 Indigo Points and 3 Yellow Wish Points (sold on every Tool Dealer). Deluge grants 2% Max Hp * Skill Level, Volcano gives 5 + 5 * Skill level Atk/Matk and Violent Gale increases Flee by 3 * Skill Level. Every elemental area also increases final damage by 2% * Skill Level of the chosen element when the user is inside said area. When there's an active elemental area, additional casts of any element won't use catalysts.
+      </p>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/290.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Overcast (Abracadabra)
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+
+Sp Cost: 50
+<br><br>
+      Abracadabra's effect removed. This skill increases Magic Damage by 2,5% * Skill Level and Casting Time by 5% * Skill Level for 20 seconds. Magic Damage increase is not applied on auto casted skills.
+      </p>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://static.divine-pride.net/images/skill/2449.png" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Psychic Wave (NEW)
+        <span class="skill-meta">Max Level: 10</span>
+      </h3>
+      <p class="skill-desc">
+
+Sp Cost: 48/56/64/70/78
+<br><br>
+      Inherited from Sorcerer's skill tree. Summon an area of psychic force that deals 2 + 1 * Skill Level hits, dealing 100% Matk Neutral Damage each.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1Ex12tSomSQ5qBhxv2OBv4a83jx0jo0M3" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Arcanist (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+<em>Passive</em> / <strong>Platinum</strong>
+<br><br>
+ Awakens the true potential of arcane enhancements. Unlocks the following bonuses: <br><br>
+
+- Endows: Elemental damage bonus increased to 2% * Skill Level.
+<br><br>
+- Elemental Areas: Elemental damage bonus increased to 4% * Skill Level.
+<br><br>
+- Spell Breaker: On a succesful skill cancel, inflicts 500% Magic damage to the target and inflicts Silence. Chance to cancel Mvp's skills increases to 25%.
+<br><br>
+- Psychic Wave: Inherits current endow element. If the caster is equipped with a Two Handed Staff, each wave deals 2 hits instead of 1.
+      </p>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-icon-box">
+      <img class="skill-icon" src="https://lh3.googleusercontent.com/d/1f6dVrl0RfPK8I1q3SV92UPzPS25lKXNr" alt="Icon">
+    </div>
+    <div class="skill-content">
+      <h3 class="skill-title">
+        Soul of the Loremaster (NEW)
+        <span class="skill-meta">Max Level: 1</span>
+      </h3>
+      <p class="skill-desc">
+<em>Passive</em> / <strong>Platinum</strong>
+<br><br>
+ Awakens the true potential Books and battle casting. Unlocks the following bonuses:<br><br>
+
+- Bestiary: Increases damage and resistances by 2% * Skill Level instead of 1%.
+<br><br>
+- Free Cast: No longer decreases Movement Speed.
+<br><br>
+- Advanced Book: Grants a 5% * Skill Level chance to use Double Attack when equipped with Books.
+<br><br>
+- Auto Spell: Auto casted spells level is now randomized, with their maximum possible level being equal to the level learned and their minimum level casted is the maximum level that would be casted when this skills is used at level 10. For example, a Sage using level 10 Fire Bolt as Auto Spell skill would auto cast it from level 3 to level 10. 
+
+      </p>
+    </div>
+  </div>
+</div>

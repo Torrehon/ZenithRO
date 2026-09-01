@@ -1,0 +1,10 @@
+//===== rAthena Script =======================================
+//= Custom Spawns for Prontera Underground Prison (prt_prison)
+//============================================================
+
+prt_prison,0,0,0,0	monster	Zombie Guard	3452,40,10000
+prt_prison,0,0,0,0	monster	Skeleton Prisoner	1196,40,10000
+prt_prison,0,0,0,0	monster	Lost Knight	2415,30,10000
+prt_prison,0,0,0,0	monster	Fallen Crusader	2434,30,10000
+prt_prison,0,0,0,0	boss_monster	Baleful Illusion	1875,1,3600000
+prt_prison,58,144,0,0	boss_monster	Abomination of Souls	3484,1,7200000

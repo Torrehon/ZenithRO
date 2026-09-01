@@ -53,7 +53,7 @@ izlude,47,131,4	script	Veteran Brand	85,{
 				delitem 501, 10;
 				delitem 502, 5;
 				delitem 503, 3;
-				skill "SM_MOVINGRECOVERY", 1, SKILL_PERM;
+				skill "SM_MOVINGRECOVERY", 1, SKILL_PERM_GRANT;
 				mes "[Veteran Brand]";
 				mes "Excellent! Your body is now prepared to mend itself even while you travel.";
 				close;
@@ -88,7 +88,7 @@ izlude,47,131,4	script	Veteran Brand	85,{
 				delitem 932, 10;
 				mes "[Veteran Brand]";
 				mes "That efficiency is the foundation of ^3355FFFatal Blow^000000. Your ^990000Bash^000000 strikes will now be stronger!";
-				skill "SM_FATALBLOW", 1, SKILL_PERM;
+				skill "SM_FATALBLOW", 1, SKILL_PERM_GRANT;
 				mes "Congratulations! Use this power wisely.";
 				close;
 			}
@@ -113,10 +113,10 @@ izlude,47,131,4	script	Veteran Brand	85,{
 			
 			if (select("I have returned from the hunt.:I am on my way.") == 2) close;
 
-			if (countitem(990) >= 5 && countitem(939) >= 10 && JobLevel >= 15) {
+			if (countitem(990) >= 5 && countitem(920) >= 10 && JobLevel >= 15) {
 				delitem 990, 5;
-				delitem 939, 10;
-				skill "SM_AUTOBERSERK", 1, SKILL_PERM;
+				delitem 920, 10;
+				skill "SM_AUTOBERSERK", 1, SKILL_PERM_GRANT;
 				
 				mes "[Veteran Brand]";
 				mes "You have returned with the fire of battle in your eyes!";

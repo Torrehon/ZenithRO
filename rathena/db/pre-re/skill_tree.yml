@@ -647,7 +647,7 @@ Body:
           - Name: BS_HILTBINDING
             Level: 1
       - Name: BS_WEAPONRESEARCH
-        MaxLevel: 10
+        MaxLevel: 1
         Requires:
           - Name: BS_HILTBINDING
             Level: 1
@@ -669,7 +669,7 @@ Body:
         MaxLevel: 5
         Requires:
           - Name: BS_WEAPONRESEARCH
-            Level: 2
+            Level: 1
           - Name: BS_ADRENALINE2
             Level: 2
       - Name: BS_OVERTHRUST
@@ -2063,7 +2063,7 @@ Body:
           - Name: BS_HILTBINDING
             Level: 1
           - Name: BS_WEAPONRESEARCH
-            Level: 5
+            Level: 1
           - Name: BS_OVERTHRUST
             Level: 3
      # - Name: WS_CREATECOIN
@@ -2108,7 +2108,7 @@ Body:
         MaxLevel: 10
         Requires:
           - Name: BS_WEAPONRESEARCH
-            Level: 10
+            Level: 1
       - Name: WS_CARTTERMINATION
         MaxLevel: 10
         Requires:

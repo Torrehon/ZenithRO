@@ -1024,6 +1024,25 @@ static bool achievement_update_objectives(map_session_data *sd, std::shared_ptr<
 			changed = true;
 			complete = true;
 			break;
+		case AG_WALK:
+			if (ad->targets.empty()) {
+				current_count[0] += update_count[0];
+				changed = true;
+			} else {
+				for (const auto &it : ad->targets) {
+					if (current_count[it.first] < it.second->count) {
+						current_count[it.first] += update_count[0];
+						changed = true;
+					}
+				}
+			}
+
+			if (!changed)
+				return false;
+
+			if (achievement_target_complete(ad, current_count))
+				complete = true;
+			break;
 		/*
 		case AG_CHATTING:
 			if (ad->targets.empty())

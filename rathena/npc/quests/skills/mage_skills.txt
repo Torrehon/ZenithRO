@@ -77,7 +77,7 @@ geffen_in,151,119,4	script	Great Wizard#en_coat	64,{
 			delitem 50002, 1; // Training Recommendation 1
 			
 			// Entrega de skill
-			skill "MG_ENERGYCOAT",1,SKILL_PERM;
+			skill "MG_ENERGYCOAT",1,SKILL_PERM_GRANT;
 			
 			mes "[BLIZZARDRISS]";
 			mes "It is done. You now have the elite skill ^3355FF'Energy Coat'^000000.";

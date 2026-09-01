@@ -5726,6 +5726,10 @@ int32 pc_identifyall(map_session_data *sd, bool identify_item)
 		if (sd->inventory.u.items_inventory[i].nameid > 0 && sd->inventory.u.items_inventory[i].identify != 1) {
 			if (identify_item == true) {
 				sd->inventory.u.items_inventory[i].identify = 1;
+				struct item_data* option_id = itemdb_search(sd->inventory.u.items_inventory[i].nameid);
+				if (option_id != nullptr) {
+					pc_apply_random_option(option_id, sd->inventory.u.items_inventory[i]);
+				}
 				clif_item_identified( *sd, i, false );
 			}
 			unidentified_count++;
@@ -6079,11 +6083,11 @@ void pc_apply_random_option(struct item_data* id, struct item& it)
 {
 	if (itemdb_isstackable2(id)) return;
 	// --- 🛡️ ESCUDO ANTI-REROLL ---
-	// Comprobamos si el ítem ya tiene opciones asignadas previamente.
+	// Comprobamos si el ítem ya tiene opciones custom asignadas previamente (excluyendo Durabilidad 243).
 	// Si encontramos al menos un hueco ocupado, abortamos la generación.
 	for (int i = 0; i < MAX_ITEM_RDM_OPT; i++) {
-		if (it.option[i].id != 0) {
-			return; // Ya tiene opciones, salimos de la función sin tocar nada.
+		if (it.option[i].id != 0 && it.option[i].id != 243) {
+			return; // Ya tiene opciones custom, salimos de la función sin tocar nada.
 		}
 	}
 	int group_id = pc_resolve_random_group(id);
@@ -6219,11 +6223,51 @@ void pc_apply_random_option(struct item_data* id, struct item& it)
 		
 		applied++;
 	}
+
+	// --- INICIO CUSTOM: Durabilidad ---
+	pc_set_item_durability(id, it, -1);
+	// --- FIN CUSTOM ---
 }
- 
- 
- 
- 
+
+// --- INICIO CUSTOM: Asignacion y Compactacion de Durabilidad ---
+void pc_set_item_durability(struct item_data* id, struct item& it, int durability_val) {
+	if (!id) return;
+	bool is_refinable = !id->flag.no_refine && 
+	                   ((id->type == IT_WEAPON) || 
+	                    (id->type == IT_ARMOR && (id->equip & (EQP_HEAD_TOP | EQP_ARMOR | EQP_HAND_L | EQP_GARMENT | EQP_SHOES))));
+	if (!is_refinable) return;
+
+	int dur = durability_val;
+	for (int i = 0; i < MAX_ITEM_RDM_OPT; i++) {
+		if (it.option[i].id == 243) {
+			if (dur < 0) dur = it.option[i].value;
+			it.option[i].id = 0;
+			it.option[i].value = 0;
+			it.option[i].param = 0;
+		}
+	}
+	if (dur < 0) dur = 100;
+
+	struct s_item_randomoption temp_opts[MAX_ITEM_RDM_OPT] = {};
+	int count = 0;
+	for (int i = 0; i < MAX_ITEM_RDM_OPT; i++) {
+		if (it.option[i].id != 0 && it.option[i].id != 243) {
+			temp_opts[count++] = it.option[i];
+		}
+	}
+
+	if (count < MAX_ITEM_RDM_OPT) {
+		temp_opts[count].id = 243;
+		temp_opts[count].value = dur;
+		temp_opts[count].param = 0;
+	}
+
+	for (int i = 0; i < MAX_ITEM_RDM_OPT; i++) {
+		it.option[i] = temp_opts[i];
+	}
+}
+// --- FIN CUSTOM ---
+
 enum e_additem_result pc_additem(map_session_data *sd,struct item *item,int32 amount,e_log_pick_type log_type, bool favorite) {
 	struct item_data *id;
 	int16 i;
@@ -6262,6 +6306,10 @@ enum e_additem_result pc_additem(map_session_data *sd,struct item *item,int32 am
 
 	if (id->flag.guid && !item->unique_id)
 		item->unique_id = pc_generate_unique_id(sd);
+
+	// --- INICIO CUSTOM: Inicializacion de Durabilidad ---
+	pc_set_item_durability(id, *item, -1);
+	// --- FIN CUSTOM ---
 
 	// Stackable | Non Rental
 	if( itemdb_isstackable2(id) && item->expire_time == 0 ) {
@@ -7148,6 +7196,10 @@ bool pc_steal_item(map_session_data *sd,block_list *bl, uint16 skill_lv)
 	if( battle_config.skill_steal_random_options ){
 		mob_setdropitem_option( tmp_item, drop );
 	}
+	struct item_data* option_id = itemdb_search(itemid);
+	if (option_id != nullptr) {
+		pc_apply_random_option(option_id, tmp_item);
+	}
 	flag = pc_additem(sd,&tmp_item,1,LOG_TYPE_PICKDROP_PLAYER);
 
 	//TODO: Should we disable stealing when the item you stole couldn't be added to your inventory? Perhaps players will figure out a way to exploit this behaviour otherwise?
@@ -7455,6 +7507,10 @@ enum e_setpos pc_setpos(map_session_data* sd, uint16 mapindex, int32 x, int32 y,
 
 	if (sd->state.vending)
 		vending_update(*sd);
+    
+	if (!sd->state.changemap)
+		sd->state.warping = 0;
+    
 	if (sd->state.buyingstore)
 		buyingstore_update(*sd);
 	
