@@ -183,7 +183,7 @@ Body:
     AegisName: Blue_Gemstone
     Name: Blue Gemstone
     Type: Etc
-    Buy: 600
+    Buy: 300
     Weight: 30
     Flags:
       BuyingStore: true
@@ -13609,7 +13609,7 @@ Body:
     AegisName: Alcol_Create_Book
     Name: Alcohol Creation Guide
     Type: Etc
-    Buy: 100000
+    Buy: 25000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -13617,7 +13617,7 @@ Body:
     AegisName: FireBottle_Create_Book
     Name: Bottle Grenade Creation Guide
     Type: Etc
-    Buy: 100000
+    Buy: 25000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -13625,7 +13625,7 @@ Body:
     AegisName: Acid_Create_Book
     Name: Acid Bottle Creation Guide
     Type: Etc
-    Buy: 100000
+    Buy: 25000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -13633,7 +13633,7 @@ Body:
     AegisName: Plant_Create_Book
     Name: Plant Bottle Creation Guide
     Type: Etc
-    Buy: 100000
+    Buy: 25000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -13641,7 +13641,7 @@ Body:
     AegisName: Mine_Create_Book
     Name: Marine Sphere Creation Guide
     Type: Etc
-    Buy: 100000
+    Buy: 25000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -13649,7 +13649,7 @@ Body:
     AegisName: Coating_Create_Book
     Name: Glistening Coat Creation Guide
     Type: Etc
-    Buy: 100000
+    Buy: 25000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -13657,7 +13657,7 @@ Body:
     AegisName: Slim_Potion_Create_Book
     Name: Condensed Potion Creation Guide
     Type: Etc
-    Buy: 240000
+    Buy: 75000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -21546,7 +21546,7 @@ Body:
     AegisName: Purple_Gemstone
     Name: Purple Gemstone
     Type: Etc
-    Buy: 300
+    Buy: 100
     Weight: 10
     Flags:
       BuyingStore: true
@@ -21568,31 +21568,31 @@ Body:
     AegisName: s_bomb
     Name: Small Bottle Grenade
     Type: Etc
-    Buy: 200
+    Buy: 100
     Weight: 10
   - Id: 50012
     AegisName: s_acid
     Name: Small Acid Bottle
     Type: Etc
-    Buy: 200
+    Buy: 100
     Weight: 10
   - Id: 50013
     AegisName: s_plantbottle
     Name: Small Plant Bottle
     Type: Etc
-    Buy: 500
+    Buy: 200
     Weight: 10
   - Id: 50014
     AegisName: s_minibottle
     Name: Small Marine Sphere Bottle
     Type: Etc
-    Buy: 500
+    Buy: 200
     Weight: 10
   - Id: 50015
     AegisName: s_coatingbottle
     Name: Small Glistening Coat
     Type: Etc
-    Buy: 1000
+    Buy: 500
     Weight: 10
   - Id: 50016
     AegisName: Vanilmirth_Embryo
@@ -21608,6 +21608,10 @@ Body:
     Type: Etc
     Buy: 10
     Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
     Flags:
       UniqueId: true
   - Id: 50018
@@ -21616,6 +21620,10 @@ Body:
     Type: Etc
     Buy: 10
     Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
     Flags:
       UniqueId: true
   - Id: 50019
@@ -21624,6 +21632,10 @@ Body:
     Type: Etc
     Buy: 10
     Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
     Flags:
       UniqueId: true
   - Id: 50020
@@ -21711,6 +21723,90 @@ Body:
   - Id: 50026
     AegisName: alde_coin
     Name: Aldebaran Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50027
+    AegisName: comodo_coin
+    Name: Comodo Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50028
+    AegisName: umbala_coin
+    Name: Umbala Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50029
+    AegisName: hugel_coin
+    Name: Hugel Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50030
+    AegisName: yuno_coin
+    Name: Yuno Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50031
+    AegisName: nifelheim_coin
+    Name: Nifelheim Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50032
+    AegisName: lutie_coin
+    Name: Lutie Coin
     Type: Etc
     Trade:
       NoDrop: true

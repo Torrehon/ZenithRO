@@ -7360,8 +7360,6 @@ Body:
         Rate: 61
       - Item: White_Herb
         Rate: 1000
-      - Item: Khukri
-        Rate: 5
       - Item: Zargon
         Rate: 1500
       - Item: Aloebera
@@ -9467,10 +9465,10 @@ Body:
     Name: Mysteltainn
     Level: 76
     Hp: 133350
-    BaseExp: 42457
-    JobExp: 39159
-    Attack: 890
-    Attack2: 1100
+    BaseExp: 62457
+    JobExp: 49159
+    Attack: 1890
+    Attack2: 2300
     Defense: 20
     MagicDefense: 20
     Str: 77
@@ -9494,16 +9492,16 @@ Body:
     Ai: 21
     Class: Boss
     Drops:
+      - Item: Old_Hilt
+        Rate: 60
       - Item: Loki's_Whispers
         Rate: 1
       - Item: Biotite
         Rate: 1500
-      - Item: Slayer_
-        Rate: 70
-      - Item: Bastard_Sword_
-        Rate: 40
-      - Item: Claymore
-        Rate: 2
+      - Item: Katzbalger
+        Rate: 100
+      - Item: Mysteltainn_
+        Rate: 50
       - Item: Steel
         Rate: 120
       - Item: Oridecon
@@ -9517,16 +9515,16 @@ Body:
     JapaneseName: Tirfing
     Level: 71
     Hp: 129900
-    BaseExp: 38412
-    JobExp: 37235
-    Attack: 450
-    Attack2: 666
+    BaseExp: 58412
+    JobExp: 47235
+    Attack: 950
+    Attack2: 1111
     Defense: 15
     MagicDefense: 45
     Str: 58
     Agi: 87
     Vit: 55
-    Int: 95
+    Int: 165
     Dex: 82
     Luk: 65
     AttackRange: 1
@@ -9545,15 +9543,15 @@ Body:
     Class: Boss
     Drops:
       - Item: Old_Hilt
-        Rate: 1
+        Rate: 60
       - Item: Silver_Knife_Of_Chaste
         Rate: 50
       - Item: Muscovite
         Rate: 1500
-      - Item: Dagger_
-        Rate: 70
-      - Item: Stiletto_
-        Rate: 40
+      - Item: Tale_Fing_
+        Rate: 50
+      - Item: Khukri
+        Rate: 100
       - Item: Steel
         Rate: 120
       - Item: Oridecon
@@ -9565,19 +9563,19 @@ Body:
     AegisName: EXECUTIONER
     Name: Executioner
     Level: 65
-    Hp: 128980
-    BaseExp: 39730
-    JobExp: 35536
-    Attack: 570
-    Attack2: 950
-    Defense: 35
-    MagicDefense: 35
+    Hp: 168980
+    BaseExp: 69730
+    JobExp: 55536
+    Attack: 1570
+    Attack2: 1950
+    Defense: 45
+    MagicDefense: 45
     Str: 64
     Agi: 85
-    Vit: 40
+    Vit: 135
     Int: 25
-    Dex: 88
-    Luk: 60
+    Dex: 145
+    Luk: 120
     AttackRange: 2
     SkillRange: 10
     ChaseRange: 12
@@ -9593,16 +9591,16 @@ Body:
     Ai: 21
     Class: Boss
     Drops:
+      - Item: Old_Hilt
+        Rate: 60
       - Item: Bloody_Edge
         Rate: 5
       - Item: Phlogopite
         Rate: 1500
-      - Item: Lapier_
-        Rate: 80
-      - Item: Scimiter_
-        Rate: 60
-      - Item: Ring_Pommel_Saber_
-        Rate: 40
+      - Item: Executioner__
+        Rate: 50
+      - Item: Berdysz
+        Rate: 100
       - Item: Steel
         Rate: 120
       - Item: Oridecon
@@ -11529,17 +11527,18 @@ Body:
   - Id: 1250
     AegisName: CHEPET
     Name: Chepet
-    Level: 42
-    Hp: 4950
-    BaseExp: 1518
-    JobExp: 946
+    Level: 62
+    Hp: 64950
+    BaseExp: 13518
+    JobExp: 11946
     Attack: 380
     Attack2: 440
+    Defense: 10
     MagicDefense: 25
     Agi: 72
     Vit: 35
-    Int: 71
-    Dex: 65
+    Int: 101
+    Dex: 85
     Luk: 85
     AttackRange: 1
     SkillRange: 10
@@ -11554,6 +11553,7 @@ Body:
     ClientAttackMotion: 336
     DamageMotion: 288
     Ai: 21
+    Class: Boss
     Drops:
       - Item: Matchstick
         Rate: 2500
@@ -11563,12 +11563,14 @@ Body:
         Rate: 5500
       - Item: Unripe_Apple
         Rate: 40
-      - Item: Red_Muffler
-        Rate: 5
+      - Item: CandyCaneRod
+        Rate: 50
+      - Item: Santa_Hat_1
+        Rate: 50
       - Item: Yellow_Herb
         Rate: 1300
       - Item: Ragamuffin_Cape
-        Rate: 5
+        Rate: 500
       - Item: Chepet_Card
         Rate: 1
         StealProtected: true
@@ -11971,10 +11973,10 @@ Body:
     Name: Gryphon
     Level: 72
     Hp: 97800
-    BaseExp: 35896
-    JobExp: 34400
-    Attack: 1050
-    Attack2: 1260
+    BaseExp: 55896
+    JobExp: 44400
+    Attack: 2050
+    Attack2: 2560
     Defense: 25
     MagicDefense: 15
     Str: 68
@@ -12004,12 +12006,14 @@ Body:
         Rate: 5335
       - Item: Soft_Feather
         Rate: 120
-      - Item: Guisarme_
-        Rate: 1500
+      - Item: Falconer_Flute_C
+        Rate: 50
+      - Item: Angel_Wing_Bow
+        Rate: 50
       - Item: Pole_Axe
-        Rate: 1
+        Rate: 100
       - Item: Oridecon
-        Rate: 185
+        Rate: 2000
       - Item: Rough_Wind
         Rate: 150
       - Item: Gryphon_Card
@@ -12113,19 +12117,19 @@ Body:
     JapaneseName: Mutant Dragon
     Level: 65
     Hp: 112600
-    BaseExp: 39730
-    JobExp: 37536
+    BaseExp: 59730
+    JobExp: 47536
     Attack: 1400
-    Attack2: 1600
+    Attack2: 1900
     Defense: 10
     MagicDefense: 40
     Str: 75
     Agi: 47
     Vit: 30
+    Int: 118
     Dex: 45
-    Int: 120
     Luk: 35
-    AttackRange: 2
+    AttackRange: 4
     SkillRange: 10
     ChaseRange: 12
     Size: Large
@@ -12389,17 +12393,17 @@ Body:
     AegisName: BLOODY_KNIGHT
     Name: Bloody Knight
     Level: 82
-    Hp: 57870
-    BaseExp: 10120
-    JobExp: 6820
+    Hp: 137870
+    BaseExp: 56120
+    JobExp: 46820
     Attack: 2150
     Attack2: 3030
     Defense: 60
-    MagicDefense: 50
+    MagicDefense: 25
     Str: 88
     Agi: 75
     Vit: 70
-    Int: 77
+    Int: 115
     Dex: 125
     Luk: 55
     AttackRange: 3
@@ -12415,21 +12419,24 @@ Body:
     ClientAttackMotion: 288
     DamageMotion: 192
     Ai: 21
+    Class: Boss
     Drops:
       - Item: Brigan
         Rate: 4850
       - Item: Helm_
-        Rate: 45
+        Rate: 500
+      - Item: Grave_
+        Rate: 500
       - Item: Plate_Armor_
-        Rate: 5
-      - Item: Strong_Shield
-        Rate: 62
+        Rate: 500
+      - Item: Bloody_Knight_Shield
+        Rate: 50
       - Item: Katzbalger
-        Rate: 1
+        Rate: 100
       - Item: Pole_Axe
-        Rate: 2
+        Rate: 50
       - Item: Elunium
-        Rate: 433
+        Rate: 2000
       - Item: Bloody_Knight_Card
         Rate: 1
         StealProtected: true
@@ -13109,13 +13116,13 @@ Body:
     AegisName: CHIMERA
     Name: Chimera
     Level: 70
-    Hp: 32600
-    BaseExp: 39500
+    Hp: 112600
+    BaseExp: 59500
     JobExp: 43000
     Attack: 1200
     Attack2: 1320
-    Defense: 40
-    MagicDefense: 10
+    Defense: 20
+    MagicDefense: 40
     Agi: 72
     Vit: 110
     Int: 108
@@ -13142,12 +13149,12 @@ Body:
         Rate: 2500
       - Item: Lemon
         Rate: 1000
-      - Item: War_Axe
-        Rate: 1
+      - Item: Crime_Whip
+        Rate: 50
       - Item: Citrine
         Rate: 1500
       - Item: Great_Axe
-        Rate: 1
+        Rate: 100
       - Item: Oridecon
         Rate: 160
       - Item: Chimera_Card
@@ -13636,7 +13643,6 @@ Body:
     ClientAttackMotion: 2304
     DamageMotion: 440
     Ai: 21
-    Class: Boss
     Drops:
       - Item: Tatters_Clothes
         Rate: 3500
@@ -14859,7 +14865,6 @@ Body:
     ClientAttackMotion: 768
     DamageMotion: 440
     Ai: 21
-    Class: Boss
     Drops:
       - Item: Tatters_Clothes
         Rate: 4413
@@ -17497,17 +17502,17 @@ Body:
     AegisName: ARCHANGELING
     Name: Arc Angeling
     JapaneseName: Archangeling
-    Level: 60
-    Hp: 79523
-    BaseExp: 4152
-    JobExp: 2173
-    Attack: 669
-    Attack2: 890
+    Level: 73
+    Hp: 129523
+    BaseExp: 64152
+    JobExp: 52173
+    Attack: 1669
+    Attack2: 1890
     Defense: 54
     MagicDefense: 58
     Agi: 65
     Vit: 80
-    Int: 74
+    Int: 99
     Dex: 65
     Luk: 105
     AttackRange: 1
@@ -17526,17 +17531,19 @@ Body:
     Class: Boss
     Drops:
       - Item: Satanic_Chain
-        Rate: 5
+        Rate: 100
       - Item: Leaf_Of_Yggdrasil
-        Rate: 1800
+        Rate: 2000
       - Item: Seed_Of_Yggdrasil
-        Rate: 150
+        Rate: 2000
       - Item: Agate
         Rate: 1500
       - Item: Angelic_Chain
-        Rate: 5
+        Rate: 100
+      - Item: G_Staff_Of_Light
+        Rate: 50
       - Item: Plate_Armor_
-        Rate: 3
+        Rate: 100
       - Item: Turquoise
         Rate: 1500
       - Item: Archangeling_Card
@@ -24152,10 +24159,10 @@ Body:
     MagicDefense: 25
     Agi: 12
     Vit: 24
-    Int: 75
+    Int: 100
     Dex: 36
     Luk: 15
-    AttackRange: 4
+    AttackRange: 6
     SkillRange: 10
     ChaseRange: 12
     Size: Medium
@@ -28238,13 +28245,9 @@ Body:
     MvpDrops:
       - Item: Old_Violet_Box
         Rate: 5500
-      - Item: Dex_Dish10
-        Rate: 5000
       - Item: Crystal_Jewel__
         Rate: 2000
     Drops:
-      - Item: Agi_Dish10
-        Rate: 5000
       - Item: Tropical_Banana
         Rate: 4000
       - Item: Fantastic_Cooking_Kits
@@ -28945,7 +28948,6 @@ Body:
     ClientAttackMotion: 192
     DamageMotion: 420
     Ai: 21
-    Class: Boss
     Drops:
       - Item: Brigan
         Rate: 1000
@@ -28993,7 +28995,6 @@ Body:
     ClientAttackMotion: 384
     DamageMotion: 360
     Ai: 21
-    Class: Boss
     Drops:
       - Item: Brigan
         Rate: 1000
@@ -29041,7 +29042,6 @@ Body:
     ClientAttackMotion: 300
     DamageMotion: 360
     Ai: 21
-    Class: Boss
     Drops:
       - Item: Brigan
         Rate: 1000
@@ -29089,7 +29089,6 @@ Body:
     ClientAttackMotion: 480
     DamageMotion: 480
     Ai: 21
-    Class: Boss
     Drops:
       - Item: Brigan
         Rate: 1000
@@ -29637,8 +29636,6 @@ Body:
         Rate: 5000
       - Item: Scale_Of_Red_Dragon
         Rate: 3589
-      - Item: Int_Dish10
-        Rate: 1000
       - Item: Pole_Axe
         Rate: 100
       - Item: Gemmed_Crown
@@ -29650,13 +29647,13 @@ Body:
     AegisName: HYDRO
     Name: Hydrolancer
     JapaneseName: Hydro
-    Level: 89
-    Hp: 308230
-    BaseExp: 83450
-    JobExp: 2480
-    Attack: 2554
-    Attack2: 3910
-    Defense: 52
+    Level: 81
+    Hp: 188230
+    BaseExp: 63450
+    JobExp: 52480
+    Attack: 2154
+    Attack2: 3110
+    Defense: 32
     MagicDefense: 62
     Agi: 96
     Vit: 110
@@ -29685,13 +29682,13 @@ Body:
       - Item: Tri_Headed_Dragon_Head
         Rate: 3880
       - Item: Morpheus's_Hood
-        Rate: 500
+        Rate: 100
       - Item: Morrigane's_Helm
-        Rate: 500
-      - Item: Vit_Dish10
-        Rate: 300
+        Rate: 100
+      - Item: Crime_Violine
+        Rate: 50
       - Item: Fricca_Circlet
-        Rate: 500
+        Rate: 100
       - Item: Hydro_Card
         Rate: 1
         StealProtected: true
@@ -33090,8 +33087,6 @@ Body:
         Rate: 500
       - Item: Pole_Axe
         Rate: 500
-      - Item: Int_Dish10
-        Rate: 1500
       - Item: Treasure_Box
         Rate: 5500
   - Id: 1814
@@ -33233,10 +33228,6 @@ Body:
         Rate: 500
       - Item: Bloody_Roar
         Rate: 500
-      - Item: Int_Dish10
-        Rate: 1500
-      - Item: Luk_Dish10
-        Rate: 1500
   - Id: 1818
     AegisName: EVENT_ALARM
     Name: Alarm
@@ -34061,8 +34052,6 @@ Body:
         Rate: 3
       - Item: Scalpel
         Rate: 150
-      - Item: Agi_Dish07
-        Rate: 500
       - Item: Old_Blue_Box
         Rate: 40
       - Item: Rider_Insignia_
@@ -35493,8 +35482,8 @@ Body:
     JapaneseName: Baleful Illusion
     Level: 61
     Hp: 343000
-    BaseExp: 53455
-    JobExp: 46890
+    BaseExp: 83455
+    JobExp: 76890
     Attack: 756
     Attack2: 989
     MagicDefense: 40
@@ -35927,8 +35916,6 @@ Body:
         Rate: 4000
       - Item: Ring_
         Rate: 200
-      - Item: Int_Dish10
-        Rate: 1000
       - Item: Ixion_Wing
         Rate: 100
       - Item: Pole_Axe
@@ -57745,6 +57732,98 @@ Body:
         Index: 7
         Rate: 20
         StealProtected: true
+  - Id: 2939
+    AegisName: MM_EVIL_SHADOW1
+    Name: Evil Shadow
+    Level: 66
+    Hp: 18353
+    BaseExp: 7456
+    JobExp: 6581
+    Attack: 856
+    Attack2: 1135
+    Defense: 5
+    MagicDefense: 5
+    Str: 88
+    Agi: 125
+    Vit: 88
+    Int: 21
+    Dex: 125
+    Luk: 44
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 732
+    AttackMotion: 732
+    ClientAttackMotion: 244
+    DamageMotion: 360
+    Ai: 04
+    Modes:
+      Detector: true
+  - Id: 2940
+    AegisName: MM_EVIL_SHADOW2
+    Name: Evil Shadow
+    Level: 66
+    Hp: 13898
+    BaseExp: 7456
+    JobExp: 6581
+    Attack: 656
+    Attack2: 835
+    Defense: 10
+    MagicDefense: 45
+    Str: 88
+    Agi: 44
+    Vit: 88
+    Int: 140
+    Dex: 95
+    Luk: 44
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 1500
+    AttackMotion: 600
+    ClientAttackMotion: 672
+    DamageMotion: 500
+    Ai: 04
+  - Id: 2941
+    AegisName: MM_EVIL_SHADOW3
+    Name: Evil Shadow
+    Level: 66
+    Hp: 25645
+    BaseExp: 7456
+    JobExp: 6581
+    Attack: 856
+    Attack2: 1135
+    Defense: 35
+    MagicDefense: 35
+    Str: 88
+    Agi: 44
+    Vit: 150
+    Int: 21
+    Dex: 125
+    Luk: 99
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 1500
+    AttackMotion: 600
+    ClientAttackMotion: 672
+    DamageMotion: 500
+    Ai: 04
   - Id: 3029
     AegisName: GRIM_REAPER_ANKOU
     Name: Geffenia's Shadow

@@ -941,13 +941,10 @@ Body:
       - Name: MO_SPIRITSRECOVERY
         MaxLevel: 5
         Requires:
-          - Name: MO_BLADESTOP
-            Level: 2
+          - Name: MO_CALLSPIRITS
+            Level: 5
       - Name: MO_CALLSPIRITS
         MaxLevel: 5
-        Requires:
-          - Name: MO_IRONHAND
-            Level: 2
       - Name: MO_ABSORBSPIRITS
         MaxLevel: 1
         Requires:
@@ -956,7 +953,7 @@ Body:
       - Name: MO_TRIPLEATTACK
         MaxLevel: 10
         Requires:
-          - Name: MO_DODGE
+          - Name: MO_IRONHAND
             Level: 5
       - Name: MO_BODYRELOCATION
         MaxLevel: 1
@@ -972,8 +969,6 @@ Body:
         Requires:
           - Name: MO_IRONHAND
             Level: 5
-          - Name: MO_CALLSPIRITS
-            Level: 5
       - Name: MO_INVESTIGATE
         MaxLevel: 5
         Requires:
@@ -987,8 +982,8 @@ Body:
       - Name: MO_STEELBODY
         MaxLevel: 5
         Requires:
-          - Name: MO_COMBOFINISH
-            Level: 3
+          - Name: MO_CALLSPIRITS
+            Level: 5
       - Name: MO_BLADESTOP
         MaxLevel: 5
         Requires:
@@ -997,15 +992,13 @@ Body:
       - Name: MO_EXPLOSIONSPIRITS
         MaxLevel: 5
         Requires:
-          - Name: MO_ABSORBSPIRITS
-            Level: 1
+          - Name: MO_CALLSPIRITS
+            Level: 5
       - Name: MO_EXTREMITYFIST
         MaxLevel: 5
         Requires:
           - Name: MO_EXPLOSIONSPIRITS
-            Level: 3
-          - Name: MO_FINGEROFFENSIVE
-            Level: 3
+            Level: 5
       - Name: MO_CHAINCOMBO
         MaxLevel: 5
         Requires:
@@ -1016,6 +1009,8 @@ Body:
         Requires:
           - Name: MO_CHAINCOMBO
             Level: 3
+          - Name: MO_CALLSPIRITS
+            Level: 5
       - Name: MO_KITRANSLATION
         MaxLevel: 1
       - Name: MO_BALKYOUNG

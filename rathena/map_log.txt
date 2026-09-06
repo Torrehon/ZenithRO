@@ -1,0 +1,1968 @@
+[Status]: Memory manager initialised: log/map-server.leaks
+
+                                                                      
+                   rAthena Development Team presents                  
+                      ___   __  __                                    
+                _____/   | / /_/ /_  ___  ____  ____ _                
+               / ___/ /| |/ __/ __ \/ _ \/ __ \/ __ `/                
+              / /  / ___ / /_/ / / /  __/ / / / /_/ /                 
+             /_/  /_/  |_\__/_/ /_/\___/_/ /_/\__,_/                  
+                                                                      
+                     http://rathena.org/board/                        
+                                                                      
+[Info]: Git Hash: 'c917d24a35be70a4b1303db8cd0d1d005e5afc14'
+[Warning]: You are running rAthena with root privileges, it is not necessary.
+[Info]: Server uses 'select' as event dispatcher
+[Info]: Server supports up to '1024' concurrent connections.
+[Info]: Char Server IP Address : '127.0.0.1' -> '127.0.0.1'.
+[Info]: Map Server IP Address : '26.156.71.155' -> '26.156.71.155'.
+[Info]: Char Server IP Address : '127.0.0.1' -> '127.0.0.1'.
+[Info]: Map Server IP Address : '167.86.87.207' -> '167.86.87.207'.
+[Warning]: Using the default user/password s1/p1 is NOT RECOMMENDED.
+[Notice]: Please edit your 'login' table to create a proper inter-server user/password (gender 'S')
+[Notice]: and then edit your user/password in conf/map_athena.conf (or conf/import/map_conf.txt)
+[Status]: Using SQL dbs: no
+[Info]: Logging item transactions to table 'picklog'.
+[Info]: Logging commands to table 'atcommandlog'.
+[Info]: Logging 'logmes' messages to table 'npclog'.
+[Info]: Logging Cash transactions to table 'cashlog'.
+[Info]: Logging Feeding items to table 'feedinglog'.
+[Info]: Connecting to the Map DB Server....
+[Status]: Connect success! (Map Server Connection)
+[Info]: [SQL]: Connecting to the Log Database rathena At 127.0.0.1...
+[Status]: [SQL]: Successfully 'connected' to Database 'rathena'.
+[Status]: Loading maps (using db/import/map_cache.dat as map cache)...
+[Status]: Loading maps (using db/pre-re/map_cache.dat as map cache)...
+[Status]: Loading maps (using db/map_cache.dat as map cache)...
+[Status]: Loading 1270 maps.
+[Info]: Successfully loaded '1270' maps.
+[Info]: Done reading '0' messages in 'conf/msg_conf/import/map_msg_eng_conf.txt'.
+[Info]: Done reading '1278' messages in 'conf/msg_conf/map_msg.conf'.
+[Status]: Loading 'conf/atcommands.yml'...[Status]: Loading '311' entries in 'conf/atcommands.yml'
+[Status]: Done reading '311' entries in 'conf/atcommands.yml'
+[Status]: Loading 'conf/import/atcommands.yml'...[Status]: Loading 'db/instance_db.yml'...[Status]: Loading 'db/pre-re/instance_db.yml'...[Status]: Loading '8' entries in 'db/pre-re/instance_db.yml'
+[Status]: Done reading '8' entries in 'db/pre-re/instance_db.yml'
+[Status]: Loading 'db/import/instance_db.yml'...[Status]: Loading '0' entries in 'db/import/instance_db.yml'
+[Status]: Done reading '0' entries in 'db/import/instance_db.yml'
+[Status]: Using packet version: 20211103.
+[Status]: Packet Obfuscation: Enabled. Keys: 0x00000000, 0x00000000, 0x00000000
+[Status]: Loading 'db/const.yml'...[Status]: Loading '6' entries in 'db/const.yml'
+[Status]: Done reading '6' entries in 'db/const.yml'
+[Status]: Loading 'db/import/const.yml'...[Status]: Loading '24' entries in 'db/import/const.yml'
+[Status]: Done reading '24' entries in 'db/import/const.yml'
+[Status]: Loading 'db/item_db.yml'...[Status]: Loading 'db/pre-re/item_db.yml'...[Status]: Loading 'db/pre-re/item_db_usable.yml'...[Status]: Loading '1917' entries in 'db/pre-re/item_db_usable.yml'
+[Status]: Done reading '1917' entries in 'db/pre-re/item_db_usable.yml'
+[Status]: Loading 'db/pre-re/item_db_equip.yml'...[Status]: Loading '6040' entries in 'db/pre-re/item_db_equip.yml'
+[Status]: Done reading '6040' entries in 'db/pre-re/item_db_equip.yml'
+[Status]: Loading 'db/pre-re/item_db_etc.yml'...[Status]: Loading '2279' entries in 'db/pre-re/item_db_etc.yml'
+[Status]: Done reading '2279' entries in 'db/pre-re/item_db_etc.yml'
+[Status]: Loading 'db/import/item_db.yml'...[Status]: Done reading '19' entries in 'db/pre-re/item_noequip.txt'.
+[Status]: Done reading '0' entries in 'db/import/item_noequip.txt'.
+[Status]: Loading 'db/item_randomopt_db.yml'...[Status]: Loading 'db/pre-re/item_randomopt_db.yml'...[Status]: Loading '249' entries in 'db/pre-re/item_randomopt_db.yml'
+[Status]: Done reading '249' entries in 'db/pre-re/item_randomopt_db.yml'
+[Status]: Loading 'db/import/item_randomopt_db.yml'...[Status]: Loading 'db/item_randomopt_group.yml'...[Status]: Loading 'db/pre-re/item_randomopt_group.yml'...[Status]: Loading '2' entries in 'db/pre-re/item_randomopt_group.yml'
+[Status]: Done reading '2' entries in 'db/pre-re/item_randomopt_group.yml'
+[Status]: Loading 'db/import/item_randomopt_group.yml'...[Status]: Loading 'db/item_group_db.yml'...[Status]: Loading 'db/pre-re/item_group_db.yml'...[Status]: Loading '62' entries in 'db/pre-re/item_group_db.yml'
+[Status]: Done reading '62' entries in 'db/pre-re/item_group_db.yml'
+[Status]: Loading 'db/import/item_group_db.yml'...[Status]: Loading 'db/item_combos.yml'...[Status]: Loading 'db/pre-re/item_combos.yml'...[Status]: Loading '152' entries in 'db/pre-re/item_combos.yml'
+[Status]: Done reading '266' entries in 'db/pre-re/item_combos.yml'
+[Status]: Loading 'db/import/item_combos.yml'...[Status]: Loading 'db/laphine_synthesis.yml'...[Status]: Loading 'db/import/laphine_synthesis.yml'...[Status]: Loading 'db/laphine_upgrade.yml'...[Status]: Loading 'db/import/laphine_upgrade.yml'...[Status]: Loading 'db/item_reform.yml'...[Status]: Loading 'db/import/item_reform.yml'...[Status]: Loading 'db/item_enchant.yml'...[Status]: Loading 'db/import/item_enchant.yml'...[Status]: Loading 'db/item_packages.yml'...[Status]: Loading 'db/import/item_packages.yml'...[Warning]: itemdb_parse_roulette_db: Level 1 has 0 items, 9 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 2 has 0 items, 8 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 3 has 0 items, 7 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 4 has 0 items, 6 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 5 has 0 items, 5 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 6 has 0 items, 4 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 7 has 0 items, 3 are required. Filling with Apples...
+[Status]: Done reading '0' entries in 'db_roulette'.
+[Status]: Done reading '3' channels in 'conf/channels.conf'.
+[Status]: Loading 'db/item_cash.yml'...[Status]: Loading 'db/import/item_cash.yml'...[Status]: Done reading '0' entries in 'sales'.
+[Status]: Loading 'db/skill_db.yml'...[Status]: Loading 'db/pre-re/skill_db.yml'...[Status]: Loading '1270' entries in 'db/pre-re/skill_db.yml'
+[Status]: Done reading '1270' entries in 'db/pre-re/skill_db.yml'
+[Status]: Loading 'db/import/skill_db.yml'...[Status]: Done reading '101' entries in 'db/pre-re/skill_nocast_db.txt'.
+[Status]: Done reading '257' entries in 'db/pre-re/produce_db.txt'.
+[Status]: Done reading '74' entries in 'db/skill_changematerial_db.txt'.
+[Status]: Done reading '0' entries in 'db/skill_damage_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/skill_nocast_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/produce_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/skill_changematerial_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/skill_damage_db.txt'.
+[Status]: Loading 'db/abra_db.yml'...[Status]: Loading '155' entries in 'db/abra_db.yml'
+[Status]: Done reading '155' entries in 'db/abra_db.yml'
+[Status]: Loading 'db/pre-re/abra_db.yml'...[Status]: Loading '1' entries in 'db/pre-re/abra_db.yml'
+[Status]: Done reading '1' entries in 'db/pre-re/abra_db.yml'
+[Status]: Loading 'db/import/abra_db.yml'...[Status]: Loading 'db/magicmushroom_db.yml'...[Status]: Loading 'db/import/magicmushroom_db.yml'...[Status]: Loading 'db/spellbook_db.yml'...[Status]: Loading 'db/import/spellbook_db.yml'...[Status]: Loading 'db/create_arrow_db.yml'...[Status]: Loading '136' entries in 'db/create_arrow_db.yml'
+[Status]: Done reading '136' entries in 'db/create_arrow_db.yml'
+[Status]: Loading 'db/import/create_arrow_db.yml'...[Status]: Loading 'db/create_bullet_db.yml'...[Status]: Loading '125' entries in 'db/create_bullet_db.yml'
+[Status]: Done reading '125' entries in 'db/create_bullet_db.yml'
+[Status]: Loading 'db/import/create_bullet_db.yml'...[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Loading 'db/job_stats.yml'...[Status]: Loading 'db/pre-re/job_stats.yml'...[Status]: Loading '42' entries in 'db/pre-re/job_stats.yml'
+[Status]: Done reading '42' entries in 'db/pre-re/job_stats.yml'
+[Status]: Loading 'db/pre-re/job_aspd.yml'...[Status]: Loading '25' entries in 'db/pre-re/job_aspd.yml'
+[Status]: Done reading '25' entries in 'db/pre-re/job_aspd.yml'
+[Status]: Loading 'db/pre-re/job_exp.yml'...[Status]: Loading '6' entries in 'db/pre-re/job_exp.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/job_exp.yml'
+[Status]: Loading 'db/pre-re/job_basepoints.yml'...[Status]: Loading '50' entries in 'db/pre-re/job_basepoints.yml'
+[Status]: Done reading '50' entries in 'db/pre-re/job_basepoints.yml'
+[Status]: Loading 'db/import/job_stats.yml'...[Status]: Done reading '0' entries in 'db/pre-re/job_noenter_map.txt'.
+[Status]: Done reading '0' entries in 'db/import/job_noenter_map.txt'.
+[Status]: Loading 'db/skill_tree.yml'...[Status]: Loading 'db/pre-re/skill_tree.yml'...[Status]: Loading '79' entries in 'db/pre-re/skill_tree.yml'
+[Status]: Done reading '79' entries in 'db/pre-re/skill_tree.yml'
+[Status]: Loading 'db/import/skill_tree.yml'...[Status]: Loading 'db/statpoint.yml'...[Status]: Loading 'db/pre-re/statpoint.yml'...[Status]: Loading '275' entries in 'db/pre-re/statpoint.yml'
+[Status]: Done reading '275' entries in 'db/pre-re/statpoint.yml'
+[Status]: Loading 'db/import/statpoint.yml'...[Status]: Done reading '1' entries in 'conf/motd.txt'.
+[Status]: Loading 'db/attendance.yml'...[Status]: Loading 'db/pre-re/attendance.yml'...[Status]: Loading 'db/import/attendance.yml'...[Status]: Loading 'db/reputation.yml'...[Status]: Loading 'db/import/reputation.yml'...[Status]: Loading 'db/captcha_db.yml'...[Status]: Loading 'db/import/captcha_db.yml'...[Status]: Loading 'conf/groups.yml'...[Status]: Loading '9' entries in 'conf/groups.yml'
+[Status]: Done reading '9' entries in 'conf/groups.yml'
+[Status]: Loading 'conf/import/groups.yml'...[Status]: Done reading '403' entries in 'db/status_disabled.txt'.
+[Status]: Done reading '0' entries in 'db/import/status_disabled.txt'.
+[Status]: Loading 'db/size_fix.yml'...[Status]: Loading '23' entries in 'db/size_fix.yml'
+[Status]: Done reading '23' entries in 'db/size_fix.yml'
+[Status]: Loading 'db/pre-re/size_fix.yml'...[Status]: Loading '2' entries in 'db/pre-re/size_fix.yml'
+[Status]: Done reading '2' entries in 'db/pre-re/size_fix.yml'
+[Status]: Loading 'db/import/size_fix.yml'...[Status]: Loading 'db/refine.yml'...[Status]: Loading 'db/pre-re/refine.yml'...[Status]: Loading '2' entries in 'db/pre-re/refine.yml'
+[Status]: Done reading '2' entries in 'db/pre-re/refine.yml'
+[Status]: Loading 'db/import/refine.yml'...[Status]: Loading 'db/status.yml'...[Status]: Loading 'db/pre-re/status.yml'...[Status]: Loading '737' entries in 'db/pre-re/status.yml'
+[Status]: Done reading '737' entries in 'db/pre-re/status.yml'
+[Status]: Loading 'db/enchantgrade.yml'...[Status]: Loading 'db/import/enchantgrade.yml'...[Status]: Loading 'db/attr_fix.yml'...[Status]: Loading 'db/pre-re/attr_fix.yml'...[Status]: Loading '4' entries in 'db/pre-re/attr_fix.yml'
+[Status]: Done reading '4' entries in 'db/pre-re/attr_fix.yml'
+[Status]: Loading 'db/import/attr_fix.yml'...[Status]: Loading 'db/castle_db.yml'...[Status]: Loading 'db/pre-re/castle_db.yml'...[Status]: Loading '34' entries in 'db/pre-re/castle_db.yml'
+[Status]: Done reading '34' entries in 'db/pre-re/castle_db.yml'
+[Status]: Loading 'db/import/castle_db.yml'...[Status]: Loading 'db/guild_skill_tree.yml'...[Status]: Loading 'db/pre-re/guild_skill_tree.yml'...[Status]: Loading '15' entries in 'db/pre-re/guild_skill_tree.yml'
+[Status]: Done reading '15' entries in 'db/pre-re/guild_skill_tree.yml'
+[Status]: Loading 'db/import/guild_skill_tree.yml'...[Status]: Loading 'db/pet_db.yml'...[Status]: Loading 'db/pre-re/pet_db.yml'...[Status]: Loading '57' entries in 'db/pre-re/pet_db.yml'
+[Status]: Done reading '57' entries in 'db/pre-re/pet_db.yml'
+[Status]: Loading 'db/import/pet_db.yml'...[Status]: Loading 'db/homunculus_db.yml'...[Status]: Loading 'db/pre-re/homunculus_db.yml'...[Status]: Loading '8' entries in 'db/pre-re/homunculus_db.yml'
+[Status]: Done reading '8' entries in 'db/pre-re/homunculus_db.yml'
+[Status]: Loading 'db/import/homunculus_db.yml'...[Status]: Loading 'db/exp_homun.yml'...[Status]: Loading 'db/pre-re/exp_homun.yml'...[Status]: Loading '98' entries in 'db/pre-re/exp_homun.yml'
+[Status]: Done reading '98' entries in 'db/pre-re/exp_homun.yml'
+[Status]: Loading 'db/import/exp_homun.yml'...[Status]: Loading 'db/mercenary_db.yml'...[Status]: Loading '44' entries in 'db/mercenary_db.yml'
+[Status]: Done reading '44' entries in 'db/mercenary_db.yml'
+[Status]: Loading 'db/pre-re/mercenary_db.yml'...[Status]: Loading 'db/import/mercenary_db.yml'...[Status]: Loading 'db/elemental_db.yml'...[Status]: Loading 'db/import/elemental_db.yml'...[Status]: Loading 'db/quest_db.yml'...[Status]: Loading 'db/pre-re/quest_db.yml'...[Status]: Loading '2985' entries in 'db/pre-re/quest_db.yml'
+[Status]: Done reading '2985' entries in 'db/pre-re/quest_db.yml'
+[Status]: Loading 'db/import/quest_db.yml'...[Status]: Loading 'db/achievement_db.yml'...[Status]: Loading 'db/pre-re/achievement_db.yml'...[Status]: Loading '369' entries in 'db/pre-re/achievement_db.yml'
+[Status]: Done reading '369' entries in 'db/pre-re/achievement_db.yml'
+[Status]: Loading 'db/import/achievement_db.yml'...[Status]: Loading 'db/achievement_level_db.yml'...[Status]: Loading 'db/pre-re/achievement_level_db.yml'...[Status]: Loading '20' entries in 'db/pre-re/achievement_level_db.yml'
+[Status]: Done reading '20' entries in 'db/pre-re/achievement_level_db.yml'
+[Status]: Loading 'db/import/achievement_level_db.yml'...[Status]: Loading 'db/battleground_db.yml'...[Status]: Loading '5' entries in 'db/battleground_db.yml'
+[Status]: Done reading '5' entries in 'db/battleground_db.yml'
+[Status]: Loading 'db/import/battleground_db.yml'...[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12281' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8999' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Server is 'ready' and listening on port '5121'.
+
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Event 'OnInterIfInitOnce' executed with '0' NPCs.
+[Status]: Requested '34' guild castles from char-server...
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Status]: Received '34' guild castles from char-server.
+[Status]: Received '4' clans from char-server.
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Perseo' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: 'Shade' logged in. (AID/CID: '2000007/150050', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Shade' logged off.
+[Info]: 'Mustank' logged in. (AID/CID: '2000007/150053', IP: '79.117.251.126', Group '2').
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Loading 'db/pet_db.yml'...[Status]: Loading 'db/pre-re/pet_db.yml'...[Status]: Loading '57' entries in 'db/pre-re/pet_db.yml'
+[Status]: Done reading '57' entries in 'db/pre-re/pet_db.yml'
+[Status]: Loading 'db/import/pet_db.yml'...[Status]: Loading 'db/homunculus_db.yml'...[Status]: Loading 'db/pre-re/homunculus_db.yml'...[Status]: Loading '8' entries in 'db/pre-re/homunculus_db.yml'
+[Status]: Done reading '8' entries in 'db/pre-re/homunculus_db.yml'
+[Status]: Loading 'db/import/homunculus_db.yml'...[Status]: Loading 'db/exp_homun.yml'...[Status]: Loading 'db/pre-re/exp_homun.yml'...[Status]: Loading '98' entries in 'db/pre-re/exp_homun.yml'
+[Status]: Done reading '98' entries in 'db/pre-re/exp_homun.yml'
+[Status]: Loading 'db/import/exp_homun.yml'...[Status]: Loading 'db/mercenary_db.yml'...[Status]: Loading '44' entries in 'db/mercenary_db.yml'
+[Status]: Done reading '44' entries in 'db/mercenary_db.yml'
+[Status]: Loading 'db/pre-re/mercenary_db.yml'...[Status]: Loading 'db/import/mercenary_db.yml'...[Status]: Loading 'db/elemental_db.yml'...[Status]: Loading 'db/import/elemental_db.yml'...[Debug]: npc_scriptcont: Veteran Hunter#prt (sd->npc_id=110012200) is not 'Unknown NPC' (id=0).
+[Info]: Character 'Mustank' logged off.
+[Info]: 'Shade' logged in. (AID/CID: '2000007/150050', IP: '79.117.251.126', Group '2').
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: Character 'Shade' logged off.
+[Info]: 'Ultima' logged in. (AID/CID: '2000007/150067', IP: '79.117.251.126', Group '2').
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Debug]: npc_scriptcont: Veteran Hunter#gef (sd->npc_id=110043198) is not 'Unknown NPC' (id=0).
+[Info]: [Instance] Created map '1265#000001' (1270) from '1@sewb2' (1265).
+[Info]: [Instance] Created: Culvert (1)
+[Info]: [Instance] Destroyed: Culvert (1)
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: Character 'Ultima' logged off.
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '768'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '768'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: 'Ultima' logged in. (AID/CID: '2000007/150067', IP: '79.117.251.126', Group '2').
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: [Instance] Created map '1268#000002' (1270) from '1@mjo' (1268).
+[Info]: [Instance] Created: Coal Mines (2)
+[Info]: [Instance] Destroyed: Coal Mines (2)
+[Info]: Character 'Ultima' logged off.
+[Info]: 'Shade' logged in. (AID/CID: '2000007/150050', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Shade' logged off.
+[Info]: 'TESTER2' logged in. (AID/CID: '2000007/150063', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER2' logged off.
+[Info]: 'Ultima' logged in. (AID/CID: '2000007/150067', IP: '79.117.251.126', Group '2').
+[Info]: [Instance] Created map '1269#000003' (1270) from '1@iz_dun03' (1269).
+[Info]: [Instance] Created: Byalan (3)
+[Info]: [Instance] Destroyed: Byalan (3)
+[Info]: Character 'Ultima' logged off.
+[Info]: 'Ultima' logged in. (AID/CID: '2000007/150067', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Ultima' logged off.
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Perseo' logged off.
+[Info]: 'Rogue OP please Nerf' logged in. (AID/CID: '2000015/150066', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Rogue OP please Nerf' logged off.
+[Info]: 'MUSSOLINI HITLER MAO ZE' logged in. (AID/CID: '2000010/150058', IP: '188.62.173.169', Group '0').
+[Info]: Character 'MUSSOLINI HITLER MAO ZE' logged off.
+[Warning]: clif_parse: Received unsupported packet (packet 0x4547, 212 bytes received), disconnecting session #8.
+[Info]: Closed connection from '5.61.209.224'.
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '714'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '714'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '667'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '667'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Perseo' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: 'TESTER2' logged in. (AID/CID: '2000007/150063', IP: '79.117.251.126', Group '2').
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: Character 'TESTER2' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Warning]: Connection to Char Server lost.
+
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Info]: Character 'Perseo' logged off.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '1' characters.
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: Character 'Perseo' logged off.
+[Info]: 'Rogue OP please Nerf' logged in. (AID/CID: '2000015/150066', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Rogue OP please Nerf' logged off.
+[Info]: 'Daniel Larusso' logged in. (AID/CID: '2000015/150059', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Daniel Larusso' logged off.
+[Info]: 'Daniel Larusso' logged in. (AID/CID: '2000015/150059', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Daniel Larusso' logged off.
+[Info]: 'Daniel Larusso' logged in. (AID/CID: '2000015/150059', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Daniel Larusso' logged off.
+[Info]: 'Daniel Larusso' logged in. (AID/CID: '2000015/150059', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Daniel Larusso' logged off.
+[Info]: 'Daniel Larusso' logged in. (AID/CID: '2000015/150059', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Daniel Larusso' logged off.
+[Info]: 'Maximo Decimo Meridio' logged in. (AID/CID: '2000015/150061', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Maximo Decimo Meridio' logged off.
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Perseo' logged off.
+[Info]: Received Fame List of '2' characters.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '2' characters.
+[Info]: 'TESTER2' logged in. (AID/CID: '2000007/150063', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER2' logged off.
+[Info]: 'TESTER2' logged in. (AID/CID: '2000007/150063', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER2' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '2' characters.
+[Info]: 'TESTER2' logged in. (AID/CID: '2000007/150063', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER2' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '2' characters.
+[Info]: 'TESTER' logged in. (AID/CID: '2000007/150055', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER' logged off.
+[Info]: 'TESTER' logged in. (AID/CID: '2000007/150055', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER' logged off.
+[Info]: 'TESTER' logged in. (AID/CID: '2000007/150055', IP: '79.117.251.126', Group '2').
+[Info]: Character 'TESTER' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Warning]: Connection to Char Server lost.
+
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '2' characters.
+[Info]: 'TESTER2' logged in. (AID/CID: '2000007/150063', IP: '79.117.251.126', Group '2').
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '603'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '603'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Loading 'db/item_db.yml'...[Status]: Loading 'db/pre-re/item_db.yml'...[Status]: Loading 'db/pre-re/item_db_usable.yml'...[Status]: Loading '1917' entries in 'db/pre-re/item_db_usable.yml'
+[Status]: Done reading '1917' entries in 'db/pre-re/item_db_usable.yml'
+[Status]: Loading 'db/pre-re/item_db_equip.yml'...[Status]: Loading '6040' entries in 'db/pre-re/item_db_equip.yml'
+[Status]: Done reading '6040' entries in 'db/pre-re/item_db_equip.yml'
+[Status]: Loading 'db/pre-re/item_db_etc.yml'...[Status]: Loading '2279' entries in 'db/pre-re/item_db_etc.yml'
+[Status]: Done reading '2279' entries in 'db/pre-re/item_db_etc.yml'
+[Status]: Loading 'db/import/item_db.yml'...[Status]: Done reading '19' entries in 'db/pre-re/item_noequip.txt'.
+[Status]: Done reading '0' entries in 'db/import/item_noequip.txt'.
+[Status]: Loading 'db/item_randomopt_db.yml'...[Status]: Loading 'db/pre-re/item_randomopt_db.yml'...[Status]: Loading '249' entries in 'db/pre-re/item_randomopt_db.yml'
+[Status]: Done reading '249' entries in 'db/pre-re/item_randomopt_db.yml'
+[Status]: Loading 'db/import/item_randomopt_db.yml'...[Status]: Loading 'db/item_randomopt_group.yml'...[Status]: Loading 'db/pre-re/item_randomopt_group.yml'...[Status]: Loading '2' entries in 'db/pre-re/item_randomopt_group.yml'
+[Status]: Done reading '2' entries in 'db/pre-re/item_randomopt_group.yml'
+[Status]: Loading 'db/import/item_randomopt_group.yml'...[Status]: Loading 'db/item_group_db.yml'...[Status]: Loading 'db/pre-re/item_group_db.yml'...[Status]: Loading '62' entries in 'db/pre-re/item_group_db.yml'
+[Status]: Done reading '62' entries in 'db/pre-re/item_group_db.yml'
+[Status]: Loading 'db/import/item_group_db.yml'...[Status]: Loading 'db/item_combos.yml'...[Status]: Loading 'db/pre-re/item_combos.yml'...[Status]: Loading '152' entries in 'db/pre-re/item_combos.yml'
+[Status]: Done reading '266' entries in 'db/pre-re/item_combos.yml'
+[Status]: Loading 'db/import/item_combos.yml'...[Status]: Loading 'db/laphine_synthesis.yml'...[Status]: Loading 'db/import/laphine_synthesis.yml'...[Status]: Loading 'db/laphine_upgrade.yml'...[Status]: Loading 'db/import/laphine_upgrade.yml'...[Status]: Loading 'db/item_reform.yml'...[Status]: Loading 'db/import/item_reform.yml'...[Status]: Loading 'db/item_enchant.yml'...[Status]: Loading 'db/import/item_enchant.yml'...[Status]: Loading 'db/item_packages.yml'...[Status]: Loading 'db/import/item_packages.yml'...[Warning]: itemdb_parse_roulette_db: Level 1 has 0 items, 9 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 2 has 0 items, 8 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 3 has 0 items, 7 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 4 has 0 items, 6 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 5 has 0 items, 5 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 6 has 0 items, 4 are required. Filling with Apples...
+[Warning]: itemdb_parse_roulette_db: Level 7 has 0 items, 3 are required. Filling with Apples...
+[Status]: Done reading '0' entries in 'db_roulette'.
+[Status]: Loading 'db/item_cash.yml'...[Status]: Loading 'db/import/item_cash.yml'...[Status]: Done reading '0' entries in 'sales'.
+[Info]: Character 'TESTER2' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '2' characters.
+[Info]: 'Mustank' logged in. (AID/CID: '2000007/150053', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Mustank' logged off.
+[Info]: 'Shade' logged in. (AID/CID: '2000007/150050', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Shade' logged off.
+[Info]: 'Mustank' logged in. (AID/CID: '2000007/150053', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Mustank' logged off.
+[Info]: 'Mustank' logged in. (AID/CID: '2000007/150053', IP: '79.117.251.126', Group '2').
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '673'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '673'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: Character 'Mustank' logged off.
+[Status]: Attempting to connect to Char Server. Please wait.
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Warning]: Connection to Char Server lost.
+
+[Status]: Connecting to 127.0.0.1:6121
+[Status]: Logging in to char server...
+[Status]: Successfully logged on to Char Server (Connection: '7').
+[Status]: Sending maps to char server...
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Status]: Map-server connected to char-server 'rAthena' (whispername: Server).
+[Status]: Map Server is now online.
+[Info]: Received Fame List of '2' characters.
+[Info]: 'Mustank' logged in. (AID/CID: '2000007/150053', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Mustank' logged off.
+[Info]: 'Ultima' logged in. (AID/CID: '2000007/150067', IP: '79.117.251.126', Group '2').
+[Info]: Character 'Ultima' logged off.
+[Info]: 'Byblos' logged in. (AID/CID: '2000007/150068', IP: '79.117.251.126', Group '2').
+[Info]: 'El verdadero Guitarras' logged in. (AID/CID: '2000015/150069', IP: '120.229.100.72', Group '0').
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: Character 'El verdadero Guitarras' logged off.
+[Info]: 'Maximo Decimo Meridio' logged in. (AID/CID: '2000015/150061', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Maximo Decimo Meridio' logged off.
+[Info]: 'El verdadero Guitarras' logged in. (AID/CID: '2000015/150069', IP: '120.229.100.72', Group '0').
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: [Instance] Created map '1265#000004' (1270) from '1@sewb2' (1265).
+[Info]: [Instance] Created: Culvert (4)
+[Info]: [Instance] Destroyed: Culvert (4)
+[Debug]: npc_scriptcont: Veteran Hunter#pay (sd->npc_id=110179945) is not 'Unknown NPC' (id=0).
+[Info]: Character 'Byblos' logged off.
+[Info]: Character 'El verdadero Guitarras' logged off.
+[Info]: 'El verdadero Guitarras' logged in. (AID/CID: '2000015/150069', IP: '120.229.100.72', Group '0').
+[Info]: Character 'El verdadero Guitarras' logged off.
+[Status]: Event 'OnAgitStart2' executed with '11' NPCs.
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '754'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '754'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Warning]: clif_parse: Received unsupported packet (packet 0x4547, 208 bytes received), disconnecting session #9.
+[Info]: Closed connection from '66.228.53.46'.
+[Warning]: clif_parse: Received packet 0x0316 specifies invalid packet_len (1), disconnecting session #9.
+[Info]: Closed connection from '66.228.53.46'.
+[Info]: Character 'Perseo' logged off.
+[Warning]: clif_parse: Received unsupported packet (packet 0x4547, 110 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Warning]: clif_parse: Received unsupported packet (packet 0x0a0a, 2 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Warning]: clif_parse: Received unsupported packet (packet 0x2300, 37 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Warning]: clif_parse: Received unsupported packet (packet 0x0003, 38 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Warning]: clif_parse: Received unsupported packet (packet 0x0000, 8 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Warning]: clif_parse: Received unsupported packet (packet 0x0006, 23 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Warning]: clif_parse: Received unsupported packet (packet 0x6d00, 109 bytes received), disconnecting session #8.
+[Info]: Closed connection from '45.33.109.8'.
+[Info]: 'Inexpugnable' logged in. (AID/CID: '2000008/150057', IP: '79.117.163.73', Group '0').
+[Info]: Character 'Inexpugnable' logged off.
+[Warning]: clif_parse: Received unsupported packet (packet 0x003a, 58 bytes received), disconnecting session #8.
+[Info]: Closed connection from '50.116.26.161'.
+[Status]: Event 'OnAgitEnd2' executed with '11' NPCs.
+[Status]: Event 'OnAgitStart' executed with '21' NPCs.
+[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Loading 'db/mob_db.yml'...[Status]: Loading 'db/pre-re/mob_db.yml'...[Status]: Loading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Done reading '1298' entries in 'db/pre-re/mob_db.yml'
+[Status]: Loading 'db/mob_chat_db.yml'...[Status]: Loading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Done reading '59' entries in 'db/mob_chat_db.yml'
+[Status]: Loading 'db/import/mob_chat_db.yml'...[Status]: Done reading '5596' entries in 'db/pre-re/mob_skill_db.txt'.
+[Status]: Done reading '0' entries in 'db/import/mob_skill_db.txt'.
+[Status]: Loading 'db/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_item_ratio.yml'...[Status]: Loading 'db/import/mob_avail.yml'...[Status]: Loading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Done reading '4' entries in 'db/import/mob_avail.yml'
+[Status]: Loading 'db/mob_summon.yml'...[Status]: Loading 'db/pre-re/mob_summon.yml'...[Status]: Loading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Done reading '6' entries in 'db/pre-re/mob_summon.yml'
+[Status]: Loading 'db/import/mob_summon.yml'...[Status]: Loading 'db/map_drops.yml'...[Status]: Loading 'db/import/map_drops.yml'...[Status]: Event 'OnAgitEnd' executed with '21' NPCs.
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: 'MUSSOLINI HITLER MAO ZE' logged in. (AID/CID: '2000010/150058', IP: '84.124.169.99', Group '0').
+[Info]: Character 'MUSSOLINI HITLER MAO ZE' logged off.
+[Info]: 'El verdadero Guitarras' logged in. (AID/CID: '2000015/150069', IP: '120.229.100.72', Group '0').
+[Info]: Character 'El verdadero Guitarras' logged off.
+[Info]: 'Maximo Decimo Meridio' logged in. (AID/CID: '2000015/150061', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Maximo Decimo Meridio' logged off.
+[Info]: 'Perseo' logged in. (AID/CID: '2000015/150062', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Perseo' logged off.
+[Info]: 'Maximo Decimo Meridio' logged in. (AID/CID: '2000015/150061', IP: '120.229.100.72', Group '0').
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Info]: Pinging SQL server to keep connection alive...
+[Debug]: npc_scriptcont: Veteran Hunter#gef (sd->npc_id=110179948) is not 'Unknown NPC' (id=0).
+[Info]: 'Byblos' logged in. (AID/CID: '2000007/150068', IP: '79.117.251.126', Group '2').
+[Info]: [Instance] Created map '1269#000005' (1270) from '1@iz_dun03' (1269).
+[Info]: [Instance] Created: Byalan (5)
+[Info]: [Instance] Destroyed: Byalan (5)
+[Status]: Done loading '0' entries for '0' NPC Markets from 'market' table.
+[Status]: Loading NPCs...
+[Info]: Done loading '12280' NPCs:
+	-'3091' Warps
+	-'191' Shops
+	-'8998' Scripts
+	-'4103' Spawn sets
+	-'40429' Mobs Cached
+	-'0' Mobs Not Cached
+[Status]: Loading 'db/stylist.yml'...[Status]: Loading 'db/import/stylist.yml'...[Status]: Loading 'npc/barters.yml'...[Status]: Loading 'npc/custom/barters.yml'...[Info]: buildin_setbattleflag: battle_config flag 'base_exp_rate' is now set to '500'.
+[Info]: buildin_setbattleflag: battle_config flag 'job_exp_rate' is now set to '500'.
+[Status]: Event 'OnInit' executed with '1454' NPCs.
+[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
+[Info]: Character 'Byblos' logged off.
+[Info]: 'Byblos' logged in. (AID/CID: '2000007/150068', IP: '79.117.251.126', Group '2').
+[Warning]: Script command 'rand' returned failure.
+[Debug]: Source (NPC): CHAMPION_SYSTEM (invisible/not on a map)
+[Debug]: Source (NPC): CHAMPION_SYSTEM is located in: npc/custom/champion_monsters.txt
+[Info]: Character 'Maximo Decimo Meridio' logged off.
+[Info]: 'Maximo Decimo Meridio' logged in. (AID/CID: '2000015/150061', IP: '120.229.100.72', Group '0').
+[Info]: Character 'Maximo Decimo Meridio' logged off.
+[Info]: 'Maximo Decimo Meridio' logged in. (AID/CID: '2000015/150061', IP: '120.229.100.72', Group '0').
+[Warning]: Script command 'countitem' returned failure.
+[Debug]: Source (NPC): Knight Einherjar at 1@4tro (22,52)
+[Debug]: Source (NPC): Knight Einherjar is located in: npc/custom/soul_quests_1.txt
+[Info]: Character 'Maximo Decimo Meridio' logged off.
+[Info]: Character 'Byblos' logged off.

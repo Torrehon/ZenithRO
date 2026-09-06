@@ -1674,8 +1674,10 @@ Body:
       Assassin: true
       Blacksmith: true
       Crusader: true
+      Genin: true
       Gunslinger: true
       Hunter: true
+      Hiregun: true
       Knight: true
       Mage: true
       Merchant: true
@@ -1708,6 +1710,7 @@ Body:
       Crusader: true
       Gunslinger: true
       Knight: true
+      Hiregun: true
       Mage: true
       Merchant: true
       Rogue: true

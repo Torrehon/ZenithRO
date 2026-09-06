@@ -3,6 +3,12 @@
 
 #include "ragingtrifectablow.hpp"
 
+#include <config/core.hpp>
+
+#include "map/clif.hpp"
+#include "map/pc.hpp"
+#include "map/status.hpp"
+
 SkillRagingTrifectaBlow::SkillRagingTrifectaBlow() : WeaponSkillImpl(MO_TRIPLEATTACK) {
 }
 
@@ -14,4 +20,11 @@ void SkillRagingTrifectaBlow::castendDamageId(block_list* src, block_list* targe
 
 void SkillRagingTrifectaBlow::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& base_skillratio, int32 mflag) const {
 	base_skillratio += 20 * skill_lv;
+
+	// --- CUSTOM: Steel Body Combo Bonus ---
+	const status_change* sc = status_get_sc(src);
+	if (sc && sc->getSCE(SC_STEELBODY)) {
+		const status_data* sstatus = status_get_status_data(*src);
+		base_skillratio += sstatus->vit * 2; 
+	}
 }

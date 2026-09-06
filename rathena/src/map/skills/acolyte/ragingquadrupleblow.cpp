@@ -27,9 +27,9 @@ void SkillRagingQuadrupleBlow::castendDamageId(block_list* src, block_list* targ
 	// Si es el golpe principal Y tiene la Soul of the Pugilist, hacemos el Área
 	if (!(flag&1) && sd && pc_checkskill(sd, MO_PUGILIST) > 0) {
 		
-		// 1. Ataque en Área (AoE)
+		// 1. Ataque en Área (AoE) - Radio 2 (5x5) con Soul of the Pugilist
 		map_foreachinshootrange(skill_area_sub, target,
-			skill_get_splash(getSkillId(), skill_lv), BL_CHAR|BL_SKILL,
+			2, BL_CHAR|BL_SKILL,
 			src, getSkillId(), skill_lv, tick, flag|BCT_ENEMY|1,
 			skill_castend_damage_id);
 

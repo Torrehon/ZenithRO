@@ -700,11 +700,13 @@ Body:
           - Odin's_Blessing
           - Magni_Cap
     Script: |
-      bonus bStr,2;
-      bonus bDef,5;
-      bonus bMdef,5;
-      if (BaseClass == Job_Swordman)
-         bonus bDef,6;
+      .@r=getequiprefinerycnt(EQI_HEAD_TOP);
+      bonus bStr,1;
+      bonus bDef,2+(.@r/2);
+      bonus bMdef,1+(.@r/2);
+        if (BaseClass == Job_Swordman) {
+           bonus bDef,5;
+        }  
   - Combos:
       - Combo:
           - Valkyrja's_Shield
@@ -817,18 +819,21 @@ Body:
           - Fricco_Shoes
           - Falcon_Robe
     Script: |
+      .@r = getequiprefinerycnt(EQI_GARMENT);
       bonus bAgi,3;
-      bonus bMaxHPrate,5;
-      bonus bMaxSPrate,5;
+      bonus bFlee,.@r;
+      bonus bMaxHPrate,5+(.@r/2);
+      bonus bMaxSPrate,5+(.@r/2);
   - Combos:
       - Combo:
           - Odin's_Blessing
           - Vidar's_Boots
           - Vali's_Manteau
     Script: |
+      .@r = getequiprefinerycnt(EQI_GARMENT);
       bonus bVit,5;
-      bonus bHPrecovRate,10;
-      bonus bSPrecovRate,10;
+      bonus bHPrecovRate,10+(.@r*2);
+      bonus bSPrecovRate,10+(.@r*2);
   - Combos:
       - Combo:
           - Odin's_Blessing
@@ -837,8 +842,12 @@ Body:
           - Odin's_Blessing
           - Ulle_Cap_I
     Script: |
-      if (readparam(bDex) > 69)
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      bonus bUseSPrate,.@r;
+      if (readparam(bDex) > 69) {
          bonus bUseSPrate,-10;
+        }
+      bonus2 bAddRace,RC_ALL,.@r;
   - Combos:
       - Combo:
           - Goibne's_Armor
@@ -846,15 +855,16 @@ Body:
           - Goibne's_Shoulder_Arms
           - Goibne's_Helmet
     Script: |
-      bonus bVit,5;
-      bonus bMaxHPrate,15;
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      bonus bVit,.@r/2;
+      bonus bMaxHPrate,9+(.@r/2);
       bonus bMaxSPrate,5;
-      bonus bDef,5;
-      bonus bMdef,15;
-      bonus2 bSubEle,Ele_Water,10;
-      bonus2 bSubEle,Ele_Earth,10;
-      bonus2 bSubEle,Ele_Fire,10;
-      bonus2 bSubEle,Ele_Wind,10;
+      bonus bDef,.@r/2;
+      bonus bMdef,5+(.@r/2);
+      bonus2 bSubEle,Ele_Water,5+(.@r/2);
+      bonus2 bSubEle,Ele_Earth,5+(.@r/2);
+      bonus2 bSubEle,Ele_Fire,5+(.@r/2);
+      bonus2 bSubEle,Ele_Wind,5+(.@r/2);
   - Combos:
       - Combo:
           - Valkyrie_Armor
@@ -1079,11 +1089,13 @@ Body:
           - Morpheus's_Armlet
           - Morpheus's_Hood
     Script: |
-      bonus bInt,5;
-      bonus bMdef,11;
-      bonus bMaxSPrate,20;
+      .@r = getequiprefinerycnt(EQI_HEAD_TOP);
+      bonus bInt,3;
+      bonus bMdef,6+(.@r/2);
+      bonus bMaxSPrate,15+.@r;
       bonus bNoCastCancel;
-      bonus bCastrate,25;
+      bonus bCastrate,25-.@r;
+      
   - Combos:
       - Combo:
           - Morrigane's_Manteau
@@ -1825,3 +1837,17 @@ Body:
       bonus bMaxHP,(.@r)*50;
       bonus2 bCastrate,"WZ_STORMGUST",-.@r;
       bonus2 bCastrate,"WZ_FROSTNOVA",-.@r;
+  - Combos:
+      - Combo:
+          - Santa_Hat_1  
+          - CandyCaneRod
+    Script: |
+      .@r = getequiprefinerycnt(EQI_HAND_R);
+      skill "PR_MAGNIFICAT",1;
+      bonus bCastrate,-(.@r);
+      bonus bDelayRate,-(.@r);
+      bonus bSpeedRate,.@r*2;
+      if (.@r>=9){
+         skill "AL_HEAL",5;
+         skill "PR_MAGNIFICAT",3;
+      }   

@@ -2390,10 +2390,10 @@ int32 unit_skilluse_id2(block_list *src, int32 target_id, uint16 skill_id, uint1
 				return 0; // Can't cast on non-dead characters.
 		break;
 #ifndef RENEWAL
-		case MO_FINGEROFFENSIVE:
-			if(sd)
-				casttime += casttime * min(skill_lv, sd->spiritball);
-		break;
+		//case MO_FINGEROFFENSIVE:
+			//if(sd)
+				//casttime += casttime * min(skill_lv, sd->spiritball);
+		//break;
 #endif
 		case MO_EXTREMITYFIST:
 			if (sc && sc->getSCE(SC_COMBO) &&

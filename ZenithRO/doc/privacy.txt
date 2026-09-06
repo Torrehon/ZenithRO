@@ -1,0 +1,40 @@
+====================================================================
+RO OpenSetup
+(c) 2010-2026 Ai4rei/AN
+See doc/license.txt for details.
+
+====================================================================
+
+== Privacy =========================================================
+
+= Summary =
+
+    The application discloses your public IP address, platform
+information and configuration during checking for updates over HTTP.
+Data is only used for statistical purposes for limited amount of
+time. No data is used commercially.
+
+= Full Disclosure =
+
+    As of version 2.16.0, the application supports anonymous usage
+statistics and automated checking for new versions, opt-in with UI
+settings and ability to check for new versions manually. The
+information is retrieved over an unsecured HTTP connection.
+
+    During the communication listed above, following information is
+disclosed as part of the protocol traffic:
+
+- HTTP:
+    - Public IP address of the source (implied).
+    - RO OpenSetup version and edition name (explicit, user-agent string).
+    - Windows* version and platform (explicit, user-agent string).
+
+    Explicitly disclosed information is used for statistics, that
+aid decision-making in futher development of the application. The
+life-time of the collected data is limited. Collected data is not
+used to identify or contact an individual.
+
+    Custom builds may have further implications on privacy, as
+available in their respective privacy policies, if available.
+
+======================================================= 2021-12-20 =

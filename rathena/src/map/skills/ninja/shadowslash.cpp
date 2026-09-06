@@ -8,27 +8,26 @@
 SkillShadowSlash::SkillShadowSlash() : WeaponSkillImpl(NJ_KIRIKAGE) {}
 
 void SkillShadowSlash::calculateSkillRatio(const Damage *wd, const block_list *src, const block_list *target, uint16 skill_lv, int32 &base_skillratio, int32 mflag) const {
-	// Ratio base: 15% por nivel
-	int32 ratio = (20 * skill_lv);
 	const status_change *sc = status_get_sc(src);
 
 	// 1. BONO POR SIGILO (Solo el daño extra)
 	if (sc && sc->getSCE(SC_HIDING)) {
-		ratio += 50;
+		base_skillratio += 100;
 	}
 
 	// 2. LÓGICA DEL DOBLE HIT (Solo si lleva Huuma Shuriken)
 	const map_session_data *sd = BL_CAST(BL_PC, src);
-	if (sd && sd->weapontype1 == W_HUUMA && wd != nullptr) {
+	if (sd && sd->weapontype1 == W_DAGGER && wd != nullptr) {
 		const_cast<Damage*>(wd)->div_ = 2;
 	}
 
-	base_skillratio += ratio;
+	base_skillratio += 20 * skill_lv;
 }
 
 void SkillShadowSlash::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	status_change *sc = status_get_sc(src);
-
+	map_session_data *sd = BL_CAST(BL_PC, src);
+  
 	// 1. Salto (Gap Closer)
 	if( !map_flag_gvg2(src->m) && !map_getmapflag(src->m, MF_BATTLEGROUND) ) {
 		int16 x, y;

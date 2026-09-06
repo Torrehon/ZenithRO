@@ -1,0 +1,490 @@
+== RO OpenSetup Log ============================================================
+[2026-08-07 13:02:21.147][Info] Logging started.
+[2026-08-07 13:02:21.147]  [Info] Version: 3.4.0.680 (built: 686bb467, linker: 6.0, subsystem: 4.0, checksum: 000b3f05)
+[2026-08-07 13:02:21.147]  [Info] Edition: 'OR'
+[2026-08-07 13:02:21.147]  [Info] Operating System: Windows 10 Enterprise N  (10.0.19045, Windows NT platform, 64-bit)
+[2026-08-07 13:02:21.147]  [Info] Memory Utilization: 50%
+[2026-08-07 13:02:21.147]  [Info] Integrity Level: High
+[2026-08-07 13:02:21.147]  [Info] Command Line: "D:\SERVER_RO\LevitationRO\client_2023_clean - online\opensetup.exe" 
+[2026-08-07 13:02:21.147]  [Warning] Either there is no config file or it failed to open.
+[2026-08-07 13:02:21.147][Info] OnChangeSettingsEngine: LUA
+[2026-08-07 13:02:21.489][Info] Enumerated 2 DX7 drivers.
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:21.489]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:21.489]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 13:02:21.489]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 13:02:21.489]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 13:02:21.489]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:21.489]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:21.489]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 13:02:21.489]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 13:02:21.489]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 13:02:21.489]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 13:02:36.476][Info] LUA settings engine sanity check started.
+[2026-08-07 13:02:36.476]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-07 13:02:36.476]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-07 13:02:36.476]  [Error] No usable default settings file was found, your client won't be able to read settings.
+[2026-08-07 13:02:36.477]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-07 13:02:36.477]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-07 13:02:36.477]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-07 13:02:36.477][Info] LUA settings engine sanity check stopped.
+[2026-08-07 13:02:36.477][Error] Displaying message:
+Se ha observado que el estado de la instalación de Ragnarök Online interfiere en la carga y guardado correcto de ajustes.
+
+Más detalles en el archivo opensetup.log
+
+Error del sistema (0x00000002, 2):
+El sistema no puede encontrar el archivo especificado.
+
+[2026-08-07 13:02:46.938][Info] OnChangeSettingsEngine: LUA
+[2026-08-07 13:02:47.232][Info] Enumerated 2 DX7 drivers.
+[2026-08-07 13:02:47.232]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-07 13:02:47.232]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-07 13:02:47.232]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:47.233]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:47.233]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 13:02:47.233]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 13:02:47.233]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 13:02:47.233]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:47.233]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:47.233]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 13:02:47.233]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 13:02:47.233]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 13:02:47.233]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 13:02:50.942][Info] LUA settings engine sanity check started.
+[2026-08-07 13:02:50.942]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-07 13:02:50.942]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-07 13:02:50.950]  [Info] Default settings file 'System\OptionInfo.lub' found. Continuing...
+[2026-08-07 13:02:50.951]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-07 13:02:50.951]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-07 13:02:50.951]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-07 13:02:50.951][Info] LUA settings engine sanity check stopped.
+[2026-08-07 13:02:50.956][Info] OnChangeSettingsEngine: LUA
+[2026-08-07 13:02:51.230][Info] Enumerated 2 DX7 drivers.
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:51.230]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:51.230]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 13:02:51.230]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 13:02:51.230]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 13:02:51.230]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:51.230]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 13:02:51.230]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 13:02:51.230]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 13:02:51.230]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 13:02:51.230]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 13:02:52.884][Info] LUA settings engine sanity check started.
+[2026-08-07 13:02:52.884]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-07 13:02:52.884]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-07 13:02:52.885]  [Info] Default settings file 'System\OptionInfo.lub' found. Continuing...
+[2026-08-07 13:02:52.885]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-07 13:02:52.885]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-07 13:02:52.885]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-07 13:02:52.885][Info] LUA settings engine sanity check stopped.
+[2026-08-07 13:02:52.913][Info] Logging stopped.
+================================================================================
+
+== RO OpenSetup Log ============================================================
+[2026-08-07 19:10:32.626][Info] Logging started.
+[2026-08-07 19:10:32.626]  [Info] Version: 3.4.0.680 (built: 686bb467, linker: 6.0, subsystem: 4.0, checksum: 000b3f05)
+[2026-08-07 19:10:32.626]  [Info] Edition: 'OR'
+[2026-08-07 19:10:32.627]  [Info] Operating System: Windows 10 Enterprise N  (10.0.19045, Windows NT platform, 64-bit)
+[2026-08-07 19:10:32.627]  [Info] Memory Utilization: 31%
+[2026-08-07 19:10:32.627]  [Info] Integrity Level: Medium
+[2026-08-07 19:10:32.627]  [Info] Command Line: "D:\SERVER_RO\LevitationRO\ZenithRO\opensetup.exe" 
+[2026-08-07 19:10:32.627]  [Warning] Either there is no config file or it failed to open.
+[2026-08-07 19:10:32.627][Info] OnChangeSettingsEngine: LUA
+[2026-08-07 19:10:32.995][Info] Enumerated 2 DX7 drivers.
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 19:10:32.995]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 19:10:32.995]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 19:10:32.995]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 19:10:32.995]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 19:10:32.995]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-07 19:10:32.995]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-07 19:10:32.995]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-07 19:10:32.996]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-07 19:10:32.996]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-07 19:10:32.996]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-07 19:10:36.667][Info] LUA settings engine sanity check started.
+[2026-08-07 19:10:36.667]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-07 19:10:36.668]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-07 19:10:36.668]  [Info] Default settings file 'System\OptionInfo.lub' found. Continuing...
+[2026-08-07 19:10:36.668]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-07 19:10:36.668]  [Error] Settings file 'savedata\OptionInfo.lua' found, but it has protective attributes set (attr=0x21).
+[2026-08-07 19:10:36.668]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-07 19:10:36.668][Info] LUA settings engine sanity check stopped.
+[2026-08-07 19:10:36.669][Error] Displaying message:
+Se ha observado que el estado de la instalación de Ragnarök Online interfiere en la carga y guardado correcto de ajustes.
+
+Más detalles en el archivo opensetup.log
+
+Error del sistema (0x00000002, 2):
+El sistema no puede encontrar el archivo especificado.
+
+[2026-08-07 19:10:43.190][Info] Logging stopped.
+================================================================================
+
+== RO OpenSetup Log ============================================================
+[2026-08-09 10:08:24.835][Info] Logging started.
+[2026-08-09 10:08:24.835]  [Info] Version: 3.4.0.680 (built: 686bb467, linker: 6.0, subsystem: 4.0, checksum: 000b3f05)
+[2026-08-09 10:08:24.835]  [Info] Edition: 'OR'
+[2026-08-09 10:08:24.835]  [Info] Operating System: Windows 10 Enterprise N  (10.0.19045, Windows NT platform, 64-bit)
+[2026-08-09 10:08:24.835]  [Info] Memory Utilization: 52%
+[2026-08-09 10:08:24.835]  [Info] Integrity Level: High
+[2026-08-09 10:08:24.835]  [Info] Command Line: "D:\SERVER_RO\LevitationRO\ZenithRO\opensetup.exe" 
+[2026-08-09 10:08:24.835]  [Info] Dumping contents of 'D:\SERVER_RO\LevitationRO\ZenithRO\opensetup.ini':
+[2026-08-09 10:08:24.835]     1: [privacy]
+[2026-08-09 10:08:24.835]     2: consent=1
+[2026-08-09 10:08:24.835][Info] OnChangeSettingsEngine: LUA
+[2026-08-09 10:08:25.177][Info] Enumerated 2 DX7 drivers.
+[2026-08-09 10:08:25.177]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-09 10:08:25.177]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-09 10:08:25.177]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:25.178]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:25.178]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 10:08:25.178]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 10:08:25.178]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 10:08:25.178]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:25.178]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:25.178]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 10:08:25.178]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 10:08:25.178]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 10:08:25.178]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 10:08:45.536][Info] LUA settings engine sanity check started.
+[2026-08-09 10:08:45.537]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-09 10:08:45.537]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-09 10:08:45.537]  [Error] No usable default settings file was found, your client won't be able to read settings.
+[2026-08-09 10:08:45.537]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-09 10:08:45.537]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-09 10:08:45.537]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-09 10:08:45.537][Info] LUA settings engine sanity check stopped.
+[2026-08-09 10:08:45.538][Error] Displaying message:
+Se ha observado que el estado de la instalación de Ragnarök Online interfiere en la carga y guardado correcto de ajustes.
+
+Más detalles en el archivo opensetup.log
+
+Error del sistema (0x00000002, 2):
+El sistema no puede encontrar el archivo especificado.
+
+[2026-08-09 10:08:58.970][Info] OnChangeSettingsEngine: LUA
+[2026-08-09 10:08:59.297][Info] Enumerated 2 DX7 drivers.
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:59.297]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:59.297]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 10:08:59.297]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 10:08:59.297]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 10:08:59.297]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:59.297]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 10:08:59.297]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 10:08:59.297]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 10:08:59.297]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 10:08:59.297]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 10:09:02.206][Info] LUA settings engine sanity check started.
+[2026-08-09 10:09:02.206]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-09 10:09:02.206]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-09 10:09:02.224]  [Info] Default settings file 'System\OptionInfo.lub' found. Continuing...
+[2026-08-09 10:09:02.225]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-09 10:09:02.225]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-09 10:09:02.225]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-09 10:09:02.225][Info] LUA settings engine sanity check stopped.
+[2026-08-09 10:09:02.233][Info] OnChangeSettingsEngine: LUA
+[2026-08-09 10:09:02.535][Info] Enumerated 2 DX7 drivers.
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 10:09:02.535]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 10:09:02.535]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 10:09:02.535]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 10:09:02.535]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 10:09:02.535]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 10:09:02.535]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 10:09:02.535]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 10:09:02.535]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 10:09:02.535]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 10:09:02.535]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 10:09:03.673][Info] LUA settings engine sanity check started.
+[2026-08-09 10:09:03.673]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-09 10:09:03.673]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-09 10:09:03.673]  [Info] Default settings file 'System\OptionInfo.lub' found. Continuing...
+[2026-08-09 10:09:03.673]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-09 10:09:03.673]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-09 10:09:03.673]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-09 10:09:03.673][Info] LUA settings engine sanity check stopped.
+[2026-08-09 10:09:03.710][Info] Logging stopped.
+================================================================================
+
+== RO OpenSetup Log ============================================================
+[2026-08-09 11:43:37.748][Info] Logging started.
+[2026-08-09 11:43:37.748]  [Info] Version: 3.5.0.692 (built: 6a48f451, linker: 6.0, subsystem: 4.0, checksum: 000b67ef)
+[2026-08-09 11:43:37.748]  [Info] Edition: 'OR'
+[2026-08-09 11:43:37.748]  [Info] Operating System: Windows 10 Enterprise N  (10.0.19045, Windows NT platform, 64-bit)
+[2026-08-09 11:43:37.748]  [Info] Memory Utilization: 52%
+[2026-08-09 11:43:37.748]  [Info] Integrity Level: Medium
+[2026-08-09 11:43:37.748]  [Info] Command Line: "D:\SERVER_RO\LevitationRO\ZenithRO\opensetup.exe" 
+[2026-08-09 11:43:37.749]  [Info] Dumping contents of 'D:\SERVER_RO\LevitationRO\ZenithRO\opensetup.ini':
+[2026-08-09 11:43:37.749]     1: [privacy]
+[2026-08-09 11:43:37.749]     2: consent=1
+[2026-08-09 11:43:37.749][Info] OnChangeSettingsEngine: LUA
+[2026-08-09 11:43:38.146][Info] Enumerated 2 DX7 drivers.
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:38.146]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:38.146]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 11:43:38.146]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 11:43:38.146]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 11:43:38.146]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 11:43:38.146]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:38.147]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:38.147]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 11:43:38.147]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 11:43:38.147]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 11:43:38.147]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 11:43:41.273][Info] LUA settings engine sanity check started.
+[2026-08-09 11:43:41.273]  [Info] Checking for 'System\LuaFiles514\OptionInfo.lub'...
+[2026-08-09 11:43:41.273]  [Info] Checking for 'System\OptionInfo.lub'...
+[2026-08-09 11:43:41.273]  [Error] No usable default settings file was found, your client won't be able to read settings.
+[2026-08-09 11:43:41.273]  [Info] Checking for 'savedata\OptionInfo.lua'...
+[2026-08-09 11:43:41.273]  [Info] Settings file 'savedata\OptionInfo.lua' found, can be both read and written.
+[2026-08-09 11:43:41.273]  [Info] Checking for 'savedata\OptionInfo.lub'...
+[2026-08-09 11:43:41.273][Info] LUA settings engine sanity check stopped.
+[2026-08-09 11:43:41.274][Error] Displaying message:
+Se ha observado que el estado de la instalación de Ragnarök Online interfiere en la carga y guardado correcto de ajustes.
+
+Más detalles en el archivo opensetup.log
+
+Error del sistema (0x00000002, 2):
+El sistema no puede encontrar el archivo especificado.
+
+[2026-08-09 11:43:42.954][Info] OnChangeSettingsEngine: LUA
+[2026-08-09 11:43:43.267][Info] Enumerated 2 DX7 drivers.
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1920x1080x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1680x1050x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1600x1024x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1440x1080x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1366x768x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x1024x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x960x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x800x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1280x720x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1152x864x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Mode 1024x768x32
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:43.267]    [Info] Driver 'Controlador de pantalla primaria': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:43.268]  [Info] Driver 'Controlador de pantalla primaria': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 11:43:43.268]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 11:43:43.268]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 11:43:43.268]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1920x1080x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1680x1050x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1600x1024x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1440x1080x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1366x768x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x1024x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x960x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x800x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1280x720x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1152x864x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Mode 1024x768x32
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 800x600x32 due to setup imposed limitations.
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 720x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:43.268]    [Info] Driver 'NVIDIA GeForce GTX 1070': Removing mode 640x480x32 due to setup imposed limitations.
+[2026-08-09 11:43:43.268]  [Info] Driver 'NVIDIA GeForce GTX 1070': 14 video modes (3 filtered), 2 hw devices, 1 sw devices
+[2026-08-09 11:43:43.268]    [Info] HW Device 'Direct3D HAL': Type 1
+[2026-08-09 11:43:43.268]    [Info] HW Device 'Direct3D T&L HAL': Type 2
+[2026-08-09 11:43:43.268]    [Info] SW Device 'RGB Emulation': Type 0
+[2026-08-09 11:43:43.883][Info] Logging stopped.
+================================================================================
+

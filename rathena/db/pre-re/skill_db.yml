@@ -1953,8 +1953,8 @@ Body:
     Hit: Multi_Hit
     HitCount: 3
     Element: Weapon
-    Damage Flags:
-       Critical: true
+    DamageFlags:
+      Critical: true
     Requires:
       SpCost: 7
       Weapon:
@@ -4469,6 +4469,7 @@ Body:
     DamageFlags:
       Splash: true
       IgnoreFlee: true
+      IgnoreElement: true
     Flags:
       TargetTrap: true
       AlterRangeVulture: true
@@ -4611,8 +4612,8 @@ Body:
     Range: 1
     Hit: Multi_Hit
     HitCount: 1
-    Damage Flags:
-       Critical: true
+    DamageFlags:
+      Critical: true
     Element: Weapon
     AfterCastActDelay: 2000
     Duration2: 5000
@@ -6144,7 +6145,7 @@ Body:
     TargetType: Self
     DamageFlags:
       NoDamage: true
-    CastTime: 3000
+    CastTime: 10000
     CastTimeFlags:
       IgnoreDex: true
       IgnoreStatus: true
@@ -7114,17 +7115,27 @@ Body:
       Skill:
         Plagiarism: true
         Reproduce: true
-    CastTime: 700
+    CastTime:
+      - Level: 1
+        Time: 300
+      - Level: 2
+        Time: 600
+      - Level: 3
+        Time: 900
+      - Level: 4
+        Time: 1200
+      - Level: 5
+        Time: 1500
     AfterCastActDelay: 500
     AfterCastWalkDelay:
       - Level: 2
         Time: 200
       - Level: 3
-        Time: 400
+        Time: 300
       - Level: 4
-        Time: 600
+        Time: 400
       - Level: 5
-        Time: 800
+        Time: 500
     Requires:
       SpCost: 10
       SpiritSphereCost:
@@ -14357,25 +14368,25 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 2
+          Amount: 1
         - Level: 2
-          Amount: 4
+          Amount: 2
         - Level: 3
-          Amount: 6
+          Amount: 3
         - Level: 4
-          Amount: 8
+          Amount: 4
         - Level: 5
-          Amount: 10
+          Amount: 5
         - Level: 6
-          Amount: 12
+          Amount: 6
         - Level: 7
-          Amount: 14
+          Amount: 7
         - Level: 8
-          Amount: 16
+          Amount: 8
         - Level: 9
-          Amount: 18
+          Amount: 9
         - Level: 10
-          Amount: 20
+          Amount: 10
       Ammo:
         Shuriken: true
       AmmoAmount:
@@ -14460,15 +14471,15 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 20
+          Amount: 22
         - Level: 2
-          Amount: 25
+          Amount: 24
         - Level: 3
-          Amount: 30
+          Amount: 26
         - Level: 4
-          Amount: 35
+          Amount: 28
         - Level: 5
-          Amount: 40
+          Amount: 30
       Weapon:
         Huuma: true
   - Id: 526
@@ -14494,7 +14505,7 @@ Body:
     Cooldown: 2000
     AfterCastActDelay: 1000
     Requires:
-      SpCost: 25
+      SpCost: 15
       ZenyCost:
         - Level: 1
           Amount: 300
@@ -14731,25 +14742,15 @@ Body:
     Requires:
       SpCost:
         - Level: 1
-          Amount: 30
+          Amount: 22
         - Level: 2
-          Amount: 32
+          Amount: 24
         - Level: 3
-          Amount: 34
+          Amount: 26
         - Level: 4
-          Amount: 36
+          Amount: 28
         - Level: 5
-          Amount: 38
-        - Level: 6
-          Amount: 40
-        - Level: 7
-          Amount: 42
-        - Level: 8
-          Amount: 44
-        - Level: 9
-          Amount: 46
-        - Level: 10
-          Amount: 48
+          Amount: 30
       ItemCost:
         - Item: Shadow_Orb
           Amount: 1
@@ -15402,27 +15403,27 @@ Body:
         Time: 1000
     Duration1:
       - Level: 1
-        Time: 30000
-      - Level: 2
-        Time: 45000
-      - Level: 3
         Time: 60000
+      - Level: 2
+        Time: 120000
+      - Level: 3
+        Time: 180000
       - Level: 4
-        Time: 75000
+        Time: 240000
       - Level: 5
-        Time: 90000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
-          Amount: 20
+          Amount: 6
         - Level: 2
-          Amount: 30
+          Amount: 12
         - Level: 3
-          Amount: 40
+          Amount: 18
         - Level: 4
-          Amount: 50
+          Amount: 24
         - Level: 5
-          Amount: 60
+          Amount: 30
       HpRateCost: -5
     Status: Nen
   - Id: 544
@@ -15462,28 +15463,29 @@ Body:
     Range: 2
     Hit: Single
     HitCount: 1
+    Element: Weapon
     Requires:
       SpCost:
         - Level: 1
-          Amount: 55
+          Amount: 22
         - Level: 2
-          Amount: 60
+          Amount: 24
         - Level: 3
-          Amount: 65
+          Amount: 26
         - Level: 4
-          Amount: 70
+          Amount: 28
         - Level: 5
-          Amount: 75
+          Amount: 30
         - Level: 6
-          Amount: 80
+          Amount: 32
         - Level: 7
-          Amount: 85
+          Amount: 34
         - Level: 8
-          Amount: 90
+          Amount: 36
         - Level: 9
-          Amount: 95
+          Amount: 38
         - Level: 10
-          Amount: 100
+          Amount: 40
     CastCancel: false
   - Id: 572
     Name: SL_DEATHKNIGHT
@@ -17174,6 +17176,8 @@ Body:
     Type: Weapon
     TargetType: Attack
     DamageFlags:
+      IgnoreDefense: true
+      IgnoreFlee: true
       Splash: true
     Flags:
       IsQuest: true
@@ -17187,7 +17191,7 @@ Body:
         Reproduce: true
     SplashArea: 1
     Knockback: 5
-    AfterCastActDelay: 2000
+    Cooldown: 1000
     CastTime: 1000
     Duration2: 5000
     Requires:
@@ -17587,11 +17591,15 @@ Body:
     Description: Soul of the Kensei
     MaxLevel: 1
     Type: Weapon
+    Flags:
+      IsQuest: true
   - Id: 1056
     Name: NJ_KUJISOUL
     Description: Soul of the Kuji
     MaxLevel: 1
     Type: Weapon  
+    Flags:
+      IsQuest: true
   - Id: 1057
     Name: SA_ARCSOUL
     Description: Soul of the Arcanist
@@ -17669,7 +17677,7 @@ Body:
     TargetType: Self
     DamageFlags:
       NoDamage: true
-    CastTime: 3000
+    CastTime: 10000
     CastTimeFlags:
       IgnoreDex: true
       IgnoreStatus: true
@@ -17681,15 +17689,15 @@ Body:
     Description: Soul of the Peacekeeper
     MaxLevel: 1
     Type: Weapon
-    # Flags:
-      # IsQuest: true
+    Flags:
+      IsQuest: true
   - Id: 1069
     Name: GS_ENFORCER
     Description: Soul of the Enforcer
     MaxLevel: 1
     Type: Weapon
-    # Flags:
-      # IsQuest: true
+    Flags:
+      IsQuest: true
   - Id: 2001
     Name: RK_ENCHANTBLADE
     Description: Enchant Blade

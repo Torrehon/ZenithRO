@@ -2676,6 +2676,20 @@ void skill_combo(block_list* src,block_list *dsrc, block_list *bl, uint16 skill_
 				duration = 1;
 				target_id = 0; // Will target current auto-target instead
 			}
+
+			// --- INICIO CUSTOM: Stacks Relentless para Pugilista ---
+			if (pc_checkskill(sd, MO_PUGILIST) > 0 && sc && sc->getSCE(SC_EXPLOSIONSPIRITS)) {
+				status_change_entry* sce_relent = sc->getSCE(SC_RELENTLESS);
+				int stacks = sce_relent ? sce_relent->val1 : 0;
+
+				if (stacks < 10) {
+					sc_start4(src, src, SC_RELENTLESS, 100, stacks + 1, 0, 0, 0, 60000);
+					clif_specialeffect(src, 368, AREA);
+				} else {
+					sc_start4(src, src, SC_RELENTLESS, 100, 10, 0, 0, 0, 60000);
+				}
+			}
+			// --- FIN CUSTOM ---
 			break;
 		case MO_CHAINCOMBO:
 			if (pc_checkskill(sd, MO_COMBOFINISH) > 0 && sd->spiritball >= 1) {

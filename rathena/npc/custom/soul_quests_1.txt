@@ -31,6 +31,8 @@ function	script	F_Is2ndJob	{
 		case Job_Alchemist:
 		case Job_Bard:
 		case Job_Dancer:
+		case Job_Ninja:
+		case Job_Gunslinger:
 			return 1;
 		default:
 			return 0;
@@ -356,7 +358,7 @@ OnTouch:
 		mes "Your spirit shows promise, but your martial foundation is not yet forged in fire. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1041, 1042)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1041, 1042)) {
 		mes "[Knight Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -377,11 +379,10 @@ OnTouch:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Knight Einherjar]";
-		mes "Greetings, true champion. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1041, 1042)) {
+	if (callfunc("F_HasSoulSkill", 1041, 1042)) {
 		mes "[Knight Einherjar]";
 		mes "Greetings, true champion. You carry the spirit of a legendary knight hero within your soul.";
 		next;
@@ -456,7 +457,7 @@ OnInit:
 		mes "Your devotion is pure, but your physical vessel requires further discipline. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1053, 1054)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1053, 1054)) {
 		mes "[Crusader Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -477,11 +478,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Crusader Einherjar]";
-		mes "Greetings, holy guardian. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1053, 1054)) {
+	if (callfunc("F_HasSoulSkill", 1053, 1054)) {
 		mes "[Crusader Einherjar]";
 		mes "Greetings, holy guardian. The holy protection of our ancestors rests upon your shield.";
 		next;
@@ -557,7 +557,7 @@ OnInit:
 		mes "Child of light, your spiritual vessel must grow stronger. Reach at least ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1049, 1050)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1049, 1050)) {
 		mes "[Priest Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -578,11 +578,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Priest Einherjar]";
-		mes "Blessings upon you, holy servant. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1049, 1050)) {
+	if (callfunc("F_HasSoulSkill", 1049, 1050)) {
 		mes "[Priest Einherjar]";
 		mes "Blessings upon you, holy servant. You walk with the sacred soul of the holy priesthood.";
 		next;
@@ -658,7 +657,7 @@ OnInit:
 		mes "Your martial spirit is still unpolished. Train until you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1061, 1062)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1061, 1062)) {
 		mes "[Monk Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -679,11 +678,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Monk Einherjar]";
-		mes "Greetings, martial master. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1061, 1062)) {
+	if (callfunc("F_HasSoulSkill", 1061, 1062)) {
 		mes "[Monk Einherjar]";
 		mes "Greetings, martial master. The spirit of the ancient masters flows through your qi.";
 		next;
@@ -759,7 +757,7 @@ OnInit:
 		mes "Your mana capacity is insufficient to channel high sorcery. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1043, 1044)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1043, 1044)) {
 		mes "[Wizard Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -780,11 +778,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Wizard Einherjar]";
-		mes "Greetings, master of arcana. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1043, 1044)) {
+	if (callfunc("F_HasSoulSkill", 1043, 1044)) {
 		mes "[Wizard Einherjar]";
 		mes "Greetings, master of arcana. You wield the high arcane soul of our order.";
 		next;
@@ -860,7 +857,7 @@ OnInit:
 		mes "Your intellect is keen, but your practical study requires ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1057, 1058)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1057, 1058)) {
 		mes "[Sage Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -881,11 +878,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Sage Einherjar]";
-		mes "Greetings, scholar. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1057, 1058)) {
+	if (callfunc("F_HasSoulSkill", 1057, 1058)) {
 		mes "[Sage Einherjar]";
 		mes "Greetings, scholar. The ancient wisdom of the scholars guides your mind.";
 		next;
@@ -961,7 +957,7 @@ OnInit:
 		mes "Your eagle eye needs more practice. Hone your skills until ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1045, 1046)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1045, 1046)) {
 		mes "[Hunter Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -982,11 +978,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Hunter Einherjar]";
-		mes "Greetings, master tracker. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1045, 1046)) {
+	if (callfunc("F_HasSoulSkill", 1045, 1046)) {
 		mes "[Hunter Einherjar]";
 		mes "Greetings, master tracker. You possess the spirit of the ancient master hunter.";
 		next;
@@ -1062,7 +1057,7 @@ OnInit:
 		mes "Your rhythm is not yet fully in tune. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1059, 1060)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1059, 1060)) {
 		mes "[Bard Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -1083,11 +1078,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Bard Einherjar]";
-		mes "Greetings, minstrel. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1059, 1060)) {
+	if (callfunc("F_HasSoulSkill", 1059, 1060)) {
 		mes "[Bard Einherjar]";
 		mes "Greetings, minstrel. The celestial song of ancient performers echoes in your soul.";
 		next;
@@ -1163,7 +1157,7 @@ OnInit:
 		mes "Your steps need more grace. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1059, 1060)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1059, 1060)) {
 		mes "[Dancer Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -1184,11 +1178,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Dancer Einherjar]";
-		mes "Greetings, dancer. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1059, 1060)) {
+	if (callfunc("F_HasSoulSkill", 1059, 1060)) {
 		mes "[Dancer Einherjar]";
 		mes "Greetings, dancer. The celestial dance of ancient performers echoes in your soul.";
 		next;
@@ -1264,7 +1257,7 @@ OnInit:
 		mes "Your hammer arm needs more iron in it! Work hard until ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1047, 1048)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1047, 1048)) {
 		mes "[Blacksmith Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -1285,11 +1278,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Blacksmith Einherjar]";
-		mes "Greetings, smith. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1047, 1048)) {
+	if (callfunc("F_HasSoulSkill", 1047, 1048)) {
 		mes "[Blacksmith Einherjar]";
 		mes "Greetings, smith. The forge spirit of our master smiths burns bright within you!";
 		next;
@@ -1365,7 +1357,7 @@ OnInit:
 		mes "Your chemical experiments require further study. Reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1063, 1064)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1063, 1064)) {
 		mes "[Alchemist Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -1386,11 +1378,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Alchemist Einherjar]";
-		mes "Greetings, alchemist. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1063, 1064)) {
+	if (callfunc("F_HasSoulSkill", 1063, 1064)) {
 		mes "[Alchemist Einherjar]";
 		mes "Greetings, alchemist. You have assimilated the living formula of ancient alchemists.";
 		next;
@@ -1466,7 +1457,7 @@ OnInit:
 		mes "Your footfalls are still too loud. Train your stealth until ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1051, 1052)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1051, 1052)) {
 		mes "[Assassin Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -1487,11 +1478,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Assassin Einherjar]";
-		mes "Greetings, shadow master. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1051, 1052)) {
+	if (callfunc("F_HasSoulSkill", 1051, 1052)) {
 		mes "[Assassin Einherjar]";
 		mes "Greetings, shadow master. The deadly shadow soul of our guild flows in your veins.";
 		next;
@@ -1574,7 +1564,7 @@ OnInit:
 		mes "Your tricks are a bit too predictable, novice. Come back at ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !F_HasSoulSkill(1065, 1066)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) == 2 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1065, 1066)) {
 		mes "[Rogue Einherjar]";
 		mes "Greetings, champion. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -1596,11 +1586,10 @@ OnInit:
 		}
 	}
 	if (SOUL_QUEST1_STEP >= 5) {
-		mes "[Rogue Einherjar]";
-		mes "Greetings, phantom rogue. You have already awakened the Star Fragment into your Twilight Weapon!";
-		close;
+		callfunc "F_EinherjarWeaponMenu";
+		end;
 	}
-	if (F_HasSoulSkill(1065, 1066)) {
+	if (callfunc("F_HasSoulSkill", 1065, 1066)) {
 		mes "[Rogue Einherjar]";
 		mes "Greetings, phantom rogue. You carry the trickster soul of ancient rogues.";
 		next;

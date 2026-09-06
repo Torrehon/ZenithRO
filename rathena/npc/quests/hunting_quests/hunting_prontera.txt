@@ -201,40 +201,76 @@ prontera,143,172,4	script	Hunting Board#prt	857,{
 OnInit:
 	// Mob Data Structure
 	setarray .Mob_Name$[1], 
+		// Tier D (1)
 		"Poring", "Lunatic", "Thief Bug", "Rocker", "Tarou", "Poporing", "Mandragora",
+		// Tier C (2)
 		"Vadon", "Yoyo", "Cornutus",
+		// Tier B (3)
 		"Marc", "Swordfish", "Merman", "Strouf", "Deviace", "Lost Knight", "Fallen Crusader", "Zombie Guard",
-		"Mastering", "Vocal", "Eclipse";
+		// Tier A (4)
+		"Sropho", "Sedora", "King Dramoh",
+		// Tier S (5)
+		"Mastering", "Vocal", "Eclipse", "Tacnu";
 
 	setarray .Mob_ID[1],
+		// Tier D (1)
 		1002, 1063, 1051, 1052, 1175, 1031, 1020,
+		// Tier C (2)
 		1066, 1057, 1067,
+		// Tier B (3)
 		1045, 1069, 1264, 1065, 1108, 2415, 2434, 3452,
-		1090, 1088, 1093;
+		// Tier A (4)
+		2201, 2204, 2198,
+		// Tier S (5)
+		1090, 1088, 1093, 2205;
 
 	setarray .Mob_QID[1],
+		// Tier D (1)
 		70001, 70002, 70003, 70004, 70005, 70006, 70007,
+		// Tier C (2)
 		70008, 70009, 70010,
+		// Tier B (3)
 		70011, 70012, 70013, 70014, 70015, 70016, 70017, 70018,
-		70019, 70020, 70021;
+		// Tier A (4)
+		70022, 70023, 70024,
+		// Tier S (5)
+		70019, 70020, 70021, 70025;
 
 	setarray .Mob_Req[1],
+		// Tier D (1)
 		25, 25, 25, 25, 25, 25, 25,
+		// Tier C (2)
 		20, 20, 20,
+		// Tier B (3)
 		15, 15, 15, 15, 15, 15, 15, 15,
-		1, 1, 1;
+		// Tier A (4)
+		10, 10, 10,
+		// Tier S (5)
+		1, 1, 1, 1;
 
 	setarray .Mob_Tier[1],
+		// Tier D (1)
 		1, 1, 1, 1, 1, 1, 1,
+		// Tier C (2)
 		2, 2, 2,
+		// Tier B (3)
 		3, 3, 3, 3, 3, 3, 3, 3,
-		5, 5, 5;
+		// Tier A (4)
+		4, 4, 4,
+		// Tier S (5)
+		5, 5, 5, 5;
 
 	setarray .Mob_Coins[1],
+		// Tier D (1)
 		3, 3, 3, 3, 3, 3, 3,
+		// Tier C (2)
 		5, 5, 5,
+		// Tier B (3)
 		7, 7, 7, 7, 7, 7, 7, 7,
-		25, 25, 25;
+		// Tier A (4)
+		10, 10, 10,
+		// Tier S (5)
+		25, 25, 25, 50;
 
 	.TotalMobs = getarraysize(.Mob_Name$) - 1;
 	end;

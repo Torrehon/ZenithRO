@@ -51,6 +51,7 @@ payon_in01	mapflag	nomemo
 payon_in02	mapflag	nomemo
 payon_in03	mapflag	nomemo
 prt_castle	mapflag	nomemo
+prt_prison	mapflag	nomemo
 prt_church	mapflag	nomemo
 prt_in	mapflag	nomemo
 um_in	mapflag	nomemo
@@ -124,9 +125,9 @@ new_5-4	mapflag	nomemo
 //============================================================
 alb2trea	mapflag	nomemo
 ayo_fild02	mapflag	nomemo
-cmd_fild01	mapflag	nomemo
+//cmd_fild01	mapflag	nomemo
 cmd_fild02	mapflag	nomemo
-cmd_fild03	mapflag	nomemo
+//cmd_fild03	mapflag	nomemo
 cmd_fild04	mapflag	nomemo
 cmd_fild05	mapflag	nomemo
 cmd_fild06	mapflag	nomemo

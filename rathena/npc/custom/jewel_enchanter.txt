@@ -9,7 +9,7 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
     mes "Each infused jewel will increase an attribute's power.";
     next;
 
-    // 1. SELECCI�N DE ITEM EN EL INVENTARIO
+    // 1. SELECCIÃ“N DE ITEM EN EL INVENTARIO
     set .@menu_count, 0;
     set .@menu$, "";
     getinventorylist;
@@ -49,7 +49,7 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
     mes "[Jewel Enchanter]";
     mes "Which option of your " + getitemname(.@it_id) + " would you like to enhance?";
     
-    // 2. LISTAR OPCIONES DEL ITEM (Men� Limpio)
+    // 2. LISTAR OPCIONES DEL ITEM (Omitiendo Durabilidad ID 243)
     set .@opt_menu$, "";
     set .@slot_count, 0; 
     
@@ -57,7 +57,7 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
         set .@o_id, getd("@inventorylist_option_id"+.@i+"["+.@idx+"]");
         set .@o_val, getd("@inventorylist_option_value"+.@i+"["+.@idx+"]");
         
-        if (.@o_id > 0) {
+        if (.@o_id > 0 && .@o_id != 243) {
             set .@opt_menu$, .@opt_menu$ + "Slot " + .@i + ":";
             set .@active_slots[.@slot_count], .@i;
             set .@slot_count, .@slot_count + 1;
@@ -107,10 +107,10 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
         set .@joya_req, .Ruby;
     }
     else {
-        set .@joya_req, .Ruby; // Fallback para f�sicas
+        set .@joya_req, .Ruby; // Fallback para fÃ­sicas
     }
 
-    // --- SEPARACI�N DE EQUIPO Y ARMAS ---
+    // --- SEPARACIÃ“N DE EQUIPO Y ARMAS ---
     if (.@joya_req != .Diamond) {
         if (.@it_type == 5) {
             // ARMADURAS Y EQUIPO (Fijo)
@@ -138,37 +138,73 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
         close;
     }
 
-    // --- C�LCULO DIN�MICO DEL INCREMENTO ---
-    set .@increment, 1; 
-    if (.@target_opt_id == 1) set .@increment, 25; // Max HP
-    else if (.@target_opt_id == 2) set .@increment, 5; // Max SP
+    // --- CÃLCULO DINÃMICO DEL INCREMENTO BASE ---
+    set .@base_step, 1; 
+    if (.@target_opt_id == 1) set .@base_step, 25; // Max HP
+    else if (.@target_opt_id == 2) set .@base_step, 5; // Max SP
 
+    // Cantidad mÃ¡xima de pasos posibles hasta alcanzar el CAP
+    set .@remaining, .@max_val - .@current_val;
+    set .@max_steps, .@remaining / .@base_step;
+    if (.@remaining % .@base_step > 0) set .@max_steps, .@max_steps + 1;
+
+    next;
+    mes "[Jewel Enchanter]";
+    mes "Option: ^0000FFSlot " + .@real_slot + "^000000";
+    mes "Current Value: ^0000FF" + .@current_val + "^000000";
+    mes "Maximum Limit: ^00AA00" + .@max_val + "^000000";
+    mes " ";
+    mes "How would you like to upgrade this option?";
+    next;
+
+    switch(select("Upgrade by 1 step:Enter custom amount:Cancel")) {
+        case 1:
+            set .@steps, 1;
+            break;
+        case 2:
+            mes "[Jewel Enchanter]";
+            mes "Enter the number of upgrade steps (1 to " + .@max_steps + "):";
+            input .@steps;
+            if (.@steps < 1) {
+                mes "Invalid amount entered.";
+                close;
+            }
+            if (.@steps > .@max_steps) set .@steps, .@max_steps;
+            break;
+        default:
+            close;
+    }
+
+    set .@increment, .@steps * .@base_step;
     if (.@current_val + .@increment > .@max_val) {
         set .@increment, .@max_val - .@current_val;
     }
 
+    set .@total_joya_qty, .@joya_qty * .@steps;
+    set .@total_zeny_req, .@zeny_req * .@steps;
+
     next;
     mes "[Jewel Enchanter]";
-    mes "To upgrade this option, you will need:";
-    mes " > ^FF0000" + .@joya_qty + "x " + getitemname(.@joya_req) + "^000000";
-    mes " > ^FF0000" + .@zeny_req + " Zeny^000000";
+    mes "To upgrade this option by ^FF8800+" + .@increment + "^000000 (" + .@steps + " step" + ((.@steps > 1) ? "s" : "") + "), you will need:";
+    mes " > ^FF0000" + .@total_joya_qty + "x " + getitemname(.@joya_req) + "^000000";
+    mes " > ^FF0000" + .@total_zeny_req + " Zeny^000000";
     mes " ";
     mes "Current Value: ^0000FF" + .@current_val + "^000000";
-    mes "Upgrade amount: ^FF8800+" + .@increment + "^000000";
-    mes "Maximum Limit: ^00AA00" + .@max_val + "^000000";
+    mes "New Value: ^00AA00" + (.@current_val + .@increment) + "^000000 (Max: " + .@max_val + ")";
     
     if (select("Proceed with upgrade:Cancel") == 2) close;
 
-    // 4. VERIFICACI�N Y COBRO
-    if (countitem(.@joya_req) < .@joya_qty || Zeny < .@zeny_req) {
+    // 4. VERIFICACIÃ“N Y COBRO
+    if (countitem(.@joya_req) < .@total_joya_qty || Zeny < .@total_zeny_req) {
+        mes "[Jewel Enchanter]";
         mes "You do not have enough materials or Zeny.";
         close;
     }
 
-    delitem .@joya_req, .@joya_qty;
-    set Zeny, Zeny - .@zeny_req;
+    delitem .@joya_req, .@total_joya_qty;
+    set Zeny, Zeny - .@total_zeny_req;
 
-    // 5. ANIMACI�N Y APLICACI�N DE CAMBIOS
+    // 5. ANIMACIÃ“N Y APLICACIÃ“N DE CAMBIOS
     close2; // Cierra la ventana del NPC pero sigue ejecutando el script
     
     soundeffect "blacksmith.wav", 0; // Efecto de sonido de forja
@@ -178,11 +214,11 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
     if (.@new_val > .@max_val) set .@new_val, .@max_val;
 
     setitemoption .@real_inv_idx, (.@real_slot - 1), .@target_opt_id, .@new_val;
-    specialeffect 154; // Brillo de �xito
+    specialeffect 154; // Brillo de Ã©xito
     dispbottom "The jewel has been successfully embedded! New value: +" + .@new_val;
     end;
 
-// SUB-RUTINA PARA CALCULAR EL CAP (1:1 con Documentaci�n Oficial)
+// SUB-RUTINA PARA CALCULAR EL CAP (1:1 con DocumentaciÃ³n Oficial)
 S_GetCap:
     set .@id, getarg(0);
     set .@w, getarg(1); // Nivel de Arma (1 a 4)
@@ -223,7 +259,7 @@ S_GetCap:
     if (.@id == 25) return 5; // Resistencia neutral
     if (.@id == 169) return 15; // Heal Recibido
     if (.@id >= 232 && .@id <= 242) return 15; // Raza EXP
-    if (.@id == 9 || .@id == 10 || .@id == 20 || .@id == 220 || (.@id >= 160 && .@id <= 162)) return 5; // HP/SP%, Def, Res Melee, Res Tama�os
+    if (.@id == 9 || .@id == 10 || .@id == 20 || .@id == 220 || (.@id >= 160 && .@id <= 162)) return 5; // HP/SP%, Def, Res Melee, Res TamaÃ±os
     if (.@id == 21) return 10; // Mdef
     if (.@id == 13 || .@id == 14 || .@id == 23 || .@id == 167 || (.@id >= 87 && .@id <= 96)) return 5; // Atk/Matk%, PD, Ranged Res, Race Res
     if (.@id == 22) return 15; // Flee

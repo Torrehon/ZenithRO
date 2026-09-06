@@ -12,5 +12,4 @@ void SkillMirrorImage::castendNoDamageId(block_list *src, block_list *target, ui
 	// TODO: refactor into status.yml
 	status_change_end(target, SC_BUNSINJYUTSU); // on official recasting cancels existing mirror image [helvetica]
 	StatusSkillImpl::castendNoDamageId(src, target, skill_lv, tick, flag);
-	status_change_end(target, SC_NEN);
 }

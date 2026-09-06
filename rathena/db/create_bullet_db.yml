@@ -70,11 +70,11 @@ Body:
   - Source: Evil_Horn
     Make:
       - Item: Blind_Sphere
-        Amount: 30
+        Amount: 300
   - Source: Posionous_Canine
     Make:
       - Item: Poison_Sphere
-        Amount: 1
+        Amount: 50
   - Source: Horn
     Make:
       - Item: Bullet
@@ -100,17 +100,17 @@ Body:
   - Source: Rotten_Scale
     Make:
       - Item: Poison_Sphere
-        Amount: 1
+        Amount: 5
   - Source: Voucher_Of_Orcish_Hero
     Make:
       - Item: Bullet
-        Amount: 1
+        Amount: 1000
   - Source: Gold
     Make:
       - Item: Blind_Sphere
-        Amount: 50
+        Amount: 500
       - Item: Bullet
-        Amount: 50
+        Amount: 5000
   - Source: Oridecon
     Make:
       - Item: Bullet
@@ -174,7 +174,7 @@ Body:
   - Source: Yellow_Gemstone
     Make:
       - Item: t_sphere
-        Amount: 1
+        Amount: 10
   - Source: Holy_Water
     Make:
       - Item: h_sphere
@@ -252,11 +252,11 @@ Body:
   - Source: Dragon_Canine
     Make:
       - Item: Bullet
-        Amount: 51
+        Amount: 500
   - Source: Petite_DiablOfs_Horn
     Make:
       - Item: Bullet
-        Amount: 50
+        Amount: 500
   - Source: Lantern
     Make:
       - Item: Bullet

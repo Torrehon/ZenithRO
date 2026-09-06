@@ -31,6 +31,7 @@ void SkillAsuraStrike::castendDamageId(block_list* src, block_list* target, uint
 
 	status_change_end(src, SC_EXPLOSIONSPIRITS);
 	status_change_end(src, SC_BLADESTOP);
+	status_change_end(src, SC_RELENTLESS);
 	// IMPORTANTE: Ya no aplicamos el SC_EXTREMITYFIST, por lo que el jugador 
 	// NO sufre la penalización de no poder regenerar SP durante 5 minutos.
 	// --- FIN CUSTOM ---
@@ -69,26 +70,29 @@ void SkillAsuraStrike::calculateSkillRatio(const Damage* wd, const block_list* s
 
 	// --- INICIO CUSTOM: Bifurcación de Fórmulas ---
 	if (sd && pc_checkskill(sd, MO_PUGILIST) > 0) {
-		// RAMA 1: PUGILIST
-		base_skillratio += (sp_consumido * base_level) / 8;
+		// RAMA 1: PUGILIST (Escalado por STR, VIT y Stacks de Relentless)
+		// Base sólida: ~110k-120k en combo sin stacks, y ~160k casteado normal con 10 stacks (-30% en combo)
+		base_skillratio += (sp_consumido * 6);
+		base_skillratio += (sstatus->str * 100);
+		base_skillratio += (sstatus->vit * 80);
 		
 		const status_change* sc = status_get_sc(src);
 		if (sc && sc->getSCE(SC_RELENTLESS)) {
 			int stacks = sc->getSCE(SC_RELENTLESS)->val1;
-			base_skillratio += (sstatus->vit * stacks * 10);
+			base_skillratio += (sstatus->str * stacks * 9);
 		}
 	} 
 	else if (sd && pc_checkskill(sd, MO_ASCETIC) > 0) {
-		// RAMA 2: ASCETIC
-		base_skillratio += (sp_consumido * base_level) / 10;
+		// RAMA 2: ASCETIC (Especialista en Esferas, SP & Asura Máximo)
+		base_skillratio += (sp_consumido * 16);
 		
-		// sd->spiritball_old guarda cuántas esferas tenía justo en el momento de castear
+		// sd->spiritball_old guarda cuántas esferas tenía justo en el momento de castear (hasta 10 esferas)
 		int spheres = sd->spiritball_old;
-		base_skillratio += (sstatus->int_ * (spheres * 200));
+		base_skillratio += (sstatus->int_ * spheres * 4);
 	} 
 	else {
-		// RAMA 3: BÁSICO (No tiene ninguna de las almas)
-		base_skillratio += (sp_consumido * base_level) / 5;
+		// RAMA 3: BÁSICO (Sin almas)
+		base_skillratio += (sp_consumido * 4);
 	}
 	// --- FIN CUSTOM ---
 

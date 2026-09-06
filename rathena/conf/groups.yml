@@ -59,10 +59,14 @@ Body:
       duel: true
       autotrade: true
       noks: true
+      accept: true
+      reject: true
       leave: true
       mi: true
       whereis: true
       whodrops: true
+      hominfo: true
+      homstats: true
     Permissions:
       # without this basic permissions regular players could not trade or party
       can_trade: true
@@ -88,8 +92,6 @@ Body:
       whodrops: true
       servertime: true
       jailtime: true
-      hominfo: true
-      homstats: true
       showexp: true
       showzeny: true
       whereis: true

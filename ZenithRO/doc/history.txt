@@ -1,0 +1,352 @@
+﻿====================================================================
+RO OpenSetup
+(c) 2010-2026 Ai4rei/AN
+See doc/license.txt for details.
+
+====================================================================
+
+== History =========================================================
+
+[Version 3.5.0 - 2026-07-04]
++ Added crash guard to display mode enumeration to avoid crashes from incompatible graphics drivers and malfunctioning graphics enhancements/wrappers.
+! [snippets::dx7enum] Mitigated `dxgi.dll` side-loading vulnerability in DirectX 10 and newer.
+! [snippets::w32ddraw] Mitigated `dxgi.dll` side-loading vulnerability in DirectX 10 and newer.
+! [snippets::w32d3d9] Mitigated `dxgi.dll` side-loading vulnerability in DirectX 10 and newer.
+! [snippets::w32ui] Fixed loading tool tips could corrupt other UI elements or crash.
+
+[Version 3.4.0 - 2025-07-07]
++ Added support for /minimap, /mineffect, /emblem and /showshop.
++ Added support for ROExt 2024.12.13.0 (in addition to the previous ones).
+* Configurable setup-imposed limits on resolution are now an array to specify limits per DirectX version.
+  * Updated default minimum width for DirectX 7 to 0 (no limit).
+  * Updated default minimum width, maximum width and maximum height for DirectX 9 to 0 (no limit).
+  # Old non-array syntax continues to work for all DirectX versions that aren't overriden per-version.
+
+[Version 3.3.0 - 2025-02-09]
++ Added support for disabling specific DirectX versions [suggested by Wizzello].
+* Updated Spanish localization [csnv].
+
+[Version 3.2.1 - 2024-07-27]
++ Added command line switch /firstrun.
+* Updated the icon set to not rely on RO assets.
+* D3D9 is no longer needed to run.
+- Removed telemetry.
+
+[Version 3.1.1 - 2024-04-28]
+* Renamed the test client to avoid name collision with an actual project.
+* Updated Brazilian Portuguese translation [drigoguille].
+
+[Version 3.1.0 - 2023-11-18]
++ Added support for ROExt 2018.6.10.0 (in addition to the previous one).
+* Updated missing translation bits in French, Spanish, Brazilian Portuguese and Russian with DeepL.
+! Fixed resolutions other than the first on the list would not work correctly (since 3.0.0).
+! Fixed settings' saving order.
+! Fixed values of DX9 settings when DX7 is selected.
+! Fixed tool tips not working in ROExt tabs.
+- Removed settings 'VooDoo3 graphics card' and 'Disable hardware-accelerated graphics'.
+
+[Version 3.0.0 - 2023-10-22]
++ Added support for DX9 (available from kRO RAG/ZERO 2023-09-06).
+* Enabled some previously disabled sound settings in Lua. While there is no UI for them, the official setup application still writes these, so maybe the client also still uses them.
+! Fixed ROExt tab layout did not align with the other tabs.
+! Fixed crash when retaining non-numeric Lua config values.
+- Removed REG engine.
+
+[Version 2.18.0]
+* Restored settings engine visual cue without switching functionality [suggested by j3NvTRe].
+* ROExt is now detected, even when not named 'dinput.dll' [suggested by ゲツガ].
+
+[Version 2.17.0]
++ Added support for live-testing the currently selected graphics settings.
+* Improved UI/UX design guideline compliance.
+* Improved high DPI support.
+* Splitted releases into 'legacy' (registry), 'default' (Lua) and 'zero' (Lua for Zero). Run-time switching is no more, because it was confusing and led people into spectacular trouble-shooting fails.
+! Fixed ROExt's code page list could be empty due to errors in code pages 1147 and 20949.
+! Fixed text-clipping with German UI.
+! Fixed info/error icons not showing on MessageBox*s.
+
+[Version 2.16.1]
+* Fixes related to trademark compliance.
+
+[Version 2.16.0]
++ Added support for configurable setup-imposed limits on window/fullscreen resolution.
++ Added alternative English translation [Yommy].
++ Added warning when the RO client is already running, because it overwrites settings on exit.
++ Added proper support for kRO:Zero (change in 2.14.0 was not sufficient).
++ Added lightweight telemetry (see doc/privacy.txt) and checking for new versions.
+  + Adds telemetry user consent (if you change your mind, go to the About tab).
+* Primary display device name is no longer handled specially.
+* Updated default setup-imposed limits on window/fullscreen resolution.
+* Drag-size-window is now always on top.
+* Updated license to CC BY-NC 4.0.
+* Integration with [snippets], general purpose refactoring.
+* Fallback for themed buttons with icons on Windows XP.
+* Updated icons from v3.
+! Fixed some localized items could be in wrong language (other than the selected one).
+! Fixed potential buffer overflow.
+! Fixed error messages could become garbled.
+# This release closes the source code, since the open-source feedback loop was not working. The license remains more or less the same, so you can still hex it or modify the resources, as long as you comply with the license.
+
+[Version 2.15.0]
+# Dropped.
+
+[Version 2.14.2]
++ Added support for /mable and /zoom.
+* Increased display name buffer for Intel's overly long GPU display names.
+* Updated new translation bits in Japanese translation [Mintmoon].
+* Updated new translation bits in Russian translation [VM].
+! Fixed UI inconsistency and clipping.
+! Fixed log reporting 32-bit on 64-bit platforms.
+! Fixes to Russian translation [VM].
+
+[Version 2.14.1]
+* Updated Russian translation [Jarek].
+! Fixed UI issues in high-contrast mode (and other dark themes).
+
+[Version 2.14.0]
++ Added support for High DPI screens. This also fixes blurred text and text clipping on some configurations.
++ Added support for kRO:Zero.
+* Updated new translation bits in Japanese translation [Mintmoon].
+* Changed the settings engine selector to be more accessible and intuitive.
+! Fixed some UI glitches.
+
+[Version 2.12.0]
++ Added support for /aura2, /btg, /cashshop, /goldpc, /quake and /roulette.
++ Added support for configuring the OpenSetup interface language.
+! Fixed description for /aura (only Czech, German and English translations, others are waiting for respective authors or contributors to update the bit).
+! Stability improvements.
+
+[Version 2.11.6]
+* Maintenance.
+  + ASLR
+  + DEP
+  + LAA
+
+[Version 2.11.5]
++ Added French translation by Valioukha.
+
+[Version 2.11.4]
++ Added Thai translation by iSuzutsuki.
+
+[Version 2.11.3]
++ Added Traditional Chinese translation by Angelmelody.
+
+[Version 2.11.2]
++ Ctrl+Cancel now nukes the process that started OpenSetup.
+  # Use this only if you need to break out of client's setup loop.
+  # If you use this when you started OpenSetup manually, you will nuke the explorer desktop instance with default settings.
+! Fixed concurrent attempts to write the debug log could truncate the output (since 2.8.1).
+! Fixed truncated debug log output when the settings engine sanity check fails (since 2.8.1).
+
+[Version 2.11.1]
++ Added Simplified Chinese translation by tinpont.
+* Adjusted UI to accomodate localized texts.
+* Marked as Windows 10 aware.
+* Improved code that handles current shell font across Windows versions. This still (probably) does not make us DPI aware, though...
+! Fixes to Spanish translation [jaBote].
+! Fixed volume sliders showing help text rather than volume level while dragging (since 2.9.0).
+
+[Version 2.11.0]
++ Added support for configurable Lua settings folder for older clients.
++ Added workaround code chunk to Lua settings to allow people with messed up client folders to start the client, once.
+* Lua setting updates are no longer appended at the end of the old settings.
+
+[Version 2.10.2]
++ Added sample ini file to release builds.
+* Updated new translation bits in Brazilian Portuguese translation [EvilPuncker].
+* Extended DX7 device information in debug log.
+
+[Version 2.10.1]
+* Updated new translation bits in Spanish translation [jaBote].
+* Updated new translation bits in Japanese translation [Mintmoon].
+
+[Version 2.10.0]
++ Added setting of default RO folder upon saving, which is normally performed by the official installer.
++ Added support for automated initialization of RO settings on machines that do not have any RO settings, yet.
++ Added detection of missing Miles Sound System files.
++ Added support for "/monsterhp", "/quickspell" and "/quickspell2".
+* Duplicated traditional Spanish to modern Spanish as per suggestion from Leeg on rAthena boards.
+* Marked as Windows 8.1 aware.
+* Improved sanity checking.
+! Fixed main window could be resized or maximized with window menu commands.
+- Removed incomplete Korean translation.
+- Removed untranslated help messages from es_CL translation.
+
+[Version 2.9.1]
+* Updated new translation bits in Spanish translation [jaBote].
+* Updated new translation bits in Japanese translation [Mintmoon].
+
+[Version 2.9.0]
++ Added support for disabling graphics hardware-acceleration.
++ Added device name labels to driver names in device selection combobox.
++ Added home page button to about tab.
++ Added support for detecting active mirror drivers, which prevent DirectX hardware acceleration from working (like conventional RDP does).
+* Context-sensitive help is now served through tool tips, replacing previous HTML Help Balloons, that have graphical glitches and require interaction in order to show up.
+* [snippets::dx7enum] Updated to the latest version.
+! Fixed various typos in translations.
+
+[Version 2.8.3]
+* Updated new translation bits in Japanese translation [Mintmoon].
+* General cleaning in translations.
+! Fixes to Japanese translation [Mintmoon] (since 2.8.2).
+! Fixes to Czech translation (since 2.6.7).
+! Fixes to German translation (since 2.6.3).
+! Fixes to English translation (since 2.0.1).
+
+[Version 2.8.2]
++ Added Japanese translation by Mintmoon.
+* Improved sanity checking to also check for files, that are not supposed to exist (lub in savedata).
+* Made sanity checking trigger on save rather than on load to make it less annoying.
+! Fixed missing Czech and German translation of sanity bits.
+
+[Version 2.8.1]
++ Added LUA settings sanity checking (checks for default settings in folder System).
++ Added logging facility (debug).
+* Updated new translation bits in Russian translation [Jarek].
+! Fixes to Russian translation [Jarek] (since 2.6.6).
+! Fixed LUA settings not being loaded from the same file as they are saved (for people with messed up installations, that is).
+
+[Version 2.8.0]
++ Added notice for Remote Desktop users (DirectX does not work over conventional RDP).
++ Added ability to specify the client window size using an actual window, which is constrained to available resolutions.
++ Added support for configurable "HKLM to HKCU" (was compile-time setting before).
++ Added support for "/skillsnap".
+* Updated new translation bits in Brazilian Portuguese translation [EvilPuncker].
+* Updated new translation bits in Spanish translation [jaBote].
+* Updated 'reset all' to exclude client generated data, as those aren't technically settings.
+! Fixed issue with default control focus on NT platforms.
+! Fixed LUA engine not reporting parse errors.
+! Fixed German /snap, /itemsnap help texts.
+! Fixed Spanish translation not getting included in the build.
+! Fixed dependent reset-checkboxes not getting enabled when using 'Apply' button.
+! Fixed reset not working when IPC is used to carry out the task (ex. UAC environments).
+! Fixed UI could be modified while the invoking instance was waiting for IPC to complete.
+
+[Version 2.7.0]
++ Added Spanish translation by jaBote.
++ Added support for configurable settings engine.
++ Added support for resetting settings and user data.
+* Increased space available for help texts from 255 to 4096 characters.
+! Fixed Ctrl+TAB not switching tabs.
+! Fixed TAB not working properly on all controls.
+! Fixed default values for REG engine not being properly set on certain conditions.
+
+[Version 2.6.7]
+* [snippets::regutil] Updated to support retrieval of last error value in batch actions.
+* Updated to use official logic to deal with Windows 8 (use 32-bit modes).
+! Fixed system errors from registry functions not being passed to error messages properly.
+! Fixed process elevation would not report errors.
+! Fixed application would close even when settings fail to save (since UAC cancel or read-only failures are recoverable ones).
+! Fixed application would stop responding while waiting for IPC to complete.
+# OpenSetup is now being considered Windows 8 aware and compatible. Previously applied compatibility flags are automatically removed.
+
+[Version 2.6.6]
+* Updated new translation bits in Russian translation [Jarek].
+! Fixes to Russian translation [Jarek] (since 2.6.3).
+
+[Version 2.6.5]
+! Fixed accidential end-less loop in the initialization.
+* Removed Windows 8 from the list of 'supportedOS' as that prevents the compatibility flags from applying (thanks to the caches, it did not become apparent during release testing...).
+
+[Version 2.6.4]
+* Marked application as Windows Vista/7/8 aware.
+! Fixed 16-bit color modes not appearing on Windows 8 (automagically applies compatibility flags, further reading: <http://msdn.microsoft.com/en-us/library/windows/desktop/dd162611(v=vs.85).aspx>).
+
+[Version 2.6.3]
++ Added Russian translation by Jarek.
++ Added Latin American Spanish translation by Namine210.
+* Minor adjustments to the visuals of the UI.
+* Updated disclaimer and credits.
+* Improved save error messages and localization.
+! Applied fixes to English translation suggested by Jarek (since 2.0.1).
+
+[Version 2.6.2]
++ Added tab and engine selector icons in 4-bit/8-bit depth (for bitdepth less than 16-bit).
+* Replaced led-icons set with fugue-icons.
+* Some improvements to Japanese translation.
+* Updated engine selector icons to be more obvious.
+* Updated explanation for exclusive mouse setting.
+! Fixed cut-off dialog text in German and Korean localization (since 2.1.0/2.3.0).
+
+[Version 2.6.1]
+* Somewhat improved safety of data involved in IPC.
+! Fixed elevated transaction getting fed invalid parameters, thus failing to save any options (since 2.6.0).
+
+[Version 2.6.0]
++ Added incomplete Japanese translation (corrections highly appreciated).
+* Improved UAC experience. Administrator is no longer required except for saving changes.
+* Separated dialog resources from localizable text.
+
+[Version 2.5.1]
+! Fixed disabled fields would not re-enable on engine change (since 2.5.0).
+
+[Version 2.5.0]
+* Made tab and combobox strings available for localization through string-tables.
+* Minor adjustments to the visuals of the UI.
+* Cleaning of unnecessary things, in preparation for source release.
+* Merged both REG and LUA engines into one executable. The engine in use can be switched via icon in left bottom corner.
+! Fixed missing/broken DirectX (is that nowadays even possible?) would leave the user with a system error.
+! Fixed non-primary drivers not displaying all available D3D devices (since 1.0.0, thx Tokei on rAthena boards).
+
+[Version 2.4.0]
++ Added tooltip to indicate volume level for bgm and sound volume sliders.
+* Updated default setting values in LUA engine to reflect official defaults (TODO: use official defaults-files).
+! Fixed LUA engine not marking settings as been written by the new setup, which caused them to get ignored by new clients.
+! Fixed /bgm on/off setting not being handled properly across REG and LUA engines.
+! Fixed /camera on/off setting being saved and loaded as /cemara, thus not recognized by the client.
+! Fixed setup LUA engine not reporting registry write errors.
+! Fixed /tip not being available in LUA engine.
+
+[Version 2.3.0]
++ Added Czech and crude Korean translation.
+
+[Version 2.2.0]
++ Added Brazilian Portuguese translation by EvilPuncker.
+! Fixed missing width restriction from official setup.
+! Fixed graphics adapters with more than 64 video modes would not show all resulutions available for RO.
+! Fixed toolbar bitmap glitch on Windows 2000 and older NT platforms.
+
+[Version 2.1.0]
++ Added German translation by Xalion.
++ Added support for "Trilinar Filtering" for Lua settings engine.
+* Fixed some English dialog labels and descriptions.
+* Updated missing description for /stateinfo (thx EvilPuncker on rAthena boards).
+! Fixed 'Fullscreen' option not getting saved.
+! Fixed dialog layout not having enough spare space for i18n variation.
+# Older clients might not be able to read/update the Lua settings, because they expect them in a different location (ex. data\) when reading but write them using OptionInfo_f.lub, which writes to savedata\ at the moment.
+
+[Version 2.0.2]
+! [snippet::cpenum] Fixed not all code pages would appear in ROExt's code page setting on systems that have more than 50 of them installed (since 1.1.0).
+
+[Version 2.0.1]
++ Added controls for BGM, Sound and Exclusive Mouse settings.
++ Added quickinfo/context-sensitive help for all options but ROExt.
++ Added setting for "Trilinear Filtering" checkbox.
+
+[Version 2.0.0]
++ Added v2.0 setup.exe settings (new tab) and Lua settings engine.
++ Added setting for "Display tip of the day" checkbox.
++ Added support for tab bitmaps with alpha channel (32-bit bmp).
+* Settings unsupported by either settings engine get disabled.
+! Fixed HKLM_TO_HKCU directive was ignored when loading settings.
+
+[Version 1.1.2]
++ Stable Release.
+
+[Version 1.1.1]
+* Banner became optional (compile).
+* ROExt Code pages are now sorted.
+! Fixed ROExt setting 'Remap Mouse Buttons' not getting greyed, when 'Mouse Freedom' was disabled (dependency).
+
+[Version 1.1.0]
++ Added support for ROExt ( http://forum.ratemyserver.net/ro-graphic-coding-media/roext-mouse-freedom-and-some-tweaks/ ).
+* Setting categories are now organized with tabs (allows easier additions of features).
+
+[Version 1.0.1]
+* 'About' is now in system menu, it's button is replaced by 'Apply'.
+! Fixed display modes not being sorted.
+
+[Version 1.0.0]
++ First Public Release.
+
+====================================================================

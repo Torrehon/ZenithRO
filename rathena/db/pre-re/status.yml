@@ -1517,6 +1517,7 @@ Body:
   - Status: Orcish
     DurationLookup: SA_REVERSEORCISH
     Flags:
+      NoSave: true
       Debuff: true
       SendOption: true
     Options:
@@ -2467,6 +2468,7 @@ Body:
     CalcFlags:
       Str: true
       Int: true
+      Dex: true
     Flags:
       NoDispell: true
       NoBanishingBuster: true

@@ -12,9 +12,8 @@ SkillPierce::SkillPierce() : WeaponSkillImpl(KN_PIERCE) {
 void SkillPierce::modifyDamageData(Damage& dmg, const block_list& src, const block_list& target, uint16 skill_lv) const {
 	const status_data* tstatus = status_get_status_data(target);
 
-	// rAthena lee los tamaños así: 0 (Small = 1 hit), 1 (Medium = 2 hits), 2 (Large = 3 hits).
-	int hits = (tstatus != nullptr) ? (tstatus->size + 1) : 1;
-	hits = cap_value(hits, 1, 3);
+	// Custom: Small y Medium = 2 hits, Large = 3 hits
+	int hits = (tstatus != nullptr && tstatus->size >= SZ_BIG) ? 3 : 2;
 
 	dmg.div_ = (dmg.div_ > 0 ? hits : -hits);
 }

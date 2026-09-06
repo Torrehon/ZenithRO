@@ -30,14 +30,14 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 		next;
 		mes "[Garrick]";
 		mes "As promised, please select your armor piece reward:";
-		mes "- 1. " + mesitemlink(2309);
+		mes "- 1. " + mesitemlink(2310);
 		mes "- 2. " + mesitemlink(2311);
-		mes "- 3. " + mesitemlink(2312);
+		mes "- 3. " + mesitemlink(2313);
 		next;
 		.@choice = select("Coat:Mink Coat:Padded Armor");
-		if (.@choice == 1) .@eq_id = 2309;
+		if (.@choice == 1) .@eq_id = 2310;
 		else if (.@choice == 2) .@eq_id = 2311;
-		else .@eq_id = 2312;
+		else .@eq_id = 2313;
 
 		mes "[Garrick]";
 		mes "Great selection! Take this armor, 1x " + mesitemlink(12997) + ", your Mining Helmet, 45,000 Zeny, and a well-earned EXP bonus!";

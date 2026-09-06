@@ -32,23 +32,17 @@ void SkillRagingThrust::castendDamageId(block_list* src, block_list* target, uin
 			skill_get_splash(getSkillId(), skill_lv), BL_CHAR|BL_SKILL,
 			src, getSkillId(), skill_lv, tick, flag|BCT_ENEMY|1,
 			skill_castend_damage_id);
-
-		// 2. Lógica de Stacks "Relentless"
-		status_change* sc = status_get_sc(src);
-		if (sc && sc->getSCE(SC_EXPLOSIONSPIRITS)) {
-			status_change_entry* sce_relent = sc->getSCE(SC_RELENTLESS);
-			int stacks = sce_relent ? sce_relent->val1 : 0;
-
-			if (stacks < 10) {
-				sc_start4(src, src, SC_RELENTLESS, 100, stacks + 1, 0, 0, 0, 60000);
-				clif_specialeffect(src, 368, AREA); 
-			} else {
-				sc_start4(src, src, SC_RELENTLESS, 100, 10, 0, 0, 0, 60000);
-			}
-		}
 	} else {
 		// Si NO es Pugilista, o si es un enemigo salpicado, aplica daño normal
 		WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
+	}
+
+	// Consumir stacks de Relentless en cualquier momento (solo en el golpe principal)
+	if (!(flag&1)) {
+		status_change* sc = status_get_sc(src);
+		if (sc && sc->getSCE(SC_RELENTLESS)) {
+			status_change_end(src, SC_RELENTLESS);
+		}
 	}
 }
 
@@ -70,8 +64,9 @@ void SkillRagingThrust::calculateSkillRatio(const Damage* wd, const block_list* 
 		base_skillratio += sstatus_src->vit * 2; 
 	}
 
-	// // --- CUSTOM: Doble daño con 10 stacks de Relentless ---
-	// if (sc_src && sc_src->getSCE(SC_RELENTLESS) && sc_src->getSCE(SC_RELENTLESS)->val1 >= 10) {
-		// base_skillratio *= 2; 
-	// }
+	// --- CUSTOM: +20% de ratio por stack de Relentless ---
+	if (sc_src && sc_src->getSCE(SC_RELENTLESS)) {
+		int stacks = sc_src->getSCE(SC_RELENTLESS)->val1;
+		base_skillratio += 20 * stacks;
+	}
 }

@@ -82,8 +82,6 @@ void SkillFinalStrike::castendDamageId(block_list *src, block_list *target, uint
 	}
 	skill_attack(BF_MISC, src, src, target, getSkillId(), skill_lv, tick, flag);
 	status_set_hp(src, umax(status_get_max_hp(src) / 100, 1), 0);
-	status_change_end(src, SC_NEN);
-	status_change_end(src, SC_HIDING);
 	
 	// CONSUMIR MARCA ZANTETSU
 	if (sc && sc->getSCE(SC_ZANTETSU)) {
@@ -98,9 +96,8 @@ void SkillFinalStrike::castendDamageId(block_list *src, block_list *target, uint
 #else
 	WeaponSkillImpl::castendDamageId(src, target, skill_lv, tick, flag);
 
-	status_change_end(src, SC_NEN);
 	status_change_end(src, SC_HIDING);
-	
+	status_change_end(src, SC_NEN);
 	// CONSUMIR MARCA ZANTETSU
 	if (sc && sc->getSCE(SC_ZANTETSU)) {
 		status_change_end(src, SC_ZANTETSU);

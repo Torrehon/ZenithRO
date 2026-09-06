@@ -208,35 +208,35 @@ Body:
   - Source: Boody_Red
     Make:
       - Item: Fire_Arrow
-        Amount: 600
+        Amount: 500
   - Source: Crystal_Blue
     Make:
       - Item: Crystal_Arrow
-        Amount: 150
+        Amount: 500
   - Source: Wind_Of_Verdure
     Make:
       - Item: Arrow_Of_Wind
-        Amount: 150
+        Amount: 500
   - Source: Yellow_Live
     Make:
       - Item: Stone_Arrow
-        Amount: 150
+        Amount: 500
   - Source: Flame_Heart
     Make:
       - Item: Fire_Arrow
-        Amount: 1800
+        Amount: 1500
       - Item: Silence_Arrow
         Amount: 5
   - Source: Mistic_Frozen
     Make:
       - Item: Crystal_Arrow
-        Amount: 450
+        Amount: 1500
       - Item: Freezing_Arrow
         Amount: 5
   - Source: Rough_Wind
     Make:
       - Item: Arrow_Of_Wind
-        Amount: 450
+        Amount: 1500
       - Item: Sleep_Arrow
         Amount: 5
   - Source: Great_Nature
@@ -244,7 +244,7 @@ Body:
       - Item: Flash_Arrow
         Amount: 5
       - Item: Stone_Arrow
-        Amount: 450
+        Amount: 1500
   - Source: Iron
     Make:
       - Item: Iron_Arrow

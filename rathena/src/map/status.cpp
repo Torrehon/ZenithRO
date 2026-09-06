@@ -7897,6 +7897,8 @@ static uint16 status_calc_dex(block_list *bl, status_change *sc, int32 dex)
 		else
 			dex -= dex / 2;
 	}
+	if(sc->getSCE(SC_NEN))
+		dex += sc->getSCE(SC_NEN)->val1;
 	if(sc->getSCE(SC_INCREASING))
 		dex += 4; // Added based on skill updates [Reddozen]
 	if(sc->getSCE(SC_MARIONETTE))
@@ -9363,8 +9365,11 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 		speed += speed * 50 / 100;
 	if( speed_rate != 100 )
 		speed = speed * speed_rate / 100;
-	if( sc->getSCE(SC_STEELBODY) )
-		speed = 200;
+	if( sc->getSCE(SC_STEELBODY) ) {
+		if (sd == nullptr || (pc_checkskill(sd, MO_PUGILIST) == 0 && pc_checkskill(sd, MO_ASCETIC) == 0)) {
+			speed = 200;
+		}
+	}
 	// --- CUSTOM: Guardian Soul anula la penalización de Defender ---
 	if( sc->getSCE(SC_DEFENDER) ) {
 		// Comprobamos si el jugador NO tiene la pasiva (o si es un monstruo usando la skill)

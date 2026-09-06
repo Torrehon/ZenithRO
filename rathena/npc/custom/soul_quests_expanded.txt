@@ -82,7 +82,7 @@
 		mes "Your footfalls are still too loud and your Ninjutsu unpolished. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) >= 1 || checkquest(90005) >= 1) && !F_HasSoulSkill(1055, 1056)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) >= 1 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1055, 1056)) {
 		mes "[Chunin Einherjar]";
 		mes "Greetings, shadow brother. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -109,7 +109,7 @@
 		mes "May the darkness protect your path.";
 		close;
 	}
-	if (F_HasSoulSkill(1055, 1056)) {
+	if (callfunc("F_HasSoulSkill", 1055, 1056)) {
 		mes "[Chunin Einherjar]";
 		mes "Greetings, shadow brother. You carry the ancient shadow soul of our guild within your spirit.";
 		next;
@@ -227,7 +227,7 @@ OnInit:
 		mes "Your trigger finger needs more discipline and recoil control. Return when you reach ^0000FFJob Level 25^000000.";
 		close;
 	}
-	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) >= 1 || checkquest(90005) >= 1) && !F_HasSoulSkill(1068, 1069)) {
+	if ((SOUL_QUEST1_STEP >= 4 || checkquest(90004) >= 1 || checkquest(90005) >= 1) && !callfunc("F_HasSoulSkill", 1068, 1069)) {
 		mes "[Gunslinger Einherjar]";
 		mes "Greetings, master marksman. I sense that the dark void attempted to sever your link with our ancestral Hero Soul...";
 		mes "Fear not! Your heroic deeds remain recorded in Valhalla. Select your Hero Soul to restore it at no cost:";
@@ -253,7 +253,7 @@ OnInit:
 		mes "Fire with absolute precision across Midgard.";
 		close;
 	}
-	if (F_HasSoulSkill(1068, 1069)) {
+	if (callfunc("F_HasSoulSkill", 1068, 1069)) {
 		mes "[Gunslinger Einherjar]";
 		mes "Greetings, master marksman. You carry the ancient hero soul of master marksmen within your spirit.";
 		next;

@@ -239,13 +239,13 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 		mes "[Culvert Guardian]";
 		mes "Prontera owes you a great debt. Please select your armor piece reward:";
 		mes "- 1. " + mesitemlink(2306);
-		mes "- 2. " + mesitemlink(2307);
-		mes "- 3. " + mesitemlink(2303);
+		mes "- 2. " + mesitemlink(2308);
+		mes "- 3. " + mesitemlink(2304);
 		next;
 		.@choice = select("Adventurer's Suit:Mantle:Jacket");
 		if (.@choice == 1) .@eq_id = 2306;
-		else if (.@choice == 2) .@eq_id = 2307;
-		else .@eq_id = 2303;
+		else if (.@choice == 2) .@eq_id = 2308;
+		else .@eq_id = 2304;
 
 		mes "[Culvert Guardian]";
 		mes "Excellent choice! Take this armor, along with 6x " + mesitemlink(1011) + " to refine your weapon, your new hat, 10,000 Zeny, and a ^0000FFTraining Recommendation^000000 to further your studies!";

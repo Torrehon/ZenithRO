@@ -7270,6 +7270,26 @@ Body:
     Targets:
       - Mob: ECLIPSE
         Count: 1
+  - Id: 70022
+    Title: "Prontera Hunt: Sropho"
+    Targets:
+      - Mob: SROPHO
+        Count: 10
+  - Id: 70023
+    Title: "Prontera Hunt: Sedora"
+    Targets:
+      - Mob: SEDORA
+        Count: 10
+  - Id: 70024
+    Title: "Prontera Hunt: King Dramoh"
+    Targets:
+      - Mob: KING_DRAMOH
+        Count: 10
+  - Id: 70025
+    Title: "Prontera Hunt: Tacnu"
+    Targets:
+      - Mob: TACNU
+        Count: 1
   - Id: 70101
     Title: "Geffen Hunt: Fabre"
     Targets:
@@ -7610,3 +7630,504 @@ Body:
     Targets:
       - Mob: CLOCK
         Count: 15
+  # Comodo Hunting Quests
+  - Id: 70501
+    Title: "Comodo Hunt: Shellfish"
+    Targets:
+      - Mob: SHELLFISH
+        Count: 25
+  - Id: 70502
+    Title: "Comodo Hunt: Crab"
+    Targets:
+      - Mob: CRAB
+        Count: 25
+  - Id: 70503
+    Title: "Comodo Hunt: Raggler"
+    Targets:
+      - Mob: RAGGLER
+        Count: 25
+  - Id: 70504
+    Title: "Comodo Hunt: Thara Frog"
+    Targets:
+      - Mob: THARA_FROG
+        Count: 20
+  - Id: 70505
+    Title: "Comodo Hunt: Megalodon"
+    Targets:
+      - Mob: MEGALODON
+        Count: 20
+  - Id: 70506
+    Title: "Comodo Hunt: Tri Joint"
+    Targets:
+      - Mob: TRI_JOINT
+        Count: 20
+  - Id: 70507
+    Title: "Comodo Hunt: Pest"
+    Targets:
+      - Mob: PEST
+        Count: 20
+  - Id: 70508
+    Title: "Comodo Hunt: Nereid"
+    Targets:
+      - Mob: NERAID
+        Count: 20
+  - Id: 70509
+    Title: "Comodo Hunt: Alligator"
+    Targets:
+      - Mob: ALLIGATOR
+        Count: 20
+  - Id: 70510
+    Title: "Comodo Hunt: Sea Otter"
+    Targets:
+      - Mob: SEE_OTTER
+        Count: 15
+  - Id: 70511
+    Title: "Comodo Hunt: Galapago"
+    Targets:
+      - Mob: GALAPAGO
+        Count: 15
+  - Id: 70512
+    Title: "Comodo Hunt: Fur Seal"
+    Targets:
+      - Mob: FUR_SEAL
+        Count: 15
+  - Id: 70513
+    Title: "Comodo Hunt: Megalith"
+    Targets:
+      - Mob: MEGALITH
+        Count: 15
+  - Id: 70514
+    Title: "Comodo Hunt: Stalactic Golem"
+    Targets:
+      - Mob: STALACTIC_GOLEM
+        Count: 10
+  - Id: 70515
+    Title: "Comodo Hunt: Anolian"
+    Targets:
+      - Mob: ANOLIAN
+        Count: 10
+  - Id: 70516
+    Title: "Comodo Hunt: Mobster"
+    Targets:
+      - Mob: MOBSTER
+        Count: 10
+  - Id: 70517
+    Title: "Comodo Hunt: Medusa"
+    Targets:
+      - Mob: MEDUSA
+        Count: 10
+  - Id: 70518
+    Title: "Comodo Hunt: Mutant Dragon"
+    Targets:
+      - Mob: MUTANT_DRAGON
+        Count: 1
+
+  # Umbala Hunting Quests
+  - Id: 70601
+    Title: "Umbala Hunt: Horn"
+    Targets:
+      - Mob: HORN
+        Count: 25
+  - Id: 70602
+    Title: "Umbala Hunt: Wootan Shooter"
+    Targets:
+      - Mob: WOOTAN_SHOOTER
+        Count: 20
+  - Id: 70603
+    Title: "Umbala Hunt: Wootan Fighter"
+    Targets:
+      - Mob: WOOTAN_FIGHTER
+        Count: 20
+  - Id: 70604
+    Title: "Umbala Hunt: Stone Shooter"
+    Targets:
+      - Mob: STONE_SHOOTER
+        Count: 20
+  - Id: 70605
+    Title: "Umbala Hunt: Parasite"
+    Targets:
+      - Mob: PARASITE
+        Count: 20
+  - Id: 70606
+    Title: "Umbala Hunt: Choco"
+    Targets:
+      - Mob: CHOCO
+        Count: 20
+  - Id: 70607
+    Title: "Umbala Hunt: Wooden Golem"
+    Targets:
+      - Mob: KIND_OF_BEETLE
+        Count: 15
+  - Id: 70608
+    Title: "Umbala Hunt: Dryad"
+    Targets:
+      - Mob: DRYAD
+        Count: 15
+  - Id: 70609
+    Title: "Umbala Hunt: Gryphon"
+    Targets:
+      - Mob: GRYPHON
+        Count: 1
+
+  # Hugel Hunting Quests
+  - Id: 70701
+    Title: "Hugel Hunt: Dragon Egg"
+    Targets:
+      - Mob: DRAGON_EGG
+        Count: 20
+  - Id: 70702
+    Title: "Hugel Hunt: Sky Petite"
+    Targets:
+      - Mob: PETIT_
+        Count: 20
+  - Id: 70703
+    Title: "Hugel Hunt: Yellow Novus"
+    Targets:
+      - Mob: NOVUS_
+        Count: 20
+  - Id: 70704
+    Title: "Hugel Hunt: Red Novus"
+    Targets:
+      - Mob: NOVUS
+        Count: 20
+  - Id: 70705
+    Title: "Hugel Hunt: Breeze"
+    Targets:
+      - Mob: BREEZE
+        Count: 15
+  - Id: 70706
+    Title: "Hugel Hunt: Demon Pungus"
+    Targets:
+      - Mob: DEMON_PUNGUS
+        Count: 15
+  - Id: 70707
+    Title: "Hugel Hunt: Green Ferus"
+    Targets:
+      - Mob: FERUS_
+        Count: 15
+  - Id: 70708
+    Title: "Hugel Hunt: Red Ferus"
+    Targets:
+      - Mob: FERUS
+        Count: 15
+  - Id: 70709
+    Title: "Hugel Hunt: Frus"
+    Targets:
+      - Mob: FRUS
+        Count: 15
+  - Id: 70710
+    Title: "Hugel Hunt: Skogul"
+    Targets:
+      - Mob: SKOGUL
+        Count: 15
+  - Id: 70711
+    Title: "Hugel Hunt: Deathword"
+    Targets:
+      - Mob: DEATHWORD
+        Count: 15
+  - Id: 70712
+    Title: "Hugel Hunt: Ancient Mimic"
+    Targets:
+      - Mob: ANCIENT_MIMIC
+        Count: 15
+  - Id: 70713
+    Title: "Hugel Hunt: Alice"
+    Targets:
+      - Mob: ALICE
+        Count: 15
+  - Id: 70714
+    Title: "Hugel Hunt: Elder"
+    Targets:
+      - Mob: ELDER
+        Count: 15
+  - Id: 70715
+    Title: "Hugel Hunt: Blue Acidus"
+    Targets:
+      - Mob: ACIDUS_
+        Count: 10
+  - Id: 70716
+    Title: "Hugel Hunt: Gold Acidus"
+    Targets:
+      - Mob: ACIDUS
+        Count: 10
+  - Id: 70717
+    Title: "Hugel Hunt: Retribution"
+    Targets:
+      - Mob: RETRIBUTION
+        Count: 10
+  - Id: 70718
+    Title: "Hugel Hunt: Solace"
+    Targets:
+      - Mob: SOLACE
+        Count: 10
+  - Id: 70719
+    Title: "Hugel Hunt: Mistress of Shelter"
+    Targets:
+      - Mob: SHELTER
+        Count: 10
+  - Id: 70720
+    Title: "Hugel Hunt: Observation"
+    Targets:
+      - Mob: OBSERVATION
+        Count: 10
+  - Id: 70721
+    Title: "Hugel Hunt: Owl Duke"
+    Targets:
+      - Mob: OWL_DUKE
+        Count: 10
+  - Id: 70722
+    Title: "Hugel Hunt: Owl Baron"
+    Targets:
+      - Mob: OWL_BARON
+        Count: 10
+  - Id: 70723
+    Title: "Hugel Hunt: Hydrolancer"
+    Targets:
+      - Mob: HYDRO
+        Count: 1
+  - Id: 70724
+    Title: "Hugel Hunt: Valkyrie"
+    Targets:
+      - Mob: G_RANDGRIS
+        Count: 1
+  - Id: 70725
+    Title: "Hugel Hunt: Thanatos Despero"
+    Targets:
+      - Mob: THA_DESPERO
+        Count: 1
+  - Id: 70726
+    Title: "Hugel Hunt: Thanatos Maero"
+    Targets:
+      - Mob: THA_MAERO
+        Count: 1
+  - Id: 70727
+    Title: "Hugel Hunt: Thanatos Dolor"
+    Targets:
+      - Mob: THA_DOLOR
+        Count: 1
+  - Id: 70728
+    Title: "Hugel Hunt: Thanatos Odium"
+    Targets:
+      - Mob: THA_ODIUM
+        Count: 1
+  # Yuno Hunting Quests
+  - Id: 70801
+    Title: "Yuno Hunt: Condor"
+    Targets:
+      - Mob: CONDOR
+        Count: 25
+  - Id: 70802
+    Title: "Yuno Hunt: Rafflesia"
+    Targets:
+      - Mob: RAFFLESIA
+        Count: 25
+  - Id: 70803
+    Title: "Yuno Hunt: Stainer"
+    Targets:
+      - Mob: STAINER
+        Count: 25
+  - Id: 70804
+    Title: "Yuno Hunt: Blazer"
+    Targets:
+      - Mob: BLAZZER
+        Count: 20
+  - Id: 70805
+    Title: "Yuno Hunt: Explosion"
+    Targets:
+      - Mob: EXPLOSION
+        Count: 20
+  - Id: 70806
+    Title: "Yuno Hunt: Geographer"
+    Targets:
+      - Mob: GEOGRAPHER
+        Count: 15
+  - Id: 70807
+    Title: "Yuno Hunt: Goat"
+    Targets:
+      - Mob: GOAT
+        Count: 15
+  - Id: 70808
+    Title: "Yuno Hunt: Sleeper"
+    Targets:
+      - Mob: SLEEPER
+        Count: 15
+  - Id: 70809
+    Title: "Yuno Hunt: Harpy"
+    Targets:
+      - Mob: HARPY
+        Count: 15
+  - Id: 70810
+    Title: "Yuno Hunt: Kaho"
+    Targets:
+      - Mob: KAHO
+        Count: 15
+  - Id: 70811
+    Title: "Yuno Hunt: Grizzly"
+    Targets:
+      - Mob: GRIZZLY
+        Count: 15
+  - Id: 70812
+    Title: "Yuno Hunt: Gig"
+    Targets:
+      - Mob: GIG
+        Count: 15
+  - Id: 70813
+    Title: "Yuno Hunt: Earth Deleter"
+    Targets:
+      - Mob: DELETER_
+        Count: 15
+  - Id: 70814
+    Title: "Yuno Hunt: Sky Deleter"
+    Targets:
+      - Mob: DELETER
+        Count: 15
+  - Id: 70815
+    Title: "Yuno Hunt: Diabolic"
+    Targets:
+      - Mob: DIABOLIC
+        Count: 15
+  - Id: 70816
+    Title: "Yuno Hunt: Constant"
+    Targets:
+      - Mob: CONSTANT
+        Count: 15
+  - Id: 70817
+    Title: "Yuno Hunt: Aliza"
+    Targets:
+      - Mob: ALIZA
+        Count: 15
+  - Id: 70818
+    Title: "Yuno Hunt: Apocalypse"
+    Targets:
+      - Mob: APOCALIPS
+        Count: 15
+  - Id: 70819
+    Title: "Yuno Hunt: Venatu"
+    Targets:
+      - Mob: VENATU_1
+        Count: 15
+  - Id: 70820
+    Title: "Yuno Hunt: Lava Golem"
+    Targets:
+      - Mob: LAVA_GOLEM
+        Count: 10
+  - Id: 70821
+    Title: "Yuno Hunt: Nightmare Terror"
+    Targets:
+      - Mob: NIGHTMARE_TERROR
+        Count: 10
+  - Id: 70822
+    Title: "Yuno Hunt: Alicel"
+    Targets:
+      - Mob: ALICEL
+        Count: 10
+  - Id: 70823
+    Title: "Yuno Hunt: Aliot"
+    Targets:
+      - Mob: ALIOT
+        Count: 10
+  - Id: 70824
+    Title: "Yuno Hunt: Dimik"
+    Targets:
+      - Mob: DIMIK_1
+        Count: 10
+  - Id: 70825
+    Title: "Yuno Hunt: Archdam"
+    Targets:
+      - Mob: ARCHDAM
+        Count: 10
+  - Id: 70826
+    Title: "Yuno Hunt: Angeling"
+    Targets:
+      - Mob: ANGELING
+        Count: 1
+  - Id: 70827
+    Title: "Yuno Hunt: Deviling"
+    Targets:
+      - Mob: DEVILING
+        Count: 1
+  - Id: 70828
+    Title: "Yuno Hunt: Archangeling"
+    Targets:
+      - Mob: ARCHANGELING
+        Count: 1
+
+  # Niflheim Hunting Quests
+  - Id: 70901
+    Title: "Niflheim Hunt: Lude"
+    Targets:
+      - Mob: LUDE
+        Count: 20
+  - Id: 70902
+    Title: "Niflheim Hunt: Quve"
+    Targets:
+      - Mob: QUVE
+        Count: 20
+  - Id: 70903
+    Title: "Niflheim Hunt: Hylozoist"
+    Targets:
+      - Mob: HYLOZOIST
+        Count: 15
+  - Id: 70904
+    Title: "Niflheim Hunt: Disguise"
+    Targets:
+      - Mob: DISGUISE
+        Count: 15
+  - Id: 70905
+    Title: "Niflheim Hunt: Gibbet"
+    Targets:
+      - Mob: GIBBET
+        Count: 15
+  - Id: 70906
+    Title: "Niflheim Hunt: Dullahan"
+    Targets:
+      - Mob: DULLAHAN
+        Count: 15
+  - Id: 70907
+    Title: "Niflheim Hunt: Loli Ruri"
+    Targets:
+      - Mob: LOLI_RURI
+        Count: 10
+  - Id: 70908
+    Title: "Niflheim Hunt: Bloody Murderer"
+    Targets:
+      - Mob: BLOODY_MURDERER
+        Count: 10
+
+  # Lutie Hunting Quests
+  - Id: 71001
+    Title: "Lutie Hunt: Marin"
+    Targets:
+      - Mob: MARIN
+        Count: 25
+  - Id: 71002
+    Title: "Lutie Hunt: Cookie"
+    Targets:
+      - Mob: COOKIE
+        Count: 25
+  - Id: 71003
+    Title: "Lutie Hunt: Christmas Cookie"
+    Targets:
+      - Mob: COOKIE_XMAS
+        Count: 20
+  - Id: 71004
+    Title: "Lutie Hunt: Sasquatch"
+    Targets:
+      - Mob: SASQUATCH
+        Count: 20
+  - Id: 71005
+    Title: "Lutie Hunt: Cruiser"
+    Targets:
+      - Mob: CRUISER
+        Count: 20
+  - Id: 71006
+    Title: "Lutie Hunt: Myst Case"
+    Targets:
+      - Mob: MYSTCASE
+        Count: 20
+  - Id: 71007
+    Title: "Lutie Hunt: Chepet"
+    Targets:
+      - Mob: CHEPET
+        Count: 1
+
