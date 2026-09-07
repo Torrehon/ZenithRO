@@ -2249,21 +2249,31 @@ Body:
     Weight: 3800
     Attack: 200
     Range: 2
-    Slots: 3
+    Slots: 2
     Jobs:
       Crusader: true
       Knight: true
       Swordman: true
-    Classes:
-      Upper: true
     Locations:
       Both_Hand: true
-    WeaponLevel: 2
-    EquipLevelMin: 50
+    WeaponLevel: 3
+    EquipLevelMin: 75
     Refineable: true
     Script: |
-      if (readparam(bStr)>=95) {
+      .@r=getrefine();
+      if (readparam(bAgi)>=80) {
          bonus bBaseAtk,20;
+      }
+      if (getskilllv("KN_AUTOCOUNTER") == 5) {
+         bonus bAspdRate,.@r/2;
+      }
+      if (.@r>=7) {
+         bonus bCritical,5;
+         bonus bCritAtkRate,5;
+      }
+      if (.@r>=9) {
+         bonus bCritical,10;
+         bonus bCritAtkRate,15;
       }
   - Id: 1190
     AegisName: Claymore_C
@@ -5755,7 +5765,6 @@ Body:
       }  
       if (.@r>=9) {
          bonus2 bSkillAtk,"BS_DECIMATION",15;
-         
       }
   - Id: 1376
     AegisName: Heart_Breaker
@@ -8778,23 +8787,32 @@ Body:
     SubType: Mace
     Buy: 20
     Weight: 900
-    Attack: 120
+    Attack: 140
     Range: 1
+    Slots: 2
     Jobs:
       Acolyte: true
       Monk: true
       Priest: true
     Locations:
       Right_Hand: true
-    WeaponLevel: 4
-    EquipLevelMin: 60
+    WeaponLevel: 3
+    EquipLevelMin: 75
     Refineable: true
     Script: |
+      .@r=getrefine();
+      bonus bMatkRate,10;
       bonus bAtkEle,Ele_Holy;
-      bonus2 bAddRace,RC_Undead,10;
-      bonus2 bAddRace,RC_Demon,10;
-      bonus3 bAutoSpell,"AL_CRUCIS",1+getrefine(),100;
-      autobonus "{ bonus bBaseAtk,50; }",10,20000,BF_WEAPON,"{ specialeffect2 EF_BLOODDRAIN; }";
+      bonus2 bAddRace,RC_Undead,5+.@r;
+      bonus2 bAddRace,RC_Demon,5+.@r;
+      if (getskilllv("MO_SPIRITSRECOVERY") == 5) {
+         bonus2 bSkillAtk,"MO_FINGEROFFENSIVE",10+.@r;
+         bonus2 bSkillAtk,"MO_BALKYOUNG",20+(.@r*2);
+      }
+      if (getskilllv("AL_DEMONBANE") == 5) {
+         bonus2 bSkillAtk,"AL_HOLYLIGHT",30+(.@r*2);
+         bonus2 bSkillAtk,"AL_HOLYSMITE",30+(.@r*2);
+      }
   - Id: 1542
     AegisName: BF_Morning_Star1
     Name: Valorous Battlefield Morning Star
@@ -15453,7 +15471,7 @@ Body:
       KagerouOboro: true
       Ninja: true
     Locations:
-      Left_Accessory: true
+      Both_Accessory: true
     ArmorLevel: 1
     EquipLevelMin: 60
     Script: |
@@ -22046,7 +22064,7 @@ Body:
       Novice: false
       SuperNovice: false
     Locations:
-      Left_Accessory: true
+      Both_Accessory: true
     ArmorLevel: 1
     EquipLevelMin: 60
     Script: |
@@ -25485,7 +25503,7 @@ Body:
       Novice: false
       SuperNovice: false
     Locations:
-      Left_Accessory: true
+      Both_Accessory: true
     ArmorLevel: 1
     EquipLevelMin: 60
     Script: |
@@ -27830,6 +27848,7 @@ Body:
     Buy: 20
     Weight: 300
     Defense: 1
+    Slots: 1
     Jobs:
       Mage: true
       Sage: true
@@ -27838,13 +27857,15 @@ Body:
     Locations:
       Head_Top: true
     ArmorLevel: 1
-    EquipLevelMin: 30
+    EquipLevelMin: 75
     Refineable: true
     View: 209
     Script: |
+      .@r=getrefine();
+      bonus bInt,1;
       bonus bMdef,5;
-      bonus bCastrate,-10;
-      bonus bUseSPrate,20;
+      bonus bCastrate,-5+(.@r/2);
+      bonus bUseSPrate,20-(.@r*2);  
   - Id: 5139
     AegisName: Hibiscus
     Name: Hibiscus
@@ -37361,6 +37382,29 @@ Body:
       NoAuction: true
     Script: |
       bonus bAllStats,1;
+  - Id: 5903
+    AegisName: Hitaikakushi_
+    Name: Deadman Bandana
+    Type: Armor
+    Weight: 200
+    Defense: 2
+    Slots: 1
+    Jobs:
+      Mage: true
+      Sage: true
+      SoulLinker: true
+      Wizard: true
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 60
+    Refineable: true
+    View: 1124
+    Script: |
+      .@r = getrefine();
+      bonus bInt,1;
+      bonus bDex,1;
+      bonus2 bMagicAddEle,Ele_Ghost,.@r; 
   - Id: 9001
     AegisName: Poring_Egg
     Name: Poring Egg
@@ -39386,6 +39430,29 @@ Body:
       NoAuction: true
     Script: |
       bonus2 bAddSize,Size_All,40;
+  - Id: 13062
+    AegisName: Ancient_Dagger
+    Name: Ancient Dagger
+    Type: Weapon
+    SubType: Dagger
+    Buy: 20
+    Weight: 600
+    Attack: 107
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 4
+    EquipLevelMin: 75
+    Refineable: true
+    Script: |
+      .@r=getrefine();
+      bonus bMatkRate,10;
+      bonus bMaxSP,100;
+      bonus bSPrecovRate,5+.@r;
+      bonus4 bAddEff,Eff_Curse,100*.@r,ATF_MAGIC,10000;
   - Id: 13100
     AegisName: Six_Shooter
     Name: Six Shooter
@@ -41586,6 +41653,23 @@ Body:
       bonus bMaxHP,500;
       bonus bMaxSP,50;
       bonus bUnbreakableArmor;
+  - Id: 15165
+    AegisName: PureWhite_Marching_Hat
+    Name: Pure White Marching Hat
+    Type: Armor
+    Buy: 20
+    Weight: 300
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 60
+    Refineable: true
+    View: 1470
+    Script: |
+      .@r = getrefine();
+      bonus bStr,2;
+      autobonus "{ bonus bAtkEle,Ele_Ghost; }",max(1,.@r*2),60000,BF_WEAPON,"{ specialeffect2 EF_ASPERSIO; }";
   - Id: 15166
     AegisName: Necklace_Rosary
     Name: Rosary Necklace

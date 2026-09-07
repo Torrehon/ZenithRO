@@ -9871,15 +9871,25 @@ tbl = {
 		identifiedResourceName = "크라스나야",
 		identifiedDescriptionName = {
 			"A strong-looking sword which resembles the shape of a Claymore. Its handgrip is decorated with red colors from the High Class Knights.",
-			"When base Str is 95 or higher: ATK +20.",
+			"_______________________",
+			"When base Agi is 80 or higher: Atk +20.",
+			"_______________________",
+			"If ^009900Auto Counter^000000 is mastered, increases Aspd by 1% every 2 refine levels.",
+			"_______________________",
+			"If this weapon's refine level is equal or higher than +7:",
+			"Increases Critical Rate by 5 and Critical Damage by 5%.",
+			"_______________________",
+			"If this weapon's refine level is equal or higher than +9:",
+			"Increases Critical Rate by 10 and Critical Damage by 15%.",
+			"_______________________",
 			"Class:^6666CC Two-Handed Sword^000000",
 			"Attack:^CC0000 200^000000",
 			"Weight:^009900 380^000000",
-			"Weapon Level:^009900 2^000000",
-			"Level Requirement:^009900 50^000000",
-			"Jobs:^6666CC Transcendent Swordman^000000"
+			"Weapon Level:^009900 3^000000",
+			"Level Requirement:^009900 75^000000",
+			"Jobs:^6666CC Swordman Class^000000"
 		},
-		slotCount = 3,
+		slotCount = 2,
 		ClassNum = 3,
 		costume = false
 	},
@@ -16647,16 +16657,23 @@ tbl = {
 		identifiedResourceName = "네메시스",
 		identifiedDescriptionName = {
 			"A large silver mace, made for exorcisms.",
-			"Increases physical damage inflicted to ^6666CCDemon^000000 and ^777777Shadow^000000 elemental monsters by 10%.",
-			"Adds a chance of autocasting Level 1 ^008800Signum Crusis^000000 when wearer receive physical attacks.",
-			"The level of ^008800Signum Crusis^000000 increases by upgrade level.",
-			"(Activate Level 10 if refine level is +11 or higher)",
-			"Adds a chance of adding ATK +50 during 20 seconds when wearer receive physical attacks.",
+			"_______________________",
+			"Matk +10%",
+			"Increases physical damage inflicted to ^6666CCDemon^000000 and ^777777Shadow^000000 elemental monsters by 5%.",
+			"_______________________",
+			"If the wearer has mastered ^009900Spirit Mastery^000000:",
+			"Increases the damage with ^009900Finger Offensive^000000 by 10% plus 1% per refine level.",
+			"Increases the damage with ^009900Ki Explosion^000000 by 20% plus 2% per refine level.",
+			"_______________________",
+			"If the wearer has mastered ^009900Demon Bane^000000:",
+			"Increases the damage with ^009900Holy Light^000000 by 30% plus 2% per refine level.",
+			"Increases the damage with ^009900Holy Smite^000000 by 30% plus 2% per refine level.",
+			"_______________________",
 			"Attack:^CC0000 120^000000",
 			"Weight:^009900 90^000000",
 			"Element:^777777 Holy^000000",
-			"Weapon Level:^009900 4^000000",
-			"Level Requirement:^009900 60^000000",
+			"Weapon Level:^009900 3^000000",
+			"Level Requirement:^009900 75^000000",
 			"Jobs:^6666CC Acolyte Classes^000000"
 		},
 		slotCount = 0,
@@ -30387,7 +30404,7 @@ tbl = {
 			"Class:^6666CC Armor^000000",
 			"Defense:^0000FF 6^000000",
 			"Weight:^009900 250^000000",
-			"Level Requirement:^009900 65^000000",
+			"Level Requirement:^009900 75^000000",
 			"Jobs:^6666CC All except Novice^000000"
 		},
 		slotCount = 1,
@@ -32021,7 +32038,7 @@ tbl = {
 			"Defense:^0000FF 3^000000",
 			"Weight:^009900 30^000000",
 			"Level Requirement:^009900 55^000000",
-			"Jobs:^6666CC All Transcendent classes except Novice^000000"
+			"Jobs:^6666CC All classes except Novice^000000"
 		},
 		slotCount = 1,
 		ClassNum = 0,
@@ -34078,7 +34095,7 @@ tbl = {
 			"Defense:^0000FF 4^000000",
 			"Weight:^009900 50^000000",
 			"Level Requirement:^009900 55^000000",
-			"Jobs:^6666CC classes except Novice^000000"
+			"Jobs:^6666CC All classes except Novice^000000"
 		},
 		slotCount = 1,
 		ClassNum = 0,
@@ -43535,7 +43552,7 @@ tbl = {
 			"Disables the Auto-Intimidate ability of the Wanderer Card.",
 			"^FFFFFF_^000000",
 			"Class:^6666CC Card^000000",
-			"Compound on:^999900 Footgear^000000",
+			"Compound on:^999900 Accesory^000000",
 			"Weight:^009900 1^000000"
 		},
 		slotCount = 0,
@@ -64276,9 +64293,15 @@ tbl = {
 		identifiedResourceName = "매직아이즈",
 		identifiedDescriptionName = {
 			"A hat that looks like the eyes of a dark mage, which are rumored to blink sometimes.",
+			"_______________________",
+			"Int +1",
 			"Mdef +5",
-			"Reduces cast time by 10%.",
-			"Increase SP Consumption by 20%.",
+			"Reduces cast time by 5%.",
+			"Increase SP Consumption by 30%.",
+			"_______________________",
+			"Further reduces cast time by 1% every 2 refine levels.",
+			"Decreases SP Consumption by 2% per refine level.",
+			"_______________________",
 			"Class:^6666CC Headgear^000000",
 			"Defense:^0000FF 1^000000",
 			"Position:^6666CC Upper^000000",
@@ -64286,7 +64309,7 @@ tbl = {
 			"Level Requirement:^009900 30^000000",
 			"Jobs:^6666CC Mage and Soul Linker^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 209,
 		costume = false
 	},
@@ -136476,15 +136499,28 @@ tbl = {
 		costume = false
 	},
 	[13062] = {
-		unidentifiedDisplayName = "Dagger",
+		unidentifiedDisplayName = "Unidentified Dagger",
 		unidentifiedResourceName = "나이프",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Ancient Dagger",
 		identifiedResourceName = "에인션트대거",
 		identifiedDescriptionName = {
-			"..."
+			"An ancient ritual dagger with unknown powers.",
+			"_______________________",
+			"Matk +10%",
+			"MaxSP +100",
+			"_______________________",
+			"Increases SP Recovery Rate by 5%.",
+			"_______________________",
+			"When refined, grants an increasing chance to inflict ^663399Curse^000000 status when dealing magical attack.",
+			"Further Increases Sp Recovery Rate by 1% per refine level.",
+			"_______________________",
+			"Class:^6666CC Dagger^000000",
+			"Attack:^CC0000 107^000000",
+			"Weight:^009900 60^000000",
+			"Weapon Level:^009900 4^000000",
+			"Level Requirement:^009900 75^000000",
+			"Jobs:^6666CC Every job but Novice and Super Novice^000000"
 		},
 		slotCount = 0,
 		ClassNum = 1,
@@ -165282,15 +165318,29 @@ tbl = {
 		costume = false
 	},
 	[15165] = {
-		unidentifiedDisplayName = "Hat",
+		Server = "jRO",
+		unidentifiedDisplayName = "Unidentified Hat",
 		unidentifiedResourceName = "캡",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Pure White Marching Hat",
 		identifiedResourceName = "순백의마칭햇",
 		identifiedDescriptionName = {
-			"..."
+			"A white hat that increases the spirit of marching. It uses wearer's mental spirit as power.",
+			"_______________________",
+			"STR +2",
+			"_______________________",
+			"Random chance to endow equipped weapon with ^777777Ghost^000000 elemental for 60 sec when dealing physical damage.",
+			"^0000FFFor each Refine Level^000000:",
+			"Increases trigger rate.",
+			"_______________________",
+			"^0000CCType:^000000 Headgear",
+			"^0000CCDefense:^000000 0",
+			"^0000CCPosition:^000000 Upper",
+			"^0000CCWeight:^000000 30",
+			"^0000CCArmor Level:^000000 1",
+			"_______________________",
+			"^0000CCRequirement:^000000",
+			"Base Level 60"
 		},
 		slotCount = 1,
 		ClassNum = 1470,
