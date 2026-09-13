@@ -134,6 +134,10 @@ OnNPCKillEvent:
 		}
 	}
 	end;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 // NPC RuRumuni se mantiene igual (mismas coordenadas)

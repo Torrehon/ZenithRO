@@ -92,7 +92,6 @@ izlude_in,174,134,2	script	Inn Employee#iz	53,{
 
 //======================== Morocc ====================================
 // North East --------------------------
-/*
 morocc_in,147,141,3	script	Inn Employee#Hasna	53,{
 
 	callfunc "F_InnMaid","[Employee Hasna]","Morocc Inn","morocc_in",142,140;
@@ -104,7 +103,6 @@ morocc_in,80,100,5	script	Inn Employee#Manar	53,{
 	callfunc "F_InnMaid","[Employee Manar]","Morocc Inn","morocc_in",78,95;
 	warp "morocc_in",79,123; end;
 }
-*/
 
 //====================== Aldebaran ===================================
 aldeba_in,92,58,5	script	Inn Maid#Rilim	53,{

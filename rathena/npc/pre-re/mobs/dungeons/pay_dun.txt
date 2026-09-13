@@ -141,6 +141,7 @@ pay_dun03,0,0	monster	Greatest General	1277,3
 pay_dun03,0,0	monster	Red Plant	1078,15,180000,90000
 pay_dun03,246,56,20,20	monster	White Plant	1082,3,180000,90000
 pay_dun03,52,262,10,4	monster	White Plant	1082,2,180000,90000
+pay_dun03,0,0	monster	Cat o' Nine Tails	1307,1,3600000
 
 //==================================================
 // pay_dun04 - Payon Cave F5
@@ -153,7 +154,7 @@ pay_dun04,0,0	monster	Archer Skeleton	1016,15
 pay_dun04,0,0	monster	Nine Tail	1180,30,60000,30000
 pay_dun04,0,0	monster	Skeleton General	1290,3
 pay_dun04,0,0	monster	Am Mut	1301,1
-pay_dun04,120,115	monster	Cat o' Nine Tails	1307,1,3600000,7200000,1
+pay_dun04,0,0	monster	Cat o' Nine Tails	1307,1,3600000
 pay_dun04,120,120,10,10	monster	Shining Plant	1083,1,1800000,900000
 pay_dun04,28,110,5,5	monster	Shining Plant	1083,1,1800000,900000
 pay_dun04,0,0	monster	Red Plant	1078,10,180000,90000

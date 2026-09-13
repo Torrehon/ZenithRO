@@ -1328,7 +1328,7 @@ OnNaviGenerate:
 	}
 
 OnInit:
-	.Satan_Morocc = true;	//	false will enable moc_fild 4,5,6,8,9,10,14,15 while disable moc_fild 20,21,22 Default is true.
+	.Satan_Morocc = false;	//	false will enable moc_fild 4,5,6,8,9,10,14,15 while disable moc_fild 20,21,22 Default is true.
 	.OnlyFirstFld = false;	//	true will teleport to the first level of the Fields  Default is false.
 	.OnlyFirstDun = false;	//	true will teleport to the first level of the Dungeons  Default is false.
 }

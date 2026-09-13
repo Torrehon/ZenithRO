@@ -41,3 +41,4 @@ mag_dun02,184,170,43,55	monster	Nightmare Terror	1379,7,300000,150000
 mag_dun02,197,59,50,37	monster	Deleter	1384,3,300000,150000
 mag_dun02,197,59,50,37	monster	Deleter	1385,5,300000,150000
 mag_dun02,197,59,50,37	monster	Diabolic	1382,5,300000,30000
+mag_dun02,0,0	monster	Mutant Dragonoid	1262,1,3600000

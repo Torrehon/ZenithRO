@@ -110,4 +110,8 @@ alberta_in,56,48,4	script	Senior Merchant Kass	86,{
 			mes "Time is money. Goodbye.";
 			close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

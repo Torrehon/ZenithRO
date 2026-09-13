@@ -27,15 +27,17 @@ OnInit:
 	setd ".ch_1771_1", 2627; // VANBERK
 	setd ".ch_1066_2", 2628; // VADON // SEGUIR POR AQUI
 	setd ".ch_1618_3", 2629; // UNGOLIANT
-	setd ".ch_2063_4", 2630; // TOUCAN
+	setd ".ch_2073_4", 2630; // TOUCAN
 //	setd ".ch_1864_5", 2631; // TIYANAK
 	setd ".ch_1051_2", 2632; // THIEF_BUG
 	setd ".ch_1051_3", 2633; // THIEF_BUG
 	setd ".ch_1051_4", 2634; // THIEF_BUG
 	setd ".ch_1034_5", 2635; // THARA_FROG
 	setd ".ch_1622_1", 2636; // TEDDY_BEAR
+	setd ".ch_1986_2", 2637; // TATACHO
 	setd ".ch_1997_2", 2637; // TATACHO
 	setd ".ch_1175_3", 2638; // TAROU
+	setd ".ch_1584_4", 2639; // TAMRUAN
 	setd ".ch_1596_4", 2639; // TAMRUAN
 	setd ".ch_1207_5", 2640; // STING
 	setd ".ch_1215_1", 2641; // STEM_WORM
@@ -57,16 +59,19 @@ OnInit:
 	setd ".ch_1752_2", 2657; // SKOGUL
 	setd ".ch_1290_3", 2658; // SKELETON_GENERAL
 	setd ".ch_1290_4", 2659; // SKELETON_GENERAL
+	setd ".ch_1169_5", 2660; // SKEL_WORKER
 	setd ".ch_1469_5", 2660; // SKEL_WORKER
 	setd ".ch_1776_1", 2661; // SIROMA
 	setd ".ch_1037_2", 2662; // SIDE_WINDER
 	setd ".ch_1037_3", 2663; // SIDE_WINDER
+	setd ".ch_1401_4", 2664; // SHINOBI
 	setd ".ch_1560_4", 2664; // SHINOBI
 	setd ".ch_1701_5", 2665; // SHELTER
 	setd ".ch_1074_1", 2666; // SHELLFISH
 	setd ".ch_1631_2", 2667; // SHECIL
 	setd ".ch_1323_3", 2668; // SEE_OTTER
-//	setd ".ch_2013_4", 2669; // SEDORA
+	setd ".ch_2204_4", 2669; // SEDORA
+	setd ".ch_1001_5", 2670; // SCORPION
 	setd ".ch_1559_5", 2670; // SCORPION
 	setd ".ch_1167_1", 2671; // SAVAGE_BABE
 	setd ".ch_1166_2", 2672; // SAVAGE
@@ -154,6 +159,7 @@ OnInit:
 	setd ".ch_1058_1", 2754; // METALLER
 	setd ".ch_1613_2", 2755; // METALING
 	setd ".ch_1613_3", 2756; // METALING
+	setd ".ch_1264_4", 2757; // MERMAN
 	setd ".ch_1451_4", 2757; // MERMAN
 //	setd ".ch_1992_5", 2758; // MENBLATT
 	setd ".ch_1148_1", 2759; // MEDUSA
@@ -163,7 +169,7 @@ OnInit:
 	setd ".ch_1140_5", 2763; // MARDUK
 	setd ".ch_1139_1", 2764; // MANTIS
 	setd ".ch_1020_2", 2765; // MANDRAGORA
-	setd ".ch_1867_3", 2766; // MANANANGGAL
+//	setd ".ch_1867_3", 2766; // MANANANGGAL
 	setd ".ch_1310_4", 2767; // MAJORUROS
 	setd ".ch_1138_5", 2768; // MAGNOLIA
 	setd ".ch_1836_1", 2769; // MAGMARING
@@ -313,208 +319,205 @@ OnInit:
 	setd ".ch_1716_3", 2913; // ACIDUS_
 
 	// --- REGISTRO DE MAPAS Y MONSTRUOS BASE PERMITIDOS ---
-	setd ".map_mob_prt_fild08", 1002;
-	setd ".map_mob_prt_fild01", 1002;
-	setd ".map_mob_prt_fild05", 1002;
-	setd ".map_mob_moc_fild02", 1002;
-	setd ".map_mob_prt_fild06", 1174;
-	setd ".map_mob_prt_fild07", 1014;
-	setd ".map_mob_prt_fild09", 1167;
-	setd ".map_mob_prt_fild11", 1052;
-	setd ".map_mob_prt_fild02", 1010;
-	setd ".map_mob_prt_fild03", 1057;
-	setd ".map_mob_prt_fild04", 1018;
-	setd ".map_mob_prt_sewb1", 1051;
-	setd ".map_mob_prt_sewb2", 1051;
-	setd ".map_mob_prt_sewb3", 1175;
-	setd ".map_mob_prt_sewb4", 1005;
-	setd ".map_mob_prt_maze01", 1162;
-	setd ".map_mob_prt_maze02", 1390;
-	setd ".map_mob_prt_maze03", 1390;
-	setd ".map_mob_pay_fild01", 1024;
-	setd ".map_mob_pay_fild02", 1013;
-	setd ".map_mob_pay_fild03", 1031;
-	setd ".map_mob_pay_fild04", 1056;
-	setd ".map_mob_pay_fild05", 1077;
-	setd ".map_mob_pay_fild07", 1031;
-	setd ".map_mob_pay_fild08", 1025;
-	setd ".map_mob_pay_fild09", 1033;
-	setd ".map_mob_pay_fild10", 1277;
-	setd ".map_mob_pay_dun00", 1015;
-	setd ".map_mob_pay_dun01", 1028;
-	setd ".map_mob_pay_dun02", 1170;
-	setd ".map_mob_pay_dun03", 1290;
-	setd ".map_mob_pay_dun04", 1517;
-	setd ".map_mob_moc_fild01", 1559;
-	setd ".map_mob_moc_fild03", 1019;
-	setd ".map_mob_moc_fild07", 1138;
-	setd ".map_mob_moc_fild11", 1040;
-	setd ".map_mob_moc_fild12", 1050;
-	setd ".map_mob_moc_fild13", 1107;
-	setd ".map_mob_moc_fild14", 1058;
-	setd ".map_mob_moc_fild16", 1165;
-	setd ".map_mob_moc_fild17", 1107;
-	setd ".map_mob_moc_fild18", 1055;
-	setd ".map_mob_moc_fild19", 1918;
-	setd ".map_mob_moc_fild20", 1918;
-	setd ".map_mob_moc_pryd02", 1028;
-	setd ".map_mob_moc_pryd03", 1041;
-	setd ".map_mob_moc_pryd04", 1041;
-	setd ".map_mob_moc_pryd05", 1149;
-	setd ".map_mob_moc_pryd06", 1149;
-	setd ".map_mob_in_sphinx2", 1164;
-	setd ".map_mob_in_sphinx3", 1037;
-	setd ".map_mob_in_sphinx4", 1140;
-	setd ".map_mob_in_sphinx5", 1154;
-	setd ".map_mob_gef_fild00", 1020;
-	setd ".map_mob_gef_fild01", 1012;
-	setd ".map_mob_gef_fild02", 1031;
-	setd ".map_mob_gef_fild03", 1023;
-	setd ".map_mob_gef_fild04", 1007;
-	setd ".map_mob_gef_fild05", 1261;
-	setd ".map_mob_gef_fild06", 1155;
-	setd ".map_mob_gef_fild07", 1155;
-	setd ".map_mob_gef_fild08", 1037;
-	setd ".map_mob_gef_fild09", 1166;
-	setd ".map_mob_gef_fild10", 1166;
-	setd ".map_mob_gef_fild11", 1122;
-	setd ".map_mob_gef_fild12", 1122;
-	setd ".map_mob_gef_fild14", 1273;
-	setd ".map_mob_orcsdun01", 1153;
-	setd ".map_mob_orcsdun02", 1152;
-	setd ".map_mob_gef_dun00", 1143;
-	setd ".map_mob_gef_dun01", 1179;
-	setd ".map_mob_gef_dun02", 1390;
-	setd ".map_mob_mjolnir_03", 1099;
-	setd ".map_mob_mjolnir_04", 1303;
-	setd ".map_mob_mjolnir_09", 1004;
-	setd ".map_mob_mjolnir_11", 1128;
-	setd ".map_mob_mjolnir_12", 1139;
-	setd ".map_mob_mjo_dun01", 1051;
-	setd ".map_mob_mjo_dun02", 1042;
-	setd ".map_mob_mjo_dun03", 1469;
-	setd ".map_mob_iz_dun00", 1074;
-	setd ".map_mob_iz_dun01", 1161;
-	setd ".map_mob_iz_dun02", 1158;
-	setd ".map_mob_iz_dun03", 1067;
-	setd ".map_mob_iz_dun04", 1451;
-	setd ".map_mob_gl_cas01", 1163;
-	setd ".map_mob_gl_cas02", 1208;
-	setd ".map_mob_gl_church", 1291;
-	setd ".map_mob_gl_chyard", 1320;
-	setd ".map_mob_gl_dun01", 1191;
-	setd ".map_mob_gl_dun02", 1163;
-	setd ".map_mob_gl_kav01", 1208;
-	setd ".map_mob_gl_prison", 1197;
-	setd ".map_mob_gl_prison1", 1257;
-	setd ".map_mob_gl_sew01", 1207;
-	setd ".map_mob_gl_sew02", 1253;
-	setd ".map_mob_gl_sew03", 1206;
-	setd ".map_mob_gl_sew04", 1253;
-	setd ".map_mob_gl_step", 1263;
-	setd ".map_mob_c_tower1", 1195;
-	setd ".map_mob_c_tower2", 1269;
-	setd ".map_mob_c_tower3", 1193;
-	setd ".map_mob_c_tower4", 1191;
-	setd ".map_mob_alde_dun01", 1194;
-	setd ".map_mob_alde_dun02", 1213;
-	setd ".map_mob_alde_dun03", 1216;
-	setd ".map_mob_alde_dun04", 1102;
-	setd ".map_mob_cmd_fild01", 1254;
-	setd ".map_mob_cmd_fild02", 1034;
-	setd ".map_mob_cmd_fild03", 1323;
-	setd ".map_mob_cmd_fild04", 1215;
-	setd ".map_mob_cmd_fild07", 1316;
-	setd ".map_mob_cmd_fild08", 1271;
-	setd ".map_mob_cmd_fild09", 1687;
-	setd ".map_mob_beach_dun", 1148;
-	setd ".map_mob_beach_dun2", 1278;
-	setd ".map_mob_beach_dun3", 1321;
-	setd ".map_mob_yuno_fild01", 1317;
-	setd ".map_mob_yuno_fild02", 1376;
-	setd ".map_mob_yuno_fild03", 1369;
-	setd ".map_mob_yuno_fild04", 1369;
-	setd ".map_mob_yuno_fild05", 1371;
-	setd ".map_mob_yuno_fild06", 1386;
-	setd ".map_mob_yuno_fild07", 1368;
-	setd ".map_mob_yuno_fild08", 1376;
-	setd ".map_mob_yuno_fild09", 1380;
-	setd ".map_mob_yuno_fild11", 1386;
-	setd ".map_mob_yuno_fild12", 1372;
-	setd ".map_mob_mag_dun01", 1838;
-	setd ".map_mob_mag_dun02", 1833;
-	setd ".map_mob_ama_fild01", 1400;
-	setd ".map_mob_ama_dun01", 1404;
-	setd ".map_mob_ama_dun02", 1402;
-	setd ".map_mob_ama_dun03", 1560;
-	setd ".map_mob_gon_dun01", 1410;
-	setd ".map_mob_gon_dun02", 1416;
-	setd ".map_mob_lou_dun01", 1516;
-	setd ".map_mob_lou_dun02", 1290;
-	setd ".map_mob_lou_dun03", 1306;
-	setd ".map_mob_ayo_fild01", 1114;
-	setd ".map_mob_ayo_fild02", 1057;
-	setd ".map_mob_ayo_dun01", 1586;
-	setd ".map_mob_ayo_dun02", 1596;
-	setd ".map_mob_um_fild01", 1493;
-	setd ".map_mob_um_fild02", 1499;
-	setd ".map_mob_um_dun01", 1494;
-	setd ".map_mob_ein_fild04", 1628;
-	setd ".map_mob_ein_fild05", 1616;
-	setd ".map_mob_ein_fild07", 1613;
-	setd ".map_mob_ein_fild09", 1619;
-	setd ".map_mob_ein_dun01", 1614;
-	setd ".map_mob_ein_dun02", 1620;
-	setd ".map_mob_lhz_fild01", 1613;
-	setd ".map_mob_lhz_fild02", 1215;
-	setd ".map_mob_lhz_dun01", 1621;
-	setd ".map_mob_lhz_dun02", 1653;
-	setd ".map_mob_lhz_dun03", 1657;
-	setd ".map_mob_ra_fild01", 1782;
-	setd ".map_mob_ra_fild05", 1680;
-	setd ".map_mob_ra_fild08", 1680;
-	setd ".map_mob_ra_san01", 1771;
-	setd ".map_mob_ra_san02", 1770;
-	setd ".map_mob_ra_san03", 1773;
-	setd ".map_mob_ra_san04", 1752;
-	setd ".map_mob_ve_fild03", 1836;
-	setd ".map_mob_ve_fild07", 1784;
-	setd ".map_mob_ice_dun01", 1776;
-	setd ".map_mob_ice_dun02", 1319;
-	setd ".map_mob_ice_dun03", 1777;
-	setd ".map_mob_hu_fild01", 1692;
-	setd ".map_mob_hu_fild02", 1715;
-	setd ".map_mob_hu_fild04", 1692;
-	setd ".map_mob_hu_fild05", 1715;
-	setd ".map_mob_hu_fild07", 1715;
-	setd ".map_mob_abyss_01", 1717;
-	setd ".map_mob_abyss_02", 1716;
-	setd ".map_mob_abyss_03", 1716;
-	setd ".map_mob_tha_t01", 1698;
-	setd ".map_mob_tha_t02", 1698;
-	setd ".map_mob_tha_t03", 1979;
-	setd ".map_mob_tha_t04", 1693;
-	setd ".map_mob_tha_t05", 1701;
-	setd ".map_mob_tha_t06", 1702;
-	setd ".map_mob_tha_t07", 1703;
-	setd ".map_mob_tha_t08", 1702;
-	setd ".map_mob_tha_t09", 1702;
-	setd ".map_mob_tha_t10", 1700;
-	setd ".map_mob_abbey01", 1867;
-	setd ".map_mob_abbey02", 1864;
-	setd ".map_mob_abbey03", 1870;
-	setd ".map_mob_arug_dun01", 1974;
-	setd ".map_mob_spl_fild01", 1988;
-	setd ".map_mob_spl_fild02", 1995;
-	setd ".map_mob_spl_fild03", 2015;
-	setd ".map_mob_man_fild03", 1997;
-	setd ".map_mob_thor_v03", 1831;
-	setd ".map_mob_mosk_dun01", 1880;
-	setd ".map_mob_mosk_dun03", 1882;
-	setd ".map_mob_bra_fild01", 2063;
-	setd ".map_mob_juperos_01", 1676;
-	setd ".map_mob_niflheim", 1509;
-	setd ".map_mob_nif_fild01", 1505;
+	setd ".map_mob_prt_fild08", 1002; // Poring (70)
+	setd ".map_mob_prt_fild01", 1063; // Lunatic (80)
+	setd ".map_mob_prt_fild05", 1002; // Poring (70)
+	setd ".map_mob_moc_fild02", 1019; // Peco Peco (70)
+	setd ".map_mob_prt_fild06", 1063; // Lunatic (60)
+	setd ".map_mob_prt_fild07", 1052; // Rocker (80)
+	setd ".map_mob_prt_fild09", 1167; // Savage Babe (70)
+	setd ".map_mob_prt_fild11", 1122; // Goblin (10)
+	setd ".map_mob_prt_fild02", 1020; // Mandragora (70)
+	setd ".map_mob_prt_fild03", 1057; // Yoyo (80)
+	setd ".map_mob_prt_fild04", 1052; // Rocker (70)
+	setd ".map_mob_prt_sewb1", 1051; // Thief Bug (30)
+	setd ".map_mob_prt_sewb2", 1051; // Thief Bug (70)
+	setd ".map_mob_prt_sewb3", 1005; // Familiar (20)
+	setd ".map_mob_prt_sewb4", 1111; // Drainliar (20)
+	setd ".map_mob_prt_maze01", 1166; // Savage (8)
+	setd ".map_mob_prt_maze02", 1031; // Poporing (25)
+	setd ".map_mob_prt_maze03", 1031; // Poporing (45)
+	setd ".map_mob_pay_fild01", 1014; // Spore (100)
+	setd ".map_mob_pay_fild02", 1013; // Wolf (70)
+	setd ".map_mob_pay_fild03", 1063; // Lunatic (50)
+	setd ".map_mob_pay_fild04", 1113; // Drops (40)
+	setd ".map_mob_pay_fild05", 1077; // Poison Spore (65)
+	setd ".map_mob_pay_fild07", 1033; // Elder Willow (70)
+	setd ".map_mob_pay_fild08", 1014; // Spore (70)
+	setd ".map_mob_pay_fild09", 1056; // Smokie (80)
+	setd ".map_mob_pay_fild10", 1110; // Dokebi (70)
+	setd ".map_mob_pay_dun00", 1015; // Zombie (20)
+	setd ".map_mob_pay_dun01", 1028; // Soldier Skeleton (50)
+	setd ".map_mob_pay_dun02", 1028; // Soldier Skeleton (15)
+	setd ".map_mob_pay_dun03", 1170; // Sohee (70)
+	setd ".map_mob_pay_dun04", 1110; // Dokebi (40)
+	setd ".map_mob_moc_fild01", 1107; // Baby Desert Wolf (70)
+	setd ".map_mob_moc_fild03", 1033; // Elder Willow (70)
+	setd ".map_mob_moc_fild07", 1113; // Drops (70)
+	setd ".map_mob_moc_fild11", 1040; // Golem (70)
+	setd ".map_mob_moc_fild12", 1050; // Picky (50)
+	setd ".map_mob_moc_fild13", 1030; // Anacondaq (75)
+	setd ".map_mob_moc_fild16", 1165; // Sandman (70)
+	setd ".map_mob_moc_fild17", 1127; // Hode (100)
+	setd ".map_mob_moc_fild18", 1055; // Muka (80)
+	setd ".map_mob_moc_fild20", 1001; // Scorpion (70)
+	setd ".map_mob_moc_pryd02", 1041; // Mummy (30)
+	setd ".map_mob_moc_pryd03", 1041; // Mummy (70)
+	setd ".map_mob_moc_pryd04", 1029; // Isis (50)
+	setd ".map_mob_moc_pryd05", 1149; // Minorous (60)
+	setd ".map_mob_moc_pryd06", 1191; // Mimic (20)
+	setd ".map_mob_in_sphinx2", 1164; // Requiem (50)
+	setd ".map_mob_in_sphinx3", 1140; // Marduk (65)
+	setd ".map_mob_in_sphinx4", 1149; // Minorous (50)
+	setd ".map_mob_in_sphinx5", 1154; // Pasana (70)
+	setd ".map_mob_gef_fild00", 1007; // Fabre (50)
+	setd ".map_mob_gef_fild01", 1012; // Roda Frog (50)
+	setd ".map_mob_gef_fild02", 1023; // Orc Warrior (60)
+	setd ".map_mob_gef_fild03", 1023; // Orc Warrior (60)
+	setd ".map_mob_gef_fild04", 1011; // Chonchon (30)
+	setd ".map_mob_gef_fild05", 1261; // Wild Rose (50)
+	setd ".map_mob_gef_fild06", 1133; // Kobold (20)
+	setd ".map_mob_gef_fild07", 1007; // Fabre (60)
+	setd ".map_mob_gef_fild08", 1040; // Golem (40)
+	setd ".map_mob_gef_fild09", 1094; // Ambernite (60)
+	setd ".map_mob_gef_fild10", 1273; // Orc Lady (70)
+	setd ".map_mob_gef_fild11", 1122; // Goblin (30)
+	setd ".map_mob_gef_fild12", 1282; // Kobold Archer (40)
+	setd ".map_mob_gef_fild14", 1213; // High Orc (70)
+	setd ".map_mob_orcsdun01", 1153; // Orc Zombie (80)
+	setd ".map_mob_orcsdun02", 1152; // Orc Skeleton (50)
+	setd ".map_mob_gef_dun00", 1035; // Hunter Fly (30)
+	setd ".map_mob_gef_dun01", 1036; // Ghoul (40)
+	setd ".map_mob_gef_dun02", 1109; // Deviruchi (35)
+	setd ".map_mob_mjolnir_03", 1139; // Mantis (30)
+	setd ".map_mob_mjolnir_04", 1004; // Hornet (70)
+	setd ".map_mob_mjolnir_09", 1128; // Horn (70)
+	setd ".map_mob_mjolnir_11", 1020; // Mandragora (50)
+	setd ".map_mob_mjolnir_12", 1114; // Dustiness (50)
+	setd ".map_mob_mjo_dun01", 1175; // Tarou (60)
+	setd ".map_mob_mjo_dun02", 1145; // Martin (60)
+	setd ".map_mob_mjo_dun03", 1169; // Skeleton Worker (70)
+	setd ".map_mob_iz_dun00", 1161; // Plankton (65)
+	setd ".map_mob_iz_dun01", 1066; // Vadon (60)
+	setd ".map_mob_iz_dun02", 1067; // Cornutus (60)
+	setd ".map_mob_iz_dun03", 1158; // Phen (45)
+	setd ".map_mob_iz_dun04", 1264; // Merman (52)
+	setd ".map_mob_gl_cas01", 1267; // Carat (50)
+	setd ".map_mob_gl_cas02", 1208; // Wanderer (41)
+	setd ".map_mob_gl_church", 1117; // Evil Druid (60)
+	setd ".map_mob_gl_chyard", 1036; // Ghoul (35)
+	setd ".map_mob_gl_dun01", 1194; // Arclouze (50)
+	setd ".map_mob_gl_dun02", 1310; // Majoruros (45)
+	setd ".map_mob_gl_prison", 1197; // Zombie Prisoner (40)
+	setd ".map_mob_gl_prison1", 1257; // Injustice (40)
+	setd ".map_mob_gl_sew01", 1179; // Whisper (40)
+	setd ".map_mob_gl_sew02", 1253; // Gargoyle (55)
+	setd ".map_mob_gl_sew03", 1207; // Sting (70)
+	setd ".map_mob_gl_sew04", 1206; // Anolian (100)
+	setd ".map_mob_gl_step", 1263; // Wind Ghost (100)
+	setd ".map_mob_c_tower1", 1195; // Rideword (70)
+	setd ".map_mob_c_tower2", 1269; // Clock (40)
+	setd ".map_mob_c_tower3", 1193; // Alarm (80)
+	setd ".map_mob_c_tower4", 1269; // Clock (35)
+	setd ".map_mob_alde_dun01", 1194; // Arclouze (50)
+	setd ".map_mob_alde_dun02", 1213; // High Orc (50)
+	setd ".map_mob_alde_dun03", 1216; // Penomena (85)
+	setd ".map_mob_alde_dun04", 1102; // Bathory (50)
+	setd ".map_mob_cmd_fild01", 1271; // Alligator (60)
+	setd ".map_mob_cmd_fild02", 1074; // Shellfish (40)
+	setd ".map_mob_cmd_fild03", 1206; // Anolian (90)
+	setd ".map_mob_cmd_fild04", 1323; // Sea Otter (20)
+	setd ".map_mob_cmd_fild07", 1113; // Drops (20)
+	setd ".map_mob_cmd_fild08", 1282; // Kobold Archer (79)
+	setd ".map_mob_cmd_fild09", 1030; // Anacondaq (60)
+	setd ".map_mob_beach_dun", 1148; // Medusa (60)
+	setd ".map_mob_beach_dun2", 1278; // Stalactic Golem (65)
+	setd ".map_mob_beach_dun3", 1034; // Thara Frog (50)
+	setd ".map_mob_yuno_fild01", 1114; // Dustiness (50)
+	setd ".map_mob_yuno_fild02", 1128; // Horn (40)
+	setd ".map_mob_yuno_fild03", 1031; // Poporing (50)
+	setd ".map_mob_yuno_fild04", 1002; // Poring (60)
+	setd ".map_mob_yuno_fild05", 1162; // Rafflesia (70)
+	setd ".map_mob_yuno_fild06", 1386; // Sleeper (70)
+	setd ".map_mob_yuno_fild07", 1376; // Harpy (40)
+	setd ".map_mob_yuno_fild08", 1369; // Grand Peco (80)
+	setd ".map_mob_yuno_fild09", 1128; // Horn (40)
+	setd ".map_mob_yuno_fild11", 1386; // Sleeper (43)
+	setd ".map_mob_yuno_fild12", 1114; // Dustiness (30)
+	setd ".map_mob_mag_dun01", 1383; // Explosion (30)
+	setd ".map_mob_mag_dun02", 1379; // Nightmare Terror (46)
+	setd ".map_mob_ama_fild01", 1400; // Karakasa (50)
+	setd ".map_mob_ama_dun01", 1404; // Miyabi Doll (65)
+	setd ".map_mob_ama_dun02", 1402; // Poison Toad (35)
+	setd ".map_mob_ama_dun03", 1401; // Shinobi (55)
+	setd ".map_mob_gon_dun01", 1408; // Bloody Butterfly (55)
+	setd ".map_mob_gon_dun02", 1410; // Enchanted Peach Tree (21)
+	setd ".map_mob_lou_dun01", 1517; // Jing Guai (45)
+	setd ".map_mob_lou_dun02", 1512; // Yao Jun (40)
+	setd ".map_mob_lou_dun03", 1514; // Zhu Po Long (25)
+	setd ".map_mob_ayo_fild01", 1057; // Yoyo (30)
+	setd ".map_mob_ayo_fild02", 1586; // Leaf Cat (50)
+	setd ".map_mob_ayo_dun01", 1586; // Leaf Cat (65)
+	setd ".map_mob_ayo_dun02", 1584; // Tamruan (100)
+	setd ".map_mob_um_fild01", 1493; // Dryad (65)
+	setd ".map_mob_um_fild02", 1499; // Wootan Fighter (50)
+	setd ".map_mob_um_dun01", 1499; // Wootan Fighter (10)
+	setd ".map_mob_ein_fild04", 1368; // Geographer (80)
+	setd ".map_mob_ein_fild05", 1614; // Mineral (35)
+	setd ".map_mob_ein_fild07", 1613; // Metaling (60)
+	setd ".map_mob_ein_fild09", 1619; // Porcellio (70)
+	setd ".map_mob_ein_dun01", 1616; // Pitman (70)
+	setd ".map_mob_ein_dun02", 1614; // Mineral (50)
+	setd ".map_mob_lhz_fild01", 1613; // Metaling (70)
+	setd ".map_mob_lhz_fild02", 1613; // Metaling (50)
+	setd ".map_mob_lhz_dun01", 1682; // Remover (100)
+	setd ".map_mob_lhz_dun02", 1653; // Wickebine Tres (50)
+	setd ".map_mob_lhz_dun03", 1635; // Eremes Guile (42)
+	setd ".map_mob_ra_fild01", 1780; // Muscipular (60)
+	setd ".map_mob_ra_fild05", 1680; // Hill Wind (70)
+	setd ".map_mob_ra_fild08", 1784; // Stapo (100)
+	setd ".map_mob_ra_san01", 1771; // Vanberk (82)
+	setd ".map_mob_ra_san02", 1772; // Isilla (85)
+	setd ".map_mob_ra_san03", 1773; // Hodremlin (60)
+	setd ".map_mob_ra_san04", 1770; // Echio (60)
+	setd ".map_mob_ve_fild03", 1165; // Sandman (45)
+	setd ".map_mob_ve_fild07", 1037; // Side Winder (70)
+	setd ".map_mob_ice_dun01", 1776; // Siroma (75)
+	setd ".map_mob_ice_dun02", 1775; // Snowier (70)
+	setd ".map_mob_ice_dun03", 1777; // Ice Titan (70)
+	setd ".map_mob_hu_fild01", 1368; // Geographer (30)
+	setd ".map_mob_hu_fild02", 1715; // Novus (21)
+	setd ".map_mob_hu_fild04", 1687; // Grove (20)
+	setd ".map_mob_hu_fild05", 1687; // Grove (60)
+	setd ".map_mob_hu_fild07", 1155; // Petite (60)
+	setd ".map_mob_abyss_01", 1717; // Ferus (55)
+	setd ".map_mob_abyss_02", 1716; // Acidus (60)
+	setd ".map_mob_abyss_03", 1191; // Mimic (10)
+	setd ".map_mob_tha_t01", 1191; // Mimic (20)
+	setd ".map_mob_tha_t02", 1699; // Ancient Mimic (80)
+	setd ".map_mob_tha_t03", 1698; // Death Word (80)
+	setd ".map_mob_tha_t04", 1191; // Mimic (20)
+	setd ".map_mob_tha_t05", 1320; // Owl Duke (80)
+	setd ".map_mob_tha_t06", 1320; // Owl Duke (40)
+	setd ".map_mob_tha_t07", 1702; // Baroness of Retribution (15)
+	setd ".map_mob_tha_t08", 1702; // Baroness of Retribution (20)
+	setd ".map_mob_tha_t09", 1703; // Lady Solace (20)
+	setd ".map_mob_tha_t10", 1702; // Baroness of Retribution (20)
+	setd ".map_mob_abbey01", 1867; // Banshee (93)
+	setd ".map_mob_abbey02", 1864; // Zombie Slaughter (210)
+	setd ".map_mob_abbey03", 1870; // Necromancer (60)
+	setd ".map_mob_arug_dun01", 1974; // Banshee Master (22)
+	setd ".map_mob_spl_fild01", 1995; // Pinguicula (50)
+	setd ".map_mob_spl_fild02", 1995; // Pinguicula (95)
+	setd ".map_mob_spl_fild03", 1994; // Luciola Vespa (35)
+	setd ".map_mob_man_fild03", 1986; // Tatacho (25)
+	setd ".map_mob_thor_v03", 1831; // Salamander (60)
+	setd ".map_mob_mosk_dun01", 1880; // Wood Goblin (66)
+	setd ".map_mob_mosk_dun03", 1882; // Baba Yaga (60)
+	setd ".map_mob_juperos_01", 1676; // Venatu (70)
+	setd ".map_mob_niflheim", 1509; // Lude (20)
+	setd ".map_mob_nif_fild01", 1506; // Disguise (50)
+	setd ".map_mob_iz_dun05", 2204; // Sedora (40)
 	end;
 	
 OnNPCKillEvent:
@@ -526,7 +529,7 @@ OnNPCKillEvent:
 
 	// 2. RESTRICCIÓN DE MAPA: Si el mapa tiene un monstruo asignado, sólo las bajas de ese monstruo suman contador.
 	set .@allowed_mob, getd(".map_mob_" + .@map$);
-	if (.@allowed_mob > 0 && .@id != .@allowed_mob) end;
+	if (.@allowed_mob <= 0 || .@id != .@allowed_mob) end;
 
 	// 3. RECOLECTAR CHAMPION IDS DEFINIDOS PARA ESTE MOB
 	deletearray .@ch_list[0];

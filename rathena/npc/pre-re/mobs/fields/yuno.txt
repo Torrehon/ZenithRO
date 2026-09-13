@@ -37,6 +37,7 @@ yuno_fild01,238,326,40,40	monster	Yellow Plant	1081,6,1800000,900000
 yuno_fild01,238,326,40,40	monster	Shining Plant	1083,2,1800000,900000
 yuno_fild01,0,0	monster	Yellow Plant	1081,15,1800000,900000
 yuno_fild01,0,0	monster	Green Plant	1080,20,1800000,900000
+yuno_fild01,0,0	monster	Chimera	1283,1,3600000
 
 //==================================================
 // yuno_fild02 - Kiel Khayr's Cottage
@@ -51,6 +52,7 @@ yuno_fild02,298,194,55,158	monster	Novus	1718,2,1200000,600000
 yuno_fild02,0,0	monster	Red Plant	1078,10,1800000,900000
 yuno_fild02,0,0	monster	Yellow Plant	1081,10,1800000,900000
 yuno_fild02,0,0	monster	Green Plant	1080,10,1800000,900000
+yuno_fild02,0,0	monster	Arc Angeling	1388,1,3600000
 
 //==================================================
 // yuno_fild03 - El Mes Plateau
@@ -89,7 +91,7 @@ yuno_fild05,0,0	monster	Rafflesia	1162,70
 yuno_fild05,0,0	monster	Dustiness	1114,30
 yuno_fild05,0,0	monster	Horn	1128,30
 yuno_fild05,0,0	monster	Beetle King	1494,10
-yuno_fild05,0,0	monster	Arc Angeling	1388,1,3600000,180000
+yuno_fild05,0,0	monster	Arc Angeling	1388,1,3600000
 yuno_fild05,0,0	monster	Red Plant	1078,10,180000,90000
 yuno_fild05,0,0	monster	Green Plant	1080,10,180000,90000
 yuno_fild05,0,0	monster	Yellow Plant	1081,10,180000,90000

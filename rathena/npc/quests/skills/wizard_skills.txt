@@ -371,6 +371,10 @@ gef_tower,115,36,4	script	Meow#q_wiz	876,{
 		mes "ZzzzzzzZZZzzz... ZzZzzzz...";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 prt_in,82,98,3	script	Simon Mayace#q_wiz	46,{

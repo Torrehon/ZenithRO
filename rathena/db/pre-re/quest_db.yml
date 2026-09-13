@@ -7290,6 +7290,11 @@ Body:
     Targets:
       - Mob: TACNU
         Count: 1
+  - Id: 70026
+    Title: "Prontera Hunt: Baleful Illusion"
+    Targets:
+      - Mob: TRISTAN_3RD
+        Count: 1
   - Id: 70101
     Title: "Geffen Hunt: Fabre"
     Targets:
@@ -7796,9 +7801,9 @@ Body:
       - Mob: BREEZE
         Count: 15
   - Id: 70706
-    Title: "Hugel Hunt: Demon Pungus"
+    Title: "Hugel Hunt: Grove"
     Targets:
-      - Mob: DEMON_PUNGUS
+      - Mob: GREEN_IGUANA
         Count: 15
   - Id: 70707
     Title: "Hugel Hunt: Green Ferus"
@@ -8131,3 +8136,146 @@ Body:
       - Mob: CHEPET
         Count: 1
 
+  # Alberta Hunting Quests
+  - Id: 71101
+    Title: "Alberta Hunt: Pupa"
+    Targets:
+      - Mob: PUPA
+        Count: 25
+  - Id: 71102
+    Title: "Alberta Hunt: Wormtail"
+    Targets:
+      - Mob: WORM_TAIL
+        Count: 25
+  - Id: 71103
+    Title: "Alberta Hunt: Hydra"
+    Targets:
+      - Mob: HYDRA
+        Count: 25
+  - Id: 71104
+    Title: "Alberta Hunt: Kukre"
+    Targets:
+      - Mob: KUKRE
+        Count: 25
+  - Id: 71105
+    Title: "Alberta Hunt: Pirate Skeleton"
+    Targets:
+      - Mob: PIRATE_SKEL
+        Count: 20
+  - Id: 71106
+    Title: "Alberta Hunt: Whisper"
+    Targets:
+      - Mob: WHISPER
+        Count: 20
+  - Id: 71107
+    Title: "Alberta Hunt: Spring Rabbit"
+    Targets:
+      - Mob: SPRING_RABBIT
+        Count: 20
+  - Id: 71108
+    Title: "Alberta Hunt: Penomena"
+    Targets:
+      - Mob: PENOMENA
+        Count: 20
+  - Id: 71109
+    Title: "Alberta Hunt: Permeter"
+    Targets:
+      - Mob: PERMETER
+        Count: 20
+  - Id: 71110
+    Title: "Alberta Hunt: Solider"
+    Targets:
+      - Mob: SOLIDER
+        Count: 20
+  - Id: 71111
+    Title: "Alberta Hunt: Freezer"
+    Targets:
+      - Mob: FREEZER
+        Count: 20
+  - Id: 71112
+    Title: "Alberta Hunt: Assaulter"
+    Targets:
+      - Mob: ASSULTER
+        Count: 15
+  - Id: 71113
+    Title: "Alberta Hunt: Heater"
+    Targets:
+      - Mob: HEATER
+        Count: 15
+  - Id: 71114
+    Title: "Alberta Hunt: Ghostring"
+    Targets:
+      - Mob: GHOSTRING
+        Count: 1
+
+  # Einbroch Hunting Quests
+  - Id: 71201
+    Title: "Einbroch Hunt: Anopheles"
+    Targets:
+      - Mob: ANOPHELES
+        Count: 20
+  - Id: 71202
+    Title: "Einbroch Hunt: Metaling"
+    Targets:
+      - Mob: METALING
+        Count: 20
+  - Id: 71203
+    Title: "Einbroch Hunt: Porcellio"
+    Targets:
+      - Mob: PORCELLIO
+        Count: 20
+  - Id: 71204
+    Title: "Einbroch Hunt: Noxious"
+    Targets:
+      - Mob: NOXIOUS
+        Count: 20
+  - Id: 71205
+    Title: "Einbroch Hunt: Holden"
+    Targets:
+      - Mob: MOLE
+        Count: 20
+  - Id: 71206
+    Title: "Einbroch Hunt: Venomous"
+    Targets:
+      - Mob: VENOMOUS
+        Count: 20
+  - Id: 71207
+    Title: "Einbroch Hunt: Pitman"
+    Targets:
+      - Mob: PITMAN
+        Count: 15
+  - Id: 71208
+    Title: "Einbroch Hunt: Obsidian"
+    Targets:
+      - Mob: OBSIDIAN
+        Count: 15
+  - Id: 71209
+    Title: "Einbroch Hunt: Driller"
+    Targets:
+      - Mob: DRILLER
+        Count: 15
+  - Id: 71210
+    Title: "Einbroch Hunt: Mineral"
+    Targets:
+      - Mob: MINERAL
+        Count: 15
+  - Id: 71211
+    Title: "Einbroch Hunt: Demon Pungus"
+    Targets:
+      - Mob: DEMON_PUNGUS
+        Count: 15
+  - Id: 71212
+    Title: "Einbroch Hunt: Old Stove"
+    Targets:
+      - Mob: WASTE_STOVE
+        Count: 10
+  - Id: 71213
+    Title: "Einbroch Hunt: Teddy Bear"
+    Targets:
+      - Mob: TEDDY_BEAR
+        Count: 10
+  - Id: 71214
+    Title: "Einbroch Hunt: Ungoliant"
+    Targets:
+      - Mob: UNGOLIANT
+        Count: 1

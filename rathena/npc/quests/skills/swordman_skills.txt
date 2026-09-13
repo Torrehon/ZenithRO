@@ -137,5 +137,9 @@ izlude,47,131,4	script	Veteran Brand	85,{
 			close;
 	}
 
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
+
 // --- Monster Kill Event (Porings ID 1002) - Removed for Fatal Blow ---
 }

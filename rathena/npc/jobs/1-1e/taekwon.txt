@@ -85,6 +85,10 @@ payon,157,141,6	script	Taekwon Master#tk_1	644,{ // QUEST DE TAEKWON
 	mes "[Taekwon Master]";
 	mes "Before you depart, speak with ^0000FFInstructor Kenji^000000 over there. He has a challenge for you.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 
@@ -165,4 +169,8 @@ payon,155,139,6	script	Instructor Kenji	843,{ // DAWN TAEKWON QUEST
 		set dawn_tk_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

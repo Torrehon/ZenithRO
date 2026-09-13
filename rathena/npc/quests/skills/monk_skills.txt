@@ -237,6 +237,10 @@ prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
 	mes "one. Discipline your mind";
 	mes "and the truth will be revealed.";
 	close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 monk_test,316,69,5	script	Monk#qsk_mo	823,{
@@ -488,4 +492,8 @@ monk_test,316,69,5	script	Monk#qsk_mo	823,{
 	mes "justice, but true justice can";
 	mes "be the means to power.";
 	close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

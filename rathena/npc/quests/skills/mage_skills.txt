@@ -96,4 +96,8 @@ geffen_in,151,119,4	script	Great Wizard#en_coat	64,{
 		mes "Prepare yourself, and return when you are ready.";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

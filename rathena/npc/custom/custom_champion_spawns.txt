@@ -50,7 +50,7 @@ gl_cas01,0,0	monster	--en--	2877,1,3600000
 c_tower2,0,0	monster	--en--	2870,1,3600000
 
 // --- Coco ---
-mjolnir_09,0,0	monster	--en--	2868,1,3600000
+mjolnir_01,0,0	monster	--en--	2868,1,3600000
 ayo_fild01,0,0	monster	--en--	2868,1,3600000
 
 // --- Cornutus ---
@@ -65,7 +65,7 @@ tha_t05,0,0	monster	--en--	2858,1,3600000
 tha_t06,0,0	monster	--en--	2858,1,3600000
 
 // --- Desert Wolf B ---
-moc_fild13,0,0	monster	--en--	2855,1,3600000
+moc_fild01,0,0	monster	--en--	2855,1,3600000
 
 // --- Disguise ---
 nif_fild01,0,0	monster	--en--	2852,1,3600000
@@ -113,7 +113,7 @@ gl_sew01,0,0	monster	--en--	2826,1,3600000
 gl_sew02,0,0	monster	--en--	2826,1,3600000
 
 // --- Geographer ---
-yuno_fild07,0,0	monster	--en--	2825,1,3600000
+ein_fild04,0,0	monster	--en--	2825,1,3600000
 
 // --- Ghoul ---
 gef_dun02,0,0	monster	--en--	2822,1,3600000
@@ -213,7 +213,6 @@ mjolnir_04,0,0	monster	--en--	2764,1,3600000
 
 // --- Martin ---
 mjo_dun02,0,0	monster	--en--	2760,1,3600000
-mjo_dun03,0,0	monster	--en--	2760,1,3600000
 
 // --- Medusa ---
 beach_dun,0,0	monster	--en--	2759,1,3600000
@@ -237,7 +236,6 @@ in_sphinx4,0,0	monster	--en--	2747,1,3600000
 
 // --- Miyabi Ningyo ---
 ama_dun01,0,0	monster	--en--	2746,1,3600000
-ama_dun03,0,0	monster	--en--	2746,1,3600000
 
 // --- Mole ---
 ein_fild04,0,0	monster	--en--	2745,1,3600000
@@ -270,7 +268,7 @@ hu_fild07,0,0	monster	--en--	2729,1,3600000
 tha_t10,0,0	monster	--en--	2726,1,3600000
 
 // --- Orc Lady ---
-gef_fild14,0,0	monster	--en--	2725,1,3600000
+gef_fild10,0,0	monster	--en--	2725,1,3600000
 
 // --- Orc Skeleton ---
 orcsdun02,0,0	monster	--en--	2724,1,3600000
@@ -283,7 +281,6 @@ gef_fild03,0,0	monster	--en--	2722,1,3600000
 gef_fild10,0,0	monster	--en--	2722,1,3600000
 
 // --- Pasana ---
-in_sphinx3,0,0	monster	--en--	2719,1,3600000
 in_sphinx5,0,0	monster	--en--	2719,1,3600000
 
 // --- Pecopeco ---
@@ -307,7 +304,6 @@ ein_dun01,0,0	monster	--en--	2708,1,3600000
 
 // --- Plankton ---
 iz_dun00,0,0	monster	--en--	2707,1,3600000
-iz_dun01,0,0	monster	--en--	2707,1,3600000
 
 // --- Poison Spore ---
 pay_fild05,0,0	monster	--en--	2705,1,3600000
@@ -317,7 +313,7 @@ ama_dun02,0,0	monster	--en--	2704,1,3600000
 
 // --- Poporing ---
 pay_fild09,0,0	monster	--en--	2701,1,3600000
-cmd_fild03,0,0	monster	--en--	2701,1,3600000
+pay_fild04,0,0	monster	--en--	2701,1,3600000
 yuno_fild03,0,0	monster	--en--	2701,1,3600000
 
 // --- Porcellio ---
@@ -369,6 +365,9 @@ thor_v03,0,0	monster	--en--	2675,1,3600000
 // --- Sand Man ---
 moc_fild16,0,0	monster	--en--	2674,1,3600000
 
+// --- Sedora ---
+iz_dun05,0,0	monster	--en--	2669,1,3600000
+
 // --- Savage Babe ---
 prt_fild09,0,0	monster	--en--	2671,1,3600000
 
@@ -401,7 +400,7 @@ ra_fild08,0,0	monster	--en--	2643,1,3600000
 ve_fild07,0,0	monster	--en--	2643,1,3600000
 
 // --- Steel Chonchon ---
-cmd_fild09,0,0	monster	--en--	2642,1,3600000
+moc_fild18,0,0	monster	--en--	2642,1,3600000
 
 // --- Stem Worm ---
 mjolnir_12,0,0	monster	--en--	2641,1,3600000
@@ -437,7 +436,6 @@ ayo_dun02,0,0	monster	--en--	2618,1,3600000
 
 // --- Wild Rose ---
 gef_fild05,0,0	monster	--en--	2616,1,3600000
-yuno_fild08,0,0	monster	--en--	2616,1,3600000
 
 // --- Wilow ---
 pay_fild08,0,0	monster	--en--	2615,1,3600000
@@ -453,11 +451,9 @@ mosk_dun01,0,0	monster	--en--	2612,1,3600000
 
 // --- Wootan Fighter ---
 um_fild02,0,0	monster	--en--	2611,1,3600000
-um_dun01,0,0	monster	--en--	2611,1,3600000
 
 // --- Yoyo ---
 prt_fild03,0,0	monster	--en--	2608,1,3600000
-gef_fild02,0,0	monster	--en--	2608,1,3600000
 
 // --- Zombie ---
 pay_dun00,0,0	monster	--en--	2606,1,3600000

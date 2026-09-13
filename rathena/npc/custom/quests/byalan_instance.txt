@@ -133,11 +133,15 @@ izlu2dun,114,88,4	script	Archeologist Dan	754,{
 		close;
 	}
 	end;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 izlu2dun,104,85,4	script	Adventurer Alard#start	1,{
 	mes "[Adventurer Alard]";
-	mes "Make sure you pack enough supplies. Undersea combat is no joke, but don't worry—we've handled way tougher missions than this before. We're much stronger now!";
+	mes "Make sure you pack enough supplies. Undersea combat is no joke, but don't worry - we've handled way tougher missions than this before. We're much stronger now!";
 	close;
 OnInit:
 	.GID = getnpcid(0);

@@ -189,4 +189,8 @@ OnNPCKillEvent:
 		set plat_general_active, 2;
 	}
 	end;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

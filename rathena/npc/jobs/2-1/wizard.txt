@@ -79,6 +79,10 @@ gef_tower,111,37,4	script	Wizard Guildsman#wiz	70,{
 	mes "He is inquiring about accomplished adventurers who hold genuine proof of valor to aid him in a crucial endeavor.";
 	mes "He lingers near the library and sanctuary district of Prontera... Pay him a visit if you seek further knowledge!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 gef_tower,102,24,2	script	Gloomy Wizard	735,{

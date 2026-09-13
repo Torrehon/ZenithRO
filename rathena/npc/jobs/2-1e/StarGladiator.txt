@@ -353,6 +353,10 @@ OnTouch_:
 	mes "Step aside, will you?";
 	mes "You're blocking my sun!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 	
 comodo,172,230,3	script	Wandering Master#job_sta	730,{

@@ -359,4 +359,8 @@ prt_church,111,112,1	script	Sister Linus	79,{
 		mes "be protected by your grace.";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

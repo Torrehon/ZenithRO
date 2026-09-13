@@ -91,6 +91,10 @@ payon_in02,64,71,4	script	Archer Master#arc_1	59,{
 	mes "Oh, wait a moment! Before you leave for your first hunt, speak to ^0000FFKael^000000 over there.";
 	mes "He has been holding onto a very special bow, waiting for a recruit with your exact potential.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 
@@ -187,4 +191,8 @@ payon_in02,69,72,4	script	Kael	732,{ //DAWN BOW QUEST
 		set dawn_bow_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

@@ -58,4 +58,8 @@ izlude,130,70,4	script	Wayfarer Lloyd	832,{
     mes "This should serve you well. Use it wisely!";
     mes "If you ever feel lost, just remember that the horizon is your best guide. Good luck out there!";
     close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

@@ -1,14 +1,14 @@
 // ==========================================================
-// Sistema de Ciclo Ambiental Dinamico y Mana Engine
-// Estados Globales: Dia (0), Noche (1), Lluvia de Estrellas (2)
-// Optimizado: Carga Dinamica de Clima (On-Demand / Zero-Lag)
+// Dynamic Environmental Cycle & Mana Engine System
+// Global States: Day (0), Night (1), Meteor Shower (2)
+// Optimized: Dynamic Weather Loading (On-Demand / Zero-Lag)
 // ==========================================================
 
 -	script	EnvCycleManager	-1,{
 OnInit:
 	if ($StarShowerChance == 0) set $StarShowerChance, 15; 
 	
-	// --- REGISTRO DE CIUDADES Y FIELDS ---
+	// --- CITIES AND FIELDS REGISTRATION ---
 	deletearray .map_list$[0];
 	setarray .map_list$[0], "prontera","geffen","payon","morocc","alberta","izlude","aldebaran","comodo","yuno","amatsu","gonryun","louyang","ayothaya","umbala","einbroch","lighthalzen","rachel","veins","hugel","niflheim","jawaii","moscovia","brasilis","dewata","malangdo","malaya";
 
@@ -22,7 +22,7 @@ OnInit:
 	setarray .map_list$[.@n], "gef_fild00","gef_fild01","gef_fild02","gef_fild03","gef_fild04","gef_fild05","gef_fild06","gef_fild07","gef_fild08","gef_fild09","gef_fild10","gef_fild11","gef_fild12","gef_fild13","gef_fild14";
 
 	set .@n, getarraysize(.map_list$);
-	setarray .map_list$[.@n], "moc_fild01","moc_fild02","moc_fild03","moc_fild07","moc_fild11","moc_fild12","moc_fild13","moc_fild16","moc_fild17","moc_fild18","moc_fild19","moc_fild20";
+	setarray .map_list$[.@n], "moc_fild01","moc_fild02","moc_fild03","moc_fild04","moc_fild05","moc_fild06","moc_fild07","moc_fild08","moc_fild09","moc_fild10","moc_fild11","moc_fild12","moc_fild13","moc_fild14","moc_fild15","moc_fild16","moc_fild17","moc_fild18","moc_fild19";
 
 	set .@n, getarraysize(.map_list$);
 	setarray .map_list$[.@n], "mjolnir_01","mjolnir_02","mjolnir_03","mjolnir_04","mjolnir_05","mjolnir_06","mjolnir_07","mjolnir_08","mjolnir_09","mjolnir_10","mjolnir_11","mjolnir_12";
@@ -45,13 +45,22 @@ OnInit:
 	set .@n, getarraysize(.map_list$);
 	setarray .map_list$[.@n], "ama_fild01","gon_fild01","lou_fild01","ayo_fild01","ayo_fild02","um_fild01","um_fild02","spl_fild01","spl_fild02","spl_fild03","man_fild01","man_fild02","man_fild03","bra_fild01","dew_fild01","ma_fild01","ma_fild02";
 
-	// Habilitar ciclo de noche y evento de carga dinamica por mapa
+	// Enable night cycle and dynamic load event per map
 	for (set .@i, 0; .@i < getarraysize(.map_list$); set .@i, .@i + 1) {
 		setmapflag .map_list$[.@i], mf_nightenabled;
 		setmapflag .map_list$[.@i], mf_loadevent;
 	}
 
-	// Restaurar estado ambiental actual
+	// Reset event state if it was interrupted by server restart/reload
+	if ($ManaEvent_Active == 1) {
+		set $ManaEvent_Active, 0;
+		set $Global_EnvState, 0;
+		callsub L_RemoveLeaves;
+		setbattleflag "job_exp_rate", 500;
+		setbattleflag "base_exp_rate", 500, 1;
+	}
+
+	// Restore current environmental state
 	if ($Global_EnvState == 1) {
 		night;
 	} else if ($Global_EnvState == 2) {
@@ -63,7 +72,7 @@ OnInit:
 	end;
 
 // ==========================================================
-// Carga Dinamica de Clima On-Demand (Solo cuando entra un jugador)
+// On-Demand Dynamic Weather Loading (Only when a player enters)
 // ==========================================================
 OnPCLoadMapEvent:
 	if ($Global_EnvState == 2) {
@@ -75,7 +84,7 @@ OnPCLoadMapEvent:
 	end;
 
 // ==========================================================
-// Subrutina de Limpieza Global
+// Global Cleanup Subroutine
 // ==========================================================
 L_RemoveLeaves:
 	for (set .@i, 0; .@i < getarraysize(.map_list$); set .@i, .@i + 1) {
@@ -86,10 +95,10 @@ L_RemoveLeaves:
 	return;
 
 // ==========================================================
-// Gatillos Manuales (Llamados desde el NPC Interruptor)
+// Manual Triggers (Called via GM or NPC Event)
 // ==========================================================
 OnManualStart:
-	set $StarShowerChance, 100; // Forzamos la lluvia
+	set $StarShowerChance, 100; // Force meteor shower
 	goto L_TriggerCycle;
 	end;
 
@@ -98,14 +107,14 @@ OnManualStop:
 	set $Global_EnvState, 0;
 	callsub L_RemoveLeaves;
 	day;
-	setbattleflag "base_exp_rate", 500;
 	setbattleflag "job_exp_rate", 500;
+	setbattleflag "base_exp_rate", 500, 1;
 	
 	announce "The mana flow has been manually stabilized. EXP rates are back to 5.00x.", bc_all|bc_blue;
 	end;
 
 // ==========================================================
-// Gatillo Automatico (Cada 1 hora, a en punto :00)
+// Automatic Trigger (Every hour at :00)
 // ==========================================================
 OnMinute00:
 L_TriggerCycle: 
@@ -114,22 +123,22 @@ L_TriggerCycle:
 
 	if (.@roll <= $StarShowerChance) {
 		// ==============================================
-		// EXITO: LLUVIA DE ESTRELLAS / MANA BURST (Estado 2)
+		// SUCCESS: METEOR SHOWER / MANA BURST (State 2)
 		// ==============================================
 		set $Global_EnvState, 2;
-		set $StarShowerChance, 15; // Se resetea al 15% tras ocurrir
+		set $StarShowerChance, 15; // Resets to 15% after triggering
 		
-		night; // Noche global limpia
+		night; // Clean global night
 		
-		// MANA ENGINE: Calculo Aleatorio 6.00x - 8.00x
+		// MANA ENGINE: Random Rate Calculation between 6.00x and 8.00x
 		set .@new_rate, rand(600, 800);
 		set .@int, .@new_rate / 100;
 		set .@dec, .@new_rate % 100;
 		if (.@dec < 10) set .@dec$, "0" + .@dec;
 		else set .@dec$, "" + .@dec;
 
-		setbattleflag "base_exp_rate", .@new_rate;
 		setbattleflag "job_exp_rate", .@new_rate;
+		setbattleflag "base_exp_rate", .@new_rate, 1;
 
 		set $ManaEvent_Active, 1;
 
@@ -137,20 +146,20 @@ L_TriggerCycle:
 
 	} else {
 		// ==============================================
-		// FALLO: CICLO NORMAL (Dia / Noche)
+		// NORMAL CYCLE (Day / Night)
 		// ==============================================
 		if ($StarShowerChance < 40)
 			set $StarShowerChance, $StarShowerChance + 5;
 		
-		// Limpiamos hojas y restablecemos rates base si veniamos de una lluvia activa
+		// Clean leaves and restore base rates if coming from an active shower
 		if ($ManaEvent_Active == 1) {
 			set $ManaEvent_Active, 0;
 			callsub L_RemoveLeaves;
-			setbattleflag "base_exp_rate", 500;
 			setbattleflag "job_exp_rate", 500;
+			setbattleflag "base_exp_rate", 500, 1;
 		}
 
-		// Alternamos entre Dia y Noche
+		// Alternate between Day and Night
 		if ($Global_EnvState == 0 || $Global_EnvState == 2) {
 			set $Global_EnvState, 1;
 			night;

@@ -79,6 +79,10 @@ yuno_in02,38,61,5	script	Dean of the Academy#sa	743,{
 	mes "He is seeking fellow scholars and warriors of proven valor to assist in an extraordinary research endeavor.";
 	mes "He lingers near the library and sanctuary district of Prontera... Seek him out to expand your knowledge!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 yuno_in03,154,35,4	script	Staff of the Academy#a	742,{

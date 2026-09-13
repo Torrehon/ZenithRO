@@ -570,6 +570,10 @@ in_rogue,355,179,0	script	Haijara Greg#rogueguild	46,{
 		mes "much time left...";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 in_rogue,152,29,0	script	Louis Greg#rogueguild	84,{

@@ -4,7 +4,7 @@
 //= Job Change quest for Crusader class.
 //============================================================ 
 
--	script	Senior Crusader_	-1,{
+prt_castle,45,169,5	script	Senior Crusader#cru	654,{
 	mes "[Senior Crusader Michael]";
 	if (Upper == 1) {
 		mes "The radiant holy aura of a Transcendent holy warrior shines from within you!";
@@ -79,6 +79,10 @@
 	mes "He is seeking holy warriors and heroes of proven valor for a mission of great spiritual importance.";
 	mes "He lingers near the library and sanctuary district of Prontera... Seek him out if your shield is ready!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 -	script	Man in Anguish_	-1,{

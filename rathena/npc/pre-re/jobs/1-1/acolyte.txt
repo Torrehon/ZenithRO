@@ -83,6 +83,10 @@ prt_church,184,41,4	script	Acolyte Master#aco_1	60,{
 	mes "[Acolyte Master]";
 	mes "Before you begin your ministry, speak with ^0000FFSister Lyra^000000. She has a blessed gift for a dedicated servant like you.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 prt_church,180,41,4	script	Sister Lyra	696,{ // DAWN MACE QUEST
@@ -174,4 +178,8 @@ prt_church,180,41,4	script	Sister Lyra	696,{ // DAWN MACE QUEST
 		set dawn_mace_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

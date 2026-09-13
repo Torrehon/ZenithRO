@@ -85,6 +85,10 @@ monk_in,99,58,1	script	Sensei Moohae#mk	60,{
 	mes "He is actively searching for martial heroes who hold authentic proof of valor for a matter of great spiritual import.";
 	mes "He wanders near the library and sanctuary district of Prontera... Seek him out to fulfill your spiritual destiny!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 prt_monk,251,255,1	script	Touha#mk	79,{

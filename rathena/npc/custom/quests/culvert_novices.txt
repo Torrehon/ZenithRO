@@ -318,6 +318,10 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 		end;
 	}
 	close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 // Inner Captain

@@ -47,7 +47,7 @@ cmd_fild02,0,0	monster	Galapago	1391,20
 //==================================================
 // cmd_fild03 - Zenhai Marsh
 //==================================================
-cmd_fild03,0,0	monster	Mutant Dragonoid	1262,1
+cmd_fild03,0,0	monster	Mutant Dragonoid	1262,1,3600000
 cmd_fild03,0,0	monster	Pest	1256,30
 cmd_fild03,0,0	monster	Poporing	1031,10
 cmd_fild03,0,0	monster	Anolian	1206,90
@@ -113,6 +113,7 @@ cmd_fild06,365,342	monster	Goblin Archer	1258,1,180000
 cmd_fild06,340,334	monster	Goblin Archer	1258,1,180000
 cmd_fild06,0,0	monster	Drops	1113,20
 cmd_fild06,0,0	monster	Harpy	1376,1,1500000,1000000
+cmd_fild06,0,0	monster	Gryphon	1259,1,3600000
 cmd_fild06,293,235,5,5	monster	Yellow Plant	1081,2,1800000,900000
 cmd_fild06,84,375,10,10	monster	Yellow Plant	1081,3,1800000,900000
 
@@ -190,7 +191,6 @@ cmd_fild08,326,258,50,110	monster	Kobold Archer	1282,10
 cmd_fild08,326,258,50,110	monster	Side Winder	1037,2
 cmd_fild08,0,0	monster	Side Winder	1037,3
 cmd_fild08,130,192,110,150	monster	Side Winder	1037,15
-cmd_fild08,0,0	monster	Gryphon	1259,1,3600000,1800000
 cmd_fild08,60,143,10,10	monster	Yellow Plant	1081,4,1800000,900000
 cmd_fild08,130,201,10,10	monster	Yellow Plant	1081,4,1800000,900000
 

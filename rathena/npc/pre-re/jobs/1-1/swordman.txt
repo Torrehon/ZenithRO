@@ -87,6 +87,10 @@ izlude_in,74,172,4	script	Swordman Master#swd_1	119,{ // SWORDMAN QUEST
 	mes "[Swordman Master]";
 	mes "Before you depart, speak with ^0000FFVeteran Leon^000000 over there. He has a challenge for you.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 
@@ -183,4 +187,8 @@ izlude_in,79,173,4	script	Veteran Leon	734,{ //DAWN SWORD QUEST
 		set dawn_sword_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

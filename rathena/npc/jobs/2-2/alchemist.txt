@@ -79,6 +79,10 @@ alde_alche,27,185,5	script	Alchemist Guildsman#am	744,{
 	mes "He is seeking adventurers of proven valor to assist in a matter of great importance.";
 	mes "He is said to be wandering near the library and sanctuary district of Prontera... Seek him out when you visit the capital!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 alde_alche,175,107,3	script	Fastidious Alchemist#am	749,{

@@ -284,6 +284,10 @@ in_moc_16,14,27,5	script	Assassin#realman	884,{
 			close;
 		}
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 in_moc_16,23,27,5	script	Assassin#realgirl	885,{
@@ -746,6 +750,10 @@ in_moc_16,23,27,5	script	Assassin#realgirl	885,{
 		close;
 	}
 }
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 in_sphinx2,259,213,0	script	Old Coffin#qsk_as	-1,7,8,{

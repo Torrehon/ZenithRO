@@ -98,4 +98,4 @@ c_tower4,0,0	monster	Mimic	1191,1,1800000,900000
 c_tower4,148,85	monster	Mimic	1191,1,1800000,900000
 c_tower4,189,51	monster	Mimic	1191,1,1800000,900000
 c_tower4,170,34	monster	Mimic	1191,1,1800000,900000
-c_tower4,42,41	monster	Executioner	1205,1,7200000,3600000
+c_tower4,0,0	monster	Executioner	1205,1,3600000

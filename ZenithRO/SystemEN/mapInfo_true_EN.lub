@@ -3503,20 +3503,20 @@ mapTbl = {
 		backgroundBmp = "village"
 	},
 	["iz_ac01.rsw"] = {
-		displayName = "Criatura Academy F1",
+		displayName = "Adventurer's Guild F1",
 		notifyEnter = true, 
 		signName = {
-			subTitle = "Criatura Academy F1"
+			mainTitle = "Adventurer's Guild F1"
 		},
-		backgroundBmp = "noname_s1"
+		backgroundBmp = "village_s2"
 	},
 	["iz_ac02.rsw"] = {
-		displayName = "Criatura Academy F2",
+		displayName = "Adventurer's Guild F2",
 		notifyEnter = true, 
 		signName = {
-			subTitle = "Criatura Academy F2"
+			mainTitle = "Adventurer's Guild F2"
 		},
-		backgroundBmp = "noname_s1"
+		backgroundBmp = "village_s2"
 	},
 	["iz_ng01.rsw"] = {
 		displayName = "Ninja Tutorial Map"

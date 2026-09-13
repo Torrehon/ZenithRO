@@ -81,6 +81,10 @@ prt_in,88,101,4	script	Chivalry Captain#knt	56,{
 	mes "He is seeking brave warriors of proven valor to assist in a matter of great spiritual importance.";
 	mes "He was last seen wandering near the quiet library and sanctuary district of Prontera... Seek him out if you are ready for a higher calling!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 prt_in,75,107,4	script	Sir Andrew#knt	65,{

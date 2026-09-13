@@ -866,6 +866,15 @@ yuno_in04,180,106,3	script	Reading Girl#moc_girl1	73,{
 	close;
 }
 
+/*
+//============================================================
+// Disabled for Pre-Satan Morroc Era:
+// - Assistant#moc_ex1 & Girl#moc_ex002 (Doomsday dialogues)
+// - Resurrection of Satan Morocc (Continental Guard quest line)
+// - The Crow of the Fate (Requires Morroc destruction)
+// Preserved for future reference / instance development.
+//============================================================
+
 morocc_in,46,125,5	script	Assistant#moc_ex1	729,{
 	mes "[Sephit]";
 	mes "I've always believed in Satan..";
@@ -4301,3 +4310,4 @@ cave,105,32,7	script	Cave Settler#f_cave7	979,{
 	mes "(Whisper)";
 	close;
 }
+*/

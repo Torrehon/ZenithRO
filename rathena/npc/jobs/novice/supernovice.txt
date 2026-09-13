@@ -326,6 +326,10 @@ aldeba_in,223,167,3	script	Tzerero#sn	709,{
 		mes "I hope you will too.";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 aldeba_in,216,169,5	script	Esseray#sn	86,{

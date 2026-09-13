@@ -5821,8 +5821,10 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 
 	hom_calc_skilltree(hd);
 
-	if((skill_lv = hom_checkskill(hd, HAMI_SKIN)) > 0)
+	if((skill_lv = hom_checkskill(hd, HAMI_SKIN)) > 0) {
 		status->def += skill_lv * 4;
+		status->mdef += skill_lv * 4;
+	}
 
 	if((skill_lv = hom_checkskill(hd, HVAN_INSTRUCT)) > 0) {
 		static const uint8 bonus_int[] = { 1, 2, 2, 4, 5 };
@@ -8951,7 +8953,7 @@ static int16 status_calc_def2(block_list *bl, status_change *sc, int32 def2)
 		int skill_lv = sc->getSCE(SC_DEFENCE)->val1;
 		
 		int flat_bonus = 10 * skill_lv;
-		int percentage_multiplier = 5 * skill_lv; // Ej: 25% al nivel 5
+		int percentage_multiplier = 10 * skill_lv; // 10% por nivel (50% al nivel 5)
 		
 		// 1. Añadimos el bono plano a la Vit Def actual
 		def2 += flat_bonus;
@@ -9068,6 +9070,11 @@ static defType status_calc_mdef(block_list *bl, status_change *sc, int32 mdef)
     if(sc->getSCE(SC_SIGNUMCRUCIS))
 	    mdef -= mdef * sc->getSCE(SC_SIGNUMCRUCIS)->val2/100;
 
+	// --- INICIO CUSTOM: Amistr Defense MDEF ---
+	if (bl->type == BL_HOM && sc->getSCE(SC_DEFENCE))
+		mdef += sc->getSCE(SC_DEFENCE)->val2;
+	// --- FIN CUSTOM ---
+
 	return (defType)cap_value(mdef,DEFTYPE_MIN,DEFTYPE_MAX);
 }
 
@@ -9100,6 +9107,14 @@ static int16 status_calc_mdef2(block_list *bl, status_change *sc, int32 mdef2)
 		// mdef2 -= mdef2 * 25 / 100;
 	if(sc->getSCE(SC_ANALYZE))
 		mdef2 -= mdef2 * (14 * sc->getSCE(SC_ANALYZE)->val1) / 100;
+
+	// --- INICIO CUSTOM: Amistr Bulwark (Soft MDEF para Master y Homúnculo) ---
+	if(sc->getSCE(SC_DEFENCE) && (bl->type == BL_PC || bl->type == BL_HOM)) {
+		int skill_lv = sc->getSCE(SC_DEFENCE)->val1;
+		int percentage_multiplier = 10 * skill_lv; // 10% por nivel (50% al nivel 5)
+		mdef2 += (mdef2 * percentage_multiplier) / 100;
+	}
+	// --- FIN CUSTOM ---
 
 #ifdef RENEWAL
 	return (int16)cap_value(mdef2,SHRT_MIN,SHRT_MAX);

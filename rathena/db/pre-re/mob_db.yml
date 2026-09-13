@@ -1469,7 +1469,7 @@ Body:
         Rate: 1100
       - Item: White_Herb
         Rate: 600
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 1
       - Item: Flower_Ring
         Rate: 200
@@ -1657,7 +1657,7 @@ Body:
         Rate: 700
       - Item: Green_Herb
         Rate: 800
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 60
       - Item: Mementos
         Rate: 150
@@ -3501,7 +3501,7 @@ Body:
         Rate: 3000
       - Item: Red_Herb
         Rate: 850
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 30
       - Item: Skeleton_Card
         Rate: 1
@@ -24985,9 +24985,9 @@ Body:
     AegisName: OBSIDIAN
     Name: Obsidian
     Level: 50
-    Hp: 8812
-    BaseExp: 2799
-    JobExp: 1802
+    Hp: 10812
+    BaseExp: 4799
+    JobExp: 2802
     Attack: 841
     Attack2: 980
     Defense: 35
@@ -25030,14 +25030,14 @@ Body:
   - Id: 1616
     AegisName: PITMAN
     Name: Pitman
-    Level: 43
-    Hp: 5015
-    BaseExp: 1799
-    JobExp: 1083
-    Attack: 290
-    Attack2: 486
-    Defense: 22
-    MagicDefense: 26
+    Level: 51
+    Hp: 8015
+    BaseExp: 3699
+    JobExp: 2183
+    Attack: 390
+    Attack2: 686
+    Defense: 25
+    MagicDefense: 25
     Str: 0
     Agi: 15
     Vit: 5
@@ -25079,14 +25079,14 @@ Body:
     AegisName: WASTE_STOVE
     Name: Old Stove
     JapaneseName: Waste Stove
-    Level: 68
+    Level: 73
     Hp: 15895
-    BaseExp: 4412
-    JobExp: 1135
+    BaseExp: 5712
+    JobExp: 2135
     Attack: 692
-    Attack2: 1081
-    Defense: 23
-    MagicDefense: 10
+    Attack2: 881
+    Defense: 35
+    MagicDefense: 1
     Str: 20
     Agi: 69
     Vit: 55
@@ -25108,17 +25108,19 @@ Body:
     Ai: 04
     Drops:
       - Item: Battered_Kettle
-        Rate: 1000
+        Rate: 2000
       - Item: Burn_Tree
-        Rate: 1000
+        Rate: 2000
       - Item: Iron
         Rate: 500
       - Item: Lusty_Iron
         Rate: 50
+      - Item: Hyper_Changer
+        Rate: 10
       - Item: Iron_Ore
         Rate: 1000
       - Item: Branch_Of_Dead_Tree
-        Rate: 50
+        Rate: 100
       - Item: Old_Steel_Plate
         Rate: 3800
       - Item: Waste_Stove_Card
@@ -25127,19 +25129,19 @@ Body:
   - Id: 1618
     AegisName: UNGOLIANT
     Name: Ungoliant
-    Level: 69
-    Hp: 29140
-    BaseExp: 8211
-    JobExp: 142
+    Level: 72
+    Hp: 129140
+    BaseExp: 58211
+    JobExp: 52142
     Attack: 1290
     Attack2: 2280
-    Defense: 25
-    MagicDefense: 25
+    Defense: 45
+    MagicDefense: 15
     Str: 33
-    Agi: 52
-    Vit: 57
+    Agi: 1
+    Vit: 99
     Int: 25
-    Dex: 119
+    Dex: 159
     Luk: 43
     AttackRange: 1
     SkillRange: 10
@@ -25169,8 +25171,10 @@ Body:
         Rate: 2500
       - Item: Dark_Red_Jewel
         Rate: 1500
-      - Item: Boots_
-        Rate: 500
+      - Item: Revenger # 28226 Crear Toxic Avenger (Trevenger)
+        Rate: 50
+      - Item: VenomInsect_Armor # 15108
+        Rate: 50
       - Item: Ungoliant_Card
         Rate: 1
         StealProtected: true
@@ -25309,16 +25313,16 @@ Body:
   - Id: 1622
     AegisName: TEDDY_BEAR
     Name: Teddy Bear
-    Level: 71
-    Hp: 8109
-    BaseExp: 5891
-    JobExp: 3455
+    Level: 75
+    Hp: 12109
+    BaseExp: 6891
+    JobExp: 5455
     Attack: 621
     Attack2: 1432
-    Defense: 19
-    MagicDefense: 32
+    Defense: 15
+    MagicDefense: 35
     Str: 5
-    Agi: 155
+    Agi: 125
     Vit: 32
     Int: 41
     Dex: 121
@@ -25340,7 +25344,7 @@ Body:
       - Item: Screw
         Rate: 3800
       - Item: Honey
-        Rate: 1000
+        Rate: 2000
       - Item: Oridecon_Hammer
         Rate: 300
       - Item: Gold_Lux
@@ -30767,7 +30771,7 @@ Body:
         Rate: 1000
       - Item: Rouge
         Rate: 500
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 100
       - Item: Elunium_Stone
         Rate: 500
@@ -35516,9 +35520,9 @@ Body:
       - Item: Broken_Crown
         Rate: 9000
       - Item: Manteau_Of_Fallen
-        Rate: 3500
+        Rate: 500
       - Item: 12th_Crown
-        Rate: 1000
+        Rate: 500
       - Item: Oridecon
         Rate: 2000
       - Item: Elunium
@@ -40676,7 +40680,7 @@ Body:
     Drops:
       - Item: Piece_Of_Black_Cloth
         Rate: 5000
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 1000
       - Item: Dagger_Of_Hunter
         Rate: 5
@@ -44058,57 +44062,57 @@ Body:
       - Item: Vadon_Card
         Rate: 20
         StealProtected: true
-  - Id: 2629
-    AegisName: C3_UNGOLIANT
-    Name: Ungoliant Ringleader
-    Level: 69
-    Hp: 118560
-    BaseExp: 32800
-    JobExp: 740
-    Attack: 1290
-    Attack2: 2280
-    Defense: 25
-    MagicDefense: 25
-    Str: 33
-    Agi: 52
-    Vit: 58
-    Int: 25
-    Dex: 119
-    Luk: 43
-    AttackRange: 1
-    SkillRange: 10
-    ChaseRange: 12
-    Size: Large
-    Race: Insect
-    Element: Poison
-    ElementLevel: 2
-    WalkSpeed: 350
-    AttackDelay: 420
-    AttackMotion: 576
-    ClientAttackMotion: 240
-    DamageMotion: 420
-    Ai: 21
-#   Class: 6   # TODO
-    Modes:
-      Detector: true
-    Drops:
-      - Item: Long_Limb
-        Rate: 10000
-      - Item: Jaws_Of_Ant
-        Rate: 8750
-      - Item: Colorful_Shell
-        Rate: 2500
-      - Item: Olivine
-        Rate: 3750
-      - Item: Fluorescent_Liquid
-        Rate: 6250
-      - Item: Dark_Red_Jewel
-        Rate: 3750
-      - Item: Boots_
-        Rate: 1250
-      - Item: Ungoliant_Card
-        Rate: 20
-        StealProtected: true
+  # - Id: 2629
+    # AegisName: C3_UNGOLIANT
+    # Name: Ungoliant Ringleader
+    # Level: 69
+    # Hp: 118560
+    # BaseExp: 32800
+    # JobExp: 740
+    # Attack: 1290
+    # Attack2: 2280
+    # Defense: 25
+    # MagicDefense: 25
+    # Str: 33
+    # Agi: 52
+    # Vit: 58
+    # Int: 25
+    # Dex: 119
+    # Luk: 43
+    # AttackRange: 1
+    # SkillRange: 10
+    # ChaseRange: 12
+    # Size: Large
+    # Race: Insect
+    # Element: Poison
+    # ElementLevel: 2
+    # WalkSpeed: 350
+    # AttackDelay: 420
+    # AttackMotion: 576
+    # ClientAttackMotion: 240
+    # DamageMotion: 420
+    # Ai: 21
+# #   Class: 6   # TODO
+    # Modes:
+      # Detector: true
+    # Drops:
+      # - Item: Long_Limb
+        # Rate: 10000
+      # - Item: Jaws_Of_Ant
+        # Rate: 8750
+      # - Item: Colorful_Shell
+        # Rate: 2500
+      # - Item: Olivine
+        # Rate: 3750
+      # - Item: Fluorescent_Liquid
+        # Rate: 6250
+      # - Item: Dark_Red_Jewel
+        # Rate: 3750
+      # - Item: Boots_
+        # Rate: 1250
+      # - Item: Ungoliant_Card
+        # Rate: 20
+        # StealProtected: true
   - Id: 2630
     AegisName: C4_TOUCAN  
     Name: Furious Toucan
@@ -44396,15 +44400,15 @@ Body:
     AegisName: C1_TEDDY_BEAR
     Name: Swift Teddy Bear
     Level: 71
-    Hp: 40545
-    BaseExp: 23670
-    JobExp: 17235
+    Hp: 60545
+    BaseExp: 33670
+    JobExp: 27235
     Attack: 621
     Attack2: 1432
-    Defense: 19
-    MagicDefense: 32
+    Defense: 15
+    MagicDefense: 35
     Str: 5
-    Agi: 155
+    Agi: 125
     Vit: 32
     Int: 41
     Dex: 121
@@ -45443,7 +45447,7 @@ Body:
         Rate: 2500
       - Item: Rouge
         Rate: 1250
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 250
       - Item: Elunium_Stone
         Rate: 1250
@@ -45974,56 +45978,55 @@ Body:
       - Item: See_Otter_Card
         Rate: 20
         StealProtected: true
-  # - Id: 2669
-    # AegisName: C4_SEDORA
-    # Name: Furious Lamp Rey
-    # Level: 110
-    # Hp: 83700
-    # Sp: 0
-    # BaseExp: 9540
-    # JobExp: 27330
-    # Attack: 630
-    # Attack2: 444
-    # Defense: 92
-    # MagicDefense: 55
-    # Str: 126
-    # Agi: 153
-    # Vit: 61
-    # Int: 107
-    # Dex: 109
-    # Luk: 84
-    # AttackRange: 1
-    # SkillRange: 10
-    # ChaseRange: 12
-    # Size: Medium
-    # Race: Fish
-    # Element: Water
-    # ElementLevel: 2
-    # WalkSpeed: 150
-    # AttackDelay: 500
-    # AttackMotion: 792
-    # ClientAttackMotion: 288
-    # DamageMotion: 432
-    # Ai: 04
-# #   Class: 6   # TODO
-    # Drops:
-      # - Item: Tentacle
-        # Rate: 10000
-      # - Item: Tidal_Shoes
-        # Rate: 15
-      # - Item: Ice_Fragment
-        # Rate: 75
-      # - Item: Elder_Branch
-        # Rate: 75
-      # - Item: Chinese_Ink
-        # Rate: 7500
-      # - Item: Old_Blue_Box
-        # Rate: 25
-      # - Item: Crystal_Blue
-        # Rate: 125
-      # - Item: Sedora_Card
-        # Rate: 5
-        # StealProtected: true
+  - Id: 2669
+    AegisName: C4_SEDORA
+    Name: Furious Lamp Rey
+    Level: 110
+    Hp: 83700
+    Sp: 0
+    BaseExp: 9540
+    JobExp: 27330
+    Attack: 630
+    Attack2: 444
+    Defense: 92
+    MagicDefense: 55
+    Str: 126
+    Agi: 153
+    Vit: 61
+    Int: 107
+    Dex: 109
+    Luk: 84
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 500
+    AttackMotion: 792
+    ClientAttackMotion: 288
+    DamageMotion: 432
+    Ai: 04
+    Drops:
+      - Item: Tentacle
+        Rate: 10000
+      - Item: Tidal_Shoes
+        Rate: 50
+      - Item: Egir_Shoes_K
+        Rate: 50
+      - Item: Ice_Fragment
+        Rate: 1000
+      - Item: Chinese_Ink
+        Rate: 1500
+      - Item: Old_Blue_Box
+        Rate: 100
+      - Item: Crystal_Blue
+        Rate: 1000
+      - Item: Sedora_Card
+        Rate: 20
+        StealProtected: true
   - Id: 2670
     AegisName: C5_SCORPION
     Name: Elusive Scorpion
@@ -47872,14 +47875,14 @@ Body:
   - Id: 2708
     AegisName: C5_PITMAN
     Name: Elusive Pitman
-    Level: 43
-    Hp: 25075
-    BaseExp: 7200
-    JobExp: 4400
-    Attack: 290
-    Attack2: 486
-    Defense: 22
-    MagicDefense: 26
+    Level: 51
+    Hp: 41015
+    BaseExp: 21199
+    JobExp: 10283
+    Attack: 390
+    Attack2: 686
+    Defense: 25
+    MagicDefense: 25
     Str: 0
     Agi: 15
     Vit: 5
@@ -53189,7 +53192,7 @@ Body:
     # Drops:
       # - Item: Piece_Of_Black_Cloth
         # Rate: 10000
-      # - Item: Skul_Ring
+      # - Item: Skul_Ring_
         # Rate: 2500
       # - Item: Dagger_Of_Hunter
         # Rate: 15
@@ -53235,7 +53238,7 @@ Body:
     # Drops:
       # - Item: Piece_Of_Black_Cloth
         # Rate: 10000
-      # - Item: Skul_Ring
+      # - Item: Skul_Ring_
         # Rate: 2500
       # - Item: Dagger_Of_Hunter
         # Rate: 15
@@ -53333,7 +53336,7 @@ Body:
         Rate: 1750
       - Item: Green_Herb
         Rate: 2000
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 150
       - Item: Mementos
         Rate: 375
@@ -53382,7 +53385,7 @@ Body:
         Rate: 1750
       - Item: Green_Herb
         Rate: 2000
-      - Item: Skul_Ring
+      - Item: Skul_Ring_
         Rate: 150
       - Item: Mementos
         Rate: 375

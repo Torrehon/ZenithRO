@@ -35,6 +35,7 @@ abyss_01,195,147,5,10	monster	Penomena	1216,5,720000,300000
 abyss_01,140,100,15,5	monster	Penomena	1216,10,780000,300000
 abyss_01,260,40,14,14	monster	Dragon Egg	1721,3,1200000,600000
 abyss_01,150,160,50,50	monster	Dragon Egg	1721,5,1800000,600000
+abyss_01,0,0	monster	Mutant Dragonoid	1262,1,3600000
 
 //==================================================
 // abyss_02 - Abyss Lakes Underground Cave F2

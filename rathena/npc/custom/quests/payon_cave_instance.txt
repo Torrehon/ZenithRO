@@ -83,6 +83,10 @@ pay_arche,48,137,4	script	Grandmother Kyung	78,{
 		close;
 	}
 	close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 // --- 2. OUTSIDE ALTAR (pay_dun00) ---

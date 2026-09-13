@@ -152,7 +152,7 @@ prt_in,160,49,4	script	Scholar#soulq1	743,{
 		next;
 		mes "[Scholar]";
 		mes "Court mages in the royal castle have detected surges of corrupt energy emanating from deep beneath Prontera Castle.";
-		mes "An ancient, forbidden dungeon — the ^0000FFProntera Underground Prison^000000 — has unsealed itself!";
+		mes "An ancient, forbidden dungeon - the ^0000FFProntera Underground Prison^000000 - has unsealed itself!";
 		next;
 		mes "[Scholar]";
 		mes "The Royal Guard is assembling an expeditionary force in the castle as we speak.";
@@ -187,6 +187,10 @@ prt_in,160,49,4	script	Scholar#soulq1	743,{
 		}
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 // ==============================================================

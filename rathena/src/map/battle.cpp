@@ -5838,9 +5838,9 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 		if (src->type == BL_HOM) {
 			homun_data *hd = (homun_data *)src;
 			
-			// IDs de Amistr: 6003, 6004, 6011, 6012
-			if (hd->homunculus.class_ == 6003 || hd->homunculus.class_ == 6004 || 
-				hd->homunculus.class_ == 6011 || hd->homunculus.class_ == 6012) {
+			// IDs de Amistr: 6002, 6006 (Base) y 6010, 6014 (Evolucionado)
+			if (hd->homunculus.class_ == 6002 || hd->homunculus.class_ == 6006 || 
+				hd->homunculus.class_ == 6010 || hd->homunculus.class_ == 6014) {
 				
 				// Llamamos directamente a su Hard DEF 
 				int bono_ataque = sstatus->def / 2; 
@@ -8230,12 +8230,14 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 		skill_castend_damage_id(src, target, 0, 1, tick, 0);
 
 	// --- INICIO CUSTOM: Splash 3x3 para Amistr Evolucionado ---
-	if (src->type == BL_HOM && damage > 0) {
+	if (src->type == BL_HOM && damage > 0 && !(flag & 1)) {
 		homun_data* hd = (homun_data*)src;
-		// 6011 (Amistr Oveja Evo) y 6012 (Amistr Hipo Evo)
-		if (hd->homunculus.class_ == 6011 || hd->homunculus.class_ == 6012) {
-			// Lanzamos el Ataque Splash invisible (Skill 0), Rango 1 (3x3)
-			skill_castend_damage_id(src, target, 0, 1, tick, 0);
+		// 6010 y 6014 son Amistr Evolucionado (MAPID_AMISTR_E)
+		if (hd->homunculus.class_ == 6010 || hd->homunculus.class_ == 6014) {
+			// Daño en área 3x3 alrededor del objetivo principal (flag | 1 para no encadenar recursión infinita)
+			map_foreachinallrange(skill_area_sub, target, 1, BL_CHAR,
+				src, 0, 1, tick, BCT_ENEMY | 1,
+				skill_castend_damage_id);
 		}
 	}
 	// --- FIN CUSTOM ---

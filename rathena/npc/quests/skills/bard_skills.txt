@@ -377,6 +377,10 @@ OnTouch:
 		emotion ET_HUK;
 	}
 	end;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 morocc_in,169,72,7	script	Spiteful-Looking Bard#bs	741,3,3,{

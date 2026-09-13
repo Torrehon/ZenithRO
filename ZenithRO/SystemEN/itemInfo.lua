@@ -33837,9 +33837,8 @@ tbl = {
 			"A manteau made from gray crow feathers that were enchanted through the power of Morrigane, whose incarnation is the gray crow.",
 			"_______________________",
 			"Increases Luk by 1 every 2 refines.",
-			"Perfect Dodge +5",
 			"_______________________",
-			"Further increases Perfect Dodge by 1 every 2 refine levels.",
+			"Increases Perfect Dodge by 1 every 2 refine levels.",
 			"_______________________",
 			"Class:^6666CC Garment^000000",
 			"Defense:^0000FF 3^000000",
@@ -36290,10 +36289,10 @@ tbl = {
 			"Class:^6666CC Accessory^000000",
 			"Defense:^0000FF 0^000000",
 			"Weight:^009900 20^000000",
-			"Level Requirement:^009900 61^000000",
+			"Level Requirement:^009900 75^000000",
 			"Jobs:^6666CC All except Novice^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 0,
 		costume = false
 	},
@@ -36308,15 +36307,15 @@ tbl = {
 		identifiedDescriptionName = {
 			"The pendant that ChuChulain gave to Morrigane when they were both still in love.",
 			"It's symoblic of her endless devotion, as she stood by his side even after he had abandoned her.",
-			"Str +2",
+			"Atk +5",
 			"Critical +3",
 			"Class:^6666CC Accessory^000000",
 			"Defense:^0000FF 0^000000",
 			"Weight:^009900 20^000000",
-			"Level Requirement:^009900 61^000000",
+			"Level Requirement:^009900 75^000000",
 			"Jobs:^6666CC All except Novice^000000"
 		},
-		slotCount = 0,
+		slotCount = 1,
 		ClassNum = 0,
 		costume = false
 	},
@@ -64007,17 +64006,25 @@ tbl = {
 		identifiedResourceName = "모리아네헬름",
 		identifiedDescriptionName = {
 			"A helm that was once owned by Morrigane, the goddess of war.",
+			"_______________________",
 			"Luk +1",
+			"Atk +5",
+			"_______________________",
 			"^6666CCMorrigane's Set^000000",
 			"^008800Morrigane's Helm^000000",
 			"^008800Morrigane's Manteau^000000",
 			"^008800Morrigane's Pendant^000000",
 			"^008800Morrigane's Belt^000000",
-			"Str +2",
-			"Luk +9",
-			"Atk +18",
-			"Critical +13",
-			"Perfect Dodge +13",
+			"Str +1",
+			"Dex +1",
+			"Luk +4",
+			"Atk +10",
+			"Critical +5",
+			"Further increases Luk by 1 every 2 refine levels of ^00FF00Morrigane's Helm^000000.",
+			"Further increases Atk by 1 per refine level of ^00FF00Morrigane's Helm^000000",
+			"Further increases Critical by 1 per refine level of ^00FF00Morrigane's Helm^000000",
+			"Increases Perfect Dodge by 1 per refine level of ^00FF00Morrigane's Helm^000000",
+			"_______________________",
 			"Class:^6666CC Headgear^000000",
 			"Defense:^0000FF 4^000000",
 			"Position:^6666CC Upper^000000",
@@ -164460,15 +164467,26 @@ tbl = {
 		costume = false
 	},
 	[15108] = {
-		unidentifiedDisplayName = "Armor",
+		unidentifiedDisplayName = "Unidentified Armor",
 		unidentifiedResourceName = "아머",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Venomous Insect Armor",
 		identifiedResourceName = "독충의갑옷",
 		identifiedDescriptionName = {
-			"..."
+			"A suit of armor made out of a urn which contained all kinds of venomous snakes and insects.",
+			"_______________________",
+			"MDEF +5",
+			"_______________________",
+			"Increases Physical Damage against enemies of ^663399Poison^000000 elemental by 10%.",
+			"_______________________",
+			"^0000CCType:^000000 Armor",
+			"^0000CCDefense:^000000 6",
+			"^0000CCElement:^663399 Poison",
+			"^0000CCWeight:^000000 50",
+			"^0000CCArmor Level:^000000 1",
+			"_______________________",
+			"Level Requirement:^009900 75^000000",
+			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 1,
 		ClassNum = 0,
@@ -213718,6 +213736,26 @@ tbl = {
 		ClassNum = 0,
 		costume = true
 	},
+	[20535] = {
+		unidentifiedDisplayName = "Unidentified Garment",
+		unidentifiedResourceName = "후드",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Digital Space",
+		identifiedResourceName = "C_Digital_Space",
+		identifiedDescriptionName = {
+			"A digital space for your own outfit.",
+			"Let's take a step into the cyber world.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Garment",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 0,
+		costume = true
+	},
 	[20571] = {
 		unidentifiedDisplayName = "Unidentified Garment",
 		unidentifiedResourceName = "후드",
@@ -216317,6 +216355,26 @@ tbl = {
 		slotCount = 1,
 		ClassNum = 0,
 		costume = false
+	},
+	[20988] = {
+		unidentifiedDisplayName = "Unidentified Garment",
+		unidentifiedResourceName = "후드",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Mechanical Butterfly",
+		identifiedResourceName = "C_Mechanical_Butterfly",
+		identifiedDescriptionName = {
+			"Butterfly wings with fine mechanical decoration.",
+			"If you're a steampunk enthusiast, you'll feel it's an irresistibly beautiful look.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCLocation:^000000 Garment",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 92,
+		costume = true
 	},
 	[20990] = {
 		unidentifiedDisplayName = "Unidentified Garment",
@@ -240874,15 +240932,30 @@ tbl = {
 		costume = false
 	},
 	[28226] = {
-		unidentifiedDisplayName = "Grenade Launcher",
+		unidentifiedDisplayName = "Unidentified Grenade Launcher",
 		unidentifiedResourceName = "디스트로이어",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Revenge",
 		identifiedResourceName = "리벤져",
 		identifiedDescriptionName = {
-			"..."
+			"A grenade launcher used by avengers.",
+			"_______________________",
+			"Increases Ranged Physical Damage by 20%.",
+			"_______________________",
+			"^0000FFRefine Level +7^000000:",
+			"Increases damage of ^009900Dragon Tail^000000 by 15%.",
+			"_______________________",
+			"^0000FFRefine Level +9^000000:",
+			"Decreases ^009900Howling Mine^000000 skill cooldown by 1 second.",
+			"_______________________",
+			"^0000CCType:^000000 Grenade Launcher",
+			"^0000CCAttack:^000000 350",
+			"^0000CCWeight:^000000 180",
+			"^0000CCWeapon Level:^000000 3",
+			"_______________________",
+			"^0000CCRequirement:^000000",
+			"Base Level 120",
+			"Rebellion"
 		},
 		slotCount = 2,
 		ClassNum = 21,
@@ -259755,6 +259828,27 @@ tbl = {
 		ClassNum = 1777,
 		costume = true
 	},
+	[31549] = {
+		Server = "jRO",
+		unidentifiedDisplayName = "Unidentified Hat",
+		unidentifiedResourceName = "캡",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Little Aquarium(Lower)",
+		identifiedResourceName = "리틀아쿠아리움",
+		identifiedDescriptionName = {
+			"A decoration for a costume that spreads out in front of you when you wear it.",
+			"You can enjoy the feeling of diving under the sea.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Lower",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 1363,
+		costume = true
+	},
 	[31565] = {
 		unidentifiedDisplayName = "Unidentified Hat",
 		unidentifiedResourceName = "캡",
@@ -260934,6 +261028,8 @@ tbl = {
 			"Enables travel to locations previously",
 			"memorized using the ^FF0000/memo^000000 command.",
 			"Max memo points: ^0099003^000000.",
+			"Adds a chance to obtain Wayfarer's Stones when defeating enemies.",
+			"The higher the wielder's Base Level, the higher the drop chance.",
 			"^FFFFFF_^000000",
 			"Weight:^009900 0^000000",
 			"Class:^0000FF Travel Item^000000"
@@ -261616,6 +261712,56 @@ tbl = {
 			"^0000CCUsage:^000000",
 			"Can be exchanged for provisions with the",
 			"^0000CCVeteran Hunter^000000 in Lutie.",
+			"_______________________________________",
+			"^FF0000Account Bound.^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0
+	},
+	[50033] = {
+		unidentifiedDisplayName = "Coin",
+		unidentifiedResourceName = "alberta_coin",
+		unidentifiedDescriptionName = {
+			" "
+		},
+		identifiedDisplayName = "Alberta Coin",
+		identifiedResourceName = "alberta_coin",
+		identifiedDescriptionName = {
+			"^0000CCAlberta Hunting Reward^000000",
+			"_______________________________________",
+			"A lustrous coin minted in the bustling",
+			"port city of ^FF0000Alberta^000000. Stamped with",
+			"an anchor and merchant ship insignia,",
+			"smelling faintly of the sea salt air.",
+			"_______________________________________",
+			"^0000CCUsage:^000000",
+			"Can be exchanged for provisions with the",
+			"^0000CCVeteran Hunter^000000 in Alberta.",
+			"_______________________________________",
+			"^FF0000Account Bound.^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0
+	},
+	[50034] = {
+		unidentifiedDisplayName = "Coin",
+		unidentifiedResourceName = "einbroch_coin",
+		unidentifiedDescriptionName = {
+			" "
+		},
+		identifiedDisplayName = "Einbroch Coin",
+		identifiedResourceName = "einbroch_coin",
+		identifiedDescriptionName = {
+			"^0000CCEinbroch Hunting Reward^000000",
+			"_______________________________________",
+			"A heavy, smog-darkened iron coin minted",
+			"in the industrial city of ^FF0000Einbroch^000000.",
+			"Emblazoned with interlocking gears and",
+			"steampunk factory motifs.",
+			"_______________________________________",
+			"^0000CCUsage:^000000",
+			"Can be exchanged for provisions with the",
+			"^0000CCVeteran Hunter^000000 in Einbroch.",
 			"_______________________________________",
 			"^FF0000Account Bound.^000000"
 		},
@@ -265633,6 +265779,65 @@ tbl = {
 		ClassNum = 2380,
 		costume = false
 	},
+	[400462] = {
+		unidentifiedDisplayName = "Unidentified Hat",
+		unidentifiedResourceName = "캡",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Sailor Cap",
+		identifiedResourceName = "C_Sailor_Cap",
+		identifiedDescriptionName = {
+			"A cap designed to go well with a sailor uniform.",
+			"The red ribbon is a point.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Upper",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 2398,
+		costume = true
+	},
+	[400725] = {
+		unidentifiedDisplayName = "Unidentified Hat",
+		unidentifiedResourceName = "햇",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Ghost Ship Captain's Hat",
+		identifiedResourceName = "C_G_S_Captain_Hat",
+		identifiedDescriptionName = {
+			"A ghost ship captain's hat floating in the cold North Sea.",
+			"The loneliness and storms of the past years are melted into it.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Upper",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 2585,
+		costume = true
+	},
+	[400739] = {
+		unidentifiedDisplayName = "Unidentified Hat",
+		unidentifiedResourceName = "햇",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Archangeling Bread Hat",
+		identifiedResourceName = "Marin_Pattern_Hat",
+		identifiedDescriptionName = {
+			"A cute round hat. You can see a cute Archangeling from the back.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Upper",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 2543,
+		costume = true
+	},
 	[410087] = {
 		unidentifiedDisplayName = "Unidentified Ribbon",
 		unidentifiedResourceName = "리본",
@@ -265651,6 +265856,26 @@ tbl = {
 		},
 		slotCount = 0,
 		ClassNum = 2127,
+		costume = true
+	},
+	[410363] = {
+		unidentifiedDisplayName = "Unidentified Ribbon",
+		unidentifiedResourceName = "리본",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Ghost Ship Aura",
+		identifiedResourceName = "C_Aura_Of_Ghost_S",
+		identifiedDescriptionName = {
+			"A strange aura that evokes fear and awe in those who see it.",
+			"It resembles the chill of the cold night sea.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Middle",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 0,
 		costume = true
 	},
 	[420010] = {
@@ -265695,6 +265920,27 @@ tbl = {
 		slotCount = 0,
 		ClassNum = 1143,
 		costume = false
+	},
+	[420044] = {
+		unidentifiedDisplayName = "Unidentified Ribbon",
+		unidentifiedResourceName = "리본",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Sailor's White Lapel",
+		identifiedResourceName = "C_Sailor_Collar_WH",
+		identifiedDescriptionName = {
+			"A decoration made with the collar part worn by sailors for clothes.",
+			"There is a legend that the collar was erected on a ship with strong winds to make it easier to hear the sound.",
+			"<NAVI>[Designer Heidam]<INFO>mal_in01,20,124,0,100,0,0</INFO></NAVI> can exchange it with Costume Enchant Stone Box 24.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Lower",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 2141,
+		costume = true
 	},
 	[450180] = {
 		unidentifiedDisplayName = "Unidentified Armor",

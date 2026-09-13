@@ -73,6 +73,10 @@ izlude_in,175,130,3	script	Genin Master#gn_1	637,{ // QUEST DE GENIN (CUSTOM ID 
 	mes "[Genin Master]";
 	mes "Before you vanish, speak with ^0000FFEnvoy Hanzo^000000 over there. He has the tools you will need for your missions.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 
@@ -171,4 +175,8 @@ izlude_in,175,124,3	script	Envoy Hanzo	636,{ // DAWN GENIN QUEST
 		set dawn_gn_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

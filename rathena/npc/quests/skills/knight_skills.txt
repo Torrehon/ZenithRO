@@ -325,6 +325,10 @@ prt_in,85,99,3	script	Knight#kabuto	734,{
 	mes "my comrades, but I find it";
 	mes "difficult to trust them.";
 	close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 prontera,69,351,0	script	#tour	111,5,5,{

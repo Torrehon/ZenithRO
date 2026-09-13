@@ -77,6 +77,10 @@ hire_in,165,96,6	script	Hiregun Master#hg_1	633,{ // QUEST DE HIREGUN (CUSTOM ID
 	mes "[Hiregun Master]";
 	mes "Before you hit the road, go talk to ^0000FFVeteran Flint^000000 over there. He brought some special hardware from the Republic.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 
@@ -175,4 +179,8 @@ hire_in,182,96,4	script	Veteran Flint	632,{ // DAWN HIREGUN QUEST
 		set dawn_hg_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

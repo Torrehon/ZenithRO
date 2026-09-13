@@ -169,4 +169,8 @@ alberta_in,16,66,4	script	Minister Marcus#alb	49,{
 		mes "Please collect these items and return to me when ready!";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

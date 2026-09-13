@@ -32,7 +32,7 @@ gef_dun00,121,109,3,3	monster	Black Mushroom	1084,3,180000,90000
 //==================================================
 gef_dun01,0,0	monster	Drainliar	1111,20
 gef_dun01,0,0	monster	Nightmare	1061,30
-gef_dun01,0,0	monster	Ogretooth	1204,1,1800000,1200000
+gef_dun01,0,0	monster	Ogretooth	1204,1,3600000
 gef_dun01,0,0	monster	Zombie	1015,25
 gef_dun01,0,0	monster	Ghoul	1036,40
 gef_dun01,0,0	monster	Jakk	1130,40,300000,100000
@@ -54,6 +54,7 @@ gef_dun02,0,0	monster	Marionette	1143,20
 gef_dun02,0,0	monster	Deviruchi	1109,35
 gef_dun02,0,0	monster	Nightmare	1061,40,60000
 gef_dun02,0,0,0,0	boss_monster	Doppelganger	1046,1,7200000,600000,1
+gef_dun02,0,0	monster	Ogretooth	1204,1,3600000
 gef_dun02,214,212,10,10	monster	White Plant	1082,3,180000,90000
 gef_dun02,215,67,10,10	monster	White Plant	1082,3,180000,90000
 gef_dun02,72,210,20,20	monster	White Plant	1082,3,180000,90000

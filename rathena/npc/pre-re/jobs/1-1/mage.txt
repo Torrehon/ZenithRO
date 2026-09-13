@@ -87,6 +87,10 @@ geffen_in,164,124,4	script	Mage Master#mag_1	123,{
 	mes "[Mage Master]";
 	mes "Oh, before you go to test your new spells! Talk to ^0000FFYuria^000000. She's over there by the wall, and she has a very special staff for a promising rookie like you.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 geffen_in,158,124,4	script	Yuria	69,{ //DAWN STAFF QUEST
@@ -181,6 +185,10 @@ geffen_in,158,124,4	script	Yuria	69,{ //DAWN STAFF QUEST
 		set dawn_staff_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 // --- Objetos de Ambientación ---

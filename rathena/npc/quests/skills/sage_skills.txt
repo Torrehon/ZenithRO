@@ -179,4 +179,8 @@ yuno_in03,176,24,3	script	Mischna	755,{
 			close;
 		}
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

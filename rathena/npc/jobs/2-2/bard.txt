@@ -84,4 +84,8 @@ comodo,226,123,5	script	Wandering Bard#bard	741,{
 	mes "He seeks heroes of proven valor to assist in an extraordinary quest of spiritual import.";
 	mes "He wanders near Prontera's quiet library district... Seek him out if you desire to star in a grand new song!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }

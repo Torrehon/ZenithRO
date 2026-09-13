@@ -1130,6 +1130,10 @@ yuno_in04,33,108,4	script	Pisruik#qsk_al	883,{
 		mes "much help to you.";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 yuno_in04,22,107,5	script	Irache#qsk_al	740,{
@@ -1812,6 +1816,10 @@ lhz_in01,224,140,3	script	Kellasus#qsk_al	57,{
 	mes "But Alchemy does provide";
 	mes "a way for the audacious...";
 	close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 lhz_in01,225,122,5	script	Skrajjad#qsk_al	754,{

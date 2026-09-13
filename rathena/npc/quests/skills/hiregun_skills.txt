@@ -76,4 +76,8 @@ hire_in,176,78,4	script	Quartermaster Vargas	900,{ // QUEST DE SKILL PLATINUM: A
 			close;
 		}
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }

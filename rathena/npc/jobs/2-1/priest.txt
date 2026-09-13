@@ -79,6 +79,10 @@ prt_church,16,41,4	script	High Bishop#prst	60,{
 	mes "He has been searching for faithful heroes of proven valor to assist in a matter of profound spiritual importance.";
 	mes "He wanders near our church sanctuary and the library district... Seek him out when you are ready to answer the call!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 prt_church,27,24,1	script	Sister Cecilia	79,{

@@ -21818,6 +21818,34 @@ Body:
     Weight: 0
     Flags:
       BuyingStore: true
+  - Id: 50033
+    AegisName: alberta_coin
+    Name: Alberta Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 50034
+    AegisName: einbroch_coin
+    Name: Einbroch Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
   - Id: 70000
     AegisName: LKnight_Card
     Name: Lost Knight Card

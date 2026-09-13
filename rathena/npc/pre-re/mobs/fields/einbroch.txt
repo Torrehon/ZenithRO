@@ -40,7 +40,7 @@ ein_fild02,259,269,90,70	monster	Driller	1380,15
 ein_fild02,287,117,55,70	monster	Driller	1380,10
 ein_fild02,108,88,60,60	monster	Driller	1380,10
 ein_fild02,0,0	monster	Demon Pungus	1378,30
-ein_fild02,0,0	monster	Ungoliant	1618,1,75600000,75000000
+ein_fild02,0,0	monster	Ungoliant	1618,1,3600000
 
 //==================================================
 // ein_fild03 - Einbroch Field
@@ -106,7 +106,7 @@ ein_fild07,0,0	monster	Geographer	1368,20
 ein_fild07,0,0	monster	Red Plant	1078,10,120000,60000
 ein_fild07,0,0	monster	Yellow Plant	1081,10,120000,60000
 ein_fild07,0,0	monster	Red Mushroom	1085,10,120000,60000
-ein_fild07,0,0	monster	Ungoliant	1618,1,86400000,86000000
+ein_fild07,0,0	monster	Ungoliant	1618,1,3600000
 
 //==================================================
 // ein_fild08 - Einbroch Field

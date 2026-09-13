@@ -85867,1235 +85867,2367 @@ QuestInfoList = {
 		},
 		Summary = "Come back to help Freya again!"
 	},
-	[70001] = {
-		Title = "Searching for the Treasure Map",
+[80001] = {
+		Title = "Sewage Novice Rescue",
 		Description = {
-			"Search the inside areas of Izlude for signs of the treasure map. You must search 4 areas for traces of the map and then return to Mikey."
+			"I have promised to help the novices",
+			"lost in the Prontera Culverts.",
+			"I must find them all to earn a reward."
 		},
-		Summary = ""
+		Summary = "Bring 20 Red Potions to the novices.",
+		NpcName = "Culvert Guardian",
+	},
+	[80002] = {
+		Title = "Mutant Bug Extermination",
+		Description = {
+			"The boss of the culvert bugs,",
+			"a powerful Mutant Thief Bug, is hiding",
+			"in the deepest corner.",
+			"I must exterminate it to save the city."
+		},
+		Summary = "Defeat the Mutant Thief Bug.",
+		Hunt1 = "Mutant Male Bug",
+		NpcName = "Prontera Knight",
+	},
+	[80003] = {
+		Title = "Culvert Bounty Claim",
+		Description = {
+			"The mutant has been slain!",
+			"I must report back to the Guard",
+			"at the entrance of the Culvert",
+			"to claim my reward."
+		},
+		Summary = "Return to the Culvert Guardian.",
+		NpcName = "Culvert Guardian",
+	},
+	[80020] = {
+		Title = "Minji Sacrifice",
+		Description = {
+			"The grandmother Kyung at Payon Archer",
+			"Village is mourning her granddaughter.",
+			"I must find the ancient altar in the",
+			"Payon Caves and purify the darkness."
+		},
+		Summary = "Purify the Tormented Weaver.",
+		Hunt1 = "Tormented Weaver",
+		NpcName = "Grandmother Kyung",
+	},
+	[80021] = {
+		Title = "Payon Purification",
+		Description = {
+			"The shadows in Payon Dungeon never",
+			"truly sleep. I must return to the altar",
+			"to keep Minji spirit at peace."
+		},
+		Summary = "Defeat the Tormented Weaver.",
+		Hunt1 = "Tormented Weaver",
+		NpcName = "Grandmother Kyung",
+	},
+	[80030] = {
+		Title = "Coal Mines Culling",
+		Description = {
+			"Clear the path towards the 3rd level",
+			"so Garrick and his team mates can ",
+			"start looking for the Orichalcum."
+		},
+		Summary = "Defeat the Targets.",
+		Hunt1 = "Skeleton Worker",
+		NpcName = "Garrick the Surveyor",
+	},
+	[80031] = {
+		Title = "Orichalcum Extraction",
+		Description = {
+			"The Orichalcum vein must be somewhere",
+			"at the northwestern part of the 3rd floor",
+			"Grab an Old Pick from a Skeleton",
+			"Worker and start mining!"
+		},
+		Summary = "Mine for Orichalcum.",
+		NpcName = "Orichalcum Vein",
+	},
+	[80032] = {
+		Title = "Mine Spirit's Vengeance",
+		Description = {
+			"Stop the Mine Spirit before it",
+			"makes the mines collapse!"
+		},
+		Summary = "Defeat the Mine Spirit",
+		Hunt1 = "Mine Spirit",
+		NpcName = "Orichalcum Vein",
+	},
+	[80033] = {
+		Title = "Orichalcum Delivery",
+		Description = {
+			"You conquered the mines.",
+			"Go back to Garrick and",
+			"give him the Orichalcum."
+		},
+		Summary = "Talk to Garrick",
+		NpcName = "Garrick the Surveyor",
+	},
+	[80040] = {
+		Title = "Byalan Culling",
+		Description = {
+			"The archaeological team needs you",
+			"to clear the way to the 3rd floor",
+			"by defeating some sea monsters."
+		},
+		Summary = "Defeat the Targets.",
+		Hunt1 = "Marc",
+		Hunt2 = "Swordfish",
+		Hunt3 = "Phen",
+		NpcName = "Archeologist Dan",
+	},
+	[80041] = {
+		Title = "Deep Sea Excavation",
+		Description = {
+			"Join Alard's competition and then",
+			"help the Chief Archeologist find the",
+			"Trident of the Depths in the kelp."
+		},
+		Summary = "Find the Trident of the Depths.",
+		NpcName = "Alard",
+	},
+	[80042] = {
+		Title = "Mermaid of the Depths",
+		Description = {
+			"Breach the seal with the Trident and",
+			"protect the expedition from the horde",
+			"of sea creatures."
+		},
+		Summary = "Defeat the Mermaid of the Depths.",
+		Hunt1 = "Depths Mermaid",
+		NpcName = "Chief Archeologist",
+	},
+	[80043] = {
+		Title = "Byalan Expedition Complete",
+		Description = {
+			"You secured the depths.",
+			"Speak to the Chief Archeologist",
+			"to warp back and receive rewards."
+		},
+		Summary = "Talk to the Chief Archeologist",
+		NpcName = "Chief Archeologist",
+	},
+	[90001] = {
+		Title = "Soul Quest: The Dawn Awakening",
+		Description = {
+			"Scholar at Prontera Library recognized your Dawn Weapon.",
+			"He asked you to gather magical energy from 4 sanctuaries:",
+			"- Prontera Field (prt_fild07 226, 112)",
+			"- Alberta Field (pay_fild03 162, 215)",
+			"- Morocc Field (moc_fild11 140, 242)",
+			"- Payon Field (pay_fild02 104, 245)"
+		},
+		Summary = "Absorb magic energy at the 4 sanctuaries.",
+		NpcName = "Scholar",
+	},
+	[90002] = {
+		Title = "Soul Quest: Return to Scholar",
+		Description = {
+			"Your Dawn Weapon is fully charged with ancient magic.",
+			"Return to the Scholar in Prontera Library",
+			"to report your discovery."
+		},
+		Summary = "Report back to Scholar in Prontera Library.",
+		NpcName = "Scholar",
+	},
+	[90003] = {
+		Title = "Soul Quest: The Celestial Call",
+		Description = {
+			"Scholar instructed you to travel to the high territory",
+			"of Geffen Field (gef_fild07 182, 240).",
+			"Keep your Dawn Weapon equipped so the gathered magic",
+			"can react with the firmament."
+		},
+		Summary = "Travel to gef_fild07 (182, 240) with your Dawn Weapon.",
+		NpcName = "Scholar",
+	},
+	[90004] = {
+		Title = "Soul Quest: Pantheon of Heroes",
+		Description = {
+			"You have arrived at the Pantheon of Heroes (1@4tro).",
+			"Speak to the Einherjar hero corresponding to your job class",
+			"to claim your ancient Hero Soul."
+		},
+		Summary = "Claim your Hero Soul from the Einherjar.",
+		NpcName = "Einherjar",
+	},
+
+	-- Prontera Hunting Quests
+	[70001] = {
+		Title = "Prontera Hunt: Poring",
+		Description = {
+			"Hunt down 25 Porings to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 25 Poring.",
+		Hunt1 = "Poring",
+		NpcName = "Hunting Board",
 	},
 	[70002] = {
-		Title = "Searching the Wardrobe",
+		Title = "Prontera Hunt: Lunatic",
 		Description = {
-			"You search the wardrobe and find only a folded piece of paper."
+			"Hunt down 25 Lunatics to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Lunatic.",
+		Hunt1 = "Lunatic",
+		NpcName = "Hunting Board",
 	},
 	[70003] = {
-		Title = "Searching the Plain Barrel",
+		Title = "Prontera Hunt: Thief Bug",
 		Description = {
-			"You have searched the plain barrel for the treasure map but found nothing."
+			"Hunt down 25 Thief Bugs to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Thief Bug.",
+		Hunt1 = "Thief Bug",
+		NpcName = "Hunting Board",
 	},
 	[70004] = {
-		Title = "Searching the Weapon Rack",
+		Title = "Prontera Hunt: Rocker",
 		Description = {
-			"You have searched the weapon rack for the treasure map but found nothing."
+			"Hunt down 25 Rockers to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Rocker.",
+		Hunt1 = "Rocker",
+		NpcName = "Hunting Board",
 	},
 	[70005] = {
-		Title = "Searching the Sturdy Barrel",
+		Title = "Prontera Hunt: Tarou",
 		Description = {
-			"You have searched the sturdy barrel for the treasure map but found nothing."
+			"Hunt down 25 Tarous to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Tarou.",
+		Hunt1 = "Tarou",
+		NpcName = "Hunting Board",
 	},
 	[70006] = {
-		Title = "No map found",
+		Title = "Prontera Hunt: Poporing",
 		Description = {
-			"You weren't able to find any signs of the treasure map. Continue talking to Mikey in Izlude."
+			"Hunt down 25 Poporings to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Poporing.",
+		Hunt1 = "Poporing",
+		NpcName = "Hunting Board",
 	},
 	[70007] = {
-		Title = "Faint image of a treasure map",
+		Title = "Prontera Hunt: Mandragora",
 		Description = {
-			"The image you saw seems to be of Byalan Island with an X slightly above the left eye of the skull."
+			"Hunt down 25 Mandragoras to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Mandragora.",
+		Hunt1 = "Mandragora",
+		NpcName = "Hunting Board",
 	},
 	[70008] = {
-		Title = "X marks the spot",
+		Title = "Prontera Hunt: Vadon",
 		Description = {
-			"After digging through the loosened earth, you fell through a hole in the ground."
+			"Hunt down 20 Vadons to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = "Find and speak to Mikey's friend"
+		Summary = "Hunt 20 Vadon.",
+		Hunt1 = "Vadon",
+		NpcName = "Hunting Board",
 	},
 	[70009] = {
-		Title = "They call him Chunk",
+		Title = "Prontera Hunt: Yoyo",
 		Description = {
-			"Continue your conversation with Chunk."
+			"Hunt down 20 Yoyos to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Yoyo.",
+		Hunt1 = "Yoyo",
+		NpcName = "Hunting Board",
 	},
 	[70010] = {
-		Title = "Searching for clues",
+		Title = "Prontera Hunt: Cornutus",
 		Description = {
-			"Find a wooden sign at a dead end of the first floor of Byalan Dungeon."
+			"Hunt down 20 Cornutuss to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Cornutus.",
+		Hunt1 = "Cornutus",
+		NpcName = "Hunting Board",
 	},
 	[70011] = {
-		Title = "The rotted signpost",
+		Title = "Prontera Hunt: Marc",
 		Description = {
-			"When you found the sign, several Pirate Skeletons spawned. Read the signpost again to read more information."
+			"Hunt down 15 Marcs to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Marc.",
+		Hunt1 = "Marc",
+		NpcName = "Hunting Board",
 	},
 	[70012] = {
-		Title = "Izlude Irene's Treasure",
+		Title = "Prontera Hunt: Swordfish",
 		Description = {
-			"\"for the next clue one floor down now you must go. Once you have found it, you may claim Irene's treasure... but to take home the riches your pirate knowledge she will measure.\""
+			"Hunt down 15 Swordfishs to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = "Find Mouth and talk to him"
+		Summary = "Hunt 15 Swordfish.",
+		Hunt1 = "Swordfish",
+		NpcName = "Hunting Board",
 	},
 	[70013] = {
-		Title = "Looking for Data",
+		Title = "Prontera Hunt: Merman",
 		Description = {
-			"Mouth says that their friend Data was running towards an island to the north of the third level of Byalan Island with a mushroom shaped rock."
+			"Hunt down 15 Mermans to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Merman.",
+		Hunt1 = "Merman",
+		NpcName = "Hunting Board",
 	},
 	[70014] = {
-		Title = "Izlude's Lieutenant",
+		Title = "Prontera Hunt: Strouf",
 		Description = {
-			"Find the resting place of Izlude Irene's loyal lieutenant. His restless spirit will point the way to the treasure."
+			"Hunt down 15 Stroufs to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Strouf.",
+		Hunt1 = "Strouf",
+		NpcName = "Hunting Board",
 	},
 	[70015] = {
-		Title = "Entrance to Izlude Irene's ship",
+		Title = "Prontera Hunt: Deviace",
 		Description = {
-			"Find the entrance to Izlude Irene's ship in the ruins of an old temple. A signpost should mark the entrance."
+			"Hunt down 15 Deviaces to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = "Find Izlude Irene and answer her questions correctly"
+		Summary = "Hunt 15 Deviace.",
+		Hunt1 = "Deviace",
+		NpcName = "Hunting Board",
 	},
 	[70016] = {
-		Title = "Izlude Irene's treasure",
+		Title = "Prontera Hunt: Lost Knight",
 		Description = {
-			"Go back to Izlude and search near the statue of the Knight next to Mikey."
+			"Hunt down 15 Lost Knights to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Lost Knight.",
+		Hunt1 = "Lost Knight",
+		NpcName = "Hunting Board",
 	},
 	[70017] = {
-		Title = "Izlude Irene's treasure",
+		Title = "Prontera Hunt: Fallen Crusader",
 		Description = {
-			"Keep digging, and your tenacity will be worth it."
+			"Hunt down 15 Fallen Crusaders to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Fallen Crusader.",
+		Hunt1 = "Fallen Crusader",
+		NpcName = "Hunting Board",
+	},
+	[70018] = {
+		Title = "Prontera Hunt: Zombie Guard",
+		Description = {
+			"Hunt down 15 Zombie Guards to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 15 Zombie Guard.",
+		Hunt1 = "Zombie Guard",
+		NpcName = "Hunting Board",
 	},
 	[70019] = {
-		Title = "2011 RWC Celebration",
+		Title = "Prontera Hunt: Mastering",
 		Description = {
-			"Wait one day before you can get more firecrackers from the RWC Agent in Prontera"
+			"Hunt down 1 Masterings to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = "Reset at 04:00",
-		CoolTimeQuest = 1
+		Summary = "Hunt 1 Mastering.",
+		Hunt1 = "Mastering",
+		NpcName = "Hunting Board",
+	},
+	[70020] = {
+		Title = "Prontera Hunt: Vocal",
+		Description = {
+			"Hunt down 1 Vocals to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 1 Vocal.",
+		Hunt1 = "Vocal",
+		NpcName = "Hunting Board",
 	},
 	[70021] = {
-		Title = "Blue Harvest",
+		Title = "Prontera Hunt: Eclipse",
 		Description = {
-			"Bring 10 Sushi and 10 Raw Fish Slices to Fujiko who is inside of the Amatsu sushi restaurant."
+			"Hunt down 1 Eclipses to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 1 Eclipse.",
+		Hunt1 = "Eclipse",
+		NpcName = "Hunting Board",
 	},
 	[70022] = {
-		Title = "Blue Harvest",
+		Title = "Prontera Hunt: Sropho",
 		Description = {
-			"Continue your conversation with Fujiko."
+			"Hunt down 10 Srophos to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 10 Sropho.",
+		Hunt1 = "Sropho",
+		NpcName = "Hunting Board",
 	},
 	[70023] = {
-		Title = "Blue Harvest",
+		Title = "Prontera Hunt: Sedora",
 		Description = {
-			"Find Jubei inside of the Amatsu castle and help him escape. You'll have to get past a guard in order to free him."
+			"Hunt down 10 Sedoras to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 10 Sedora.",
+		Hunt1 = "Sedora",
+		NpcName = "Hunting Board",
 	},
 	[70024] = {
-		Title = "Blue Harvest",
+		Title = "Prontera Hunt: King Dramoh",
 		Description = {
-			"Quick, the guard is distracted! Get Jubei outta there!"
+			"Hunt down 10 King Dramohs to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 10 King Dramoh.",
+		Hunt1 = "King Dramoh",
+		NpcName = "Hunting Board",
 	},
 	[70025] = {
-		Title = "Blue Harvest",
+		Title = "Prontera Hunt: Tacnu",
 		Description = {
-			"Jagyu Yubei asked you to help find the person who framed him. Find the treasure hunter Einrich Lambretta somewhere on the first floor of Amatsu castle."
+			"Hunt down 1 Tacnu to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 1 Tacnu.",
+		Hunt1 = "Tacnu",
+		NpcName = "Hunting Board",
 	},
 	[70026] = {
-		Title = "Blue Harvest",
+		Title = "Prontera Hunt: Baleful Illusion",
 		Description = {
-			"Talk to Einrich's sister Zella"
+			"Hunt down 1 Baleful Illusion to complete the contract",
+			"and claim your Prontera Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 1 Baleful Illusion.",
+		Hunt1 = "Baleful Illusion",
+		NpcName = "Hunting Board",
 	},
-	[70027] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Find the scroll in the underground shrine. It should be hidden somewhere near where a doll is displayed on a high platform."
-		},
-		Summary = ""
-	},
-	[70028] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Find Zella just to the south of Amatsu castle and tell her that you've found the scroll."
-		},
-		Summary = ""
-	},
-	[70029] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Find the Master Swordmaker inside of a hut at the eastern area of Amatsu field so that he can repair the broken sword."
-		},
-		Summary = ""
-	},
-	[70030] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Bring 30 pieces of Bamboo, 20 Cyfar, and 20 Star Crumbs to the Master Swordmaker in Amatsu."
-		},
-		Summary = ""
-	},
-	[70031] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Bring the fixed sword to the Lord of the Palace of Amatsu."
-		},
-		Summary = ""
-	},
-	[70032] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Tell Fujiko in the Sushi restaurant that you have restored Yubei's honor and that they now be married."
-		},
-		Summary = ""
-	},
-	[70033] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Your work isn't completed just yet. Find Major Kusanagi inside of the castle and find out who framed Yubei."
-		},
-		Summary = ""
-	},
-	[70034] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Search the area on the second floor to find any clue that could lead to the actual perpetrator."
-		},
-		Summary = ""
-	},
-	[70035] = {
-		Title = "Blue Harvest",
-		Description = {
-			"You found a secret scroll intended for a ninja that proves that Yubei was framed but it self-destructed. Look for the person who wrote this in a small house next to the well in Amatsu."
-		},
-		Summary = ""
-	},
-	[70036] = {
-		Title = "Blue Harvest",
-		Description = {
-			"Fight past the Ninja's and make your way to the northern end of Amatsu. Congratulate the guests there on Fujiko and Yubei's marriage."
-		},
-		Summary = ""
-	},
-	[70037] = {
-		Title = "Amatsu - Poison Toad Skin",
-		Description = {
-			"The Brasilis Ambassador has asked you to bring 50 Poisonous Toad Skins from the Poison Toads here in Amatsu."
-		},
-		Summary = ""
-	},
-	[70038] = {
-		Title = "Amatsu - Daily Quest Timer",
-		Description = {
-			"You must wait one day before taking this quest again."
-		},
-		Summary = "Reset at 04:00",
-		CoolTimeQuest = 1
-	},
-	[70039] = {
-		Title = "Amatsu - Oil Papers",
-		Description = {
-			"The Dewata Ambassador has asked you to bring 50 Oil Papers from the Karakasa monsters here in Amatsu."
-		},
-		Summary = ""
-	},
-	[70040] = {
-		Title = "Amatsu - Daily Quest Timer",
-		Description = {
-			"You must wait one day before taking this quest again."
-		},
-		Summary = "Reset at 04:00",
-		CoolTimeQuest = 1
-	},
-	[70041] = {
-		Title = "Amatsu - Yellow Plates",
-		Description = {
-			"The Louyang Ambassador has asked you to bring 40 Yellow Plates from the Kapha monsters here in Amatsu."
-		},
-		Summary = ""
-	},
-	[70042] = {
-		Title = "Amatsu - Daily Quest Timer",
-		Description = {
-			"You must wait one day before taking this quest again."
-		},
-		Summary = "Reset at 04:00",
-		CoolTimeQuest = 1
-	},
-	[70043] = {
-		Title = "Amatsu - Worn-out Kimono",
-		Description = {
-			"The Moscovia Ambassador has asked you to bring him 50 Worn-out Kimonos from the Miyabi Dolls here in Amatsu."
-		},
-		Summary = ""
-	},
-	[70044] = {
-		Title = "Amatsu - Daily Quest Timer",
-		Description = {
-			"You must wait one day before taking this quest again."
-		},
-		Summary = "Reset at 04:00",
-		CoolTimeQuest = 1
-	},
-	[70045] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"You have joined up with the Ecto Exterminators. Continue your conversation with Peter Vanker"
-		},
-		Summary = ""
-	},
-	[70046] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Speak with Egan Spanglish."
-		},
-		Summary = ""
-	},
-	[70047] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Go to the Lighthalzen Hotel and speak with the manager there."
-		},
-		Summary = ""
-	},
-	[70048] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Seems there's a ghost haunting the hotel. Go upstairs and try to find the ghost. Speak to the Hotel Employee upstairs for clues"
-		},
-		Summary = ""
-	},
-	[70049] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"The Hotel Employee said that the Ghost disturbing the guests is in a room at the end of the hallway."
-		},
-		Summary = ""
-	},
-	[70050] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"The Hotel Employee said that the Ghost disturbing the guests is in a room at the end of the hallway."
-		},
-		Summary = "Search for the Hidden Ghost"
-	},
-	[70051] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"The ghost keeps eluding you. Keep searching the area."
-		},
-		Summary = "Search for the Hidden Ghost"
-	},
-	[70052] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"The ghost keeps eluding you. Keep searching the area."
-		},
-		Summary = "Search for the Hidden Ghost"
-	},
-	[70053] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"The ghost keeps eluding you. You're getting closer. It should be cornered near the stairs."
-		},
-		Summary = "Search for the Hidden Ghost"
-	},
-	[70054] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Tell the Hotel Manager that the Ghost threat has been defeatd"
-		},
-		Summary = ""
-	},
-	[70055] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Go back to the Ecto Exterminators in the Yuno Library."
-		},
-		Summary = ""
-	},
-	[70056] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Find a Crusader inside of the Prontera Castle that asked for the Ecto Exterminators for help."
-		},
-		Summary = ""
-	},
-	[70057] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Find the Ghost near a bridge in the field West of Prontera. Bring 1 Trap to capture the ghost but DON'T cross the bridge (stream)."
-		},
-		Summary = ""
-	},
-	[70058] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Tell the Crusader in Prontera Castle that the Ghost threat has been defeatd."
-		},
-		Summary = ""
-	},
-	[70059] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Bring the captured Ghost back to the Ecto Exterminators in the Yuno Library."
-		},
-		Summary = ""
-	},
-	[70060] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Talk to one of the members of the Ecto Exterminators."
-		},
-		Summary = ""
-	},
-	[70061] = {
-		Title = "Ecto Exterminators",
-		Description = {
-			"Survive the Destructor and speak to one of the Ecto Exterminators for your reward."
-		},
-		Summary = ""
-	},
-	[70062] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Some kid just pushed you down the stairs. Better find someone else who could help you figure out what's going on here."
-		},
-		Summary = ""
-	},
-	[70063] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Find the doctor Thessla in the house just being the Niflheim Inn."
-		},
-		Summary = ""
-	},
-	[70064] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Go back to the Inn and speak to the boy Kendall who pushed you down the stairs."
-		},
-		Summary = ""
-	},
-	[70065] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Kendall mentions that his parents are gravely ill maybe talking to them will help you figure out what's wrong with them..."
-		},
-		Summary = ""
-	},
-	[70066] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Taeli says that she's hidden several pieces of candy around Niflheim. She's hidden them near lampposts so look around for them."
-		},
-		Summary = ""
-	},
-	[70067] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"You've found the first piece of candy. Time to find the second one."
-		},
-		Summary = ""
-	},
-	[70068] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"You've found the second piece of candy. Time to find the third one."
-		},
-		Summary = ""
-	},
-	[70069] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"You've found the third piece of candy. Time to find the fourth one."
-		},
-		Summary = ""
-	},
-	[70070] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"You've found the fourth piece of candy. Go back to Taeli and tell her you found all 4."
-		},
-		Summary = ""
-	},
-	[70071] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"The last piece of candy is hidden in a house on a hill that has 2 smiling pumpkins over the front door."
-		},
-		Summary = ""
-	},
-	[70072] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Find the lady that Taeli was talking about. She's on the second floor from where the last piece of candy was hidden."
-		},
-		Summary = ""
-	},
-	[70073] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"Make the Queen of the Dead release the spell that she put on Kendall, Arvus and Taeli's parents."
-		},
-		Summary = ""
-	},
-	[70074] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"You seem to have convinced the Queen of the Dead. Speak to her again to make sure she releases the spell."
-		},
-		Summary = ""
-	},
-	[70075] = {
-		Title = "Niflheim Tourists",
-		Description = {
-			"The Queen of the Dead has released the family of the spell. Now she might be more accomodating."
-		},
-		Summary = ""
-	},
-	[70076] = {
-		Title = "Niflheim Timer",
-		Description = {
-			"You can only do the quests, from the Queen of the Dead, once every 12 hours."
-		},
-		Summary = ""
-	},
-	[70077] = {
-		Title = "Gather Ectoplasm",
-		Description = {
-			"Gather 100 Ectoplasm that you can get from hunting the Quve, Lude and Heirozoists in Niflheim and bring it back to the Queen of the Dead."
-		},
-		Summary = ""
-	},
-	[70078] = {
-		Title = "Gather Pumpkin Lanterns",
-		Description = {
-			"Gather 60 Pumpkin Lanterns that you can get from hunting the Lude monsters in Niflheim and bring it back to the Queen of the Dead."
-		},
-		Summary = ""
-	},
-	[70079] = {
-		Title = "Gather Wooden Gnarl",
-		Description = {
-			"Gather 50 Wooden Gnarls that you can get from hunting the Gibbet monsters in Niflheim and bring it back to the Queen of the Dead."
-		},
-		Summary = ""
-	},
-	[70080] = {
-		Title = "Food Ingredient timer",
-		Description = {
-			"You must wait one day before you can receive another quest from the Eden Group Chef."
-		},
-		Summary = "Reset at 04:00",
-		CoolTimeQuest = 1
-	},
+	-- Geffen Hunting Quests
 	[70101] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Fabre",
 		Description = {
-			"Go and check in at Lighthalzen's Hotel"
+			"Hunt down 25 Fabres to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Fabre.",
+		Hunt1 = "Fabre",
+		NpcName = "Hunting Board",
 	},
 	[70102] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Roda Frog",
 		Description = {
-			"Go and take a nap upstairs while you wait for the Expo to begin. The room is upstairs and down a long hallway."
+			"Hunt down 25 Roda Frogs to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Roda Frog.",
+		Hunt1 = "Roda Frog",
+		NpcName = "Hunting Board",
 	},
 	[70103] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Ambernite",
 		Description = {
-			"Talk to the Expo Receptionist to see what happened with the dream."
+			"Hunt down 25 Ambernites to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Ambernite.",
+		Hunt1 = "Ambernite",
+		NpcName = "Hunting Board",
 	},
 	[70104] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Coco",
 		Description = {
-			"Talk to the Anniversary Tram Guide in the southern section of Lighthalzen and take the Tour in the Expo Fairground."
+			"Hunt down 20 Cocos to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Coco.",
+		Hunt1 = "Coco",
+		NpcName = "Hunting Board",
 	},
 	[70105] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Orc Warrior",
 		Description = {
-			"Continue to the Automated Tour guide near the Machine Building where the Technology Exhibit is taking place."
+			"Hunt down 20 Orc Warriors to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Orc Warrior.",
+		Hunt1 = "Orc Warrior",
+		NpcName = "Hunting Board",
 	},
 	[70106] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Orc Lady",
 		Description = {
-			"Check out the next Automated tour guide in front of the Rare Gem Exhibit to the south."
+			"Hunt down 20 Orc Ladys to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Orc Lady.",
+		Hunt1 = "Orc Lady",
+		NpcName = "Hunting Board",
 	},
 	[70107] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Caramel",
 		Description = {
-			"The automated tour continues at the Bazaar to the South of Old Morroc Castle."
+			"Hunt down 20 Caramels to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Caramel.",
+		Hunt1 = "Caramel",
+		NpcName = "Hunting Board",
 	},
 	[70108] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Orc Skeleton",
 		Description = {
-			"Travel to the Culturetorium leg of the tour to the Northwest."
+			"Hunt down 20 Orc Skeletons to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Orc Skeleton.",
+		Hunt1 = "Orc Skeleton",
+		NpcName = "Hunting Board",
 	},
 	[70109] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Zenorc",
 		Description = {
-			"Seek out the Eden Expo Representative near the Bar."
+			"Hunt down 20 Zenorcs to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Zenorc.",
+		Hunt1 = "Zenorc",
+		NpcName = "Hunting Board",
 	},
 	[70110] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Skeleton Worker",
 		Description = {
-			"Talk to the Commerce Guild Rep at the Bazaar."
+			"Hunt down 20 Skeleton Workers to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Skeleton Worker.",
+		Hunt1 = "Skeleton Worker",
+		NpcName = "Hunting Board",
 	},
 	[70111] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Myst",
 		Description = {
-			"Talk to the Commerce Guild Rep at the Bazaar."
+			"Hunt down 20 Mysts to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Myst.",
+		Hunt1 = "Myst",
+		NpcName = "Hunting Board",
 	},
 	[70112] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Nightmare",
 		Description = {
-			"Find more evidence to get the Commerce Guild Rep to confess."
+			"Hunt down 15 Nightmares to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Nightmare.",
+		Hunt1 = "Nightmare",
+		NpcName = "Hunting Board",
 	},
 	[70113] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Jakk",
 		Description = {
-			"Find more evidence of harassment."
+			"Hunt down 15 Jakks to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Jakk.",
+		Hunt1 = "Jakk",
+		NpcName = "Hunting Board",
 	},
 	[70114] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Deviruchi",
 		Description = {
-			"You need to find all the evidence of harassment. Talk to the Commerce Guild Rep when you have three pieces of evidence."
+			"Hunt down 15 Deviruchis to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Deviruchi.",
+		Hunt1 = "Deviruchi",
+		NpcName = "Hunting Board",
+	},
+	[70115] = {
+		Title = "Geffen Hunt: High Orc",
+		Description = {
+			"Hunt down 15 High Orcs to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 High Orc.",
+		Hunt1 = "High Orc",
+		NpcName = "Hunting Board",
 	},
 	[70116] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Raydric",
 		Description = {
-			"Talk to the Commerce Guild Rep Again"
+			"Hunt down 15 Raydrics to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Raydric.",
+		Hunt1 = "Raydric",
+		NpcName = "Hunting Board",
+	},
+	[70117] = {
+		Title = "Geffen Hunt: Evil Druid",
+		Description = {
+			"Hunt down 15 Evil Druids to complete the contract",
+			"and claim your Geffen Coins."
+		},
+		Summary = "Hunt 15 Evil Druid.",
+		Hunt1 = "Evil Druid",
+		NpcName = "Hunting Board",
 	},
 	[70118] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Sting",
 		Description = {
-			"Travel to Lighthalzen's slums and confront the Mobster Monsieur."
+			"Hunt down 15 Stings to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Sting.",
+		Hunt1 = "Sting",
+		NpcName = "Hunting Board",
 	},
 	[70119] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Abysmal Knight",
 		Description = {
-			"Tell the Commerce Guild Rep that you've defeated the Mob."
+			"Hunt down 10 Abysmal Knights to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 10 Abysmal Knight.",
+		Hunt1 = "Abysmal Knight",
+		NpcName = "Hunting Board",
 	},
 	[70120] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Toad",
 		Description = {
-			"Report the Commerce Guild's change of heart to the Expo Representative."
+			"Hunt down 1 Toads to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 1 Toad.",
+		Hunt1 = "Toad",
+		NpcName = "Hunting Board",
 	},
 	[70121] = {
-		Title = "Rune-Midgarts Exposition",
+		Title = "Geffen Hunt: Pouring",
 		Description = {
-			"Let Frau Beau know when you are ready to pick up a class quest."
+			"Hunt down 1 Pourings to complete the contract",
+			"and claim your Geffen Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 1 Pouring.",
+		Hunt1 = "Pouring",
+		NpcName = "Hunting Board",
 	},
-	[70122] = {
-		Title = "Rune-Midgarts Exposition",
+	-- Morroc Hunting Quests
+	[70201] = {
+		Title = "Morroc Hunt: Picky",
 		Description = {
-			"Class quest: speak to the indicated Expo attendee or representative."
+			"Hunt down 25 Pickys to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
-	},
-	[70123] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Investigate the castle, find a surviving guard"
-		},
-		Summary = ""
-	},
-	[70124] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Try to find a locked door where Mort and the others disappeared."
-		},
-		Summary = ""
-	},
-	[70125] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Go and return to the Injured Guard"
-		},
-		Summary = ""
-	},
-	[70126] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Bring 1 rope, 10 Hinale Leaflets and 3 Explosive Powders to the Injured Guard"
-		},
-		Summary = ""
-	},
-	[70127] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Set the explosive at the Locked Door."
-		},
-		Summary = ""
-	},
-	[70128] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Talk to the Injured Guard again."
-		},
-		Summary = ""
-	},
-	[70129] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Try to find the Master Key in Mort's Office in the East Wing of the Castle."
-		},
-		Summary = ""
-	},
-	[70130] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Report the invasion to the Expo Representative Frau Beau."
-		},
-		Summary = ""
-	},
-	[70131] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Talk to the Technology Rep at the Expo by the Machine Building."
-		},
-		Summary = ""
-	},
-	[70132] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Bring the Technology Rep 20 mole whiskers and 5 rusty screws"
-		},
-		Summary = ""
-	},
-	[70133] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Talk to the Head Gemologist at the Rare Gem exhibit"
-		},
-		Summary = ""
-	},
-	[70134] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Bring the Head Gemologist 1 ruby, 1 sapphire and 1 emerald"
-		},
-		Summary = ""
-	},
-	[70135] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Get a lens from the Culturetorium"
-		},
-		Summary = ""
-	},
-	[70136] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Talk to the camera seller at the Bazaar"
-		},
-		Summary = ""
-	},
-	[70137] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Go and take the lens to the Culture Rep"
-		},
-		Summary = ""
-	},
-	[70138] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Bring the device to the Expo Representative"
-		},
-		Summary = ""
-	},
-	[70139] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			""
-		},
-		Summary = ""
-	},
-	[70140] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Use the Astral Rejector device on the Cultist Lieutenant"
-		},
-		Summary = ""
-	},
-	[70141] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"Gather a party and enter the Castle's dungeon"
-		},
-		Summary = ""
-	},
-	[70142] = {
-		Title = "Rune-Midgarts Exposition",
-		Description = {
-			"You can re-enter the Cultist Basement after the timer has expired."
-		},
-		Summary = ""
-	},
-	[70143] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Continue your conversation with Tesco."
-		},
-		Summary = ""
-	},
-	[70144] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Talk to Tesco's Assistant out in Einbroch"
-		},
-		Summary = ""
-	},
-	[70145] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Continue your conversation with Tesco's assistant."
-		},
-		Summary = ""
-	},
-	[70146] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Bring 30 Large Jellopy, 20 Iron Ore and 5 Iron to Tesco's Assistant."
-		},
-		Summary = ""
-	},
-	[70147] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"The battery is charged so speak to Tesco's Assistant."
-		},
-		Summary = ""
-	},
-	[70148] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Take the battery to the Control Panel to the southwest area of Einbroch."
-		},
-		Summary = ""
-	},
-	[70149] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"You have collected the battery now bring it back to Tesco's Assistant."
-		},
-		Summary = ""
-	},
-	[70150] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Bring the battery to Tesco."
-		},
-		Summary = ""
-	},
-	[70151] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Talk to Tesco's courier at the western area of Einbroch."
-		},
-		Summary = ""
-	},
-	[70152] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Search for the Flag Beacon 1 at Lighthalzen Field 2"
-		},
-		Summary = ""
-	},
-	[70153] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Search for the Flag Beacon 2 at Lighthalzen Field 2"
-		},
-		Summary = ""
-	},
-	[70154] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Search for the Flag Beacon 3 at Lighthalzen Field 2"
-		},
-		Summary = ""
-	},
-	[70155] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Search for the Flag Beacon 4 at Lighthalzen Field 2"
-		},
-		Summary = ""
-	},
-	[70156] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Go back to the Expo Engineer at the Rune-Midgarts Exposition grounds."
-		},
-		Summary = ""
-	},
-	[70157] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Return to Frau Beau at the Rune-Midgarts Exposition."
-		},
-		Summary = ""
-	},
-	[70158] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find the terrible director that Madame West is complaining about near the center castle."
-		},
-		Summary = ""
-	},
-	[70159] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Search for Spellman's cinematographer Kuro Akirasawa."
-		},
-		Summary = ""
-	},
-	[70160] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find Samuel Jack Ellson and convince him to come back to the movie shoot."
-		},
-		Summary = ""
-	},
-	[70161] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Bring 3 Holy Waters to Sam J Ellson to help him protect himself during the filming."
-		},
-		Summary = ""
-	},
-	[70162] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Now that he feels safe, find Adime Pamidonna here at the exposition."
-		},
-		Summary = ""
-	},
-	[70163] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find and examine the stunt explosives from the film crew."
-		},
-		Summary = ""
-	},
-	[70164] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Ok, it's not exactly the safest but it won't defeat anyone... go back to Adime Pamidonna and reassure her..."
-		},
-		Summary = ""
-	},
-	[70165] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find Cage Whickerman and convince him to go back to the filming."
-		},
-		Summary = ""
-	},
-	[70166] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Bring 10 Apples to Cage Whickerman so he can charge his creative abilities."
-		},
-		Summary = ""
-	},
-	[70167] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Now that he's feeling better, go and tell Kuro Akirasawa that his cast is ready to film."
-		},
-		Summary = ""
-	},
-	[70168] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find the Spider in Comodo so you can \"steal\" the gems."
-		},
-		Summary = ""
-	},
-	[70169] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find the Secret safe of Mister Von Drebbin..."
-		},
-		Summary = ""
-	},
-	[70170] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Go back to The Spider and tell him that the safe is too difficult to open on your own."
-		},
-		Summary = ""
-	},
-	[70171] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Find the Master Locksmith at Comodo Field 2."
-		},
-		Summary = ""
-	},
-	[70172] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Now that you have what you need the Spider will help you crack the safe."
-		},
-		Summary = ""
-	},
-	[70173] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"You have successfully opened the safe. Regroup with The Spider at Comodo."
-		},
-		Summary = ""
-	},
-	[70174] = {
-		Title = "Rune-Midgarts Exposition: Class quest",
-		Description = {
-			"Go back to the Gem Collector at the Rune-Midgarts Exposition."
-		},
-		Summary = ""
+		Summary = "Hunt 25 Picky.",
+		Hunt1 = "Picky",
+		NpcName = "Hunting Board",
 	},
 	[70202] = {
-		Title = "Slot Machine Timer",
+		Title = "Morroc Hunt: Baby Desert Wolf",
 		Description = {
-			"Wait for the timer to expire to try again"
+			"Hunt down 25 Baby Desert Wolfs to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Baby Desert Wolf.",
+		Hunt1 = "Baby Desert Wolf",
+		NpcName = "Hunting Board",
 	},
 	[70203] = {
-		Title = "Claw Machine Timer",
+		Title = "Morroc Hunt: Drops",
 		Description = {
-			"Wait for the timer to expire to try again"
+			"Hunt down 25 Dropss to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Drops.",
+		Hunt1 = "Drops",
+		NpcName = "Hunting Board",
 	},
 	[70204] = {
-		Title = "Anniversary Timer",
+		Title = "Morroc Hunt: Muka",
 		Description = {
-			"Wait for the timer to expire to try again"
+			"Hunt down 25 Mukas to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Muka.",
+		Hunt1 = "Muka",
+		NpcName = "Hunting Board",
 	},
 	[70205] = {
-		Title = "Fishing Machine Timer",
+		Title = "Morroc Hunt: Peco Peco",
 		Description = {
-			"Wait for the timer to expire to try again"
+			"Hunt down 20 Peco Pecos to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Peco Peco.",
+		Hunt1 = "Peco Peco",
+		NpcName = "Hunting Board",
 	},
-	[70224] = {
-		Title = "Summer Sports Fencing Timer",
+	[70206] = {
+		Title = "Morroc Hunt: Zerom",
 		Description = {
-			"You must wait 3 hours before attempting to joust the famous Fencing Master. Though, if you give him 1 Eden Merit Badge he will let you skip waiting."
+			"Hunt down 20 Zeroms to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Zerom.",
+		Hunt1 = "Zerom",
+		NpcName = "Hunting Board",
 	},
-	[70225] = {
-		Title = "Summer Sports Punching Bag Timer",
+	[70207] = {
+		Title = "Morroc Hunt: Requiem",
 		Description = {
-			"You must weight 3 hours before attempting to test your strength. Though, if you have 1 Eden Merit Badge it will let you skip waiting."
+			"Hunt down 20 Requiems to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Requiem.",
+		Hunt1 = "Requiem",
+		NpcName = "Hunting Board",
 	},
-	[70226] = {
-		Title = "Summer Sports Obstacle Timer",
+	[70208] = {
+		Title = "Morroc Hunt: Hode",
 		Description = {
-			"You must wait 3 hours before attempting to tackle the obstacle course again. Though, if you have 1 Eden Merit Badge it will let you skip waiting."
+			"Hunt down 20 Hodes to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Hode.",
+		Hunt1 = "Hode",
+		NpcName = "Hunting Board",
 	},
-	[70231] = {
-		Title = "Back to School",
+	[70209] = {
+		Title = "Morroc Hunt: Frilldora",
 		Description = {
-			"You have begun the back to school quest"
+			"Hunt down 20 Frilldoras to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Frilldora.",
+		Hunt1 = "Frilldora",
+		NpcName = "Hunting Board",
 	},
-	[70232] = {
-		Title = "Back to School: Read the Manuel",
+	[70210] = {
+		Title = "Morroc Hunt: Mummy",
 		Description = {
-			"Camille says Manuel is refusing to goto school. You should talk to him and try to figure out why. He can be found near the monster Race Tracks"
+			"Hunt down 20 Mummys to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Mummy.",
+		Hunt1 = "Mummy",
+		NpcName = "Hunting Board",
 	},
-	[70233] = {
-		Title = "Back to School: Mrs. Farina knows best",
+	[70211] = {
+		Title = "Morroc Hunt: Verit",
 		Description = {
-			"Manuel says Franzie is bullying him at school. Better talk to his teacher north of the Grocery Store"
+			"Hunt down 20 Verits to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Verit.",
+		Hunt1 = "Verit",
+		NpcName = "Hunting Board",
 	},
-	[70234] = {
-		Title = "Back to School: Bingo was his name",
+	[70212] = {
+		Title = "Morroc Hunt: Marduk",
 		Description = {
-			"Mrs. Farina says the Headmaster won't let her deal with the problem. He is currently attending a fund raiser at the bingo hall."
+			"Hunt down 15 Marduks to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Marduk.",
+		Hunt1 = "Marduk",
+		NpcName = "Hunting Board",
 	},
-	[70235] = {
-		Title = "Back to School: Toy Store",
+	[70213] = {
+		Title = "Morroc Hunt: Pasana",
 		Description = {
-			"Headmaster Tanner is afraid of the Bully's family. You feel that confronting the bully directly may help the situation"
+			"Hunt down 15 Pasanas to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Pasana.",
+		Hunt1 = "Pasana",
+		NpcName = "Hunting Board",
 	},
-	[70236] = {
-		Title = "Back to School: Being a family man",
+	[70214] = {
+		Title = "Morroc Hunt: Minorous",
 		Description = {
-			"Franzie has declined your request. You should return to Headmaster Tanner"
+			"Hunt down 15 Minorouss to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Minorous.",
+		Hunt1 = "Minorous",
+		NpcName = "Hunting Board",
 	},
-	[70237] = {
-		Title = "Back to School: Uriel the Pure",
+	[70215] = {
+		Title = "Morroc Hunt: Isis",
 		Description = {
-			"Headmaster Tanner has invited you to participate in the Guard raid on the mobsters. Talk to Officer Uriel to help out"
+			"Hunt down 15 Isiss to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 15 Isis.",
+		Hunt1 = "Isis",
+		NpcName = "Hunting Board",
 	},
-	[70239] = {
-		Title = "Back to School: Investigations I",
+	[70216] = {
+		Title = "Morroc Hunt: Anubis",
 		Description = {
-			"Help Inspector Device investigate the chests."
+			"Hunt down 10 Anubiss to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 10 Anubis.",
+		Hunt1 = "Anubis",
+		NpcName = "Hunting Board",
 	},
-	[70240] = {
-		Title = "Back to School: Investigations II",
+	[70217] = {
+		Title = "Morroc Hunt: Ancient Mummy",
 		Description = {
-			"Help Inspector Device investigate the chests."
+			"Hunt down 10 Ancient Mummys to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 10 Ancient Mummy.",
+		Hunt1 = "Ancient Mummy",
+		NpcName = "Hunting Board",
 	},
-	[70241] = {
-		Title = "Back to School: Investigations III",
+	[70218] = {
+		Title = "Morroc Hunt: Dragon Fly",
 		Description = {
-			"Help Inspector Device investigate the chests."
+			"Hunt down 1 Dragon Flys to complete the contract",
+			"and claim your Morroc Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 1 Dragon Fly.",
+		Hunt1 = "Dragon Fly",
+		NpcName = "Hunting Board",
 	},
-	[70242] = {
-		Title = "Back to School: Investigations IV",
+	-- Payon Hunting Quests
+	[70301] = {
+		Title = "Payon Hunt: Willow",
 		Description = {
-			"Help Inspector Device investigate the chests."
+			"Hunt down 25 Willows to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Willow.",
+		Hunt1 = "Willow",
+		NpcName = "Hunting Board",
 	},
-	[70243] = {
-		Title = "Back to School: Return to Tanner",
+	[70302] = {
+		Title = "Payon Hunt: Spore",
 		Description = {
-			"Inspector Device has asked you to return to Headmaster Tanner with the good news."
+			"Hunt down 25 Spores to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Spore.",
+		Hunt1 = "Spore",
+		NpcName = "Hunting Board",
 	},
-	[70244] = {
-		Title = "Back to School: Safe to School",
+	[70303] = {
+		Title = "Payon Hunt: Familiar",
 		Description = {
-			"Find Manuel and let him know it is safe to return to school"
+			"Hunt down 25 Familiars to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Familiar.",
+		Hunt1 = "Familiar",
+		NpcName = "Hunting Board",
 	},
-	[70245] = {
-		Title = "Back to School Timer",
+	[70304] = {
+		Title = "Payon Hunt: Zombie",
 		Description = {
-			"You feel that Camille may have another request for you in 3 hours."
+			"Hunt down 25 Zombies to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Zombie.",
+		Hunt1 = "Zombie",
+		NpcName = "Hunting Board",
 	},
-	[70246] = {
-		Title = "Back to School Timer",
+	[70305] = {
+		Title = "Payon Hunt: Skeleton",
 		Description = {
-			"You can create a new plant after the timer has expired"
+			"Hunt down 25 Skeletons to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 25 Skeleton.",
+		Hunt1 = "Skeleton",
+		NpcName = "Hunting Board",
 	},
-	[70248] = {
-		Title = "Thanksgiving Feast",
+	[70306] = {
+		Title = "Payon Hunt: Wolf",
 		Description = {
-			"Uncle Jack wants Rotten Meat and Bacillus from the Roween and Anopheles east of Rachel"
+			"Hunt down 20 Wolfs to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Wolf.",
+		Hunt1 = "Wolf",
+		NpcName = "Hunting Board",
 	},
-	[70249] = {
-		Title = "Thanksgiving Feast",
+	[70307] = {
+		Title = "Payon Hunt: Bigfoot",
 		Description = {
-			"Mrs. Raven is looking for 30 Peco Peco Feathers that come from the Grand Peco Pecos"
+			"Hunt down 20 Bigfoots to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Bigfoot.",
+		Hunt1 = "Bigfoot",
+		NpcName = "Hunting Board",
 	},
-	[70250] = {
-		Title = "Raffler Cooldown",
+	[70308] = {
+		Title = "Payon Hunt: Munak",
 		Description = {
-			"Wait for the timer before purchasing another raffle ticket"
+			"Hunt down 20 Munaks to complete the contract",
+			"and claim your Payon Coins."
 		},
-		Summary = ""
+		Summary = "Hunt 20 Munak.",
+		Hunt1 = "Munak",
+		NpcName = "Hunting Board",
 	},
+	[70309] = {
+		Title = "Payon Hunt: Bongun",
+		Description = {
+			"Hunt down 20 Bonguns to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Bongun.",
+		Hunt1 = "Bongun",
+		NpcName = "Hunting Board",
+	},
+	[70310] = {
+		Title = "Payon Hunt: Sohee",
+		Description = {
+			"Hunt down 20 Sohees to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Sohee.",
+		Hunt1 = "Sohee",
+		NpcName = "Hunting Board",
+	},
+	[70311] = {
+		Title = "Payon Hunt: Archer Skeleton",
+		Description = {
+			"Hunt down 20 Archer Skeletons to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Archer Skeleton.",
+		Hunt1 = "Archer Skeleton",
+		NpcName = "Hunting Board",
+	},
+	[70312] = {
+		Title = "Payon Hunt: Dokebi",
+		Description = {
+			"Hunt down 20 Dokebis to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 20 Dokebi.",
+		Hunt1 = "Dokebi",
+		NpcName = "Hunting Board",
+	},
+	[70313] = {
+		Title = "Payon Hunt: Nine Tail",
+		Description = {
+			"Hunt down 15 Nine Tails to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 15 Nine Tail.",
+		Hunt1 = "Nine Tail",
+		NpcName = "Hunting Board",
+	},
+	[70314] = {
+		Title = "Payon Hunt: Dragon Tail",
+		Description = {
+			"Hunt down 15 Dragon Tails to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 15 Dragon Tail.",
+		Hunt1 = "Dragon Tail",
+		NpcName = "Hunting Board",
+	},
+	[70315] = {
+		Title = "Payon Hunt: Skeleton General",
+		Description = {
+			"Hunt down 10 Skeleton Generals to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 10 Skeleton General.",
+		Hunt1 = "Skeleton General",
+		NpcName = "Hunting Board",
+	},
+	[70316] = {
+		Title = "Payon Hunt: Vagabond Wolf",
+		Description = {
+			"Hunt down 1 Vagabond Wolfs to complete the contract",
+			"and claim your Payon Coins."
+		},
+		Summary = "Hunt 1 Vagabond Wolf.",
+		Hunt1 = "Vagabond Wolf",
+		NpcName = "Hunting Board",
+	},
+
+	-- Aldebaran Hunting Quests
+	[70401] = {
+		Title = "Aldebaran Hunt: Thief Bug Female",
+		Description = {
+			"Hunt down 25 Thief Bug Females to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 25 Thief Bug Female.",
+		Hunt1 = "Thief Bug Female",
+		NpcName = "Hunting Board",
+	},
+	[70402] = {
+		Title = "Aldebaran Hunt: Dustiness",
+		Description = {
+			"Hunt down 25 Dustiness to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 25 Dustiness.",
+		Hunt1 = "Dustiness",
+		NpcName = "Hunting Board",
+	},
+	[70403] = {
+		Title = "Aldebaran Hunt: Argos",
+		Description = {
+			"Hunt down 25 Argos to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 25 Argos.",
+		Hunt1 = "Argos",
+		NpcName = "Hunting Board",
+	},
+	[70404] = {
+		Title = "Aldebaran Hunt: Flora",
+		Description = {
+			"Hunt down 25 Floras to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 25 Flora.",
+		Hunt1 = "Flora",
+		NpcName = "Hunting Board",
+	},
+	[70405] = {
+		Title = "Aldebaran Hunt: Stem Worm",
+		Description = {
+			"Hunt down 20 Stem Worms to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 20 Stem Worm.",
+		Hunt1 = "Stem Worm",
+		NpcName = "Hunting Board",
+	},
+	[70406] = {
+		Title = "Aldebaran Hunt: Argiope",
+		Description = {
+			"Hunt down 20 Argiopes to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 20 Argiope.",
+		Hunt1 = "Argiope",
+		NpcName = "Hunting Board",
+	},
+	[70407] = {
+		Title = "Aldebaran Hunt: Earth Petite",
+		Description = {
+			"Hunt down 20 Earth Petites to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 20 Earth Petite.",
+		Hunt1 = "Earth Petite",
+		NpcName = "Hunting Board",
+	},
+	[70408] = {
+		Title = "Aldebaran Hunt: Bathory",
+		Description = {
+			"Hunt down 20 Bathorys to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 20 Bathory.",
+		Hunt1 = "Bathory",
+		NpcName = "Hunting Board",
+	},
+	[70409] = {
+		Title = "Aldebaran Hunt: Punk",
+		Description = {
+			"Hunt down 20 Punks to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 20 Punk.",
+		Hunt1 = "Punk",
+		NpcName = "Hunting Board",
+	},
+	[70410] = {
+		Title = "Aldebaran Hunt: Grand Peco",
+		Description = {
+			"Hunt down 15 Grand Pecos to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 15 Grand Peco.",
+		Hunt1 = "Grand Peco",
+		NpcName = "Hunting Board",
+	},
+	[70411] = {
+		Title = "Aldebaran Hunt: Rideword",
+		Description = {
+			"Hunt down 15 Ridewords to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 15 Rideword.",
+		Hunt1 = "Rideword",
+		NpcName = "Hunting Board",
+	},
+	[70412] = {
+		Title = "Aldebaran Hunt: Alarm",
+		Description = {
+			"Hunt down 15 Alarms to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 15 Alarm.",
+		Hunt1 = "Alarm",
+		NpcName = "Hunting Board",
+	},
+	[70413] = {
+		Title = "Aldebaran Hunt: Clock",
+		Description = {
+			"Hunt down 15 Clocks to complete the contract",
+			"and claim your Aldebaran Coins."
+		},
+		Summary = "Hunt 15 Clock.",
+		Hunt1 = "Clock",
+		NpcName = "Hunting Board",
+	},
+	-- Comodo Hunting Quests
+	[70501] = {
+		Title = "Comodo Hunt: Shellfish",
+		Description = {
+			"Hunt down 25 Shellfish to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 25 Shellfish.",
+		Hunt1 = "Shellfish",
+		NpcName = "Hunting Board",
+	},
+	[70502] = {
+		Title = "Comodo Hunt: Crab",
+		Description = {
+			"Hunt down 25 Crabs to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 25 Crab.",
+		Hunt1 = "Crab",
+		NpcName = "Hunting Board",
+	},
+	[70503] = {
+		Title = "Comodo Hunt: Raggler",
+		Description = {
+			"Hunt down 25 Ragglers to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 25 Raggler.",
+		Hunt1 = "Raggler",
+		NpcName = "Hunting Board",
+	},
+	[70504] = {
+		Title = "Comodo Hunt: Thara Frog",
+		Description = {
+			"Hunt down 20 Thara Frogs to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 20 Thara Frog.",
+		Hunt1 = "Thara Frog",
+		NpcName = "Hunting Board",
+	},
+	[70505] = {
+		Title = "Comodo Hunt: Megalodon",
+		Description = {
+			"Hunt down 20 Megalodons to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 20 Megalodon.",
+		Hunt1 = "Megalodon",
+		NpcName = "Hunting Board",
+	},
+	[70506] = {
+		Title = "Comodo Hunt: Tri Joint",
+		Description = {
+			"Hunt down 20 Tri Joints to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 20 Tri Joint.",
+		Hunt1 = "Tri Joint",
+		NpcName = "Hunting Board",
+	},
+	[70507] = {
+		Title = "Comodo Hunt: Pest",
+		Description = {
+			"Hunt down 20 Pests to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 20 Pest.",
+		Hunt1 = "Pest",
+		NpcName = "Hunting Board",
+	},
+	[70508] = {
+		Title = "Comodo Hunt: Nereid",
+		Description = {
+			"Hunt down 20 Nereids to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 20 Nereid.",
+		Hunt1 = "Nereid",
+		NpcName = "Hunting Board",
+	},
+	[70509] = {
+		Title = "Comodo Hunt: Alligator",
+		Description = {
+			"Hunt down 20 Alligators to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 20 Alligator.",
+		Hunt1 = "Alligator",
+		NpcName = "Hunting Board",
+	},
+	[70510] = {
+		Title = "Comodo Hunt: Sea Otter",
+		Description = {
+			"Hunt down 15 Sea Otters to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 15 Sea Otter.",
+		Hunt1 = "Sea Otter",
+		NpcName = "Hunting Board",
+	},
+	[70511] = {
+		Title = "Comodo Hunt: Galapago",
+		Description = {
+			"Hunt down 15 Galapagos to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 15 Galapago.",
+		Hunt1 = "Galapago",
+		NpcName = "Hunting Board",
+	},
+	[70512] = {
+		Title = "Comodo Hunt: Fur Seal",
+		Description = {
+			"Hunt down 15 Fur Seals to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 15 Fur Seal.",
+		Hunt1 = "Fur Seal",
+		NpcName = "Hunting Board",
+	},
+	[70513] = {
+		Title = "Comodo Hunt: Megalith",
+		Description = {
+			"Hunt down 15 Megaliths to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 15 Megalith.",
+		Hunt1 = "Megalith",
+		NpcName = "Hunting Board",
+	},
+	[70514] = {
+		Title = "Comodo Hunt: Stalactic Golem",
+		Description = {
+			"Hunt down 10 Stalactic Golems to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 10 Stalactic Golem.",
+		Hunt1 = "Stalactic Golem",
+		NpcName = "Hunting Board",
+	},
+	[70515] = {
+		Title = "Comodo Hunt: Anolian",
+		Description = {
+			"Hunt down 10 Anolians to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 10 Anolian.",
+		Hunt1 = "Anolian",
+		NpcName = "Hunting Board",
+	},
+	[70516] = {
+		Title = "Comodo Hunt: Mobster",
+		Description = {
+			"Hunt down 10 Mobsters to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 10 Mobster.",
+		Hunt1 = "Mobster",
+		NpcName = "Hunting Board",
+	},
+	[70517] = {
+		Title = "Comodo Hunt: Medusa",
+		Description = {
+			"Hunt down 10 Medusas to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 10 Medusa.",
+		Hunt1 = "Medusa",
+		NpcName = "Hunting Board",
+	},
+	[70518] = {
+		Title = "Comodo Hunt: Mutant Dragon",
+		Description = {
+			"Hunt down 1 Mutant Dragons to complete the contract",
+			"and claim your Comodo Coins."
+		},
+		Summary = "Hunt 1 Mutant Dragon.",
+		Hunt1 = "Mutant Dragon",
+		NpcName = "Hunting Board",
+	},
+	-- Umbala Hunting Quests
+	[70601] = {
+		Title = "Umbala Hunt: Horn",
+		Description = {
+			"Hunt down 25 Horns to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 25 Horn.",
+		Hunt1 = "Horn",
+		NpcName = "Hunting Board",
+	},
+	[70602] = {
+		Title = "Umbala Hunt: Wootan Shooter",
+		Description = {
+			"Hunt down 20 Wootan Shooters to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 20 Wootan Shooter.",
+		Hunt1 = "Wootan Shooter",
+		NpcName = "Hunting Board",
+	},
+	[70603] = {
+		Title = "Umbala Hunt: Wootan Fighter",
+		Description = {
+			"Hunt down 20 Wootan Fighters to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 20 Wootan Fighter.",
+		Hunt1 = "Wootan Fighter",
+		NpcName = "Hunting Board",
+	},
+	[70604] = {
+		Title = "Umbala Hunt: Stone Shooter",
+		Description = {
+			"Hunt down 20 Stone Shooters to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 20 Stone Shooter.",
+		Hunt1 = "Stone Shooter",
+		NpcName = "Hunting Board",
+	},
+	[70605] = {
+		Title = "Umbala Hunt: Parasite",
+		Description = {
+			"Hunt down 20 Parasites to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 20 Parasite.",
+		Hunt1 = "Parasite",
+		NpcName = "Hunting Board",
+	},
+	[70606] = {
+		Title = "Umbala Hunt: Choco",
+		Description = {
+			"Hunt down 20 Chocos to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 20 Choco.",
+		Hunt1 = "Choco",
+		NpcName = "Hunting Board",
+	},
+	[70607] = {
+		Title = "Umbala Hunt: Wooden Golem",
+		Description = {
+			"Hunt down 15 Wooden Golems to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 15 Wooden Golem.",
+		Hunt1 = "Wooden Golem",
+		NpcName = "Hunting Board",
+	},
+	[70608] = {
+		Title = "Umbala Hunt: Dryad",
+		Description = {
+			"Hunt down 15 Dryads to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 15 Dryad.",
+		Hunt1 = "Dryad",
+		NpcName = "Hunting Board",
+	},
+	[70609] = {
+		Title = "Umbala Hunt: Gryphon",
+		Description = {
+			"Hunt down 1 Gryphons to complete the contract",
+			"and claim your Umbala Coins."
+		},
+		Summary = "Hunt 1 Gryphon.",
+		Hunt1 = "Gryphon",
+		NpcName = "Hunting Board",
+	},
+	-- Hugel Hunting Quests
+	[70701] = {
+		Title = "Hugel Hunt: Dragon Egg",
+		Description = {
+			"Hunt down 20 Dragon Eggs to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 20 Dragon Egg.",
+		Hunt1 = "Dragon Egg",
+		NpcName = "Hunting Board",
+	},
+	[70702] = {
+		Title = "Hugel Hunt: Sky Petite",
+		Description = {
+			"Hunt down 20 Sky Petites to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 20 Sky Petite.",
+		Hunt1 = "Sky Petite",
+		NpcName = "Hunting Board",
+	},
+	[70703] = {
+		Title = "Hugel Hunt: Yellow Novus",
+		Description = {
+			"Hunt down 20 Yellow Novus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 20 Yellow Novus.",
+		Hunt1 = "Yellow Novus",
+		NpcName = "Hunting Board",
+	},
+	[70704] = {
+		Title = "Hugel Hunt: Red Novus",
+		Description = {
+			"Hunt down 20 Red Novus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 20 Red Novus.",
+		Hunt1 = "Red Novus",
+		NpcName = "Hunting Board",
+	},
+	[70705] = {
+		Title = "Hugel Hunt: Breeze",
+		Description = {
+			"Hunt down 15 Breezes to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Breeze.",
+		Hunt1 = "Breeze",
+		NpcName = "Hunting Board",
+	},
+	[70706] = {
+		Title = "Hugel Hunt: Grove",
+		Description = {
+			"Hunt down 15 Groves to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Grove.",
+		Hunt1 = "Grove",
+		NpcName = "Hunting Board",
+	},
+	[70707] = {
+		Title = "Hugel Hunt: Green Ferus",
+		Description = {
+			"Hunt down 15 Green Ferus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Green Ferus.",
+		Hunt1 = "Green Ferus",
+		NpcName = "Hunting Board",
+	},
+	[70708] = {
+		Title = "Hugel Hunt: Red Ferus",
+		Description = {
+			"Hunt down 15 Red Ferus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Red Ferus.",
+		Hunt1 = "Red Ferus",
+		NpcName = "Hunting Board",
+	},
+	[70709] = {
+		Title = "Hugel Hunt: Frus",
+		Description = {
+			"Hunt down 15 Frus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Frus.",
+		Hunt1 = "Frus",
+		NpcName = "Hunting Board",
+	},
+	[70710] = {
+		Title = "Hugel Hunt: Skogul",
+		Description = {
+			"Hunt down 15 Skoguls to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Skogul.",
+		Hunt1 = "Skogul",
+		NpcName = "Hunting Board",
+	},
+	[70711] = {
+		Title = "Hugel Hunt: Deathword",
+		Description = {
+			"Hunt down 15 Deathwords to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Deathword.",
+		Hunt1 = "Deathword",
+		NpcName = "Hunting Board",
+	},
+	[70712] = {
+		Title = "Hugel Hunt: Ancient Mimic",
+		Description = {
+			"Hunt down 15 Ancient Mimics to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Ancient Mimic.",
+		Hunt1 = "Ancient Mimic",
+		NpcName = "Hunting Board",
+	},
+	[70713] = {
+		Title = "Hugel Hunt: Alice",
+		Description = {
+			"Hunt down 15 Alices to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Alice.",
+		Hunt1 = "Alice",
+		NpcName = "Hunting Board",
+	},
+	[70714] = {
+		Title = "Hugel Hunt: Elder",
+		Description = {
+			"Hunt down 15 Elders to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 15 Elder.",
+		Hunt1 = "Elder",
+		NpcName = "Hunting Board",
+	},
+	[70715] = {
+		Title = "Hugel Hunt: Blue Acidus",
+		Description = {
+			"Hunt down 10 Blue Acidus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Blue Acidus.",
+		Hunt1 = "Blue Acidus",
+		NpcName = "Hunting Board",
+	},
+	[70716] = {
+		Title = "Hugel Hunt: Gold Acidus",
+		Description = {
+			"Hunt down 10 Gold Acidus to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Gold Acidus.",
+		Hunt1 = "Gold Acidus",
+		NpcName = "Hunting Board",
+	},
+	[70717] = {
+		Title = "Hugel Hunt: Retribution",
+		Description = {
+			"Hunt down 10 Retributions to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Retribution.",
+		Hunt1 = "Retribution",
+		NpcName = "Hunting Board",
+	},
+	[70718] = {
+		Title = "Hugel Hunt: Solace",
+		Description = {
+			"Hunt down 10 Solaces to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Solace.",
+		Hunt1 = "Solace",
+		NpcName = "Hunting Board",
+	},
+	[70719] = {
+		Title = "Hugel Hunt: Mistress of Shelter",
+		Description = {
+			"Hunt down 10 Mistress of Shelters to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Mistress of Shelter.",
+		Hunt1 = "Mistress of Shelter",
+		NpcName = "Hunting Board",
+	},
+	[70720] = {
+		Title = "Hugel Hunt: Observation",
+		Description = {
+			"Hunt down 10 Observations to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Observation.",
+		Hunt1 = "Observation",
+		NpcName = "Hunting Board",
+	},
+	[70721] = {
+		Title = "Hugel Hunt: Owl Duke",
+		Description = {
+			"Hunt down 10 Owl Dukes to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Owl Duke.",
+		Hunt1 = "Owl Duke",
+		NpcName = "Hunting Board",
+	},
+	[70722] = {
+		Title = "Hugel Hunt: Owl Baron",
+		Description = {
+			"Hunt down 10 Owl Barons to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 10 Owl Baron.",
+		Hunt1 = "Owl Baron",
+		NpcName = "Hunting Board",
+	},
+	[70723] = {
+		Title = "Hugel Hunt: Hydrolancer",
+		Description = {
+			"Hunt down 1 Hydrolancers to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 1 Hydrolancer.",
+		Hunt1 = "Hydrolancer",
+		NpcName = "Hunting Board",
+	},
+	[70724] = {
+		Title = "Hugel Hunt: Valkyrie",
+		Description = {
+			"Hunt down 1 Valkyries to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 1 Valkyrie.",
+		Hunt1 = "Valkyrie",
+		NpcName = "Hunting Board",
+	},
+	[70725] = {
+		Title = "Hugel Hunt: Thanatos Despero",
+		Description = {
+			"Hunt down 1 Thanatos Despero to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 1 Thanatos Despero.",
+		Hunt1 = "Thanatos Despero",
+		NpcName = "Hunting Board",
+	},
+	[70726] = {
+		Title = "Hugel Hunt: Thanatos Maero",
+		Description = {
+			"Hunt down 1 Thanatos Maero to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 1 Thanatos Maero.",
+		Hunt1 = "Thanatos Maero",
+		NpcName = "Hunting Board",
+	},
+	[70727] = {
+		Title = "Hugel Hunt: Thanatos Dolor",
+		Description = {
+			"Hunt down 1 Thanatos Dolor to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 1 Thanatos Dolor.",
+		Hunt1 = "Thanatos Dolor",
+		NpcName = "Hunting Board",
+	},
+	[70728] = {
+		Title = "Hugel Hunt: Thanatos Odium",
+		Description = {
+			"Hunt down 1 Thanatos Odium to complete the contract",
+			"and claim your Hugel Coins."
+		},
+		Summary = "Hunt 1 Thanatos Odium.",
+		Hunt1 = "Thanatos Odium",
+		NpcName = "Hunting Board",
+	},
+	-- Yuno Hunting Quests
+	[70801] = {
+		Title = "Yuno Hunt: Condor",
+		Description = {
+			"Hunt down 25 Condors to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 25 Condor.",
+		Hunt1 = "Condor",
+		NpcName = "Hunting Board",
+	},	[70802] = {
+		Title = "Yuno Hunt: Rafflesia",
+		Description = {
+			"Hunt down 25 Rafflesias to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 25 Rafflesia.",
+		Hunt1 = "Rafflesia",
+		NpcName = "Hunting Board",
+	},	[70803] = {
+		Title = "Yuno Hunt: Stainer",
+		Description = {
+			"Hunt down 25 Stainers to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 25 Stainer.",
+		Hunt1 = "Stainer",
+		NpcName = "Hunting Board",
+	},	[70804] = {
+		Title = "Yuno Hunt: Blazer",
+		Description = {
+			"Hunt down 20 Blazers to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 20 Blazer.",
+		Hunt1 = "Blazer",
+		NpcName = "Hunting Board",
+	},	[70805] = {
+		Title = "Yuno Hunt: Explosion",
+		Description = {
+			"Hunt down 20 Explosions to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 20 Explosion.",
+		Hunt1 = "Explosion",
+		NpcName = "Hunting Board",
+	},	[70806] = {
+		Title = "Yuno Hunt: Geographer",
+		Description = {
+			"Hunt down 15 Geographers to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Geographer.",
+		Hunt1 = "Geographer",
+		NpcName = "Hunting Board",
+	},	[70807] = {
+		Title = "Yuno Hunt: Goat",
+		Description = {
+			"Hunt down 15 Goats to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Goat.",
+		Hunt1 = "Goat",
+		NpcName = "Hunting Board",
+	},	[70808] = {
+		Title = "Yuno Hunt: Sleeper",
+		Description = {
+			"Hunt down 15 Sleepers to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Sleeper.",
+		Hunt1 = "Sleeper",
+		NpcName = "Hunting Board",
+	},	[70809] = {
+		Title = "Yuno Hunt: Harpy",
+		Description = {
+			"Hunt down 15 Harpies to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Harpy.",
+		Hunt1 = "Harpy",
+		NpcName = "Hunting Board",
+	},	[70810] = {
+		Title = "Yuno Hunt: Kaho",
+		Description = {
+			"Hunt down 15 Kahos to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Kaho.",
+		Hunt1 = "Kaho",
+		NpcName = "Hunting Board",
+	},	[70811] = {
+		Title = "Yuno Hunt: Grizzly",
+		Description = {
+			"Hunt down 15 Grizzlies to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Grizzly.",
+		Hunt1 = "Grizzly",
+		NpcName = "Hunting Board",
+	},	[70812] = {
+		Title = "Yuno Hunt: Gig",
+		Description = {
+			"Hunt down 15 Gigs to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Gig.",
+		Hunt1 = "Gig",
+		NpcName = "Hunting Board",
+	},	[70813] = {
+		Title = "Yuno Hunt: Earth Deleter",
+		Description = {
+			"Hunt down 15 Earth Deleters to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Earth Deleter.",
+		Hunt1 = "Earth Deleter",
+		NpcName = "Hunting Board",
+	},	[70814] = {
+		Title = "Yuno Hunt: Sky Deleter",
+		Description = {
+			"Hunt down 15 Sky Deleters to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Sky Deleter.",
+		Hunt1 = "Sky Deleter",
+		NpcName = "Hunting Board",
+	},	[70815] = {
+		Title = "Yuno Hunt: Diabolic",
+		Description = {
+			"Hunt down 15 Diabolics to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Diabolic.",
+		Hunt1 = "Diabolic",
+		NpcName = "Hunting Board",
+	},	[70816] = {
+		Title = "Yuno Hunt: Constant",
+		Description = {
+			"Hunt down 15 Constants to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Constant.",
+		Hunt1 = "Constant",
+		NpcName = "Hunting Board",
+	},	[70817] = {
+		Title = "Yuno Hunt: Aliza",
+		Description = {
+			"Hunt down 15 Alizas to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Aliza.",
+		Hunt1 = "Aliza",
+		NpcName = "Hunting Board",
+	},	[70818] = {
+		Title = "Yuno Hunt: Apocalypse",
+		Description = {
+			"Hunt down 15 Apocalypses to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Apocalypse.",
+		Hunt1 = "Apocalypse",
+		NpcName = "Hunting Board",
+	},	[70819] = {
+		Title = "Yuno Hunt: Venatu",
+		Description = {
+			"Hunt down 15 Venatus to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 15 Venatu.",
+		Hunt1 = "Venatu",
+		NpcName = "Hunting Board",
+	},	[70820] = {
+		Title = "Yuno Hunt: Lava Golem",
+		Description = {
+			"Hunt down 10 Lava Golems to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 10 Lava Golem.",
+		Hunt1 = "Lava Golem",
+		NpcName = "Hunting Board",
+	},	[70821] = {
+		Title = "Yuno Hunt: Nightmare Terror",
+		Description = {
+			"Hunt down 10 Nightmare Terrors to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 10 Nightmare Terror.",
+		Hunt1 = "Nightmare Terror",
+		NpcName = "Hunting Board",
+	},	[70822] = {
+		Title = "Yuno Hunt: Alicel",
+		Description = {
+			"Hunt down 10 Alicels to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 10 Alicel.",
+		Hunt1 = "Alicel",
+		NpcName = "Hunting Board",
+	},	[70823] = {
+		Title = "Yuno Hunt: Aliot",
+		Description = {
+			"Hunt down 10 Aliots to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 10 Aliot.",
+		Hunt1 = "Aliot",
+		NpcName = "Hunting Board",
+	},	[70824] = {
+		Title = "Yuno Hunt: Dimik",
+		Description = {
+			"Hunt down 10 Dimiks to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 10 Dimik.",
+		Hunt1 = "Dimik",
+		NpcName = "Hunting Board",
+	},	[70825] = {
+		Title = "Yuno Hunt: Archdam",
+		Description = {
+			"Hunt down 10 Archdams to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 10 Archdam.",
+		Hunt1 = "Archdam",
+		NpcName = "Hunting Board",
+	},	[70826] = {
+		Title = "Yuno Hunt: Angeling",
+		Description = {
+			"Hunt down 1 Angeling to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 1 Angeling.",
+		Hunt1 = "Angeling",
+		NpcName = "Hunting Board",
+	},	[70827] = {
+		Title = "Yuno Hunt: Deviling",
+		Description = {
+			"Hunt down 1 Deviling to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 1 Deviling.",
+		Hunt1 = "Deviling",
+		NpcName = "Hunting Board",
+	},	[70828] = {
+		Title = "Yuno Hunt: Archangeling",
+		Description = {
+			"Hunt down 1 Archangeling to complete the contract",
+			"and claim your Yuno Coins."
+		},
+		Summary = "Hunt 1 Archangeling.",
+		Hunt1 = "Archangeling",
+		NpcName = "Hunting Board",
+	},
+	-- Niflheim Hunting Quests
+	[70901] = {
+		Title = "Niflheim Hunt: Lude",
+		Description = {
+			"Hunt down 20 Ludes to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 20 Lude.",
+		Hunt1 = "Lude",
+		NpcName = "Hunting Board",
+	},	[70902] = {
+		Title = "Niflheim Hunt: Quve",
+		Description = {
+			"Hunt down 20 Quves to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 20 Quve.",
+		Hunt1 = "Quve",
+		NpcName = "Hunting Board",
+	},	[70903] = {
+		Title = "Niflheim Hunt: Hylozoist",
+		Description = {
+			"Hunt down 15 Hylozoists to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 15 Hylozoist.",
+		Hunt1 = "Hylozoist",
+		NpcName = "Hunting Board",
+	},	[70904] = {
+		Title = "Niflheim Hunt: Disguise",
+		Description = {
+			"Hunt down 15 Disguises to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 15 Disguise.",
+		Hunt1 = "Disguise",
+		NpcName = "Hunting Board",
+	},	[70905] = {
+		Title = "Niflheim Hunt: Gibbet",
+		Description = {
+			"Hunt down 15 Gibbets to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 15 Gibbet.",
+		Hunt1 = "Gibbet",
+		NpcName = "Hunting Board",
+	},	[70906] = {
+		Title = "Niflheim Hunt: Dullahan",
+		Description = {
+			"Hunt down 15 Dullahans to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 15 Dullahan.",
+		Hunt1 = "Dullahan",
+		NpcName = "Hunting Board",
+	},	[70907] = {
+		Title = "Niflheim Hunt: Loli Ruri",
+		Description = {
+			"Hunt down 10 Loli Ruris to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 10 Loli Ruri.",
+		Hunt1 = "Loli Ruri",
+		NpcName = "Hunting Board",
+	},	[70908] = {
+		Title = "Niflheim Hunt: Bloody Murderer",
+		Description = {
+			"Hunt down 10 Bloody Murderers to complete the contract",
+			"and claim your Niflheim Coins."
+		},
+		Summary = "Hunt 10 Bloody Murderer.",
+		Hunt1 = "Bloody Murderer",
+		NpcName = "Hunting Board",
+	},
+	-- Lutie Hunting Quests
+	[71001] = {
+		Title = "Lutie Hunt: Marin",
+		Description = {
+			"Hunt down 25 Marins to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 25 Marin.",
+		Hunt1 = "Marin",
+		NpcName = "Hunting Board",
+	},	[71002] = {
+		Title = "Lutie Hunt: Cookie",
+		Description = {
+			"Hunt down 25 Cookies to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 25 Cookie.",
+		Hunt1 = "Cookie",
+		NpcName = "Hunting Board",
+	},	[71003] = {
+		Title = "Lutie Hunt: Christmas Cookie",
+		Description = {
+			"Hunt down 20 Christmas Cookies to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 20 Christmas Cookie.",
+		Hunt1 = "Christmas Cookie",
+		NpcName = "Hunting Board",
+	},	[71004] = {
+		Title = "Lutie Hunt: Sasquatch",
+		Description = {
+			"Hunt down 20 Sasquatches to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 20 Sasquatch.",
+		Hunt1 = "Sasquatch",
+		NpcName = "Hunting Board",
+	},	[71005] = {
+		Title = "Lutie Hunt: Cruiser",
+		Description = {
+			"Hunt down 20 Cruisers to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 20 Cruiser.",
+		Hunt1 = "Cruiser",
+		NpcName = "Hunting Board",
+	},	[71006] = {
+		Title = "Lutie Hunt: Myst Case",
+		Description = {
+			"Hunt down 20 Myst Cases to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 20 Myst Case.",
+		Hunt1 = "Myst Case",
+		NpcName = "Hunting Board",
+	},	[71007] = {
+		Title = "Lutie Hunt: Chepet",
+		Description = {
+			"Hunt down 1 Chepets to complete the contract",
+			"and claim your Lutie Coins."
+		},
+		Summary = "Hunt 1 Chepet.",
+		Hunt1 = "Chepet",
+		NpcName = "Hunting Board",
+	},
+
+	-- Alberta Hunting Quests
+	[71101] = {
+		Title = "Alberta Hunt: Pupa",
+		Description = {
+			"Hunt down 25 Pupas to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Pupa.",
+		Hunt1 = "Pupa",
+		NpcName = "Hunting Board",
+	},
+	[71102] = {
+		Title = "Alberta Hunt: Wormtail",
+		Description = {
+			"Hunt down 25 Wormtails to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Wormtail.",
+		Hunt1 = "Wormtail",
+		NpcName = "Hunting Board",
+	},
+	[71103] = {
+		Title = "Alberta Hunt: Hydra",
+		Description = {
+			"Hunt down 25 Hydras to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Hydra.",
+		Hunt1 = "Hydra",
+		NpcName = "Hunting Board",
+	},
+	[71104] = {
+		Title = "Alberta Hunt: Kukre",
+		Description = {
+			"Hunt down 25 Kukres to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Kukre.",
+		Hunt1 = "Kukre",
+		NpcName = "Hunting Board",
+	},
+	[71105] = {
+		Title = "Alberta Hunt: Pirate Skeleton",
+		Description = {
+			"Hunt down 20 Pirate Skeletons to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Pirate Skeleton.",
+		Hunt1 = "Pirate Skeleton",
+		NpcName = "Hunting Board",
+	},
+	[71106] = {
+		Title = "Alberta Hunt: Whisper",
+		Description = {
+			"Hunt down 20 Whispers to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Whisper.",
+		Hunt1 = "Whisper",
+		NpcName = "Hunting Board",
+	},
+	[71107] = {
+		Title = "Alberta Hunt: Spring Rabbit",
+		Description = {
+			"Hunt down 20 Spring Rabbits to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Spring Rabbit.",
+		Hunt1 = "Spring Rabbit",
+		NpcName = "Hunting Board",
+	},
+	[71108] = {
+		Title = "Alberta Hunt: Penomena",
+		Description = {
+			"Hunt down 20 Penomenas to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Penomena.",
+		Hunt1 = "Penomena",
+		NpcName = "Hunting Board",
+	},
+	[71109] = {
+		Title = "Alberta Hunt: Permeter",
+		Description = {
+			"Hunt down 20 Permeters to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Permeter.",
+		Hunt1 = "Permeter",
+		NpcName = "Hunting Board",
+	},
+	[71110] = {
+		Title = "Alberta Hunt: Solider",
+		Description = {
+			"Hunt down 20 Soliders to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Solider.",
+		Hunt1 = "Solider",
+		NpcName = "Hunting Board",
+	},
+	[71111] = {
+		Title = "Alberta Hunt: Freezer",
+		Description = {
+			"Hunt down 20 Freezers to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Freezer.",
+		Hunt1 = "Freezer",
+		NpcName = "Hunting Board",
+	},
+	[71112] = {
+		Title = "Alberta Hunt: Assaulter",
+		Description = {
+			"Hunt down 15 Assaulters to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 15 Assaulter.",
+		Hunt1 = "Assaulter",
+		NpcName = "Hunting Board",
+	},
+	[71113] = {
+		Title = "Alberta Hunt: Heater",
+		Description = {
+			"Hunt down 15 Heaters to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 15 Heater.",
+		Hunt1 = "Heater",
+		NpcName = "Hunting Board",
+	},
+	[71114] = {
+		Title = "Alberta Hunt: Ghostring",
+		Description = {
+			"Hunt down 1 Ghostring to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 1 Ghostring.",
+		Hunt1 = "Ghostring",
+		NpcName = "Hunting Board",
+	},
+	-- Einbroch Hunting Quests
+	[71201] = {
+		Title = "Einbroch Hunt: Anopheles",
+		Description = {
+			"Hunt down 20 Anopheles to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Anopheles.",
+		Hunt1 = "Anopheles",
+		NpcName = "Hunting Board",
+	},
+	[71202] = {
+		Title = "Einbroch Hunt: Metaling",
+		Description = {
+			"Hunt down 20 Metalings to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Metaling.",
+		Hunt1 = "Metaling",
+		NpcName = "Hunting Board",
+	},
+	[71203] = {
+		Title = "Einbroch Hunt: Porcellio",
+		Description = {
+			"Hunt down 20 Porcellios to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Porcellio.",
+		Hunt1 = "Porcellio",
+		NpcName = "Hunting Board",
+	},
+	[71204] = {
+		Title = "Einbroch Hunt: Noxious",
+		Description = {
+			"Hunt down 20 Noxious to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Noxious.",
+		Hunt1 = "Noxious",
+		NpcName = "Hunting Board",
+	},
+	[71205] = {
+		Title = "Einbroch Hunt: Holden",
+		Description = {
+			"Hunt down 20 Holdens to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Holden.",
+		Hunt1 = "Holden",
+		NpcName = "Hunting Board",
+	},
+	[71206] = {
+		Title = "Einbroch Hunt: Venomous",
+		Description = {
+			"Hunt down 20 Venomous to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Venomous.",
+		Hunt1 = "Venomous",
+		NpcName = "Hunting Board",
+	},
+	[71207] = {
+		Title = "Einbroch Hunt: Pitman",
+		Description = {
+			"Hunt down 15 Pitmen to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Pitman.",
+		Hunt1 = "Pitman",
+		NpcName = "Hunting Board",
+	},
+	[71208] = {
+		Title = "Einbroch Hunt: Obsidian",
+		Description = {
+			"Hunt down 15 Obsidians to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Obsidian.",
+		Hunt1 = "Obsidian",
+		NpcName = "Hunting Board",
+	},
+	[71209] = {
+		Title = "Einbroch Hunt: Driller",
+		Description = {
+			"Hunt down 15 Drillers to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Driller.",
+		Hunt1 = "Driller",
+		NpcName = "Hunting Board",
+	},
+	[71210] = {
+		Title = "Einbroch Hunt: Mineral",
+		Description = {
+			"Hunt down 15 Minerals to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Mineral.",
+		Hunt1 = "Mineral",
+		NpcName = "Hunting Board",
+	},
+	[71211] = {
+		Title = "Einbroch Hunt: Demon Pungus",
+		Description = {
+			"Hunt down 15 Demon Pungus to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Demon Pungus.",
+		Hunt1 = "Demon Pungus",
+		NpcName = "Hunting Board",
+	},
+	[71212] = {
+		Title = "Einbroch Hunt: Old Stove",
+		Description = {
+			"Hunt down 10 Old Stoves to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 10 Old Stove.",
+		Hunt1 = "Old Stove",
+		NpcName = "Hunting Board",
+	},
+	[71213] = {
+		Title = "Einbroch Hunt: Teddy Bear",
+		Description = {
+			"Hunt down 10 Teddy Bears to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 10 Teddy Bear.",
+		Hunt1 = "Teddy Bear",
+		NpcName = "Hunting Board",
+	},
+	[71214] = {
+		Title = "Einbroch Hunt: Ungoliant",
+		Description = {
+			"Hunt down 1 Ungoliant to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 1 Ungoliant.",
+		Hunt1 = "Ungoliant",
+		NpcName = "Hunting Board",
+	},
+
 }

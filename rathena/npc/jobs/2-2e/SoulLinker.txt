@@ -329,6 +329,7 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 	}
 
 OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
 	set .SoulLinkerTest,0;
 	end;
 }

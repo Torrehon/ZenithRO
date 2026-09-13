@@ -466,6 +466,16 @@ QuestInfoList_C = {
 		Hunt1 = "Tacnu",
 		NpcName = "Hunting Board",
 	},
+	[70026] = {
+		Title = "Prontera Hunt: Baleful Illusion",
+		Description = {
+			"Hunt down 1 Baleful Illusion to complete the contract",
+			"and claim your Prontera Coins."
+		},
+		Summary = "Hunt 1 Baleful Illusion.",
+		Hunt1 = "Baleful Illusion",
+		NpcName = "Hunting Board",
+	},
 	-- Geffen Hunting Quests
 	[70101] = {
 		Title = "Geffen Hunt: Fabre",
@@ -1475,13 +1485,13 @@ QuestInfoList_C = {
 		NpcName = "Hunting Board",
 	},
 	[70706] = {
-		Title = "Hugel Hunt: Demon Pungus",
+		Title = "Hugel Hunt: Grove",
 		Description = {
-			"Hunt down 15 Demon Pungus to complete the contract",
+			"Hunt down 15 Groves to complete the contract",
 			"and claim your Hugel Coins."
 		},
-		Summary = "Hunt 15 Demon Pungus.",
-		Hunt1 = "Demon Pungus",
+		Summary = "Hunt 15 Grove.",
+		Hunt1 = "Grove",
 		NpcName = "Hunting Board",
 	},
 	[70707] = {
@@ -2095,6 +2105,289 @@ QuestInfoList_C = {
 		},
 		Summary = "Hunt 1 Chepet.",
 		Hunt1 = "Chepet",
+		NpcName = "Hunting Board",
+	},
+
+	-- Alberta Hunting Quests
+	[71101] = {
+		Title = "Alberta Hunt: Pupa",
+		Description = {
+			"Hunt down 25 Pupas to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Pupa.",
+		Hunt1 = "Pupa",
+		NpcName = "Hunting Board",
+	},
+	[71102] = {
+		Title = "Alberta Hunt: Wormtail",
+		Description = {
+			"Hunt down 25 Wormtails to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Wormtail.",
+		Hunt1 = "Wormtail",
+		NpcName = "Hunting Board",
+	},
+	[71103] = {
+		Title = "Alberta Hunt: Hydra",
+		Description = {
+			"Hunt down 25 Hydras to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Hydra.",
+		Hunt1 = "Hydra",
+		NpcName = "Hunting Board",
+	},
+	[71104] = {
+		Title = "Alberta Hunt: Kukre",
+		Description = {
+			"Hunt down 25 Kukres to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 25 Kukre.",
+		Hunt1 = "Kukre",
+		NpcName = "Hunting Board",
+	},
+	[71105] = {
+		Title = "Alberta Hunt: Pirate Skeleton",
+		Description = {
+			"Hunt down 20 Pirate Skeletons to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Pirate Skeleton.",
+		Hunt1 = "Pirate Skeleton",
+		NpcName = "Hunting Board",
+	},
+	[71106] = {
+		Title = "Alberta Hunt: Whisper",
+		Description = {
+			"Hunt down 20 Whispers to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Whisper.",
+		Hunt1 = "Whisper",
+		NpcName = "Hunting Board",
+	},
+	[71107] = {
+		Title = "Alberta Hunt: Spring Rabbit",
+		Description = {
+			"Hunt down 20 Spring Rabbits to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Spring Rabbit.",
+		Hunt1 = "Spring Rabbit",
+		NpcName = "Hunting Board",
+	},
+	[71108] = {
+		Title = "Alberta Hunt: Penomena",
+		Description = {
+			"Hunt down 20 Penomenas to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Penomena.",
+		Hunt1 = "Penomena",
+		NpcName = "Hunting Board",
+	},
+	[71109] = {
+		Title = "Alberta Hunt: Permeter",
+		Description = {
+			"Hunt down 20 Permeters to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Permeter.",
+		Hunt1 = "Permeter",
+		NpcName = "Hunting Board",
+	},
+	[71110] = {
+		Title = "Alberta Hunt: Solider",
+		Description = {
+			"Hunt down 20 Soliders to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Solider.",
+		Hunt1 = "Solider",
+		NpcName = "Hunting Board",
+	},
+	[71111] = {
+		Title = "Alberta Hunt: Freezer",
+		Description = {
+			"Hunt down 20 Freezers to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 20 Freezer.",
+		Hunt1 = "Freezer",
+		NpcName = "Hunting Board",
+	},
+	[71112] = {
+		Title = "Alberta Hunt: Assaulter",
+		Description = {
+			"Hunt down 15 Assaulters to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 15 Assaulter.",
+		Hunt1 = "Assaulter",
+		NpcName = "Hunting Board",
+	},
+	[71113] = {
+		Title = "Alberta Hunt: Heater",
+		Description = {
+			"Hunt down 15 Heaters to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 15 Heater.",
+		Hunt1 = "Heater",
+		NpcName = "Hunting Board",
+	},
+	[71114] = {
+		Title = "Alberta Hunt: Ghostring",
+		Description = {
+			"Hunt down 1 Ghostring to complete the contract",
+			"and claim your Alberta Coins."
+		},
+		Summary = "Hunt 1 Ghostring.",
+		Hunt1 = "Ghostring",
+		NpcName = "Hunting Board",
+	},
+	-- Einbroch Hunting Quests
+	[71201] = {
+		Title = "Einbroch Hunt: Anopheles",
+		Description = {
+			"Hunt down 20 Anopheles to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Anopheles.",
+		Hunt1 = "Anopheles",
+		NpcName = "Hunting Board",
+	},
+	[71202] = {
+		Title = "Einbroch Hunt: Metaling",
+		Description = {
+			"Hunt down 20 Metalings to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Metaling.",
+		Hunt1 = "Metaling",
+		NpcName = "Hunting Board",
+	},
+	[71203] = {
+		Title = "Einbroch Hunt: Porcellio",
+		Description = {
+			"Hunt down 20 Porcellios to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Porcellio.",
+		Hunt1 = "Porcellio",
+		NpcName = "Hunting Board",
+	},
+	[71204] = {
+		Title = "Einbroch Hunt: Noxious",
+		Description = {
+			"Hunt down 20 Noxious to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Noxious.",
+		Hunt1 = "Noxious",
+		NpcName = "Hunting Board",
+	},
+	[71205] = {
+		Title = "Einbroch Hunt: Holden",
+		Description = {
+			"Hunt down 20 Holdens to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Holden.",
+		Hunt1 = "Holden",
+		NpcName = "Hunting Board",
+	},
+	[71206] = {
+		Title = "Einbroch Hunt: Venomous",
+		Description = {
+			"Hunt down 20 Venomous to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 20 Venomous.",
+		Hunt1 = "Venomous",
+		NpcName = "Hunting Board",
+	},
+	[71207] = {
+		Title = "Einbroch Hunt: Pitman",
+		Description = {
+			"Hunt down 15 Pitmen to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Pitman.",
+		Hunt1 = "Pitman",
+		NpcName = "Hunting Board",
+	},
+	[71208] = {
+		Title = "Einbroch Hunt: Obsidian",
+		Description = {
+			"Hunt down 15 Obsidians to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Obsidian.",
+		Hunt1 = "Obsidian",
+		NpcName = "Hunting Board",
+	},
+	[71209] = {
+		Title = "Einbroch Hunt: Driller",
+		Description = {
+			"Hunt down 15 Drillers to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Driller.",
+		Hunt1 = "Driller",
+		NpcName = "Hunting Board",
+	},
+	[71210] = {
+		Title = "Einbroch Hunt: Mineral",
+		Description = {
+			"Hunt down 15 Minerals to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Mineral.",
+		Hunt1 = "Mineral",
+		NpcName = "Hunting Board",
+	},
+	[71211] = {
+		Title = "Einbroch Hunt: Demon Pungus",
+		Description = {
+			"Hunt down 15 Demon Pungus to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 15 Demon Pungus.",
+		Hunt1 = "Demon Pungus",
+		NpcName = "Hunting Board",
+	},
+	[71212] = {
+		Title = "Einbroch Hunt: Old Stove",
+		Description = {
+			"Hunt down 10 Old Stoves to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 10 Old Stove.",
+		Hunt1 = "Old Stove",
+		NpcName = "Hunting Board",
+	},
+	[71213] = {
+		Title = "Einbroch Hunt: Teddy Bear",
+		Description = {
+			"Hunt down 10 Teddy Bears to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 10 Teddy Bear.",
+		Hunt1 = "Teddy Bear",
+		NpcName = "Hunting Board",
+	},
+	[71214] = {
+		Title = "Einbroch Hunt: Ungoliant",
+		Description = {
+			"Hunt down 1 Ungoliant to complete the contract",
+			"and claim your Einbroch Coins."
+		},
+		Summary = "Hunt 1 Ungoliant.",
+		Hunt1 = "Ungoliant",
 		NpcName = "Hunting Board",
 	},
 }

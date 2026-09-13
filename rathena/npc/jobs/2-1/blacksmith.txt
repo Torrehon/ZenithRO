@@ -79,6 +79,10 @@ ein_in01,18,28,4	script	Guildsman#BLS	731,{
 	mes "He is searching for adventurers of proven valor to aid him in a crucial matter.";
 	mes "They say he wanders near the library and sanctuary district of Prontera... Seek him out if you seek new horizons!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 ein_in01,201,27,3	script	Guildsman#alberta	63,{

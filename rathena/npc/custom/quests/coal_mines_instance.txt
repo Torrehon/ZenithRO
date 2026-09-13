@@ -85,6 +85,10 @@ mjo_dun01,52,37,4	script	Garrick the Surveyor	854,{
 		close;
 	}
 	end;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 

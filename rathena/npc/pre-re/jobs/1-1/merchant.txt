@@ -95,6 +95,10 @@ alberta_in,53,43,6	script	Merchant Master#mer	86,{
 	mes "[Merchant Master]";
 	mes "Oh, before you go! Talk to ^0000FFGarrick^000000 just outside. He's a veteran who has been looking for a rookie to handle a very special weapon.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 alberta_in,56,39,6	script	Garrick	731,{ //DAWN AXE QUEST
@@ -194,4 +198,8 @@ alberta_in,56,39,6	script	Garrick	731,{ //DAWN AXE QUEST
 		set dawn_axe_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

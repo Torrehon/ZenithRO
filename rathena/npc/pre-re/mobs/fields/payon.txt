@@ -123,6 +123,7 @@ pay_fild08,143,156,40,40	monster	Shining Plant	1083,1,3600000,1800000
 pay_fild09,0,0	monster	Poporing	1031,20
 pay_fild09,0,0	monster	Smokie	1056,80
 pay_fild09,0,0	monster	Bigfoot	1060,70
+pay_fild09,0,0	monster	Cat o' Nine Tails	1307,1,3600000
 pay_fild09,198,217,30,30	monster	Green Plant	1080,10,360000,180000
 pay_fild09,198,217,30,30	monster	Shining Plant	1083,1,1800000,900000
 
@@ -135,6 +136,7 @@ pay_fild10,0,0	monster	Poison Spore	1077,20
 pay_fild10,0,0	monster	Nine Tail	1180,2
 pay_fild10,0,0	monster	Nine Tail	1180,1,1800000,900000
 pay_fild10,0,0	monster	Nine Tail	1180,1,900000,450000
+pay_fild10,0,0	monster	Cat o' Nine Tails	1307,1,3600000
 pay_fild10,213,157,10,10	monster	Green Plant	1080,5,360000,180000
 pay_fild10,281,307,10,10	monster	Green Plant	1080,5,360000,180000
 pay_fild10,66,332,10,10	monster	Green Plant	1080,5,360000,180000

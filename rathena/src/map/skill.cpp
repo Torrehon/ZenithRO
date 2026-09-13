@@ -4590,6 +4590,10 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 					skill_castend_damage_id);
 				flag|=1; //Set flag to 1 so ammo is not double-consumed. [Skotlex]
 			}
+		} else if (src->type == BL_HOM) {
+			// Soporte de ataque normal splash para Homúnculos (Amistr Evolucionado)
+			if (bl->id != skill_area_temp[1])
+				skill_attack(BF_WEAPON, src, src, bl, skill_id, skill_lv, tick, SD_LEVEL|flag);
 		}
 		break;
 	

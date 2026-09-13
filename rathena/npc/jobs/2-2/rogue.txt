@@ -85,6 +85,10 @@ in_rogue,363,122,4	script	Rogue Guildsman#rg	747,{
 	mes "He is asking around for adventurers of proven valor to aid him in a discreet, high-value endeavor.";
 	mes "He lingers near Prontera's library and sanctuary district... Keep your eyes sharp if you head to the capital!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 in_rogue,376,23,1	script	Mr. Smith#rg	57,{

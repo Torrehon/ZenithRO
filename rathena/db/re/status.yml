@@ -2631,6 +2631,9 @@ Body:
     DurationLookup: HAMI_DEFENCE
     CalcFlags:
       Def: true
+      Def2: true
+      Mdef: true
+      Mdef2: true
       Vit: true
     Flags:
       NoSave: true

@@ -437,6 +437,10 @@ comodo,204,172,5	script	Canell#qsk_dan01	724,{
 			close;
 		}
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 prontera,183,333,1	script	Aelle#qsk_dan02	79,{

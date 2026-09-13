@@ -79,6 +79,10 @@ in_moc_16,19,33,1	script	Guildsman#asn	55,{
 	mes "He seeks heroes of proven valor for an endeavor of great spiritual significance.";
 	mes "He lingers near Prontera's library and sanctuary district... Keep your eyes open if your path leads to the capital!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 in_moc_16,25,90,1	script	Guildsman#ASN2	730,2,2,{

@@ -81,6 +81,10 @@ moc_prydb1,39,129,2	script	Thief Master	69,{ //JOB QUEST
 	mes "Now, disappear into the shadows and make a name for yourself.";
 	mes "Oh, and before you go... Speak with Brad over there. He has a special assignment for promising rookies.";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 
@@ -179,4 +183,8 @@ moc_prydb1,42,133,2	script	Brad	118,{ // DAWN WEAPON QUEST
 		set dawn_dagger_q, 1;
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

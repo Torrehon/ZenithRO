@@ -395,5 +395,9 @@ pay_arche,109,169,3	script	Arpesto	712,{
 		mes "cocky. Kids nowadays...";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 

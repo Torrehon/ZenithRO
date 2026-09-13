@@ -306,6 +306,10 @@ geffen,110,117,3	script	Ford#11	752,{
 		mes "of. Now if you'll excuse me...";
 		close;
 	}
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW;
+	end;
 }
 
 gef_fild13,297,242,3	script	Soldier#277	751,{

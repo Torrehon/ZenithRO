@@ -80,6 +80,10 @@ new_1-3,85,33,3	script	Messy Mary	729,{
     specialeffect2 EF_LEVELUP;
     mes "Now we can both pick up loot much faster. No more messy floors for us!";
     close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }
 
 
@@ -163,4 +167,8 @@ prt_in,179,12,3	script	Not-So-Messy Mary	729,{
     specialeffect2 EF_LEVELUP;
     mes "Now get out there and show Midgard you don't leave anything behind. You're welcome, by the way!";
     close;
+
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_PURPLE;
+	end;
 }

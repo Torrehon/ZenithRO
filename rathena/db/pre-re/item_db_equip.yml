@@ -18380,8 +18380,6 @@ Body:
     Slots: 1
     Jobs:
       Hunter: true
-    Classes:
-      Upper: true
     Locations:
       Armor: true
     ArmorLevel: 1
@@ -20638,7 +20636,7 @@ Body:
     Script: |
       .@r = getrefine();
       bonus bLuk,.@r/2;
-      bonus bFlee2,5+(.@r/2);
+      bonus bFlee2,.@r/2;
   - Id: 2520
     AegisName: Goibne's_Shoulder_Arms
     Name: Goibne's Spaulders
@@ -22146,6 +22144,7 @@ Body:
     Type: Armor
     Buy: 30000
     Weight: 200
+    Slots: 1
     Jobs:
       All: true
       Novice: false
@@ -22153,9 +22152,9 @@ Body:
     Locations:
       Both_Accessory: true
     ArmorLevel: 1
-    EquipLevelMin: 61
+    EquipLevelMin: 75
     Script: |
-      bonus bBaseAtk,5;
+      bonus bAtk,5;
       bonus bCritical,3;
   - Id: 2651
     AegisName: Morrigane's_Pendant
@@ -22163,6 +22162,7 @@ Body:
     Type: Armor
     Buy: 30000
     Weight: 200
+    Slots: 1
     Jobs:
       All: true
       Novice: false
@@ -22170,9 +22170,9 @@ Body:
     Locations:
       Both_Accessory: true
     ArmorLevel: 1
-    EquipLevelMin: 61
+    EquipLevelMin: 75
     Script: |
-      bonus bStr,2;
+      bonus bAtk,5;
       bonus bCritical,3;
   - Id: 2652
     AegisName: Cursed_Lucky_Brooch
@@ -26166,7 +26166,9 @@ Body:
     View: 120
     Script: |
       bonus2 bAddClass,Class_Normal,5;
+      if (BaseLevel<60) {
       bonus2 bExpAddRace,RC_All,15;
+      }
   - Id: 5036
     AegisName: Cross_Band
     Name: Cross Hat
@@ -27647,6 +27649,7 @@ Body:
     View: 257
     Script: |
       bonus bLuk,1;
+      bonus bAtk,5;
   - Id: 5128
     AegisName: Goibne's_Helmet
     Name: Goibne's Helm
@@ -41636,6 +41639,23 @@ Body:
       bonus bStr,1;
       bonus bMaxHPrate,15;
       bonus bMaxSPrate,-30;
+  - Id: 15108
+    AegisName: VenomInsect_Armor
+    Name: Venomous Insect Armor
+    Type: Armor
+    Buy: 20
+    Weight: 500
+    Defense: 5
+    Slots: 1
+    Locations:
+      Armor: true
+    ArmorLevel: 1
+    EquipLevelMin: 75
+    Refineable: true
+    Script: |
+      bonus bDefEle,Ele_Poison;
+      bonus bMdef,5;
+      bonus2 bAddEle,Ele_Poison,10;
   - Id: 15138
     AegisName: Egir_Armor_K
     Name: Aegir Armor
@@ -41684,6 +41704,14 @@ Body:
     Script: |
       bonus2 bMagicAtkEle,Ele_Holy,3;
       bonus bHealPower,3;
+  - Id: 15841
+    AegisName: C_Hat_of_Goggle
+    Name: Costume Goggles Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 1721
   - Id: 15854
     AegisName: C_Phigasia_Scarf_EXE
     Name: Costume Phigasia Scarf
@@ -46466,8 +46494,6 @@ Body:
       Costume_Head_Mid: true
     ArmorLevel: 1
     View: 1094
-    Script: |
-      bonus2 bAddMonsterDropItem,22660,50;
   - Id: 19901
     AegisName: C_Viking_Helm
     Name: Costume Orc Helm
@@ -47451,6 +47477,25 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 1
     View: 61
+  - Id: 20059
+    AegisName: C_Welding_Mask
+    Name: Costume Welding Mask
+    Type: Armor
+    Locations:
+      Costume_Head_Mid: true
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 79
+  - Id: 20060
+    AegisName: C_Safety_Helmet
+    Name: Costume Construction Helmet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 95
   - Id: 20069
     AegisName: C_Gryphon_Hairband
     Name: Costume Gryphon Hairband
@@ -103994,7 +104039,9 @@ Body:
       NoMail: true
       NoAuction: true
     Script: |
+      .@l = BaseLevel;
       skill "AL_WARP", 4;
+      bonus3 bAddMonsterDropItem,50001,RC_All,100+((.@l+1)*4);
   - Id: 60000
     AegisName: ora3000
     Name: Ora Ora 3000
@@ -104265,14 +104312,15 @@ Body:
       Rogue: true
     Classes:
       All: true
-  - Id: 420010
-    AegisName: C_Cons_Of_Darkness
-    Name: Costume Dark Master
+  - Id: 400224
+    AegisName: C_Navy_Beret
+    Name: Costume Navy Hat
     Type: Armor
-    View: 2020
     Locations:
-      Costume_Head_Low: true
+      Costume_Head_Top: true
     ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 652
   - Id: 400437
     AegisName: Chic_Peony
     Name: Chic Peony
@@ -104303,6 +104351,30 @@ Body:
          bonus bAtkRate,3;
          bonus bMatkRate,3;
       }
+  - Id: 400462
+    AegisName: C_Sailor_Cap
+    Name: Costume Sailor Cap
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 2398
+  - Id: 400725
+    AegisName: C_G_S_Captain_Hat
+    Name: Costume: Ghost Ship Captain Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 2585
+  - Id: 400739
+    AegisName: C_Marin_Pattern_Hat
+    Name: Costume Archangeling Bread Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 2543
   - Id: 410087
     AegisName: C_Demons_Familiar_K
     Name: Costume Robotic Watcher
@@ -104311,6 +104383,25 @@ Body:
       Costume_Head_Mid: true
     ArmorLevel: 1
     View: 2127
+  - Id: 410363
+    AegisName: C_Aura_Of_Ghost_S
+    Name: Costume Aura of Ghost Ship
+    Type: Armor
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      hateffect HAT_EF_AURA_OF_GHOST_S,true;
+    UnEquipScript: |
+      hateffect HAT_EF_AURA_OF_GHOST_S,false;
+  - Id: 420010
+    AegisName: C_Cons_Of_Darkness
+    Name: Costume Dark Master
+    Type: Armor
+    View: 2020
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
   - Id: 420030
     AegisName: Falconer_Flute_C
     Name: Feather In Mouth
@@ -104323,6 +104414,14 @@ Body:
     EquipLevelMin: 75
     Script: |
       bonus bLongAtkRate,5;
+  - Id: 420044
+    AegisName: C_Sailor_Collar_WH
+    Name: Costume Sailor's White Lapel
+    Type: Armor
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    View: 2141
   - Id: 450180
     AegisName: Cute_Frog_Raincoat
     Name: Cute Frog Raincoat

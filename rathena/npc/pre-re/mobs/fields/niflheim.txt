@@ -25,6 +25,7 @@ nif_fild01,0,0	monster	Dullahan	1504,13
 nif_fild01,0,0	monster	Gibbet	1503,10
 nif_fild01,0,0	monster	Heirozoist	1510,10
 nif_fild01,0,0	monster	Quve	1508,30
+nif_fild01,0,0	monster	Mysteltainn	1203,1,3600000
 
 //==================================================
 // nif_fild02 - Valley of Gyoll
@@ -44,6 +45,7 @@ nif_fild02,352,273,15,15	monster	Dullahan	1504,5,600000,300000
 nif_fild02,0,0	monster	Dullahan	1504,5
 nif_fild02,0,0	monster	Heirozoist	1510,6
 nif_fild02,0,0	monster	Gibbet	1503,10
+nif_fild02,0,0	monster	Dark Illusion	1302,1,3600000
 
 //==================================================
 // niflheim - Niflheim, Realm of the Dead

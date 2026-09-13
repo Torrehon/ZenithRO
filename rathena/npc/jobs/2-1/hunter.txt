@@ -79,6 +79,10 @@ hu_in01,386,373,4	script	Hunter Guildsman#hnt	727,{
 	mes "He is seeking courageous warriors who possess true valor to assist him in an extraordinary quest.";
 	mes "He lingers around Prontera's quiet library district... Track him down if your journey takes you there!";
 	close;
+
+OnInit:
+	questinfo QTYPE_JOB, QMARK_YELLOW;
+	end;
 }
 
 in_hunter,99,99,4	script	Hunter Info#hnt::HntNotice	727,{
