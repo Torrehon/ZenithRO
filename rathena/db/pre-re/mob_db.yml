@@ -25171,9 +25171,9 @@ Body:
         Rate: 2500
       - Item: Dark_Red_Jewel
         Rate: 1500
-      - Item: Revenger # 28226 Crear Toxic Avenger (Trevenger)
+      - Item: Revenger
         Rate: 50
-      - Item: VenomInsect_Armor # 15108
+      - Item: VenomInsect_Armor
         Rate: 50
       - Item: Ungoliant_Card
         Rate: 1
@@ -27918,19 +27918,19 @@ Body:
     AegisName: GEMINI
     Name: Gemini-S58
     Level: 72
-    Hp: 57870
-    BaseExp: 22024
-    JobExp: 9442
+    Hp: 107870
+    BaseExp: 62024
+    JobExp: 49442
     Attack: 2150
-    Attack2: 3030
-    Defense: 60
-    MagicDefense: 45
+    Attack2: 2830
+    Defense: 35
+    MagicDefense: 35
     Str: 88
-    Agi: 75
+    Agi: 120
     Vit: 70
-    Int: 77
-    Dex: 105
-    Luk: 55
+    Int: 99
+    Dex: 125
+    Luk: 99
     AttackRange: 3
     SkillRange: 10
     ChaseRange: 12
@@ -27949,17 +27949,21 @@ Body:
       - Item: Skull
         Rate: 3000
       - Item: Old_Blue_Box
-        Rate: 1000
+        Rate: 2000
       - Item: Butcher_
-        Rate: 5
+        Rate: 100
+      - Item: MINIMAY
+        Rate: 50      
+      - Item: Gemini_Eyes
+        Rate: 50
       - Item: Yellow_Slim_Potion
-        Rate: 500
+        Rate: 2000
       - Item: White_Slim_Potion
-        Rate: 400
+        Rate: 1400
       - Item: Cookbook08
-        Rate: 6
+        Rate: 50
       - Item: Stone_Of_Intelligence_
-        Rate: 300
+        Rate: 1000
       - Item: Gemini_Card
         Rate: 1
         StealProtected: true
@@ -35499,7 +35503,7 @@ Body:
     Str: 55
     Agi: 75
     Vit: 10
-    Int: 79
+    Int: 109
     Dex: 70
     Luk: 55
     AttackRange: 2

@@ -1,18 +1,18 @@
 // =====================================================
-// Custom Hunting System - Einbroch
+// Custom Hunting System - Lighthalzen
 // Description: Hunting Board & Veteran Hunter Shop
-// Currency: Einbroch Coin (ID 50034)
+// Currency: Lighthalzen Coin (ID 50035)
 // =====================================================
 
 // -----------------------------------------------------
-// 1. Hunting Board - Einbroch (Sprite 857)
+// 1. Hunting Board - Lighthalzen (Sprite 857)
 // -----------------------------------------------------
-einbroch,221,192,4	script	Hunting Board#ein	857,{
+lighthalzen,145,96,4	script	Hunting Board#lhz	857,{
 	.@today = gettime(DT_YYYYMMDD);
 
 	while (1) {
 		mes "[^0055FF" + .BoardTitle$ + "^000000]";
-		mes "Greetings, worker. Select a contract tier to inspect today's missions across Einbroch fields, Einbech, and the Mine Dungeon.";
+		mes "Greetings, operative. Select a contract tier to inspect today's containment missions across Lighthalzen fields and the Somatology Laboratory.";
 		mes "You may take on multiple contracts at once.";
 		next;
 
@@ -375,92 +375,92 @@ OnInit:
 	// Tier S (Miniboss) [1 kill, 25 coins]
 	setarray .Mob_Name$[1], 
 		// Tier C
-		"Anopheles", "Porcellio", "Noxious", "Venomous",
+		"Metaling", "Holden",
 		// Tier B
-		"Pitman", "Obsidian", "Driller", "Mineral", "Demon Pungus",
+		"Remover", "Egnigem Cenia", "Wickebine Tres", "Armeyer Dinze", "Errende Ebecee", "Kavach Icarus", "Laurell Weinder",
 		// Tier A
-		"Old Stove", "Teddy Bear",
+		"Seyren Windsor", "Eremes Guile", "Howard Alt-Eisen", "Margaretha Sorin", "Cecil Damon", "Kathryne Keyron",
 		// Tier S
-		"Ungoliant";
+		"Gemini-S58", "Chimera";
 
 	setarray .Mob_ID[1],
 		// Tier C
-		1627, 1619, 1620, 1621,
+		1613, 1628,
 		// Tier B
-		1616, 1615, 1380, 1614, 1378,
+		1682, 1652, 1653, 1654, 1655, 1656, 1657,
 		// Tier A
-		1617, 1622,
+		1634, 1635, 1636, 1637, 1638, 1639,
 		// Tier S
-		1618;
+		1681, 1283;
 
 	setarray .Mob_QID[1],
 		// Tier C
-		71201, 71202, 71203, 71204,
+		71301, 71302,
 		// Tier B
-		71205, 71206, 71207, 71208, 71209,
+		71303, 71304, 71305, 71306, 71307, 71308, 71309,
 		// Tier A
-		71210, 71211,
+		71310, 71311, 71312, 71313, 71314, 71315,
 		// Tier S
-		71212;
+		71316, 71317;
 
 	setarray .Mob_Req[1],
 		// Tier C
-		20, 20, 20, 20,
+		20, 20,
 		// Tier B
-		15, 15, 15, 15, 15,
+		15, 15, 15, 15, 15, 15, 15,
 		// Tier A
-		10, 10,
+		10, 10, 10, 10, 10, 10,
 		// Tier S
-		1;
+		1, 1;
 
 	setarray .Mob_Tier[1],
 		// Tier C
-		2, 2, 2, 2,
+		2, 2,
 		// Tier B
-		3, 3, 3, 3, 3,
+		3, 3, 3, 3, 3, 3, 3,
 		// Tier A
-		4, 4,
+		4, 4, 4, 4, 4, 4,
 		// Tier S
-		5;
+		5, 5;
 
 	setarray .Mob_Coins[1],
 		// Tier C
-		5, 5, 5, 5,
+		5, 5,
 		// Tier B
-		7, 7, 7, 7, 7,
+		7, 7, 7, 7, 7, 7, 7,
 		// Tier A
-		10, 10,
+		10, 10, 10, 10, 10, 10,
 		// Tier S
-		25;
+		25, 25;
 
 	.TotalMobs = getarraysize(.Mob_Name$) - 1;
-	.CoinID = 50034;
-	.CoinName$ = "Einbroch Coin";
-	.BoardTitle$ = "Hunting Board - Einbroch";
+	.CoinID = 50035;
+	.CoinName$ = "Lighthalzen Coin";
+	.BoardTitle$ = "Hunting Board - Lighthalzen";
 	questinfo QTYPE_DAILYQUEST, QMARK_YELLOW;
 	end;
 }
 
 // -----------------------------------------------------
-// 2. Veteran Hunter Shop - Einbroch (Industrial / Factory Flavor)
+// 2. Veteran Hunter Shop - Lighthalzen (Biotech / Corporate Flavor)
 // -----------------------------------------------------
-einbroch,219,192,6	script	Veteran Hunter#ein	10183,{
+lighthalzen,143,96,6	script	Veteran Hunter#lhz	4_LGTSCIENCE,{
 	mes "[^0055FFVeteran Hunter^000000]";
-	mes "Welcome to the city of iron and steam. Between malfunctioning machinery, toxic vapors, and aggressive mine pests, there is always work to be done.";
-	mes "The Einbroch Factory and Mining Consortium rewards those who keep the perimeter clean and secure.";
-	mes "Do you wish to trade your Einbroch Coins for industrial equipment and heavy supplies?";
+	mes "Greetings, associate. Lighthalzen may present itself as the pinnacle of corporate prosperity, but beneath the polished surface lies the grim reality of the Somatology Laboratory.";
+	mes "The Rekenber Corporation and municipal security quietly contract seasoned hunters to contain hazardous biological specimens and stray experiments.";
+	mes "Do you wish to exchange your Lighthalzen Coins for medical provisions, alchemical supplies, or laboratory equipment?";
 	mes " ";
-	mes "You currently hold: ^00AA00" + countitem(50034) + " Einbroch Coins^000000.";
+	mes "You currently hold: ^00AA00" + countitem(50035) + " Lighthalzen Coins^000000.";
 	next;
 
-	if (select("Show me your gear:Back to the forge") == 2) {
+	if (select("Show me your gear:I have lab business") == 2) {
 		mes "[^0055FFVeteran Hunter^000000]";
-		mes "Keep your pressure gauges steady, friend!";
+		mes "Mind your steps around the Regenschirm district, operative.";
 		close;
 	}
 
-	callshop "einbroch_hunter_shop",1;
-	npcshopattach "einbroch_hunter_shop";
+	callshop "lighthalzen_hunter_shop",1;
+	npcshopattach "lighthalzen_hunter_shop";
 	end;
 
 OnBuyItem:
@@ -474,22 +474,22 @@ OnBuyItem:
 		.@total_cost += (.Shop_Data[.@item_idx + 1] * @bought_quantity[.@i]);
 	}
 
-	if (.@total_cost > countitem(50034)) {
+	if (.@total_cost > countitem(50035)) {
 		mes "[^0055FFVeteran Hunter^000000]";
-		mes "I am afraid you lack the necessary Einbroch Coins for these supplies, partner.";
+		mes "I am afraid you lack the necessary Lighthalzen Coins for these supplies, partner.";
 		mes "Total cost: " + .@total_cost + " Coins.";
 		close;
 	}
 	
-	delitem 50034, .@total_cost;
+	delitem 50035, .@total_cost;
 	
 	for (.@i = 0; .@i < .@size; .@i++) {
 		getitem @bought_nameid[.@i], @bought_quantity[.@i];
 	}
 	
 	mes "[^0055FFVeteran Hunter^000000]";
-	mes "Heavy iron and fine craftmanship! May these provisions protect you from the heat and smog.";
-	mes "Stay alert in the mines!";
+	mes "High-grade corporate gear! May these provisions protect you from the toxic vapors and biohazards.";
+	mes "Stay alert in the laboratory!";
 	specialeffect2 EF_MONEY;
 	close;
 
@@ -505,27 +505,29 @@ OnInit:
 		12117, 2,     // Wind Converter Scroll
 		51008, 3,     // Shadow Converter Scroll
 		51009, 3,     // Holy Converter Scroll
-		51018, 2,
-		51019, 2,
-		51020, 1,
+		51018, 2,     // Alchemist Supplies I
+		51019, 2,     // Alchemist Supplies II
+		51020, 1,     // Empty Bottle Box
 		// Costumes: Tier 50 (Classic / Basic)
-		19578, 50,    // Costume Googles
-		20060, 50,    // Costume Construction Helmet
-		20473, 50,    // Costume Mine Helm
-		19736, 50,    // Costume Gas Mask
-		20059, 50,   // Costume Welding Mask
-		// Costumes: Tier 200 (Thematic High)
-		31166, 200,   // Costume Teddy Bear Hood
-		20434, 200,   // Costume Drooping Gunslinger
+		20037, 50,    // Costume Duke Hat
+		20091, 50,    // Costume Pipe
+		19925, 50,    // Costume One Eyed Glasses
+		31052, 50,    // Costume Alchemist Mask
+		// Costumes: Tier 200 (Thematic Mid-High)
+		31540, 200,   // Costume Red Gemini Eyes
+		31446, 200,   // Costume Toy Syringe
+		31570, 200,   // Costume Cyclops Visor
 		// Costumes: Tier 500 (Modern / Visually Attractive)
-		20381, 500,   // Costume Steampunk Hat
-		20988, 500,   // Costume Mechanical Butterfly
+		20315, 500,   // Costume Analyze Eye
+		20405, 500,   // Costume Eremes Scarf
 		// Costumes: Tier 1000 (Animated with Visual Effects)
-		20535, 1000;  // Costume Digital Space (HAT_EF_DIGITAL_SPACE)
+		31391, 1000,  // Costume Floating Sage Stone
+		20132, 1000,  // Costume Test Subject Aura
+		20407, 1000;  // Costume Test Subject Aura (Red)
 
-	npcshopdelitem "einbroch_hunter_shop", 502; 
+	npcshopdelitem "lighthalzen_hunter_shop", 502; 
 	for (.@i = 0; .@i < getarraysize(.Shop_Data); .@i += 2) {
-		npcshopadditem "einbroch_hunter_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
+		npcshopadditem "lighthalzen_hunter_shop", .Shop_Data[.@i], .Shop_Data[.@i+1];
 	}
 	end;
 }
@@ -533,4 +535,4 @@ OnInit:
 // -----------------------------------------------------
 // 3. Shop Definition (Hidden)
 // -----------------------------------------------------
--	shop	einbroch_hunter_shop	-1,502:-1
+-	shop	lighthalzen_hunter_shop	-1,502:-1

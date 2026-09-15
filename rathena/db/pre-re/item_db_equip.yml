@@ -40501,6 +40501,26 @@ Body:
          bonus3 bAddEffOnSkill,"GS_SPREADATTACK",Eff_Stun,2000;
          autobonus "{ bonus bAspdRate,20; }",200,20000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";
       }
+  - Id: 13197
+    AegisName: MINIMAY
+    Name: Minigun
+    Type: Weapon
+    SubType: Gatling
+    Buy: 20
+    Weight: 2000
+    Attack: 110
+    Range: 9
+    Slots: 1
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 3
+    EquipLevelMin: 75
+    Refineable: true
+    Script: |
+      .@r = getrefine();
+      bonus2 bSPDrainRate,10+((.@r*10)/3),5;
   - Id: 13300
     AegisName: Huuma_Bird_Wing
     Name: Huuma Wing Shuriken
@@ -42295,6 +42315,20 @@ Body:
       bonus bMdef,3;
       bonus bInt,1;
       bonus bDex,1;
+  - Id: 19113
+    AegisName: Gemini_Eyes
+    Name: Gemini-S58 Eyes
+    Type: Armor
+    Weight: 100
+    Jobs:
+      All: true
+    Locations:
+      Head_Mid: true
+    ArmorLevel: 1
+    EquipLevelMin: 75
+    View: 1456
+    Script: |
+      bonus bLongAtkRate,3;
   - Id: 19292
     AegisName: C_Wildcat_Knit_Cap
     Name: Costume Smokie Knit Cap
@@ -84666,31 +84700,23 @@ Body:
       }
   - Id: 28226
     AegisName: Revenger
-    Name: Avenger
+    Name: Toxic Avenger
     Type: Weapon
     SubType: Grenade
     Buy: 20
     Weight: 1800
-    Attack: 350
+    Attack: 250
     Range: 9
     Slots: 2
     Jobs:
       Gunslinger: true
-      Rebellion: true
     Locations:
       Both_Hand: true
     WeaponLevel: 3
-    EquipLevelMin: 120
+    EquipLevelMin: 75
     Refineable: true
     Script: |
-      .@r = getrefine();
-      bonus bLongAtkRate,20;
-      if (.@r >= 7) {
-         bonus2 bSkillAtk,"RL_D_TAIL",15;
-         if (.@r >= 9) {
-            bonus2 bSkillCooldown,"RL_H_MINE",-1000;
-         }
-      }
+      bonus bAtkEle,Ele_Poison;
   - Id: 28227
     AegisName: Diva_Rifle
     Name: Diva Rifle

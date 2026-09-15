@@ -1852,4 +1852,10 @@ Body:
       if (.@r>=9){
          skill "AL_HEAL",5;
          skill "PR_MAGNIFICAT",3;
-      }   
+      }
+  - Combos:
+      - Combo:
+          - Revenger
+          - Poison_Sphere
+    Script: |
+      bonus2 bSkillAtk,"GS_GROUNDDRIFT",50;

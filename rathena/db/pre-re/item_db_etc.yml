@@ -21846,6 +21846,20 @@ Body:
     Weight: 0
     Flags:
       BuyingStore: true
+  - Id: 50035
+    AegisName: lighthalzen_coin
+    Name: Lighthalzen Coin
+    Type: Etc
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Weight: 0
+    Flags:
+      BuyingStore: true
   - Id: 70000
     AegisName: LKnight_Card
     Name: Lost Knight Card

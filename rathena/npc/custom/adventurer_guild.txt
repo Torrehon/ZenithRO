@@ -57,10 +57,11 @@ iz_ac01,96,49,0	script	Guild Quartermaster	459,{
 		"^0055FFHugel Supplies^000000 (" + countitem(50029) + " Coins)",
 		"^0055FFNiflheim Supplies^000000 (" + countitem(50031) + " Coins)",
 		"^0055FFLutie Supplies^000000 (" + countitem(50032) + " Coins)",
+		"^0055FFLighthalzen Supplies^000000 (" + countitem(50035) + " Coins)",
 		"Leave"
 	);
 
-	if (.@sel == 14) {
+	if (.@sel == 15) {
 		mes "[^0055FFGuild Quartermaster^000000]";
 		mes "Stay sharp out there. May your contracts be fruitful!";
 		close;
@@ -138,19 +139,19 @@ OnBuyItem:
 OnInit:
 	setarray .Cities$[0],
 		"Prontera", "Payon", "Alberta", "Geffen", "Morroc", "Aldebaran", "Comodo", "Umbala",
-		"Yuno", "Einbroch", "Hugel", "Niflheim", "Lutie";
+		"Yuno", "Einbroch", "Hugel", "Niflheim", "Lutie", "Lighthalzen";
 
 	setarray .Coins[0],
 		50003, 50006, 50033, 50005, 50007, 50026, 50027, 50028,
-		50030, 50034, 50029, 50031, 50032;
+		50030, 50034, 50029, 50031, 50032, 50035;
 
 	setarray .Shops$[0],
 		"prt_hunter_shop", "payon_hunter_shop", "alberta_hunter_shop", "geffen_hunter_shop", "morroc_hunter_shop", "aldebaran_hunter_shop", "comodo_hunter_shop", "umbala_hunter_shop",
-		"yuno_hunter_shop", "einbroch_hunter_shop", "hugel_hunter_shop", "niflheim_hunter_shop", "lutie_hunter_shop";
+		"yuno_hunter_shop", "einbroch_hunter_shop", "hugel_hunter_shop", "niflheim_hunter_shop", "lutie_hunter_shop", "lighthalzen_hunter_shop";
 
 	setarray .Hosts$[0],
 		"Veteran Hunter#prt", "Veteran Hunter#pay", "Veteran Hunter#alb", "Veteran Hunter#gef", "Veteran Hunter#moc", "Veteran Hunter#alde", "Veteran Hunter#cmd", "Veteran Hunter#umb",
-		"Veteran Hunter#yuno", "Veteran Hunter#ein", "Veteran Hunter#hug", "Veteran Hunter#nif", "Veteran Hunter#xmas";
+		"Veteran Hunter#yuno", "Veteran Hunter#ein", "Veteran Hunter#hug", "Veteran Hunter#nif", "Veteran Hunter#xmas", "Veteran Hunter#lhz";
 	end;
 }
 
@@ -547,7 +548,7 @@ iz_ac01,91,83,4	duplicate(Hunting Board#umb)	Umbala Hunting Board#umb_ag	857
 
 
 // -------------------------------------------------------------
-// Column 2 (Right Hallway: Y=55 to Y=71, spaced by 4 cells -> 5 slots)
+// Column 2 (Right Hallway: Y=55 to Y=75, spaced by 4 cells -> 6 slots)
 // -------------------------------------------------------------
 
 // 9. Yuno (Y=55)
@@ -564,6 +565,9 @@ iz_ac01,108,67,4	duplicate(Hunting Board#nif)	Niflheim Hunting Board#nif_ag	857
 
 // 13. Lutie (Y=71)
 iz_ac01,108,71,4	duplicate(Hunting Board#xmas)	Lutie Hunting Board#xmas_ag	857
+
+// 14. Lighthalzen (Y=75)
+iz_ac01,108,75,4	duplicate(Hunting Board#lhz)	Lighthalzen Hunting Board#lhz_ag	857
 
 
 // =============================================================
@@ -857,7 +861,10 @@ alberta,108,68,4	duplicate(WayfarerWarperBase)	Wayfarer Warper#alb	832
 // 13. Einbroch (Hub: 219 Hunter, 221 Board, 223 Warper)
 einbroch,223,192,4	duplicate(WayfarerWarperBase)	Wayfarer Warper#ein	832
 
-// 14. Adventurer Agency Headquarters (iz_ac01: 103, 49, Facing: North (0))
+// 14. Lighthalzen (Hub: 143 Hunter, 145 Board, 147 Warper)
+lighthalzen,147,96,4	duplicate(WayfarerWarperBase)	Wayfarer Warper#lhz	832
+
+// 15. Adventurer Agency Headquarters (iz_ac01: 103, 49, Facing: North (0))
 iz_ac01,103,49,0	duplicate(WayfarerWarperBase)	Wayfarer Warper#ag	832
 
 

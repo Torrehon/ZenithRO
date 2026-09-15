@@ -138915,17 +138915,26 @@ tbl = {
 		costume = false
 	},
 	[13197] = {
-		unidentifiedDisplayName = "Gatling Gun",
-		unidentifiedResourceName = "드리프터",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDisplayName = "Unidentified Gatling Gun",
+		unidentifiedResourceName = "미니메이",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Minigun",
 		identifiedResourceName = "미니메이",
 		identifiedDescriptionName = {
-			"..."
+			"A modified version of mass-produced gatling gun. It's quite useful considering its size.",
+			"_______________________",
+			"Adds 1% chance to absorb 5% of the damage dealt when attacking as SP.",
+			"_______________________",
+			"Further increases the SP drain chance by 1% every 3 refines.",
+			"_______________________",
+			"^0000CCType:^000000 Gatling Gun",
+			"^0000CCAttack:^000000 110",
+			"^0000CCWeight:^000000 200",
+			"Weapon Level:^009900 3^000000",
+			"Level Requirement:^009900 75^000000",
+			"Jobs:^6666CC Gunslinger Class^000000"
 		},
-		slotCount = 2,
+		slotCount = 1,
 		ClassNum = 19,
 		costume = false
 	},
@@ -192557,15 +192566,25 @@ tbl = {
 		costume = false
 	},
 	[19113] = {
-		unidentifiedDisplayName = "Glasses",
+		unidentifiedDisplayName = "Unidentified Glasses",
 		unidentifiedResourceName = "글래스",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Gemini-S58 Eyes(Blue)",
 		identifiedResourceName = "제미니S58의눈",
 		identifiedDescriptionName = {
-			"..."
+			"An imitation eyes based of Gemini-S58 eyes.",
+			"_______________________",
+			"Increases Ranged Attacks damage by 3%.",
+			"_______________________",
+			"^0000CCType:^000000 Headgear",
+			"^0000CCDefense:^000000 0",
+			"^0000CCPosition:^000000 Middle",
+			"^0000CCWeight:^000000 10",
+			"^0000CCArmor Level:^000000 1",
+			"^0000CCRefineable:^000000 No",
+			"_______________________",
+			"^0000CCRequirement:^000000",
+			"Base Level 75"
 		},
 		slotCount = 0,
 		ClassNum = 1456,
@@ -240935,27 +240954,21 @@ tbl = {
 		unidentifiedDisplayName = "Unidentified Grenade Launcher",
 		unidentifiedResourceName = "디스트로이어",
 		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
-		identifiedDisplayName = "Revenge",
-		identifiedResourceName = "리벤져",
+		identifiedDisplayName = "Toxic Avenger",
+		identifiedResourceName = "toxic_avenger",
 		identifiedDescriptionName = {
-			"A grenade launcher used by avengers.",
+			"A grenade launcher used for biologic warfare.",
 			"_______________________",
-			"Increases Ranged Physical Damage by 20%.",
-			"_______________________",
-			"^0000FFRefine Level +7^000000:",
-			"Increases damage of ^009900Dragon Tail^000000 by 15%.",
-			"_______________________",
-			"^0000FFRefine Level +9^000000:",
-			"Decreases ^009900Howling Mine^000000 skill cooldown by 1 second.",
+			"If equipped alongside with ^663399Poison Sphere^000000:",
+			"Increases ^CC0000Ground Drift^000000 damage by 50%.",
 			"_______________________",
 			"^0000CCType:^000000 Grenade Launcher",
-			"^0000CCAttack:^000000 350",
+			"^0000CCAttack:^000000 250",
+			"^0000CCElement:^663399 Poison",
 			"^0000CCWeight:^000000 180",
 			"^0000CCWeapon Level:^000000 3",
-			"_______________________",
-			"^0000CCRequirement:^000000",
-			"Base Level 120",
-			"Rebellion"
+			"Level Requirement:^009900 75^000000",
+			"Jobs:^6666CC All^000000"
 		},
 		slotCount = 2,
 		ClassNum = 21,
@@ -261762,6 +261775,31 @@ tbl = {
 			"^0000CCUsage:^000000",
 			"Can be exchanged for provisions with the",
 			"^0000CCVeteran Hunter^000000 in Einbroch.",
+			"_______________________________________",
+			"^FF0000Account Bound.^000000"
+		},
+		slotCount = 0,
+		ClassNum = 0
+	},
+	[50035] = {
+		unidentifiedDisplayName = "Coin",
+		unidentifiedResourceName = "lighthalzen_coin",
+		unidentifiedDescriptionName = {
+			" "
+		},
+		identifiedDisplayName = "Lighthalzen Coin",
+		identifiedResourceName = "lighthalzen_coin",
+		identifiedDescriptionName = {
+			"^0000CCLighthalzen Hunting Reward^000000",
+			"_______________________________________",
+			"A sleek, high-grade alloy coin minted in",
+			"the corporate metropolis of ^FF0000Lighthalzen^000000.",
+			"Engraved with the emblem of Rekenber",
+			"Corporation and advanced bio-tech motifs.",
+			"_______________________________________",
+			"^0000CCUsage:^000000",
+			"Can be exchanged for provisions with the",
+			"^0000CCVeteran Hunter^000000 in Lighthalzen.",
 			"_______________________________________",
 			"^FF0000Account Bound.^000000"
 		},

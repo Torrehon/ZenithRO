@@ -2086,16 +2086,6 @@ QuestInfoList_CLS = {
 		NpcName = "Hunting Board",
 	},
 	[71202] = {
-		Title = "Einbroch Hunt: Metaling",
-		Description = {
-			"Hunt down 20 Metalings to complete the contract",
-			"and claim your Einbroch Coins."
-		},
-		Summary = "Hunt 20 Metaling.",
-		Hunt1 = "Metaling",
-		NpcName = "Hunting Board",
-	},
-	[71203] = {
 		Title = "Einbroch Hunt: Porcellio",
 		Description = {
 			"Hunt down 20 Porcellios to complete the contract",
@@ -2105,7 +2095,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Porcellio",
 		NpcName = "Hunting Board",
 	},
-	[71204] = {
+	[71203] = {
 		Title = "Einbroch Hunt: Noxious",
 		Description = {
 			"Hunt down 20 Noxious to complete the contract",
@@ -2115,17 +2105,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Noxious",
 		NpcName = "Hunting Board",
 	},
-	[71205] = {
-		Title = "Einbroch Hunt: Holden",
-		Description = {
-			"Hunt down 20 Holdens to complete the contract",
-			"and claim your Einbroch Coins."
-		},
-		Summary = "Hunt 20 Holden.",
-		Hunt1 = "Holden",
-		NpcName = "Hunting Board",
-	},
-	[71206] = {
+	[71204] = {
 		Title = "Einbroch Hunt: Venomous",
 		Description = {
 			"Hunt down 20 Venomous to complete the contract",
@@ -2135,7 +2115,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Venomous",
 		NpcName = "Hunting Board",
 	},
-	[71207] = {
+	[71205] = {
 		Title = "Einbroch Hunt: Pitman",
 		Description = {
 			"Hunt down 15 Pitmen to complete the contract",
@@ -2145,7 +2125,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Pitman",
 		NpcName = "Hunting Board",
 	},
-	[71208] = {
+	[71206] = {
 		Title = "Einbroch Hunt: Obsidian",
 		Description = {
 			"Hunt down 15 Obsidians to complete the contract",
@@ -2155,7 +2135,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Obsidian",
 		NpcName = "Hunting Board",
 	},
-	[71209] = {
+	[71207] = {
 		Title = "Einbroch Hunt: Driller",
 		Description = {
 			"Hunt down 15 Drillers to complete the contract",
@@ -2165,7 +2145,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Driller",
 		NpcName = "Hunting Board",
 	},
-	[71210] = {
+	[71208] = {
 		Title = "Einbroch Hunt: Mineral",
 		Description = {
 			"Hunt down 15 Minerals to complete the contract",
@@ -2175,7 +2155,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Mineral",
 		NpcName = "Hunting Board",
 	},
-	[71211] = {
+	[71209] = {
 		Title = "Einbroch Hunt: Demon Pungus",
 		Description = {
 			"Hunt down 15 Demon Pungus to complete the contract",
@@ -2185,7 +2165,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Demon Pungus",
 		NpcName = "Hunting Board",
 	},
-	[71212] = {
+	[71210] = {
 		Title = "Einbroch Hunt: Old Stove",
 		Description = {
 			"Hunt down 10 Old Stoves to complete the contract",
@@ -2195,7 +2175,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Old Stove",
 		NpcName = "Hunting Board",
 	},
-	[71213] = {
+	[71211] = {
 		Title = "Einbroch Hunt: Teddy Bear",
 		Description = {
 			"Hunt down 10 Teddy Bears to complete the contract",
@@ -2205,7 +2185,7 @@ QuestInfoList_CLS = {
 		Hunt1 = "Teddy Bear",
 		NpcName = "Hunting Board",
 	},
-	[71214] = {
+	[71212] = {
 		Title = "Einbroch Hunt: Ungoliant",
 		Description = {
 			"Hunt down 1 Ungoliant to complete the contract",
@@ -2213,6 +2193,178 @@ QuestInfoList_CLS = {
 		},
 		Summary = "Hunt 1 Ungoliant.",
 		Hunt1 = "Ungoliant",
+		NpcName = "Hunting Board",
+	},
+
+	-- Lighthalzen Hunting Quests
+	[71301] = {
+		Title = "Lighthalzen Hunt: Metaling",
+		Description = {
+			"Hunt down 20 Metalings to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 20 Metaling.",
+		Hunt1 = "Metaling",
+		NpcName = "Hunting Board",
+	},
+	[71302] = {
+		Title = "Lighthalzen Hunt: Holden",
+		Description = {
+			"Hunt down 20 Holdens to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 20 Holden.",
+		Hunt1 = "Holden",
+		NpcName = "Hunting Board",
+	},
+	[71303] = {
+		Title = "Lighthalzen Hunt: Remover",
+		Description = {
+			"Hunt down 15 Removers to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Remover.",
+		Hunt1 = "Remover",
+		NpcName = "Hunting Board",
+	},
+	[71304] = {
+		Title = "Lighthalzen Hunt: Egnigem Cenia",
+		Description = {
+			"Hunt down 15 Egnigem Cenias to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Egnigem Cenia.",
+		Hunt1 = "Egnigem Cenia",
+		NpcName = "Hunting Board",
+	},
+	[71305] = {
+		Title = "Lighthalzen Hunt: Wickebine Tres",
+		Description = {
+			"Hunt down 15 Wickebine Tres to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Wickebine Tres.",
+		Hunt1 = "Wickebine Tres",
+		NpcName = "Hunting Board",
+	},
+	[71306] = {
+		Title = "Lighthalzen Hunt: Armeyer Dinze",
+		Description = {
+			"Hunt down 15 Armeyer Dinzes to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Armeyer Dinze.",
+		Hunt1 = "Armeyer Dinze",
+		NpcName = "Hunting Board",
+	},
+	[71307] = {
+		Title = "Lighthalzen Hunt: Errende Ebecee",
+		Description = {
+			"Hunt down 15 Errende Ebecees to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Errende Ebecee.",
+		Hunt1 = "Errende Ebecee",
+		NpcName = "Hunting Board",
+	},
+	[71308] = {
+		Title = "Lighthalzen Hunt: Kavach Icarus",
+		Description = {
+			"Hunt down 15 Kavach Icarus to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Kavach Icarus.",
+		Hunt1 = "Kavach Icarus",
+		NpcName = "Hunting Board",
+	},
+	[71309] = {
+		Title = "Lighthalzen Hunt: Laurell Weinder",
+		Description = {
+			"Hunt down 15 Laurell Weinders to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 15 Laurell Weinder.",
+		Hunt1 = "Laurell Weinder",
+		NpcName = "Hunting Board",
+	},
+	[71310] = {
+		Title = "Lighthalzen Hunt: Seyren Windsor",
+		Description = {
+			"Hunt down 10 Seyren Windsors to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 10 Seyren Windsor.",
+		Hunt1 = "Seyren Windsor",
+		NpcName = "Hunting Board",
+	},
+	[71311] = {
+		Title = "Lighthalzen Hunt: Eremes Guile",
+		Description = {
+			"Hunt down 10 Eremes Guiles to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 10 Eremes Guile.",
+		Hunt1 = "Eremes Guile",
+		NpcName = "Hunting Board",
+	},
+	[71312] = {
+		Title = "Lighthalzen Hunt: Howard Alt-Eisen",
+		Description = {
+			"Hunt down 10 Howard Alt-Eisens to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 10 Howard Alt-Eisen.",
+		Hunt1 = "Howard Alt-Eisen",
+		NpcName = "Hunting Board",
+	},
+	[71313] = {
+		Title = "Lighthalzen Hunt: Margaretha Sorin",
+		Description = {
+			"Hunt down 10 Margaretha Sorins to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 10 Margaretha Sorin.",
+		Hunt1 = "Margaretha Sorin",
+		NpcName = "Hunting Board",
+	},
+	[71314] = {
+		Title = "Lighthalzen Hunt: Cecil Damon",
+		Description = {
+			"Hunt down 10 Cecil Damons to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 10 Cecil Damon.",
+		Hunt1 = "Cecil Damon",
+		NpcName = "Hunting Board",
+	},
+	[71315] = {
+		Title = "Lighthalzen Hunt: Kathryne Keyron",
+		Description = {
+			"Hunt down 10 Kathryne Keyrons to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 10 Kathryne Keyron.",
+		Hunt1 = "Kathryne Keyron",
+		NpcName = "Hunting Board",
+	},
+	[71316] = {
+		Title = "Lighthalzen Hunt: Gemini-S58",
+		Description = {
+			"Hunt down 1 Gemini-S58 to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 1 Gemini-S58.",
+		Hunt1 = "Gemini-S58",
+		NpcName = "Hunting Board",
+	},
+	[71317] = {
+		Title = "Lighthalzen Hunt: Chimera",
+		Description = {
+			"Hunt down 1 Chimera to complete the contract",
+			"and claim your Lighthalzen Coins."
+		},
+		Summary = "Hunt 1 Chimera.",
+		Hunt1 = "Chimera",
 		NpcName = "Hunting Board",
 	},
 }
@@ -2453,5 +2605,22 @@ QuestClassificationList[71209] = 2 -- Daily Quest
 QuestClassificationList[71210] = 2 -- Daily Quest
 QuestClassificationList[71211] = 2 -- Daily Quest
 QuestClassificationList[71212] = 2 -- Daily Quest
-QuestClassificationList[71213] = 2 -- Daily Quest
-QuestClassificationList[71214] = 2 -- Daily Quest
+
+-- Lighthalzen Hunting Quests Classification
+QuestClassificationList[71301] = 2 -- Daily Quest
+QuestClassificationList[71302] = 2 -- Daily Quest
+QuestClassificationList[71303] = 2 -- Daily Quest
+QuestClassificationList[71304] = 2 -- Daily Quest
+QuestClassificationList[71305] = 2 -- Daily Quest
+QuestClassificationList[71306] = 2 -- Daily Quest
+QuestClassificationList[71307] = 2 -- Daily Quest
+QuestClassificationList[71308] = 2 -- Daily Quest
+QuestClassificationList[71309] = 2 -- Daily Quest
+QuestClassificationList[71310] = 2 -- Daily Quest
+QuestClassificationList[71311] = 2 -- Daily Quest
+QuestClassificationList[71312] = 2 -- Daily Quest
+QuestClassificationList[71313] = 2 -- Daily Quest
+QuestClassificationList[71314] = 2 -- Daily Quest
+QuestClassificationList[71315] = 2 -- Daily Quest
+QuestClassificationList[71316] = 2 -- Daily Quest
+QuestClassificationList[71317] = 2 -- Daily Quest
