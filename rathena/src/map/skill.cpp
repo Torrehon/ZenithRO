@@ -4763,6 +4763,9 @@ int32 skill_castend_nodamage_id (block_list *src, block_list *bl, uint16 skill_i
 	map_foreachinrange(build_plagiarism_list_sub, src, 15, BL_PC, src, skill_id, 1);
 	// --- FIN CUSTOM ---
 
+	// Notify nearby monsters about healing skills cast by players
+	mob_notify_heal(src, bl, skill_id);
+
 	if( src != bl && status_isdead(*bl) ) {
 		switch( skill_id ) { // Skills that may be cast on dead targets
 			case NPC_WIDESOULDRAIN:
@@ -7528,6 +7531,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 				if( tsc && tsc->getSCE(SC_AKAITSUKI) && heal )
 					heal = ~heal + 1;
 				status_heal(bl, heal, 0, 0);
+				mob_notify_heal(ss, bl, sg->skill_id);
 			}
 			break;
 
@@ -7773,6 +7777,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 					heal = ~heal + 1;
 				clif_skill_nodamage(unit, *bl, AL_HEAL, heal);
 				status_heal(bl, heal, 0, 0);
+				mob_notify_heal(ss, bl, sg->skill_id);
 			}
 			break;
 

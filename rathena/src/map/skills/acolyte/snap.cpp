@@ -13,9 +13,10 @@ SkillSnap::SkillSnap() : SkillImpl(MO_BODYRELOCATION) {
 }
 
 void SkillSnap::castendPos2(block_list* src, int32 x, int32 y, uint16 skill_lv, t_tick tick, int32& flag) const {
-	map_session_data* sd = BL_CAST(BL_PC, src);
+	// Players check path; monsters/bosses ignore pathing obstacles (e.g. anti-rude snap)
+	bool checkpath = (sd != nullptr);
 
-	if (unit_movepos(src, x, y, 2, 1)) {
+	if (unit_movepos(src, x, y, 2, checkpath)) {
 #if PACKETVER >= 20111005
 		clif_snap(src, src->x, src->y);
 #else

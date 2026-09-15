@@ -2280,11 +2280,38 @@ void mob_set_attacked_id(int32 src_id, int32 target_id, t_tick tick, bool is_nor
 			}
 			break;
 		}
+		case BL_HOM:
+		{
+			homun_data& hd = *reinterpret_cast<homun_data*>(src);
+			if (hd.master && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+				md->attacked_id = hd.master->id;
+			else
+				md->attacked_id = src->id;
+			break;
+		}
+		case BL_MER:
+		{
+			s_mercenary_data& mc = *reinterpret_cast<s_mercenary_data*>(src);
+			if (mc.master && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+				md->attacked_id = mc.master->id;
+			else
+				md->attacked_id = src->id;
+			break;
+		}
+		case BL_ELEM:
+		{
+			s_elemental_data& ed = *reinterpret_cast<s_elemental_data*>(src);
+			if (ed.master && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+				md->attacked_id = ed.master->id;
+			else
+				md->attacked_id = src->id;
+			break;
+		}
 		case BL_MOB:
 		{
 			mob_data& md2 = *reinterpret_cast<mob_data*>(src);
-			// Config to decide whether to retaliate versus the master or the mob
-			if (md2.master_id && battle_config.retaliate_to_master)
+			// Config to decide whether to retaliate versus the master or the mob (Bosses always target master)
+			if (md2.master_id && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
 				md->attacked_id = md2.master_id;
 			else
 				md->attacked_id = src->id;
@@ -4356,6 +4383,105 @@ void mobskill_delay(mob_data& md, t_tick tick)
 		md.skilldelay[md.skill_idx] = tick + ms[md.skill_idx]->delay;
 }
 
+/**
+ * Resolves the real player attacker when a mob/boss is attacked,
+ * recursively tracing through homunculus, mercenaries, elementals, pets,
+ * and player-summoned mobs/plants (e.g. Alchemist flora/spheres).
+ * @param md: Monster data
+ * @return block_list* of the ultimate player attacker (or original target)
+ */
+block_list* mob_get_real_attacker(mob_data* md) {
+	if (!md)
+		return nullptr;
+
+	int32 target_id = md->attacked_id ? md->attacked_id : md->target_id;
+	block_list* bl = map_id2bl(target_id);
+	if (!bl)
+		return nullptr;
+
+	for (int32 depth = 0; bl != nullptr && depth < 5; depth++) {
+		if (bl->m != md->m || bl->prev == nullptr)
+			return nullptr;
+
+		if (bl->type == BL_PC) {
+			return bl;
+		} else if (bl->type == BL_HOM) {
+			homun_data* hd = BL_CAST(BL_HOM, bl);
+			bl = (hd && hd->master) ? hd->master : nullptr;
+		} else if (bl->type == BL_MER) {
+			s_mercenary_data* mc = BL_CAST(BL_MER, bl);
+			bl = (mc && mc->master) ? mc->master : nullptr;
+		} else if (bl->type == BL_ELEM) {
+			s_elemental_data* ed = BL_CAST(BL_ELEM, bl);
+			bl = (ed && ed->master) ? ed->master : nullptr;
+		} else if (bl->type == BL_PET) {
+			pet_data* pd = BL_CAST(BL_PET, bl);
+			bl = (pd && pd->master) ? pd->master : nullptr;
+		} else if (bl->type == BL_MOB) {
+			mob_data* smd = BL_CAST(BL_MOB, bl);
+			bl = (smd && smd->master_id) ? map_id2bl(smd->master_id) : nullptr;
+		} else {
+			break;
+		}
+	}
+
+	block_list* orig_bl = map_id2bl(target_id);
+	if (orig_bl && (orig_bl->m != md->m || orig_bl->prev == nullptr))
+		return nullptr;
+
+	return orig_bl;
+}
+
+/**
+ * Sub-function for notifying nearby mobs about healing skills cast by enemies.
+ */
+static int32 mob_notify_heal_sub(block_list* bl, va_list ap) {
+	block_list* src = va_arg(ap, block_list*);
+	mob_data* md = BL_CAST(BL_MOB, bl);
+	if (!md || md->status.hp <= 0 || md->prev == nullptr)
+		return 0;
+
+	// Only trigger if healer is an enemy of the mob
+	if (battle_check_target(md, src, BCT_ENEMY) <= 0)
+		return 0;
+
+	mobskill_event(md, src, gettick(), MSC_HEALUSED, 0);
+	return 1;
+}
+
+/**
+ * Broadcasts heal detection to monsters within area of healer and target.
+ * @param src: The entity casting the heal
+ * @param target: The entity receiving the heal
+ * @param skill_id: The healing skill ID
+ */
+void mob_notify_heal(block_list* src, block_list* target, uint16 skill_id) {
+	if (!src)
+		return;
+
+	switch (skill_id) {
+		case AL_HEAL:
+		case PR_SANCTUARY:
+		case AB_HIGHNESSHEAL:
+		case AB_CHEAL:
+		case CD_DILECTIO_HEAL:
+		case CD_MEDIALE_VOTUM:
+		case AM_POTIONPITCHER:
+		case CR_SLIMPITCHER:
+		case BA_APPLEIDUN:
+		case SU_FRESHSHRIMP:
+		case SU_BUNCHOFSHRIMP:
+			break;
+		default:
+			return;
+	}
+
+	map_foreachinrange(mob_notify_heal_sub, src, AREA_SIZE, BL_MOB, src);
+	if (target && target != src && target->m == src->m) {
+		map_foreachinrange(mob_notify_heal_sub, target, AREA_SIZE, BL_MOB, src);
+	}
+}
+
 /*==========================================
  * Skill use judging
  *------------------------------------------*/
@@ -4425,6 +4551,10 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 			flag = 1; //Trigger skill.
 		else if (ms[i]->cond1 == MSC_SKILLUSED)
 			flag = ((event & 0xffff) == MSC_SKILLUSED && ((event >> 16) == c2 || c2 == 0));
+		else if (ms[i]->cond1 == MSC_ELEMENTATTACKED && damage > 0)
+			flag = ((event & 0xffff) == MSC_ELEMENTATTACKED && ((event >> 16) == c2 || c2 == -1));
+		else if (ms[i]->cond1 == MSC_HEALUSED)
+			flag = (event == MSC_HEALUSED);
 		else if (ms[i]->cond1 == MSC_GROUNDATTACKED && damage > 0)
 			flag = ((event & 0xffff) == MSC_SKILLUSED && skill_get_inf((event >> 16))&INF_GROUND_SKILL);
 		else if (ms[i]->cond1 == MSC_DAMAGEDGT && damage > 0 && !((event & 0xffff) == MSC_SKILLUSED)) //Avoid double check if skill has been used [datawulf]
@@ -4507,6 +4637,9 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 				case MST_AROUND8:
 					bl = map_id2bl(md->target_id);
 					break;
+				case MST_ATTACKER:
+					bl = mob_get_real_attacker(md);
+					break;
 				case MST_MASTER:
 					bl = md;
 					if (md->master_id)
@@ -4526,6 +4659,10 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 					continue;
 				else
 					break;
+			}
+
+			if (ms[i]->target == MST_ATTACKER) {
+				md->target_id = bl->id; // Lock aggro onto the attacker
 			}
 
 			x = bl->x;
@@ -4559,6 +4696,9 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 					if (bl == nullptr && !status_has_mode(&md->status, MD_CANATTACK))
 						bl = map_id2bl(md->attacked_id);
 					break;
+				case MST_ATTACKER:
+					bl = mob_get_real_attacker(md);
+					break;
 				case MST_MASTER:
 					bl = md;
 					if (md->master_id)
@@ -4584,6 +4724,10 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 					continue;
 				else
 					break;
+			}
+
+			if (ms[i]->target == MST_ATTACKER) {
+				md->target_id = bl->id; // Lock aggro onto the attacker
 			}
 
 			md->skill_idx = i;
@@ -4616,14 +4760,22 @@ int32 mobskill_event(mob_data *md, block_list *src, t_tick tick, int32 flag, int
 	if(md->prev == nullptr || md->status.hp == 0)
 		return 0;
 
+	int32 prev_attacked_id = md->attacked_id;
+	if (src != nullptr)
+		md->attacked_id = src->id;
+
 	target_id = md->target_id;
 	if (!target_id || battle_config.mob_changetarget_byskill)
-		md->target_id = src->id;
+		md->target_id = src ? src->id : 0;
 
 	if (flag == -1)
 		res = mobskill_use(md, tick, MSC_CASTTARGETED);
 	else if ((flag&0xffff) == MSC_SKILLUSED)
 		res = mobskill_use(md, tick, flag, damage);
+	else if ((flag&0xffff) == MSC_ELEMENTATTACKED)
+		res = mobskill_use(md, tick, flag, damage);
+	else if (flag == MSC_HEALUSED)
+		res = mobskill_use(md, tick, MSC_HEALUSED, damage);
 	else if (flag&BF_SHORT)
 		res = mobskill_use(md, tick, MSC_CLOSEDATTACKED, damage);
 	else if (flag&BF_LONG && !(flag&BF_MAGIC)) //Long-attacked should not include magic.
@@ -4631,12 +4783,13 @@ int32 mobskill_event(mob_data *md, block_list *src, t_tick tick, int32 flag, int
 	else if (damage > 0) //Trigger for any damage dealt from other attack types without affecting other triggers [datawulf]
 		res = mobskill_use(md, tick, -2, damage);
 
-	if (!res)
-	//Restore previous target only if skill condition failed to trigger. [Skotlex]
+	if (!res) {
+		//Restore previous target only if skill condition failed to trigger. [Skotlex]
 		md->target_id = target_id;
-	//Otherwise check if the target is an enemy, and unlock if needed.
-	else if (battle_check_target(md, src, BCT_ENEMY) <= 0)
+		md->attacked_id = prev_attacked_id;
+	} else if (battle_check_target(md, src, BCT_ENEMY) <= 0) {
 		md->target_id = target_id;
+	}
 
 	return res;
 }
@@ -6523,6 +6676,11 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 		{ "groundattacked",    MSC_GROUNDATTACKED    },
 		{ "damagedgt",         MSC_DAMAGEDGT         },
 		{ "trickcasting",      MSC_TRICKCASTING      },
+		{ "healused",          MSC_HEALUSED          },
+		{ "healerdetected",    MSC_HEALUSED          },
+		{ "elementattacked",   MSC_ELEMENTATTACKED   },
+		{ "elementdamage",     MSC_ELEMENTATTACKED   },
+		{ "damaged_ele",       MSC_ELEMENTATTACKED   },
 	}, cond2[] ={
 		{	"anybad",		-1				},
 		{	"stone",		SC_STONE		},
@@ -6543,6 +6701,8 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 		{	"self",		MST_SELF	},
 		{	"friend",	MST_FRIEND	},
 		{	"master",	MST_MASTER	},
+		{	"attacker",	MST_ATTACKER	},
+		{	"rudeattacker",	MST_ATTACKER	},
 		{	"around5",	MST_AROUND5	},
 		{	"around6",	MST_AROUND6	},
 		{	"around7",	MST_AROUND7	},
@@ -6677,9 +6837,34 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	// numeric value
 	ms->cond2 = atoi(str[11]);
 	// or special constant
-	ARR_FIND( 0, ARRAYLENGTH(cond2), j, strcmp(str[11],cond2[j].str) == 0 );
-	if( j < ARRAYLENGTH(cond2) )
-		ms->cond2 = cond2[j].id;
+	if (ms->cond1 == MSC_ELEMENTATTACKED) {
+		static const struct {
+			char str[32];
+			int32 id;
+		} ele_table[] = {
+			{ "neutral",     ELE_NEUTRAL },
+			{ "water",       ELE_WATER   },
+			{ "earth",       ELE_EARTH   },
+			{ "fire",        ELE_FIRE    },
+			{ "wind",        ELE_WIND    },
+			{ "poison",      ELE_POISON  },
+			{ "holy",        ELE_HOLY    },
+			{ "dark",        ELE_DARK    },
+			{ "shadow",      ELE_DARK    },
+			{ "ghost",       ELE_GHOST   },
+			{ "telekinetic", ELE_GHOST   },
+			{ "undead",      ELE_UNDEAD  },
+			{ "anyelement",  -1          },
+			{ "any",         -1          },
+		};
+		ARR_FIND( 0, ARRAYLENGTH(ele_table), j, strcmp(str[11],ele_table[j].str) == 0 );
+		if( j < ARRAYLENGTH(ele_table) )
+			ms->cond2 = ele_table[j].id;
+	} else {
+		ARR_FIND( 0, ARRAYLENGTH(cond2), j, strcmp(str[11],cond2[j].str) == 0 );
+		if( j < ARRAYLENGTH(cond2) )
+			ms->cond2 = cond2[j].id;
+	}
 
 	ms->val[0] = (int32)strtol(str[12],nullptr,0);
 	ms->val[1] = (int32)strtol(str[13],nullptr,0);

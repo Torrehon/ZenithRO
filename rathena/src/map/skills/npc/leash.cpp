@@ -4,6 +4,7 @@
 #include "leash.hpp"
 
 #include "map/clif.hpp"
+#include "map/status.hpp"
 
 SkillLeash::SkillLeash() : SkillImpl(NPC_LEASH) {
 }
@@ -11,7 +12,8 @@ SkillLeash::SkillLeash() : SkillImpl(NPC_LEASH) {
 void SkillLeash::castendNoDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	clif_skill_nodamage(src, *target, getSkillId(), skill_lv);
 
-	if( !skill_check_unit_movepos( 0, target, src->x, src->y, 1, 1 ) ){
+	bool checkpath = (status_get_class_(src) != CLASS_BOSS);
+	if( !skill_check_unit_movepos( 0, target, src->x, src->y, 1, checkpath ) ){
 		flag |= SKILL_NOCONSUME_REQ;
 		return;
 	}

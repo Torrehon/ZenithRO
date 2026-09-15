@@ -451,6 +451,7 @@ enum e_mob_skill_target {
 	MST_AROUND3,
 	MST_AROUND4,
 	MST_AROUND	=	MST_AROUND4,
+	MST_ATTACKER,
 };
 
 enum e_mob_skill_condition {
@@ -481,6 +482,8 @@ enum e_mob_skill_condition {
 	MSC_GROUNDATTACKED,
 	MSC_DAMAGEDGT,
 	MSC_TRICKCASTING,
+	MSC_HEALUSED,
+	MSC_ELEMENTATTACKED,
 };
 
 // The data structures for storing delayed item drops
@@ -554,6 +557,8 @@ int32 mob_warpslave(block_list *bl, int32 range);
 int32 mob_linksearch(block_list *bl,va_list ap);
 
 bool mob_chat_display_message( const mob_data& md, uint16 msg_id );
+block_list* mob_get_real_attacker(mob_data* md);
+void mob_notify_heal(block_list* src, block_list* target, uint16 skill_id);
 void mobskill_delay(mob_data& md, t_tick tick);
 bool mobskill_use(mob_data *md,t_tick tick,int32 event, int64 damage = 0);
 int32 mobskill_event(mob_data *md,block_list *src,t_tick tick, int32 flag, int64 damage = 0);

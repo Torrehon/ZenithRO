@@ -15570,23 +15570,23 @@ Body:
     HitCount: 1
     SplashArea:
       - Level: 1
-        Area: 5
+        Area: 13
       - Level: 2
-        Area: 7
+        Area: 13
       - Level: 3
-        Area: 9
+        Area: 13
       - Level: 4
-        Area: 11
+        Area: 13
       - Level: 5
         Area: 13
       - Level: 6
-        Area: 5
+        Area: 13
       - Level: 7
-        Area: 7
+        Area: 13
       - Level: 8
-        Area: 9
+        Area: 13
       - Level: 9
-        Area: 11
+        Area: 13
       - Level: 10
         Area: 13
     Duration1: 910
@@ -16897,6 +16897,62 @@ Body:
       Flag:
         NoReiteration: true
         NoOverlap: true
+  - Id: 747
+    Name: NPC_LEASH
+    Description: Leash
+    MaxLevel: 5
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Range:
+      - Level: 1
+        Size: 5
+      - Level: 2
+        Size: 10
+      - Level: 3
+        Size: 15
+      - Level: 4
+        Size: 20
+      - Level: 5
+        Size: 25
+    Hit: Single
+    HitCount: 1
+  - Id: 748
+    Name: NPC_WIDELEASH
+    Description: Wide Leash
+    MaxLevel: 5
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+    Range:
+      - Level: 1
+        Size: 5
+      - Level: 2
+        Size: 10
+      - Level: 3
+        Size: 15
+      - Level: 4
+        Size: 20
+      - Level: 5
+        Size: 25
+    Hit: Single
+    HitCount: 1
+    SplashArea: -1
+  - Id: 755
+    Name: NPC_MOVE_COORDINATE
+    Description: Change Location
+    MaxLevel: 1
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Range: 14
   - Id: 1001
     Name: KN_CHARGEATK
     Description: Charge Attack

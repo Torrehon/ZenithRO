@@ -3738,7 +3738,14 @@ void clif_updatestatus( map_session_data& sd, enum _sp type ){
 			clif_par_change(sd, type, sd.battle_status.sp);
 			break;
 		case SP_ASPD:
+#ifndef RENEWAL_ASPD
+			{
+				int32 apm = (sd.battle_status.amotion > 0) ? (30000 / sd.battle_status.amotion) : 0;
+				clif_par_change(sd, type, 2000 - 10 * apm);
+			}
+#else
 			clif_par_change(sd, type, sd.battle_status.amotion);
+#endif
 			break;
 		case SP_ATK1:
 			clif_par_change(sd, type, pc_leftside_atk(&sd));
@@ -4203,7 +4210,14 @@ void clif_initialstatus( map_session_data& sd ) {
 	packet.avoidSuccessValue = sd.battle_status.flee;
 	packet.plusAvoidSuccessValue = sd.battle_status.flee2 / 10;
 	packet.criticalSuccessValue = sd.battle_status.cri / 10;
+#ifndef RENEWAL_ASPD
+	{
+		int32 apm = (sd.battle_status.amotion > 0) ? (30000 / sd.battle_status.amotion) : 0;
+		packet.ASPD = 2000 - 10 * apm;
+	}
+#else
 	packet.ASPD = sd.battle_status.amotion;
+#endif
 	packet.plusASPD = 0;
 
 	clif_send( &packet, sizeof( packet ), &sd, SELF );
@@ -15903,7 +15917,11 @@ void clif_check(int32 fd, map_session_data* pl_sd)
 	WFIFOW(fd,32) = pl_sd->battle_status.flee;
 	WFIFOW(fd,34) = pl_sd->battle_status.flee2/10;
 	WFIFOW(fd,36) = pl_sd->battle_status.cri/10;
+#ifndef RENEWAL_ASPD
+	WFIFOW(fd,38) = (pl_sd->battle_status.amotion > 0) ? (30000 / pl_sd->battle_status.amotion) : 0;  // aspd (APM)
+#else
 	WFIFOW(fd,38) = (2000-pl_sd->battle_status.amotion)/10;  // aspd
+#endif
 	WFIFOW(fd,40) = 0;  // FIXME: What is 'plusASPD' supposed to be? Maybe adelay?
 	WFIFOSET(fd,packet_len(0x214));
 }

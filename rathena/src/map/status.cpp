@@ -103,6 +103,7 @@ static int16 status_calc_aspd_rate(block_list *,status_change *,int32);
 static int16 status_calc_aspd(block_list *bl, status_change *sc, bool fixed);
 #endif
 static int16 status_calc_fix_aspd(block_list *bl, status_change *sc, int32);
+int32 status_base_apm_pc(map_session_data* sd, struct status_data* status);
 static int16 status_calc_patk(block_list *, status_change *, int32);
 static int16 status_calc_smatk(block_list *, status_change *, int32);
 static int16 status_calc_res(block_list *, status_change *, int32);
@@ -2402,18 +2403,58 @@ int32 status_base_amotion_pc(map_session_data* sd, struct status_data* status)
 	if (job == nullptr)
 		return AMOTION_ZERO_ASPD;
 
-	// Base weapon delay
-	int32 amotion = (sd->status.weapon < MAX_WEAPON_TYPE)
+	int32 apm = status_base_apm_pc(sd, status);
+	if (apm <= 0)
+		return AMOTION_ZERO_ASPD;
+
+	return 30000 / apm;
+#endif
+}
+
+/**
+ * Calculates base APM for players from job weapon table, plus comfort bonus (+10) and stats scaling
+ * @param sd: Player session data
+ * @param status: Player status data
+ * @return Base APM
+ */
+int32 status_base_apm_pc(map_session_data* sd, struct status_data* status)
+{
+	nullpo_ret(sd);
+	nullpo_ret(status);
+
+	std::shared_ptr<s_job_info> job = job_db.find(sd->status.class_);
+	if (job == nullptr)
+		return 60;
+
+	// Base weapon delay from job tables
+	int32 raw_weapon_delay = (sd->status.weapon < MAX_WEAPON_TYPE)
 	 ? (job->aspd_base[sd->status.weapon]) // Single weapon
 	 : (job->aspd_base[sd->weapontype1] + job->aspd_base[sd->weapontype2]) * 7 / 10; // Dual-wield
 
-	// Percentual delay reduction from stats
-	amotion -= amotion * (4 * status->agi + status->dex) / 1000;
+	if (raw_weapon_delay <= 0)
+		raw_weapon_delay = 600;
 
-	// Raw delay adjustment from bAspd bonus
-	amotion += sd->bonus.aspd_add;
-	return amotion;
-#endif
+	// Base APM oficial + 10 de confort inicial
+	int32 base_apm = (30000 / raw_weapon_delay) + 10;
+
+	// Aporte de stats con Tasa de Rango (Range Tax) - Ajuste Moderado
+	int32 stat_apm = 0;
+	switch (sd->status.weapon) {
+		case W_BOW:
+		case W_REVOLVER:
+		case W_RIFLE:
+		case W_GATLING:
+		case W_SHOTGUN:
+		case W_GRENADE:
+		case W_HUUMA:
+			stat_apm = (status->agi * 60 + status->dex * 10) / 100;
+			break;
+		default: // Melee
+			stat_apm = (status->agi * 85 + status->dex * 12) / 100;
+			break;
+	}
+
+	return base_apm + stat_apm;
 }
 
 /**
@@ -5219,6 +5260,12 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 	// --- FIN CUSTOM ---
 	
+	// --- INICIO CUSTOM: Soul of the Peacekeeper (Gatling ASPD Stacks: +0.3% per stack) ---
+	if (sc && sc->getSCE(SC_GATLING_STACK)) {
+		base_status->aspd_rate -= sc->getSCE(SC_GATLING_STACK)->val1 * 3;
+	}
+	// --- FIN CUSTOM ---
+	
 	if(pc_isriding(sd))
 		base_status->aspd_rate += 500-100*pc_checkskill(sd,KN_CAVALIERMASTERY);
 	else if(pc_isridingdragon(sd))
@@ -7191,39 +7238,17 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			}
 			// --- FIN CUSTOM ---
 
-			// --- INICIO DEL "MURO" DE ASPD ---
-			// Barrera en 185 ASPD (150 amotion)
-			int32 amotion_wall = 150; 
-			
-			if (amotion < amotion_wall) {
-				int32 excess_speed = amotion_wall - amotion;
-				
-				// Retienen el 75% del exceso de velocidad. 
-				// Multiplicamos por 3 y dividimos por 4 para evitar usar decimales (flotantes) en C++.
-				amotion = amotion_wall - (excess_speed * 3 / 4); 
-			}
-			// --- FIN DEL MURO ---
-			
 			status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
 
 			status->adelay = AMOTION_DIVIDER_NOPC * status->amotion;
 		} else if ( bl.type == BL_PC ) {
 			uint16 skill_lv;
 
+#ifdef RENEWAL_ASPD
 			amotion = status_base_amotion_pc(sd,status);
-#ifndef RENEWAL_ASPD
-			status->aspd_rate = status_calc_aspd_rate(&bl, sc, b_status->aspd_rate);
-#endif
-			// Absolute ASPD % modifiers
-			amotion = amotion * status->aspd_rate / 1000;
 			if (sd->ud.skilltimer != INVALID_TIMER && (skill_lv = pc_checkskill(sd, SA_FREECAST)) > 0)
-#ifdef RENEWAL_ASPD
 				amotion = amotion * 5 * (skill_lv + 10) / 100;
-#else
-				amotion += (2000 - amotion) * ( 55 - 5 * ( skill_lv + 1 ) ) / 100; //Increases amotion to reduce ASPD to the corresponding absolute percentage for each level (overriding other adjustments)
-#endif
 
-#ifdef RENEWAL_ASPD
 			// RE ASPD % modifier
 			amotion += (max(195 - amotion, 2) * (status->aspd_rate2 + status_calc_aspd(&bl, sc, false))) / 100;
 
@@ -7231,6 +7256,35 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			amotion = AMOTION_ZERO_ASPD - amotion * AMOTION_INTERVAL;
 
 			amotion += sd->bonus.aspd_add;
+#else
+			// --- MODELO LINEAL APM (Attacks Per Minute) ---
+			int32 apm = status_base_apm_pc(sd, status);
+
+			status->aspd_rate = status_calc_aspd_rate(&bl, sc, b_status->aspd_rate);
+
+			// En rAthena, aspd_rate empieza en 1000 y resta bonos de skills/pociones/equipo.
+			// rate_bonus representa el % directo de aceleración de velocidad (1000 - aspd_rate).
+			int32 rate_bonus = 1000 - status->aspd_rate;
+			if (rate_bonus != 0) {
+				apm = apm * (1000 + rate_bonus) / 1000;
+			}
+
+			// Modificador plano de equipo (bAspd)
+			// En rAthena, cada punto de bAspd almacena -10 en aspd_add
+			if (sd->bonus.aspd_add != 0) {
+				apm += (-sd->bonus.aspd_add * 2) / 10;
+			}
+
+			// Penalización de Free Cast si el personaje está casteando
+			if (sd->ud.skilltimer != INVALID_TIMER && (skill_lv = pc_checkskill(sd, SA_FREECAST)) > 0) {
+				apm = apm * (30 + 7 * skill_lv) / 100;
+			}
+
+			if (apm <= 0)
+				apm = 1;
+
+			// Convertir APM a milisegundos de animación (amotion)
+			amotion = 30000 / apm;
 #endif
 			amotion = status_calc_fix_aspd(&bl, sc, amotion);
 			status->amotion = cap_value(amotion, pc_maxaspd(sd)/AMOTION_DIVIDER_PC, MIN_ASPD/AMOTION_DIVIDER_PC);
@@ -15058,6 +15112,12 @@ int32 status_change_end( block_list* bl, enum sc_type type, int32 tid ){
 				}
 			}
 			break;
+		case SC_GATLINGFEVER:
+		case SC_MBULLET:
+			if (sc->getSCE(SC_GATLING_STACK))
+				status_change_end(bl, SC_GATLING_STACK);
+			break;
+
 		case SC_GUARD_STANCE:
 			if (sd) {
 				int32 sec = skill_get_time2(scdb->skill_id, val1);

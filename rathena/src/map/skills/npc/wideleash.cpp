@@ -5,13 +5,15 @@
 
 #include "map/clif.hpp"
 #include "map/map.hpp"
+#include "map/status.hpp"
 
 SkillWideLeash::SkillWideLeash() : SkillImpl(NPC_WIDELEASH) {
 }
 
 void SkillWideLeash::castendNoDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	if( flag & 1 ){
-		if( !skill_check_unit_movepos( 0, target, src->x, src->y, 1, 1 ) ){
+		bool checkpath = (status_get_class_(src) != CLASS_BOSS);
+		if( !skill_check_unit_movepos( 0, target, src->x, src->y, 1, checkpath ) ){
 			flag |= SKILL_NOCONSUME_REQ;
 			return;
 		}

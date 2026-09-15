@@ -353,8 +353,26 @@ int32 battle_damage(block_list *src, block_list *target, int64 damage, int16 div
 
 		// Trigger monster skill conditions
 		if (src != target && !status_isdead(*target)) {
-			if (damage > 0)
+			if (damage > 0) {
 				mobskill_event(&md, src, tick, attack_type, damage);
+
+				// Determine attack element for elemental reactive skills
+				int32 atk_elem = ELE_NEUTRAL;
+				if (skill_id > 0) {
+					atk_elem = skill_get_ele(skill_id, skill_lv);
+					if (atk_elem < 0) { // ELE_WEAPON or variable
+						status_data* sstatus = status_get_status_data(*src);
+						atk_elem = sstatus ? sstatus->rhw.ele : ELE_NEUTRAL;
+					}
+				} else {
+					status_data* sstatus = status_get_status_data(*src);
+					atk_elem = sstatus ? sstatus->rhw.ele : ELE_NEUTRAL;
+				}
+				if (atk_elem < 0 || atk_elem > ELE_UNDEAD)
+					atk_elem = ELE_NEUTRAL;
+
+				mobskill_event(&md, src, tick, MSC_ELEMENTATTACKED | (atk_elem << 16), damage);
+			}
 			if (skill_id > 0)
 				mobskill_event(&md, src, tick, MSC_SKILLUSED | (skill_id << 16), damage);
 		}
@@ -1728,6 +1746,7 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 		case HW_GRAVITATION:
 #endif
 		case SP_SOULEXPLOSION:
+		case NPC_EARTHQUAKE:
 			// Adjust these based on any possible PK damage rates.
 			if (battle_config.pk_mode == 1 && map_getmapflag(bl->m, MF_PVP) > 0)
 				damage = battle_calc_pk_damage(*src, *bl, damage, skill_id, flag);
@@ -3524,9 +3543,10 @@ static bool attack_ignores_def(Damage* wd, block_list *src, const block_list *ta
 	std::bitset<NK_MAX> nk = battle_skill_get_damage_properties(skill_id, wd->miscflag);
 
 #ifndef RENEWAL
-	if (is_attack_critical(wd, src, target, skill_id, skill_lv, false))
-		return true;
-	else
+	// --- REWORK DE CRÍTICO: Los críticos ya no ignoran DEF automáticamente (pasan por penetración progresiva) ---
+	// if (is_attack_critical(wd, src, target, skill_id, skill_lv, false))
+	// 	return true;
+	// else
 #endif
 	if (sc && sc->getSCE(SC_FUSION))
 		return true;
@@ -4453,22 +4473,21 @@ static void battle_calc_skill_base_damage(struct Damage* wd, block_list *src,blo
 				}
 				// --- FIN CUSTOM ---
 				
-				// --- INICIO CUSTOM: Stacks de ASPD (Soul of the Peacekeeper) ---
+				// --- INICIO CUSTOM: Soul of the Peacekeeper (Gatling ASPD Stacks) ---
 				if (skill_id == 0 && pc_checkskill(sd, GS_PKEEPER) > 0) {
 					status_change *sc_pkeeper = status_get_sc(src);
 					
-					// Si tiene ambos estados activos (Magical Bullet y Gatling Fever)
+					// Active if both Gatling Fever and Magical Bullet are active
 					if (sc_pkeeper && sc_pkeeper->getSCE(SC_GATLINGFEVER) && sc_pkeeper->getSCE(SC_MBULLET)) {
 						int stacks = 1;
 						
-						// Leemos cuántos stacks tiene y le sumamos 1 sin límite
+						// Increment stack count by 1 without upper limit
 						if (sc_pkeeper->getSCE(SC_GATLING_STACK)) {
-							stacks = sc_pkeeper->getSCE(SC_GATLING_STACK)->val1 + 2;
+							stacks = sc_pkeeper->getSCE(SC_GATLING_STACK)->val1 + 1;
 						}
 						
-						// Iniciamos el estado con duración infinita (-1)
+						// Apply/refresh 10-second duration on each hit
 						sc_start4(src, src, SC_GATLING_STACK, 100, stacks, 0, 0, 0, 10000);
-						
 					}
 				}
 				// --- FIN CUSTOM ---
@@ -5099,6 +5118,36 @@ static void battle_calc_defense_reduction( Damage* wd, block_list* src, block_li
 	int16 vit_def;
 	defType def1 = status_get_def(target); //Don't use tstatus->def1 due to skill timer reductions.
 	int16 def2 = tstatus->def2;
+
+	// --- REWORK DE CRÍTICO: PENETRACIÓN (BASE 25%) + CONVERSIÓN A DAÑO CRÍTICO (RATIO 1/5) ---
+	if (is_attack_critical(wd, src, target, skill_id, skill_lv, false)) {
+		if (sd) {
+			int16 player_cri = sstatus->cri / 10; // Escala normal de crítico visual
+			int16 player_luk = sstatus->luk;
+
+			// Factor de eficiencia: 0.25 + (LUK / 60) -> Exactamente 1.0 a 45 LUK
+			float efficiency = 0.25f + (player_luk / 60.0f);
+
+			// Penetración Bruta calculada desde base 25%
+			int32 raw_penetration = 25 + (int32)(player_cri * efficiency);
+
+			// 1. Penetración de DEF (Topada al 100% de la armadura)
+			int32 def_penetration = cap_value(raw_penetration, 25, 100);
+			def1 = def1 * (100 - def_penetration) / 100;
+			def2 = def2 * (100 - def_penetration) / 100;
+
+			// 2. Conversión del Exceso (>100%) a Daño Crítico con Ratio 1/5 (Sin Cap)
+			if (raw_penetration > 100) {
+				int32 bonus_crit_damage = (raw_penetration - 100) / 5; // Cada 5% de exceso = +1% daño crítico
+
+				ATK_ADDRATE(wd->damage, wd->damage2, bonus_crit_damage);
+			}
+		} else {
+			// Monstruos/NPCs que hagan crítico ignoran el 100% de la defensa
+			def1 = 0;
+			def2 = 0;
+		}
+	}
 
 	if (sd) {
 		int32 i = sd->indexed_bonus.ignore_def_by_race[tstatus->race] + sd->indexed_bonus.ignore_def_by_race[RC_ALL];
@@ -6551,34 +6600,24 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 			case AB_RENOVATIO:
 				ad.damage = status_get_lv(src) * 10 + sstatus->int_;
 				break;
-			case NPC_EARTHQUAKE:
+			case NPC_EARTHQUAKE: {
 				if (mflag & NPC_EARTHQUAKE_FLAG) {
 					ad.flag |= NPC_EARTHQUAKE_FLAG; // Pass flag to battle_calc_damage
-					mflag &= ~NPC_EARTHQUAKE_FLAG; // Remove before NK_SPLASHSPLIT check
+					mflag &= ~NPC_EARTHQUAKE_FLAG; // Remove before target count
 				}
 
-				// TODO: This code is only accurate for pre-renewal
-				// In renewal, monsters should use NPC_EARTHQUAKE_K instead, but it's not implemented yet
-				if (sd != nullptr) {
-#ifdef RENEWAL
-					ad.damage = sstatus->str * 2 + battle_calc_weapon_attack(src, target, skill_id, skill_lv, mflag).damage;
-#else
-					ad.damage = sd->battle_status.batk + sd->battle_status.rhw.atk;
-#endif
-				}
-				else {
-					ad.damage = battle_calc_base_damage(src, sstatus, &sstatus->rhw, sc, tstatus->size, 0);
-#ifndef RENEWAL
-					if (sc != nullptr)
-						MATK_RATE(battle_get_atkpercent(*src, skill_id, *sc));
-#endif
-				}
+				// Earthquake Rework: Fixed irreducible true damage scaling with skill level,
+				// split among targets up to a maximum of 6 (matching party cap).
+				int32 split_targets = mflag;
+				if (split_targets > 6)
+					split_targets = 6;
+				if (split_targets < 1)
+					split_targets = 1;
 
-				MATK_RATE(200 + 100 * skill_lv + 100 * (skill_lv / 2) + ((skill_lv > 4) ? 100 : 0));
-
-				if (nk[NK_SPLASHSPLIT] && mflag > 1)
-					ad.damage /= mflag;
+				ad.damage = (int64)(1500 * skill_lv) / split_targets;
+				flag.imdef = 1;
 				break;
+			}
 			case NPC_ICEMINE:
 			case NPC_FLAMECROSS:
 				ad.damage = static_cast<int64>( sstatus->rhw.atk ) * static_cast<int64>( 20 ) * static_cast<int64>( skill_lv );

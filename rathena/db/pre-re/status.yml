@@ -7094,9 +7094,13 @@ Body:
   - Status: Gatling_Stack
     Icon: EFST_GATLING_STACK
     CalcFlags:
-      All: true
+      Aspd: true
     Flags:
-      NoRemoveOnDead: false
+      SendVal1: true
+      OverlapIgnoreLevel: true
+      NoDispell: true
+      NoBanishingBuster: true
+      NoClearance: true
   - Status: Poison_Mist
     Icon: EFST_POISON_MIST
     DurationLookup: MH_POISON_MIST
