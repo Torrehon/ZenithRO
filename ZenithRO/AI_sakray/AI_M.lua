@@ -24,16 +24,16 @@ FOLLOW_CMD_ST				= 12
 ------------------------------------------
 -- global variable
 ------------------------------------------
-MyState				= IDLE_ST	-- ÃÖÃÊÀÇ »óÅÂ´Â ÈŞ½Ä
-MyEnemy				= 0		-- Àû id
-MyDestX				= 0		-- ¸ñÀûÁö x
-MyDestY				= 0		-- ¸ñÀûÁö y
-MyPatrolX			= 0		-- Á¤Âû ¸ñÀûÁö x
-MyPatrolY			= 0		-- Á¤Âû ¸ñÀûÁö y
-ResCmdList			= List.new()	-- ¿¹¾à ¸í·É¾î ¸®½ºÆ® 
-MyID				= 0		-- ¿ëº´ id
-MySkill				= 0		-- ¿ëº´ÀÇ ½ºÅ³
-MySkillLevel		= 0		-- ¿ëº´ÀÇ ½ºÅ³ ·¹º§
+MyState				= IDLE_ST	-- ìµœì´ˆì˜ ìƒíƒœëŠ” íœ´ì‹
+MyEnemy				= 0		-- ì  id
+MyDestX				= 0		-- ëª©ì ì§€ x
+MyDestY				= 0		-- ëª©ì ì§€ y
+MyPatrolX			= 0		-- ì •ì°° ëª©ì ì§€ x
+MyPatrolY			= 0		-- ì •ì°° ëª©ì ì§€ y
+ResCmdList			= List.new()	-- ì˜ˆì•½ ëª…ë ¹ì–´ ë¦¬ìŠ¤íŠ¸ 
+MyID				= 0		-- ìš©ë³‘ id
+MySkill				= 0		-- ìš©ë³‘ì˜ ìŠ¤í‚¬
+MySkillLevel		= 0		-- ìš©ë³‘ì˜ ìŠ¤í‚¬ ë ˆë²¨
 ------------------------------------------
 
 
@@ -44,13 +44,13 @@ function	OnMOVE_CMD (x,y)
 	TraceAI ("OnMOVE_CMD")
 
 	if ( x == MyDestX and y == MyDestY and MOTION_MOVE == GetV(V_MOTION,MyID)) then
-		return		-- ÇöÀç ÀÌµ¿ÁßÀÎ ¸ñÀûÁö¿Í °°Àº °÷ÀÌ¸é Ã³¸®ÇÏÁö ¾Ê´Â´Ù. 
+		return		-- í˜„ì¬ ì´ë™ì¤‘ì¸ ëª©ì ì§€ì™€ ê°™ì€ ê³³ì´ë©´ ì²˜ë¦¬í•˜ì§€ ì•ŠëŠ”ë‹¤. 
 	end
 
 	local curX, curY = GetV (V_POSITION,MyID)
-	if (math.abs(x-curX)+math.abs(y-curY) > 15) then		-- ¸ñÀûÁö°¡ ÀÏÁ¤ °Å¸® ÀÌ»óÀÌ¸é (¼­¹ö¿¡¼­ ¸Õ°Å¸®´Â Ã³¸®ÇÏÁö ¾Ê±â ¶§¹®¿¡)
-		List.pushleft (ResCmdList,{MOVE_CMD,x,y})			-- ¿ø·¡ ¸ñÀûÁö·ÎÀÇ ÀÌµ¿À» ¿¹¾àÇÑ´Ù. 	
-		x = math.floor((x+curX)/2)							-- Áß°£ÁöÁ¡À¸·Î ¸ÕÀú ÀÌµ¿ÇÑ´Ù.  
+	if (math.abs(x-curX)+math.abs(y-curY) > 15) then		-- ëª©ì ì§€ê°€ ì¼ì • ê±°ë¦¬ ì´ìƒì´ë©´ (ì„œë²„ì—ì„œ ë¨¼ê±°ë¦¬ëŠ” ì²˜ë¦¬í•˜ì§€ ì•Šê¸° ë•Œë¬¸ì—)
+		List.pushleft (ResCmdList,{MOVE_CMD,x,y})			-- ì›ë˜ ëª©ì ì§€ë¡œì˜ ì´ë™ì„ ì˜ˆì•½í•œë‹¤. 	
+		x = math.floor((x+curX)/2)							-- ì¤‘ê°„ì§€ì ìœ¼ë¡œ ë¨¼ì € ì´ë™í•œë‹¤.  
 		y = math.floor((y+curY)/2)							-- 
 	end
 
@@ -168,7 +168,7 @@ end
 
 function	OnFOLLOW_CMD ()
 
-	-- ´ë±â¸í·ÉÀº ´ë±â»óÅÂ¿Í ÈŞ½Ä»óÅÂ¸¦ ¼­·Î ÀüÈ¯½ÃÅ²´Ù. 
+	-- ëŒ€ê¸°ëª…ë ¹ì€ ëŒ€ê¸°ìƒíƒœì™€ íœ´ì‹ìƒíƒœë¥¼ ì„œë¡œ ì „í™˜ì‹œí‚¨ë‹¤. 
 	if (MyState ~= FOLLOW_CMD_ST) then
 		MoveToOwner (MyID)
 		MyState = FOLLOW_CMD_ST
@@ -231,7 +231,7 @@ function	OnIDLE_ST ()
 
 	local cmd = List.popleft(ResCmdList)
 	if (cmd ~= nil) then		
-		ProcessCommand (cmd)	-- ¿¹¾à ¸í·É¾î Ã³¸® 
+		ProcessCommand (cmd)	-- ì˜ˆì•½ ëª…ë ¹ì–´ ì²˜ë¦¬ 
 		return 
 	end
 
@@ -266,9 +266,36 @@ function	OnFOLLOW_ST ()
 
 	TraceAI ("OnFOLLOW_ST")
 
-	if (GetDistanceFromOwner(MyID) <= 3) then		--  DESTINATION_ARRIVED_IN 
+	local cmd = List.popleft(ResCmdList)
+	if (cmd ~= nil) then		
+		ProcessCommand (cmd)
+		return 
+	end
+
+	-- Aggressive: Check if owner is attacked
+	local object = GetOwnerEnemy (MyID)
+	if (object ~= 0) then
+		MyState = CHASE_ST
+		MyEnemy = object
+		TraceAI ("FOLLOW_ST -> CHASE_ST : OWNER_ATTACKED")
+		return
+	end
+
+	-- Aggressive: Check if any hostile monster is nearby
+	object = GetMyEnemy (MyID)
+	if (object ~= 0) then
+		local ownerDist = GetDistanceFromOwner(MyID)
+		if (ownerDist <= 12 and ownerDist ~= -1) then
+			MyState = CHASE_ST
+			MyEnemy = object
+			TraceAI ("FOLLOW_ST -> CHASE_ST : AGGRESSIVE_ENEMY_FOUND")
+			return
+		end
+	end
+
+	if (GetDistanceFromOwner(MyID) <= 3) then		-- DESTINATION_ARRIVED_IN 
 		MyState = IDLE_ST
-		TraceAI ("FOLLOW_ST -> IDLW_ST")
+		TraceAI ("FOLLOW_ST -> IDLE_ST")
 		return
 	elseif (GetV(V_MOTION,MyID) == MOTION_STAND) then
 		MoveToOwner (MyID)
@@ -291,6 +318,17 @@ function	OnCHASE_ST ()
 		TraceAI ("CHASE_ST -> IDLE_ST : ENEMY_OUTSIGHT_IN")
 		return
 	end
+
+	-- Leash check: do not wander off too far from owner
+	local ownerDist = GetDistanceFromOwner(MyID)
+	if (ownerDist > 14 or ownerDist == -1) then
+		MyState = FOLLOW_ST
+		MyEnemy = 0
+		MyDestX, MyDestY = 0,0
+		TraceAI ("CHASE_ST -> FOLLOW_ST : OWNER_LEASH_EXCEEDED")
+		return
+	end
+
 	if (true == IsInAttackSight(MyID,MyEnemy)) then  -- ENEMY_INATTACKSIGHT_IN
 		MyState = ATTACK_ST
 		TraceAI ("CHASE_ST -> ATTACK_ST : ENEMY_INATTACKSIGHT_IN")
@@ -485,25 +523,25 @@ function OnFOLLOW_CMD_ST ()
 	TraceAI ("OnFOLLOW_CMD_ST")
 
 	local ownerX, ownerY, myX, myY
-	ownerX, ownerY = GetV (V_POSITION,GetV(V_OWNER,MyID)) -- ÁÖÀÎ
-	myX, myY = GetV (V_POSITION,MyID)					  -- ³ª 
+	ownerX, ownerY = GetV (V_POSITION,GetV(V_OWNER,MyID)) -- ì£¼ì¸
+	myX, myY = GetV (V_POSITION,MyID)					  -- ë‚˜ 
 	
 	local d = GetDistance (ownerX,ownerY,myX,myY)
 
-	if ( d <= 3) then									  -- 3¼¿ ÀÌÇÏ °Å¸®¸é 
+	if ( d <= 3) then									  -- 3ì…€ ì´í•˜ ê±°ë¦¬ë©´ 
 		return 
 	end
 
 	local motion = GetV (V_MOTION,MyID)
-	if (motion == MOTION_MOVE) then                       -- ÀÌµ¿Áß
+	if (motion == MOTION_MOVE) then                       -- ì´ë™ì¤‘
 		d = GetDistance (ownerX, ownerY, MyDestX, MyDestY)
-		if ( d > 3) then                                  -- ¸ñÀûÁö º¯°æ ?
+		if ( d > 3) then                                  -- ëª©ì ì§€ ë³€ê²½ ?
 			MoveToOwner (MyID)
 			MyDestX = ownerX
 			MyDestY = ownerY
 			return
 		end
-	else                                                  -- ´Ù¸¥ µ¿ÀÛ 
+	else                                                  -- ë‹¤ë¥¸ ë™ì‘ 
 		MoveToOwner (MyID)
 		MyDestX = ownerX
 		MyDestY = ownerY
@@ -513,6 +551,27 @@ function OnFOLLOW_CMD_ST ()
 end
 
 
+
+-------------------------------------------
+-- Monster Exclusion List (Wild Plants & Player Summons)
+-------------------------------------------
+IgnoredMonsters = {
+	[1078] = true, -- Red Plant
+	[1079] = true, -- Blue Plant
+	[1080] = true, -- Green Plant
+	[1081] = true, -- Yellow Plant
+	[1082] = true, -- White Plant
+	[1083] = true, -- Shining Plant
+	[1084] = true, -- Red Mushroom
+	[1085] = true, -- Black Mushroom
+	[1555] = true, -- Parasite
+	[1575] = true, -- Flora
+	[1579] = true, -- Hydra
+	[1589] = true, -- Mandragora
+	[1590] = true, -- Geographer
+	[1790] = true, -- Rafflesia
+	[20572] = true, -- Wooden Golem
+}
 
 function	GetOwnerEnemy (myid)
 	local result = 0
@@ -525,14 +584,18 @@ function	GetOwnerEnemy (myid)
 		if (v ~= owner and v ~= myid) then
 			target = GetV (V_TARGET,v)
 			if (target == owner) then
-				if (IsMonster(v) == 1) then
-					enemys[index] = v
-					index = index+1
-				else
-					local motion = GetV(V_MOTION,i)
-					if (motion == MOTION_ATTACK or motion == MOTION_ATTACK2) then
+				local mobType = GetV(V_HOMUNTYPE, v)
+				local motion = GetV(V_MOTION, v)
+				if (not IgnoredMonsters[mobType]) and (motion ~= MOTION_DEAD) then
+					if (IsMonster(v) == 1) then
 						enemys[index] = v
 						index = index+1
+					else
+						local m = GetV(V_MOTION,v)
+						if (m == MOTION_ATTACK or m == MOTION_ATTACK2) then
+							enemys[index] = v
+							index = index+1
+						end
 					end
 				end
 			end
@@ -555,23 +618,15 @@ end
 
 
 function	GetMyEnemy (myid)
-	local result = 0
-	local type = GetV (V_MERTYPE,myid)
-	
-	if (type >= ARCHER01 and type <= SWORDMAN10) then
-		result = GetMyEnemyA (myid)
-	else
-		result = GetMyEnemyB (myid)
-	end
-
-	return result
+	-- Mercenary aggressively seeks monsters on sight
+	return GetMyEnemyB (myid)
 end
 
 
 
 
 -------------------------------------------
---  ºñ¼±°øÇü GetMyEnemy
+-- Passive Enemy Detection (Retaliation Only)
 -------------------------------------------
 function	GetMyEnemyA (myid)
 	local result = 0
@@ -584,8 +639,12 @@ function	GetMyEnemyA (myid)
 		if (v ~= owner and v ~= myid) then
 			target = GetV (V_TARGET,v)
 			if (target == myid) then
-				enemys[index] = v
-				index = index+1
+				local mobType = GetV(V_HOMUNTYPE, v)
+				local motion = GetV(V_MOTION, v)
+				if (not IgnoredMonsters[mobType]) and (motion ~= MOTION_DEAD) then
+					enemys[index] = v
+					index = index+1
+				end
 			end
 		end
 	end
@@ -608,7 +667,7 @@ end
 
 
 -------------------------------------------
---  ¼±°øÇü GetMyEnemy
+-- Aggressive Enemy Detection (Monsters in Sight)
 -------------------------------------------
 function	GetMyEnemyB (myid)
 	local result = 0
@@ -616,12 +675,18 @@ function	GetMyEnemyB (myid)
 	local actors = GetActors ()
 	local enemys = {}
 	local index = 1
-	local type
 	for i,v in ipairs(actors) do
 		if (v ~= owner and v ~= myid) then
 			if (1 == IsMonster(v))	then
-				enemys[index] = v
-				index = index+1
+				local mobType = GetV(V_HOMUNTYPE, v)
+				local motion = GetV(V_MOTION, v)
+				local distToOwner = GetDistance2(owner, v)
+				local distToMe = GetDistance2(myid, v)
+				-- Skip ignored/summoned monsters, dead entities, and monsters beyond leash range (14 cells of owner, 12 cells of mercenary)
+				if (not IgnoredMonsters[mobType]) and (motion ~= MOTION_DEAD) and (distToOwner ~= -1 and distToOwner <= 14) and (distToMe ~= -1 and distToMe <= 12) then
+					enemys[index] = v
+					index = index+1
+				end
 			end
 		end
 	end
@@ -651,16 +716,16 @@ function AI(myid)
 	if msg[1] == NONE_CMD then
 		if rmsg[1] ~= NONE_CMD then
 			if List.size(ResCmdList) < 10 then
-				List.pushright (ResCmdList,rmsg) -- ¿¹¾à ¸í·É ÀúÀå
+				List.pushright (ResCmdList,rmsg) -- ì˜ˆì•½ ëª…ë ¹ ì €ì¥
 			end
 		end
 	else
-		List.clear (ResCmdList)	-- »õ·Î¿î ¸í·ÉÀÌ ÀÔ·ÂµÇ¸é ¿¹¾à ¸í·ÉµéÀº »èÁ¦ÇÑ´Ù.  
-		ProcessCommand (msg)	-- ¸í·É¾î Ã³¸® 
+		List.clear (ResCmdList)	-- ìƒˆë¡œìš´ ëª…ë ¹ì´ ì…ë ¥ë˜ë©´ ì˜ˆì•½ ëª…ë ¹ë“¤ì€ ì‚­ì œí•œë‹¤.  
+		ProcessCommand (msg)	-- ëª…ë ¹ì–´ ì²˜ë¦¬ 
 	end
 
 		
-	-- »óÅÂ Ã³¸® 
+	-- ìƒíƒœ ì²˜ë¦¬ 
  	if (MyState == IDLE_ST) then
 		OnIDLE_ST ()
 	elseif (MyState == CHASE_ST) then					

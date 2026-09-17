@@ -251,7 +251,7 @@ Body:
           - Helm_
           - Iron_Cane
     Script: |
-      bonus bMaxHP,2;
+      bonus bMaxHPRate,2;
   - Combos:
       - Combo:
           - Mage_Coat

@@ -26,6 +26,12 @@ SKILL_EFFECT_INFO_LIST = {
         targetEffectID = { 1826 },
         onTarget = true
     },
+	  [SKID.NPC_LICK] = {
+		targetEffectNum = 1,
+        targetEffectID = { 1741 },
+        onTarget = true,
+		LaunchZC_USE_SKILL = true
+    },
 	  [SKID.BS_DECIMATION] = {
 		beginMotionType = ACTOR_STATE.ST_BEGIN_SKILL,
 		effectNum = 3,

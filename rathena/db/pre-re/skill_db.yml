@@ -262,7 +262,7 @@ Body:
   - Id: 7
     Name: SM_MAGNUM
     Description: Magnum Break
-    MaxLevel: 10
+    MaxLevel: 30
     Type: Weapon
     TargetType: Self
     DamageFlags:
@@ -295,6 +295,44 @@ Body:
         Area: 2
       - Level: 11
         Area: 4
+      - Level: 12
+        Area: 4
+      - Level: 13
+        Area: 4
+      - Level: 14
+        Area: 4
+      - Level: 15
+        Area: 4
+      - Level: 16
+        Area: 4
+      - Level: 17
+        Area: 4
+      - Level: 18
+        Area: 4
+      - Level: 19
+        Area: 4
+      - Level: 20
+        Area: 4
+      - Level: 21
+        Area: 4
+      - Level: 22
+        Area: 4
+      - Level: 23
+        Area: 4
+      - Level: 24
+        Area: 4
+      - Level: 25
+        Area: 4
+      - Level: 26
+        Area: 4
+      - Level: 27
+        Area: 4
+      - Level: 28
+        Area: 4
+      - Level: 29
+        Area: 4
+      - Level: 30
+        Area: 4
     Knockback: 2
     CopyFlags:
       Skill:
@@ -324,6 +362,46 @@ Body:
           Amount: 28
         - Level: 10
           Amount: 30
+        - Level: 11
+          Amount: 32
+        - Level: 12
+          Amount: 34
+        - Level: 13
+          Amount: 36
+        - Level: 14
+          Amount: 38
+        - Level: 15
+          Amount: 40
+        - Level: 16
+          Amount: 42
+        - Level: 17
+          Amount: 44
+        - Level: 18
+          Amount: 46
+        - Level: 19
+          Amount: 48
+        - Level: 20
+          Amount: 50
+        - Level: 21
+          Amount: 52
+        - Level: 22
+          Amount: 54
+        - Level: 23
+          Amount: 56
+        - Level: 24
+          Amount: 58
+        - Level: 25
+          Amount: 60
+        - Level: 26
+          Amount: 62
+        - Level: 27
+          Amount: 64
+        - Level: 28
+          Amount: 66
+        - Level: 29
+          Amount: 68
+        - Level: 30
+          Amount: 70
     Status: Watk_Element
   - Id: 8
     Name: SM_ENDURE
@@ -761,7 +839,7 @@ Body:
   - Id: 17
     Name: MG_FIREBALL
     Description: Fire Ball
-    MaxLevel: 5
+    MaxLevel: 25
     Type: Magic
     TargetType: Attack
     DamageFlags:
@@ -1055,7 +1133,7 @@ Body:
   - Id: 21
     Name: MG_THUNDERSTORM
     Description: Thunderstorm
-    MaxLevel: 5
+    MaxLevel: 10
     Type: Magic
     TargetType: Ground
     Flags:
@@ -1073,6 +1151,16 @@ Body:
         Count: 4
       - Level: 5
         Count: 5
+      - Level: 6
+        Count: 6
+      - Level: 7
+        Count: 7
+      - Level: 8
+        Count: 8
+      - Level: 9
+        Count: 9
+      - Level: 10
+        Count: 10
     Element: Wind
     CopyFlags:
       Skill:
@@ -1089,6 +1177,16 @@ Body:
         Time: 2000
       - Level: 5
         Time: 2500
+      - Level: 6
+        Time: 3000
+      - Level: 7
+        Time: 3500
+      - Level: 8
+        Time: 4000
+      - Level: 9
+        Time: 4500
+      - Level: 10
+        Time: 5000
     AfterCastActDelay: 2000
     Duration1: 100
     Requires:
@@ -1103,6 +1201,16 @@ Body:
           Amount: 44
         - Level: 5
           Amount: 49
+        - Level: 6
+          Amount: 54
+        - Level: 7
+          Amount: 59
+        - Level: 8
+          Amount: 64
+        - Level: 9
+          Amount: 69
+        - Level: 10
+          Amount: 74
     Unit:
       Id: Dummyskill
       Range:
@@ -1115,6 +1223,16 @@ Body:
         - Level: 4
           Size: 2
         - Level: 5
+          Size: 3
+        - Level: 6
+          Size: 3
+        - Level: 7
+          Size: 3
+        - Level: 8
+          Size: 3
+        - Level: 9
+          Size: 3
+        - Level: 10
           Size: 3
       Interval: 1000
       Target: Enemy
@@ -3232,7 +3350,7 @@ Body:
   - Id: 86
     Name: WZ_WATERBALL
     Description: Water Ball
-    MaxLevel: 10
+    MaxLevel: 30
     Type: Magic
     TargetType: Attack
     Flags:
@@ -3265,7 +3383,47 @@ Body:
       - Level: 9
         Time: 9000
       - Level: 10
-        Time: 1000
+        Time: 10000
+      - Level: 11
+        Time: 11000
+      - Level: 12
+        Time: 12000
+      - Level: 13
+        Time: 13000
+      - Level: 14
+        Time: 14000
+      - Level: 15
+        Time: 15000
+      - Level: 16
+        Time: 16000
+      - Level: 17
+        Time: 17000
+      - Level: 18
+        Time: 18000
+      - Level: 19
+        Time: 19000
+      - Level: 20
+        Time: 20000
+      - Level: 21
+        Time: 21000
+      - Level: 22
+        Time: 22000
+      - Level: 23
+        Time: 23000
+      - Level: 24
+        Time: 24000
+      - Level: 25
+        Time: 25000
+      - Level: 26
+        Time: 26000
+      - Level: 27
+        Time: 27000
+      - Level: 28
+        Time: 28000
+      - Level: 29
+        Time: 29000
+      - Level: 30
+        Time: 30000
     Duration1: 10000
     Requires:
       SpCost:
@@ -3289,6 +3447,46 @@ Body:
           Amount: 55
         - Level: 10
           Amount: 60
+        - Level: 11
+          Amount: 65
+        - Level: 12
+          Amount: 70
+        - Level: 13
+          Amount: 75
+        - Level: 14
+          Amount: 80
+        - Level: 15
+          Amount: 85
+        - Level: 16
+          Amount: 90
+        - Level: 17
+          Amount: 95
+        - Level: 18
+          Amount: 100
+        - Level: 19
+          Amount: 105
+        - Level: 20
+          Amount: 110
+        - Level: 21
+          Amount: 115
+        - Level: 22
+          Amount: 120
+        - Level: 23
+          Amount: 125
+        - Level: 24
+          Amount: 130
+        - Level: 25
+          Amount: 135
+        - Level: 26
+          Amount: 140
+        - Level: 27
+          Amount: 145
+        - Level: 28
+          Amount: 150
+        - Level: 29
+          Amount: 155
+        - Level: 30
+          Amount: 160
       # State: Water
     # Unit:
       # Id: Dummyskill
@@ -3329,7 +3527,7 @@ Body:
     MaxLevel: 10
     Type: Magic
     TargetType: Attack
-    Range: 9
+    Range: 14
     DamageFlags:
       Splash: true
     Flags:
@@ -9136,6 +9334,7 @@ Body:
       Interval: 300
       Target: Enemy
     Status: Blind
+    CastCancel: false
   - Id: 340
     Name: NPC_DARKSTRIKE
     Description: Soul Strike of Darkness
@@ -9320,15 +9519,15 @@ Body:
     Hit: Single
     Duration1:
       - Level: 1
-        Time: 5000
-      - Level: 2
         Time: 10000
-      - Level: 3
+      - Level: 2
         Time: 15000
-      - Level: 4
+      - Level: 3
         Time: 20000
-      - Level: 5
+      - Level: 4
         Time: 25000
+      - Level: 5
+        Time: 30000
     Status: Powerup
   - Id: 350
     Name: NPC_AGIUP
@@ -15561,6 +15760,9 @@ Body:
       Splash: true
       SplashSplit: true
       IgnoreDefense: true
+      IgnoreElement: true
+      IgnoreDefCard: true
+      IgnoreLongCard: true
     Flags:
       IsNpc: true
       TargetTrap: true
@@ -16943,6 +17145,42 @@ Body:
     Hit: Single
     HitCount: 1
     SplashArea: -1
+  - Id: 749
+    Name: NPC_WIDECRITICALWOUND
+    Description: Wide Critical Wounds
+    MaxLevel: 10
+    Type: Weapon
+    TargetType: Self
+    DamageFlags:
+      Splash: true
+    Flags:
+      IsNpc: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+      - Level: 6
+        Area: 14
+      - Level: 7
+        Area: 14
+      - Level: 8
+        Area: 14
+      - Level: 9
+        Area: 14
+      - Level: 10
+        Area: 2
+    Element: Weapon
+    Duration2: 30000
+    Status: CriticalWound
   - Id: 755
     Name: NPC_MOVE_COORDINATE
     Description: Change Location

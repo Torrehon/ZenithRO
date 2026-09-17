@@ -11,18 +11,26 @@ ErrorInfo=""
 LastSavedDate=""
 TactLastSavedDate=""
 TypeString="M"
-dofile( "./AI/USER_AI/Const_.lua")
-dofile( "./AI/USER_AI/M_SkillList.lua" )
-dofile( "./AI/USER_AI/Defaults.lua")
-dofile( "./AI/USER_AI/AzzyUtil.lua")
-dofile( "./AI/USER_AI/Stubs.lua")
-dofile( "./AI/USER_AI/A_Friends.lua")
-dofile( "./AI/USER_AI/M_Config.lua")
-dofile( "./AI/USER_AI/M_Tactics.lua")
-pcall(function () dofile( "./AI/USER_AI/Mob_ID.lua") end)
-dofile( "./AI/USER_AI/AI_main.lua")
-dofile( "./AI/USER_AI/M_PVP_Tact.lua")
-dofile( "./AI/USER_AI/M_Extra.lua")
+local BaseAIPath = "./AI_sakray/USER_AI/"
+local _f = io.open(BaseAIPath .. "Const_.lua", "r")
+if _f then
+	_f:close()
+else
+	BaseAIPath = "./AI/USER_AI/"
+end
+
+dofile( BaseAIPath .. "Const_.lua")
+dofile( BaseAIPath .. "M_SkillList.lua" )
+dofile( BaseAIPath .. "Defaults.lua")
+dofile( BaseAIPath .. "AzzyUtil.lua")
+dofile( BaseAIPath .. "Stubs.lua")
+dofile( BaseAIPath .. "A_Friends.lua")
+dofile( BaseAIPath .. "M_Config.lua")
+dofile( BaseAIPath .. "M_Tactics.lua")
+pcall(function () dofile( BaseAIPath .. "Mob_ID.lua") end)
+dofile( BaseAIPath .. "AI_main.lua")
+dofile( BaseAIPath .. "M_PVP_Tact.lua")
+dofile( BaseAIPath .. "M_Extra.lua")
 
 
 function WriteStartupLog(Version,ErrorCode,ErrorInfo)
@@ -32,11 +40,11 @@ function WriteStartupLog(Version,ErrorCode,ErrorInfo)
 		AUVersion="1.30b or earlier"
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."AzzyUtil.lua no version found"
-	elseif string.gfind(AUVersion,verspattern)()~="1.56" then
+	elseif string.gfind(AUVersion,verspattern)()~="1.56" and string.gfind(AUVersion,verspattern)()~="1.55" then
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."AzzyUtil.lua wrong version "..string.gfind(AUVersion,verspattern)().."\n"
 	end
-	TestFile=io.open("./AI/USER_AI/data/testM.txt","w") --different name since they'd be potentially running simulaneously if user logged in with homun and merc out
+	TestFile=io.open(BaseAIPath .. "data/testM.txt","w") --different name since they'd be potentially running simulaneously if user logged in with homun and merc out
 	if TestFile~=nil then
 		TestFile:close()
 	else
@@ -47,7 +55,7 @@ if CVersion==nil then
 		CVersion="1.30b or earlier"
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."Const_.lua no version found"
-	elseif string.gfind(CVersion,verspattern)()~="1.56" then
+	elseif string.gfind(CVersion,verspattern)()~="1.56" and string.gfind(CVersion,verspattern)()~="1.55" then
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."Const_.lua wrong version "..string.gfind(CVersion,verspattern)().."\n"
 	end
@@ -60,25 +68,25 @@ if CVersion==nil then
 		ErrorInfo=ErrorInfo.."AI_main.lua wrong version "..string.gfind(MainVersion,verspattern)().."\n"
 	end
 	--[[
-	if fsize("./AI/USER_AI/AzzyUtil.lua")~=AULen then
+	if fsize(BaseAIPath .. "AzzyUtil.lua")~=AULen then
 		ErrorCode="Damaged File"
 		ErrorInfo=ErrorInfo.." AzzyUtil.lua has been modified or is corrupted"
 	end
-	if fsize("./AI/USER_AI/Const_.lua")~=ConstLen then
+	if fsize(BaseAIPath .. "Const_.lua")~=ConstLen then
 		ErrorCode="Damaged File"
 		ErrorInfo=ErrorInfo.." Const_.lua has been modified or is corrupted"
 	end
-	if fsize("./AI/USER_AI/AI_main.lua")~=MainLen then
+	if fsize(BaseAIPath .. "AI_main.lua")~=MainLen then
 		ErrorCode="Damaged File"
 		ErrorInfo=ErrorInfo.." AI_main.lua has been modified or corrupted"
 	end
 	--]]
-	if fsize("./AI/USER_AI/M_Config.lua")==3017 then
+	if fsize(BaseAIPath .. "M_Config.lua")==3017 then
 		ConfigVers="Default: "..LastSavedDate
 	else
 		ConfigVers="Custom, edited "..LastSavedDate
 	end
-	if fsize("./AI/USER_AI/M_Tactics.lua")==547 then
+	if fsize(BaseAIPath .. "M_Tactics.lua")==547 then
 		TacticVers="Default: "..TactLastSavedDate
 	else
 		TacticVers="Custom, edited "..TactLastSavedDate

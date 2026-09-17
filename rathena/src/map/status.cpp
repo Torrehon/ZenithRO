@@ -5260,12 +5260,6 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 	// --- FIN CUSTOM ---
 	
-	// --- INICIO CUSTOM: Soul of the Peacekeeper (Gatling ASPD Stacks: +0.3% per stack) ---
-	if (sc && sc->getSCE(SC_GATLING_STACK)) {
-		base_status->aspd_rate -= sc->getSCE(SC_GATLING_STACK)->val1 * 3;
-	}
-	// --- FIN CUSTOM ---
-	
 	if(pc_isriding(sd))
 		base_status->aspd_rate += 500-100*pc_checkskill(sd,KN_CAVALIERMASTERY);
 	else if(pc_isridingdragon(sd))
@@ -5854,12 +5848,6 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 	amotion = (1000 - 4 * status->agi - status->dex) * hd->homunculusDB->baseASPD / 1000;
 #endif
 
-	// --- INICIO CUSTOM: Bono del 10% ASPD para Homúnculo bajo Adrenaline Rush ---
-	if (hd->sc.getSCE(SC_ADRENALINE) || (hd->master && hd->master->sc.getSCE(SC_ADRENALINE))) {
-		amotion = amotion * 90 / 100;
-	}
-	// --- FIN CUSTOM ---
-
 	status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
 	status->adelay = AMOTION_DIVIDER_NOPC * status->amotion; //It seems adelay = amotion for Homunculus.
 
@@ -5918,17 +5906,19 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 			sc_start(hd, hd, SC_STYLE_CHANGE, 100, MH_MD_FIGHTING, INFINITE_TICK);
 	}
 	
-	// --- INICIO CUSTOM: Biomancer Homunculus Base Stat Inheritance ---
+	// --- CUSTOM: Biomancer Homunculus Base Stat Inheritance ---
 	if (hd->master && pc_checkskill(hd->master, AM_BIOMANCER) > 0) {
 		// ==========================================
-		// CONFIGURACIÓN DE BALANCEO
+		// BALANCE CONFIGURATION
 		// ==========================================
-		int hp_rate = 25;     // Mantiene el 25% de HP extra como blindaje
-		int stats_rate = 25;  // Hereda un 25% de los stats básicos
+		int hp_rate = 25;     // Keeps 25% extra HP as shielding
+		int sp_rate = 25;     // Inherits 25% of master's Max SP
+		int stats_rate = 25;  // Inherits 25% of basic stats
 		// ==========================================
 
-		// Accedemos directamente a la batalla del maestro (hd->master->battle_status)
+		// Access master battle status directly (hd->master->battle_status)
 		status->max_hp += hd->master->battle_status.max_hp * hp_rate / 100;
+		status->max_sp += hd->master->battle_status.max_sp * sp_rate / 100;
 		
 		status->str += hd->master->battle_status.str * stats_rate / 100;
 		status->agi += hd->master->battle_status.agi * stats_rate / 100;
@@ -5937,7 +5927,7 @@ int32 status_calc_homunculus_(homun_data *hd, uint8 opt)
 		status->dex += hd->master->battle_status.dex * stats_rate / 100;
 		status->luk += hd->master->battle_status.luk * stats_rate / 100;
 	}
-	// --- FIN CUSTOM ---
+	// --- END CUSTOM ---
 	
 	
 #ifndef RENEWAL
@@ -6844,6 +6834,14 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 
 		if( bl.type == BL_HOM )
 			status->def += (status->vit/5 - b_status->vit/5);
+
+#ifndef RENEWAL
+		if (bl.type == BL_PC && !battle_config.weapon_defense_type) {
+			if (status->def > battle_config.max_def)
+				status->def = (defType)battle_config.max_def;
+			flag.set(SCB_DEF2);
+		}
+#endif
 	}
 
 	if(flag[SCB_DEF2]) {
@@ -6861,6 +6859,16 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			+ (status->vit - b_status->vit)
 #endif
 		);
+
+#ifndef RENEWAL
+		if (bl.type == BL_PC && !battle_config.weapon_defense_type) {
+			int32 total_def = status_calc_def(&bl, sc, b_status->def);
+			if (total_def > battle_config.max_def) {
+				status->def2 = (int16)cap_value(status->def2 + battle_config.over_def_bonus * (total_def - battle_config.max_def), 1, SHRT_MAX);
+				status->def = (defType)battle_config.max_def;
+			}
+		}
+#endif
 	}
 
 	if(flag[SCB_MDEF]) {
@@ -6868,6 +6876,14 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 
 		if( bl.type == BL_HOM )
 			status->mdef += (status->int_/5 - b_status->int_/5);
+
+#ifndef RENEWAL
+		if (bl.type == BL_PC && !battle_config.magic_defense_type) {
+			if (status->mdef > battle_config.max_def)
+				status->mdef = (defType)battle_config.max_def;
+			flag.set(SCB_MDEF2);
+		}
+#endif
 	}
 
 	if(flag[SCB_MDEF2]) {
@@ -6885,6 +6901,16 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			+ ((status->vit - b_status->vit) / 2)
 #endif
 			);
+
+#ifndef RENEWAL
+		if (bl.type == BL_PC && !battle_config.magic_defense_type) {
+			int32 total_mdef = status_calc_mdef(&bl, sc, b_status->mdef);
+			if (total_mdef > battle_config.max_def) {
+				status->mdef2 = (int16)cap_value(status->mdef2 + battle_config.over_def_bonus * (total_mdef - battle_config.max_def), 0, SHRT_MAX);
+				status->mdef = (defType)battle_config.max_def;
+			}
+		}
+#endif
 	}
 
 	if(flag[SCB_SPEED]) {
@@ -7225,18 +7251,11 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 #else
 			amotion = (1000 - 4 * status->agi - status->dex) * (reinterpret_cast<homun_data*>(&bl))->homunculusDB->baseASPD / 1000;
 
-			amotion = status_calc_aspd_rate(&bl, sc, amotion);
+			status->aspd_rate = status_calc_aspd_rate(&bl, sc, b_status->aspd_rate);
 			amotion = amotion * status->aspd_rate / 1000;
 #endif
 
 			amotion = status_calc_fix_aspd(&bl, sc, amotion);
-			
-			// --- INICIO CUSTOM: Bono del 10% ASPD para Homúnculo bajo Adrenaline Rush ---
-			homun_data* hd = reinterpret_cast<homun_data*>(&bl);
-			if (hd && ((sc && sc->getSCE(SC_ADRENALINE)) || (hd->master && hd->master->sc.getSCE(SC_ADRENALINE)))) {
-				amotion = amotion * 90 / 100;
-			}
-			// --- FIN CUSTOM ---
 
 			status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
 
@@ -7294,16 +7313,6 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			amotion = b_status->amotion;
 			status->aspd_rate = status_calc_aspd_rate(&bl, sc, b_status->aspd_rate);
 			amotion = amotion*status->aspd_rate/1000;
-
-			// --- INICIO CUSTOM: Bono del 10% ASPD para Plantas/Invocaciones bajo Adrenaline Rush ---
-			mob_data* md = BL_CAST(BL_MOB, &bl);
-			if (md && md->master_id > 0) {
-				map_session_data* msd = map_id2sd(md->master_id);
-				if ((sc && sc->getSCE(SC_ADRENALINE)) || (msd && msd->sc.getSCE(SC_ADRENALINE))) {
-					amotion = amotion * 90 / 100;
-				}
-			}
-			// --- FIN CUSTOM ---
 
 			amotion = status_calc_fix_aspd(&bl, sc, amotion);
 			status->amotion = cap_value(amotion, MAX_ASPD_NOPC/AMOTION_DIVIDER_NOPC, MIN_ASPD/AMOTION_DIVIDER_NOPC);
@@ -9754,6 +9763,12 @@ static int16 status_calc_aspd_rate(block_list *bl, status_change *sc, int32 aspd
 		aspd_rate -= sc->getSCE(SC_LIGHTFINGERS)->val1 * 20;
 	}
 	// --- Fin Custom Skill ---
+
+	// --- CUSTOM: Soul of the Peacekeeper (Gatling ASPD Stacks: +0.3% per stack) ---
+	if (sc->getSCE(SC_GATLING_STACK)) {
+		aspd_rate -= sc->getSCE(SC_GATLING_STACK)->val1 * 3;
+	}
+	// --- END CUSTOM ---
 
 	if(bl->type == BL_PC && sc->getSCE(SC_DONTFORGETME))
 		aspd_rate += sc->getSCE(SC_DONTFORGETME)->val2;

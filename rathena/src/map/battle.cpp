@@ -1724,6 +1724,20 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 		&& skill_get_casttype(skill_id) == CAST_GROUND )
 		return 0;
 
+	switch (skill_id) {
+#ifndef RENEWAL
+		case PA_PRESSURE:
+		case HW_GRAVITATION:
+#endif
+		case SP_SOULEXPLOSION:
+		case NPC_EARTHQUAKE:
+			// Adjust these based on any possible PK damage rates.
+			if (battle_config.pk_mode == 1 && map_getmapflag(bl->m, MF_PVP) > 0)
+				damage = battle_calc_pk_damage(*src, *bl, damage, skill_id, flag);
+
+			return damage; //These skills bypass everything else.
+	}
+
 	if (bl->type == BL_PC) {
 		sd=(map_session_data *)bl;
 		//Special no damage states
@@ -1738,20 +1752,6 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 
 		if(!damage)
 			return 0;
-	}
-
-	switch (skill_id) {
-#ifndef RENEWAL
-		case PA_PRESSURE:
-		case HW_GRAVITATION:
-#endif
-		case SP_SOULEXPLOSION:
-		case NPC_EARTHQUAKE:
-			// Adjust these based on any possible PK damage rates.
-			if (battle_config.pk_mode == 1 && map_getmapflag(bl->m, MF_PVP) > 0)
-				damage = battle_calc_pk_damage(*src, *bl, damage, skill_id, flag);
-
-			return damage; //These skills bypass everything else.
 	}
 
 	status_change* tsc = status_get_sc(bl); //check target status
@@ -5892,7 +5892,7 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 				hd->homunculus.class_ == 6010 || hd->homunculus.class_ == 6014) {
 				
 				// Llamamos directamente a su Hard DEF 
-				int bono_ataque = sstatus->def / 2; 
+				int bono_ataque = sstatus->def; 
 				
 				if (bono_ataque > 0) {
 					ATK_ADD(wd.damage, wd.damage2, bono_ataque);
@@ -6518,7 +6518,7 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 	}
 
 	//Infinite defense (plant mode)
-	flag.infdef = is_infinite_defense(target, ad.flag)?1:0;
+	flag.infdef = (skill_id != NPC_EARTHQUAKE && is_infinite_defense(target, ad.flag)) ? 1 : 0;
 
 	if (!flag.infdef) { //No need to do the math for plants
 		int32 skillratio = 100; //Skill dmg modifiers.
@@ -6606,16 +6606,25 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 					mflag &= ~NPC_EARTHQUAKE_FLAG; // Remove before target count
 				}
 
-				// Earthquake Rework: Fixed irreducible true damage scaling with skill level,
-				// split among targets up to a maximum of 6 (matching party cap).
-				int32 split_targets = mflag;
-				if (split_targets > 6)
-					split_targets = 6;
-				if (split_targets < 1)
-					split_targets = 1;
+				// Earthquake Rework: Fixed irreducible true damage scaling with skill level.
+				// Damage is split exclusively among player targets (up to a maximum of 6).
+				// Homunculus, plants, and other minions do not split damage and receive the full amount.
+				if (target->type == BL_PC) {
+					int32 split_targets = mflag;
+					if (split_targets > 6)
+						split_targets = 6;
+					if (split_targets < 1)
+						split_targets = 1;
 
-				ad.damage = (int64)(1500 * skill_lv) / split_targets;
+					ad.damage = (int64)(1500 * skill_lv) / split_targets;
+				} else {
+					ad.damage = (int64)(1500 * skill_lv);
+				}
 				flag.imdef = 1;
+				nk.set(NK_IGNOREDEFENSE);
+				nk.set(NK_IGNOREDEFCARD);
+				nk.set(NK_IGNORELONGCARD);
+				nk.set(NK_IGNOREELEMENT);
 				break;
 			}
 			case NPC_ICEMINE:
@@ -6693,7 +6702,7 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 				flag.imdef = 1;
 		}
 
-		if (tsd && (i = pc_sub_skillatk_bonus(tsd, skill_id)))
+		if (skill_id != NPC_EARTHQUAKE && tsd && (i = pc_sub_skillatk_bonus(tsd, skill_id)))
 			ad.damage -= (int64)ad.damage*i/100;
 
 #ifdef RENEWAL
@@ -6960,12 +6969,14 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 			}
 		}
 
-		if (!nk[NK_IGNOREELEMENT])
-			ad.damage = battle_attr_fix(src, target, ad.damage, s_ele, tstatus->def_ele, tstatus->ele_lv);
+		if (skill_id != NPC_EARTHQUAKE) {
+			if (!nk[NK_IGNOREELEMENT])
+				ad.damage = battle_attr_fix(src, target, ad.damage, s_ele, tstatus->def_ele, tstatus->ele_lv);
 
 #ifndef RENEWAL
-		ad.damage += battle_calc_cardfix(BF_MAGIC, src, target, nk, s_ele, 0, ad.damage, 0, ad.flag);
+			ad.damage += battle_calc_cardfix(BF_MAGIC, src, target, nk, s_ele, 0, ad.damage, 0, ad.flag);
 #endif
+		}
 
 		switch (skill_id) {
 			case CR_GRANDCROSS:
@@ -7096,7 +7107,8 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 	if ((skill_damage = battle_skill_damage(src,target,skill_id)) != 0)
 		MATK_ADDRATE(skill_damage);
 
-	battle_absorb_damage(target, &ad);
+	if (skill_id != NPC_EARTHQUAKE)
+		battle_absorb_damage(target, &ad);
 
 	//battle_do_reflect(BF_MAGIC,&ad, src, target, skill_id, skill_lv); //WIP [lighta] Magic skill has own handler at skill_attack
 	return ad;
@@ -8268,18 +8280,15 @@ if (tsc && tsc->getSCE(SC_AUTOCOUNTER) && status_check_skilluse(target, src, KN_
 	if (sd && sd->bonus.splash_range > 0 && damage > 0)
 		skill_castend_damage_id(src, target, 0, 1, tick, 0);
 
-	// --- INICIO CUSTOM: Splash 3x3 para Amistr Evolucionado ---
+	// --- CUSTOM: 3x3 Splash attack for Evolved Amistr ---
 	if (src->type == BL_HOM && damage > 0 && !(flag & 1)) {
 		homun_data* hd = (homun_data*)src;
-		// 6010 y 6014 son Amistr Evolucionado (MAPID_AMISTR_E)
-		if (hd->homunculus.class_ == 6010 || hd->homunculus.class_ == 6014) {
-			// Daño en área 3x3 alrededor del objetivo principal (flag | 1 para no encadenar recursión infinita)
-			map_foreachinallrange(skill_area_sub, target, 1, BL_CHAR,
-				src, 0, 1, tick, BCT_ENEMY | 1,
-				skill_castend_damage_id);
+		// 6010 and 6014 are Evolved Amistr (MAPID_AMISTR_E)
+		if (hd && (hd->homunculus.class_ == 6010 || hd->homunculus.class_ == 6014)) {
+			skill_castend_damage_id(src, target, 0, 1, tick, 0);
 		}
 	}
-	// --- FIN CUSTOM ---
+	// --- END CUSTOM ---
 
 	bool is_norm_attacked = false;
 

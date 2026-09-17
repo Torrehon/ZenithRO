@@ -12,18 +12,26 @@ LastSavedDate=""
 TactLastSavedDate=""
 TypeString="H"
 
-dofile("./AI/USER_AI/Const_.lua")
-dofile("./AI/USER_AI/H_SkillList.lua") 
-dofile("./AI/USER_AI/Defaults.lua")
-dofile("./AI/USER_AI/AzzyUtil.lua")
-dofile("./AI/USER_AI/Stubs.lua")
-dofile("./AI/USER_AI/A_Friends.lua")
-dofile("./AI/USER_AI/H_Config.lua")
-dofile("./AI/USER_AI/H_Tactics.lua")
-dofile("./AI/USER_AI/AI_main.lua")
-dofile("./AI/USER_AI/H_PVP_Tact.lua")
-dofile("./AI/USER_AI/H_Avoid.lua")
-dofile("./AI/USER_AI/H_Extra.lua")
+local BaseAIPath = "./AI_sakray/USER_AI/"
+local _f = io.open(BaseAIPath .. "Const_.lua", "r")
+if _f then
+	_f:close()
+else
+	BaseAIPath = "./AI/USER_AI/"
+end
+
+dofile(BaseAIPath .. "Const_.lua")
+dofile(BaseAIPath .. "H_SkillList.lua") 
+dofile(BaseAIPath .. "Defaults.lua")
+dofile(BaseAIPath .. "AzzyUtil.lua")
+dofile(BaseAIPath .. "Stubs.lua")
+dofile(BaseAIPath .. "A_Friends.lua")
+dofile(BaseAIPath .. "H_Config.lua")
+dofile(BaseAIPath .. "H_Tactics.lua")
+dofile(BaseAIPath .. "AI_main.lua")
+dofile(BaseAIPath .. "H_PVP_Tact.lua")
+dofile(BaseAIPath .. "H_Avoid.lua")
+dofile(BaseAIPath .. "H_Extra.lua")
 
 function WriteStartupLog(Version,ErrorCode,ErrorInfo)
 	local verspattern="%d.%d%d"
@@ -31,11 +39,11 @@ function WriteStartupLog(Version,ErrorCode,ErrorInfo)
 		AUVersion="1.30b or earlier"
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."AzzyUtil.lua no version found"
-	elseif string.gfind(AUVersion,verspattern)()~="1.552" then
+	elseif string.gfind(AUVersion,verspattern)()~="1.56" and string.gfind(AUVersion,verspattern)()~="1.55" then
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."AzzyUtil.lua wrong version "..string.gfind(AUVersion,verspattern)().."\n"
 	end
-	TestFile=io.open("./AI/USER_AI/data/test.txt","w")
+	TestFile=io.open(BaseAIPath .. "data/test.txt","w")
 	if TestFile~=nil then
 		TestFile:close()
 	else
@@ -46,7 +54,7 @@ function WriteStartupLog(Version,ErrorCode,ErrorInfo)
 		CVersion="1.30b or earlier"
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."Const_.lua no version found"
-	elseif string.gfind(CVersion,verspattern)()~="1.56" then
+	elseif string.gfind(CVersion,verspattern)()~="1.56" and string.gfind(CVersion,verspattern)()~="1.55" then
 		ErrorCode="File version error"
 		ErrorInfo=ErrorInfo.."Const_.lua wrong version "..string.gfind(CVersion,verspattern)().."\n"
 	end
@@ -59,25 +67,25 @@ function WriteStartupLog(Version,ErrorCode,ErrorInfo)
 		ErrorInfo=ErrorInfo.."AI_main.lua wrong version "..string.gfind(MainVersion,verspattern)().."\n"
 	end
 	--[[
-	if fsize("./AI/USER_AI/AzzyUtil.lua")~=AULen then
+	if fsize(BaseAIPath .. "AzzyUtil.lua")~=AULen then
 		ErrorCode="Damaged File"
 		ErrorInfo=ErrorInfo.." AzzyUtil.lua has been modified or is corrupted"
 	end
-	if fsize("./AI/USER_AI/Const_.lua")~=ConstLen then
+	if fsize(BaseAIPath .. "Const_.lua")~=ConstLen then
 		ErrorCode="Damaged File"
 		ErrorInfo=ErrorInfo.." Const_.lua has been modified or is corrupted"
 	end
-	if fsize("./AI/USER_AI/AI_main.lua")~=MainLen then
+	if fsize(BaseAIPath .. "AI_main.lua")~=MainLen then
 		ErrorCode="Damaged File"
 		ErrorInfo=ErrorInfo.." AI_main.lua has been modified or corrupted"
 	end
 	--]]
-	if fsize("./AI/USER_AI/H_Config.lua")==3898 then
+	if fsize(BaseAIPath .. "H_Config.lua")==3898 then
 		ConfigVers="Default: "..LastSavedDate
 	else
 		ConfigVers="Custom, edited "..LastSavedDate
 	end
-	if fsize("./AI/USER_AI/H_Tactics.lua")==5393 then
+	if fsize(BaseAIPath .. "H_Tactics.lua")==5393 then
 		TacticVers="Default: "..TactLastSavedDate
 	else
 		TacticVers="Custom, edited "..TactLastSavedDate

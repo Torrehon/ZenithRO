@@ -4,12 +4,28 @@
 #include "adrenalinerush.hpp"
 
 #include "map/clif.hpp"
+#include "map/homunculus.hpp"
 #include "map/map.hpp"
 #include "map/mob.hpp"
 #include "map/party.hpp"
 #include "map/pc.hpp"
 #include "map/script.hpp"
 #include "map/status.hpp"
+
+static int skill_adrenaline_slaves_sub(block_list* bl, va_list ap) {
+	uint32 master_id = va_arg(ap, uint32);
+	block_list* src = va_arg(ap, block_list*);
+	uint16 skill_id = (uint16)va_arg(ap, int);
+	uint16 skill_lv = (uint16)va_arg(ap, int);
+	t_tick duration = va_arg(ap, t_tick);
+
+	mob_data* md = BL_CAST(BL_MOB, bl);
+	if (md && md->master_id == master_id) {
+		sc_start2(src, md, skill_get_sc(skill_id), 100, skill_lv, 0, duration);
+		clif_specialeffect(md, EF_HASTEUP, AREA);
+	}
+	return 0;
+}
 
 SkillAdrenalineRush::SkillAdrenalineRush() : SkillImpl(BS_ADRENALINE) {
 }
@@ -23,6 +39,17 @@ void SkillAdrenalineRush::castendNoDamageId(block_list* src, block_list* target,
 		if (!weapontype || !dstsd || pc_check_weapontype(dstsd, weapontype)) {
 			clif_skill_nodamage(target, *target, getSkillId(), skill_lv,
 				sc_start2(src, target, skill_get_sc(getSkillId()), 100, skill_lv, (src == target) ? 1 : 0, skill_get_time(getSkillId(), skill_lv)));
+
+			// --- CUSTOM: Propagate SC_ADRENALINE to Homunculus and Alchemist Summons ---
+			if (dstsd) {
+				t_tick duration = skill_get_time(getSkillId(), skill_lv);
+				if (dstsd->hd) {
+					sc_start2(src, dstsd->hd, skill_get_sc(getSkillId()), 100, skill_lv, 0, duration);
+					clif_specialeffect(dstsd->hd, EF_HASTEUP, AREA);
+				}
+				map_foreachinrange(skill_adrenaline_slaves_sub, dstsd, AREA_SIZE, BL_MOB, dstsd->id, src, (int)getSkillId(), (int)skill_lv, duration);
+			}
+			// --- END CUSTOM ---
 		}
 	} else if (sd) {
 		party_foreachsamemap(skill_area_sub,

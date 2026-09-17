@@ -2092,20 +2092,20 @@ Body:
     AegisName: DOPPELGANGER
     Name: Doppelganger
     Level: 72
-    Hp: 249000
-    BaseExp: 51480
-    JobExp: 10725
-    MvpExp: 25740
-    Attack: 1340
-    Attack2: 1590
+    Hp: 310000
+    BaseExp: 110000
+    JobExp: 58000
+    MvpExp: 58000
+    Attack: 1600
+    Attack2: 2180
     Defense: 60
-    MagicDefense: 35
-    Str: 88
-    Agi: 90
-    Vit: 30
-    Int: 35
-    Dex: 125
-    Luk: 65
+    MagicDefense: 25
+    Str: 95
+    Agi: 95
+    Vit: 50
+    Int: 40
+    Dex: 150
+    Luk: 75
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -2704,19 +2704,19 @@ Body:
     Name: Mistress
     Level: 74
     Hp: 212000
-    BaseExp: 39325
-    JobExp: 27170
-    MvpExp: 19662
-    Attack: 880
-    Attack2: 1110
-    Defense: 40
+    BaseExp: 102480
+    JobExp: 53160
+    MvpExp: 53160
+    Attack: 1150
+    Attack2: 1480
+    Defense: 20
     MagicDefense: 60
     Str: 50
     Agi: 165
     Vit: 60
     Int: 95
-    Dex: 70
-    Luk: 130
+    Dex: 120
+    Luk: 100
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -3955,19 +3955,19 @@ Body:
     AegisName: GOLDEN_BUG
     Name: Golden Thief Bug
     Level: 64
-    Hp: 126000
-    BaseExp: 14300
-    JobExp: 7150
-    MvpExp: 7150
-    Attack: 870
-    Attack2: 1145
+    Hp: 230000
+    BaseExp: 95000
+    JobExp: 50000
+    MvpExp: 50000
+    Attack: 1450
+    Attack2: 1980
     Defense: 60
     MagicDefense: 45
     Str: 65
     Agi: 75
-    Vit: 35
-    Int: 45
-    Dex: 85
+    Vit: 55
+    Int: 90
+    Dex: 145
     Luk: 150
     AttackRange: 1
     SkillRange: 10
@@ -5230,19 +5230,19 @@ Body:
     AegisName: DRAKE
     Name: Drake
     Level: 70
-    Hp: 326666
-    BaseExp: 28600
-    JobExp: 22880
-    MvpExp: 14300
+    Hp: 391200
+    BaseExp: 114680
+    JobExp: 58340
+    MvpExp: 58340
     Attack: 1800
-    Attack2: 2100
-    Defense: 20
-    MagicDefense: 35
-    Str: 85
+    Attack2: 2150
+    Defense: 25
+    MagicDefense: 30
+    Str: 88
     Agi: 80
-    Vit: 49
-    Int: 75
-    Dex: 79
+    Vit: 55
+    Int: 120
+    Dex: 135
     Luk: 50
     AttackRange: 1
     SkillRange: 10
@@ -5376,19 +5376,19 @@ Body:
     AegisName: EDDGA
     Name: Eddga
     Level: 65
-    Hp: 152000
-    BaseExp: 25025
-    JobExp: 12870
-    MvpExp: 12512
-    Attack: 1215
-    Attack2: 1565
-    Defense: 15
-    MagicDefense: 15
-    Str: 78
-    Agi: 70
-    Vit: 85
-    Int: 66
-    Dex: 90
+    Hp: 231450
+    BaseExp: 97340
+    JobExp: 49180
+    MvpExp: 49180
+    Attack: 1580
+    Attack2: 1960
+    Defense: 30
+    MagicDefense: 25
+    Str: 90
+    Agi: 72
+    Vit: 95
+    Int: 70
+    Dex: 135
     Luk: 85
     AttackRange: 1
     SkillRange: 10
@@ -6892,20 +6892,20 @@ Body:
     AegisName: MAYA
     Name: Maya
     Level: 81
-    Hp: 169000
-    BaseExp: 42900
-    JobExp: 17875
-    MvpExp: 21450
-    Attack: 1800
-    Attack2: 2070
-    Defense: 60
-    MagicDefense: 25
+    Hp: 256380
+    BaseExp: 108720
+    JobExp: 54360
+    MvpExp: 54360
+    Attack: 1680
+    Attack2: 2140
+    Defense: 55
+    MagicDefense: 30
     Str: 95
-    Agi: 97
-    Vit: 76
+    Agi: 95
+    Vit: 85
     Int: 95
-    Dex: 82
-    Luk: 105
+    Dex: 130
+    Luk: 90
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
@@ -7046,19 +7046,19 @@ Body:
     AegisName: MOONLIGHT
     Name: Moonlight Flower
     Level: 67
-    Hp: 120000
-    BaseExp: 27500
-    JobExp: 14300
-    MvpExp: 13750
-    Attack: 1200
-    Attack2: 1700
-    Defense: 10
+    Hp: 224350
+    BaseExp: 106420
+    JobExp: 53210
+    MvpExp: 53210
+    Attack: 1380
+    Attack2: 1780
+    Defense: 15
     MagicDefense: 55
-    Str: 55
-    Agi: 99
-    Vit: 55
-    Int: 82
-    Dex: 95
+    Str: 70
+    Agi: 115
+    Vit: 60
+    Int: 95
+    Dex: 135
     Luk: 120
     AttackRange: 1
     SkillRange: 10
@@ -7474,18 +7474,19 @@ Body:
     AegisName: PHREEONI
     Name: Phreeoni
     Level: 69
-    Hp: 188000
-    BaseExp: 32175
-    JobExp: 16445
-    MvpExp: 16087
-    Attack: 880
-    Attack2: 1530
-    Defense: 10
+    Hp: 238620
+    BaseExp: 101480
+    JobExp: 50740
+    MvpExp: 50740
+    Attack: 1420
+    Attack2: 1860
+    Defense: 25
     MagicDefense: 20
-    Agi: 85
-    Vit: 78
-    Int: 35
-    Dex: 130
+    Str: 85
+    Agi: 90
+    Vit: 88
+    Int: 92
+    Dex: 145
     Luk: 60
     AttackRange: 1
     SkillRange: 10
@@ -18763,20 +18764,20 @@ Body:
     AegisName: DARK_SNAKE_LORD
     Name: Evil Snake Lord
     Level: 73
-    Hp: 254993
-    BaseExp: 34288
-    JobExp: 17950
-    MvpExp: 17144
-    Attack: 2433
-    Attack2: 4210
+    Hp: 298640
+    BaseExp: 112650
+    JobExp: 56325
+    MvpExp: 56325
+    Attack: 2080
+    Attack2: 2960
     Defense: 25
     MagicDefense: 55
-    Str: 70
-    Agi: 83
-    Vit: 30
-    Int: 80
-    Dex: 164
-    Luk: 88
+    Str: 80
+    Agi: 85
+    Vit: 55
+    Int: 110
+    Dex: 155
+    Luk: 90
     AttackRange: 3
     SkillRange: 10
     ChaseRange: 12

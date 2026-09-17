@@ -1943,7 +1943,19 @@ static bool mob_ai_sub_hard(mob_data *md, t_tick tick)
 	{
 		if( md->attacked_id == md->target_id )
 		{	//Rude attacked check.
-			if( !battle_check_range(md, tbl, md->status.rhw.range)
+			bool is_minion_combat = false;
+			if( tbl ) {
+				if( tbl->type == BL_HOM || tbl->type == BL_MER || tbl->type == BL_ELEM ) {
+					is_minion_combat = true;
+				} else if( tbl->type == BL_PC ) {
+					map_session_data* sd = BL_CAST(BL_PC, tbl);
+					if( sd && sd->hd && sd->hd->prev != nullptr && sd->hd->m == md->m && check_distance_bl(md, sd->hd, AREA_SIZE) )
+						is_minion_combat = true;
+				}
+			}
+
+			if( !is_minion_combat
+			&&  !battle_check_range(md, tbl, md->status.rhw.range)
 			&&  ( //Can't attack back and can't reach back.
 					(!can_move && DIFF_TICK(tick, md->ud.canmove_tick) > 0 && (battle_config.mob_ai&0x2 || md->sc.getSCE(SC_SPIDERWEB)
 						|| md->sc.getSCE(SC_BITE) || md->sc.getSCE(SC_VACUUM_EXTREME) || md->sc.getSCE(SC_THORNSTRAP)
@@ -1959,8 +1971,18 @@ static bool mob_ai_sub_hard(mob_data *md, t_tick tick)
 		else
 		if( (abl = map_id2bl(md->attacked_id)) && (!tbl || mob_can_changetarget(md, abl, mode)) )
 		{
+			bool is_minion_combat = false;
+			if( abl->type == BL_HOM || abl->type == BL_MER || abl->type == BL_ELEM ) {
+				is_minion_combat = true;
+			} else if( abl->type == BL_PC ) {
+				map_session_data* sd = BL_CAST(BL_PC, abl);
+				if( sd && sd->hd && sd->hd->prev != nullptr && sd->hd->m == md->m && check_distance_bl(md, sd->hd, AREA_SIZE) )
+					is_minion_combat = true;
+			}
+
 			int32 dist;
-			if( md->m != abl->m || abl->prev == nullptr
+			if( !is_minion_combat && (
+				md->m != abl->m || abl->prev == nullptr
 				|| (dist = distance_bl(md, abl)) > AREA_SIZE // Attacker longer than visual area
 				|| battle_check_target(md, abl, BCT_ENEMY) <= 0 // Attacker is not enemy of mob
 				|| (battle_config.mob_ai&0x2 && !status_check_skilluse(md, abl, 0, 0)) // Cannot normal attack back to Attacker
@@ -1973,9 +1995,10 @@ static bool mob_ai_sub_hard(mob_data *md, t_tick tick)
 					)
 					|| !mob_can_reach(md, abl, dist+md->db->range3)
 				   )
-				) )
+				) ) )
 			{ // Rude attacked
 				if (abl->id != md->id //Self damage does not cause rude attack
+				&& !is_minion_combat
 				&& ++md->state.attacked_count > RUDE_ATTACKED_COUNT) {
 					mobskill_use(md, tick, MSC_RUDEATTACKED);
 				}
@@ -2283,7 +2306,7 @@ void mob_set_attacked_id(int32 src_id, int32 target_id, t_tick tick, bool is_nor
 		case BL_HOM:
 		{
 			homun_data& hd = *reinterpret_cast<homun_data*>(src);
-			if (hd.master && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+			if (hd.master && battle_config.retaliate_to_master)
 				md->attacked_id = hd.master->id;
 			else
 				md->attacked_id = src->id;
@@ -2292,7 +2315,7 @@ void mob_set_attacked_id(int32 src_id, int32 target_id, t_tick tick, bool is_nor
 		case BL_MER:
 		{
 			s_mercenary_data& mc = *reinterpret_cast<s_mercenary_data*>(src);
-			if (mc.master && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+			if (mc.master && battle_config.retaliate_to_master)
 				md->attacked_id = mc.master->id;
 			else
 				md->attacked_id = src->id;
@@ -2301,7 +2324,7 @@ void mob_set_attacked_id(int32 src_id, int32 target_id, t_tick tick, bool is_nor
 		case BL_ELEM:
 		{
 			s_elemental_data& ed = *reinterpret_cast<s_elemental_data*>(src);
-			if (ed.master && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+			if (ed.master && battle_config.retaliate_to_master)
 				md->attacked_id = ed.master->id;
 			else
 				md->attacked_id = src->id;
@@ -2310,8 +2333,8 @@ void mob_set_attacked_id(int32 src_id, int32 target_id, t_tick tick, bool is_nor
 		case BL_MOB:
 		{
 			mob_data& md2 = *reinterpret_cast<mob_data*>(src);
-			// Config to decide whether to retaliate versus the master or the mob (Bosses always target master)
-			if (md2.master_id && (battle_config.retaliate_to_master || status_get_class_(md) == CLASS_BOSS))
+			// Config to decide whether to retaliate versus the master or the mob
+			if (md2.master_id && battle_config.retaliate_to_master)
 				md->attacked_id = md2.master_id;
 			else
 				md->attacked_id = src->id;
@@ -4406,14 +4429,26 @@ block_list* mob_get_real_attacker(mob_data* md) {
 		if (bl->type == BL_PC) {
 			return bl;
 		} else if (bl->type == BL_HOM) {
-			homun_data* hd = BL_CAST(BL_HOM, bl);
-			bl = (hd && hd->master) ? hd->master : nullptr;
+			if (battle_config.retaliate_to_master) {
+				homun_data* hd = BL_CAST(BL_HOM, bl);
+				bl = (hd && hd->master) ? hd->master : nullptr;
+			} else {
+				return bl;
+			}
 		} else if (bl->type == BL_MER) {
-			s_mercenary_data* mc = BL_CAST(BL_MER, bl);
-			bl = (mc && mc->master) ? mc->master : nullptr;
+			if (battle_config.retaliate_to_master) {
+				s_mercenary_data* mc = BL_CAST(BL_MER, bl);
+				bl = (mc && mc->master) ? mc->master : nullptr;
+			} else {
+				return bl;
+			}
 		} else if (bl->type == BL_ELEM) {
-			s_elemental_data* ed = BL_CAST(BL_ELEM, bl);
-			bl = (ed && ed->master) ? ed->master : nullptr;
+			if (battle_config.retaliate_to_master) {
+				s_elemental_data* ed = BL_CAST(BL_ELEM, bl);
+				bl = (ed && ed->master) ? ed->master : nullptr;
+			} else {
+				return bl;
+			}
 		} else if (bl->type == BL_PET) {
 			pet_data* pd = BL_CAST(BL_PET, bl);
 			bl = (pd && pd->master) ? pd->master : nullptr;
@@ -4547,7 +4582,9 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 		if (rnd() % 10000 > ms[i]->permillage) //Lupus (max value = 10000)
 			continue;
 
-		if (ms[i]->cond1 == event)
+		if (ms[i]->cond1 == MSC_AFTERSKILL)
+			flag = ((event == MSC_AFTERSKILL || event == -1) && (c2 == 0 || md->ud.skill_id == c2));
+		else if (ms[i]->cond1 == event)
 			flag = 1; //Trigger skill.
 		else if (ms[i]->cond1 == MSC_SKILLUSED)
 			flag = ((event & 0xffff) == MSC_SKILLUSED && ((event >> 16) == c2 || c2 == 0));
@@ -4668,7 +4705,7 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 			x = bl->x;
 		  	y = bl->y;
 			// Look for an area to cast the spell around...
-			if (ms[i]->target >= MST_AROUND5) {
+			if (ms[i]->target >= MST_AROUND5 && ms[i]->target <= MST_AROUND) {
 				j = ms[i]->target >= MST_AROUND1 ?
 					(ms[i]->target - MST_AROUND1) + 1 :
 					(ms[i]->target - MST_AROUND5) + 1;
@@ -4765,7 +4802,7 @@ int32 mobskill_event(mob_data *md, block_list *src, t_tick tick, int32 flag, int
 		md->attacked_id = src->id;
 
 	target_id = md->target_id;
-	if (!target_id || battle_config.mob_changetarget_byskill)
+	if (!target_id || battle_config.mob_changetarget_byskill || flag == MSC_HEALUSED)
 		md->target_id = src ? src->id : 0;
 
 	if (flag == -1)
@@ -6808,20 +6845,16 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	}
 
 	//Check that the target condition is right for the skill type. [Skotlex]
-	if (skill_get_casttype(ms->skill_id) == CAST_GROUND)
-	{	//Ground skill.
-		if (ms->target > MST_AROUND)
+	if (skill_get_casttype(ms->skill_id) != CAST_GROUND)
+	{
+		// Non-ground skills cannot use 'around' target (MST_AROUND5 to MST_AROUND4)
+		if (ms->target >= MST_AROUND5 && ms->target <= MST_AROUND)
 		{
-			ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target for ground skill %d (%s) for %s.\n",
+			ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target 'around' for non-ground skill %d (%s) for %s.\n",
 				ms->skill_id, skill_get_name(ms->skill_id),
 				mob_id < 0 ? "all mobs" : mob->sprite.c_str());
 			ms->target = MST_TARGET;
 		}
-	} else if (ms->target > MST_MASTER) {
-		ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target 'around' for non-ground skill %d (%s) for %s.\n",
-			ms->skill_id, skill_get_name(ms->skill_id),
-			mob_id < 0 ? "all mobs" : mob->sprite.c_str());
-		ms->target = MST_TARGET;
 	}
 
 	//Cond1

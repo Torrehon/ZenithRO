@@ -171,7 +171,7 @@ Berzerk_IgnoreMinSP      = 0
 --Misc settings:
 StandbyFriending         = 1  
 MirAIFriending           = 1  
-UseAvoid		 = 0  
+UseAvoid		 = 0
 TankMonsterLimit	= 4
 AttackTimeLimit		= 0
 AggressiveRelogTracking = 0

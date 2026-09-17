@@ -22,7 +22,7 @@
 # Homunculus Settings
 #
 ###########################################################################
-# - BaseClass               Base class.
+# - Class                   Base class.
 #   Name                    Name of homunculus.
 #   EvolutionClass          Evolution class.
 #   Food                    Homunculus food item. (Default: Pet_Food)
@@ -63,9 +63,9 @@ Body:
     Status:
       - Type: Hp
         Base: 150
-        GrowthMinimum: 60    # Vuelve a su mínimo original
-        GrowthMaximum: 75    # (-25%) Techo bajado
-        EvolutionMinimum: 3
+        GrowthMinimum: 60
+        GrowthMaximum: 100
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Sp
         Base: 40
@@ -75,38 +75,38 @@ Body:
         EvolutionMaximum: 20
       - Type: Str
         Base: 17
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
-        EvolutionMinimum: 2
+        GrowthMinimum: 5
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Agi
         Base: 20
-        GrowthMinimum: 7     # Secondary stat
-        GrowthMaximum: 13
+        GrowthMinimum: 5
+        GrowthMaximum: 19
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Vit
         Base: 15
-        GrowthMinimum: 7     # Secondary stat
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
+        GrowthMinimum: 5
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Int
         Base: 35
-        GrowthMinimum: 10    # Main stat (High healing output)
-        GrowthMaximum: 15
+        GrowthMinimum: 4
+        GrowthMaximum: 20
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Dex
         Base: 24
-        GrowthMinimum: 7     # Secondary stat (Cast time & hit)
-        GrowthMaximum: 13
-        EvolutionMinimum: 4
+        GrowthMinimum: 6
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Luk
         Base: 12
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
+        GrowthMinimum: 6
+        GrowthMaximum: 20
         EvolutionMinimum: 1
         EvolutionMaximum: 3
     SkillTree:
@@ -134,8 +134,8 @@ Body:
     Status:
       - Type: Hp
         Base: 320
-        GrowthMinimum: 80    # Vuelve a su mínimo original
-        GrowthMaximum: 98    # (-25%) Techo bajado
+        GrowthMinimum: 80
+        GrowthMaximum: 130
         EvolutionMinimum: 10
         EvolutionMaximum: 20
       - Type: Sp
@@ -146,38 +146,38 @@ Body:
         EvolutionMaximum: 10
       - Type: Str
         Base: 20
-        GrowthMinimum: 10    # Main stat (Physical tank & Bloodlust damage)
-        GrowthMaximum: 15
-        EvolutionMinimum: 3
+        GrowthMinimum: 8
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Agi
         Base: 17
-        GrowthMinimum: 7     # Secondary stat
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
+        GrowthMinimum: 4
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Vit
         Base: 35
-        GrowthMinimum: 10    # Main stat (Supreme physical tank)
-        GrowthMaximum: 15
+        GrowthMinimum: 4
+        GrowthMaximum: 20
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Int
         Base: 11
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 10
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Dex
         Base: 24
-        GrowthMinimum: 7     # Secondary stat (Melee accuracy)
-        GrowthMaximum: 13
+        GrowthMinimum: 3
+        GrowthMaximum: 19
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Luk
         Base: 12
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
+        GrowthMinimum: 3
+        GrowthMaximum: 19
         EvolutionMinimum: 1
         EvolutionMaximum: 5
     SkillTree:
@@ -205,51 +205,51 @@ Body:
     Status:
       - Type: Hp
         Base: 90
-        GrowthMinimum: 45    # Mantenemos su mínimo original (sigue siendo frágil)
-        GrowthMaximum: 56    # Antes 75 (-25%)
+        GrowthMinimum: 45
+        GrowthMaximum: 75
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Sp
         Base: 25
-        GrowthMinimum: 3     # INTACTO
-        GrowthMaximum: 6     # INTACTO
+        GrowthMinimum: 3
+        GrowthMaximum: 6
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Str
         Base: 29
-        GrowthMinimum: 7     # Secondary stat (Physical DPS / Moonlight)
-        GrowthMaximum: 13
+        GrowthMinimum: 4
+        GrowthMaximum: 20
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Agi
         Base: 35
-        GrowthMinimum: 10    # Main stat (Supreme ASPD and Flee)
-        GrowthMaximum: 15
-        EvolutionMinimum: 4
+        GrowthMinimum: 8
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Vit
         Base: 9
-        GrowthMinimum: 5     # Dump stat (Glass cannon)
-        GrowthMaximum: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 10
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Int
         Base: 8
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
-        EvolutionMinimum: 2
+        GrowthMinimum: 3
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Dex
         Base: 30
-        GrowthMinimum: 10    # Main stat (Flawless accuracy & attack speed)
-        GrowthMaximum: 15
-        EvolutionMinimum: 2
+        GrowthMinimum: 4
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Luk
         Base: 9
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
+        GrowthMinimum: 3
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
     SkillTree:
       - Skill: HFLI_MOON
@@ -275,53 +275,53 @@ Body:
     Race: Formless
     Status:
       - Type: Hp
-        Base: 120
-        GrowthMinimum: 75    # Off-tank HP pool
-        GrowthMaximum: 95
-        EvolutionMinimum: 10
-        EvolutionMaximum: 20
+        Base: 80
+        GrowthMinimum: 30
+        GrowthMaximum: 150
+        EvolutionMinimum: 1
+        EvolutionMaximum: 30
       - Type: Sp
-        Base: 30
-        GrowthMinimum: 4     # Caster SP pool for Caprice spam
-        GrowthMaximum: 8
-        EvolutionMinimum: 5
-        EvolutionMaximum: 15
+        Base: 11
+        GrowthMinimum: 0
+        GrowthMaximum: 7
+        EvolutionMinimum: 1
+        EvolutionMaximum: 30
       - Type: Str
         Base: 11
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
         EvolutionMinimum: 1
-        EvolutionMaximum: 3
+        EvolutionMaximum: 10
       - Type: Agi
-        Base: 20
-        GrowthMinimum: 7     # Secondary stat (Moderate speed)
-        GrowthMaximum: 13
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
         EvolutionMinimum: 1
-        EvolutionMaximum: 4
+        EvolutionMaximum: 10
       - Type: Vit
-        Base: 20
-        GrowthMinimum: 10    # Main stat (Frontline Off-tank)
-        GrowthMaximum: 15
-        EvolutionMinimum: 3
-        EvolutionMaximum: 6
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
+        EvolutionMinimum: 1
+        EvolutionMaximum: 10
       - Type: Int
-        Base: 30
-        GrowthMinimum: 10    # Main stat (Caprice burst damage)
-        GrowthMaximum: 15
-        EvolutionMinimum: 4
-        EvolutionMaximum: 8
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
+        EvolutionMinimum: 1
+        EvolutionMaximum: 10
       - Type: Dex
-        Base: 18
-        GrowthMinimum: 7     # Secondary stat (Cast time & hit)
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
-        EvolutionMaximum: 5
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
+        EvolutionMinimum: 1
+        EvolutionMaximum: 10
       - Type: Luk
         Base: 11
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
+        GrowthMinimum: 1
+        GrowthMaximum: 30
         EvolutionMinimum: 1
-        EvolutionMaximum: 3
+        EvolutionMaximum: 10
     SkillTree:
       - Skill: HVAN_CAPRICE
         MaxLevel: 5
@@ -345,9 +345,9 @@ Body:
     Status:
       - Type: Hp
         Base: 150
-        GrowthMinimum: 60    # Vuelve a su mínimo original
-        GrowthMaximum: 75    # (-25%) Techo bajado
-        EvolutionMinimum: 3
+        GrowthMinimum: 60
+        GrowthMaximum: 100
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Sp
         Base: 40
@@ -357,38 +357,38 @@ Body:
         EvolutionMaximum: 20
       - Type: Str
         Base: 17
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
-        EvolutionMinimum: 2
+        GrowthMinimum: 5
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Agi
         Base: 20
-        GrowthMinimum: 7     # Secondary stat
-        GrowthMaximum: 13
+        GrowthMinimum: 5
+        GrowthMaximum: 19
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Vit
         Base: 15
-        GrowthMinimum: 7     # Secondary stat
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
+        GrowthMinimum: 5
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Int
         Base: 35
-        GrowthMinimum: 10    # Main stat (High healing output)
-        GrowthMaximum: 15
+        GrowthMinimum: 4
+        GrowthMaximum: 20
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Dex
         Base: 24
-        GrowthMinimum: 7     # Secondary stat (Cast time & hit)
-        GrowthMaximum: 13
-        EvolutionMinimum: 4
+        GrowthMinimum: 6
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Luk
         Base: 12
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
+        GrowthMinimum: 6
+        GrowthMaximum: 20
         EvolutionMinimum: 1
         EvolutionMaximum: 3
     SkillTree:
@@ -416,8 +416,8 @@ Body:
     Status:
       - Type: Hp
         Base: 320
-        GrowthMinimum: 80    # Vuelve a su mínimo original
-        GrowthMaximum: 98    # (-25%) Techo bajado
+        GrowthMinimum: 80
+        GrowthMaximum: 130
         EvolutionMinimum: 10
         EvolutionMaximum: 20
       - Type: Sp
@@ -428,38 +428,38 @@ Body:
         EvolutionMaximum: 10
       - Type: Str
         Base: 20
-        GrowthMinimum: 10    # Main stat (Physical tank & Bloodlust damage)
-        GrowthMaximum: 15
-        EvolutionMinimum: 3
+        GrowthMinimum: 8
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Agi
         Base: 17
-        GrowthMinimum: 7     # Secondary stat
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
+        GrowthMinimum: 4
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Vit
         Base: 35
-        GrowthMinimum: 10    # Main stat (Supreme physical tank)
-        GrowthMaximum: 15
+        GrowthMinimum: 4
+        GrowthMaximum: 20
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Int
         Base: 11
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 10
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Dex
         Base: 24
-        GrowthMinimum: 7     # Secondary stat (Melee accuracy)
-        GrowthMaximum: 13
+        GrowthMinimum: 3
+        GrowthMaximum: 19
         EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Luk
         Base: 12
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
+        GrowthMinimum: 3
+        GrowthMaximum: 19
         EvolutionMinimum: 1
         EvolutionMaximum: 5
     SkillTree:
@@ -487,51 +487,51 @@ Body:
     Status:
       - Type: Hp
         Base: 90
-        GrowthMinimum: 45    # Mantenemos su mínimo original (sigue siendo frágil)
-        GrowthMaximum: 56    # Antes 75 (-25%)
+        GrowthMinimum: 45
+        GrowthMaximum: 75
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Sp
         Base: 25
-        GrowthMinimum: 3     # INTACTO
-        GrowthMaximum: 6     # INTACTO
+        GrowthMinimum: 3
+        GrowthMaximum: 6
         EvolutionMinimum: 5
         EvolutionMaximum: 15
       - Type: Str
         Base: 29
-        GrowthMinimum: 7     # Secondary stat (Physical DPS / Moonlight)
-        GrowthMaximum: 13
+        GrowthMinimum: 4
+        GrowthMaximum: 20
         EvolutionMinimum: 4
         EvolutionMaximum: 10
       - Type: Agi
         Base: 35
-        GrowthMinimum: 10    # Main stat (Supreme ASPD and Flee)
-        GrowthMaximum: 15
-        EvolutionMinimum: 4
+        GrowthMinimum: 8
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 10
       - Type: Vit
         Base: 9
-        GrowthMinimum: 5     # Dump stat (Glass cannon)
-        GrowthMaximum: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 10
         EvolutionMinimum: 1
         EvolutionMaximum: 3
       - Type: Int
         Base: 8
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
-        EvolutionMinimum: 2
+        GrowthMinimum: 3
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 4
       - Type: Dex
         Base: 30
-        GrowthMinimum: 10    # Main stat (Flawless accuracy & attack speed)
-        GrowthMaximum: 15
-        EvolutionMinimum: 2
+        GrowthMinimum: 4
+        GrowthMaximum: 20
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
       - Type: Luk
         Base: 9
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
+        GrowthMinimum: 3
+        GrowthMaximum: 19
+        EvolutionMinimum: 1
         EvolutionMaximum: 5
     SkillTree:
       - Skill: HFLI_MOON
@@ -557,53 +557,53 @@ Body:
     Race: Formless
     Status:
       - Type: Hp
-        Base: 120
-        GrowthMinimum: 75    # Off-tank HP pool
-        GrowthMaximum: 95
-        EvolutionMinimum: 10
-        EvolutionMaximum: 20
+        Base: 80
+        GrowthMinimum: 30
+        GrowthMaximum: 150
+        EvolutionMinimum: 1
+        EvolutionMaximum: 30
       - Type: Sp
-        Base: 30
-        GrowthMinimum: 4     # Caster SP pool for Caprice spam
-        GrowthMaximum: 8
-        EvolutionMinimum: 5
-        EvolutionMaximum: 15
+        Base: 11
+        GrowthMinimum: 0
+        GrowthMaximum: 7
+        EvolutionMinimum: 1
+        EvolutionMaximum: 30
       - Type: Str
         Base: 11
-        GrowthMinimum: 5     # Dump stat
-        GrowthMaximum: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
         EvolutionMinimum: 1
-        EvolutionMaximum: 3
+        EvolutionMaximum: 10
       - Type: Agi
-        Base: 20
-        GrowthMinimum: 7     # Secondary stat (Moderate speed)
-        GrowthMaximum: 13
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
         EvolutionMinimum: 1
-        EvolutionMaximum: 4
+        EvolutionMaximum: 10
       - Type: Vit
-        Base: 20
-        GrowthMinimum: 10    # Main stat (Frontline Off-tank)
-        GrowthMaximum: 15
-        EvolutionMinimum: 3
-        EvolutionMaximum: 6
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
+        EvolutionMinimum: 1
+        EvolutionMaximum: 10
       - Type: Int
-        Base: 30
-        GrowthMinimum: 10    # Main stat (Caprice burst damage)
-        GrowthMaximum: 15
-        EvolutionMinimum: 4
-        EvolutionMaximum: 8
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
+        EvolutionMinimum: 1
+        EvolutionMaximum: 10
       - Type: Dex
-        Base: 18
-        GrowthMinimum: 7     # Secondary stat (Cast time & hit)
-        GrowthMaximum: 13
-        EvolutionMinimum: 2
-        EvolutionMaximum: 5
+        Base: 11
+        GrowthMinimum: 1
+        GrowthMaximum: 30
+        EvolutionMinimum: 1
+        EvolutionMaximum: 10
       - Type: Luk
         Base: 11
-        GrowthMinimum: 7     # Secondary stat (Universal resilience)
-        GrowthMaximum: 13
+        GrowthMinimum: 1
+        GrowthMaximum: 30
         EvolutionMinimum: 1
-        EvolutionMaximum: 3
+        EvolutionMaximum: 10
     SkillTree:
       - Skill: HVAN_CAPRICE
         MaxLevel: 5

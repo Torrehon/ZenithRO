@@ -3296,6 +3296,10 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 			break;
 		case NPC_EARTHQUAKE:
 			clif_skill_damage( *src, *bl, tick, status_get_amotion(src), dmg.dmotion, damage, dmg.div_, skill_id, -1, DMG_SPLASH );
+			if (bl) {
+				clif_specialeffect(bl, 1706, AREA);
+				clif_specialeffect(bl, 1707, AREA);
+			}
 			break;
 		case NPC_DARKPIERCING:
 		case EL_FIRE_BOMB:
@@ -4591,9 +4595,20 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 				flag|=1; //Set flag to 1 so ammo is not double-consumed. [Skotlex]
 			}
 		} else if (src->type == BL_HOM) {
-			// Soporte de ataque normal splash para Homúnculos (Amistr Evolucionado)
-			if (bl->id != skill_area_temp[1])
-				skill_attack(BF_WEAPON, src, src, bl, skill_id, skill_lv, tick, SD_LEVEL|flag);
+			// Splash normal attack support for Homunculus (Evolved Amistr)
+			homun_data* hd = (homun_data*)src;
+			if (hd && (hd->homunculus.class_ == 6010 || hd->homunculus.class_ == 6014)) {
+				if (flag & 3) {
+					if (bl->id != skill_area_temp[1])
+						skill_attack(BF_WEAPON, src, src, bl, skill_id, skill_lv, tick, SD_LEVEL|flag);
+				} else {
+					skill_area_temp[1] = bl->id;
+					map_foreachinallrange(skill_area_sub, bl,
+						1, BL_CHAR,
+						src, skill_id, skill_lv, tick, flag | BCT_ENEMY | 1,
+						skill_castend_damage_id);
+				}
+			}
 		}
 		break;
 	
@@ -5607,9 +5622,19 @@ TIMER_FUNC(skill_castend_id){
 			// sd->skillitem = sd->skillitemlv = sd->skillitem_keep_requirement = 0;
 
 		if (ud->skilltimer == INVALID_TIMER) {
-			if(md) md->skill_idx = -1;
-			else ud->skill_id = 0; //mobs can't clear this one as it is used for skill condition 'afterskill'
-			ud->skill_lv = ud->skilltarget = 0;
+			if (md) {
+				md->skill_idx = -1;
+				ud->skill_lv = ud->skilltarget = 0;
+				static int32 afterskill_depth = 0;
+				if (afterskill_depth < 5) {
+					afterskill_depth++;
+					mobskill_use(md, tick, MSC_AFTERSKILL);
+					afterskill_depth--;
+				}
+			} else {
+				ud->skill_id = 0; //mobs can't clear this one as it is used for skill condition 'afterskill'
+				ud->skill_lv = ud->skilltarget = 0;
+			}
 		}
 		return 1;
 	} while(0);
@@ -5800,9 +5825,19 @@ TIMER_FUNC(skill_castend_pos){
 			sd->skillitem = sd->skillitemlv = sd->skillitem_keep_requirement = 0;
 
 		if (ud->skilltimer == INVALID_TIMER) {
-			if (md) md->skill_idx = -1;
-			else ud->skill_id = 0; //Non mobs can't clear this one as it is used for skill condition 'afterskill'
-			ud->skill_lv = ud->skillx = ud->skilly = 0;
+			if (md) {
+				md->skill_idx = -1;
+				ud->skill_lv = ud->skillx = ud->skilly = 0;
+				static int32 afterskill_depth = 0;
+				if (afterskill_depth < 5) {
+					afterskill_depth++;
+					mobskill_use(md, tick, MSC_AFTERSKILL);
+					afterskill_depth--;
+				}
+			} else {
+				ud->skill_id = 0; //Non mobs can't clear this one as it is used for skill condition 'afterskill'
+				ud->skill_lv = ud->skillx = ud->skilly = 0;
+			}
 		}
 
 		return 1;
@@ -7630,7 +7665,7 @@ int32 skill_unit_onplace_timer(skill_unit *unit, block_list *bl, t_tick tick)
 
 		case UNT_EARTHQUAKE:
 			sg->val1++; // Hit count
-			skill_attack(skill_get_type(sg->skill_id), ss, unit, bl, sg->skill_id, sg->skill_lv, tick, map_foreachinallrange(skill_area_sub, unit, skill_get_splash(sg->skill_id, sg->skill_lv), BL_CHAR, unit, sg->skill_id, sg->skill_lv, tick, BCT_ENEMY, skill_area_sub_count) | (sg->val1 == 1 ? NPC_EARTHQUAKE_FLAG : 0));
+			skill_attack(skill_get_type(sg->skill_id), ss, unit, bl, sg->skill_id, sg->skill_lv, tick, map_foreachinallrange(skill_area_sub, unit, skill_get_splash(sg->skill_id, sg->skill_lv), BL_PC, unit, sg->skill_id, sg->skill_lv, tick, BCT_ENEMY, skill_area_sub_count) | (sg->val1 == 1 ? NPC_EARTHQUAKE_FLAG : 0));
 			break;
 
 		case UNT_ELECTRICSHOCKER:

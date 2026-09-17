@@ -32,8 +32,8 @@ void SkillWaterBall::applyAdditionalEffects(block_list* src, block_list* target,
 	// Nivel 5: (base * 100) / 100
 	int32 final_matk = (base_matk * (20 * skill_lv)) / 100;
 
-	// 3. Fórmula de probabilidad
-	int rate = 8 * skill_lv;
+	// 3. Fórmula de probabilidad (4% Drown por nivel, 2% Silence por nivel)
+	int rate = 4 * skill_lv;
 	int duration = 10000;
 	
 	map_session_data* sd = BL_CAST(BL_PC, src);

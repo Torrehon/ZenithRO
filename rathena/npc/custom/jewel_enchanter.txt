@@ -207,7 +207,6 @@ prt_in,89,72,4	script	Jewel Enchanter	542,{
     // 5. ANIMACIÃ“N Y APLICACIÃ“N DE CAMBIOS
     close2; // Cierra la ventana del NPC pero sigue ejecutando el script
     
-    soundeffect "blacksmith.wav", 0; // Efecto de sonido de forja
     progressbar "0x00FF00", 2;       // Barra de casteo verde de 2 segundos
 
     set .@new_val, .@current_val + .@increment;

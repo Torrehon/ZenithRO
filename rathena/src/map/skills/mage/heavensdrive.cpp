@@ -14,18 +14,37 @@ SkillHeavensDrive::SkillHeavensDrive() : SkillImpl(WZ_HEAVENDRIVE) {
 void SkillHeavensDrive::castendPos2(block_list* src, int32 x, int32 y, uint16 skill_lv, t_tick tick, int32& flag) const {
 	flag |= 1;
 
-	int32 instances = 1; 
-	int32 spread = 3;    
+	// Determinamos el número de instancias según el nivel:
+	// Lv 1 - 5 (Jugadores): 2 instancias (1 garantizada + 1 aleatoria)
+	// Lv 6 - 10 (Combate MVP Lv 10): 3 instancias (1 garantizada + 2 aleatorias)
+	// Lv > 10 (Castigo Rude Attack Lv 20): 6 instancias (1 garantizada + 5 aleatorias)
+	int32 instances = 2;
+	if (skill_lv > 10) {
+		instances = 6;
+	} else if (skill_lv > 5) {
+		instances = 3;
+	}
+
+	int32 spread = 3;
 
 	for (int32 i = 0; i < instances; i++) {
-		int16 tmpx = x + (rnd() % (spread * 2 + 1)) - spread;
-		int16 tmpy = y + (rnd() % (spread * 2 + 1)) - spread;
+		int16 cur_x, cur_y;
 
-		// Dibujamos el efecto visual en las coordenadas aleatorias
-		clif_skill_poseffect(*src, getSkillId(), skill_lv, tmpx, tmpy, tick);
+		if (i == 0) {
+			// La primera instancia SIEMPRE impacta exactamente en el objetivo original
+			cur_x = x;
+			cur_y = y;
+		} else {
+			// Las instancias adicionales erupcionan aleatoriamente alrededor
+			cur_x = x + (rnd() % (spread * 2 + 1)) - spread;
+			cur_y = y + (rnd() % (spread * 2 + 1)) - spread;
+		}
 
-		// Creamos la unidad invisible que hace el daño real (¡con un 0 al final!)
-		skill_unitsetting(src, getSkillId(), skill_lv, tmpx, tmpy, 0);
+		// Mostramos la animación visual de estalagmitas exactamente en la coordenada real
+		clif_skill_poseffect(*src, getSkillId(), skill_lv, cur_x, cur_y, tick);
+
+		// Creamos la unidad de daño en la misma coordenada
+		skill_unitsetting(src, getSkillId(), skill_lv, cur_x, cur_y, 0);
 	}
 }
 

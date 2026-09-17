@@ -1,6 +1,6 @@
 
-require "AI\\Const"
-require "AI\\Util"					
+require "./AI/Const.lua"
+require "./AI/Util.lua"					
 
 -----------------------------
 -- state
@@ -21,28 +21,29 @@ FOLLOW_CMD_ST				= 12
 ----------------------------
 
 
+
 ------------------------------------------
 -- global variable
 ------------------------------------------
-MyState				= IDLE_ST	-- ÏµúÏ¥àÏùò ÏÉÅÌÉúÎäî Ìú¥Ïãù
-MyEnemy				= 0		-- Ï†Å id
-MyDestX				= 0		-- Î™©Ï†ÅÏßÄ x
-MyDestY				= 0		-- Î™©Ï†ÅÏßÄ y
-MyPatrolX			= 0		-- Ï†ïÏ∞∞ Î™©Ï†ÅÏßÄ x
-MyPatrolY			= 0		-- Ï†ïÏ∞∞ Î™©Ï†ÅÏßÄ y
-ResCmdList			= List.new()	-- ÏòàÏïΩ Î™ÖÎ†πÏñ¥ Î¶¨Ïä§Ìä∏ 
-MyID				= 0		-- Ìò∏Î¨∏ÌÅ¥Î£®Ïä§ id
-MySkill				= 0		-- Ìò∏Î¨∏ÌÅ¥Î£®Ïä§Ïùò Ïä§ÌÇ¨
-MySkillLevel		= 0		-- Ìò∏Î¨∏ÌÅ¥Î£®Ïä§Ïùò Ïä§ÌÇ¨ Î†àÎ≤®
-LastAmiBulwarkTick	= 0
-LastAmiBloodlustTick	= 0
-LastCastlingTick	= 0
-LastLifAvoidTick	= 0
-LastLifHealTick		= 0
-LastFilirFlitTick	= 0
-LastFilirSpeedTick	= 0
-LastOffensiveSkillTick	= 0
+MyState				= IDLE_ST	-- √÷√ ¿« ªÛ≈¬¥¬ »ﬁΩƒ
+MyEnemy				= 0		-- ¿˚ id
+MyDestX				= 0		-- ∏Ò¿˚¡ˆ x
+MyDestY				= 0		-- ∏Ò¿˚¡ˆ y
+MyPatrolX			= 0		-- ¡§¬˚ ∏Ò¿˚¡ˆ x
+MyPatrolY			= 0		-- ¡§¬˚ ∏Ò¿˚¡ˆ y
+ResCmdList			= List.new()	-- øπæ‡ ∏Ì∑…æÓ ∏ÆΩ∫∆Æ 
+MyID				= 0		-- øÎ∫¥ id
+MySkill				= 0		-- øÎ∫¥¿« Ω∫≈≥
+MySkillLevel			= 0		-- øÎ∫¥¿« Ω∫≈≥ ∑π∫ß
 ------------------------------------------
+
+
+
+
+
+
+
+
 
 
 ------------- command process  ---------------------
@@ -52,13 +53,13 @@ function	OnMOVE_CMD (x,y)
 	TraceAI ("OnMOVE_CMD")
 
 	if ( x == MyDestX and y == MyDestY and MOTION_MOVE == GetV(V_MOTION,MyID)) then
-		return		-- ÌòÑÏû¨ Ïù¥ÎèôÏ§ëÏù∏ Î™©Ï†ÅÏßÄÏôÄ Í∞ôÏùÄ Í≥≥Ïù¥Î©¥ Ï≤òÎ¶¨ÌïòÏßÄ ÏïäÎäîÎã§. 
+		return		-- «ˆ¿Á ¿Ãµø¡ﬂ¿Œ ∏Ò¿˚¡ˆøÕ ∞∞¿∫ ∞˜¿Ã∏È √≥∏Æ«œ¡ˆ æ ¥¬¥Ÿ. 
 	end
 
 	local curX, curY = GetV (V_POSITION,MyID)
-	if (math.abs(x-curX)+math.abs(y-curY) > 15) then		-- Î™©Ï†ÅÏßÄÍ∞Ä ÏùºÏ†ï Í±∞Î¶¨ Ïù¥ÏÉÅÏù¥Î©¥ (ÏÑúÎ≤ÑÏóêÏÑú Î®ºÍ±∞Î¶¨Îäî Ï≤òÎ¶¨ÌïòÏßÄ ÏïäÍ∏∞ ÎïåÎ¨∏Ïóê)
-		List.pushleft (ResCmdList,{MOVE_CMD,x,y})			-- ÏõêÎûò Î™©Ï†ÅÏßÄÎ°úÏùò Ïù¥ÎèôÏùÑ ÏòàÏïΩÌïúÎã§. 	
-		x = math.floor((x+curX)/2)							-- Ï§ëÍ∞ÑÏßÄÏ†êÏúºÎ°ú Î®ºÏ†Ä Ïù¥ÎèôÌïúÎã§.  
+	if (math.abs(x-curX)+math.abs(y-curY) > 15) then		-- ∏Ò¿˚¡ˆ∞° ¿œ¡§ ∞≈∏Æ ¿ÃªÛ¿Ã∏È (º≠πˆø°º≠ ∏’∞≈∏Æ¥¬ √≥∏Æ«œ¡ˆ æ ±‚ ∂ßπÆø°)
+		List.pushleft (ResCmdList,{MOVE_CMD,x,y})			-- ø¯∑° ∏Ò¿˚¡ˆ∑Œ¿« ¿Ãµø¿ª øπæ‡«—¥Ÿ. 	
+		x = math.floor((x+curX)/2)							-- ¡ﬂ∞£¡ˆ¡°¿∏∑Œ ∏’¿˙ ¿Ãµø«—¥Ÿ.  
 		y = math.floor((y+curY)/2)							-- 
 	end
 
@@ -71,6 +72,7 @@ function	OnMOVE_CMD (x,y)
 	MySkill = 0
 
 end
+
 
 
 
@@ -91,6 +93,7 @@ end
 
 
 
+
 function	OnATTACK_OBJECT_CMD (id)
 
 	TraceAI ("OnATTACK_OBJECT_CMD")
@@ -100,6 +103,7 @@ function	OnATTACK_OBJECT_CMD (id)
 	MyState = CHASE_ST
 
 end
+
 
 
 
@@ -133,6 +137,7 @@ end
 
 
 
+
 function	OnHOLD_CMD ()
 
 	TraceAI ("OnHOLD_CMD")
@@ -146,6 +151,7 @@ end
 
 
 
+
 function	OnSKILL_OBJECT_CMD (level,skill,id)
 
 	TraceAI ("OnSKILL_OBJECT_CMD")
@@ -156,6 +162,7 @@ function	OnSKILL_OBJECT_CMD (level,skill,id)
 	MyState = CHASE_ST
 
 end
+
 
 
 
@@ -174,9 +181,10 @@ end
 
 
 
+
 function	OnFOLLOW_CMD ()
 
-	-- ÎåÄÍ∏∞Î™ÖÎ†πÏùÄ ÎåÄÍ∏∞ÏÉÅÌÉúÏôÄ Ìú¥ÏãùÏÉÅÌÉúÎ•º ÏÑúÎ°ú Ï†ÑÌôòÏãúÌÇ®Îã§. 
+	-- ¥Î±‚∏Ì∑…¿∫ ¥Î±‚ªÛ≈¬øÕ »ﬁΩƒªÛ≈¬∏¶ º≠∑Œ ¿¸»ØΩ√≈≤¥Ÿ. 
 	if (MyState ~= FOLLOW_CMD_ST) then
 		MoveToOwner (MyID)
 		MyState = FOLLOW_CMD_ST
@@ -192,6 +200,7 @@ function	OnFOLLOW_CMD ()
 	end
 
 end
+
 
 
 
@@ -232,99 +241,6 @@ end
 
 -------------- state process  --------------------
 
--------------------------------------------
--- Utility Functions
--------------------------------------------
-function modulo(a, b)
-	if a == nil or b == nil or b == 0 then return 0 end
-	return a - math.floor(a / b) * b
-end
-
--------------------------------------------
--- Combat Support / Buff / Healing Routine (Only during combat!)
--------------------------------------------
-function CombatSupportSkills(myid)
-	local tick = GetTick()
-	local htype = GetV(V_HOMUNTYPE, myid)
-	local sp = GetV(V_SP, myid)
-	local hp = GetV(V_HP, myid)
-	local maxHp = GetV(V_MAXHP, myid)
-	local owner = GetV(V_OWNER, myid)
-	local ownerHp = GetV(V_HP, owner)
-	local ownerMaxHp = GetV(V_MAXHP, owner)
-	local hmod = modulo(htype, 4)
-
-	-- Check Lif skills (htype % 4 == 1)
-	if (htype == LIF or htype == LIF_H or htype == LIF2 or htype == LIF_H2 or hmod == 1) then
-		-- 1. Lif Healing Hands (HLIF_HEAL = 8001) in combat: only if seriously hurt (<70%)
-		if (sp ~= nil and sp >= 15 and tick > LastLifHealTick) then
-			-- Heal master if master HP < 70%
-			if (ownerHp ~= nil and ownerMaxHp ~= nil and ownerMaxHp > 0 and (ownerHp * 100 / ownerMaxHp) < 70) then
-				LastLifHealTick = tick + 8000 -- 8s cooldown
-				SkillObject(myid, 5, 8001, owner)
-				return true
-			end
-			-- Heal self if self HP < 65%
-			if (hp ~= nil and maxHp ~= nil and maxHp > 0 and (hp * 100 / maxHp) < 65) then
-				LastLifHealTick = tick + 8000 -- 8s cooldown
-				SkillObject(myid, 5, 8001, myid)
-				return true
-			end
-		end
-
-		-- 2. Lif Urgent Escape (HLIF_AVOID = 8002) - Speed buff in combat
-		if (sp ~= nil and sp >= 25 and tick > LastLifAvoidTick) then
-			LastLifAvoidTick = tick + 35000 -- 35s cooldown
-			SkillObject(myid, 5, 8002, myid)
-			return true
-		end
-
-	-- Check Amistr skills (htype % 4 == 2)
-	elseif (htype == AMISTR or htype == AMISTR_H or htype == AMISTR2 or htype == AMISTR_H2 or hmod == 2) then
-		-- 1. Amistr Bulwark (HAMI_DEFENCE = 8006) - DEF buff in combat
-		if (sp ~= nil and sp >= 20 and tick > LastAmiBulwarkTick) then
-			LastAmiBulwarkTick = tick + 30000 -- 30s cooldown
-			SkillObject(myid, 5, 8006, myid)
-			return true
-		end
-
-		-- 2. Amistr Castling (HAMI_CASTLE = 8005) - Rescue master if under attack and master HP < 70%
-		if (sp ~= nil and sp >= 10 and tick > LastCastlingTick) then
-			local ownerEnemy = GetOwnerEnemy(myid)
-			if (ownerEnemy ~= 0 and ownerHp ~= nil and ownerMaxHp ~= nil and ownerMaxHp > 0 and (ownerHp * 100 / ownerMaxHp) < 70) then
-				LastCastlingTick = tick + 10000 -- 10s cooldown
-				SkillObject(myid, 5, 8005, myid)
-				return true
-			end
-		end
-
-		-- 3. Amistr Blood Lust (HAMI_BLOODLUST = 8008) in combat
-		if (sp ~= nil and sp >= 120 and tick > LastAmiBloodlustTick) then
-			LastAmiBloodlustTick = tick + 120000 -- 120s cooldown
-			SkillObject(myid, 3, 8008, myid)
-			return true
-		end
-
-	-- Check Filir skills (htype % 4 == 3)
-	elseif (htype == FILIR or htype == FILIR_H or htype == FILIR2 or htype == FILIR_H2 or hmod == 3) then
-		-- 1. Accelerated Flight (HFLI_SPEED = 8011) - FLEE buff in combat
-		if (sp ~= nil and sp >= 30 and tick > LastFilirSpeedTick) then
-			LastFilirSpeedTick = tick + 60000 -- 60s cooldown
-			SkillObject(myid, 5, 8011, myid)
-			return true
-		end
-
-		-- 2. Flitting (HFLI_FLEET = 8010) - ASPD/ATK buff in combat
-		if (sp ~= nil and sp >= 30 and tick > LastFilirFlitTick) then
-			LastFilirFlitTick = tick + 60000 -- 60s cooldown
-			SkillObject(myid, 5, 8010, myid)
-			return true
-		end
-	end
-
-	return false
-end
-
 
 function	OnIDLE_ST ()
 	
@@ -332,7 +248,7 @@ function	OnIDLE_ST ()
 
 	local cmd = List.popleft(ResCmdList)
 	if (cmd ~= nil) then		
-		ProcessCommand (cmd)	-- ÏòàÏïΩ Î™ÖÎ†πÏñ¥ Ï≤òÎ¶¨ 
+		ProcessCommand (cmd)	-- øπæ‡ ∏Ì∑…æÓ √≥∏Æ 
 		return 
 	end
 
@@ -356,10 +272,11 @@ function	OnIDLE_ST ()
 	if ( distance > 3 or distance == -1) then		-- MYOWNER_OUTSIGNT_IN
 		MyState = FOLLOW_ST
 		TraceAI ("IDLE_ST -> FOLLOW_ST")
-		return
+		return;
 	end
 
 end
+
 
 
 
@@ -367,44 +284,18 @@ function	OnFOLLOW_ST ()
 
 	TraceAI ("OnFOLLOW_ST")
 
-	local cmd = List.popleft(ResCmdList)
-	if (cmd ~= nil) then		
-		ProcessCommand (cmd)
-		return 
-	end
-
-	-- Aggressive: Check if owner is attacked
-	local object = GetOwnerEnemy (MyID)
-	if (object ~= 0) then
-		MyState = CHASE_ST
-		MyEnemy = object
-		TraceAI ("FOLLOW_ST -> CHASE_ST : OWNER_ATTACKED")
-		return
-	end
-
-	-- Aggressive: Check if any hostile monster is nearby
-	object = GetMyEnemy (MyID)
-	if (object ~= 0) then
-		local ownerDist = GetDistanceFromOwner(MyID)
-		if (ownerDist <= 12 and ownerDist ~= -1) then
-			MyState = CHASE_ST
-			MyEnemy = object
-			TraceAI ("FOLLOW_ST -> CHASE_ST : AGGRESSIVE_ENEMY_FOUND")
-			return
-		end
-	end
-
-	if (GetDistanceFromOwner(MyID) <= 3) then		-- DESTINATION_ARRIVED_IN 
+	if (GetDistanceFromOwner(MyID) <= 3) then		--  DESTINATION_ARRIVED_IN 
 		MyState = IDLE_ST
-		TraceAI ("FOLLOW_ST -> IDLE_ST")
-		return
+		TraceAI ("FOLLOW_ST -> IDLW_ST")
+		return;
 	elseif (GetV(V_MOTION,MyID) == MOTION_STAND) then
 		MoveToOwner (MyID)
 		TraceAI ("FOLLOW_ST -> FOLLOW_ST")
-		return
+		return;
 	end
 
 end
+
 
 
 
@@ -419,32 +310,22 @@ function	OnCHASE_ST ()
 		TraceAI ("CHASE_ST -> IDLE_ST : ENEMY_OUTSIGHT_IN")
 		return
 	end
-
-	-- Leash check: do not wander off too far from owner
-	local ownerDist = GetDistanceFromOwner(MyID)
-	if (ownerDist > 14 or ownerDist == -1) then
-		MyState = FOLLOW_ST
-		MyEnemy = 0
-		MyDestX, MyDestY = 0,0
-		TraceAI ("CHASE_ST -> FOLLOW_ST : OWNER_LEASH_EXCEEDED")
-		return
-	end
-
 	if (true == IsInAttackSight(MyID,MyEnemy)) then  -- ENEMY_INATTACKSIGHT_IN
 		MyState = ATTACK_ST
 		TraceAI ("CHASE_ST -> ATTACK_ST : ENEMY_INATTACKSIGHT_IN")
 		return
 	end
 
-	local x, y = GetV (V_POSITION_APPLY_SKILLATTACKRANGE, MyEnemy, MySkill, MySkillLevel)
+	local x, y = GetV (V_POSITION,MyEnemy)
 	if (MyDestX ~= x or MyDestY ~= y) then			-- DESTCHANGED_IN
-		MyDestX, MyDestY = GetV (V_POSITION_APPLY_SKILLATTACKRANGE, MyEnemy, MySkill, MySkillLevel)
+		MyDestX, MyDestY = GetV (V_POSITION,MyEnemy);
 		Move (MyID,MyDestX,MyDestY)
 		TraceAI ("CHASE_ST -> CHASE_ST : DESTCHANGED_IN")
 		return
 	end
 
 end
+
 
 
 
@@ -466,49 +347,26 @@ function	OnATTACK_ST ()
 		
 	if (false == IsInAttackSight(MyID,MyEnemy)) then  -- ENEMY_OUTATTACKSIGHT_IN
 		MyState = CHASE_ST
-		MyDestX, MyDestY = GetV(V_POSITION_APPLY_SKILLATTACKRANGE, MyEnemy, MySkill, MySkillLevel)
+		MyDestX, MyDestY = GetV (V_POSITION,MyEnemy);
 		Move (MyID,MyDestX,MyDestY)
 		TraceAI ("ATTACK_ST -> CHASE_ST  : ENEMY_OUTATTACKSIGHT_IN")
 		return
 	end
-
-	-- Support & buff skills during combat (with strict cooldowns)
-	if (CombatSupportSkills(MyID)) then
-		return
-	end
 	
 	if (MySkill == 0) then
-		local htype = GetV(V_HOMUNTYPE, MyID)
-		local sp = GetV(V_SP, MyID)
-		local tick = GetTick()
-		local castSkill = false
-		-- Offensive attack skills: only cast every 3.5 seconds with proper cooldown!
-		if (tick > LastOffensiveSkillTick) then
-			if (htype == VANILMIRTH or htype == VANILMIRTH_H or htype == VANILMIRTH2 or htype == VANILMIRTH_H2) and (sp ~= nil and sp > 30) then
-				LastOffensiveSkillTick = tick + 3500
-				SkillObject(MyID, 5, 8013, MyEnemy)
-				castSkill = true
-			elseif (htype == FILIR or htype == FILIR_H or htype == FILIR2 or htype == FILIR_H2) and (sp ~= nil and sp > 20) then
-				LastOffensiveSkillTick = tick + 3500
-				SkillObject(MyID, 5, 8009, MyEnemy)
-				castSkill = true
-			end
-		end
-
-		if (not castSkill) then
-			Attack (MyID,MyEnemy)
-		end
+		Attack (MyID,MyEnemy)
 	else
 		if (1 == SkillObject(MyID,MySkillLevel,MySkill,MyEnemy)) then
 			MyEnemy = 0
 		end
-		
 		MySkill = 0
 	end
 	TraceAI ("ATTACK_ST -> ATTACK_ST  : ENERGY_RECHARGED_IN")
 	return
 
+
 end
+
 
 
 
@@ -524,6 +382,7 @@ end
 
 
 
+
 function OnSTOP_CMD_ST ()
 
 
@@ -531,10 +390,13 @@ end
 
 
 
+
 function OnATTACK_OBJECT_CMD_ST ()
 
 	
+
 end
+
 
 
 
@@ -559,6 +421,7 @@ function OnATTACK_AREA_CMD_ST ()
 	end
 
 end
+
 
 
 
@@ -591,6 +454,7 @@ end
 
 
 
+
 function OnHOLD_CMD_ST ()
 
 	TraceAI ("OnHOLD_CMD_ST")
@@ -600,7 +464,7 @@ function OnHOLD_CMD_ST ()
 		if (d ~= -1 and d <= GetV(V_ATTACKRANGE,MyID)) then
 				Attack (MyID,MyEnemy)
 		else
-			MyEnemy = 0
+			MyEnemy = 0;
 		end
 		return
 	end
@@ -620,6 +484,7 @@ end
 
 
 
+
 function OnSKILL_OBJECT_CMD_ST ()
 	
 end
@@ -632,7 +497,7 @@ function OnSKILL_AREA_CMD_ST ()
 	TraceAI ("OnSKILL_AREA_CMD_ST")
 
 	local x , y = GetV (V_POSITION,MyID)
-	if (GetDistance(x,y,MyDestX,MyDestY) <= GetV(V_SKILLATTACKRANGE_LEVEL, MyID, MySkill, MySkillLevel)) then	-- DESTARRIVED_IN
+	if (GetDistance(x,y,MyDestX,MyDestY) <= GetV(V_SKILLATTACKRANGE,MyID,MySkill)) then	-- DESTARRIVED_IN
 		SkillGround (MyID,MySkillLevel,MySkill,MyDestX,MyDestY)
 		MyState = IDLE_ST
 		MySkill = 0
@@ -642,30 +507,34 @@ end
 
 
 
+
+
+
+
 function OnFOLLOW_CMD_ST ()
 
 	TraceAI ("OnFOLLOW_CMD_ST")
 
 	local ownerX, ownerY, myX, myY
-	ownerX, ownerY = GetV (V_POSITION,GetV(V_OWNER,MyID)) -- Ï£ºÏù∏
-	myX, myY = GetV (V_POSITION,MyID)					  -- ÎÇò 
+	ownerX, ownerY = GetV (V_POSITION,GetV(V_OWNER,MyID)) -- ¡÷¿Œ
+	myX, myY = GetV (V_POSITION,MyID)					  -- ≥™ 
 	
 	local d = GetDistance (ownerX,ownerY,myX,myY)
 
-	if ( d <= 3) then									  -- 3ÏÖÄ Ïù¥Ìïò Í±∞Î¶¨Î©¥ 
+	if ( d <= 3) then									  -- 3ºø ¿Ã«œ ∞≈∏Æ∏È 
 		return 
 	end
 
 	local motion = GetV (V_MOTION,MyID)
-	if (motion == MOTION_MOVE) then                       -- Ïù¥ÎèôÏ§ë
+	if (motion == MOTION_MOVE) then                       -- ¿Ãµø¡ﬂ
 		d = GetDistance (ownerX, ownerY, MyDestX, MyDestY)
-		if ( d > 3) then                                  -- Î™©Ï†ÅÏßÄ Î≥ÄÍ≤Ω ?
+		if ( d > 3) then                                  -- ∏Ò¿˚¡ˆ ∫Ø∞Ê ?
 			MoveToOwner (MyID)
 			MyDestX = ownerX
 			MyDestY = ownerY
 			return
 		end
-	else                                                  -- Îã§Î•∏ ÎèôÏûë 
+	else                                                  -- ¥Ÿ∏• µø¿€ 
 		MoveToOwner (MyID)
 		MyDestX = ownerX
 		MyDestY = ownerY
@@ -676,26 +545,10 @@ end
 
 
 
--------------------------------------------
--- Monster Exclusion List (Wild Plants & Player Summons)
--------------------------------------------
-IgnoredMonsters = {
-	[1078] = true, -- Red Plant
-	[1079] = true, -- Blue Plant
-	[1080] = true, -- Green Plant
-	[1081] = true, -- Yellow Plant
-	[1082] = true, -- White Plant
-	[1083] = true, -- Shining Plant
-	[1084] = true, -- Red Mushroom
-	[1085] = true, -- Black Mushroom
-	[1555] = true, -- Parasite
-	[1575] = true, -- Flora
-	[1579] = true, -- Hydra
-	[1589] = true, -- Mandragora
-	[1590] = true, -- Geographer
-	[1790] = true, -- Rafflesia
-	[20572] = true, -- Wooden Golem
-}
+
+
+
+
 
 function	GetOwnerEnemy (myid)
 	local result = 0
@@ -708,18 +561,14 @@ function	GetOwnerEnemy (myid)
 		if (v ~= owner and v ~= myid) then
 			target = GetV (V_TARGET,v)
 			if (target == owner) then
-				local mobType = GetV(V_HOMUNTYPE, v)
-				local motion = GetV(V_MOTION, v)
-				if (not IgnoredMonsters[mobType]) and (motion ~= MOTION_DEAD) then
-					if (IsMonster(v) == 1) then
+				if (IsMonster(v) == 1) then
+					enemys[index] = v
+					index = index+1
+				else
+					local motion = GetV(V_MOTION,i)
+					if (motion == MOTION_ATTACK or motion == MOTION_ATTACK2) then
 						enemys[index] = v
 						index = index+1
-					else
-						local m = GetV(V_MOTION,v)
-						if (m == MOTION_ATTACK or m == MOTION_ATTACK2) then
-							enemys[index] = v
-							index = index+1
-						end
 					end
 				end
 			end
@@ -741,16 +590,24 @@ end
 
 
 
+
 function	GetMyEnemy (myid)
-	-- All homunculus classes aggressively seek monsters on sight
-	return GetMyEnemyB (myid)
+	local result = 0
+
+	local type = GetV (V_MERTYPE,myid)
+	if (type >= ARCHER01 and type <= SWORDMAN10) then
+		result = GetMyEnemyA (myid)
+	else
+		result = GetMyEnemyB (myid)
+	end
+	return result
 end
 
 
 
 
 -------------------------------------------
--- Passive Enemy Detection (Retaliation Only)
+--  ∫Òº±∞¯«¸ GetMyEnemy
 -------------------------------------------
 function	GetMyEnemyA (myid)
 	local result = 0
@@ -762,13 +619,9 @@ function	GetMyEnemyA (myid)
 	for i,v in ipairs(actors) do
 		if (v ~= owner and v ~= myid) then
 			target = GetV (V_TARGET,v)
-			if (target == myid) then
-				local mobType = GetV(V_HOMUNTYPE, v)
-				local motion = GetV(V_MOTION, v)
-				if (not IgnoredMonsters[mobType]) and (motion ~= MOTION_DEAD) then
-					enemys[index] = v
-					index = index+1
-				end
+			if (target == myid) then	
+				enemys[index] = v
+				index = index+1
 			end
 		end
 	end
@@ -790,8 +643,9 @@ end
 
 
 
+
 -------------------------------------------
--- Aggressive Enemy Detection (Monsters in Sight)
+--  º±∞¯«¸ GetMyEnemy
 -------------------------------------------
 function	GetMyEnemyB (myid)
 	local result = 0
@@ -799,18 +653,12 @@ function	GetMyEnemyB (myid)
 	local actors = GetActors ()
 	local enemys = {}
 	local index = 1
+	local type
 	for i,v in ipairs(actors) do
 		if (v ~= owner and v ~= myid) then
 			if (1 == IsMonster(v))	then
-				local mobType = GetV(V_HOMUNTYPE, v)
-				local motion = GetV(V_MOTION, v)
-				local distToOwner = GetDistance2(owner, v)
-				local distToMe = GetDistance2(myid, v)
-				-- Skip ignored/summoned monsters, dead entities, and monsters beyond leash range (14 cells of owner, 12 cells of homun)
-				if (not IgnoredMonsters[mobType]) and (motion ~= MOTION_DEAD) and (distToOwner ~= -1 and distToOwner <= 14) and (distToMe ~= -1 and distToMe <= 12) then
-					enemys[index] = v
-					index = index+1
-				end
+				enemys[index] = v
+				index = index+1
 			end
 		end
 	end
@@ -827,6 +675,9 @@ function	GetMyEnemyB (myid)
 
 	return result
 end
+
+
+
 
 
 
@@ -840,16 +691,16 @@ function AI(myid)
 	if msg[1] == NONE_CMD then
 		if rmsg[1] ~= NONE_CMD then
 			if List.size(ResCmdList) < 10 then
-				List.pushright (ResCmdList,rmsg) -- ÏòàÏïΩ Î™ÖÎ†π Ï†ÄÏû•
+				List.pushright (ResCmdList,rmsg) -- øπæ‡ ∏Ì∑… ¿˙¿Â
 			end
 		end
 	else
-		List.clear (ResCmdList)	-- ÏÉàÎ°úÏö¥ Î™ÖÎ†πÏù¥ ÏûÖÎ†•ÎêòÎ©¥ ÏòàÏïΩ Î™ÖÎ†πÎì§ÏùÄ ÏÇ≠Ï†úÌïúÎã§.  
-		ProcessCommand (msg)	-- Î™ÖÎ†πÏñ¥ Ï≤òÎ¶¨ 
+		List.clear (ResCmdList)	-- ªı∑ŒøÓ ∏Ì∑…¿Ã ¿‘∑¬µ«∏È øπæ‡ ∏Ì∑…µÈ¿∫ ªË¡¶«—¥Ÿ.  
+		ProcessCommand (msg)	-- ∏Ì∑…æÓ √≥∏Æ 
 	end
 
 		
-	-- ÏÉÅÌÉú Ï≤òÎ¶¨ 
+	-- ªÛ≈¬ √≥∏Æ 
  	if (MyState == IDLE_ST) then
 		OnIDLE_ST ()
 	elseif (MyState == CHASE_ST) then					
