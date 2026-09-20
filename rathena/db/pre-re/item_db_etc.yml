@@ -5985,7 +5985,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus3 bAutoSpell,"AS_SONICBLOW",1,50;
+      bonus3 bAutoSpell,"AS_SONICBLOW",3,50;
   - Id: 4269
     AegisName: Incubus_Card
     Name: Incubus Card
@@ -7004,9 +7004,7 @@ Body:
     Script: |
       bonus bLuk,2;
       if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_REVOLVER || getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_GATLING) {
-         bonus bAspd,3;
-        }
-      if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_RIFLE || getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_GRENADE || getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_SHOTGUN) {
+         bonus bAspdRate,3;
          bonus bLongAtkRate,3;
         }
   - Id: 4344

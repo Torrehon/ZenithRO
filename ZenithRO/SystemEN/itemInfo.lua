@@ -204710,20 +204710,19 @@ tbl = {
 		costume = true
 	},
 	[20037] = {
-		unidentifiedDisplayName = "Hat",
+		unidentifiedDisplayName = "Unidentified Hat",
 		unidentifiedResourceName = "캡",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
-		identifiedDisplayName = "Costume Owlduke Silk Hat",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Silk Hat",
 		identifiedResourceName = "아울듀크의실크햇",
 		identifiedDescriptionName = {
-			"A silk hat of Owlduke.",
-			"Class:^6666CC Costume^000000",
-			"Location:^6666CC Upper^000000",
-			"Weight:^009900 0^000000",
-			"Level Requirement:^009900 1^000000",
-			"Jobs:^6666CC All^000000"
+			"A silk hat of a duke.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Upper",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
 		},
 		slotCount = 0,
 		ClassNum = 982,
@@ -252944,19 +252943,20 @@ tbl = {
 		costume = true
 	},
 	[31052] = {
-		unidentifiedDisplayName = "Hat",
+		Server = "iRO",
+		unidentifiedDisplayName = "Unidentified Hat",
 		unidentifiedResourceName = "캡",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Costume Alchemist Mask",
 		identifiedResourceName = "연금술사마스크",
 		identifiedDescriptionName = {
-			"Class:^6666CC Costume^000000",
-			"Location:^6666CC Upper^000000",
-			"Weight:^006600 0^000000",
-			"Level Requirement:^006600 1^000000",
-			"Jobs:^6666CC All^000000"
+			"A protective mask worn by an alchemist to avoid inhaling toxic substances when making potions.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Upper",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
 		},
 		slotCount = 0,
 		ClassNum = 1497,
@@ -258496,19 +258496,20 @@ tbl = {
 		costume = true
 	},
 	[31391] = {
-		unidentifiedDisplayName = "Hat",
+		Server = "jRO",
+		unidentifiedDisplayName = "Unidentified Hat",
 		unidentifiedResourceName = "캡",
-		unidentifiedDescriptionName = {
-			"Unknown Item, can be identified by using a ^6666CCMagnifier^000000."
-		},
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
 		identifiedDisplayName = "Costume Floating Stone of Sage",
 		identifiedResourceName = "부유하는현자의돌",
 		identifiedDescriptionName = {
-			"Class:^6666CC Costume^000000",
-			"Location:^6666CC Middle^000000",
-			"Weight:^006600 0^000000",
-			"Level Requirement:^006600 1^000000",
-			"Jobs:^6666CC All^000000"
+			"A stone of a wealthy sage.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Middle",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
 		},
 		slotCount = 0,
 		ClassNum = 0,
@@ -259821,6 +259822,26 @@ tbl = {
 		ClassNum = 1713,
 		costume = true
 	},
+	[31540] = {
+		Server = "jRO",
+		unidentifiedDisplayName = "Unidentified Glasses",
+		unidentifiedResourceName = "글래스",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Gemini Eyes(Red)",
+		identifiedResourceName = "Gemini_RedEyes",
+		identifiedDescriptionName = {
+			"Costume colored contacts made to mimic the eyes of Gemini-S58.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Middle",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 1654,
+		costume = true
+	},
 	[31546] = {
 		Server = "jRO",
 		unidentifiedDisplayName = "Unidentified Hat",
@@ -259880,6 +259901,26 @@ tbl = {
 		},
 		slotCount = 0,
 		ClassNum = 1786,
+		costume = true
+	},
+	[31570] = {
+		Server = "jRO",
+		unidentifiedDisplayName = "Unidentified Glasses",
+		unidentifiedResourceName = "글래스",
+		unidentifiedDescriptionName = { "Can be identified by using a ^990099Magnifier^000000." },
+		identifiedDisplayName = "Costume Cyclop's Eye",
+		identifiedResourceName = "사이클롭스아이",
+		identifiedDescriptionName = {
+			"Eye of the cyclops. Replicate eye protection. No change in vision.",
+			"_______________________",
+			"^0000CCType:^000000 Costume",
+			"^0000CCPosition:^000000 Middle",
+			"^0000CCWeight:^000000 0",
+			"_______________________",
+			"^0000CCRequirement:^000000 None"
+		},
+		slotCount = 0,
+		ClassNum = 207,
 		costume = true
 	},
 	[31598] = {

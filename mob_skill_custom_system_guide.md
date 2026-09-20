@@ -6,6 +6,7 @@ Esta guía documenta paso a paso cómo extender el motor de **rAthena** para sop
 3. **Nuevas Condiciones de activación por daño elemental** (`elementattacked`).
 4. **Sistema de variables dinámicas por monstruo** (Ej: Mecánica de Overheat / Enfriamiento por Agua para RSX).
 5. **Variables estáticas adicionales en `mob_skill_db.txt`**.
+6. **Soporte extendido de Estados para `mystatuson/off` y `friendstatuson/off`** (`powerup`, `agiup`, `berserk`, y resolución dinámica de constantes `SC_*`).
 
 ---
 
@@ -267,12 +268,12 @@ En la función `battle_damage`:
 
 ### Paso 3.4: `src/map/mob.cpp` - Evaluación en `mob_ai_sub_hard_activeskill`
 ```cpp
-		if (ms[i]->cond1 == event)
-			flag = 1;
-		else if (ms[i]->cond1 == MSC_SKILLUSED)
+		if (ms[i]->cond1 == MSC_SKILLUSED)
 			flag = ((event & 0xffff) == MSC_SKILLUSED && ((event >> 16) == c2 || c2 == 0));
 		else if (ms[i]->cond1 == MSC_ELEMENTATTACKED && damage > 0)
 			flag = ((event & 0xffff) == MSC_ELEMENTATTACKED && ((event >> 16) == c2 || c2 == -1));
+		else if (ms[i]->cond1 == event)
+			flag = 1;
 		else if (event == -1) {
 			switch (ms[i]->cond1) {
 				// ...
@@ -367,3 +368,23 @@ En `battle_damage`:
 1623,RSX@Berserk,any,357,1,10000,0,60000,no,self,heatgte,90,0,0,0,0,0,28,
 1623,RSX@Earthquake,any,653,10,10000,2000,5000,no,target,heatgte,90,0,0,0,0,0,28,
 ```
+
+---
+
+## 6. Soporte Extendido de Estados (`mystatuson`, `mystatusoff`, `friendstatuson`, `friendstatusoff`)
+
+Por defecto, rAthena solo mapeaba una lista reducida de estados alterados negativos en `cond2[]` (`stone`, `freeze`, `stun`, `sleep`, `poison`, `curse`, `silence`, `confusion`, `blind`, `hiding`, `sight`, `anybad`). Al colocar un estado de buff como `powerup` o cualquier constante `SC_*`, la función `atoi()` devolvía `0`, asignando erróneamente `SC_STONE` (petrificación), por lo que las habilidades nunca se disparaban.
+
+### Mejoras Implementadas:
+1. **Inclusión nativa en `cond2[]`**: Se agregaron `powerup` (`SC_POWERUP`), `agiup` (`SC_AGIUP`) y `berserk` (`SC_BERSERK`).
+2. **Comparación Case-Insensitive**: Uso de `strcmpi()` para evitar fallos por mayúsculas/minúsculas.
+3. **Resolución dinámica por constantes (`script_get_constant`)**: Si el estado no está en la tabla corta, busca automáticamente `"SC_" + NOMBRE` o el nombre completo de la constante en el motor de scripts de rAthena.
+4. **Corrección de `MSC_MYSTATUSOFF`**: Se corrigió el bug donde `mystatusoff` devolvía falso si el monstruo no tenía ningún estado activo (`sc.empty()`).
+
+### Ejemplo en `mob_skill_db.txt`:
+```csv
+// Tao Gunka: activa NPC_POWERUP al 30% HP y spamea Hammer Fall mientras el estado esté activo
+1583,Tao Gunka@NPC_POWERUP,attack,349,2,10000,0,30000,yes,self,myhpltmaxrate,30,,,,,,,
+1583,Tao Gunka@BS_HAMMERFALL,attack,110,10,10000,0,1000,no,target,mystatuson,powerup,,,,,,,
+```
+

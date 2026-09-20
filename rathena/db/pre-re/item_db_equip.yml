@@ -40514,7 +40514,7 @@ Body:
     Jobs:
       Gunslinger: true
     Locations:
-      Right_Hand: true
+      Both_Hand: true
     WeaponLevel: 3
     EquipLevelMin: 75
     Refineable: true
@@ -47502,6 +47502,15 @@ Body:
       Costume_Head_Low: true
     ArmorLevel: 1
     EquipLevelMin: 1
+  - Id: 20037
+    AegisName: C_Owlduke_Silk_Hat
+    Name: Costume Owlduke Silk Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 982
   - Id: 20055
     AegisName: C_Ghost_Bandana
     Name: Costume Ghost Bandana
@@ -47539,6 +47548,15 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 1
     View: 1233
+  - Id: 20091
+    AegisName: C_Smoking_Pipe
+    Name: Costume Pipe
+    Type: Armor
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 55
   - Id: 20093
     AegisName: C_Star_Sparkling
     Name: Costume Wizard Hat

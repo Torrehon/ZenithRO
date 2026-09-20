@@ -370,9 +370,9 @@ const char* job_name(int32 class_) {
 //CUSTOM JOBS
         
 		case JOB_GENIN:
-			return msg_txt( 700 );
-        case JOB_HIREGUN:
-			return msg_txt( 701 );
+			return "Genin";
+		case JOB_HIREGUN:
+			return "Hiregun";
 		default:
 			return msg_txt(199);
 	}

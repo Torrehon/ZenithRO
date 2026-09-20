@@ -7284,6 +7284,13 @@ void status_calc_bl_main(block_list& bl, std::bitset<SCB_MAX> flag)
 			// En rAthena, aspd_rate empieza en 1000 y resta bonos de skills/pociones/equipo.
 			// rate_bonus representa el % directo de aceleración de velocidad (1000 - aspd_rate).
 			int32 rate_bonus = 1000 - status->aspd_rate;
+
+			// --- CUSTOM: Soul of the Peacekeeper (Gatling ASPD Stacks: +0.5% per stack) ---
+			if (sc && sc->getSCE(SC_GATLING_STACK)) {
+				rate_bonus += sc->getSCE(SC_GATLING_STACK)->val1 * 5;
+			}
+			// --- END CUSTOM ---
+
 			if (rate_bonus != 0) {
 				apm = apm * (1000 + rate_bonus) / 1000;
 			}
@@ -9764,11 +9771,6 @@ static int16 status_calc_aspd_rate(block_list *bl, status_change *sc, int32 aspd
 	}
 	// --- Fin Custom Skill ---
 
-	// --- CUSTOM: Soul of the Peacekeeper (Gatling ASPD Stacks: +0.3% per stack) ---
-	if (sc->getSCE(SC_GATLING_STACK)) {
-		aspd_rate -= sc->getSCE(SC_GATLING_STACK)->val1 * 3;
-	}
-	// --- END CUSTOM ---
 
 	if(bl->type == BL_PC && sc->getSCE(SC_DONTFORGETME))
 		aspd_rate += sc->getSCE(SC_DONTFORGETME)->val2;

@@ -1221,6 +1221,24 @@ ACMD_FUNC(jobchange)
 			}
 		}
 
+		// Custom Jobs (Genin, Hiregun)
+		for( i = JOB_GENIN; i <= JOB_HIREGUN && !found; i++ ) {
+			if (strncmpi(message, job_name(i), 16) == 0) {
+				job = i;
+				found = true;
+			}
+		}
+
+		if (!found) {
+			if (strncmpi(message, "genin", 16) == 0) {
+				job = JOB_GENIN;
+				found = true;
+			} else if (strncmpi(message, "hiregun", 16) == 0) {
+				job = JOB_HIREGUN;
+				found = true;
+			}
+		}
+
 		if (!found) {
 			text = atcommand_help_string(command);
 			if (text)
@@ -1228,6 +1246,12 @@ ACMD_FUNC(jobchange)
 			return -1;
 		}
 	}
+
+	// Custom job ID alias support (in case 3501/3502 are passed)
+	if (job == 3501)
+		job = JOB_GENIN;
+	else if (job == 3502)
+		job = JOB_HIREGUN;
 
 	if (job == JOB_KNIGHT2 || job == JOB_CRUSADER2 || job == JOB_WEDDING || job == JOB_XMAS || job == JOB_SUMMER || job == JOB_HANBOK || job == JOB_OKTOBERFEST
 		|| job == JOB_LORD_KNIGHT2 || job == JOB_PALADIN2 || job == JOB_BABY_KNIGHT2 || job == JOB_BABY_CRUSADER2 || job == JOB_STAR_GLADIATOR2

@@ -6891,7 +6891,7 @@ Body:
   - Id: 1147
     AegisName: MAYA
     Name: Maya
-    Level: 81
+    Level: 73
     Hp: 256380
     BaseExp: 108720
     JobExp: 54360
@@ -23870,18 +23870,19 @@ Body:
     AegisName: TAO_GUNKA
     Name: Tao Gunka
     Level: 70
-    Hp: 193000
-    BaseExp: 59175
-    JobExp: 10445
-    MvpExp: 29587
-    Attack: 1450
-    Attack2: 1770
+    Hp: 365400
+    BaseExp: 114850
+    JobExp: 57425
+    MvpExp: 57425
+    Attack: 1800
+    Attack2: 2400
     Defense: 20
-    MagicDefense: 20
-    Agi: 85
-    Vit: 78
-    Int: 35
-    Dex: 140
+    MagicDefense: 15
+    Str: 95
+    Agi: 65
+    Vit: 110
+    Int: 40
+    Dex: 145
     Luk: 60
     AttackRange: 2
     SkillRange: 10
@@ -28226,26 +28227,27 @@ Body:
   - Id: 1688
     AegisName: LADY_TANEE
     Name: Lady Tanee
-    Level: 89
-    Hp: 493000
-    BaseExp: 64995
-    JobExp: 43222
-    MvpExp: 32497
-    Attack: 450
-    Attack2: 2170
+    Level: 75
+    Hp: 396800
+    BaseExp: 116800
+    JobExp: 58400
+    MvpExp: 58400
+    Attack: 1650
+    Attack2: 2280
     Defense: 20
-    MagicDefense: 44
-    Agi: 125
-    Vit: 48
-    Int: 78
-    Dex: 210
-    Luk: 38
+    MagicDefense: 45
+    Str: 75
+    Agi: 120
+    Vit: 55
+    Int: 110
+    Dex: 180
+    Luk: 50
     AttackRange: 14
-    SkillRange: 10
-    ChaseRange: 12
+    SkillRange: 14
+    ChaseRange: 14
     Size: Large
     Race: Plant
-    Element: Wind
+    Element: Earth
     ElementLevel: 3
     WalkSpeed: 100
     AttackDelay: 576

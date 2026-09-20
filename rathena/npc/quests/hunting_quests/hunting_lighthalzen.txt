@@ -521,7 +521,7 @@ OnInit:
 		20315, 500,   // Costume Analyze Eye
 		20405, 500,   // Costume Eremes Scarf
 		// Costumes: Tier 1000 (Animated with Visual Effects)
-		31391, 1000,  // Costume Floating Sage Stone
+		//31391, 1000,  // Costume Floating Sage Stone
 		20132, 1000,  // Costume Test Subject Aura
 		20407, 1000;  // Costume Test Subject Aura (Red)
 

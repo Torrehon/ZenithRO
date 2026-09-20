@@ -49,6 +49,7 @@ int32 battle_get_weapon_element(const Damage& dmg, const block_list& src, const 
 int32 battle_get_magic_element(const Damage& dmg, const block_list& src, const block_list& target, uint16 skill_id, uint16 skill_lv);
 int32 battle_get_misc_element(const Damage& dmg, const block_list& src, const block_list& target, uint16 skill_id, uint16 skill_lv);
 static void battle_calc_defense_reduction( Damage* wd, block_list* src, block_list* target, uint16 skill_id, uint16 skill_lv );
+static bool is_skill_using_arrow(const block_list* src, int32 skill_id);
 
 /**
  * Returns the current/list skill used by the bl
@@ -360,13 +361,19 @@ int32 battle_damage(block_list *src, block_list *target, int64 damage, int16 div
 				int32 atk_elem = ELE_NEUTRAL;
 				if (skill_id > 0) {
 					atk_elem = skill_get_ele(skill_id, skill_lv);
-					if (atk_elem < 0) { // ELE_WEAPON or variable
+					if (atk_elem == ELE_WEAPON || atk_elem == ELE_ENDOWED || atk_elem < 0) {
 						status_data* sstatus = status_get_status_data(*src);
 						atk_elem = sstatus ? sstatus->rhw.ele : ELE_NEUTRAL;
+						if (sd && (sd->state.arrow_atk || is_skill_using_arrow(src, skill_id)) && sd->bonus.arrow_ele)
+							atk_elem = sd->bonus.arrow_ele;
+					} else if (atk_elem == ELE_RANDOM) {
+						atk_elem = rnd() % ELE_ALL;
 					}
 				} else {
 					status_data* sstatus = status_get_status_data(*src);
 					atk_elem = sstatus ? sstatus->rhw.ele : ELE_NEUTRAL;
+					if (sd && sd->state.arrow_atk && sd->bonus.arrow_ele)
+						atk_elem = sd->bonus.arrow_ele;
 				}
 				if (atk_elem < 0 || atk_elem > ELE_UNDEAD)
 					atk_elem = ELE_NEUTRAL;

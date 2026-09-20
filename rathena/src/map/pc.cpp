@@ -8437,8 +8437,10 @@ const char* job_name(int32 class_)
 
 //CUSTOM JOBS
 
-    case JOB_GENIN:
-		return msg_txt(nullptr,700);
+	case JOB_GENIN:
+		return "Genin";
+	case JOB_HIREGUN:
+		return "Hiregun";
 
 	case JOB_BABY_KAGEROU:
 	case JOB_BABY_OBORO:

@@ -40,6 +40,7 @@
 #include "pc.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "script.hpp"
 
 using namespace rathena;
 
@@ -4584,8 +4585,6 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 
 		if (ms[i]->cond1 == MSC_AFTERSKILL)
 			flag = ((event == MSC_AFTERSKILL || event == -1) && (c2 == 0 || md->ud.skill_id == c2));
-		else if (ms[i]->cond1 == event)
-			flag = 1; //Trigger skill.
 		else if (ms[i]->cond1 == MSC_SKILLUSED)
 			flag = ((event & 0xffff) == MSC_SKILLUSED && ((event >> 16) == c2 || c2 == 0));
 		else if (ms[i]->cond1 == MSC_ELEMENTATTACKED && damage > 0)
@@ -4596,6 +4595,8 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 			flag = ((event & 0xffff) == MSC_SKILLUSED && skill_get_inf((event >> 16))&INF_GROUND_SKILL);
 		else if (ms[i]->cond1 == MSC_DAMAGEDGT && damage > 0 && !((event & 0xffff) == MSC_SKILLUSED)) //Avoid double check if skill has been used [datawulf]
 			flag = (damage > c2);
+		else if (ms[i]->cond1 == event)
+			flag = 1; //Trigger skill.
 		else if(event == -1){
 			//Avoid entering on defined events to avoid "hyper-active skill use" due to the overflow of calls to this function in battle.
 			switch (ms[i]->cond1)
@@ -4612,13 +4613,7 @@ bool mobskill_use(mob_data *md, t_tick tick, int32 event, int64 damage)
 					break;
 				case MSC_MYSTATUSON:		// status[num] on
 				case MSC_MYSTATUSOFF:		// status[num] off
-					if( md->sc.empty() ){
-						flag = 0;
-					}else if( mob_getstatus_sub( *md, static_cast<e_mob_skill_condition>( ms[i]->cond1 ), static_cast<sc_type>( ms[i]->cond2 ) ) ){
-						flag = 1;
-					}else{
-						flag = 0;
-					}
+					flag = mob_getstatus_sub( *md, static_cast<e_mob_skill_condition>( ms[i]->cond1 ), static_cast<sc_type>( ms[i]->cond2 ) );
 					break;
 				case MSC_FRIENDHPLTMAXRATE:	// friend HP < maxhp%
 					flag = ((fbl = mob_getfriendhprate(md, 0, ms[i]->cond2)) != nullptr); break;
@@ -6716,6 +6711,8 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 		{ "healused",          MSC_HEALUSED          },
 		{ "healerdetected",    MSC_HEALUSED          },
 		{ "elementattacked",   MSC_ELEMENTATTACKED   },
+		{ "elemtattacked",     MSC_ELEMENTATTACKED   },
+		{ "eleattacked",       MSC_ELEMENTATTACKED   },
 		{ "elementdamage",     MSC_ELEMENTATTACKED   },
 		{ "damaged_ele",       MSC_ELEMENTATTACKED   },
 	}, cond2[] ={
@@ -6731,6 +6728,9 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 		{	"blind",		SC_BLIND		},
 		{	"hiding",		SC_HIDING		},
 		{	"sight",		SC_SIGHT		},
+		{	"powerup",		SC_POWERUP		},
+		{	"agiup",		SC_AGIUP		},
+		{	"berserk",		SC_BERSERK		},
 	}, target[] = {
 		// enum e_mob_skill_target
 		{	"target",	MST_TARGET	},
@@ -6888,15 +6888,33 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 			{ "telekinetic", ELE_GHOST   },
 			{ "undead",      ELE_UNDEAD  },
 			{ "anyelement",  -1          },
+			{ "allelements", -1          },
 			{ "any",         -1          },
 		};
 		ARR_FIND( 0, ARRAYLENGTH(ele_table), j, strcmp(str[11],ele_table[j].str) == 0 );
 		if( j < ARRAYLENGTH(ele_table) )
 			ms->cond2 = ele_table[j].id;
 	} else {
-		ARR_FIND( 0, ARRAYLENGTH(cond2), j, strcmp(str[11],cond2[j].str) == 0 );
-		if( j < ARRAYLENGTH(cond2) )
+		ARR_FIND( 0, ARRAYLENGTH(cond2), j, strcmpi(str[11],cond2[j].str) == 0 );
+		if( j < ARRAYLENGTH(cond2) ) {
 			ms->cond2 = cond2[j].id;
+		} else if( ms->cond1 == MSC_MYSTATUSON || ms->cond1 == MSC_MYSTATUSOFF || ms->cond1 == MSC_FRIENDSTATUSON || ms->cond1 == MSC_FRIENDSTATUSOFF ) {
+			int64 constant;
+			std::string sc_name = "SC_";
+			std::string upper_name = str[11];
+			std::transform(upper_name.begin(), upper_name.end(), upper_name.begin(), ::toupper);
+			if (upper_name.rfind("SC_", 0) == 0) {
+				sc_name = upper_name;
+			} else {
+				sc_name += upper_name;
+			}
+			if (script_get_constant(sc_name.c_str(), &constant)) {
+				ms->cond2 = constant;
+			} else if (atoi(str[11]) == 0 && str[11][0] != '0') {
+				ShowWarning("mob_parse_row_mobskilldb: Unrecognized status '%s' for monster %d (skill %d)\n", str[11], mob_id, ms->skill_id);
+				ms->cond2 = -999;
+			}
+		}
 	}
 
 	ms->val[0] = (int32)strtol(str[12],nullptr,0);
