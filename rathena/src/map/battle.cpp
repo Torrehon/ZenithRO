@@ -7015,8 +7015,8 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
         if (sd) {
             int crit_chance = (sd->battle_status.cri * 10) * 2/3; 
             if (rnd() % 1000 < crit_chance) {
-            ad.damage = ad.damage * 140 / 100; // +40% de daño si entra el crítico
-            ad.type = DMG_MULTI_HIT_CRITICAL;  // Estética de impacto múltiple crítico
+                ad.damage = ad.damage * (140 + sd->bonus.crit_atk_rate) / 100; // +40% de daño base si entra el crítico + bonus de daño crítico (bCritAtkRate)
+                ad.type = DMG_MULTI_HIT_CRITICAL;  // Estética de impacto múltiple crítico
             }
         }
 	    

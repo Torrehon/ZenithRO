@@ -2123,19 +2123,21 @@ Body:
     Modes:
       Mvp: true
     MvpDrops:
-      - Item: Cardinal_Jewel_
-        Rate: 1500
-      - Item: Blue_Potion
-        Rate: 6000
+      - Item: Old_Violet_Box
+        Rate: 2000
+      - Item: Pure_Diamond
+        Rate: 200
     Drops:
       - Item: Plate_Armor_
         Rate: 250
       - Item: Broad_Sword_
         Rate: 220
-      - Item: Zweihander
+      - Item: Zweihander_
         Rate: 150
-      - Item: Sharp_Gear
+      - Item: Sharp_Gear_
         Rate: 350
+      - Item: Sinister_Spear
+        Rate: 150
       - Item: Lance_
         Rate: 550
       - Item: Elunium
@@ -2734,12 +2736,14 @@ Body:
     Modes:
       Mvp: true
     MvpDrops:
-      - Item: Rough_Wind
-        Rate: 1500
+      - Item: Old_Violet_Box
+        Rate: 2000
+      - Item: Pure_Diamond
+        Rate: 200
       - Item: Royal_Jelly
         Rate: 4000
     Drops:
-      - Item: Gungnir
+      - Item: Gungnir_
         Rate: 150
       - Item: Honey
         Rate: 10000
@@ -3987,22 +3991,26 @@ Body:
       Mvp: true
     MvpDrops:
       - Item: Gold_Ring
+        Rate: 600
+      - Item: Old_Violet_Box
         Rate: 2000
-      - Item: Ora_Ora
-        Rate: 1000
+      - Item: Pure_Diamond
+        Rate: 200
     Drops:
       - Item: Gold
         Rate: 1000
-      - Item: Golden_Mace
+      - Item: Golden_Mace_
         Rate: 150
-      - Item: Golden_Gear
+      - Item: Golden_Gear_
         Rate: 250
-      - Item: Golden_Bell
-        Rate: 500
+      - Item: Upg_Two_Handed_Axe
+        Rate: 150
+      - Item: Golden_Ninja_Suit
+        Rate: 200
+      - Item: Golden_Scarf
+        Rate: 200
       - Item: Emperium
         Rate: 300
-      - Item: Elunium
-        Rate: 2000
       - Item: Oridecon
         Rate: 1500
       - Item: Golden_Bug_Card
@@ -5261,6 +5269,10 @@ Body:
     Modes:
       Mvp: true
     MvpDrops:
+      - Item: Old_Violet_Box
+        Rate: 2000
+      - Item: Pure_Diamond
+        Rate: 200
       - Item: White_Potion
         Rate: 5000
     Drops:
@@ -5268,11 +5280,11 @@ Body:
         Rate: 600
       - Item: Ring_Pommel_Saber_
         Rate: 950
-      - Item: Cutlas
+      - Item: Cutlas_
         Rate: 150
       - Item: Hae_Dong_Gum_
         Rate: 400
-      - Item: Corsair
+      - Item: Corsair_
         Rate: 350
       - Item: Elunium
         Rate: 3200

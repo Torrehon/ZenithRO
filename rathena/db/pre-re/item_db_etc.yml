@@ -4101,8 +4101,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      bonus bNoMagicDamage,100;
-      bonus bUseSPrate,100;
+      .@r = getrefine();
+      bonus bMdef,30+(.@r*3);
   - Id: 4129
     AegisName: Baphomet__Card
     Name: Bapho Jr. Card

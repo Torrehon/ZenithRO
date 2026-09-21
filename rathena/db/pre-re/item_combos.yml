@@ -421,10 +421,14 @@ Body:
           - Corsair
           - Cutlas_
     Script: |
-      bonus bDef,2;
-      skill "SM_BASH",10;
-      skill "SM_FATALBLOW",1;
-      bonus2 bSkillAtk,"SM_BASH",25;
+      bonus bDef, 2;
+      skill "SM_BASH", 10;
+      skill "SM_FATALBLOW", 1;
+      bonus2 bSkillAtk, "SM_BASH", 25;
+      bonus2 bGetZenyNum, 500, 5;
+      if (getequiprefinerycnt(EQI_HAND_R) >= 9 || getequiprefinerycnt(EQI_HAND_L) >= 9) {
+        skill "KN_TWOHANDQUICKEN", 5;
+      }
   - Combos:
       - Combo:
           - Deviruchi_Cap
@@ -1859,3 +1863,16 @@ Body:
           - Poison_Sphere
     Script: |
       bonus2 bSkillAtk,"GS_GROUNDDRIFT",50;
+  - Combos:
+      - Combo:
+          - Golden_Ninja_Suit
+          - Golden_Scarf
+    Script: |
+      .@r = getequiprefinerycnt(EQI_ARMOR) + getequiprefinerycnt(EQI_GARMENT);
+      bonus bMatkRate,5;
+      bonus bLuk,5;
+      bonus bCritical,5;
+      bonus bCastrate,-10;
+      bonus2 bSkillAtk,"NJ_KOUENKA",.@r;
+      bonus2 bSkillAtk,"NJ_HYOUSENSOU",.@r;
+      bonus2 bSkillAtk,"NJ_HUUJIN",.@r;
